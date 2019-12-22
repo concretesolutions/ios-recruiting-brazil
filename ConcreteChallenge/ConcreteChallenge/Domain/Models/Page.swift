@@ -38,10 +38,11 @@ struct Page<ItemType: Decodable>: Decodable {
         case totalOfPages = "total_pages"
     }
     
-    init(items: [ItemType], totalOfPages: Int? = nil) {
+    init(items: [ItemType], totalOfPages: Int? = nil, pageNumber: Int = 0) {
         self.init()
         self.items = items
         self.totalOfPages = totalOfPages
+        self.pageNumber = pageNumber
     }
     
     init() {

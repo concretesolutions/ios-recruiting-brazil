@@ -22,6 +22,7 @@ protocol MoviesListViewModel: AnyObject {
     var needDeleteMovieView: ((_ position: Int) -> Void)? { get set }
     var needInsertMovieView: ((_ position: Int) -> Void)? { get set }
     var needChangeEmptyStateVisibility: ((_ visible: Bool) -> Void)? { get set }
+    var needChangeLoadingStateVisibility: ((_ visible: Bool) -> Void)? { get set }
     
     func thePageReachedTheEnd()
     func viewModelFromMovie(atPosition position: Int) -> MovieViewModel
@@ -64,7 +65,7 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
     
     var needShowNewMovies: ((Range<Int>) -> Void)? {
         didSet {
-            needShowNewMovies?(0..<moviesPage.items.count)
+            self.needReloadAllMovies?()
         }
     }
     
@@ -81,6 +82,15 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
     var needReloadMovieView: ((Int) -> Void)?
     var needDeleteMovieView: ((Int) -> Void)?
     var needInsertMovieView: ((Int) -> Void)?
+    var needChangeLoadingStateVisibility: ((Bool) -> Void)? {
+        didSet {
+            if moviesPage.items.count == 0 {
+                self.needChangeLoadingStateVisibility?(true)
+            } else {
+                self.needChangeEmptyStateVisibility?(false)
+            }
+        }
+    }
     var needChangeEmptyStateVisibility: ((Bool) -> Void)? {
         didSet {
             if moviesPage.items.count == 0 {
@@ -114,8 +124,11 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
     
     private func getMovies() {
         guard let nextPage = moviesPage.nextPage else {
+            
+            self.needChangeLoadingStateVisibility?(false)
             return
         }
+        self.needChangeLoadingStateVisibility?(true)
         moviesRepository.getMovies(fromPage: nextPage) { [weak self] (result) in
             guard let self = self else { return }
             
@@ -125,6 +138,7 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
             case .failure(let error):
                 self.needShowError?(error.localizedDescription)
             }
+            self.needChangeLoadingStateVisibility?(false)
         }
     }
     
@@ -158,7 +172,7 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
 
         if self.presentations[currentState].hasFavorite {
             let movieViewModel = movieViewModelInjector(.favorite(moviesPage.items[position]))
-            movieViewModel.withFavoriteOptions?.navigator = self
+            movieViewModel.withFavoriteOptions?.favoritesNavigator = self
             return movieViewModel
         } else {
             return movieViewModelInjector(.normal(moviesPage.items[position]))

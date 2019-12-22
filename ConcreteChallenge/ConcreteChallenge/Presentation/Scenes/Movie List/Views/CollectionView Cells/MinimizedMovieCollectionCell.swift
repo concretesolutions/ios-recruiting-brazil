@@ -25,7 +25,7 @@ class MinimizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView
         }
     }
     
-    private let movieImageView = UIImageView().build {
+    var movieImageView = UIImageView().build {
         $0.contentMode = .scaleAspectFill
         $0.backgroundColor = .appRed
         $0.layer.cornerRadius = 5

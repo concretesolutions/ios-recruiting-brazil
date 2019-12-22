@@ -18,7 +18,7 @@ class FavoriteMoviesRepository: MoviesRepository {
 
             completion(.success(Page<Movie>(items: cdMovies.map({ (cdMovie) -> Movie in
                 return Movie(cdMovie: cdMovie)
-            }), totalOfPages: 1)))
+            }), totalOfPages: 1, pageNumber: 1)))
         } catch {
             completion(.failure(error))
         }

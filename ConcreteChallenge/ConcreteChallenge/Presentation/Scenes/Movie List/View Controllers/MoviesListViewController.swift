@@ -33,6 +33,10 @@ class MoviesListViewController: UIViewController {
         .top(10).left(10).right(-10).bottom
         .fill(to: view.safeAreaLayoutGuide)
     }
+    
+    func viewForMovieAt(position: Int) -> UIView? {
+        return moviesListView.viewForMovieAt(position: position)
+    }
 }
  
 extension MoviesListViewController: MoviesListViewDelegate {

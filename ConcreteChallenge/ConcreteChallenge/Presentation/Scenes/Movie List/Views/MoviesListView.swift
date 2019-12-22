@@ -40,6 +40,8 @@ class MoviesListView: UIView, ViewCodable {
         }
     }
     
+    private let loadingIndicatorView = RoundedActivityIndicatorView()
+    
     init(viewModel: MoviesListViewModel, presentationManager: MovieListPresentationManager) {
         self.viewModel = viewModel
         self.presentationManager = presentationManager
@@ -52,10 +54,11 @@ class MoviesListView: UIView, ViewCodable {
     }
     
     func buildHierarchy() {
-        addSubViews(moviesCollectionView, toggleButton, emptyWarningLabel)
+        addSubViews(moviesCollectionView, toggleButton, emptyWarningLabel, loadingIndicatorView)
     }
     
     func addConstraints() {
+        loadingIndicatorView.layout.fillSuperView()
         emptyWarningLabel.layout.group.left(10).top(10).right(-10).fill(to: safeAreaLayoutGuide)
         moviesCollectionView.layout.fillSuperView()
         toggleButton.layout.build {
@@ -72,7 +75,6 @@ class MoviesListView: UIView, ViewCodable {
         }
         
         viewModel.needShowError = { [weak self] errorMessage in
-            print(errorMessage)
             DispatchQueue.main.async {
                 self?.delegate?.needShowError(withMessage: errorMessage) {
                     self?.viewModel.thePageReachedTheEnd()
@@ -118,6 +120,16 @@ class MoviesListView: UIView, ViewCodable {
             }
         }
         
+        viewModel.needChangeLoadingStateVisibility = { [weak self] visible in
+            DispatchQueue.main.async {
+                if visible {
+                    self?.loadingIndicatorView.startLoading()
+                } else {
+                    self?.loadingIndicatorView.stopLoading()
+                }
+            }
+        }
+        
         viewModel.thePageReachedTheEnd()
     }
     
@@ -128,6 +140,10 @@ class MoviesListView: UIView, ViewCodable {
         }
         
         completion(movieView)
+    }
+    
+    func viewForMovieAt(position: Int) -> UIView? {
+        return moviesCollectionView.cellForItem(at: IndexPath.init(row: position, section: 0))
     }
 }
 

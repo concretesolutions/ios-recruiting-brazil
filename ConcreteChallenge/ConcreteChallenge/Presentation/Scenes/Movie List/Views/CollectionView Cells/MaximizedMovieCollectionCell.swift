@@ -36,7 +36,7 @@ class MaximizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView
     private let headerContentView = UIView().build {
         $0.backgroundColor = UIColor.appPurple.withAlphaComponent(0.8)
     }
-    private let movieImageView = UIImageView().build {
+    var movieImageView = UIImageView().build {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
     }

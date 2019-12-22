@@ -14,11 +14,18 @@ protocol MovieViewModel: AnyObject {
     var needReplaceImage: ((_ image: UIImage) -> Void)? { get set }
     var needReplaceGenres: ((_ genres: String) -> Void)? { get set }
     
+    var navigator: MovieViewModelNavigator? { get set }
+    
     func movieViewWasReused()
+    func closeButtonWasTapped()
 }
 
 protocol MovieViewModelWithData: MovieViewModel {
     var movie: Movie { get }
+}
+
+protocol MovieViewModelNavigator: AnyObject {
+    func closeWasTapped()
 }
 
 typealias ImageRouter = (_ imagePath: String) -> Route
@@ -31,6 +38,7 @@ class DefaultMovieViewModel: MovieViewModelWithData {
     var needReplaceImage: ((_ image: UIImage) -> Void)? {
         didSet {
             guard let movieImage = self.movieImage else {
+                self.needReplaceImage?(Constants.placeholderImage)
                 return
             }
             
@@ -46,6 +54,8 @@ class DefaultMovieViewModel: MovieViewModelWithData {
             self.needReplaceGenres?(movieGenres)
         }
     }
+    
+    weak var navigator: MovieViewModelNavigator?
     
     let movie: Movie
     private let imageRepository: MovieImageRepository
@@ -120,6 +130,10 @@ class DefaultMovieViewModel: MovieViewModelWithData {
         self.imageTaskCancelCompletion = nil
         
         self.needReplaceImage?(Constants.placeholderImage)
+    }
+    
+    func closeButtonWasTapped() {
+        navigator?.closeWasTapped()
     }
 }
 

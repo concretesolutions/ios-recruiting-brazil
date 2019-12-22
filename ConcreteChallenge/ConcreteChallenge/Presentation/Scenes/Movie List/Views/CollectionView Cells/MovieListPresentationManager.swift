@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MovieViewCell: UICollectionViewCell, MovieView {
-    
+    var movieImageView: UIImageView { get set }
 }
 
 struct MovieListPresentationManager {

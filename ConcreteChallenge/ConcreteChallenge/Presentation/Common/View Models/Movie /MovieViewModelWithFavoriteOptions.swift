@@ -10,7 +10,7 @@ import Foundation
 
 protocol MovieViewModelWithFavoriteOptions: MovieViewModel {
     var needUpdateFavorite: ((_ faved: Bool) -> Void)? { get set}
-    var navigator: MovieViewModelWithFavoriteOptionsNavigator? { get set }
+    var favoritesNavigator: MovieViewModelWithFavoriteOptionsNavigator? { get set }
     
     func usedTappedToFavoriteMovie()
 }
@@ -22,7 +22,7 @@ extension MovieViewModel {
 }
 
 class DefaultMovieViewModelWithFavoriteOptions: MovieViewModelDecorator, MovieViewModelWithFavoriteOptions {
-    weak var navigator: MovieViewModelWithFavoriteOptionsNavigator?
+    weak var favoritesNavigator: MovieViewModelWithFavoriteOptionsNavigator?
     
     var needUpdateFavorite: ((Bool) -> Void)? {
         didSet {
@@ -77,7 +77,7 @@ class DefaultMovieViewModelWithFavoriteOptions: MovieViewModelDecorator, MovieVi
             switch result {
             case .success:
                 self.isFaved = true
-                self.navigator?.userFavedMovie(movie: self.movie)
+                self.favoritesNavigator?.userFavedMovie(movie: self.movie)
             default:
                 break
             }
@@ -90,7 +90,7 @@ class DefaultMovieViewModelWithFavoriteOptions: MovieViewModelDecorator, MovieVi
             switch result {
             case .success:
                 self.isFaved = false
-                self.navigator?.userUnFavedMovie(movie: self.movie)
+                self.favoritesNavigator?.userUnFavedMovie(movie: self.movie)
             default:
                 break
             }

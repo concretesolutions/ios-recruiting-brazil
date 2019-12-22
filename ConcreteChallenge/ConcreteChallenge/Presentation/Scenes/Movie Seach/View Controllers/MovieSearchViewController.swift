@@ -30,6 +30,15 @@ class MovieSearchViewController: UIViewController, ViewCodable {
         return searchController
     }()
     
+    lazy var searchOptionsSegmentedControl = UISegmentedControl(items: ["All", "Favorites"]).build {
+        $0.selectedSegmentIndex = 0
+        if #available(iOS 13.0, *) {
+            $0.selectedSegmentTintColor = .appLightRed
+        } else {
+            $0.tintColor = .appLightRed
+        }
+    }
+    
     init(viewModel: SeachMoviesViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -47,11 +56,16 @@ class MovieSearchViewController: UIViewController, ViewCodable {
     }
     
     func buildHierarchy() {
+        view.addSubview(searchOptionsSegmentedControl)
         view.addLayoutGuide(moviesListLayoutGuide)
     }
        
     func addConstraints() {
-        moviesListLayoutGuide.layout.fill(view: view.safeAreaLayoutGuide)
+        searchOptionsSegmentedControl.layout.group
+            .left(10).top(10).right(-10)
+            .fill(to: view.safeAreaLayoutGuide)
+        moviesListLayoutGuide.layout.top.equal(to: searchOptionsSegmentedControl.layout.bottom)
+        moviesListLayoutGuide.layout.group.left.right.bottom.fill(to: view.safeAreaLayoutGuide)
     }
     
     func applyAditionalChanges() {

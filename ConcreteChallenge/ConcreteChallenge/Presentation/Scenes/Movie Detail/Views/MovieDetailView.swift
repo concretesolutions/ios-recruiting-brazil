@@ -14,7 +14,7 @@ class MovieDetailView: UIView, ViewCodable {
     var favoriteViewModel: MovieViewModelWithFavoriteOptions? {
         return viewModel as? MovieViewModelWithFavoriteOptions
     }
-    
+        
     private let scrollView = UIScrollView()
     private let scrollContentView = UIView().build {
         $0.backgroundColor = .clear
@@ -37,18 +37,20 @@ class MovieDetailView: UIView, ViewCodable {
         $0.backgroundColor = .black
     }
     private let marginsLayoutGuide = UILayoutGuide()
-    private let movieImageView = UIImageView().build {
+    let movieImageView = UIImageView().build {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
         $0.backgroundColor = .appRed
     }
     
-    private let closeButton = RoundedImageView().build {
+    private lazy var closeButton = RoundedImageView().build {
         $0.image = UIImage(named: "closeButton")
         $0.layer.build {
             $0.shadowOpacity = 0.5
             $0.shadowOffset = .zero
         }
+        $0.isUserInteractionEnabled = true
+        $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeButtonTapped)))
     }
     
     init(viewModel: MovieViewModel) {
@@ -128,5 +130,9 @@ class MovieDetailView: UIView, ViewCodable {
                 self?.headerView.setFavoriteState(isFaved: isFaved)
             }
         }
+    }
+    
+    @objc func closeButtonTapped() {
+        viewModel.closeButtonWasTapped()
     }
 }

@@ -17,7 +17,9 @@ class MovieDetailCoordinator: StopableCoordinator {
     private let movie: Movie
     private lazy var movieDetailViewController: MovieDetailViewController = {
         let viewModel = viewModelsFactory.movieViewModelWithFavoriteOptions(movie: movie)
+        viewModel.favoritesNavigator = self
         viewModel.navigator = self
+        
         let movieDetailViewController = MovieDetailViewController(viewModel: viewModel)
         return movieDetailViewController
     }()
@@ -38,7 +40,11 @@ class MovieDetailCoordinator: StopableCoordinator {
     }
 }
 
-extension MovieDetailCoordinator: MovieViewModelWithFavoriteOptionsNavigator {
+extension MovieDetailCoordinator: MovieViewModelWithFavoriteOptionsNavigator, MovieViewModelNavigator {
+    func closeWasTapped() {
+        movieDetailViewController.dismiss(animated: true, completion: nil)
+    }
+    
     func userUnFavedMovie(movie: Movie) {
         DispatchQueue.main.async {
             self.userUnFavedMovieCompletion?(movie)

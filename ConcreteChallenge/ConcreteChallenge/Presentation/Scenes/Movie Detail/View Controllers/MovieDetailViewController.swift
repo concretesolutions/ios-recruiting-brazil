@@ -12,12 +12,14 @@ class MovieDetailViewController: UIViewController, ViewCodable {
     private let viewModel: MovieViewModel
     private lazy var movieDetailView = MovieDetailView(viewModel: viewModel)
     
+    var movieImageView: UIImageView {
+        return self.movieDetailView.movieImageView
+    }
+    
     init(viewModel: MovieViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        setupView()
-        
-        view.backgroundColor = .blue
+        setupView()        
     }
     
     required init?(coder: NSCoder) {

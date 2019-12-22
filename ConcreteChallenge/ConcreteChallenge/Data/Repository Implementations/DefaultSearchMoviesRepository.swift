@@ -22,6 +22,7 @@ class DefaultSearchMoviesRepository<MoviesProviderType: ParserProvider>: SearchM
        
     func getMovies(fromPage page: Int, completion: @escaping (Result<Page<Movie>, Error>) -> Void) {
         guard let query = searchQueryProvider?() else {
+            completion(.success(Page<Movie>(items: [], totalOfPages: 1, pageNumber: 1)))
             return
         }
         moviesProvider.requestAndParse(route: TMDBMoviesRoute.searchMovies(query, page), completion: completion)
