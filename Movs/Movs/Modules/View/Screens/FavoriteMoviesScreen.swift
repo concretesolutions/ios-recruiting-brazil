@@ -24,7 +24,7 @@ final class FavoriteMoviesScreen: UIView {
 
     lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .insetGrouped)
-        view.register(FavoriteMovieCell.self, forCellReuseIdentifier: FavoriteMovieCell.reusableIdentifier)
+        view.register(FavoriteMovieCell.self, forCellReuseIdentifier: FavoriteMovieCell.reuseIdentifier)
         view.delegate = self.delegate
         view.dataSource = self.delegate
         view.backgroundColor = .systemBackground

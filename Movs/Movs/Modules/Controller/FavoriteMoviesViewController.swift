@@ -102,7 +102,7 @@ extension FavoriteMoviesViewController: TableViewScreenDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteMovieCell.reusableIdentifier, for: indexPath) as? FavoriteMovieCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteMovieCell.reuseIdentifier, for: indexPath) as? FavoriteMovieCell else {
             fatalError("Wrong table view cell type")
         }
 
