@@ -42,11 +42,11 @@ class MovieListViewModel: ObservableObject {
     @Published private(set) var state: MovieListViewState = .movies
     
     // Cancellables
-    var querySubscriber: AnyCancellable?
-    var popularMoviesSubscriber: AnyCancellable?
+    private var querySubscriber: AnyCancellable?
+    private var popularMoviesSubscriber: AnyCancellable?
     
     // Data provider
-    let dataProvider: DataProvidable
+    private let dataProvider: DataProvidable
        
     init(dataProvider: DataProvidable) {
         self.dataProvider = dataProvider
@@ -57,15 +57,18 @@ class MovieListViewModel: ObservableObject {
     // MARK: - Subscribers
     
     public func bindQuery(_ query: AnyPublisher<String?, Never>) {
-        querySubscriber = query // Listen to changes in query and search movie
+        self.querySubscriber = query // Listen to changes in query and search movie
             .throttle(for: 1.0, scheduler: RunLoop.main, latest: false)
             .removeDuplicates()
             .sink { [weak self] queryString in
-                self?.searchMovie(query: queryString)
+                self?.searchMovie(query: queryString, completion: { (movies, state) in
+                    self?.state = state
+                    self?.searchMovies = movies
+                })
             }
     }
     
-    public func subscribeToPopularMovies(_ publisher: AnyPublisher<([Movie], Error?), Never>) {
+    private func subscribeToPopularMovies(_ publisher: AnyPublisher<([Movie], Error?), Never>) {
         self.state = .loading
         self.popularMoviesSubscriber = publisher
             .receive(on: DispatchQueue.main)
@@ -74,7 +77,6 @@ class MovieListViewModel: ObservableObject {
                     self?.searchMovies = []
                     self?.state = .error
                 } else {
-                    self?.page += 1
                     guard self?.searching == false else { return }
                     self?.searchMovies.append(contentsOf: movies)
                     self?.state = .movies
@@ -98,18 +100,17 @@ class MovieListViewModel: ObservableObject {
         return MovieDetailsViewModel(of: self.searchMovies[index])
     }
     
-    // MARK: - Search
+    // MARK: - Movie List
     
     public func fetchNextPage() {
-        // TODO: Get from data provider
-        DataProvider.shared.fetchMovies(page: self.page)
+        self.page += 1
+        self.dataProvider.fetchPopularMovies(page: self.page, completion: nil)
     }
     
     public func refreshMovies(completion: @escaping () -> Void) {
         self.page = 1
         self.searchMovies = []
-        // TODO: Get from data provider
-        DataProvider.shared.fetchMovies(page: self.page, completion: completion)
+        self.dataProvider.fetchPopularMovies(page: self.page, completion: completion)
         if self.dataProvider.genres.isEmpty {
             MovieService.fetchGenres()
         }
@@ -117,7 +118,7 @@ class MovieListViewModel: ObservableObject {
     
     /// Search movies according to their names using the given query
     /// - Parameter query: Name of the movie being searched
-    public func searchMovie(query: String?) {
+    private func searchMovie(query: String?, completion: @escaping ([Movie], MovieListViewState) -> Void) {
         guard let query = query, !query.isEmpty else { // Check if there is a valid text on the query
             self.searching = false
             self.state = .movies
@@ -126,19 +127,16 @@ class MovieListViewModel: ObservableObject {
         
         self.searching = true
         self.state = .loading
-        MovieService.searchMovie(query: query) { [weak self] result in
+        self.dataProvider.searchMovie(query: query) { result in
             switch result {
             case .failure(let error):
                 if let error = error as? MovieError, error == .noData {
-                    self?.state = .noDataError
+                    completion([], .noDataError)
                 } else {
-                    self?.state = .error
+                    completion([], .error)
                 }
-                
-                self?.searchMovies = []
             case .success(let movies):
-                self?.state = .movies
-                self?.searchMovies = Array(movies.prefix(12)) // Set movies array to the first five results
+                completion(movies, .movies)
             }
         }
     }

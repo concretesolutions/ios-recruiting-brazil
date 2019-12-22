@@ -66,6 +66,7 @@ final class MovieListViewControllerScreen: UIView {
         noDataErrorView.isHidden = !(state == .noDataError)
         // State = .loading
         activityIndicator.isHidden = !(state == .loading)
+        collectionView.isHidden = (state == .loading)
         
         if state == .loading {
             activityIndicator.startAnimating()

@@ -10,6 +10,7 @@ import Foundation
 import Combine
 
 class MockedDataProvider: DataProvidable {
+    
     public static let shared = MockedDataProvider()
     
     var popularMoviesPublisher = CurrentValueSubject<([Movie], Error?), Never>(([], nil))
@@ -43,6 +44,11 @@ class MockedDataProvider: DataProvidable {
     
     init() {
         // Initializing movies
+        fetchPopularMovies(page: 1)
+        fetchFavoriteMovies()
+    }
+    
+    func fetchPopularMovies(page: Int, completion: (() -> Void)? = nil) {
         let movies = [
             Movie(id: 0,
                   title: "The Little Mermaid",
@@ -83,7 +89,15 @@ class MockedDataProvider: DataProvidable {
         ]
         
         popularMoviesPublisher.send((movies, nil))
-        favoriteMoviesPublisher.send((movies.filter { isFavorite($0.id) }, nil))
+    }
+    
+    func fetchFavoriteMovies(completion: (() -> Void)? = nil) {
+        favoriteMoviesPublisher.send((self.popularMovies.filter { isFavorite($0.id) }, nil))
+    }
+    
+    func searchMovie(query: String, completion: @escaping (Result<[Movie], Error>) -> Void) {
+        let movies = self.popularMovies.filter { $0.title.lowercased().contains(query.lowercased()) }
+        completion(.success(movies))
     }
     
     func toggleFavorite(withId id: Int) {

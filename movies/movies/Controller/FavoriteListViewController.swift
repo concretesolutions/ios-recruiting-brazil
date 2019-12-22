@@ -83,7 +83,7 @@ class FavoriteListViewController: UIViewController {
     }
     
     @objc func showFilterView() {
-        let viewModel = FilterViewViewModel(filterSubject: self.viewModel.filters)
+        let viewModel = self.viewModel.viewModelForFilters()
         let filterViewController = FilterViewController(viewModel: viewModel)
         
         self.present(UINavigationController(rootViewController: filterViewController), animated: true)

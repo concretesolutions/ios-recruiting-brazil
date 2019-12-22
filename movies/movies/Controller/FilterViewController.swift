@@ -57,7 +57,7 @@ class FilterViewController: UIViewController {
 // MARK: - Data Source
 extension FilterViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.viewModel.filters.count
+        self.viewModel.filterCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,7 +77,7 @@ extension FilterViewController: UITableViewDataSource {
 // MARK: - Delegate
 extension FilterViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewModel = FilterOptionsViewModel(filter: self.viewModel.filters[indexPath.row])
+        guard let viewModel = self.viewModel.viewModelForFilterOptions(at: indexPath.row) else { return }
         let optionsViewController = FilterOptionsViewController(viewModel: viewModel)
         
         self.navigationController?.pushViewController(optionsViewController, animated: true)
