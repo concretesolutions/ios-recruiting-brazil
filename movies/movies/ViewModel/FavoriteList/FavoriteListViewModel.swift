@@ -17,12 +17,6 @@ class FavoriteListViewModel: ObservableObject {
         willSet {
             // Update movie count when search movies is updated
             self.movieCount = newValue.count
-            // Check if list is empty
-            if newValue.isEmpty && !self.dataProvider.favoriteMovies.isEmpty {
-                self.state = .noDataError
-            } else {
-                self.state = self.isFiltering(self.filters.value) ? .filter : .movies
-            }
         }
     }
     
@@ -33,7 +27,7 @@ class FavoriteListViewModel: ObservableObject {
     @Published private(set) var state: MovieListViewState = .movies
     @Published private var query: String?
 
-    private var filters = CurrentValueSubject<[Filter], Never>([])
+    internal var filters = CurrentValueSubject<[Filter], Never>([])
     
     // Cancellables
     private var querySubscriber: AnyCancellable?
@@ -41,7 +35,7 @@ class FavoriteListViewModel: ObservableObject {
     private var filtersSubscriber: AnyCancellable?
     
     // Data provider
-    private let dataProvider: DataProvidable
+    internal let dataProvider: DataProvidable
     
     init(dataProvider: DataProvidable) {
         self.dataProvider = dataProvider
@@ -61,10 +55,8 @@ class FavoriteListViewModel: ObservableObject {
             .sink(receiveValue: { [weak self] query in
                 self?.query = query
                 
-                guard let favoriteMovies = self?.dataProvider.favoriteMovies, let filters = self?.filters.value else { return }
-                guard let movieList = self?.getMoviesList(favoriteMovies, withFilters: filters, andQuery: query) else { return }
-                
-                self?.searchMovies = movieList
+                guard let favoriteMovies = self?.dataProvider.favoriteMovies else { return }
+                self?.updateList(favoriteMovies)
             })
     }
     
@@ -74,13 +66,9 @@ class FavoriteListViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] (movies, error) in
                 if error != nil {
-                    self?.searchMovies = []
-                    self?.state = .error
+                    self?.updateList([], state: .error)
                 } else {
-                    guard let filters = self?.filters.value else { return }
-                    guard let movieList = self?.getMoviesList(movies, withFilters: filters, andQuery: self?.query) else { return }
-                    
-                    self?.searchMovies = movieList
+                    self?.updateList(movies)
                     
                     guard let newFilters = self?.getFilters(for: movies) else { return }
                     self?.filters.send(newFilters)
@@ -91,11 +79,9 @@ class FavoriteListViewModel: ObservableObject {
     private func subscribeToFilters(_ publisher: AnyPublisher<[Filter], Never>) {
         self.filtersSubscriber = publisher
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] filters in
+            .sink(receiveValue: { [weak self] _ in
                 guard let favoriteMovies = self?.dataProvider.favoriteMovies else { return }
-                guard let movieList = self?.getMoviesList(favoriteMovies, withFilters: filters, andQuery: self?.query) else { return }
-                
-                self?.searchMovies = movieList
+                self?.updateList(favoriteMovies)
             })
     }
     
@@ -128,6 +114,42 @@ class FavoriteListViewModel: ObservableObject {
     }
 
     // MARK: - Movie List
+    /// Return sorted list of movies filtered by filters and query search
+    /// - Parameters:
+    ///   - movies: List of movies to convert
+    ///   - filters: Applied filters
+    ///   - query: Query to search on movie title
+    private func getMoviesList(_ movies: [Movie], withFilters filters: [Filter], andQuery query: String?) -> [Movie] {
+        let filteredMovies = self.filterArray(movies, with: filters)
+        let searchedMovies = self.searchMovie(filteredMovies, query: query)
+        let sortedMovies = self.sortMovies(searchedMovies)
+        
+        return sortedMovies
+    }
+    
+    /// Return current state according to movie list
+    /// Returns:
+    ///     .noDataError if list of movies is empty
+    ///     .filter if there are selected options on list of filters
+    ///     .movies if none of the above
+    /// - Parameters:
+    ///   - movies: List of movies
+    ///   - filters: Current filters
+    private func getState(_ movies: [Movie], filters: [Filter]?) -> MovieListViewState {
+        if movies.isEmpty && !self.dataProvider.favoriteMovies.isEmpty {
+            return .noDataError
+        } else {
+            return self.isFiltering(self.filters.value) ? .filter : .movies
+        }
+    }
+    
+    private func updateList(_ movies: [Movie], state: MovieListViewState? = nil) {
+        let movieList = self.getMoviesList(movies, withFilters: self.filters.value, andQuery: self.query)
+        let state = state ?? self.getState(movieList, filters: self.filters.value)
+        
+        self.searchMovies = movieList
+        self.state = state
+    }
     
     public func refreshMovies(completion: @escaping () -> Void) {
         self.dataProvider.fetchFavoriteMovies(completion: completion)
@@ -153,19 +175,6 @@ class FavoriteListViewModel: ObservableObject {
     /// - Parameter movies: Array of movies to be sorted
     private func sortMovies(_ movies: [Movie]) -> [Movie] {
         return movies.sorted { $0.title < $1.title }
-    }
-    
-    /// Return sorted list of movies filtered by filters and query search
-    /// - Parameters:
-    ///   - movies: List of movies to convert
-    ///   - filters: Applied filters
-    ///   - query: Query to search on movie title
-    private func getMoviesList(_ movies: [Movie], withFilters filters: [Filter], andQuery query: String?) -> [Movie] {
-        let filteredMovies = self.filterArray(movies, with: filters)
-        let searchedMovies = self.searchMovie(filteredMovies, query: query)
-        let sortedMovies = self.sortMovies(searchedMovies)
-        
-        return sortedMovies
     }
 }
 
@@ -234,6 +243,7 @@ extension FavoriteListViewModel {
     ///   - array: Array of movies do be filtered
     ///   - query: Title of the movie to filter
     internal func filterArray(_ array: [Movie], with query: String) -> [Movie] {
+        guard query.isEmpty == false else { return array }
         return array.filter { $0.title.lowercased().contains(query.lowercased()) } // Filter movies with title starting with query text
     }
     
@@ -242,6 +252,8 @@ extension FavoriteListViewModel {
     ///   - array: Array of movies to be filtered
     ///   - filters: Array of custom filters
     internal func filterArray(_ array: [Movie], with filters: [Filter]) -> [Movie] {
+        guard self.isFiltering(filters) else { return array }
+        
         var filteredMovies = [Movie]()
         
         for filter in filters {

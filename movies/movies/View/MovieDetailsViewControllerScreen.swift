@@ -10,7 +10,7 @@ import UIKit
 import Combine
 
 class MovieDetailsViewControllerScreen: UIView {
-    public var viewModel: MovieDetailsViewModel! {
+    private var viewModel: MovieDetailsViewModel! {
         didSet {
             self.titleLabel.text = self.viewModel.title
             self.favoriteButton.delegate = self.viewModel
@@ -59,6 +59,7 @@ class MovieDetailsViewControllerScreen: UIView {
         let view = UILabel(frame: .zero)
         view.font = UIFont.preferredFont(forTextStyle: .caption1)
         view.textColor = .systemOrange
+        view.numberOfLines = 0
         return view
     }()
     
@@ -93,7 +94,8 @@ class MovieDetailsViewControllerScreen: UIView {
         self.viewModel = viewModel
         self.favoriteButton.type = viewModel.favorite ? .favorite  : .unfavorite
 
-        favoriteSubscriber = self.viewModel.$favorite
+        // Observe changes in favorite state and change favorite button
+        self.favoriteSubscriber = self.viewModel.$favorite
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] favorite in
                 self?.favoriteButton.type = favorite ? .favorite  : .unfavorite

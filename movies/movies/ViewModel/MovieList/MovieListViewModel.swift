@@ -136,7 +136,7 @@ class MovieListViewModel: ObservableObject {
                     completion([], .error)
                 }
             case .success(let movies):
-                completion(movies, .movies)
+                completion(movies, movies.isEmpty ? .noDataError : .movies)
             }
         }
     }

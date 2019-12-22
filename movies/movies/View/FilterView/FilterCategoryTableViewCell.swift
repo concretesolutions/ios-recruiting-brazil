@@ -50,8 +50,9 @@ final class FilterCategoryTableViewCell: UITableViewCell {
     }
     
     private func bindOptions() {
-        optionsSubscriber?.cancel()
-        optionsSubscriber = self.viewModel.$options
+        self.optionsSubscriber?.cancel() // Cancel subscription if exists
+        // Observe changes in options and update label
+        self.optionsSubscriber = self.viewModel.$options
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] options in
                 self?.optionsLabel.text = options
