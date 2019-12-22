@@ -55,13 +55,8 @@ class FavoriteListViewModel: ObservableObject {
             .sink(receiveValue: { [weak self] query in
                 self?.query = query
                 
-                guard let favoriteMovies = self?.dataProvider.favoriteMovies, let filters = self?.filters.value else { return }
-                guard let movieList = self?.getMoviesList(favoriteMovies, withFilters: filters, andQuery: query) else { return }
-                
-                self?.searchMovies = movieList
-                
-                guard let state = self?.getState(movieList, filters: self?.filters.value) else { return }
-                self?.state = state
+                guard let favoriteMovies = self?.dataProvider.favoriteMovies else { return }
+                self?.updateList(favoriteMovies)
             })
     }
     
@@ -71,19 +66,12 @@ class FavoriteListViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] (movies, error) in
                 if error != nil {
-                    self?.searchMovies = []
-                    self?.state = .error
+                    self?.updateList([], state: .error)
                 } else {
-                    guard let filters = self?.filters.value else { return }
-                    guard let movieList = self?.getMoviesList(movies, withFilters: filters, andQuery: self?.query) else { return }
-                    
-                    self?.searchMovies = movieList
+                    self?.updateList(movies)
                     
                     guard let newFilters = self?.getFilters(for: movies) else { return }
                     self?.filters.send(newFilters)
-                    
-                    guard let state = self?.getState(movieList, filters: self?.filters.value) else { return }
-                    self?.state = state
                 }
             })
     }
@@ -91,14 +79,9 @@ class FavoriteListViewModel: ObservableObject {
     private func subscribeToFilters(_ publisher: AnyPublisher<[Filter], Never>) {
         self.filtersSubscriber = publisher
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] filters in
+            .sink(receiveValue: { [weak self] _ in
                 guard let favoriteMovies = self?.dataProvider.favoriteMovies else { return }
-                guard let movieList = self?.getMoviesList(favoriteMovies, withFilters: filters, andQuery: self?.query) else { return }
-                
-                self?.searchMovies = movieList
-                
-                guard let state = self?.getState(movieList, filters: self?.filters.value) else { return }
-                self?.state = state
+                self?.updateList(favoriteMovies)
             })
     }
     
@@ -131,33 +114,6 @@ class FavoriteListViewModel: ObservableObject {
     }
 
     // MARK: - Movie List
-    
-    public func refreshMovies(completion: @escaping () -> Void) {
-        self.dataProvider.fetchFavoriteMovies(completion: completion)
-        if self.dataProvider.genres.isEmpty {
-            MovieService.fetchGenres()
-        }
-    }
-    
-    /// Filter movies according to their names using the given query
-    /// - Parameter query: Name of the movie being searched
-    private func searchMovie(_ movies: [Movie], query: String?) -> [Movie] {
-        guard let query = query, !query.isEmpty else { // Check if there is a valid text on the query
-            self.searching = false
-            return movies
-        }
-        
-        self.searching = true
-        self.state = .loading
-        return self.filterArray(movies, with: query) // Filter search list with text in query
-    }
-    
-    /// Sort array of movies in alphabetical order
-    /// - Parameter movies: Array of movies to be sorted
-    private func sortMovies(_ movies: [Movie]) -> [Movie] {
-        return movies.sorted { $0.title < $1.title }
-    }
-    
     /// Return sorted list of movies filtered by filters and query search
     /// - Parameters:
     ///   - movies: List of movies to convert
@@ -185,6 +141,40 @@ class FavoriteListViewModel: ObservableObject {
         } else {
             return self.isFiltering(self.filters.value) ? .filter : .movies
         }
+    }
+    
+    private func updateList(_ movies: [Movie], state: MovieListViewState? = nil) {
+        let movieList = self.getMoviesList(movies, withFilters: self.filters.value, andQuery: self.query)
+        let state = state ?? self.getState(movieList, filters: self.filters.value)
+        
+        self.searchMovies = movieList
+        self.state = state
+    }
+    
+    public func refreshMovies(completion: @escaping () -> Void) {
+        self.dataProvider.fetchFavoriteMovies(completion: completion)
+        if self.dataProvider.genres.isEmpty {
+            MovieService.fetchGenres()
+        }
+    }
+    
+    /// Filter movies according to their names using the given query
+    /// - Parameter query: Name of the movie being searched
+    private func searchMovie(_ movies: [Movie], query: String?) -> [Movie] {
+        guard let query = query, !query.isEmpty else { // Check if there is a valid text on the query
+            self.searching = false
+            return movies
+        }
+        
+        self.searching = true
+        self.state = .loading
+        return self.filterArray(movies, with: query) // Filter search list with text in query
+    }
+    
+    /// Sort array of movies in alphabetical order
+    /// - Parameter movies: Array of movies to be sorted
+    private func sortMovies(_ movies: [Movie]) -> [Movie] {
+        return movies.sorted { $0.title < $1.title }
     }
 }
 
