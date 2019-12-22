@@ -20,7 +20,27 @@ class MovieCollectionCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var favoriteButton: UIButton = UIButton()
+    lazy var favoriteButton: UIButton = {
+        let button = UIButton()
+        
+        button.setImage(UIImage(named: "Favorite-gray"), for: .normal)
+        
+        return button
+    }()
+    
+    var isFavorite: Bool = false {
+        didSet {
+            
+            var imageName = "Favorite-gray"
+            
+            if self.isFavorite {
+                imageName = "Favorite-filled"
+            }
+            
+            self.favoriteButton.setImage(UIImage(named: imageName), for: .normal)
+            
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,10 +48,17 @@ class MovieCollectionCell: UICollectionViewCell {
         self.backgroundColor = UIColor(named: "CellBlue")
 
         self.setupLayout()
+        
+        self.favoriteButton.addTarget(self, action: #selector(didTapFavorite), for: .touchUpInside)
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func didTapFavorite() {
+        self.isFavorite = !self.isFavorite
     }
     
 }
@@ -49,7 +76,8 @@ extension MovieCollectionCell {
         
         NSLayoutConstraint.activate([
             bannerImageView.topAnchor.constraint(equalTo: self.topAnchor),
-            bannerImageView.widthAnchor.constraint(equalTo: self.widthAnchor)
+            bannerImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            bannerImageView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([
