@@ -46,7 +46,7 @@ class FavoriteMoviesViewController: UIViewController, FilterApplyer {
         if self.isFiltering {
             return self.filteredMovies
         } else {
-            return DataProvider.shared.favoriteMovies
+            return DataProvider.shared.favoriteMovies.sorted { $0.popularity > $1.popularity }
         }
     }
 
@@ -75,6 +75,18 @@ class FavoriteMoviesViewController: UIViewController, FilterApplyer {
         DataProvider.shared.didChangeFavorites = {
             DispatchQueue.main.async {
                 self.updateData()
+            }
+        }
+
+        DataProvider.shared.setupFavorites { error in
+            DispatchQueue.main.async {
+                self.screen.stopLoading()
+
+                if error != nil {
+                    self.screen.displayError()
+                } else {
+                    self.screen.tableView.reloadData()
+                }
             }
         }
     }

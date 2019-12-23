@@ -21,8 +21,8 @@ class DataProvider {
 
     // MARK: - Data variables
 
-    var movies: [Movie] = []
-    var favoriteMovies: [Movie] = []
+    private(set) var movies: [Movie] = []
+    private(set) var favoriteMovies: Set<Movie> = []
     private(set) var genres: [Int: Genre] = [:]
 
     // MARK: - Closures
@@ -61,6 +61,7 @@ class DataProvider {
     // MARK: - Setup
 
     func setup(withDataFetcher moviesDataFetcher: MoviesDataFetcherProtocol = MoviesAPIDataFetcher(), completion: @escaping (_ error: Error?) -> Void) {
+        self.reset()
         self.moviesDataFetcher = moviesDataFetcher
 
         // Genres setup
@@ -73,13 +74,42 @@ class DataProvider {
                 for genreDTO in genresDTO {
                     self.genres[genreDTO.id] = Genre(fromDTO: genreDTO)
                 }
-                group.leave()
             }
+            group.leave()
         }
         group.wait()
 
         // Movies setup
         self.getMoreMovies(completion: completion)
+    }
+
+    func setupFavorites(completion: @escaping (_ error: Error?) -> Void) {
+        guard self.moviesDataFetcher != nil else {
+            return
+        }
+
+        let group = DispatchGroup()
+
+        let favoriteIDs: [Int] = UserDefaults.standard.object(forKey: "favoriteIDs") as? [Int] ?? []
+
+        for id in favoriteIDs {
+            if let movie = self.movies.first(where: { $0.id == id }) {
+                movie.isFavorite = true
+            } else {
+                group.enter()
+                self.getFavoriteMovie(withId: id) {
+                    group.leave()
+                }
+            }
+        }
+
+        group.notify(queue: DispatchQueue.global()) {
+            if self.favoriteMovies.count != favoriteIDs.count {
+                completion(DataProviderError(desciption: "Error trying to get the favorite movies"))
+            } else {
+                completion(nil)
+            }
+        }
     }
 
     // MARK: - Get methods
@@ -106,21 +136,12 @@ class DataProvider {
                 self.movieSemaphore?.signal()
                 completion(error)
             } else {
-                let favoriteIDs: [Int] = UserDefaults.standard.object(forKey: "favoriteIDs") as? [Int] ?? []
-
                 let movies = moviesDTO.map { movieDTO -> Movie in
                     let movie: Movie
                     if let posterPath = movieDTO.posterPath {
-                        movie = Movie(fromDTO: movieDTO, smallImageURL: self.moviesDataFetcher.smallImageURL(forPath: posterPath), bigImageURL: self.moviesDataFetcher.bigImageURL(forPath: posterPath), isFavorite: false)
+                        movie = Movie(fromDTO: movieDTO, smallImageURL: self.moviesDataFetcher.smallImageURL(forPath: posterPath), bigImageURL: self.moviesDataFetcher.bigImageURL(forPath: posterPath))
                     } else {
-                        movie = Movie(fromDTO: movieDTO, smallImageURL: nil, bigImageURL: nil, isFavorite: false)
-                    }
-
-                    if favoriteIDs.contains(movie.id) {
-                        movie.isFavorite = true
-                        self.favoriteMovies.append(movie)
-                    } else {
-                        movie.isFavorite = false
+                        movie = Movie(fromDTO: movieDTO, smallImageURL: nil, bigImageURL: nil)
                     }
 
                     return movie
@@ -137,27 +158,26 @@ class DataProvider {
         }
     }
 
-    func getFavoriteMovie(withId id: Int, completion: @escaping (_ error: Error?) -> Void) {
+    func getFavoriteMovie(withId id: Int, completion: @escaping () -> Void) {
         guard self.moviesDataFetcher != nil else {
-            completion(DataProviderError(desciption: "Tried to get a movie without a dataFetcher"))
             return
         }
 
         self.moviesDataFetcher.requestMovieDetails(forId: id) { (movieDTO, error) in
             if let error = error {
-                completion(error)
+                print(error)
             } else if let movieDTO = movieDTO {
                 let movie: Movie
                 if let posterPath = movieDTO.posterPath {
-                    movie = Movie(fromDTO: movieDTO, smallImageURL: self.moviesDataFetcher.smallImageURL(forPath: posterPath), bigImageURL: self.moviesDataFetcher.bigImageURL(forPath: posterPath), isFavorite: true)
+                    movie = Movie(fromDTO: movieDTO, smallImageURL: self.moviesDataFetcher.smallImageURL(forPath: posterPath), bigImageURL: self.moviesDataFetcher.bigImageURL(forPath: posterPath))
                 } else {
-                    movie = Movie(fromDTO: movieDTO, smallImageURL: nil, bigImageURL: nil, isFavorite: true)
+                    movie = Movie(fromDTO: movieDTO, smallImageURL: nil, bigImageURL: nil)
                 }
 
-                self.favoriteMovies.append(movie)
-
-                completion(nil)
+                movie.isFavorite = true
             }
+
+            completion()
         }
     }
 
@@ -166,15 +186,15 @@ class DataProvider {
     func addFavoriteMovie(_ movie: Movie) {
         guard var favoriteIDs = UserDefaults.standard.object(forKey: "favoriteIDs") as? [Int] else {
             UserDefaults.standard.set([movie.id], forKey: "favoriteIDs")
-            self.favoriteMovies.append(movie)
+            self.favoriteMovies.insert(movie)
             self.didChangeFavorites()
             return
         }
 
+        self.favoriteMovies.insert(movie)
         if !favoriteIDs.contains(movie.id) {
             favoriteIDs.append(movie.id)
             UserDefaults.standard.set(favoriteIDs, forKey: "favoriteIDs")
-            self.favoriteMovies.append(movie)
             self.didChangeFavorites()
         }
     }
@@ -186,7 +206,7 @@ class DataProvider {
 
         favoriteIDs.removeAll(where: { $0 == movie.id })
         UserDefaults.standard.set(favoriteIDs, forKey: "favoriteIDs")
-        self.favoriteMovies.removeAll(where: { $0 == movie })
+        self.favoriteMovies.remove(movie)
         self.didChangeFavorites()
     }
 }
