@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3FC84E4F7C0E14C374A0D4DE /* Pods_Movs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9F7E59C63F3C5FE8D3C2F2C /* Pods_Movs.framework */; };
 		759B0771C076B09B8D0E22C9 /* Pods_Movs_Tests_MovsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27AC56D8EA0F0585BBD4CE89 /* Pods_Movs_Tests_MovsTests.framework */; };
+		7703460423B150570002C45C /* MovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7703460323B150570002C45C /* MovieDTO.swift */; };
+		7703460623B153B20002C45C /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7703460523B153B20002C45C /* Genre.swift */; };
 		7703F6A623AC26AA00CFA8C7 /* FavoriteMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7703F6A523AC26AA00CFA8C7 /* FavoriteMoviesViewController.swift */; };
 		7703F6AA23AC298100CFA8C7 /* FavoriteMoviesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7703F6A923AC298100CFA8C7 /* FavoriteMoviesScreen.swift */; };
 		7703F6AC23AC29F900CFA8C7 /* TableViewScreenDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7703F6AB23AC29F900CFA8C7 /* TableViewScreenDelegate.swift */; };
@@ -76,6 +78,8 @@
 		2C0ABF6A85A82F98A7D5B439 /* Pods-Movs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movs.debug.xcconfig"; path = "Target Support Files/Pods-Movs/Pods-Movs.debug.xcconfig"; sourceTree = "<group>"; };
 		496503DFD71F34720162C37D /* Pods-Movs-Tests-MovsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movs-Tests-MovsTests.release.xcconfig"; path = "Target Support Files/Pods-Movs-Tests-MovsTests/Pods-Movs-Tests-MovsTests.release.xcconfig"; sourceTree = "<group>"; };
 		6C1E34C29B5B8A157B6EBB1D /* Pods-MovsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovsTests.debug.xcconfig"; path = "Target Support Files/Pods-MovsTests/Pods-MovsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7703460323B150570002C45C /* MovieDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDTO.swift; sourceTree = "<group>"; };
+		7703460523B153B20002C45C /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		7703F6A523AC26AA00CFA8C7 /* FavoriteMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesViewController.swift; sourceTree = "<group>"; };
 		7703F6A923AC298100CFA8C7 /* FavoriteMoviesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesScreen.swift; sourceTree = "<group>"; };
 		7703F6AB23AC29F900CFA8C7 /* TableViewScreenDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewScreenDelegate.swift; sourceTree = "<group>"; };
@@ -292,6 +296,7 @@
 		776AD8AE2395959600521410 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7703460523B153B20002C45C /* Genre.swift */,
 				776AD8B223959F8D00521410 /* Movie.swift */,
 				776AD8AF2395959A00521410 /* DTO */,
 			);
@@ -303,6 +308,7 @@
 			children = (
 				776AD8B92395A34600521410 /* ConfigurationDTO.swift */,
 				77F9F56A2396876F00D7DAF0 /* GenreDTO.swift */,
+				7703460323B150570002C45C /* MovieDTO.swift */,
 				776AD8B0239595D600521410 /* PopularMovieDTO.swift */,
 			);
 			path = DTO;
@@ -693,7 +699,9 @@
 				776AD8B323959F8D00521410 /* Movie.swift in Sources */,
 				77C240DB23AEF332004B0B07 /* PopularMoviesScreen.swift in Sources */,
 				77C240DD23AEF332004B0B07 /* FavoriteMovieCell.swift in Sources */,
+				7703460423B150570002C45C /* MovieDTO.swift in Sources */,
 				77348474239B00F700424F81 /* MovsViewController.swift in Sources */,
+				7703460623B153B20002C45C /* Genre.swift in Sources */,
 				77A71A99239767A700D06E36 /* MoviesAPIDataFetcher.swift in Sources */,
 				77E391B623AEF5170025F5C1 /* FilterOptionsCell.swift in Sources */,
 				77E391B823AEF51C0025F5C1 /* FilterOptionsViewController.swift in Sources */,

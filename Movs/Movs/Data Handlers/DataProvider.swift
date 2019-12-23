@@ -23,7 +23,7 @@ class DataProvider {
 
     var movies: [Movie] = []
     var favoriteMovies: [Movie] = []
-    private var genres: [Int: String] = [:]
+    private(set) var genres: [Int: Genre] = [:]
 
     // MARK: - Closures
 
@@ -38,13 +38,8 @@ class DataProvider {
     private var page: Int = 1
     private var isFetchingMovies: Bool = false
 
-    // MARK: - Dependency handler
-
-    private var genresGroup: DispatchGroup?
-
     // MARK: - Concurrency handler
 
-    private var genreSemaphore: DispatchSemaphore? = DispatchSemaphore(value: 1)
     private var movieSemaphore: DispatchSemaphore? = DispatchSemaphore(value: 1)
 
     // MARK: - Initializers
@@ -60,8 +55,6 @@ class DataProvider {
         self.genres = [:]
         self.page = 1
         self.isFetchingMovies = false
-        self.genresGroup = nil
-        self.genreSemaphore = nil
         self.movieSemaphore = nil
     }
 
@@ -71,46 +64,25 @@ class DataProvider {
         self.moviesDataFetcher = moviesDataFetcher
 
         // Genres setup
-        self.genreSemaphore?.wait()
-        self.genresGroup = DispatchGroup()
-        self.genresGroup?.enter()
-        self.genreSemaphore?.signal()
-        self.moviesDataFetcher.requestGenres { (genres, error) in
-            self.genreSemaphore?.wait()
+        let group = DispatchGroup()
+        group.enter()
+        self.moviesDataFetcher.requestGenres { (genresDTO, error) in
             if let error = error {
                 print(error)
             } else {
-                self.genres = genres
-                self.genresGroup?.leave()
+                for genreDTO in genresDTO {
+                    self.genres[genreDTO.id] = Genre(fromDTO: genreDTO)
+                }
+                group.leave()
             }
-
-            self.genresGroup = nil
-            self.genreSemaphore?.signal()
         }
+        group.wait()
 
         // Movies setup
         self.getMoreMovies(completion: completion)
     }
 
     // MARK: - Get methods
-
-    func genre(forId id: Int, completion: @escaping (String?) -> Void) {
-        self.genreSemaphore?.wait()
-        if self.genres == [:] && self.genresGroup != nil {
-            self.genresGroup?.notify(queue: DispatchQueue.global()) {
-                self.genreSemaphore?.signal()
-                completion(self.genres[id])
-            }
-        } else {
-            self.genreSemaphore?.signal()
-            completion(self.genres[id])
-        }
-    }
-
-    func getAllGenres() -> [Int: String] {
-        self.genresGroup?.wait()
-        return self.genres
-    }
 
     func getMoreMovies(completion: @escaping (_ error: Error?) -> Void) {
         guard self.moviesDataFetcher != nil else {
@@ -160,6 +132,30 @@ class DataProvider {
                 self.movieSemaphore?.wait()
                 self.isFetchingMovies = false
                 self.movieSemaphore?.signal()
+                completion(nil)
+            }
+        }
+    }
+
+    func getFavoriteMovie(withId id: Int, completion: @escaping (_ error: Error?) -> Void) {
+        guard self.moviesDataFetcher != nil else {
+            completion(DataProviderError(desciption: "Tried to get a movie without a dataFetcher"))
+            return
+        }
+
+        self.moviesDataFetcher.requestMovieDetails(forId: id) { (movieDTO, error) in
+            if let error = error {
+                completion(error)
+            } else if let movieDTO = movieDTO {
+                let movie: Movie
+                if let posterPath = movieDTO.posterPath {
+                    movie = Movie(fromDTO: movieDTO, smallImageURL: self.moviesDataFetcher.smallImageURL(forPath: posterPath), bigImageURL: self.moviesDataFetcher.bigImageURL(forPath: posterPath), isFavorite: true)
+                } else {
+                    movie = Movie(fromDTO: movieDTO, smallImageURL: nil, bigImageURL: nil, isFavorite: true)
+                }
+
+                self.favoriteMovies.append(movie)
+
                 completion(nil)
             }
         }

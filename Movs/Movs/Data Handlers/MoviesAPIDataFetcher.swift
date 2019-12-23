@@ -36,23 +36,17 @@ extension MoviesAPIDataFetcher: MoviesDataFetcherProtocol {
 
     // MARK: - Data request methods
 
-    func requestGenres(completion: @escaping (_ genres: [Int: String], _ error: Error?) -> Void) {
+    func requestGenres(completion: @escaping (_ genres: [GenreDTO], _ error: Error?) -> Void) {
         let url = baseURL + "/genre/movie/list" + apiKey
         self.requestData(with: url) { (data, error) in
             if let error = error {
-                completion([:], error)
+                completion([], error)
             } else if let data = data {
                 do {
                     let genreData = try JSONDecoder().decode(GenreWrapperDTO.self, from: data)
-
-                    var genres: [Int: String] = [:]
-                    for genre in genreData.genres {
-                        genres[genre.id] = genre.name
-                    }
-
-                    completion(genres, nil)
+                    completion(genreData.genres, nil)
                 } catch {
-                    completion([:], error)
+                    completion([], error)
                 }
             }
         }
@@ -69,6 +63,22 @@ extension MoviesAPIDataFetcher: MoviesDataFetcherProtocol {
                     completion(popularMovies.results, nil)
                 } catch {
                     completion([], error)
+                }
+            }
+        }
+    }
+
+    func requestMovieDetails(forId id: Int, completion: @escaping (_ movie: MovieDTO?, _ error: Error?) -> Void) {
+        let url = self.baseURL + "/movie/\(id)"  + self.apiKey
+        self.requestData(with: url) { (data, error) in
+            if let error = error {
+                completion(nil, error)
+            } else if let data = data {
+                do {
+                    let movie = try JSONDecoder().decode(MovieDTO.self, from: data)
+                    completion(movie, nil)
+                } catch {
+                    completion(nil, error)
                 }
             }
         }

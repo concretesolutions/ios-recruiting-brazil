@@ -30,13 +30,13 @@ class FilterOptionsViewController: UIViewController, DatesFilterDelegate, Genres
 
     // MARK: - GenresFilterDelegate
 
-    var genres: [Int: String] = [:]
-    var tempSelectedGenreIds: Set<Int> = []
+    var genres: [Genre] = []
+    var tempSelectedGenres: Set<Genre> = []
 
     // MARK: - Cancel values
 
     private var selectedDates: Set<String> = []
-    private var selectedGenreIds: Set<Int> = []
+    private var selectedGenres: Set<Genre> = []
 
     // MARK: - Life cycle
 
@@ -61,12 +61,10 @@ class FilterOptionsViewController: UIViewController, DatesFilterDelegate, Genres
         super.viewWillAppear(animated)
 
         self.dates = Set(DataProvider.shared.favoriteMovies.map { $0.releaseYear }).sorted { $0 < $1 }
-        let allGenres = DataProvider.shared.getAllGenres()
-        let availablesGenreIds = Set(DataProvider.shared.favoriteMovies.reduce([], { $0 + $1.genreIds }))
-        self.genres = allGenres.filter({ availablesGenreIds.contains($0.key) })
+        self.genres = Set(DataProvider.shared.favoriteMovies.reduce([], { $0 + $1.genres })).sorted { $0.name < $1.name }
 
         self.selectedDates = self.selectedDates.filter { self.dates.contains($0) }
-        self.selectedGenreIds = self.selectedGenreIds.filter { self.genres[$0] != nil }
+        self.selectedGenres = self.selectedGenres.filter { self.genres.contains($0)}
 
         self.screen.tableView.reloadData()
     }
@@ -75,26 +73,26 @@ class FilterOptionsViewController: UIViewController, DatesFilterDelegate, Genres
 
     @objc private func apply() {
         self.selectedDates = self.tempSelectedDates
-        self.selectedGenreIds = self.tempSelectedGenreIds
+        self.selectedGenres = self.tempSelectedGenres
         self.delegate?.updateData()
         self.dismiss(animated: true)
     }
 
     @objc private func cancel() {
         self.tempSelectedDates = self.selectedDates
-        self.tempSelectedGenreIds = self.selectedGenreIds
+        self.tempSelectedGenres = self.selectedGenres
         self.dismiss(animated: true)
     }
 
     // MARK: - Helpers
 
     func applyFilter() {
-        if self.selectedDates.isEmpty && self.selectedGenreIds.isEmpty {
+        if self.selectedDates.isEmpty && self.selectedGenres.isEmpty {
             self.delegate?.isFiltering = false
         } else {
             self.delegate?.isFiltering = true
             self.delegate?.filteredMovies = DataProvider.shared.favoriteMovies.filter { movie in
-                self.selectedDates.contains(where: { $0 == movie.releaseYear }) || self.selectedGenreIds.contains(where: { movie.genreIds.contains($0) })
+                self.selectedDates.contains(where: { $0 == movie.releaseYear }) || self.selectedGenres.contains(where: { movie.genres.contains($0) })
             }
         }
     }
@@ -123,14 +121,10 @@ extension FilterOptionsViewController: TableViewScreenDelegate {
                 cell.configure(title: "Dates", detail: "multiple")
             }
         case 1:
-            if self.tempSelectedGenreIds.isEmpty {
+            if self.tempSelectedGenres.isEmpty {
                 cell.configure(title: "Genres", detail: "")
-            } else if self.tempSelectedGenreIds.count == 1 {
-                DataProvider.shared.genre(forId: self.tempSelectedGenreIds.first!) { genre in
-                    DispatchQueue.main.async {
-                        cell.configure(title: "Genres", detail: genre!)
-                    }
-                }
+            } else if self.tempSelectedGenres.count == 1 {
+                cell.configure(title: "Genres", detail: self.tempSelectedGenres.first!.name)
             } else {
                 cell.configure(title: "Genres", detail: "multiple")
             }
@@ -158,6 +152,6 @@ extension FilterOptionsViewController: TableViewScreenDelegate {
 extension FilterOptionsViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         self.tempSelectedDates = self.selectedDates
-        self.tempSelectedGenreIds = self.selectedGenreIds
+        self.tempSelectedGenres = self.selectedGenres
     }
 }

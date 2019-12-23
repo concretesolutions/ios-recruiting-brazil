@@ -20,7 +20,7 @@ class GenresFilterViewController: UIViewController {
 
     // MARK: - Model
 
-    private var genres: [(Int, String)] = []
+    private var genres: [Genre] = []
 
     // MARK: - Life cycle
 
@@ -38,14 +38,14 @@ class GenresFilterViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.genres = self.delegate?.genres.sorted(by: { $0.value < $1.value }) ?? []
+        self.genres = self.delegate?.genres ?? []
         self.screen.tableView.reloadData()
     }
 
     // MARK: - Clear
 
     @objc private func clear() {
-        self.delegate?.tempSelectedGenreIds = []
+        self.delegate?.tempSelectedGenres = []
         self.screen.tableView.reloadData()
     }
 }
@@ -67,10 +67,10 @@ extension GenresFilterViewController: TableViewScreenDelegate {
             fatalError("No delegate")
         }
 
-        let (id, genre) = self.genres[indexPath.row]
+        let genre = self.genres[indexPath.row]
 
-        cell.configure(title: genre)
-        cell.accessoryView = delegate.tempSelectedGenreIds.contains(id) ? UIImageView(image: UIImage(systemName: "checkmark")) : nil
+        cell.configure(title: genre.name)
+        cell.accessoryView = delegate.tempSelectedGenres.contains(genre) ? UIImageView(image: UIImage(systemName: "checkmark")) : nil
 
         return cell
     }
@@ -82,12 +82,12 @@ extension GenresFilterViewController: TableViewScreenDelegate {
             fatalError("No delegate")
         }
 
-        let (id, _) = self.genres[indexPath.row]
+        let genre = self.genres[indexPath.row]
 
-        if delegate.tempSelectedGenreIds.contains(id) {
-            delegate.tempSelectedGenreIds.remove(id)
+        if delegate.tempSelectedGenres.contains(genre) {
+            delegate.tempSelectedGenres.remove(genre)
         } else {
-            delegate.tempSelectedGenreIds.insert(id)
+            delegate.tempSelectedGenres.insert(genre)
         }
 
         tableView.reloadRows(at: [indexPath], with: .automatic)
