@@ -12,6 +12,7 @@ import XCTest
 class DataServiceTest: XCTestCase {
     
     var dataService = DataService.shared
+    var dataSource = DataSourceMock.self
 
     override func setUp() {
         super.setUp()
@@ -21,33 +22,134 @@ class DataServiceTest: XCTestCase {
                                defaults: UserDefaults.init(suiteName: "DataServiceTest")!)
     }
     
-    func testLoadMovies() {
+    // MARK: - Load movies
+    func testLoadMoviesFirstPageIsCorrect() {
+        self.dataSource.setup(for: .loadSuccess)
+        let expection = self.expectation(description: "LoadMovies")
+        var stateReturned: CollectionState = .loadError
         
+        self.dataService.loadMovies(of: 1) { (state) in
+            stateReturned = state
+            expection.fulfill()
+        }
+        
+        waitForExpectations(timeout: 2, handler: nil)
+        
+        XCTAssertEqual(stateReturned, .loadSuccess)
+        XCTAssertEqual(self.dataService.movies.count, 3)
+        XCTAssertEqual(self.dataService.genres.count, 4)
     }
     
+    func testLoadMoviesSecondPageIsCorrect() {
+        self.dataSource.setup(for: .loadSuccess)
+        let expection = self.expectation(description: "LoadMovies")
+        var stateReturned: CollectionState = .loadError
+        
+        self.dataService.loadMovies(of: 1) { (_) in
+            self.dataService.loadMovies(of: 2) { (state) in
+                stateReturned = state
+                expection.fulfill()
+            }
+        }
+        
+        waitForExpectations(timeout: 2, handler: nil)
+        
+        XCTAssertEqual(stateReturned, .loadSuccess)
+        XCTAssertEqual(self.dataService.movies.count, 6)
+        XCTAssertEqual(self.dataService.genres.count, 4)
+    }
+    
+    func testLoadMoviesIsIncorrect() {
+        self.dataSource.setup(for: .loadError)
+        let expection = self.expectation(description: "LoadMovies")
+        var stateReturned: CollectionState = .loadSuccess
+        
+        self.dataService.loadMovies(of: 1) { (state) in
+            stateReturned = state
+            expection.fulfill()
+        }
+        
+        waitForExpectations(timeout: 2, handler: nil)
+        
+        XCTAssertEqual(stateReturned, .loadError)
+        XCTAssert(self.dataService.movies.isEmpty)
+        XCTAssert(self.dataService.genres.isEmpty)
+    }
+    
+    // MARK: - Movie image
+    func testLoadPosterImageIsCorrect() {
+        self.dataSource.setup(for: .loadSuccess)
+        let expection = self.expectation(description: "LoadPosterImage")
+        var posterImage: UIImage?
+        
+        self.dataService.loadPosterImage(with: "") { (image) in
+            posterImage = image
+            expection.fulfill()
+        }
+        
+        waitForExpectations(timeout: 2, handler: nil)
+        
+        if let image = posterImage {
+            XCTAssertEqual(image, UIImage())
+        } else {
+            XCTAssert(false)
+        }
+    }
+    
+    func testLoadPosterImageIsIncorrect() {
+        self.dataSource.setup(for: .loadError)
+        let expection = self.expectation(description: "LoadPosterImage")
+        var posterImage: UIImage?
+        
+        self.dataService.loadPosterImage(with: "") { (image) in
+            posterImage = image
+            expection.fulfill()
+        }
+        
+        waitForExpectations(timeout: 2, handler: nil)
+        
+        if let image = posterImage {
+            XCTAssertEqual(image, UIImage(named: "PosterUnavailabe")!)
+        } else {
+            XCTAssert(false)
+        }
+    }
+    
+    // MARK: - Favorites
     func testLoadFavorites() {
+        self.dataSource.setup(for: .loadSuccess)
+        let expection = self.expectation(description: "LoadFavorites")
+        var stateReturned: CollectionState = .loadError
+        self.dataService.addToFavorites(10)
         
-    }
-    
-    func testLoadPosterImage() {
+        self.dataService.loadFavorites { (state) in
+            stateReturned = state
+            expection.fulfill()
+        }
         
+        waitForExpectations(timeout: 2, handler: nil)
+        
+        XCTAssertEqual(stateReturned, .loadSuccess)
+        XCTAssertEqual(self.dataService.favorites.count, 1)
     }
     
     func testAddToFavorites() {
+        for i in 0...10 {
+            self.dataService.addToFavorites(i)
+        }
         
+        XCTAssertEqual(self.dataService.favoritesIDs, Set(Array(0...10)))
     }
     
     func testRemoveFromFavorites() {
+        self.dataService.addToFavorites(10)
+        self.dataService.removeFromFavorites(10)
         
+        XCTAssertEqual(self.dataService.favoritesIDs, Set([]))
     }
     
     func testMovieIsFavorite() {
-        
+        self.dataService.addToFavorites(10)
+        XCTAssert(self.dataService.movieIsFavorite(10))
     }
 }
-
-//private(set) var genres: [Int: String] = [:]
-//private(set) var dataSource: DataSource.Type
-//private(set) var movies: [Movie]
-//private(set) var favorites: [Movie]
-//private var favoritesIDs: Set<Int>

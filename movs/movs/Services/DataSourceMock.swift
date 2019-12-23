@@ -18,19 +18,27 @@ final class DataSourceMock: DataSource {
     }
     
     static func fetchGenres(completion: @escaping (Result<GenresDTO, Error>) -> Void) {
-        let genresDTO = GenresDTO(genres: [
-            GenreDTO(id: 28, name: "Action"),
-            GenreDTO(id: 53, name: "Thriller"),
-            GenreDTO(id: 12, name: "Adventure"),
-            GenreDTO(id: 35, name: "Comedy")
-        ])
-        
-        completion(.success(genresDTO))
+        switch self.collectionState {
+        case .loading, .normal, .filtered:
+            return
+        case .loadSuccess:
+            let genresDTO = GenresDTO(genres: [
+                GenreDTO(id: 28, name: "Action"),
+                GenreDTO(id: 53, name: "Thriller"),
+                GenreDTO(id: 12, name: "Adventure"),
+                GenreDTO(id: 24, name: "Action")
+            ])
+            
+            completion(.success(genresDTO))
+        case .loadError:
+            let error = NSError(domain: "error", code: 0, userInfo: nil)
+            completion(.failure(error))
+        }
     }
     
     static func fetchPopularMovies(of page: Int, completion: @escaping (Result<MoviesRequestDTO, Error>) -> Void) {
         switch self.collectionState {
-        case .loading, .normal:
+        case .loading, .normal, .filtered:
             return
         case .loadSuccess:
             let moviesDTO = [MovieDTO(id: 241251,
@@ -56,18 +64,39 @@ final class DataSourceMock: DataSource {
                                                    totalResults: 1,
                                                    totalPages: 1)
             completion(.success(movieRequestDTO))
-        case .filtered:
-            return
         case .loadError:
-            return
+            let error = NSError(domain: "error", code: 0, userInfo: nil)
+            completion(.failure(error))
         }
     }
     
     static func fetchMoviePoster(with imageURL: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
-        
+        switch self.collectionState {
+        case .loading, .normal, .filtered:
+            return
+        case .loadSuccess:
+            completion(.success(UIImage()))
+        case .loadError:
+            let error = NSError(domain: "error", code: 0, userInfo: nil)
+            completion(.failure(error))
+        }
     }
     
     static func fetchMovieDetail(with id: Int, completion: @escaping (Result<MovieDetailDTO, Error>) -> Void) {
-        
+        switch self.collectionState {
+        case .loading, .normal, .filtered:
+            return
+        case .loadSuccess:
+            let movieDetail = MovieDetailDTO(id: id,
+                                             title: "Fight Club",
+                                             releaseDate: "1999-10-12",
+                                             synopsis: "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground fight clubs forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.",
+                                             posterPath: nil,
+                                             genres: [GenreDTO(id: 24, name: "Action")])
+            completion(.success(movieDetail))
+        case .loadError:
+            let error = NSError(domain: "error", code: 0, userInfo: nil)
+            completion(.failure(error))
+        }
     }
 }
