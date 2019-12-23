@@ -32,15 +32,7 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
     var needReloadMovieView: ((Int) -> Void)?
     var needDeleteMovieView: ((Int) -> Void)?
     var needInsertMovieView: ((Int) -> Void)?
-    var needChangeLoadingStateVisibility: ((Bool) -> Void)? {
-        didSet {
-            if moviesPage.items.count == 0 {
-                self.needChangeLoadingStateVisibility?(true)
-            } else {
-                self.needChangeEmptyStateVisibility?(false)
-            }
-        }
-    }
+    var needChangeLoadingStateVisibility: ((Bool) -> Void)?
     var needChangeEmptyStateVisibility: ((Bool) -> Void)? {
         didSet {
             if moviesPage.items.count == 0 {
@@ -107,7 +99,7 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
             needChangeEmptyStateVisibility?(false)
         }
         
-        if moviesPage.pageNumber == 1 {
+        if moviesPage.pageNumber <= 1 {
             self.needReloadAllMovies?()
         } else {
             self.needShowNewMovies?(newMoviesRange)

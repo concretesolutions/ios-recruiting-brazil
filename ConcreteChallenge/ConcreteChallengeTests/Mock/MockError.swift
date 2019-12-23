@@ -8,5 +8,7 @@
 
 import Foundation
 
-struct MockError: Error {}
+struct MockError: Error, LocalizedError {
+    
+}
 
