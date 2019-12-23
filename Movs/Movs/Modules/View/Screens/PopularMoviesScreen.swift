@@ -39,6 +39,8 @@ final class PopularMoviesScreen: UIView {
         return view
     }()
 
+    // MARK: - Exception views
+
     private let errorView: ExceptionView = ExceptionView.error
     private let emptySearchView: ExceptionView = ExceptionView.emptySearch
 

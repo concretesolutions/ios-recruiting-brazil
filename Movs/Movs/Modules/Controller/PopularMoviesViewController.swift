@@ -61,12 +61,7 @@ class PopularMoviesViewController: UIViewController {
                 if error != nil {
                     self.screen.displayError()
                 } else {
-                    var indexPaths: [IndexPath] = []
-                    for row in 0...DataProvider.shared.movies.count-1 {
-                        indexPaths.append(IndexPath(row: row, section: 0))
-                    }
-
-                    self.screen.collectionView.insertItems(at: indexPaths)
+                    self.screen.collectionView.reloadData()
                 }
             }
         }

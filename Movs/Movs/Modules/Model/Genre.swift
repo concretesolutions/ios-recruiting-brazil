@@ -23,7 +23,7 @@ class Genre {
 
 extension Genre: CustomStringConvertible {
     var description: String {
-        "Genre {\n" + "\tid: \(self.id)\n" + "\name \(String(describing: self.name))\n" + "}\n"
+        "Genre (" + "id: \(self.id), " + "name \(String(describing: self.name))" + ")"
     }
 }
 
