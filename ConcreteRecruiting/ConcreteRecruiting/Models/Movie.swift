@@ -10,9 +10,6 @@ import UIKit
 
 struct Movie: Decodable {
     
-    // TODO: Remove the following line
-    private let imgBase = "https://image.tmdb.org/t/p/w185/"
-    
     let title: String
     let description: String
     let releaseDate: Date
@@ -38,7 +35,7 @@ struct Movie: Decodable {
         releaseDate = try values.decode(Date.self, forKey: .releaseDate)
         
         let imgPath = try values.decode(String.self, forKey: .banner)
-        banner = URL(string: imgBase+imgPath)
+        banner = URL(string: NetworkManager.baseImageUrl+imgPath)
         
         genres = try values.decode([Genre].self, forKey: .genres)
         
