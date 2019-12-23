@@ -42,12 +42,15 @@ class MovieCollectionCell: UICollectionViewCell {
         }
     }
     
-    func setup(with model: Movie) {
+    var viewModel: MovieCellViewModel!
+    
+    func setup(with viewModel: MovieCellViewModel) {
         
         // TODO: Download image
+        self.viewModel = viewModel
         
-        self.titleLabel.text = model.title
-        self.isFavorite = model.isFavorite
+        self.titleLabel.text = viewModel.movieTitle
+        self.isFavorite = viewModel.isFavorite
         
     }
     
@@ -67,7 +70,7 @@ class MovieCollectionCell: UICollectionViewCell {
     }
     
     @objc func didTapFavorite() {
-        self.isFavorite = !self.isFavorite
+        viewModel.didTapFavorite()
     }
     
 }

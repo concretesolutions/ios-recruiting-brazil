@@ -10,7 +10,7 @@ import Foundation
 
 class MovieCellViewModel {
     
-    let movie: Movie
+    var movie: Movie
     
     init(with movie: Movie) {
         self.movie = movie
@@ -28,5 +28,12 @@ class MovieCellViewModel {
         return movie.isFavorite
     }
     
+    func didTapFavorite() {
+        
+        movie.isFavorite = !movie.isFavorite
+        
+        // TODO: Persist the favorite somewhere
+        
+    }
     
 }

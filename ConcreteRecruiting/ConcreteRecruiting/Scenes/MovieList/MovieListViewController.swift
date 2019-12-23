@@ -26,8 +26,6 @@ class MovieListViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        viewModel.didLoad()
-        
         self.title = viewModel.title
         
         let movieView = MovieListView()

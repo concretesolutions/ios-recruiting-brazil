@@ -17,6 +17,8 @@ class MovieListView: UIView {
         
         collectionView.register(MovieCollectionCell.self, forCellWithReuseIdentifier: "MovieCell")
         
+        collectionView.isHidden = true
+        
         return collectionView
     }()
     
@@ -41,7 +43,7 @@ class MovieListView: UIView {
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
         
-        activityIndicator.hidesWhenStopped = true
+        //activityIndicator.hidesWhenStopped = true
         
         return activityIndicator
     }()
@@ -55,7 +57,7 @@ class MovieListView: UIView {
         self.backgroundColor = .systemGray6
         self.setupLayout()
        
-        collectionView.dataSource = self.datasource
+        //collectionView.dataSource = self.datasource
         collectionView.delegate = self.delegate
         
       }
@@ -66,25 +68,64 @@ class MovieListView: UIView {
     
     func setup(with viewModel: MovieListViewModel) {
         
+        
         viewModel.didChangeLoadingState = { [weak self] (isLoading) in
-            if isLoading {
-                self?.activityIndicator.startAnimating()
-            } else {
-                self?.activityIndicator.stopAnimating()
+            DispatchQueue.main.async {
+                if isLoading {
+                    self?.collectionView.isHidden = true
+                    self?.searchErrorView.isHidden = true
+                    self?.errorView.isHidden = true
+                    self?.activityIndicator.isHidden = false
+                    
+                    self?.activityIndicator.startAnimating()
+                
+                } else {
+                    self?.collectionView.isHidden = false
+                    self?.searchErrorView.isHidden = true
+                    self?.errorView.isHidden = true
+                    
+                    self?.activityIndicator.stopAnimating()
+                    
+                    self?.activityIndicator.isHidden = true
+                }
+                    
             }
         }
         
         viewModel.errorWhileLoadingMovies = { [weak self] (error) in
-            self?.collectionView.isHidden = true
-            self?.searchErrorView.isHidden = true
-            self?.errorView.isHidden = false
+            DispatchQueue.main.async {
+                self?.collectionView.isHidden = true
+                self?.searchErrorView.isHidden = true
+                self?.activityIndicator.isHidden = true
+                self?.errorView.isHidden = false
+            }
             
             print(error.localizedDescription)
         }
         
         viewModel.noResultsFound = { [weak self] (rationale) in
+            DispatchQueue.main.async {
+                
+                self?.collectionView.isHidden = true
+                self?.searchErrorView.isHidden = false
+                self?.errorView.isHidden = true
+                self?.activityIndicator.isHidden = true
+            }
             print(rationale)
         }
+        
+        viewModel.reloadData = { [weak self] in
+            DispatchQueue.main.async {
+                self?.collectionView.isHidden = false
+                self?.searchErrorView.isHidden = true
+                self?.errorView.isHidden = true
+                self?.activityIndicator.isHidden = true
+                
+                self?.collectionView.reloadData()
+            }
+        }
+        
+        viewModel.didBind()
         
     }
 

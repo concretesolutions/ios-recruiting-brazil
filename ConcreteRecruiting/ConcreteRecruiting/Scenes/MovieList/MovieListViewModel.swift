@@ -63,7 +63,7 @@ class MovieListViewModel {
         
     }
     
-    public func didLoad() {
+    public func didBind() {
         getMovies(page: self.currentPage)
     }
     
