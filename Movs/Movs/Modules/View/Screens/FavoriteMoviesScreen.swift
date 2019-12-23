@@ -32,6 +32,16 @@ final class FavoriteMoviesScreen: UIView {
         return view
     }()
 
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(frame: .zero)
+        view.hidesWhenStopped = true
+        view.color = .systemIndigo
+        return view
+    }()
+
+    // MARK: - Exception views
+
+    private let errorView: ExceptionView = ExceptionView.error
     private let emptyFavoritesView: ExceptionView = ExceptionView.emptyFavorites
     private let emptySearchView: ExceptionView = ExceptionView.emptySearch
 
@@ -46,7 +56,21 @@ final class FavoriteMoviesScreen: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Activity Indicator handlers
+
+    func startLoading() {
+        self.activityIndicator.startAnimating()
+    }
+
+    func stopLoading() {
+        self.activityIndicator.stopAnimating()
+    }
+
     // MARK: - Exception handlers
+
+    func displayError() {
+        self.tableView.backgroundView = self.errorView
+    }
 
     func displayEmptyFavorites() {
         self.tableView.backgroundView = self.emptyFavoritesView

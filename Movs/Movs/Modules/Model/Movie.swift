@@ -16,6 +16,7 @@ class Movie {
     let releaseYear: String
     let posterPath: String?
     var genres: [Genre]
+    let popularity: Double
     let smallImageURL: String?
     let bigImageURL: String?
     var isFavorite: Bool {
@@ -35,7 +36,7 @@ class Movie {
 
     // MARK: - Initializers
 
-    init(fromDTO dto: PopularMovieDTO, smallImageURL: String?, bigImageURL: String?, isFavorite: Bool) {
+    init(fromDTO dto: PopularMovieDTO, smallImageURL: String?, bigImageURL: String?, isFavorite: Bool = false) {
         self.id = dto.id
         self.title = dto.title
         self.overview = dto.overview
@@ -45,13 +46,14 @@ class Movie {
             self.releaseYear = "----"
         }
         self.posterPath = dto.posterPath
-        self.genres = dto.genreIds.map { DataProvider.shared.genres[$0]! }
+        self.genres = dto.genreIds.compactMap { DataProvider.shared.genres[$0] }
+        self.popularity = dto.popularity
         self.smallImageURL = smallImageURL
         self.bigImageURL = bigImageURL
         self.isFavorite = isFavorite
     }
 
-    init(fromDTO dto: MovieDTO, smallImageURL: String?, bigImageURL: String?, isFavorite: Bool) {
+    init(fromDTO dto: MovieDTO, smallImageURL: String?, bigImageURL: String?, isFavorite: Bool = false) {
         self.id = dto.id
         self.title = dto.title
         self.overview = dto.overview
@@ -62,6 +64,7 @@ class Movie {
         }
         self.posterPath = dto.posterPath
         self.genres = dto.genres.map { Genre(fromDTO: $0) }
+        self.popularity = dto.popularity
         self.smallImageURL = smallImageURL
         self.bigImageURL = bigImageURL
         self.isFavorite = isFavorite
@@ -77,5 +80,11 @@ extension Movie: CustomStringConvertible {
 extension Movie: Equatable {
     static func == (lhs: Movie, rhs: Movie) -> Bool {
         return lhs.id == rhs.id && lhs.title == rhs.title && lhs.overview == rhs.overview && lhs.releaseYear == rhs.releaseYear && lhs.posterPath == rhs.posterPath && lhs.genres == rhs.genres && lhs.smallImageURL == rhs.smallImageURL && lhs.bigImageURL == rhs.bigImageURL && lhs.isFavorite == rhs.isFavorite
+    }
+}
+
+extension Movie: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
     }
 }
