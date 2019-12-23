@@ -10,6 +10,12 @@ import UIKit
 
 class FilterCell: UITableViewCell {
 
+    override var accessoryView: UIView? {
+        didSet {
+            self.accessoryView?.tintColor = .systemIndigo
+        }
+    }
+
     // MARK: - Reusable Identifier
 
     static let reuseIdentifier: String = "FilterCell"
