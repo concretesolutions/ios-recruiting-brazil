@@ -10,15 +10,11 @@ import UIKit
 
 struct Movie: Decodable {
     
-    // TODO: Remove the following line
-    private let imgBase = "https://image.tmdb.org/t/p/w185/"
-    
     let title: String
     let description: String
-    let releaseDate: Date
-    let banner: URL?
-    
-    let genres: [Genre]
+    let releaseDate: Date?
+    let bannerPath: String
+    let genres: [Int]
     
     var isFavorite: Bool = false
     
@@ -26,21 +22,23 @@ struct Movie: Decodable {
         case title
         case description = "overview"
         case releaseDate = "release_date"
-        case banner = "poster"
-        case genres
+        case banner = "poster_path"
+        case genres = "genre_ids"
     }
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
-        title = try values.decode(String.self, forKey: .title)
-        description = try values.decode(String.self, forKey: .description)
-        releaseDate = try values.decode(Date.self, forKey: .releaseDate)
+        self.title = try values.decode(String.self, forKey: .title)
+        self.description = try values.decode(String.self, forKey: .description)
+       
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withFullDate, .withDashSeparatorInDate]
+        let dateText = try values.decode(String.self, forKey: .releaseDate)
+        self.releaseDate = formatter.date(from: dateText)
         
-        let imgPath = try values.decode(String.self, forKey: .banner)
-        banner = URL(string: imgBase+imgPath)
-        
-        genres = try values.decode([Genre].self, forKey: .genres)
+        self.bannerPath = try values.decode(String.self, forKey: .banner)
+        self.genres = try values.decode([Int].self, forKey: .genres)
         
     }
     
