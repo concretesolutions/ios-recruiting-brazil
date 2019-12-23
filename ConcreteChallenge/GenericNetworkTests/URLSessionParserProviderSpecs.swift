@@ -85,6 +85,32 @@ class URLSessionParserProviderSpecs: QuickSpec {
                     expect(returnError).toEventuallyNot(beNil())
                 }
             }
+            
+            context("a wrong route was provided") {
+                it("must throw a error") {
+                    var returnError: NetworkError?
+                    stub(condition: { _ in return true }) { (request) -> OHHTTPStubsResponse in
+                        return .init(data: Data(), statusCode: 200, headers: nil)
+                    }
+
+                    let wrongRoute = MockRoute(baseURL: URL(string: "https://www.mock.com")!, path: "www.#@", method: .get, urlParams: [])
+                    urlSessionProvider.request(route: wrongRoute) { (result) in
+                        switch result {
+                        case .failure(let error):
+                            switch error {
+                            case NetworkError.wrongURL:
+                                returnError = error as? NetworkError
+                            default:
+                                returnError = nil
+                            }
+                        case .success:
+                            returnError = nil
+                        }
+                    }
+                    
+                    expect(returnError).toEventuallyNot(beNil())
+                }
+            }
         }
     }
 }

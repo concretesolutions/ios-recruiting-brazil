@@ -17,8 +17,4 @@ public struct BasicRoute: Route {
     public init(url: URL) {
         self.baseURL = url
     }
-    
-    var completeUrl: URL? {
-        return baseURL
-    }
 }

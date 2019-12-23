@@ -7,6 +7,7 @@
 //
 
 import Foundation
+@testable import GenericNetwork
 
 /// A provider that simulates requesting, while reading from a local file. It also can send intentional errors at the completion
 public class LocalMockProvider<ParserType: Parser>: ParserProvider {
