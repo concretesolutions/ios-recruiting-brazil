@@ -19,6 +19,7 @@ public class URLSessionParserProvider<ParserType: Parser>: ParserProvider {
         self.parser = parser
     }
     
+    @discardableResult
     public func request(route: Route, completion: @escaping (Result<Data, Error>) -> Void) -> CancellableTask? {
         // the other route methods supossed to be implemmented when they be necessary in the future.
         guard route.method == .get else {
