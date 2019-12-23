@@ -52,6 +52,4 @@ enum MovieEndPoint: EndPointType {
         return .url
     }
     
-    
-    
 }
