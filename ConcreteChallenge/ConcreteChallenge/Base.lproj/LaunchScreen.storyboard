@@ -21,12 +21,21 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" name="red"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Concrete Challenge" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpI-DU-npC">
+                                <rect key="frame" x="10" y="610.5" width="394" height="33"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
+                                <color key="textColor" name="text_purple"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jpI-DU-npC" secondAttribute="trailing" constant="10" id="BCB-ie-Ene"/>
                             <constraint firstAttribute="trailing" secondItem="rJc-0G-mmC" secondAttribute="trailing" id="Fnj-el-5GU"/>
                             <constraint firstItem="rJc-0G-mmC" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="IfQ-KT-GbU"/>
                             <constraint firstItem="rJc-0G-mmC" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="OQ2-FG-ntt"/>
+                            <constraint firstItem="jpI-DU-npC" firstAttribute="centerY" secondItem="rJc-0G-mmC" secondAttribute="centerY" multiplier="1.4" id="o07-xT-oYE"/>
+                            <constraint firstItem="jpI-DU-npC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="qnY-hX-kgP"/>
                             <constraint firstAttribute="bottom" secondItem="rJc-0G-mmC" secondAttribute="bottom" id="qnc-zt-5QX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -41,6 +50,9 @@
         <image name="placeholderImage.png" width="897" height="869"/>
         <namedColor name="red">
             <color red="0.54500001668930054" green="0.11400000005960464" blue="0.097999997437000275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="text_purple">
+            <color red="0.78799998760223389" green="0.80400002002716064" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
