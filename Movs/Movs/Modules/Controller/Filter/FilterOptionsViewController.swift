@@ -48,7 +48,7 @@ class FilterOptionsViewController: UIViewController, DatesFilterDelegate, Genres
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Filters"
+        self.title = "Filter"
         self.navigationItem.largeTitleDisplayMode = .always
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Apply", style: .done, target: self, action: #selector(self.apply))
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.cancel))
