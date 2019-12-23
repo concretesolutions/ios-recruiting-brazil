@@ -41,7 +41,7 @@ class MovieViewModelDecorator: MovieViewModelWithData {
         }
     }
     
-    private var decoratedMovieViewModel: MovieViewModelWithData
+    var decoratedMovieViewModel: MovieViewModelWithData
     
     init(_ decorated: MovieViewModelWithData) {
         self.decoratedMovieViewModel = decorated
@@ -53,5 +53,19 @@ class MovieViewModelDecorator: MovieViewModelWithData {
     
     func closeButtonWasTapped() {
         self.decoratedMovieViewModel.closeButtonWasTapped()
+    }
+    
+    static func searchDecorator<MovieViewModelDecoratorType>(ofType type: MovieViewModelDecoratorType.Type, in movieViewModel: MovieViewModel) -> MovieViewModelDecoratorType? {
+        
+        var currentDecorator: MovieViewModelDecorator? = movieViewModel as? MovieViewModelDecorator
+        while(currentDecorator != nil) {
+            if let currentDecoratorAsType = currentDecorator as? MovieViewModelDecoratorType {
+                return currentDecoratorAsType
+            }
+            
+            currentDecorator = currentDecorator?.decoratedMovieViewModel as? MovieViewModelDecorator
+        }
+        
+        return nil
     }
 }

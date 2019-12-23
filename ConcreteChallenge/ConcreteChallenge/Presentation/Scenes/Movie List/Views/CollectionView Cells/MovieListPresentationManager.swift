@@ -45,10 +45,20 @@ struct MovieListPresentationManager {
         guard let collectionViewLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
             return nil
         }
-        
+        let collectionViewHeight = collectionView.frame.height - collectionView.contentInset.top
         let floatingNumberOfColumns = CGFloat(numberOfColumns)
         let movieCellWidth = (collectionView.frame.width - floatingNumberOfColumns * collectionViewLayout.minimumInteritemSpacing)/floatingNumberOfColumns
-        return CGSize(width: movieCellWidth, height: movieCellWidth * heightFactor)
+        
+        let movieCellHeight = movieCellWidth * heightFactor
+        
+        guard movieCellHeight < collectionViewHeight else {
+            let adjustedCellHeight = collectionViewHeight
+            let adjustedCellWidth = adjustedCellHeight / heightFactor
+            
+            return CGSize(width: adjustedCellWidth, height: adjustedCellHeight)
+        }
+        
+        return CGSize(width: movieCellWidth, height: movieCellHeight)
     }
     
     var toggleButtonItems: [ToggleButtonItem] {

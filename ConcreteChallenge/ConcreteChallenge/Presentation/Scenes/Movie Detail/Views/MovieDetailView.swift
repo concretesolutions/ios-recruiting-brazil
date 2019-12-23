@@ -10,19 +10,20 @@ import UIKit
 
 class MovieDetailView: UIView, ViewCodable {
     let viewModel: MovieViewModel
-    
-    var favoriteViewModel: MovieViewModelWithFavoriteOptions? {
-        return viewModel as? MovieViewModelWithFavoriteOptions
-    }
-        
+
     private let scrollView = UIScrollView()
+    let moviesListLayoutGuide = UILayoutGuide()
     private let scrollContentView = UIView().build {
         $0.backgroundColor = .clear
     }
     private lazy var headerView = MovieHeaderView().build {
         $0.favoriteButtonTapCompletion = { [weak self] in
-            self?.favoriteViewModel?.usedTappedToFavoriteMovie()
+            self?.viewModel.withFavoriteOptions?.usedTappedToFavoriteMovie()
         }
+    }
+    private let similarsLabel = UILabel(text: "Similar Movies").build {
+        $0.font = .systemFont(ofSize: 15, weight: .bold)
+        $0.textColor = .appTextBlue
     }
     private let genresLabel = UILabel().build {
         $0.font = .systemFont(ofSize: 15, weight: .bold)
@@ -66,8 +67,9 @@ class MovieDetailView: UIView, ViewCodable {
     func buildHierarchy() {
         self.addSubViews(movieImageView, bodyBackgroundView, scrollView, closeButton)
         scrollView.addSubViews(scrollContentView)
-        scrollContentView.addSubViews(headerView, genresLabel, overviewLabel)
+        scrollContentView.addSubViews(headerView, genresLabel, overviewLabel, similarsLabel)
         scrollContentView.addLayoutGuide(marginsLayoutGuide)
+        addLayoutGuide(moviesListLayoutGuide)
     }
 
     func addConstraints() {
@@ -79,7 +81,8 @@ class MovieDetailView: UIView, ViewCodable {
         marginsLayoutGuide.layout.fill(view: scrollContentView, margin: 10)
         headerView.layout.group.top(300).left.right.fill(to: marginsLayoutGuide)
         movieImageView.layout.build {
-            $0.group.top.left.right.fillToSuperView()
+            $0.top.equal(to: layout.top).priority = .defaultLow
+            $0.group.left.right.fillToSuperView()
             $0.bottom.equal(to: headerView.layout.centerY)
         }
         bodyBackgroundView.layout.build {
@@ -91,25 +94,33 @@ class MovieDetailView: UIView, ViewCodable {
             $0.top.equal(to: headerView.layout.bottom, offsetBy: 10)
         }
         overviewLabel.layout.build {
-            $0.group.left.bottom.right.fill(to: marginsLayoutGuide)
+            $0.group.left.right.fill(to: marginsLayoutGuide)
             $0.top.equal(to: genresLabel.layout.bottom, offsetBy: 20)
         }
         closeButton.layout.build {
             $0.right.equalToSuperView(margin: -10)
             $0.bottom.lessThanOrEqual(to: headerView.layout.top, offsetBy: -10)
-            $0.top.equal(to: self.layout.top, offsetBy: 10).priority = .defaultLow
+            $0.top.equal(to: safeAreaLayoutGuide.layout.top, offsetBy: 10).priority = .defaultLow
             $0.width.equal(to: 50)
             $0.height.equal(to: 50)
         }
+        similarsLabel.layout.build {
+            $0.group.left.right.fill(to: marginsLayoutGuide)
+            $0.top.equal(to: overviewLabel.layout.bottom, offsetBy: 10)
+
+        }
+        moviesListLayoutGuide.layout.build {
+            $0.top.equal(to: similarsLabel.layout.bottom)
+            $0.group.left.bottom.right.fill(to: marginsLayoutGuide)
+            $0.height.equal(to: 300)
+        }
         
-        genresLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
-        genresLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-        headerView.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        headerView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         overviewLabel.setContentHuggingPriority(.required, for: .vertical)
         overviewLabel.setContentCompressionResistancePriority(.required, for: .vertical)
         movieImageView.setContentHuggingPriority(.defaultLow, for: .vertical)
         movieImageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        bodyBackgroundView.setContentHuggingPriority(.defaultLow, for: .vertical)
+        bodyBackgroundView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
     }
     
     func observeViewModel() {
@@ -125,7 +136,7 @@ class MovieDetailView: UIView, ViewCodable {
                 self?.genresLabel.text = genres
             }
         }
-        favoriteViewModel?.needUpdateFavorite = { [weak self] isFaved in
+        viewModel.withFavoriteOptions?.needUpdateFavorite = { [weak self] isFaved in
             DispatchQueue.main.async {
                 self?.headerView.setFavoriteState(isFaved: isFaved)
             }

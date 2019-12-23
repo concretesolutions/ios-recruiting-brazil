@@ -12,5 +12,6 @@ protocol ViewModelsFactory: AnyObject {
     func movieViewModel(movie: Movie) -> MovieViewModel
     func movieListViewModel(moviesRepository: MoviesRepository?, emptyStateTitle: String?) -> MoviesListViewModel
     func movieViewModelWithFavoriteOptions(movie: Movie) -> MovieViewModelWithFavoriteOptions
+    func movieViewModelWithSimilarAndFavoriteOptions(movie: Movie) -> MovieViewModel
     func searchMoviesViewModel() -> SeachMoviesViewModel
 }

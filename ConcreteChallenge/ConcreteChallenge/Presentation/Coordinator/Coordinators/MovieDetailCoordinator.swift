@@ -16,13 +16,28 @@ class MovieDetailCoordinator: StopableCoordinator {
 
     private let movie: Movie
     private lazy var movieDetailViewController: MovieDetailViewController = {
-        let viewModel = viewModelsFactory.movieViewModelWithFavoriteOptions(movie: movie)
-        viewModel.favoritesNavigator = self
+        let viewModel = viewModelsFactory.movieViewModelWithSimilarAndFavoriteOptions(movie: movie)
+        viewModel.withFavoriteOptions?.favoritesNavigator = self
+        viewModel.withSimilarOptions?.moviesListViewModel.navigator = self
         viewModel.navigator = self
         
         let movieDetailViewController = MovieDetailViewController(viewModel: viewModel)
         return movieDetailViewController
     }()
+    
+    var movieDetailCoordinator: MovieDetailCoordinator? {
+        didSet {
+            movieDetailCoordinator?.userFavedMovieCompletion = { [weak self] movie in
+                self?.movieDetailViewController.viewModel.withSimilarOptions?.moviesListViewModel.reloadMovie(movie)
+                self?.userFavedMovieCompletion?(movie)
+            }
+            movieDetailCoordinator?.userUnFavedMovieCompletion = { [weak self] movie in
+                self?.movieDetailViewController.viewModel.withSimilarOptions?.moviesListViewModel.reloadMovie(movie)
+                self?.userUnFavedMovieCompletion?(movie)
+            }
+        }
+    }
+    
     private let viewModelsFactory: ViewModelsFactory
     
     init(rootViewController: RootViewController, movie: Movie, viewModelsFactory: ViewModelsFactory) {
@@ -32,6 +47,7 @@ class MovieDetailCoordinator: StopableCoordinator {
     }
     
     func start(previousController: UIViewController?) {
+        movieDetailViewController.modalPresentationStyle = .overFullScreen
         previousController?.present(movieDetailViewController, animated: true, completion: nil)
     }
     
@@ -54,6 +70,29 @@ extension MovieDetailCoordinator: MovieViewModelWithFavoriteOptionsNavigator, Mo
     func userFavedMovie(movie: Movie) {
         DispatchQueue.main.async {
             self.userFavedMovieCompletion?(movie)
+        }
+    }
+}
+
+extension MovieDetailCoordinator: MoviesListViewModelNavigator {
+    func movieWasSelected(movie: Movie) {
+        movieDetailCoordinator = MovieDetailCoordinator(
+            rootViewController: rootViewController,
+            movie: movie,
+            viewModelsFactory: self.viewModelsFactory
+        )
+        movieDetailCoordinator?.start(previousController: movieDetailViewController)
+    }
+    
+    func movieWasFaved(movie: Movie) {
+        DispatchQueue.main.async {
+            self.userFavedMovieCompletion?(movie)
+        }
+    }
+    
+    func movieWasUnfaved(movie: Movie) {
+        DispatchQueue.main.async {
+            self.userUnFavedMovieCompletion?(movie)
         }
     }
 }

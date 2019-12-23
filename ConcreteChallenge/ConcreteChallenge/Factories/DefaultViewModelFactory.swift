@@ -25,6 +25,28 @@ class DefaultViewModelFactory: ViewModelsFactory {
         )
     }
     
+    func movieViewModelWithSimilarAndFavoriteOptions(movie: Movie) -> MovieViewModel {
+        return DefaultMovieViewModelWithFavoriteOptions(
+            favoriteHandlerRepository: DefaultFavoriteMovieHandlerRepository(),
+            decorated: DefaultMovieViewModelWithSimilarOptions(
+                similarMoviesRepository: DefaultSimilarMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>()),
+                movieViewModel(movie: movie) as! DefaultMovieViewModel,
+                movieViewModelInjector: { (movieRepository) -> MoviesListViewModel in
+                    DefaultMoviesListViewModel(moviesRepository: movieRepository, presentations: [
+                        Presentation(hasFavorite: false),
+                        Presentation(hasFavorite: true)]) { (injectorData) -> MovieViewModel in
+                            switch injectorData {
+                            case .favorite(let movie):
+                                return self.movieViewModelWithFavoriteOptions(movie: movie)
+                            case .normal(let movie):
+                                return self.movieViewModel(movie: movie)
+                            }
+                    }
+                }
+            )
+        )
+    }
+       
     func movieListViewModel(moviesRepository: MoviesRepository? = nil, emptyStateTitle: String? = nil) -> MoviesListViewModel {
         return DefaultMoviesListViewModel(
             moviesRepository: moviesRepository ?? DefaultMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>()), presentations: [

@@ -20,6 +20,14 @@ class MoviesListView: UIView, ViewCodable {
     weak var delegate: MoviesListViewDelegate?
     var presentationManager: MovieListPresentationManager
     
+    var scrollDirection: UICollectionView.ScrollDirection {
+        get {
+            return self.moviesCollectionLayout.scrollDirection
+        } set {
+            self.moviesCollectionLayout.scrollDirection = newValue
+        }
+    }
+    
     private let moviesCollectionLayout = UICollectionViewFlowLayout()
     private lazy var moviesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: moviesCollectionLayout).build {
         self.presentationManager.registerCells(atMoviesCollectionView: $0)

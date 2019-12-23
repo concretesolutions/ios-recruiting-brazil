@@ -17,7 +17,8 @@ protocol MovieViewModelWithFavoriteOptions: MovieViewModel {
 
 extension MovieViewModel {
     var withFavoriteOptions: MovieViewModelWithFavoriteOptions? {
-        return self as? MovieViewModelWithFavoriteOptions
+        
+        return MovieViewModelDecorator.searchDecorator(ofType: MovieViewModelWithFavoriteOptions.self, in: self)
     }
 }
 

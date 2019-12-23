@@ -12,6 +12,15 @@ import GenericNetwork
 class MoviesListViewController: UIViewController {
     let viewModel: MoviesListViewModel
     private let presentationManager: MovieListPresentationManager
+    
+    var scrollDirection: UICollectionView.ScrollDirection {
+        get {
+            return moviesListView.scrollDirection
+        } set {
+            moviesListView.scrollDirection = newValue
+        }
+    }
+    
     lazy var moviesListView = MoviesListView(viewModel: viewModel, presentationManager: self.presentationManager).build {
         $0.delegate = self
     }

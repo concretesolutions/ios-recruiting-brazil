@@ -17,18 +17,16 @@ class MovieSearchViewController: UIViewController, ViewCodable {
     )
 
     private let moviesListLayoutGuide = UILayoutGuide()
-    private lazy var searchController: UISearchController = {
-        let searchController = UISearchController.init(searchResultsController: nil)
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.definesPresentationContext = true
-        searchController.delegate = self
-        searchController.searchBar.delegate = self
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.tintColor = UIColor.white
-        searchController.searchBar.barStyle = .black
+    private lazy var searchController = UISearchController(searchResultsController: nil).build {
+        $0.obscuresBackgroundDuringPresentation = false
+        $0.definesPresentationContext = true
+        $0.delegate = self
+        $0.searchBar.delegate = self
+        $0.searchResultsUpdater = self
+        $0.searchBar.tintColor = UIColor.white
+        $0.searchBar.barStyle = .black
+    }
 
-        return searchController
-    }()
     private lazy var searchOptionsSegmentedControl = UISegmentedControl(items: ["All", "Favorites"]).build {
         $0.selectedSegmentIndex = 0
         if #available(iOS 13.0, *) {
