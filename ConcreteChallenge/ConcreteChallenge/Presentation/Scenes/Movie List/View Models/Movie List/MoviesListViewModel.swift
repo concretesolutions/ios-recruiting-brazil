@@ -115,7 +115,11 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
         }
     }
 
-    init(moviesRepository: MoviesRepository, presentations: [Presentation], emptyStateTitle: String? = nil, movieViewModelInjector: @escaping Injector<MovieViewModel, MoviesListViewModelInjetorData>) {
+    init(moviesRepository: MoviesRepository,
+         presentations: [Presentation],
+         emptyStateTitle: String? = nil,
+         movieViewModelInjector: @escaping Injector<MovieViewModel, MoviesListViewModelInjetorData>) {
+
         self.moviesRepository = moviesRepository
         self.movieViewModelInjector = movieViewModelInjector
         self.presentations = presentations
@@ -201,6 +205,7 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
     }
     
     func deleteMovie(_ movie: Movie) {
+        
         findPositionOf(movie: movie) { (moviePosition) in
             self.moviesPage.items.remove(at: moviePosition)
             self.needDeleteMovieView?(moviePosition)
@@ -208,6 +213,9 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
     }
     
     func insertMovie(_ movie: Movie) {
+        guard moviesPage.pageNumber > 0 else {
+            return
+        }
         self.moviesPage.items.insert(movie, at: 0)
         self.needInsertMovieView?(0)
     }
