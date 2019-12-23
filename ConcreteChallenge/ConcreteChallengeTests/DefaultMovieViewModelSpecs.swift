@@ -91,13 +91,13 @@ class DefaultMovieViewModelSpecs: QuickSpec {
         }
     }
     
-    private static func defaultMovieViewModel(
+    static func defaultMovieViewModel(
         genresData: MockGenresRepository.MockResponse = .genres([
             .init(id: 0, name: "genre1"),
             .init(id: 1, name: "genre2")]),
         imageData: MockMovieImageRepository.MockResponse = .image(URL(string: "https://www.mock.com")!),
         posterPath: String? = "posterPath",
-        imageCancelCompletion: (() -> Void)? = nil) -> MovieViewModel {
+        imageCancelCompletion: (() -> Void)? = nil) -> MovieViewModelWithData {
         
         let movie = Movie(
             id: 1, title: "movie", posterPath: posterPath, backdropPath: nil,

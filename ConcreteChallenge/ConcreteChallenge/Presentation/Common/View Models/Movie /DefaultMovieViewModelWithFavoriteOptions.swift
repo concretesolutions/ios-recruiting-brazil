@@ -61,12 +61,9 @@ class DefaultMovieViewModelWithFavoriteOptions: MovieViewModelDecorator, MovieVi
     private func addToFavorites() {
         favoriteHandlerRepository.addMovieToFavorite(movie) { [weak self] (result) in
             guard let self = self else { return }
-            switch result {
-            case .success:
+            if case .success = result {
                 self.isFaved = true
                 self.favoritesNavigator?.userFavedMovie(movie: self.movie)
-            default:
-                break
             }
         }
     }
@@ -74,12 +71,10 @@ class DefaultMovieViewModelWithFavoriteOptions: MovieViewModelDecorator, MovieVi
     private func removeFavorite() {
         favoriteHandlerRepository.removeMovieFromFavorite(movieID: movie.id) { [weak self] (result) in
             guard let self = self else { return }
-            switch result {
-            case .success:
+            
+            if case .success = result {
                 self.isFaved = false
                 self.favoritesNavigator?.userUnFavedMovie(movie: self.movie)
-            default:
-                break
             }
         }
     }

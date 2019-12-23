@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Nimble
 @testable import ConcreteChallenge
 
 struct MockMovieImageRepository: MovieImageRepository {
@@ -29,25 +28,6 @@ struct MockMovieImageRepository: MovieImageRepository {
     
     enum MockResponse {
         case image(URL)
-        case error(Error)
-    }
-}
-
-struct MockGenresRepository: GenresRepository {
-    
-    var response: MockResponse
-    
-    func getAllGenres(completion: @escaping (Result<[Genre], Error>) -> Void) {
-        switch response {
-        case .genres(let genres):
-            completion(.success(genres))
-        case .error(let error):
-            completion(.failure(error))
-        }
-    }
-    
-    enum MockResponse {
-        case genres([Genre])
         case error(Error)
     }
 }
