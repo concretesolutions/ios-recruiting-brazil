@@ -86,7 +86,7 @@ class DefaultMovieViewModel: MovieViewModelWithData {
             case .success(let genres):
                 self.movieGenres = DefaultMovieViewModel.mapGenres(genres, toMovie: self.movie)
             case .failure:
-                self.needReplaceGenres?("")
+                self.movieGenres = ""
             }
         }
     }
