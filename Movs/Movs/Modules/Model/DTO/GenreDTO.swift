@@ -14,3 +14,9 @@ struct GenreDTO: Decodable {
     let id: Int
     let name: String
 }
+
+extension GenreDTO: Equatable {
+    static func == (lhs: GenreDTO, rhs: GenreDTO) -> Bool {
+        return lhs.id == rhs.id && lhs.name == rhs.name
+    }
+}

@@ -10,6 +10,6 @@ protocol GenresFilterDelegate: class {
 
     // MARK: - properties
 
-    var genres: [Int: String] { get }
-    var tempSelectedGenreIds: Set<Int> { get set }
+    var genres: [Genre] { get }
+    var tempSelectedGenres: Set<Genre> { get set }
 }

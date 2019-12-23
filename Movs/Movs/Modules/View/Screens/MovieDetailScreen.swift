@@ -108,28 +108,16 @@ final class MovieDetailScreen: UIView {
     }
 
     private func configureGenres() {
-        let group = DispatchGroup()
         var genres: String = ""
 
-        for (i, id) in self.movie.genreIds.enumerated() {
-            group.enter()
-            DataProvider.shared.genre(forId: id) { genre in
-                if let genre = genre {
-                    genres += genre
-                    if i < self.movie.genreIds.count-1 {
-                        genres += " | "
-                    }
-                }
-
-                group.leave()
+        for (i, genre) in self.movie.genres.enumerated() {
+            genres += genre.name
+            if i < self.movie.genres.count-1 {
+                genres += " | "
             }
         }
 
-        group.notify(queue: DispatchQueue.global()) {
-            DispatchQueue.main.async {
-                self.genresLabel.text = genres
-            }
-        }
+        self.genresLabel.text = genres
     }
 }
 
