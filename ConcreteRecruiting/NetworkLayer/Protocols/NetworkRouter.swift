@@ -8,9 +8,9 @@
 
 import Foundation
 
-public typealias NetworkRouterCompletion = (Result<(Data?, URLResponse), Error>) -> Void
+public typealias NetworkRouterCompletion = (Result<(Data?, URLResponse?), Error>) -> Void
 
-protocol NetworkRouter: class {
+public protocol NetworkRouter: class {
     
     associatedtype EndPoint: EndPointType
     
