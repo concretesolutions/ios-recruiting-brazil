@@ -13,7 +13,7 @@ struct Movie: Decodable {
     let title: String
     let description: String
     let releaseDate: Date
-    let banner: URL?
+    let bannerPath: String
     
     let genres: [Genre]
     
@@ -33,9 +33,7 @@ struct Movie: Decodable {
         title = try values.decode(String.self, forKey: .title)
         description = try values.decode(String.self, forKey: .description)
         releaseDate = try values.decode(Date.self, forKey: .releaseDate)
-        
-        let imgPath = try values.decode(String.self, forKey: .banner)
-        banner = URL(string: NetworkManager.baseImageUrl+imgPath)
+        bannerPath = try values.decode(String.self, forKey: .banner)
         
         genres = try values.decode([Genre].self, forKey: .genres)
         
