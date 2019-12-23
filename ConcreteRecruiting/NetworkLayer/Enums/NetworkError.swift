@@ -8,10 +8,11 @@
 
 import Foundation
 
-enum NetworkError: Error {
+public enum NetworkError: Error {
     case unknown
     case missingURL
     case noJson
+    case parsingError
     case apiError
     
 }

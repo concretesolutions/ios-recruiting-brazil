@@ -8,13 +8,13 @@
 
 import Foundation
 
-public typealias NetworkRouterCompletion = (Result<(Data?, URLResponse?), Error>) -> Void
+public typealias NetworkRouterCompletion = (Result<(Data, URLResponse), Error>) -> Void
 
 public protocol NetworkRouter: class {
     
     associatedtype EndPoint: EndPointType
     
-    func request(_ route: EndPoint, completion: @escaping NetworkRouterCompletion)
+    func request<T: Decodable>(_ route: EndPoint, type: T.Type, completion: @escaping (Result<T, Error>) -> Void)
     func cancel()
     
 }

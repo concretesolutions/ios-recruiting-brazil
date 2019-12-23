@@ -18,20 +18,15 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
         self.session = session
     }
     
-    func request(_ route: EndPoint, completion: @escaping NetworkRouterCompletion) {
-        
+    func request<T: Decodable>(_ route: EndPoint, type: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
         
         do {
             let request = try createRequest(from: route)
             
-            self.task = session.dataTask(with: request, completionHandler: { (data, response, error) in
-                if let error = error {
-                    completion(.failure(error))
-                } else {
-                    completion(.success((data, response)))
-                }
-            })
-            
+            self.task = self.session.dataTask(with: request) { (result) in
+                self.handleResult(result: result, type: T.self, completion: completion)
+            }
+
         } catch {
             completion(.failure(error))
         }
@@ -42,6 +37,41 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
     
     func cancel() {
         self.task?.cancel()
+    }
+    
+    private func handleResult<T: Decodable>(result: Result<(Data, URLResponse), Error>, type: T.Type, completion: (Result<T, Error>) -> Void) {
+        
+        switch result {
+            
+        case .failure(let error):
+            return completion(.failure(error))
+            
+        case .success(let data, let response):
+            let decoder = JSONDecoder()
+            
+            guard let response = response as? HTTPURLResponse else {
+                return completion(.failure(NetworkError.noJson))
+            }
+            
+            switch response.statusCode {
+                
+            case 200...299:
+                do {
+                    let model = try decoder.decode(T.self, from: data)
+                    completion(.success(model))
+                } catch {
+                    completion(.failure(NetworkError.parsingError))
+                }
+                
+            case 400...499:
+                completion(.failure(NetworkError.apiError))
+            default:
+                completion(.failure(NetworkError.unknown))
+                
+            }
+            
+        }
+        
     }
     
     private func createRequest(from route: EndPoint) throws -> URLRequest {
