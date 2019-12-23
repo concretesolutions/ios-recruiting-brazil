@@ -12,10 +12,9 @@ struct Movie: Decodable {
     
     let title: String
     let description: String
-    let releaseDate: Date
+    let releaseDate: Date?
     let bannerPath: String
-    
-    let genres: [Genre]
+    let genres: [Int]
     
     var isFavorite: Bool = false
     
@@ -23,19 +22,23 @@ struct Movie: Decodable {
         case title
         case description = "overview"
         case releaseDate = "release_date"
-        case banner = "poster"
-        case genres
+        case banner = "poster_path"
+        case genres = "genre_ids"
     }
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
-        title = try values.decode(String.self, forKey: .title)
-        description = try values.decode(String.self, forKey: .description)
-        releaseDate = try values.decode(Date.self, forKey: .releaseDate)
-        bannerPath = try values.decode(String.self, forKey: .banner)
+        self.title = try values.decode(String.self, forKey: .title)
+        self.description = try values.decode(String.self, forKey: .description)
+       
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withFullDate, .withDashSeparatorInDate]
+        let dateText = try values.decode(String.self, forKey: .releaseDate)
+        self.releaseDate = formatter.date(from: dateText)
         
-        genres = try values.decode([Genre].self, forKey: .genres)
+        self.bannerPath = try values.decode(String.self, forKey: .banner)
+        self.genres = try values.decode([Int].self, forKey: .genres)
         
     }
     

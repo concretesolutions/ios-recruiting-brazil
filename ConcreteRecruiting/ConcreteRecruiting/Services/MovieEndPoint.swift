@@ -11,7 +11,7 @@ import NetworkLayer
 
 enum MovieEndPoint: EndPointType {
     
-    case popularMovies
+    case popularMovies(page: Int)
     
     var baseUrl: URL {
         guard let url = URL(string: NetworkManager.baseUrl) else { fatalError("Unable to create URL object!")}
@@ -22,7 +22,7 @@ enum MovieEndPoint: EndPointType {
         
         switch self {
         case .popularMovies:
-            return "/get-popular-videos"
+            return "/popular"
         }
         
     }
@@ -38,8 +38,8 @@ enum MovieEndPoint: EndPointType {
     var task: HTTPTask {
         
         switch self {
-        case .popularMovies:
-            return .requestUrlParameters(["api_key": NetworkManager.apiKey])
+        case .popularMovies(let page):
+            return .requestUrlParameters(["page": "\(page)", "api_key": NetworkManager.apiKey])
         }
         
     }
