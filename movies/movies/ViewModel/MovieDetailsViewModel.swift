@@ -26,15 +26,7 @@ class MovieDetailsViewModel: ObservableObject {
         return MovieDetailsViewModel.dateFormatter.string(from: releaseDate)
     }
     
-    var genres: String {
-        guard let genres = self.movie.genreIds?.reduce("", { (genres, genre) -> String in
-            "\(genres), \(MovieService.genres[genre] ?? "")"
-        }) else {
-            return ""
-        }
-
-        return String(genres.dropFirst(2))
-    }
+    var genres: String = ""
     
     var overview: String {
         return self.movie.overview
@@ -58,6 +50,7 @@ class MovieDetailsViewModel: ObservableObject {
         self.toggleFavorite = { // Set function to be called when favorite button is clicked
             dataProvider.toggleFavorite(withId: movie.id)
         }
+        self.genres = self.getGenresText(dataProvider.genres)
         
         // Observe changes in favorite list and change its state when it does
         self.favoriteIdsSubscriber = dataProvider.favoriteMoviesPublisher
@@ -66,6 +59,16 @@ class MovieDetailsViewModel: ObservableObject {
                 guard let id = self?.movie.id else { return }
                 self?.favorite = dataProvider.isFavorite(id)
             })
+    }
+    
+    private func getGenresText(_ dict: [Int: String]) -> String {
+        guard let genres = self.movie.genreIds?.reduce("", { (genres, genre) -> String in
+            "\(genres), \(dict[genre] ?? "")"
+        }) else {
+            return ""
+        }
+        
+        return String(genres.dropFirst(2))
     }
 }
 
