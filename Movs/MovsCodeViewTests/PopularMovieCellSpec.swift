@@ -27,7 +27,7 @@ class PopularMovieCellSpec: QuickSpec {
         describe("PopularMovieCell") {
             beforeEach {
                 self.sut = PopularMovieCell(frame: CGRect(x: 0, y: 0, width: 170, height: 250))
-                self.movieDTO = PopularMovieDTO(id: 1, title: "A VERY very big movie title", overview: "The movie's overview", genreIds: [1, 5], releaseDate: "3000", posterPath: nil)
+                self.movieDTO = PopularMovieDTO(id: 1, title: "A VERY very big movie title", overview: "The movie's overview", popularity: 100, genreIds: [1, 5], releaseDate: "3000", posterPath: nil)
             }
 
             afterEach {

@@ -27,7 +27,7 @@ class FavoriteMovieCellSpec: QuickSpec {
         describe("FavoriteMovieCell") {
             beforeEach {
                 self.sut = FavoriteMovieCell(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 20, height: 130))
-                self.movieDTO = PopularMovieDTO(id: 1, title: "Movie title", overview: "The movie's overview", genreIds: [1, 5], releaseDate: "3000", posterPath: nil)
+                self.movieDTO = PopularMovieDTO(id: 1, title: "Movie title", overview: "The movie's overview", popularity: 100, genreIds: [1, 5], releaseDate: "3000", posterPath: nil)
                 self.sut.configure(with: Movie(fromDTO: self.movieDTO, smallImageURL: nil, bigImageURL: nil, isFavorite: false))
             }
 
