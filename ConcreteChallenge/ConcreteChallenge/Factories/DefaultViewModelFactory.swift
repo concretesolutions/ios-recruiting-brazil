@@ -33,8 +33,8 @@ class DefaultViewModelFactory: ViewModelsFactory {
                 movieViewModel(movie: movie) as! DefaultMovieViewModel,
                 movieViewModelInjector: { (movieRepository) -> MoviesListViewModel in
                     DefaultMoviesListViewModel(moviesRepository: movieRepository, presentations: [
-                        Presentation(hasFavorite: false),
-                        Presentation(hasFavorite: true)]) { (injectorData) -> MovieViewModel in
+                        DefaultMoviesListViewModel.Presentation(hasFavorite: false),
+                        DefaultMoviesListViewModel.Presentation(hasFavorite: true)]) { (injectorData) -> MovieViewModel in
                             switch injectorData {
                             case .favorite(let movie):
                                 return self.movieViewModelWithFavoriteOptions(movie: movie)
@@ -50,8 +50,8 @@ class DefaultViewModelFactory: ViewModelsFactory {
     func movieListViewModel(moviesRepository: MoviesRepository? = nil, emptyStateTitle: String? = nil) -> MoviesListViewModel {
         return DefaultMoviesListViewModel(
             moviesRepository: moviesRepository ?? DefaultMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>()), presentations: [
-                Presentation(hasFavorite: false),
-                Presentation(hasFavorite: true)
+                DefaultMoviesListViewModel.Presentation(hasFavorite: false),
+                DefaultMoviesListViewModel.Presentation(hasFavorite: true)
             ],
             emptyStateTitle: emptyStateTitle
         ) { (injectorData) -> MovieViewModel in

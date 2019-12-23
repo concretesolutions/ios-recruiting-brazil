@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// It helps to extend movie view model functionality without increase the coupling between the decorators.
 class MovieViewModelDecorator: MovieViewModelWithData {
     var navigator: MovieViewModelNavigator? {
         get {

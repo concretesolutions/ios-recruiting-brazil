@@ -8,14 +8,6 @@
 
 import UIKit
 
-enum FavoriteState: String {
-    case faved, unfaved
-    
-    var image: UIImage {
-        return UIImage(named: self.rawValue)!
-    }
-}
-
 class FavoriteImageView: UIImageView {
     var isFaved: Bool = false {
         didSet {
@@ -27,11 +19,11 @@ class FavoriteImageView: UIImageView {
         }
     }
     
-    private let imagesForState: [FavoriteState: UIImage?]
+    private let imagesForState: [State: UIImage?]
     
     var favoriteButtonTapCompletion: (() -> Void)?
     
-    init(imagesForState: [FavoriteState: UIImage?]) {
+    init(imagesForState: [State: UIImage?]) {
         self.imagesForState = imagesForState
         super.init(image: imagesForState[.unfaved] ?? nil)
         
@@ -46,5 +38,13 @@ class FavoriteImageView: UIImageView {
     
     @objc func favoriteButtonWasTapped() {
         favoriteButtonTapCompletion?()
+    }
+    
+    enum State: String {
+        case faved, unfaved
+        
+        var image: UIImage {
+            return UIImage(named: self.rawValue)!
+        }
     }
 }

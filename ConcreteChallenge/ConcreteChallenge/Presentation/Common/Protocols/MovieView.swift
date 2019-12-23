@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A protocol to be implemmented by all views that shows movies(the cells)
 protocol MovieView: UIView {
     
     var viewModel: MovieViewModel? { get set }

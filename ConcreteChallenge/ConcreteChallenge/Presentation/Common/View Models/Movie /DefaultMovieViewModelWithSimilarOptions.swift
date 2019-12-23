@@ -8,18 +8,7 @@
 
 import Foundation
 
-protocol MovieViewModelWithSimilarOptions: MovieViewModel {
-    var moviesListViewModel: MoviesListViewModel { get }
-}
-
-extension MovieViewModel {
-    var withSimilarOptions: MovieViewModelWithSimilarOptions? {
-        return MovieViewModelDecorator.searchDecorator(ofType: MovieViewModelWithSimilarOptions.self, in: self)
-    }
-}
-
 class DefaultMovieViewModelWithSimilarOptions: MovieViewModelDecorator, MovieViewModelWithSimilarOptions {
-  
     private var similarMoviesRepository: SimilarMoviesRepository
     
     var moviesListViewModel: MoviesListViewModel

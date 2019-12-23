@@ -9,6 +9,8 @@
 import UIKit
 import GenericNetwork
 
+/// It has the responsability of listing movies. This will be reused in all the application.
+/// A MoviesListViewController can have presention modes, this modes are ways the movies are showed at screen.
 class MoviesListViewController: UIViewController {
     let viewModel: MoviesListViewModel
     private let presentationManager: MovieListPresentationManager
@@ -25,6 +27,11 @@ class MoviesListViewController: UIViewController {
         $0.delegate = self
     }
     
+    
+    /// Initilizes the MoviesListViewController
+    /// - Parameters:
+    ///   - viewModel: the viewModel that provides data to it.
+    ///   - presentationManager: the presentation manager containing the presentation modes.
     init(viewModel: MoviesListViewModel, presentationManager: MovieListPresentationManager) {
         self.viewModel = viewModel
         self.presentationManager = presentationManager

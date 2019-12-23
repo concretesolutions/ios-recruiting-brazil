@@ -11,6 +11,7 @@ import UIKit
 class MovieSearchViewController: UIViewController, ViewCodable {
     var viewModel: SeachMoviesViewModel
 
+    /// it use a MoviesListViewController as child view controller to reuse it code.
     private lazy var moviesListViewController = MoviesListViewController(viewModel: viewModel.moviesViewModel, presentationManager: MovieListPresentationManager(
             modes:[.init(cellType: InformativeMovieCollectionViewCell.self, numberOfColumns: 1, heightFactor: 0.4)]
         )
@@ -35,6 +36,8 @@ class MovieSearchViewController: UIViewController, ViewCodable {
             $0.tintColor = .appLightRed
         }
     }
+    
+    /// the suggestions tableview.
     private lazy var suggestionsTableView = UITableView().build {
         $0.registerReusableCell(forCellType: UITableViewCell.self)
         $0.delegate = self

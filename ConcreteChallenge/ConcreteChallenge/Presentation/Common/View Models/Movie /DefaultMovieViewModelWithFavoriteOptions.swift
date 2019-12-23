@@ -8,20 +8,6 @@
 
 import Foundation
 
-protocol MovieViewModelWithFavoriteOptions: MovieViewModel {
-    var needUpdateFavorite: ((_ faved: Bool) -> Void)? { get set}
-    var favoritesNavigator: MovieViewModelWithFavoriteOptionsNavigator? { get set }
-    
-    func usedTappedToFavoriteMovie()
-}
-
-extension MovieViewModel {
-    var withFavoriteOptions: MovieViewModelWithFavoriteOptions? {
-        
-        return MovieViewModelDecorator.searchDecorator(ofType: MovieViewModelWithFavoriteOptions.self, in: self)
-    }
-}
-
 class DefaultMovieViewModelWithFavoriteOptions: MovieViewModelDecorator, MovieViewModelWithFavoriteOptions {
     weak var favoritesNavigator: MovieViewModelWithFavoriteOptionsNavigator?
     

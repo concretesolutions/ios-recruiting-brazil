@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// its a delegate with important favorite information to make the navigation
 protocol MovieViewModelWithFavoriteOptionsNavigator: AnyObject {
     func userFavedMovie(movie: Movie)
     func userUnFavedMovie(movie: Movie)

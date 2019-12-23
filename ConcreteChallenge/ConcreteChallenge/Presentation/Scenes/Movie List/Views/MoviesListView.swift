@@ -8,13 +8,6 @@
 
 import UIKit
 
-struct MovieListPresentationMode {
-    var cellType: MovieViewCell.Type
-    var iconImage: UIImage?
-    var numberOfColumns: Int
-    var heightFactor: CGFloat
-}
-
 class MoviesListView: UIView, ViewCodable {
     let viewModel: MoviesListViewModel
     weak var delegate: MoviesListViewDelegate?
@@ -42,6 +35,7 @@ class MoviesListView: UIView, ViewCodable {
         $0.numberOfLines = 0
     }
     
+    /// the toggle button is initilized with the presentation manager data.
     private lazy var toggleButton = ToggleButton(items: presentationManager.toggleButtonItems).build {
         $0.wasToggledCompletion = { [weak self] currentSelection in
             self?.viewModel.viewStateChanged(toState: currentSelection)
@@ -187,5 +181,12 @@ extension MoviesListView: UICollectionViewDataSource, UICollectionViewDelegateFl
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.userSelectedMovie(atPosition: indexPath.row)
+    }
+    
+    struct PresentationMode {
+        var cellType: MovieViewCell.Type
+        var iconImage: UIImage?
+        var numberOfColumns: Int
+        var heightFactor: CGFloat
     }
 }

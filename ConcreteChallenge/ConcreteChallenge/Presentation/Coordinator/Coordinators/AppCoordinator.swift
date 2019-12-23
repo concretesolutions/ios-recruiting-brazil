@@ -20,12 +20,12 @@ class AppCoordinator: Coordinator {
     }()
     
     private let popularAndFavoritesPresentationManager = MovieListPresentationManager(modes: [
-        MovieListPresentationMode(
+        MoviesListView.PresentationMode(
             cellType: MinimizedMovieCollectionCell.self,
             iconImage: UIImage(named: "grid"),
             numberOfColumns: 3, heightFactor: 1.7
         ),
-        MovieListPresentationMode(
+        MoviesListView.PresentationMode(
             cellType: MaximizedMovieCollectionCell.self,
             iconImage: UIImage(named: "expanded"),
             numberOfColumns: 1, heightFactor: 1.3
@@ -33,7 +33,7 @@ class AppCoordinator: Coordinator {
     ])
     
     private let searchPresentationManager = MovieListPresentationManager(modes: [
-        MovieListPresentationMode(
+        MoviesListView.PresentationMode(
             cellType: InformativeMovieCollectionViewCell.self,
             iconImage: nil,
             numberOfColumns: 1, heightFactor: 0.4

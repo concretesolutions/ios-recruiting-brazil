@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// a cell made to show more information abount the movie.
 class InformativeMovieCollectionViewCell: UICollectionViewCell, ViewCodable, MovieViewCell {
     var viewModel: MovieViewModel? {
         didSet {

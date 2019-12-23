@@ -9,7 +9,6 @@
 import UIKit
 
 class RoundedImageView: UIImageView {
-    
     override func layoutSubviews() {
         self.layer.cornerRadius = min(self.frame.height, self.frame.width)/2
     }

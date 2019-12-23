@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A cell made to fill a big space on screen
 class MaximizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieViewCell {
     var viewModel: MovieViewModel? {
         didSet {

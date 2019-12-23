@@ -12,8 +12,9 @@ protocol MovieViewCell: UICollectionViewCell, MovieView {
     var movieImageView: UIImageView { get set }
 }
 
+/// A presentation manager stores the presentation modes of a MovieListView and handle this data.
 struct MovieListPresentationManager {
-    var modes: [MovieListPresentationMode]
+    var modes: [MoviesListView.PresentationMode]
     
     func dequeueCell(fromCollection collectionView: UICollectionView, indexPath: IndexPath, presentationMode: Int) -> MovieViewCell {
         guard presentationMode >= 0 && presentationMode < modes.count,
@@ -61,9 +62,9 @@ struct MovieListPresentationManager {
         return CGSize(width: movieCellWidth, height: movieCellHeight)
     }
     
-    var toggleButtonItems: [ToggleButtonItem] {
-        return self.modes.map { (presentationMode) -> ToggleButtonItem in
-            return ToggleButtonItem(image: presentationMode.iconImage)
+    var toggleButtonItems: [ToggleButton.Item] {
+        return self.modes.map { (presentationMode) -> ToggleButton.Item in
+            return ToggleButton.Item(image: presentationMode.iconImage)
         }
     }
 }

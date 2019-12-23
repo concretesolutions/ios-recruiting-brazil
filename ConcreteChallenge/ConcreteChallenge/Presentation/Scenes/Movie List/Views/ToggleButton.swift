@@ -8,13 +8,10 @@
 
 import UIKit
 
-struct ToggleButtonItem {
-    var image: UIImage?
-}
-
+/// A Toggle button shows a list of buttons and enables the user switch between them.
 class ToggleButton: UIVisualEffectView, ViewCodable {
     public var wasToggledCompletion: ((Int) -> Void)?
-    private let items: [ToggleButtonItem]
+    private let items: [Item]
     private var currentItem = 0 {
         didSet {
             self.wasToggledCompletion?(currentItem)
@@ -35,7 +32,9 @@ class ToggleButton: UIVisualEffectView, ViewCodable {
     private let contentLayoutGuide = UILayoutGuide()
     private var overlayViewLeftConstraint: NSLayoutConstraint?
     
-    init(items: [ToggleButtonItem]) {
+    /// initlized the toggle button
+    /// - Parameter items: the items that will be showed on it view
+    init(items: [Item]) {
         self.items = items
         super.init(effect: UIBlurEffect(style: .dark))
         
@@ -134,5 +133,9 @@ class ToggleButton: UIVisualEffectView, ViewCodable {
         UIView.animate(withDuration: 0.5) {
             self.overlayView.superview?.layoutIfNeeded()
         }
+    }
+    
+    struct Item {
+        var image: UIImage?
     }
 }

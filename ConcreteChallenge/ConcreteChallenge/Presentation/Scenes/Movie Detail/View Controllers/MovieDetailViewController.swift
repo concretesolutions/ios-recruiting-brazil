@@ -10,6 +10,8 @@ import UIKit
 
 class MovieDetailViewController: UIViewController, ViewCodable {
     let viewModel: MovieViewModel
+    
+    /// it reuses the MoviesListViewController as child view controller
     private lazy var moviesListViewController = makeMoviesListViewController()
     private lazy var movieDetailView = MovieDetailView(viewModel: viewModel)
 
@@ -56,12 +58,12 @@ class MovieDetailViewController: UIViewController, ViewCodable {
         
         return MoviesListViewController(viewModel: similarMoviesViewModel, presentationManager: MovieListPresentationManager(
                 modes:[
-                    MovieListPresentationMode(
+                    MoviesListView.PresentationMode(
                         cellType: MinimizedMovieCollectionCell.self,
                         iconImage: UIImage(named: "grid"),
                         numberOfColumns: 3, heightFactor: 1.7
                     ),
-                    MovieListPresentationMode(
+                    MoviesListView.PresentationMode(
                         cellType: MaximizedMovieCollectionCell.self,
                         iconImage: UIImage(named: "expanded"),
                         numberOfColumns: 1, heightFactor: 1

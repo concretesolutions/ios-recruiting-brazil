@@ -1,34 +1,12 @@
 //
-//  MovieViewModel.swift
+//  DefaultMovieViewModel.swift
 //  ConcreteChallenge
 //
-//  Created by Elias Paulino on 19/12/19.
+//  Created by Elias Paulino on 23/12/19.
 //  Copyright © 2019 Elias Paulino. All rights reserved.
 //
 
 import UIKit
-import GenericNetwork
-
-protocol MovieViewModel: AnyObject {
-    var movieAtributtes: (title: String, description: String, release: String) { get }
-    var needReplaceImage: ((_ image: UIImage) -> Void)? { get set }
-    var needReplaceGenres: ((_ genres: String) -> Void)? { get set }
-    
-    var navigator: MovieViewModelNavigator? { get set }
-    
-    func movieViewWasReused()
-    func closeButtonWasTapped()
-}
-
-protocol MovieViewModelWithData: MovieViewModel {
-    var movie: Movie { get }
-}
-
-protocol MovieViewModelNavigator: AnyObject {
-    func closeWasTapped()
-}
-
-typealias ImageRouter = (_ imagePath: String) -> Route
 
 class DefaultMovieViewModel: MovieViewModelWithData {
     var movieAtributtes: (title: String, description: String, release: String) {

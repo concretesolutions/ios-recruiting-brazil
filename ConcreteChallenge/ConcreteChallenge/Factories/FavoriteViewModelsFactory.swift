@@ -11,8 +11,8 @@ import Foundation
 class FavoriteViewModelsFactory: DefaultViewModelFactory {
     override func movieListViewModel(moviesRepository: MoviesRepository? = nil, emptyStateTitle: String? = nil) -> MoviesListViewModel {
         return DefaultMoviesListViewModel(moviesRepository: FavoriteMoviesRepository(), presentations: [
-            Presentation(hasFavorite: false),
-            Presentation(hasFavorite: true)
+            DefaultMoviesListViewModel.Presentation(hasFavorite: false),
+            DefaultMoviesListViewModel.Presentation(hasFavorite: true)
         ],
         emptyStateTitle: emptyStateTitle
         ) { (injectorData) -> MovieViewModel in

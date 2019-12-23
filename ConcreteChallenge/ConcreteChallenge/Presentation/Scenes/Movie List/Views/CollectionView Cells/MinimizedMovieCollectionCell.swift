@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// a cell made to fill a short space on screen.
 class MinimizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieViewCell {
     var viewModel: MovieViewModel? {
         didSet {
