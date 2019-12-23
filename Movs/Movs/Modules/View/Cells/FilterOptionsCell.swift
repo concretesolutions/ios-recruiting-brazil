@@ -6,7 +6,6 @@
 //  Copyright © 2019 Carolina Lopes. All rights reserved.
 //
 
-import SnapKit
 import UIKit
 
 final class FilterOptionsCell: UITableViewCell {
@@ -18,9 +17,10 @@ final class FilterOptionsCell: UITableViewCell {
     // MARK: - Initializers
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
         self.accessoryType = .disclosureIndicator
         self.backgroundColor = .systemGray3
+        self.selectionStyle = .none
     }
 
     convenience init(frame: CGRect) {

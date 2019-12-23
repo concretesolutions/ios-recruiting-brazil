@@ -20,6 +20,13 @@
 		77348472239AFD4800424F81 /* PopularMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77348471239AFD4800424F81 /* PopularMoviesViewController.swift */; };
 		77348474239B00F700424F81 /* MovsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77348473239B00F700424F81 /* MovsViewController.swift */; };
 		7741158D239A954100C91F2B /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7741158C239A954100C91F2B /* UIImageView.swift */; };
+		774F30DC23B053E300A1CE1E /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774F30DB23B053E300A1CE1E /* FilterCell.swift */; };
+		774F30DE23B0557A00A1CE1E /* FilterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774F30DD23B0557A00A1CE1E /* FilterScreen.swift */; };
+		774F30E023B055EF00A1CE1E /* FilterApplyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774F30DF23B055EF00A1CE1E /* FilterApplyer.swift */; };
+		774F30E223B0571900A1CE1E /* DatesFilterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774F30E123B0571900A1CE1E /* DatesFilterDelegate.swift */; };
+		774F30E423B0576000A1CE1E /* GenresFilterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774F30E323B0576000A1CE1E /* GenresFilterDelegate.swift */; };
+		774F30E723B05DF700A1CE1E /* DatesFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774F30E623B05DF700A1CE1E /* DatesFilterViewController.swift */; };
+		774F30E923B05E0700A1CE1E /* GenresFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774F30E823B05E0700A1CE1E /* GenresFilterViewController.swift */; };
 		776AD8B1239595D600521410 /* PopularMovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776AD8B0239595D600521410 /* PopularMovieDTO.swift */; };
 		776AD8B323959F8D00521410 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776AD8B223959F8D00521410 /* Movie.swift */; };
 		776AD8BA2395A34600521410 /* ConfigurationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776AD8B92395A34600521410 /* ConfigurationDTO.swift */; };
@@ -82,6 +89,13 @@
 		77348471239AFD4800424F81 /* PopularMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesViewController.swift; sourceTree = "<group>"; };
 		77348473239B00F700424F81 /* MovsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsViewController.swift; sourceTree = "<group>"; };
 		7741158C239A954100C91F2B /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		774F30DB23B053E300A1CE1E /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
+		774F30DD23B0557A00A1CE1E /* FilterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterScreen.swift; sourceTree = "<group>"; };
+		774F30DF23B055EF00A1CE1E /* FilterApplyer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterApplyer.swift; sourceTree = "<group>"; };
+		774F30E123B0571900A1CE1E /* DatesFilterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesFilterDelegate.swift; sourceTree = "<group>"; };
+		774F30E323B0576000A1CE1E /* GenresFilterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresFilterDelegate.swift; sourceTree = "<group>"; };
+		774F30E623B05DF700A1CE1E /* DatesFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesFilterViewController.swift; sourceTree = "<group>"; };
+		774F30E823B05E0700A1CE1E /* GenresFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresFilterViewController.swift; sourceTree = "<group>"; };
 		776AD8B0239595D600521410 /* PopularMovieDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMovieDTO.swift; sourceTree = "<group>"; };
 		776AD8B223959F8D00521410 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		776AD8B92395A34600521410 /* ConfigurationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationDTO.swift; sourceTree = "<group>"; };
@@ -209,10 +223,10 @@
 			isa = PBXGroup;
 			children = (
 				7703F6A523AC26AA00CFA8C7 /* FavoriteMoviesViewController.swift */,
-				77E391B723AEF51B0025F5C1 /* FilterOptionsViewController.swift */,
 				77AA5A99239D9908008EBC9C /* MovieDetailViewController.swift */,
 				77348473239B00F700424F81 /* MovsViewController.swift */,
 				77348471239AFD4800424F81 /* PopularMoviesViewController.swift */,
+				774F30EA23B05E0B00A1CE1E /* Filter */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -232,6 +246,7 @@
 				7734846F239AFC3D00424F81 /* CollectionViewScreenDelegate.swift */,
 				772B79F82395D9890026E4C8 /* MoviesDataFetcherProtocol.swift */,
 				7703F6AB23AC29F900CFA8C7 /* TableViewScreenDelegate.swift */,
+				774F30E523B057AC00A1CE1E /* Filter */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -242,6 +257,26 @@
 				7741158C239A954100C91F2B /* UIImageView.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		774F30E523B057AC00A1CE1E /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				774F30E123B0571900A1CE1E /* DatesFilterDelegate.swift */,
+				774F30DF23B055EF00A1CE1E /* FilterApplyer.swift */,
+				774F30E323B0576000A1CE1E /* GenresFilterDelegate.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		774F30EA23B05E0B00A1CE1E /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				774F30E623B05DF700A1CE1E /* DatesFilterViewController.swift */,
+				77E391B723AEF51B0025F5C1 /* FilterOptionsViewController.swift */,
+				774F30E823B05E0700A1CE1E /* GenresFilterViewController.swift */,
+			);
+			path = Filter;
 			sourceTree = "<group>";
 		};
 		776AD8AD2395959200521410 /* View */ = {
@@ -295,6 +330,7 @@
 			children = (
 				7703F6A923AC298100CFA8C7 /* FavoriteMoviesScreen.swift */,
 				77E391B323AEF5120025F5C1 /* FilterOptionsScreen.swift */,
+				774F30DD23B0557A00A1CE1E /* FilterScreen.swift */,
 				77AA5A97239D930A008EBC9C /* MovieDetailScreen.swift */,
 				77C240D723AEF332004B0B07 /* PopularMoviesScreen.swift */,
 			);
@@ -305,6 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				77C240DA23AEF332004B0B07 /* FavoriteMovieCell.swift */,
+				774F30DB23B053E300A1CE1E /* FilterCell.swift */,
 				77E391B523AEF5170025F5C1 /* FilterOptionsCell.swift */,
 				77C240D923AEF332004B0B07 /* PopularMovieCell.swift */,
 			);
@@ -636,16 +673,23 @@
 				77348470239AFC3D00424F81 /* CollectionViewScreenDelegate.swift in Sources */,
 				77348472239AFD4800424F81 /* PopularMoviesViewController.swift in Sources */,
 				77F9F56B2396876F00D7DAF0 /* GenreDTO.swift in Sources */,
+				774F30E223B0571900A1CE1E /* DatesFilterDelegate.swift in Sources */,
+				774F30E723B05DF700A1CE1E /* DatesFilterViewController.swift in Sources */,
+				774F30DC23B053E300A1CE1E /* FilterCell.swift in Sources */,
+				774F30E923B05E0700A1CE1E /* GenresFilterViewController.swift in Sources */,
 				776AD8B1239595D600521410 /* PopularMovieDTO.swift in Sources */,
+				774F30DE23B0557A00A1CE1E /* FilterScreen.swift in Sources */,
 				776DC82623AD4F0D00C0F3C2 /* ExceptionView.swift in Sources */,
 				7741158D239A954100C91F2B /* UIImageView.swift in Sources */,
 				776AD8BA2395A34600521410 /* ConfigurationDTO.swift in Sources */,
+				774F30E423B0576000A1CE1E /* GenresFilterDelegate.swift in Sources */,
 				772A8B8123945B8B00303636 /* AppDelegate.swift in Sources */,
 				77C240DC23AEF332004B0B07 /* PopularMovieCell.swift in Sources */,
 				77E391B423AEF5120025F5C1 /* FilterOptionsScreen.swift in Sources */,
 				77AA5A98239D930A008EBC9C /* MovieDetailScreen.swift in Sources */,
 				7703F6AC23AC29F900CFA8C7 /* TableViewScreenDelegate.swift in Sources */,
 				77E5850F2399CFAF0032BD88 /* CodeView.swift in Sources */,
+				774F30E023B055EF00A1CE1E /* FilterApplyer.swift in Sources */,
 				776AD8B323959F8D00521410 /* Movie.swift in Sources */,
 				77C240DB23AEF332004B0B07 /* PopularMoviesScreen.swift in Sources */,
 				77C240DD23AEF332004B0B07 /* FavoriteMovieCell.swift in Sources */,

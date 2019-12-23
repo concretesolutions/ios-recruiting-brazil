@@ -8,13 +8,13 @@
 
 import UIKit
 
-class FavoriteMoviesViewController: UIViewController {
+class FavoriteMoviesViewController: UIViewController, FilterApplyer {
 
     // MARK: - Screen
 
     private lazy var screen = FavoriteMoviesScreen()
 
-    // MARK: - Search
+    // MARK: - Search properties
 
     private var searchedMovies: [Movie] = []
     private let searchController: UISearchController = UISearchController(searchResultsController: nil)
@@ -34,9 +34,26 @@ class FavoriteMoviesViewController: UIViewController {
         if self.isSearching {
             return self.searchedMovies
         } else {
+            return self.baseMovies
+        }
+    }
+
+    // MARK: - Filter properties
+
+    private let filterOptionsVC = FilterOptionsViewController()
+
+    private var baseMovies: [Movie] {
+        if self.isFiltering {
+            return self.filteredMovies
+        } else {
             return DataProvider.shared.favoriteMovies
         }
     }
+
+    // MARK: FilterApplyer protocol
+
+    var filteredMovies: [Movie] = []
+    var isFiltering: Bool = false
 
     // MARK: - Life cycle
 
@@ -53,10 +70,11 @@ class FavoriteMoviesViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: self, action: #selector(self.showFilterOptions))
         self.setupSearch()
 
+        self.filterOptionsVC.delegate = self
+
         DataProvider.shared.didChangeFavorites = {
             DispatchQueue.main.async {
-                self.filterContent(forText: self.lastSearchText)
-                self.screen.tableView.reloadData()
+                self.updateData()
             }
         }
     }
@@ -73,7 +91,7 @@ class FavoriteMoviesViewController: UIViewController {
     }
 
     private func filterContent(forText text: String) {
-        self.searchedMovies = DataProvider.shared.favoriteMovies.filter { movie in
+        self.searchedMovies = self.baseMovies.filter { movie in
             return movie.title.lowercased().contains(text.lowercased())
         }
 
@@ -83,11 +101,12 @@ class FavoriteMoviesViewController: UIViewController {
     // MARK: - Navigation Bar actions
 
     @objc func showFilterOptions() {
-        let filterNavController = UINavigationController(rootViewController: FilterOptionsViewController())
+        let filterNavController = UINavigationController(rootViewController: self.filterOptionsVC)
         filterNavController.navigationBar.tintColor = .systemIndigo
         filterNavController.navigationBar.prefersLargeTitles = false
         filterNavController.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.systemIndigo]
         filterNavController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.systemIndigo]
+        filterNavController.presentationController?.delegate = self.filterOptionsVC
 
         self.present(filterNavController, animated: true)
     }
@@ -166,5 +185,17 @@ extension FavoriteMoviesViewController: UISearchResultsUpdating {
             self.filterContent(forText: text)
             self.lastSearchText = text
         }
+    }
+}
+
+// MARK: - FilterApplyer
+
+extension FavoriteMoviesViewController {
+
+    func updateData() {
+        self.filterOptionsVC.applyFilter()
+        self.navigationItem.rightBarButtonItem?.image = self.isFiltering ? UIImage(systemName: "line.horizontal.3.decrease.circle.fill") : UIImage(systemName: "line.horizontal.3.decrease.circle")
+        self.filterContent(forText: self.lastSearchText)
+        self.screen.tableView.reloadData()
     }
 }
