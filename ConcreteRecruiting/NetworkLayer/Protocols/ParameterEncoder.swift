@@ -1,5 +1,5 @@
 //
-//  NetworkError.swift
+//  ParameterEncoder.swift
 //  NetworkLayer
 //
 //  Created by Alysson Moreira on 22/12/19.
@@ -8,10 +8,6 @@
 
 import Foundation
 
-enum NetworkError: Error {
-    case unknown
-    case missingURL
-    case noJson
-    case apiError
-    
+public protocol ParameterEncoder {
+    static func encode(_ request: inout URLRequest, with parameters: Parameters) throws
 }

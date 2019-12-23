@@ -17,5 +17,4 @@ public enum HTTPTask {
     case requestBodyParameters(Parameters)
     case requestUrlBodyParameters(Parameters)
     
-    
 }
