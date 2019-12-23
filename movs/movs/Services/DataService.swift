@@ -10,21 +10,21 @@ import UIKit
 
 final class DataService {
     
-    // MARK: - Attributes
+    // MARK: - Runtime store
     private(set) var genres: [Int: String] = [:]
-    private(set) var dataSource: DataSource.Type
-    // Movies
     private(set) var movies: [Movie] = []
-    
-    // Favorites
     private(set) var favorites: [Movie] = []
-    private var favoritesIDs: Set<Int> {
+    
+    // MARK: - Data source
+    private var defaults: UserDefaults
+    private(set) var dataSource: DataSource.Type
+    private(set) var favoritesIDs: Set<Int> {
         get {
-            return Set(UserDefaults.standard.array(forKey: "FavoritesIDs") as? [Int] ?? [])
+            return Set(self.defaults.array(forKey: "FavoritesIDs") as? [Int] ?? [])
         }
         
         set {
-            UserDefaults.standard.set(Array(newValue), forKey: "FavoritesIDs")
+            self.defaults.set(Array(newValue), forKey: "FavoritesIDs")
         }
     }
     
@@ -34,17 +34,24 @@ final class DataService {
     // MARK: - Initiliazer
     private init() {
         self.dataSource = MovieAPIService.self
+        self.defaults = UserDefaults.standard
     }
     
     // MARK: - Setup data service for tests
-    func setup(with dataService: DataSource.Type = MovieAPIService.self) {
+    func setup(with dataService: DataSource.Type = MovieAPIService.self,
+               defaults: UserDefaults = UserDefaults.standard) {
         self.dataSource = dataService.self
+        self.defaults = defaults
     }
     
     func reset() {
         self.genres = [:]
         self.movies = []
         self.favorites = []
+    }
+    
+    func resetDefaults(with suitName: String) {
+        self.defaults.removePersistentDomain(forName: suitName)
     }
     
     // MARK: - Load methods

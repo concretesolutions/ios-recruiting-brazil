@@ -13,28 +13,43 @@ class MovieTests: XCTestCase {
     
     // Attributes
     var movieDTO: MovieDTO!
+    var movieDetailDTO: MovieDetailDTO!
     var movie: Movie!
     
-    // Setting up
     override func setUp() {
         super.setUp()
-        movieDTO = MovieDTO(id: 10,
-                            title: "Movie title",
-                            releaseDate: "2010-10-10",
-                            synopsis: "Movie synopsis",
-                            posterPath: "/poster-url-string",
-                            genreIDs: [28, 14])
-        movie = Movie(movie: movieDTO)
+        self.movie = nil
     }
-
-    override func tearDown() {
-        super.tearDown()
-        movieDTO = nil
-        movie = nil
+    
+    func testMovieDTOInitilializerIsCorrect() {
+        let movieDTO = MovieDTO(id: 10,
+                                title: "Movie title",
+                                releaseDate: "2010-10-10",
+                                synopsis: "Movie synopsis",
+                                posterPath: "/poster-url-string",
+                                genreIDs: nil)
+        self.movie = Movie(movie: movieDTO)
+        
+        XCTAssertEqual(movie.id, 10)
+        XCTAssertEqual(movie.title, "Movie title")
+        XCTAssertEqual(movie.releaseDate, "2010")
+        XCTAssertEqual(movie.synopsis, "Movie synopsis")
+        XCTAssertEqual(movie.posterPath, "/poster-url-string")
+        XCTAssertEqual(movie.genres, [])
     }
-
-    /// Test if the initializer ir correct
-    func testInitilializerIsCorrect() {
+    
+    func testMovieDetailDTOInitilializerIsCorrect() {
+        let movieDetailDTO = MovieDetailDTO(id: 10,
+                                            title: "Movie title",
+                                            releaseDate: "2010-10-10",
+                                            synopsis: "Movie synopsis",
+                                            posterPath: "/poster-url-string",
+                                            genres: [
+                                                GenreDTO(id: 28, name: "Action"),
+                                                GenreDTO(id: 14, name: "Fantasy")
+                                            ])
+        self.movie = Movie(movie: movieDetailDTO)
+        
         XCTAssertEqual(movie.id, 10)
         XCTAssertEqual(movie.title, "Movie title")
         XCTAssertEqual(movie.releaseDate, "2010")
