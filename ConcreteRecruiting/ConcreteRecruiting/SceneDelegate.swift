@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = UIWindow(windowScene: scene)
         self.window?.makeKeyAndVisible()
         
-        let movieListVC = MovieListViewController()
+        let movieListVC = MovieListViewController(with: MovieListViewModel())
         let navigationController = UINavigationController(rootViewController: movieListVC)
         
         navigationController.navigationBar.applyDefaultStyle()

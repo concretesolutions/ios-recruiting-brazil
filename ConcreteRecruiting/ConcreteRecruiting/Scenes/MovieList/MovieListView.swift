@@ -63,6 +63,30 @@ class MovieListView: UIView {
       required init?(coder: NSCoder) {
           fatalError("init(coder:) has not been implemented")
       }
+    
+    func setup(with viewModel: MovieListViewModel) {
+        
+        viewModel.didChangeLoadingState = { [weak self] (isLoading) in
+            if isLoading {
+                self?.activityIndicator.startAnimating()
+            } else {
+                self?.activityIndicator.stopAnimating()
+            }
+        }
+        
+        viewModel.errorWhileLoadingMovies = { [weak self] (error) in
+            self?.collectionView.isHidden = true
+            self?.searchErrorView.isHidden = true
+            self?.errorView.isHidden = false
+            
+            print(error.localizedDescription)
+        }
+        
+        viewModel.noResultsFound = { [weak self] (rationale) in
+            print(rationale)
+        }
+        
+    }
 
 }
 

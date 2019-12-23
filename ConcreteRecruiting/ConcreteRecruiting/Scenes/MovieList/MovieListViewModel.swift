@@ -8,14 +8,9 @@
 
 import Foundation
 
-class ModelListViewModel {
+class MovieListViewModel {
     
-    
-    
-    init() {
-        
-        getMovies(page: self.currentPage)
-    }
+    init() {}
     
     // Closures
     
@@ -66,6 +61,10 @@ class ModelListViewModel {
             
         }
         
+    }
+    
+    public func didLoad() {
+        getMovies(page: self.currentPage)
     }
     
     public func searchMovies(with text: String) {
