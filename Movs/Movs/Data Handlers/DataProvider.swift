@@ -107,6 +107,11 @@ class DataProvider {
         }
     }
 
+    func getAllGenres() -> [Int: String] {
+        self.genresGroup?.wait()
+        return self.genres
+    }
+
     func getMoreMovies(completion: @escaping (_ error: Error?) -> Void) {
         guard self.moviesDataFetcher != nil else {
             completion(DataProviderError(desciption: "Tried to get more movies without a dataFetcher"))
