@@ -92,7 +92,7 @@ class FilterOptionsViewController: UIViewController, DatesFilterDelegate, Genres
         } else {
             self.delegate?.isFiltering = true
             self.delegate?.filteredMovies = DataProvider.shared.favoriteMovies.filter { movie in
-                self.selectedDates.contains(where: { $0 == movie.releaseYear }) || self.selectedGenres.contains(where: { movie.genres.contains($0) })
+                self.selectedDates.contains(where: { $0 == movie.releaseYear }) && self.selectedGenres.contains(where: { movie.genres.contains($0) })
             }
         }
     }
