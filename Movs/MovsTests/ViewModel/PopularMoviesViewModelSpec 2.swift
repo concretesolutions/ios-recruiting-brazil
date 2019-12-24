@@ -16,18 +16,21 @@ class PopularMoviesViewModelSpec: QuickSpec {
     override func spec() {
         describe("PopularMoviesViewModel") {
             var popularMoviesViewModel: PopularMoviesViewModel!
+            beforeEach {
+                popularMoviesViewModel = PopularMoviesViewModel()
+            }
             context("get a cell") {
                 var movieDTO: MovieDTO!
                 var movie: Movie!
                 beforeEach {
                     movieDTO = MovieDTO(id: 1,
                                         overview: "overview",
-                                        releaseDate: "2019-12-18",
+                                        releaseDate: "releaseDate",
                                         genreIds: [1, 2],
                                         title: "title",
                                         posterPath: "posterPath")
                     movie = Movie(withMovie: movieDTO)
-                    popularMoviesViewModel = PopularMoviesViewModel(withPopularMovies: [movie])
+                    popularMoviesViewModel.popularMovies = [movie]
                 }
                 context("viewModel") {
                     var viewModel: PopularMoviesCellViewModel!
@@ -36,6 +39,8 @@ class PopularMoviesViewModelSpec: QuickSpec {
                     }
                     it("Instanciate and return the correct PopularMoviesCellViewModel") {
                         expect(viewModel.title).to(equal(movie.title))
+                        expect(viewModel.posterImageCancellable).to(beAnInstanceOf(AnyCancellable.self))
+                        expect(viewModel.isLikedCancellable).to(beAnInstanceOf(AnyCancellable.self))
                     }
                 }
                 context("viewModelDetails") {
@@ -45,11 +50,27 @@ class PopularMoviesViewModelSpec: QuickSpec {
                     }
                     it("Instanciate and return the correct MovieDetailsViewModel") {
                         expect(viewModelDetails.title).to(equal(movie.title))
-                        expect(viewModelDetails.overview).to(equal(movie.overview))
-                        expect(viewModelDetails.releaseYear).to(equal("2019"))
+                        expect(viewModelDetails.posterImageCancellable).to(beAnInstanceOf(AnyCancellable.self))
                     }
                 }
             }
+            context("searchCombine") {
+                beforeEach {
+                    popularMoviesViewModel.setSearchCombine(<#T##publisher: Published<String>.Publisher##Published<String>.Publisher#>)
+                }
+                it("has a cancellable") {
+                    
+                }
+            }
+            context("networkCancellable") {
+                beforeEach {
+                    popularMoviesViewModel.setNetworkCombine()
+                }
+                it("has a cancellable") {
+                    
+                }
+            }
+            
         }
     }
 }
