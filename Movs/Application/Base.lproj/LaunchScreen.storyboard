@@ -15,17 +15,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HuR-by-dYJ">
-                                <rect key="frame" x="138.5" y="420" width="137" height="66"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="55"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="mhN-Dx-Lj2">
+                                <rect key="frame" x="134.5" y="380.5" width="145" height="145"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="mhN-Dx-Lj2" secondAttribute="height" multiplier="1:1" id="rtf-QK-b04"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="HuR-by-dYJ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Xlj-e8-3wb"/>
-                            <constraint firstItem="HuR-by-dYJ" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="iD6-5D-ovB"/>
+                            <constraint firstItem="mhN-Dx-Lj2" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="KIS-d6-oio"/>
+                            <constraint firstItem="mhN-Dx-Lj2" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.35" id="Wvy-ys-WPE"/>
+                            <constraint firstItem="mhN-Dx-Lj2" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="q8E-tz-X7L"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -35,4 +36,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="AppLogo" width="598" height="488"/>
+    </resources>
 </document>
