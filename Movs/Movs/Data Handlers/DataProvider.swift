@@ -15,9 +15,10 @@ class DataProvider {
 
     static var shared = DataProvider()
 
-    // MARK: - Data fetcher
+    // MARK: - Data fetchers
 
     private var moviesDataFetcher: MoviesDataFetcherProtocol!
+    private var favoriteIDsDataFetcher: UserDefaults!
 
     // MARK: - Data variables
 
@@ -60,9 +61,10 @@ class DataProvider {
 
     // MARK: - Setup
 
-    func setup(withDataFetcher moviesDataFetcher: MoviesDataFetcherProtocol = MoviesAPIDataFetcher(), completion: @escaping (_ error: Error?) -> Void) {
+    func setup(withMoviesDataFetcher moviesDataFetcher: MoviesDataFetcherProtocol = MoviesAPIDataFetcher(), andFavoriteIDsDataFetcher favoriteIDsDataFetcher: UserDefaults = UserDefaults.standard, completion: @escaping (_ error: Error?) -> Void) {
         self.reset()
         self.moviesDataFetcher = moviesDataFetcher
+        self.favoriteIDsDataFetcher = favoriteIDsDataFetcher
 
         // Genres setup
         let group = DispatchGroup()
@@ -94,7 +96,7 @@ class DataProvider {
 
         let group = DispatchGroup()
 
-        let favoriteIDs: [Int] = UserDefaults.standard.object(forKey: "favoriteIDs") as? [Int] ?? []
+        let favoriteIDs: [Int] = self.favoriteIDsDataFetcher.object(forKey: "favoriteIDs") as? [Int] ?? []
 
         for id in favoriteIDs {
             if let movie = self.movies.first(where: { $0.id == id }) {
@@ -188,7 +190,7 @@ class DataProvider {
     // MARK: - Favorite movies
 
     func addFavoriteMovie(_ movie: Movie) {
-        guard var favoriteIDs = UserDefaults.standard.object(forKey: "favoriteIDs") as? [Int] else {
+        guard var favoriteIDs = self.favoriteIDsDataFetcher.object(forKey: "favoriteIDs") as? [Int] else {
             UserDefaults.standard.set([movie.id], forKey: "favoriteIDs")
             self.favoriteMovies.insert(movie)
             self.didChangeFavorites()
@@ -204,7 +206,7 @@ class DataProvider {
     }
 
     func removeFavoriteMovie(_ movie: Movie) {
-        guard var favoriteIDs = UserDefaults.standard.object(forKey: "favoriteIDs") as? [Int] else {
+        guard var favoriteIDs = self.favoriteIDsDataFetcher.object(forKey: "favoriteIDs") as? [Int] else {
             return
         }
 

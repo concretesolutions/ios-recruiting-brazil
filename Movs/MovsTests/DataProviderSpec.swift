@@ -21,6 +21,7 @@ class DataProviderSpec: QuickSpec {
     // MARK: - Variables
 
     private var dataFetcher: MockDataFetcher!
+    private var userDefaults: MockUserDefaults!
 
     // MARK: - Tests
 
@@ -31,11 +32,14 @@ class DataProviderSpec: QuickSpec {
             beforeEach {
                 DataProvider.shared.reset()
                 self.dataFetcher = MockDataFetcher()
+                self.userDefaults = MockUserDefaults()
                 self.sut = DataProvider.shared
             }
 
             afterEach {
                 self.sut = nil
+                self.userDefaults.clear()
+                self.userDefaults = nil
                 self.dataFetcher = nil
             }
 
@@ -77,7 +81,7 @@ class DataProviderSpec: QuickSpec {
                         self.dataFetcher.mockData()
 
                         waitUntil { done in
-                            self.sut.setup(withDataFetcher: self.dataFetcher) { error in
+                            self.sut.setup(withMoviesDataFetcher: self.dataFetcher, andFavoriteIDsDataFetcher: MockUserDefaults()) { error in
                                 if error != nil {
                                     fail("Expected setup to suceed, but it failed")
                                 }
@@ -173,7 +177,7 @@ class DataProviderSpec: QuickSpec {
                             self.dataFetcher.mockMovies()
 
                             waitUntil { done in
-                                self.sut.setup(withDataFetcher: self.dataFetcher) { error in
+                                self.sut.setup(withMoviesDataFetcher: self.dataFetcher, andFavoriteIDsDataFetcher: MockUserDefaults()) { error in
                                     if error != nil {
                                         fail("Expected setup to suceed, but it failed")
                                     }
@@ -194,7 +198,7 @@ class DataProviderSpec: QuickSpec {
                             self.dataFetcher.mockGenres()
 
                             waitUntil { done in
-                                self.sut.setup(withDataFetcher: self.dataFetcher) { error in
+                                self.sut.setup(withMoviesDataFetcher: self.dataFetcher, andFavoriteIDsDataFetcher: MockUserDefaults()) { error in
                                     expect(error).toNot(beNil())
                                     done()
                                 }

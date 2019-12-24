@@ -18,6 +18,10 @@ class MovieDetailScreenSpec: QuickSpec {
 
     private var sut: MovieDetailScreen!
 
+    // MARK: - Variables
+
+    private var userDefaults: MockUserDefaults!
+
     // MARK: - Tests
 
     override func spec() {
@@ -28,14 +32,17 @@ class MovieDetailScreenSpec: QuickSpec {
                 let mockFetcher = MockDataFetcher()
                 mockFetcher.mockData()
 
+                self.userDefaults = MockUserDefaults()
                 DataProvider.shared.reset()
-                DataProvider.shared.setup(withDataFetcher: mockFetcher) { _ in }
+                DataProvider.shared.setup(withMoviesDataFetcher: mockFetcher, andFavoriteIDsDataFetcher: self.userDefaults) { _ in }
 
                 self.sut.configure(with: Movie(fromDTO: mockFetcher.movies[2]![0], smallImageURL: nil, bigImageURL: nil, isFavorite: false))
             }
 
             afterEach {
                 self.sut = nil
+                self.userDefaults.clear()
+                self.userDefaults = nil
             }
 
             it("should have the expected look and feel") {
