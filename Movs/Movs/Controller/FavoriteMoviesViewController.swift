@@ -10,11 +10,19 @@ import UIKit
 import Combine
 
 class FavoriteMoviesViewController: UIViewController {
-
+    
+    // Properties
     private let viewModel = FavoriteMoviesViewModel()
-    private let screen = FavoriteMoviesView()
+    private lazy var screen: FavoriteMoviesView = {
+        return FavoriteMoviesView(forController: self)
+    }()
+    private let searchController: SearchController = SearchController(withPlaceholder: "Search")
+    private var state: ExceptionView.State = .none
 
-    private var countCancellable: AnyCancellable?
+    // Cancellables
+    private var stateCancellable: AnyCancellable?
+    private var movieCountCancellable: AnyCancellable?
+    private var networkCancellable: AnyCancellable?
 
     override func loadView() {
         self.view = self.screen
@@ -22,11 +30,9 @@ class FavoriteMoviesViewController: UIViewController {
 
     required init() {
         super.init(nibName: nil, bundle: nil)
-        self.screen.tableView.dataSource = self
-        self.screen.tableView.delegate = self
 
         // Sets SearchController for this ViewController
-        self.navigationItem.searchController = SearchController(withPlaceholder: "Search", searchResultsUpdater: self)
+        self.navigationItem.searchController = self.searchController
         self.definesPresentationContext = true
 
         self.setCombine()
@@ -35,26 +41,29 @@ class FavoriteMoviesViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    func setCombine() {
-        self.countCancellable = self.viewModel.$count
+    
+    private func setCombine() {
+        self.movieCountCancellable = self.viewModel.$movieCount
             .receive(on: RunLoop.main)
             .sink { _ in
-                self.screen.tableView.performBatchUpdates({
-                    self.screen.tableView.reloadSections(IndexSet(integer: 0), with: .fade)
-                })
+                self.screen.reloadTableView()
             }
-    }
-
-}
-
-extension FavoriteMoviesViewController: UISearchResultsUpdating {
-
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let searchText = searchController.searchBar.text else { return }
-        if !searchText.isEmpty {
-            print(searchText.lowercased())
-        }
+        self.stateCancellable = self.viewModel.$state
+            .receive(on: RunLoop.main)
+            .assign(to: \.state, on: self.screen)
+        self.networkCancellable = self.viewModel.$withoutNetwork
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { (value) in
+                if value == true && self.state != .withoutNetwork {
+                    let alert = UIAlertController(title: "Connection problem",
+                                                  message: "We encountered problems with your connection.",
+                                                  preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            })
+        self.viewModel.setSearchCombine(forSearchController: self.searchController)
+        self.viewModel.setNetworkCombine()
     }
 
 }
@@ -62,15 +71,13 @@ extension FavoriteMoviesViewController: UISearchResultsUpdating {
 extension FavoriteMoviesViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.count
+        return self.viewModel.movieCount
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "favoritesTableViewCell", for: indexPath) as? FavoritesTableViewCell else {
-            print("Caramba")
-            return UITableViewCell()
-        }
-        cell.setup(withViewModel: self.viewModel.viewModel(forCellAt: indexPath))
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "favoritesTableViewCell",
+                                                       for: indexPath) as? FavoritesTableViewCell else { return UITableViewCell() }
+        cell.setup(withViewModel: self.viewModel.viewModelForCell(at: indexPath))
         return cell
     }
 
@@ -79,9 +86,15 @@ extension FavoriteMoviesViewController: UITableViewDataSource {
 extension FavoriteMoviesViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let removeFavoriteAction = UIContextualAction(style: .destructive, title: "Remover favorito") { (_, _, completion) in
+        let removeFavoriteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completion) in
+            guard let cell = tableView.cellForRow(at: indexPath) as? FavoritesTableViewCell else {
+                completion(false)
+                return
+            }
+            cell.toggleFavorite()
             completion(true)
         }
+        removeFavoriteAction.image = UIImage(systemName: "heart.slash")
         return UISwipeActionsConfiguration(actions: [removeFavoriteAction])
     }
 

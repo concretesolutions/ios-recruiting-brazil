@@ -7,18 +7,38 @@
 //
 
 import UIKit
+import Combine
 
 class SearchController: UISearchController {
 
-    required init(withPlaceholder placeholder: String, searchResultsUpdater: UISearchResultsUpdating) {
+    @Published var termPublisher: String = ""
+    private var textCancellable: AnyCancellable?
+    
+    required init(withPlaceholder placeholder: String) {
         super.init(nibName: nil, bundle: nil)
-        self.searchResultsUpdater = searchResultsUpdater
+        self.delegate = self
         self.searchBar.placeholder = placeholder
         self.obscuresBackgroundDuringPresentation = false
+        self.textCancellable = NotificationCenter.default
+            .publisher(for: UITextField.textDidChangeNotification, object: self.searchBar.searchTextField)
+            .map { (notification) -> String in
+                guard let textField = notification.object as? UITextField else { return "" }
+                return textField.text!
+            }
+            .assign(to: \.termPublisher, on: self)
+            
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+extension SearchController: UISearchControllerDelegate {
+    
+    func willDismissSearchController(_ searchController: UISearchController) {
+        self.termPublisher = ""
     }
     
 }

@@ -11,31 +11,31 @@ import Combine
 
 class PopularMoviesViewController: UIViewController {
 
+    // Properties
     private let viewModel = PopularMoviesViewModel()
-    private let screen = PopularMoviesView()
+    private lazy var screen: PopularMoviesView = {
+        return PopularMoviesView(forController: self)
+    }()
+    private let searchController: SearchController = SearchController(withPlaceholder: "Search")
+    private var state: ExceptionView.State = .none
 
-    private var countCancellable: AnyCancellable?
+    // Cancellables
+    private var stateCancellable: AnyCancellable?
+    private var movieCountCancellable: AnyCancellable?
+    private var networkCancellable: AnyCancellable?
 
     override func loadView() {
-        self.view = screen
+        self.view = self.screen
     }
 
     required init() {
         super.init(nibName: nil, bundle: nil)
-        screen.collectionView.dataSource = self
-        screen.collectionView.prefetchDataSource = self
 
         // Sets SearchController for this ViewController
-        self.navigationItem.searchController = SearchController(withPlaceholder: "Search", searchResultsUpdater: self)
+        self.navigationItem.searchController = self.searchController
         self.definesPresentationContext = true
-        self.navigationItem.searchController?.delegate = self
 
-        self.screen.collectionView.delegate = self
-
-        // MARK: Sets pull to refresh - Under construction
-        // let refreshControl = UIRefreshControl()
-        // self.screen.collectionView.refreshControl = refreshControl
-
+        self.viewModel.getMovies()
         self.setCombine()
     }
 
@@ -43,61 +43,64 @@ class PopularMoviesViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setCombine() {
-        self.countCancellable = self.viewModel.$count
+    private func setCombine() {
+        self.movieCountCancellable = self.viewModel.$movieCount
             .receive(on: RunLoop.main)
             .sink { _ in
-                self.screen.collectionView.performBatchUpdates({
-                    self.screen.collectionView.reloadSections(IndexSet(integer: 0))
-                })
+                self.screen.reloadCollectionView()
             }
+        self.stateCancellable = self.viewModel.$state
+            .receive(on: RunLoop.main)
+            .assign(to: \.state, on: self.screen)
+        self.networkCancellable = self.viewModel.$withoutNetwork
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { (value) in
+                if value == true && self.state != .withoutNetwork {
+                    let alert = UIAlertController(title: "Connection problem",
+                                                  message: "We encountered problems with your connection.",
+                                                  preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            })
+        self.viewModel.setSearchCombine(forSearchController: self.searchController)
+        self.viewModel.setNetworkCombine()
     }
     
 }
 
-extension PopularMoviesViewController: UISearchResultsUpdating, UISearchControllerDelegate {
-
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let searchTerm = searchController.searchBar.text else { return }
-        self.viewModel.isSearching = true
-        self.viewModel.search(formTerm: searchTerm)
-    }
-
-    func didDismissSearchController(_ searchController: UISearchController) {
-        self.viewModel.isSearching = false
-    }
-
-}
-
+// CollectionView DataSource
 extension PopularMoviesViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.count
+        return self.viewModel.movieCount
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "moviesCollectionViewCell",
-                                                            for: indexPath) as? MoviesCollectionViewCell else { return UICollectionViewCell() }
-        cell.setup(withViewModel: self.viewModel.viewModel(forCellAt: indexPath))
+                                                            for: indexPath) as? PopularMoviesCollectionViewCell else { return UICollectionViewCell() }
+        cell.setup(withViewModel: self.viewModel.viewModelForCell(at: indexPath))
         return cell
     }
 
 }
 
+// CollectionView Delegate
 extension PopularMoviesViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let controller = MovieDetailsViewController(withMovieViewModel: self.viewModel.viewModel1(forCellAt: indexPath))
+        let controller = MovieDetailsViewController(withMovieViewModel: self.viewModel.viewModelDetailsForCell(at: indexPath))
         self.navigationController!.pushViewController(controller, animated: true)
     }
 
 }
 
+// CollectionView DataSourcePrefetching
 extension PopularMoviesViewController: UICollectionViewDataSourcePrefetching {
 
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         guard let indexPath = indexPaths.first else { return }
-        if indexPath.row >= viewModel.count - 8 {
+        if indexPath.row >= self.viewModel.movieCount - 2 {
             self.viewModel.getMovies()
         }
     }
