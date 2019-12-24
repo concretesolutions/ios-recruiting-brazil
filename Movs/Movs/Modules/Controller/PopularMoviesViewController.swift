@@ -14,6 +14,16 @@ class PopularMoviesViewController: UIViewController {
 
     private lazy var screen = PopularMoviesScreen()
 
+    // MARK: - Data
+
+    private var displayMovies: [Movie] {
+        if self.isSearching {
+            return self.searchedMovies
+        } else {
+            return DataProvider.shared.movies
+        }
+    }
+
     // MARK: - Search
 
     private var searchedMovies: [Movie] = []
@@ -28,16 +38,6 @@ class PopularMoviesViewController: UIViewController {
         return self.searchController.isActive && !self.isSearchBarEmpty
     }
 
-    // MARK: - Data
-
-    private var displayMovies: [Movie] {
-        if self.isSearching {
-            return self.searchedMovies
-        } else {
-            return DataProvider.shared.movies
-        }
-    }
-
     // MARK: - Life cycle
 
     override func loadView() {
@@ -50,21 +50,11 @@ class PopularMoviesViewController: UIViewController {
 
         self.title = "Movies"
         self.navigationItem.largeTitleDisplayMode = .always
+
         self.setupSearch()
+        self.setupRefresh()
 
-        self.screen.startLoading()
-
-        DataProvider.shared.setup { error in
-            DispatchQueue.main.async {
-                self.screen.stopLoading()
-
-                if error != nil {
-                    self.screen.displayError()
-                } else {
-                    self.screen.collectionView.reloadData()
-                }
-            }
-        }
+        self.refresh()
     }
 
     // MARK: - Search
@@ -84,6 +74,58 @@ class PopularMoviesViewController: UIViewController {
         }
 
         self.screen.collectionView.reloadData()
+    }
+
+    // MARK: - Refresh
+
+    private func setupRefresh() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull down to refresh")
+        refreshControl.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
+        self.screen.collectionView.refreshControl = refreshControl
+    }
+
+    @objc func refresh() {
+        self.screen.collectionView.refreshControl?.endRefreshing()
+        self.screen.startLoading()
+        DataProvider.shared.setup { error in
+            DispatchQueue.main.async {
+                self.screen.stopLoading()
+
+                if error != nil {
+                    self.screen.displayError()
+                } else {
+                    self.screen.collectionView.reloadData()
+                }
+            }
+        }
+    }
+
+    // MARK: - Helpers
+
+    private func getMoreMovies(fromIndex startIndex: Int) {
+        if !self.isSearching {
+            DataProvider.shared.getMoreMovies { error in
+                DispatchQueue.main.async {
+                    if error != nil {
+                        let alert = UIAlertController(title: "Error", message: "Could not load more movies", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+                        alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { _ in
+                            self.getMoreMovies(fromIndex: startIndex)
+                        }))
+
+                        self.present(alert, animated: true)
+                    } else {
+                        var indexPaths: [IndexPath] = []
+                        for i in startIndex...DataProvider.shared.movies.count-1 {
+                            indexPaths.append(IndexPath(row: i, section: 0))
+                        }
+
+                        self.screen.collectionView.insertItems(at: indexPaths)
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -114,24 +156,8 @@ extension PopularMoviesViewController: CollectionViewScreenDelegate {
     // MARK: - UICollectionViewDelegate
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if !self.isSearching && indexPath.row == DataProvider.shared.movies.count - 1 {
-            DataProvider.shared.getMoreMovies { error in
-                DispatchQueue.main.async {
-                    if error != nil {
-                        let alert = UIAlertController(title: "Error", message: "Could not load more movies", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: .default))
-
-                        self.present(alert, animated: true)
-                    } else {
-                        var indexPaths: [IndexPath] = []
-                        for row in indexPath.row+1...DataProvider.shared.movies.count-1 {
-                            indexPaths.append(IndexPath(row: row, section: 0))
-                        }
-
-                        self.screen.collectionView.insertItems(at: indexPaths)
-                    }
-                }
-            }
+        if indexPath.row == DataProvider.shared.movies.count - 1 {
+            self.getMoreMovies(fromIndex: indexPath.row+1)
         }
     }
 
