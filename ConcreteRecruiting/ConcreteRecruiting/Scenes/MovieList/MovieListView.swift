@@ -48,8 +48,16 @@ class MovieListView: UIView {
         return activityIndicator
     }()
     
-    lazy var datasource = MovieListDataSource()
-    lazy var delegate = MovieListDelegate()
+    var collectionDataSource: MovieListDataSource? {
+        didSet {
+            self.collectionView.dataSource = self.collectionDataSource
+        }
+    }
+    var collectionDelegate: MovieListDelegate? {
+        didSet {
+            self.collectionView.delegate = self.collectionDelegate
+        }
+    }
     
       override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,9 +65,6 @@ class MovieListView: UIView {
         self.backgroundColor = .systemGray6
         self.setupLayout()
        
-        //collectionView.dataSource = self.datasource
-        collectionView.delegate = self.delegate
-        
       }
       
       required init?(coder: NSCoder) {
@@ -68,6 +73,8 @@ class MovieListView: UIView {
     
     func setup(with viewModel: MovieListViewModel) {
         
+        self.collectionDataSource = MovieListDataSource(with: viewModel)
+        self.collectionDelegate = MovieListDelegate(with: viewModel)
         
         viewModel.didChangeLoadingState = { [weak self] (isLoading) in
             DispatchQueue.main.async {
