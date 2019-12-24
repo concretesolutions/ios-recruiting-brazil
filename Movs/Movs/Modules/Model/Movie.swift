@@ -14,7 +14,6 @@ class Movie {
     let title: String
     let overview: String
     let releaseYear: String
-    let posterPath: String?
     var genres: [Genre]
     let popularity: Double
     let smallImageURL: String?
@@ -45,7 +44,6 @@ class Movie {
         } else {
             self.releaseYear = "----"
         }
-        self.posterPath = dto.posterPath
         self.genres = dto.genreIds.compactMap { DataProvider.shared.genres[$0] }
         self.popularity = dto.popularity
         self.smallImageURL = smallImageURL
@@ -62,7 +60,6 @@ class Movie {
         } else {
             self.releaseYear = "----"
         }
-        self.posterPath = dto.posterPath
         self.genres = dto.genres.map { Genre(fromDTO: $0) }
         self.popularity = dto.popularity
         self.smallImageURL = smallImageURL
@@ -73,13 +70,13 @@ class Movie {
 
 extension Movie: CustomStringConvertible {
     var description: String {
-        "Movie {\n" + "\tid: \(self.id)\n" + "\ttitle: \(self.title)\n" + "\toverview: \(self.overview)\n" + "\treleaseYear: \(self.releaseYear)\n" + "\tposterPath: \(String(describing: self.posterPath))\n" + "\tgenres: \(self.genres)\n" + "\tsmallImageURL: \(String(describing: self.smallImageURL))\n" + "\tbigImageURL:: \(String(describing: self.bigImageURL))\n" + "\tisFavorite: \(self.isFavorite)\n" + "}\n"
+        "Movie {\n" + "\tid: \(self.id)\n" + "\ttitle: \(self.title)\n" + "\toverview: \(self.overview)\n" + "\treleaseYear: \(self.releaseYear)\n" + "\tgenres: \(self.genres)\n" + "\tsmallImageURL: \(String(describing: self.smallImageURL))\n" + "\tbigImageURL:: \(String(describing: self.bigImageURL))\n" + "\tisFavorite: \(self.isFavorite)\n" + "}\n"
     }
 }
 
 extension Movie: Equatable {
     static func == (lhs: Movie, rhs: Movie) -> Bool {
-        return lhs.id == rhs.id && lhs.title == rhs.title && lhs.overview == rhs.overview && lhs.releaseYear == rhs.releaseYear && lhs.posterPath == rhs.posterPath && lhs.genres == rhs.genres && lhs.smallImageURL == rhs.smallImageURL && lhs.bigImageURL == rhs.bigImageURL && lhs.isFavorite == rhs.isFavorite
+        return lhs.id == rhs.id && lhs.title == rhs.title && lhs.overview == rhs.overview && lhs.releaseYear == rhs.releaseYear && lhs.genres == rhs.genres && lhs.smallImageURL == rhs.smallImageURL && lhs.bigImageURL == rhs.bigImageURL && lhs.isFavorite == rhs.isFavorite
     }
 }
 

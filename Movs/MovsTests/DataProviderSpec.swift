@@ -96,14 +96,12 @@ class DataProviderSpec: QuickSpec {
                             expect(self.sut.movies[0].overview) == "Movie_1 overview"
                             expect(self.sut.movies[0].genres) == [Genre(fromDTO: GenreDTO(id: 1, name: "Action"))]
                             expect(self.sut.movies[0].releaseYear) == "2019"
-                            expect(self.sut.movies[0].posterPath) == "/Movie_1.jpg"
 
                             expect(self.sut.movies[1].id) == 2
                             expect(self.sut.movies[1].title) == "Movie_2"
                             expect(self.sut.movies[1].overview) == "Movie_2 overview"
                             expect(self.sut.movies[1].genres) == [Genre(fromDTO: GenreDTO(id: 4, name: "Comedy"))]
                             expect(self.sut.movies[1].releaseYear) == "2010"
-                            expect(self.sut.movies[1].posterPath) == "/Movie_2.jpg"
                         }
                     }
 
@@ -131,7 +129,6 @@ class DataProviderSpec: QuickSpec {
                                     expect(self.sut.movies[2].overview) == "Movie_3 overview"
                                     expect(self.sut.movies[2].genres) == [Genre(fromDTO: GenreDTO(id: 2, name: "Romance")), Genre(fromDTO: GenreDTO(id: 4, name: "Comedy"))]
                                     expect(self.sut.movies[2].releaseYear) == "3000"
-                                    expect(self.sut.movies[2].posterPath).to(beNil())
 
                                     done()
                                 }
