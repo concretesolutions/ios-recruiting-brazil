@@ -6,26 +6,23 @@ target 'Movs' do
   pod 'SwiftLint'
   pod 'SnapKit', '~> 5.0.0'
 
+  target 'MovsTests' do
+    inherit! :search_paths
+    pod 'Quick'
+    pod 'Nimble'
+  end
+
   target 'MovsUITests' do
     inherit! :search_paths
-
     pod 'Quick'
     pod 'Nimble-Snapshots'
   end
 
   target 'MovsFunctionalTests' do
     inherit! :search_paths
-   
     pod 'Quick'
     pod 'Nimble'
     pod 'KIF', :configurations => ['Debug']
-  end
-
-  target 'MovsTests' do
-    inherit! :search_paths
-
-    pod 'Nimble'
-    pod 'Quick'
   end
 
 end
