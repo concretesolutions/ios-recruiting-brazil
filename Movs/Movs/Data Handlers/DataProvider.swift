@@ -56,7 +56,7 @@ class DataProvider {
         self.genres = [:]
         self.page = 1
         self.isFetchingMovies = false
-        self.movieSemaphore = nil
+        self.movieSemaphore = DispatchSemaphore(value: 1)
     }
 
     // MARK: - Setup

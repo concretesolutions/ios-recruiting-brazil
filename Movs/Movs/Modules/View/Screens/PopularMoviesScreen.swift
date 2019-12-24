@@ -58,6 +58,7 @@ final class PopularMoviesScreen: UIView {
     // MARK: - Activity Indicator handlers
 
     func startLoading() {
+        self.hideError()
         self.activityIndicator.startAnimating()
     }
 
@@ -69,6 +70,12 @@ final class PopularMoviesScreen: UIView {
 
     func displayError() {
         self.collectionView.backgroundView = self.errorView
+    }
+
+    func hideError() {
+        if self.collectionView.backgroundView == self.errorView {
+            self.collectionView.backgroundView = nil
+        }
     }
 
     func displayEmptySearch() {
