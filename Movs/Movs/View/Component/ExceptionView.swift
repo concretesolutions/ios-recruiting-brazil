@@ -11,6 +11,7 @@ import UIKit
 class ExceptionView: UIView {
     
     enum State {
+        case firstLoading
         case loading
         case loaded
         case error
@@ -21,49 +22,45 @@ class ExceptionView: UIView {
         case none
     }
     
-    private lazy var imageView: UIImageView = {
+    private let imageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
-        let imageConfiguration = UIImage.SymbolConfiguration(weight: .thin)
-        switch self.state {
-        case .searchNoData:
-            imageView.image = UIImage(systemName: "magnifyingglass", withConfiguration: imageConfiguration)
-        case .withoutNetwork:
-            imageView.image = UIImage(systemName: "wifi.slash", withConfiguration: imageConfiguration)
-        case .noFavorites:
-            imageView.image = UIImage(systemName: "heart", withConfiguration: imageConfiguration)
-        case .loading:
-            imageView.image = UIImage(systemName: "film", withConfiguration: imageConfiguration)
-        default: break
-        }
         imageView.tintColor = .systemGray
         return imageView
     }()
     
-    private lazy var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         label.textAlignment = .center
         label.textColor = .secondaryLabel
-        switch self.state {
-        case .withoutNetwork:
-            label.text = "You are not connected to the internet. \n Pull to refresh"
-        case .searchNoData:
-            label.text = "Your search returned no result"
-        case .noFavorites:
-            label.text = "You don't have any favorite movies yet"
-        case .loading:
-            label.text = "Loading popular movies"
-        default: break
-        }
         return label
     }()
     
-    private var state: State
-
-    required init(withState state: State) {
-        self.state = state
-        super.init(frame: .zero)
+    var state: State = .none {
+        didSet {
+            let imageConfiguration = UIImage.SymbolConfiguration(weight: .thin)
+            switch self.state {
+            case .withoutNetwork:
+                imageView.image = UIImage(systemName: "wifi.slash", withConfiguration: imageConfiguration)
+                titleLabel.text = "You are not connected to the internet."
+            case .searchNoData:
+                imageView.image = UIImage(systemName: "magnifyingglass", withConfiguration: imageConfiguration)
+                titleLabel.text = "Your search returned no result"
+            case .noFavorites:
+                imageView.image = UIImage(systemName: "heart", withConfiguration: imageConfiguration)
+                titleLabel.text = "You don't have any favorite movies yet"
+            case .firstLoading:
+                imageView.image = UIImage(systemName: "film", withConfiguration: imageConfiguration)
+                titleLabel.text = "Loading popular movies"
+            default: break
+            }
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setupView()
     }
     
     required init?(coder: NSCoder) {

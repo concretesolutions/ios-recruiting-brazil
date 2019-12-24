@@ -6,28 +6,24 @@
 //  Copyright © 2019 LuccaFranca. All rights reserved.
 //
 
+import Combine
 import UIKit
 
 class MovieDetailsView: UIView {
 
     private var viewModel: MovieDetailsViewModel!
 
-    private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView(frame: .zero)
-        return scrollView
-    }()
-
     @Published private var posterImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
-        imageView.image = UIImage()  //Problem related with combine operators
+        imageView.layer.cornerRadius = 16.0
+        imageView.image = UIImage() //Problem related with combine operators
         return imageView
     }()
-
-    private let containerView: UIView = {
+    
+    private let contentView: UIView = {
         let view = UIView(frame: .zero)
-        view.backgroundColor = .blue
         return view
     }()
 
@@ -35,7 +31,8 @@ class MovieDetailsView: UIView {
         let label = UILabel(frame: .zero)
         label.font = UIFont.systemFont(ofSize: 18.0, weight: .semibold)
         label.textAlignment = .natural
-        label.text = "Teste"
+        label.font = UIFont.systemFont(ofSize: 28, weight: .heavy)
+        label.numberOfLines = 5
         return label
     }()
 
@@ -45,28 +42,78 @@ class MovieDetailsView: UIView {
         label.textAlignment = .natural
         return label
     }()
-
-    private let movieOverview: UILabel = {
+    
+    private let movieOverview: UITextView = {
+        let view = UITextView()
+        view.backgroundColor = .clear
+        view.isEditable = false
+        view.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        view.textContainer.lineFragmentPadding = 0
+        view.textContainerInset = .zero
+        view.textColor = .label
+        return view
+    }()
+    
+    private let movieGenres: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = UIFont.systemFont(ofSize: 18.0, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        label.textColor = .secondaryLabel
+        label.lineBreakMode = .byWordWrapping
         label.textAlignment = .natural
-        label.numberOfLines = 0
+        label.numberOfLines = 4
         return label
     }()
+    
+    @Published private var likeButton: LikeButton = {
+        let button = LikeButton()
+        return button
+    }()
+    
+    private(set) var likeButtonCancellable: AnyCancellable?
+    private(set) var posterImageCancellable: AnyCancellable?
 
     required init(withViewModel viewModel: MovieDetailsViewModel) {
         super.init(frame: .zero)
         self.viewModel = viewModel
-        self.setupView()
+        self.setCombine()
+        self.likeButton.addTarget(self, action: #selector(touchLikeButton), for: .touchUpInside)
         self.movieTitle.text = viewModel.title
+        self.movieReleaseYear.text = viewModel.releaseYear
+        self.movieGenres.text = self.viewModel.genres
         self.movieOverview.text = viewModel.overview
-        self.movieReleaseYear.text = viewModel.releaseDate
-        self.posterImageView.image = viewModel.posterImage
-        self.backgroundColor = .systemBackground
+    }
+    
+    required init(withFrame frame: CGRect, withViewModel viewModel: MovieDetailsViewModel) {
+        super.init(frame: frame)
+        self.viewModel = viewModel
+        self.setCombine()
+        self.likeButton.addTarget(self, action: #selector(touchLikeButton), for: .touchUpInside)
+        self.movieTitle.text = viewModel.title
+        self.movieReleaseYear.text = viewModel.releaseYear
+        self.movieGenres.text = self.viewModel.genres
+        self.movieOverview.text = viewModel.overview
+        self.setupView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.setupView()
+    }
+    
+    private func setCombine() {
+        self.posterImageCancellable = self.viewModel.posterImage
+            .receive(on: RunLoop.main)
+            .assign(to: \.image!, on: posterImageView)
+        self.likeButtonCancellable = self.viewModel.$isLiked
+            .assign(to: \.isSelected, on: likeButton)
+    }
+    
+    @objc func touchLikeButton() {
+        self.viewModel.toggleFavorite()
     }
     
 }
@@ -74,39 +121,53 @@ class MovieDetailsView: UIView {
 extension MovieDetailsView: ViewCode {
 
     func buildViewHierarchy() {
-        self.addSubview(self.scrollView)
-        self.scrollView.addSubview(self.posterImageView)
-        self.scrollView.addSubview(self.containerView)
-        self.containerView.addSubview(self.movieTitle)
-        self.containerView.addSubview(self.movieOverview)
+        self.addSubview(self.contentView)
+        self.contentView.addSubview(self.posterImageView)
+        self.contentView.addSubview(self.likeButton)
+        self.contentView.addSubview(self.movieTitle)
+        self.contentView.addSubview(self.movieReleaseYear)
+        self.contentView.addSubview(self.movieGenres)
+        self.contentView.addSubview(self.movieOverview)
     }
 
-    func setupContraints() {
-        self.scrollView.snp.makeConstraints { (make) in
-            make.top.bottom.left.right.equalToSuperview()
+    func setupConstraints() {
+        self.contentView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(16)
+            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).inset(16)
+            make.left.right.equalToSuperview().inset(16)
         }
         self.posterImageView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
-            make.width.equalTo(self.snp.width)
-            make.height.equalTo(200)
+            make.top.right.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.4)
+            make.height.equalTo(self.posterImageView.snp.width).multipliedBy(1.7)
         }
-        self.containerView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.posterImageView.snp.bottom)
-            make.width.equalTo(self.snp.width)
-            make.height.equalTo(600)
+        self.likeButton.snp.makeConstraints { (make) in
+            make.top.right.equalTo(self.posterImageView).inset(16)
         }
         self.movieTitle.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.8)
-            make.top.equalTo(self.posterImageView.snp.bottom).offset(16)
+            make.left.top.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.5)
+        }
+        self.movieReleaseYear.snp.makeConstraints { (make) in
+            make.left.equalToSuperview()
+            make.top.equalTo(self.movieTitle.snp.bottom).offset(16)
+            make.width.equalToSuperview().multipliedBy(0.5)
+        }
+        self.movieGenres.snp.makeConstraints { (make) in
+            make.left.equalToSuperview()
+            make.top.equalTo(self.movieReleaseYear.snp.bottom).offset(16)
+            make.width.equalToSuperview().multipliedBy(0.5)
         }
         self.movieOverview.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.8)
-            make.top.equalTo(self.movieTitle.snp.bottom).offset(16)
+            make.left.right.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().inset(16)
+            make.top.equalTo(self.posterImageView.snp.bottom).offset(16).priority(.medium)
+            make.top.greaterThanOrEqualTo(self.movieGenres.snp.bottom).offset(16).priority(.required)
         }
     }
 
-    func setupAdditionalConfiguration() {}
+    func setupAdditionalConfiguration() {
+        self.backgroundColor = .systemBackground
+    }
     
 }

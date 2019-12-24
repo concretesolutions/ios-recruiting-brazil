@@ -12,7 +12,12 @@ import Combine
 
 class PopularMoviesCollectionViewCell: UICollectionViewCell {
 
-    private var viewModel: PopularMoviesCellViewModel!
+    private var viewModel: PopularMoviesCellViewModel! {
+        didSet {
+            self.movieTitle.text = self.viewModel.title
+            self.setCombine()
+        }
+    }
 
     private var posterImageCancellable: AnyCancellable?
     private var likeButtonCancellable: AnyCancellable?
@@ -47,13 +52,13 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
-    @Published private var likeButton: LikeButton = {
+    @Published var likeButton: LikeButton = {
         let button = LikeButton()
         return button
     }()
 
     override init(frame: CGRect) {
-        super.init(frame: .zero)
+        super.init(frame: frame)
         self.setupView()
     }
 
@@ -63,17 +68,15 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell {
 
     func setup(withViewModel viewModel: PopularMoviesCellViewModel) {
         self.viewModel = viewModel
-        self.movieTitle.text = self.viewModel.title
         self.likeButton.addTarget(self, action: #selector(touchLikeButton), for: .touchUpInside)
-        self.setCombine()
     }
 
     private func setCombine() {
         self.posterImageCancellable = self.viewModel.posterImage
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .assign(to: \.image!, on: posterImageView)
-        self.likeButtonCancellable = self.viewModel.isLiked
-            .assign(to: \.isSelected, on: likeButton)
+        self.likeButtonCancellable = self.viewModel.$isLiked
+            .assign(to: \.isSelected, on: self.likeButton)
     }
 
     @objc func touchLikeButton() {

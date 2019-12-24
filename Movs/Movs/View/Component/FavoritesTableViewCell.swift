@@ -11,14 +11,21 @@ import Combine
 
 class FavoritesTableViewCell: UITableViewCell {
 
-    private var viewModel: FavoriteMoviesCellViewModel!
+    private var viewModel: FavoriteMoviesCellViewModel! {
+        didSet {
+            self.movieTitle.text = self.viewModel.title
+            self.movieReleaseYear.text = self.viewModel.releaseYear
+            self.movieOverview.text = self.viewModel.overview
+            self.setCombine()
+        }
+    }
 
     private var posterImageCancellable: AnyCancellable?
 
     let containerView: UIView = {
         let view = UIView(frame: .zero)
         view.layer.cornerRadius = 10.0
-        view.backgroundColor = UIColor(named: "cellBackground")
+        view.backgroundColor = .secondarySystemBackground
         return view
     }()
 
@@ -36,29 +43,43 @@ class FavoritesTableViewCell: UITableViewCell {
         return imageView
     }()
 
-    private let textContainerView: UIView = {
+    private let textualContentContainerView: UIView = {
         let view = UIView(frame: .zero)
         return view
     }()
-
-    private let overviewLabel: UILabel = {
+    
+    private let titleContainer: UIStackView = {
+        let stackView = UIStackView(frame: .zero)
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .top
+        return stackView
+    }()
+    
+    private let movieTitle: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = UIFont.systemFont(ofSize: 16, weight: .thin)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
+        label.lineBreakMode = .byTruncatingTail
+        label.textColor = .label
+        label.numberOfLines = 1
+        return label
+    }()
+
+    private let movieOverview: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.lineBreakMode = .byTruncatingTail
+        label.textColor = .label
         label.numberOfLines = 0
         return label
     }()
 
-    private let yearLabel: UILabel = {
+    private let movieReleaseYear: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.text = "2018"
-        return label
-    }()
-
-    private let movieTitle: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        label.numberOfLines = 2
+        label.font = UIFont.systemFont(ofSize: 14, weight: .heavy)
+        label.textColor = .secondaryLabel
+        label.numberOfLines = 1
+        label.textAlignment = .right
         return label
     }()
 
@@ -73,21 +94,24 @@ class FavoritesTableViewCell: UITableViewCell {
 
     func setup(withViewModel viewModel: FavoriteMoviesCellViewModel) {
         self.viewModel = viewModel
-        self.movieTitle.text = self.viewModel.title
-        self.yearLabel.text = self.viewModel.releaseDate
-        self.overviewLabel.text = self.viewModel.overview
-        self.setCombine()
     }
 
     private func setCombine() {
-        self.posterImageCancellable = self.viewModel.$posterImage
-            .receive(on: RunLoop.main)
+        self.posterImageCancellable = self.viewModel.posterImage
+            .receive(on: DispatchQueue.main)
             .assign(to: \.image!, on: posterImageView)
     }
 
     override func prepareForReuse() {
-        super.prepareForReuse()
         self.posterImageView.image = UIImage(named: "imagePlaceholder")
+    }
+    
+    @objc func touchLikeButton() {
+        self.viewModel.toggleFavorite()
+    }
+    
+    func toggleFavorite() {
+        self.viewModel.toggleFavorite()
     }
     
 }
@@ -95,40 +119,33 @@ class FavoritesTableViewCell: UITableViewCell {
 extension FavoritesTableViewCell: ViewCode {
 
     func buildViewHierarchy() {
-        self.addSubview(containerView)
-        self.containerView.addSubview(posterImageView)
-        self.containerView.addSubview(textContainerView)
-        self.textContainerView.addSubview(movieTitle)
-        self.textContainerView.addSubview(yearLabel)
-        self.textContainerView.addSubview(overviewLabel)
+        self.addSubview(self.containerView)
+        self.containerView.addSubview(self.posterImageView)
+        self.containerView.addSubview(self.textualContentContainerView)
+        self.textualContentContainerView.addSubview(self.titleContainer)
+        self.titleContainer.addArrangedSubview(self.movieTitle)
+        self.titleContainer.addArrangedSubview(self.movieReleaseYear)
+        self.textualContentContainerView.addSubview(movieOverview)
     }
 
-    func setupContraints() {
+    func setupConstraints() {
         self.containerView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(8.0)
-            make.bottom.equalToSuperview().inset(8.0)
-            make.left.equalToSuperview().offset(16.0)
-            make.right.equalToSuperview().inset(16.0)
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
         }
         self.posterImageView.snp.makeConstraints { (make) in
             make.top.bottom.left.equalToSuperview()
             make.width.equalTo(self.posterImageView.snp.height).multipliedBy(0.8)
         }
-        self.textContainerView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(16.0)
-            make.bottom.equalToSuperview().inset(16.0)
-            make.left.equalTo(self.posterImageView.snp.right).offset(16.0)
-            make.right.equalToSuperview().inset(16.0)
+        self.textualContentContainerView.snp.makeConstraints { (make) in
+            make.top.bottom.right.equalToSuperview().inset(10.0)
+            make.left.equalTo(self.posterImageView.snp.right).offset(10.0)
         }
-        self.yearLabel.snp.makeConstraints { (make) in
-            make.top.right.equalToSuperview()
+        self.titleContainer.snp.makeConstraints { (make) in
+            make.top.left.right.equalToSuperview()
         }
-        self.movieTitle.snp.makeConstraints { (make) in
-            make.top.left.equalToSuperview()
-        }
-        self.overviewLabel.snp.makeConstraints { (make) in
+        self.movieOverview.snp.makeConstraints { (make) in
             make.bottom.left.right.equalToSuperview()
-            make.top.greaterThanOrEqualTo(self.movieTitle.snp.bottom).offset(2.0)
+            make.top.equalTo(self.titleContainer.snp.bottom).offset(4.0)
         }
     }
 

@@ -9,12 +9,20 @@
 import UIKit
 
 class PopularMoviesCollectionView: UICollectionView, UICollectionViewDelegateFlowLayout {
-
+    
+    var state: ExceptionView.State = .none {
+        didSet {
+            let exceptionView = ExceptionView(frame: .zero)
+            exceptionView.state = self.state
+            self.backgroundView = exceptionView
+        }
+    }
+    
     required init(itemsPerRow: Int, withMargin margin: CGFloat) {
         super.init(frame: .zero, collectionViewLayout: Layout(itemsPerRow: itemsPerRow, withMargin: margin))
         self.contentInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
         self.backgroundColor = .systemBackground
-        self.register(MoviesCollectionViewCell.self, forCellWithReuseIdentifier: "moviesCollectionViewCell")
+        self.register(PopularMoviesCollectionViewCell.self, forCellWithReuseIdentifier: "moviesCollectionViewCell")
     }
 
     required init?(coder: NSCoder) {
