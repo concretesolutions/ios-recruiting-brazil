@@ -26,7 +26,7 @@ extension StorageManager: CoreDataFactory {
             }))
             instance.addToGenres(createdGenres)
         } catch {
-            fatalError()
+            fatalError("Failed to retrieve entity CDGenre in current context")
         }
         
         return instance

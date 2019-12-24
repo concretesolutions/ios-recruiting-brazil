@@ -76,7 +76,7 @@ class MoviesAPIManagerTests: XCTestCase {
             let path = self.bundle.path(forResource: "GenresAPIData", ofType: "json")!
             self.mockedSession.data = try Data(contentsOf: URL(fileURLWithPath: path))
         } catch {
-            fatalError()
+            fatalError("Failed to create Data from file: GenresAPIData")
         }
         
         self.sut.fetchGenresList()
@@ -89,7 +89,7 @@ class MoviesAPIManagerTests: XCTestCase {
             let path = self.bundle.path(forResource: "PopularMoviesAPIData", ofType: "json")!
             self.mockedSession.data = try Data(contentsOf: URL(fileURLWithPath: path))
         } catch {
-            fatalError()
+            fatalError("Failed to create Data from file: PopularMoviesAPIData")
         }
         
         self.sut.fetchNextPopularMoviesPage()

@@ -18,6 +18,13 @@ extension UIImageView {
         self.kf.indicatorType = .activity
         self.kf.setImage(with: ImageResource(downloadURL: imageURL), options: [
             .transition(.fade(0.5))
-        ])
+        ]) { result in
+            switch result {
+            case .failure:
+                self.image = UIImage(named: "placeholder")
+            case .success(let result):
+                self.image = result.image
+            }
+        }
     }
 }

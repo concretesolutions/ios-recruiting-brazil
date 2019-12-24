@@ -26,7 +26,7 @@ extension MovieDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "GenresCell", for: indexPath) as? GenresDetailsTableViewCell else {
-                fatalError()
+                fatalError("Failed to dequeue GenresCell as GenresDetailsTableViewCell")
             }
             
             cell.headingLabel.text = "Genres"
@@ -36,7 +36,7 @@ extension MovieDetailsViewController: UITableViewDataSource {
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as? MovieDetailsTableViewCell else {
-                fatalError()
+                fatalError("Failed to dequeue DetailCell as MovieDetailsTableViewCell")
             }
             
             let content = self.viewModel.detailsForItemAt(indexPath: indexPath)

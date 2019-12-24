@@ -45,7 +45,9 @@ extension PopularMoviesViewController: UICollectionViewDelegateFlowLayout {
         let width: CGFloat = (collectionView.bounds.width/3.0)
         let height: CGFloat = width * 1.755
         
-        return CGSize(width: width - insets.left - widthSpacing, height: height - insets.top - heightSpacing)
+        let size = CGSize(width: width - insets.left - widthSpacing, height: height - insets.top - heightSpacing)
+        print(size)
+        return size
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

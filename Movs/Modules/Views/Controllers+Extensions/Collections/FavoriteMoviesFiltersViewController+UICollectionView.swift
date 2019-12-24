@@ -39,7 +39,7 @@ extension FavoriteMoviesFiltersViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GenreCell", for: indexPath) as? GenreCollectionViewCell else {
-            fatalError()
+            fatalError("Failed to dequeue GenreCell as GenreCollectionViewCell")
         }
         
         cell.nameLabel.text = self.viewModel.genreNameForItemAt(indexPath: indexPath)

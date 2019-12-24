@@ -55,14 +55,14 @@ extension StorageManager {
     func getFavoriteMovie(movieID: Int) -> CDFavoriteMovie {
         let results = self.favorites.filter({ $0.id == Int64(movieID) })
 
-        guard let movie = results.first else { fatalError() }
+        guard let movie = results.first else { fatalError("Failed to retrieve favorite movie for MovieID \(movieID)") }
         return movie
     }
     
     func getGenre(genreID: Int) -> CDGenre {
         let results = self.genres.filter({ $0.id == Int64(genreID) })
         
-        guard let genre = results.first else { fatalError() }
+        guard let genre = results.first else { fatalError("Failed to retrieve favorite genre for GenreID \(genreID)") }
         return genre
     }
 }

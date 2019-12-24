@@ -45,7 +45,6 @@ class FavoriteMoviesFiltersViewController: UIViewController {
     init(viewModel: FavoriteMoviesFiltersControllerViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        self.navigationItem.title = "teste"
         self.screen.filterButton.addTarget(self, action: #selector(self.didPressFilter(_:)), for: .touchUpInside)
         self.screen.resetButton.addTarget(self, action: #selector(self.didPressReset(_:)), for: .touchUpInside)
     }
