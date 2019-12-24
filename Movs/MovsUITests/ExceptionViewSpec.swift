@@ -6,28 +6,64 @@
 //  Copyright © 2019 LuccaFranca. All rights reserved.
 //
 
-import XCTest
+import Quick
+import Nimble
+import Nimble_Snapshots
+@testable import Movs
 
 class ExceptionViewSpec: QuickSpec {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    override func spec() {
+        var exceptionView: ExceptionView!
+        describe("ExceptionView") {
+            context("when state is withoutNetwork") {
+                beforeEach {
+                    exceptionView = ExceptionView(frame: CGRect(x: 0, y: 0, width: 414, height: 896))
+                    exceptionView.state = .withoutNetwork
+                }
+                it("should have the expected look and feel.") {
+                    expect(exceptionView) == snapshot("ExceptionView_withoutNetwork")
+                }
+            }
+            context("when state is searchNoData") {
+                beforeEach {
+                    exceptionView = ExceptionView(frame: CGRect(x: 0, y: 0, width: 414, height: 896))
+                    exceptionView.state = .searchNoData
+                }
+                it("should have the expected look and feel.") {
+                    expect(exceptionView) == snapshot("ExceptionView_searchNoData")
+                }
+            }
+            context("when state is noFavorites") {
+                beforeEach {
+                    exceptionView = ExceptionView(frame: CGRect(x: 0, y: 0, width: 414, height: 896))
+                    exceptionView.state = .noFavorites
+                }
+                it("should have the expected look and feel.") {
+                    expect(exceptionView) == snapshot("ExceptionView_noFavorites")
+                }
+            }
+            context("when state is firstLoading") {
+                beforeEach {
+                    exceptionView = ExceptionView(frame: CGRect(x: 0, y: 0, width: 414, height: 896))
+                    exceptionView.state = .firstLoading
+                }
+                it("should have the expected look and feel.") {
+                    expect(exceptionView) == snapshot("ExceptionView_firstLoading")
+                }
+            }
+            context("when state is any other") {
+                beforeEach {
+                    exceptionView = ExceptionView(frame: CGRect(x: 0, y: 0, width: 414, height: 896))
+                    exceptionView.state = .none
+                }
+                it("should have the expected look and feel.") {
+                    expect(exceptionView) == snapshot("ExceptionView")
+                }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+            }
+            
         }
     }
-
+    
 }

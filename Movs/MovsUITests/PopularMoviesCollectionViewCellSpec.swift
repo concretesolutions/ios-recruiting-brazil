@@ -38,7 +38,7 @@ class PopularMoviesCollectionViewCellSpec: QuickSpec {
                     beforeEach {
                         viewModel.isLiked = false
                         popularMoviesCollectionViewCell = PopularMoviesCollectionViewCell(frame: frame)
-                        popularMoviesCollectionViewCell.setViewModel(viewModel)
+                        popularMoviesCollectionViewCell.setup(withViewModel: viewModel)
                         
                     }
                     
@@ -51,7 +51,7 @@ class PopularMoviesCollectionViewCellSpec: QuickSpec {
                     beforeEach {
                         viewModel.isLiked = true
                         popularMoviesCollectionViewCell = PopularMoviesCollectionViewCell(frame: frame)
-                        popularMoviesCollectionViewCell.setViewModel(viewModel)
+                        popularMoviesCollectionViewCell.setup(withViewModel: viewModel)
                     }
                     
                     it("should have the expected look and feel.") {
