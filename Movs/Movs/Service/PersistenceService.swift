@@ -17,16 +17,14 @@ final class PersistenceService {
         return array
     }
 
-    class func favorite(movie: Movie) {
+    class func toggleFavorite(_ movie: Movie) {
         var values = favoriteMovies
         if values.contains(movie.id) {
             values.removeAll { $0 == movie.id }
         } else {
             values.append(movie.id)
         }
-        movie.isLiked.toggle()
         UserDefaults.standard.set(values, forKey: "favoriteMovies")
-        print(favoriteMovies)
     }
 
 }

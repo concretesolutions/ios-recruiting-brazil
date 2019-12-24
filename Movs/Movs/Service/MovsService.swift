@@ -12,13 +12,23 @@ import UIKit
 
 final class MovsService {
     
+    static let shared = MovsService()
+    
     enum MovsServiceError: Error {
         case url(URLError?)
         case decode
         case unknown(Error)
     }
+    
+    @Published var genres: [Genre] = []
+    
+    private(set) var genresCancellable: AnyCancellable?
+    
+    private init() {
+        self.genresCancellable = self.getGenres().assign(to: \.genres, on: self)
+    }
 
-    static private let session: URLSession = {
+    private let session: URLSession = {
         let configuration = URLSessionConfiguration.default
         configuration.waitsForConnectivity = true
         configuration.requestCachePolicy = .reloadRevalidatingCacheData
@@ -35,8 +45,8 @@ final class MovsService {
         return urlComponents
     }()
 
-    class func popularMovies(fromPage page: Int) -> AnyPublisher<[Movie], MovsServiceError> {
-        var urlComponents = self.urlComponents
+    func popularMovies(fromPage page: Int) -> AnyPublisher<[Movie], MovsServiceError> {
+        var urlComponents = MovsService.urlComponents
         urlComponents.path = "/3/movie/popular"
         urlComponents.queryItems?.append(URLQueryItem(name: "page", value: String(page)))
         guard let url = urlComponents.url else { fatalError() }
@@ -52,10 +62,13 @@ final class MovsService {
             .eraseToAnyPublisher()
     }
 
-    class func getMoviePoster(fromPath path: String?) -> AnyPublisher<UIImage, Never> {
-        var urlComponents = self.urlComponents
+    func getMoviePoster(fromPath path: String?) -> AnyPublisher<UIImage, Never> {
+        guard let path = path else {
+            return CurrentValueSubject<UIImage, Never>(UIImage(named: "imagePlaceholder")!).eraseToAnyPublisher()
+        }
+        var urlComponents = MovsService.urlComponents
         urlComponents.host = "image.tmdb.org"
-        urlComponents.path = "/t/p/w500/\(path ?? "")"
+        urlComponents.path = "/t/p/w500/\(path)"
         guard let url = urlComponents.url else { fatalError() }
         return self.session.dataTaskPublisher(for: url)
             .map { (data: Data, _: URLResponse) -> UIImage in
@@ -66,8 +79,8 @@ final class MovsService {
             .eraseToAnyPublisher()
     }
 
-    class func getMovie(withId id: Int) -> AnyPublisher<Movie, MovsServiceError> {
-        var urlComponents = self.urlComponents
+    func getMovie(withId id: Int) -> AnyPublisher<Movie, MovsServiceError> {
+        var urlComponents = MovsService.urlComponents
         urlComponents.path = "/3/movie/\(id)"
         guard let url = urlComponents.url else { fatalError() }
         return request(inUrl: url)
@@ -78,14 +91,15 @@ final class MovsService {
             .eraseToAnyPublisher()
     }
 
-    class func getGenres() -> AnyPublisher<[Genre], MovsServiceError> {
-        var urlComponents = self.urlComponents
+    func getGenres() -> AnyPublisher<[Genre], Never> {
+        var urlComponents = MovsService.urlComponents
         urlComponents.path = "/3/genre/movie/list"
         guard let url = urlComponents.url else { fatalError() }
         return request(inUrl: url)
             .map { (wrapper: GenreWrapperDTO) in
                 return wrapper.genres
             }
+            .replaceError(with: [])
             .map { (genresDTO) -> [Genre] in
                 var genres: [Genre] = []
                 for genreDTO in genresDTO {
@@ -96,7 +110,7 @@ final class MovsService {
             .eraseToAnyPublisher()
     }
 
-    private class func request<T: Decodable>(inUrl url: URL) -> AnyPublisher<T, MovsServiceError> {
+    func request<T: Decodable>(inUrl url: URL) -> AnyPublisher<T, MovsServiceError> {
         return session.dataTaskPublisher(for: url)
         .map { $0.data }
         .decode(type: T.self, decoder: JSONDecoder())
@@ -115,4 +129,3 @@ final class MovsService {
     }
 
 }
-
