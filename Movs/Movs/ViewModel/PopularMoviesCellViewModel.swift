@@ -14,26 +14,32 @@ class PopularMoviesCellViewModel {
 
     private var movie: Movie
 
-    private(set) var title: String
-    @Published var posterImage: UIImage = UIImage()
-    @Published var isLiked: Bool = false
-
-    var posterImageCancellable: AnyCancellable?
-    var isLikedCancellable: AnyCancellable?
+    var title: String {
+        return self.movie.title
+    }
+    var posterImage: Published<UIImage>.Publisher {
+        return self.movie.$posterImage
+    }
+    @Published var isLiked: Bool
+    
+    private(set) var favoriteIdsSubscriber: AnyCancellable?
 
     init(withMovie movie: Movie) {
         self.movie = movie
-        self.title = movie.title
+        self.isLiked = PersistenceService.favoriteMovies.contains(self.movie.id)
         self.setCombine()
     }
-
+    
     private func setCombine() {
-        self.isLikedCancellable = self.movie.$isLiked.assign(to: \.isLiked, on: self)
-        self.posterImageCancellable = self.movie.$posterImage.assign(to: \.posterImage, on: self)
+        self.favoriteIdsSubscriber = PersistenceService.publisher
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { _ in
+                self.isLiked = PersistenceService.favoriteMovies.contains(self.movie.id)
+            })
     }
 
     public func toggleFavorite() {
-        PersistenceService.favorite(movie: self.movie)
+        self.movie.toggleFavorite()
     }
 
 }

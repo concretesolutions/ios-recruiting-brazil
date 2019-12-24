@@ -9,64 +9,104 @@
 import Foundation
 import Combine
 
-class PopularMoviesViewModel {
+class PopularMoviesViewModel: ObservableObject {
 
-    @Published var count = 0
-
-    var movies: [Movie] {
-        return self.isSearching ? self.filteredMovies : self.popularMovies
-    }
-
-    private var filteredMovies: [Movie] = [] {
+    @Published private(set) var movieCount = 0
+    @Published private(set) var state: ExceptionView.State = .none {
         didSet {
-            self.count = self.filteredMovies.count
+            self.movieCount = self.movies.count
         }
     }
-    private var popularMovies: [Movie] = [] {
+    @Published private(set) var searchTerm: String = "" {
         didSet {
-            self.count = self.popularMovies.count
+            self.setSearch()
         }
     }
+    @Published var withoutNetwork: Bool = false {
+        didSet {
+            if (self.state == .none || self.state == .firstLoading) && self.withoutNetwork {
+                self.state = .withoutNetwork
+            }
+        }
+    }
+    
+    private var movies: [Movie] {
+        return (self.state == .search) || (self.state == .searchNoData) ? self.filteredMovies : self.popularMovies
+    }
+
+    private(set) var filteredMovies: [Movie] = []
+    private(set) var popularMovies: [Movie] = []
 
     private var currentPage: Int = 1
     private var moviesCancellable: AnyCancellable?
-
-    var isSearching: Bool = false {
-        didSet {
-            self.count = self.movies.count
+    private var searchTermCancellable: AnyCancellable?
+    private var networkCancellable: AnyCancellable?
+    private var searchIsEnableCancellable: AnyCancellable?
+    
+    init(withPopularMovies popularMovies: [Movie]) {
+        self.popularMovies = popularMovies
+    }
+    
+    init() {}
+    
+    func getMovies() {
+        if !self.withoutNetwork && self.state != .search && self.state != .searchNoData {
+            if self.state == .none {
+                self.state = .firstLoading
+            } else {
+                self.state = .loading
+            }
+            self.moviesCancellable = MovsService.shared.popularMovies(fromPage: self.currentPage)
+                .sink(receiveCompletion: { (completion) in
+                    switch completion {
+                    case .failure:
+                        self.state = .error
+                    case .finished:
+                        break
+                    }
+                }, receiveValue: { (movies) in
+                    self.popularMovies += movies
+                    self.currentPage += 1
+                    self.movieCount = self.movies.count
+                    self.state = .loaded
+                })
         }
     }
-
-    init() {
-        self.getMovies()
+    
+    func setSearchCombine(forSearchController searchController: SearchController) {
+        self.searchTermCancellable = searchController.$termPublisher
+            .assign(to: \.searchTerm, on: self)
+        self.searchIsEnableCancellable = self.$state
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { (state) in
+            searchController.searchBar.isHidden = state == .withoutNetwork
+        })
+    }
+    
+    func setNetworkCombine() {
+        self.networkCancellable = NetworkService.shared.$status
+            .sink(receiveValue: { (status) in
+                self.withoutNetwork = !(status == .satisfied)
+            })
     }
 
-    public func getMovies() {
-        self.moviesCancellable = MovsServiceAPI.popularMovies(fromPage: self.currentPage)
-            .assertNoFailure("Deu ruim pegando filmes populares")
-            .sink { (movies) in
-                self.popularMovies += movies
-                self.currentPage += 1
-        }
-    }
-
-    func search(formTerm term: String) {
-        if term.isEmpty {
-            self.filteredMovies = self.popularMovies
-        } else {
-            self.filteredMovies = self.popularMovies.filter { $0.title.lowercased().contains(term.lowercased()) }
-        }
-        self.count = self.filteredMovies.count
-    }
-
-    func viewModel(forCellAt indexPath: IndexPath) -> PopularMoviesCellViewModel {
+    func viewModelForCell(at indexPath: IndexPath) -> PopularMoviesCellViewModel {
         let viewModel = PopularMoviesCellViewModel(withMovie: self.movies[indexPath.row])
         return viewModel
     }
 
-    func viewModel1(forCellAt indexPath: IndexPath) -> MovieDetailsViewModel {
+    func viewModelDetailsForCell(at indexPath: IndexPath) -> MovieDetailsViewModel {
         let viewModel = MovieDetailsViewModel(withMovie: self.movies[indexPath.row])
         return viewModel
+    }
+    
+    private func setSearch() {
+        if !self.searchTerm.isEmpty && self.state != .withoutNetwork {
+            self.filteredMovies = self.popularMovies.filter { $0.title.lowercased().contains(self.searchTerm.lowercased()) }
+            self.state = self.filteredMovies.isEmpty ? .searchNoData : .search
+        } else if self.currentPage != 1 {
+            self.state = .loaded
+        }
     }
 
 }
