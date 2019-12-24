@@ -80,10 +80,14 @@ class DataProvider {
         group.wait()
 
         // Movies setup
-        self.getMoreMovies(completion: completion)
+        self.getMoreMovies { error in
+            self.setupFavorites { favoritesError in
+                completion(error ?? favoritesError)
+            }
+        }
     }
 
-    func setupFavorites(completion: @escaping (_ error: Error?) -> Void) {
+    private func setupFavorites(completion: @escaping (_ error: Error?) -> Void) {
         guard self.moviesDataFetcher != nil else {
             return
         }

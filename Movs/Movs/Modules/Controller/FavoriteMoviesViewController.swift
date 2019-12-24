@@ -77,18 +77,6 @@ class FavoriteMoviesViewController: UIViewController, FilterApplyer {
                 self.updateData()
             }
         }
-
-        DataProvider.shared.setupFavorites { error in
-            DispatchQueue.main.async {
-                self.screen.stopLoading()
-
-                if error != nil {
-                    self.screen.displayError()
-                } else {
-                    self.screen.tableView.reloadData()
-                }
-            }
-        }
     }
 
     // MARK: - Search
