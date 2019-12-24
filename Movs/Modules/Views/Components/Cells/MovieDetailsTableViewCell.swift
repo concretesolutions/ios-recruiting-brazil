@@ -12,7 +12,7 @@ import Combine
 
 class MovieDetailsTableViewCell: UITableViewCell {
     
-    // MARK: - Properties
+    // MARK: - Interface Elements
     
     lazy var headingLabel: UILabel = {
         let label = UILabel()

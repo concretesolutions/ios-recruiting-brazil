@@ -14,7 +14,7 @@ final class ErrorViewScreen: UIView {
     
     lazy var circleView: UIView = {
         let view = UIView(frame: .zero)
-        view.backgroundColor = UIColor(named: "palettePurple")
+        view.backgroundColor = UIColor.systemGray4
         view.layer.masksToBounds = true
         view.layer.cornerRadius = 50.0
         return view
@@ -47,7 +47,7 @@ final class ErrorViewScreen: UIView {
         let button = ImportantActionButton(frame: .zero)
         button.setTitle("Try again", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.0)
-        button.backgroundColor = UIColor.systemGray3
+        button.backgroundColor = UIColor(named: "palettePurple")
         button.layer.cornerRadius = 16.0
         button.layer.masksToBounds = true
         return button

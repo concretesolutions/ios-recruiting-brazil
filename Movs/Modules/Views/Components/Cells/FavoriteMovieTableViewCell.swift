@@ -28,7 +28,6 @@ class FavoriteMovieTableViewCell: UITableViewCell {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.text = "The Amazing Return to the La La Land"
         label.font = UIFont.systemFont(ofSize: 18.0, weight: .bold)
         label.numberOfLines = 2
         return label
@@ -36,7 +35,6 @@ class FavoriteMovieTableViewCell: UITableViewCell {
     
     lazy var summaryLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.text = "testeeeeeeeeeeeeeeeeeeeeeeeeeee varias linhas espero que tenha tipo umas tres linhas isso aqui tudo que eu to escrevendo pq é bom"
         label.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
         label.textColor = .secondaryLabel
         label.numberOfLines = 3

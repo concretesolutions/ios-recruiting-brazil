@@ -20,7 +20,7 @@ extension MovieDetailsViewController: UITableViewDelegate {
 
 extension MovieDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.detailsContent.count
+        return self.viewModel.numberOfDetails
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -39,7 +39,7 @@ extension MovieDetailsViewController: UITableViewDataSource {
                 fatalError()
             }
             
-            let content = self.viewModel.detailForCellAt(indexPath: indexPath)
+            let content = self.viewModel.detailsForItemAt(indexPath: indexPath)
             cell.headingLabel.text = content.0
             cell.contentLabel.text = content.1
             return cell

@@ -16,7 +16,9 @@ class FavoriteMoviesControllerViewModel {
     private var dataSource: [Movie] = [] {
         willSet {
             if newValue.isEmpty, self.currentSearch != nil {
-                self.searchStatus = .noResults
+                self.hasSearchResults = false
+            } else {
+                self.hasSearchResults = true
             }
         }
         didSet {
@@ -24,23 +26,29 @@ class FavoriteMoviesControllerViewModel {
             self.numberOfFavoriteMovies = self.dataSource.count
         }
     }
-    
+        
     // MARK: - Dependencies
     
     typealias Dependencies = HasStorageManager
     private let dependencies: Dependencies
     private let storageManager: StorageManager
     
+    // MARK: - Filters
+    
+    typealias Filters = HasGenreFilter & HasYearFilter
+    
     // MARK: - Properties
     
-    weak var modalPresenter: ModalPresenterDelegate?
+    unowned var modalPresenter: ModalPresenterDelegate!
     internal var deletedIndex: IndexPath?
+    internal var searchStatus: SearchStatus = .none
+    internal var currentFilters: Filters?
     internal var currentSearch: String?
     
     // MARK: - Publishers and Subscribers
     
     @Published var numberOfFavoriteMovies: Int = 0
-    @Published var searchStatus: SearchStatus = .none
+    @Published var hasSearchResults: Bool = true
     private var subscribers: [AnyCancellable?] = []
     
     // MARK: - Initializers and Deinitializers
@@ -59,19 +67,35 @@ class FavoriteMoviesControllerViewModel {
         }
     }
     
+    // MARK: - Methods
+    
+    func updateDataSource(with movies: [Movie]) {
+        switch self.searchStatus {
+        case .searching:
+            guard let searchText = self.currentSearch else { return }
+            self.dataSource = self.search(movies: movies, with: searchText)
+        case .filtering:
+            guard let filters = self.currentFilters else { return }
+            self.dataSource = self.filter(movies: movies, with: filters)
+        case .searchingAndFiltering:
+            guard let searchText = self.currentSearch, let filters = self.currentFilters else { return }
+            self.dataSource = self.search(movies: movies, with: searchText)
+            self.dataSource = self.filter(movies: movies, with: filters)
+        default:
+            self.dataSource = movies
+        }
+    }
+    
     // MARK: - Binding
     
     func bind(to storageManager: StorageManager) {
         self.subscribers.append(storageManager.$favorites
             .sink(receiveValue: { storedFavorites in
-                let favorites = storedFavorites.map({ Movie(favoriteMovie: $0, genres: self.storageManager.genres) })
-                
                 if let index = self.deletedIndex {
                     self.dataSource.remove(at: index.row)
-                } else if self.searchStatus == .none {
-                    self.dataSource = favorites
-                } else if [.search, .searchAndFilter].contains(self.searchStatus), let text = self.currentSearch {
-                    self.filterMovies(favorites, searchText: text)
+                } else {
+                    let favorites = storedFavorites.map({ Movie(favoriteMovie: $0, genres: self.storageManager.genres) })
+                    self.updateDataSource(with: favorites)
                 }
             })
         )
@@ -88,7 +112,7 @@ extension FavoriteMoviesControllerViewModel {
     
     func didSelectItemAt(indexPath: IndexPath) {
         let movie = self.dataSource[indexPath.row]
-        if let showDetails = self.modalPresenter?.showMovieDetails {
+        if let showDetails = self.modalPresenter.showMovieDetails {
             showDetails(movie)
         }
     }
@@ -104,24 +128,85 @@ extension FavoriteMoviesControllerViewModel {
 
 extension FavoriteMoviesControllerViewModel {
     func applySearch(searchText: String) {
-        let storedMovies = self.storageManager.favorites.map({ Movie(favoriteMovie: $0, genres: self.storageManager.genres) })
+        switch self.searchStatus {
+        case .filtering, .searchingAndFiltering:
+            self.searchStatus = .searchingAndFiltering
+        default:
+            self.searchStatus = .searching
+        }
         
-        if searchText.isEmpty {
-            self.resetSearch(with: storedMovies)
-        } else {
-            self.currentSearch = searchText
-            self.filterMovies(storedMovies, searchText: searchText)
+        let storedMovies = self.storageManager.favorites.map({ Movie(favoriteMovie: $0, genres: self.storageManager.genres) })
+        self.dataSource = self.search(movies: storedMovies, with: searchText)
+        
+        if let filters = self.currentFilters {
+            self.dataSource = self.filter(movies: self.dataSource, with: filters)
         }
     }
     
-    func filterMovies(_ movies: [Movie], searchText: String) {
-        self.searchStatus = self.searchStatus == .filter ? .searchAndFilter : .search
-        self.dataSource = movies.filter({ $0.title.starts(with: searchText.capitalized) })
+    func search(movies: [Movie], with searchText: String) -> [Movie] {
+        self.currentSearch = searchText == "" ? nil : searchText
+        if let currentText = self.currentSearch {
+            return movies.filter({ $0.title.starts(with: currentText.capitalized) })
+        } else {
+            return movies
+        }
     }
     
-    func resetSearch(with movies: [Movie]) {
-        self.dataSource = movies
+    func resetSearch() {
+        let storedMovies = self.storageManager.favorites.map({ Movie(favoriteMovie: $0, genres: self.storageManager.genres) })
         self.currentSearch = nil
+        
+        switch self.searchStatus {
+        case .filtering, .searchingAndFiltering:
+            guard let filters = self.currentFilters else { return }
+            self.searchStatus = .filtering
+            self.dataSource = self.filter(movies: storedMovies, with: filters)
+        default:
+            self.searchStatus = .none
+            self.dataSource = storedMovies
+        }
+    }
+}
+
+// MARK: - Filters
+
+extension FavoriteMoviesControllerViewModel {
+    func applyFilter(_ filters: Filters) {
+        let storedMovies = self.storageManager.favorites.map({ Movie(favoriteMovie: $0, genres: self.storageManager.genres) })
+        
+        if filters.genresNames == nil && filters.year == nil {
+            self.resetFilters(for: storedMovies)
+        } else {
+            self.searchStatus = .filtering
+            self.dataSource = self.filter(movies: storedMovies, with: filters)
+        }
+    }
+        
+    func filter(movies: [Movie], with filters: Filters) -> [Movie] {
+        self.currentFilters = filters
+        return movies
+            .filter({ // Filtering by year
+                guard filters.year != nil else { return true }
+                guard let movieRelease = $0.releaseDate else { return false }
+                let movieYear = Calendar.current.component(.year, from: movieRelease)
+                
+                if filters.year == 1970 {
+                    return movieYear <= filters.year
+                } else {
+                    return movieYear == filters.year
+                }
+            })
+            .filter({ // Filtering by genres
+                guard filters.genresNames != nil else { return true }
+                
+                let movieGenres = $0.genres.map({ $0.name })
+                return movieGenres.contains(where: filters.genresNames.contains)
+            })
+    }
+    
+    func resetFilters(for movies: [Movie]) {
         self.searchStatus = .none
+        self.currentFilters = nil
+        self.dataSource = movies
     }
 }

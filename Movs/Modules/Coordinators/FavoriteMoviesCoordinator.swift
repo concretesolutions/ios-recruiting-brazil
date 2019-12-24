@@ -19,13 +19,17 @@ class FavoriteMoviesCoordinator: Coordinator {
     // MARK: - Properties
     
     internal let dependencies: Dependencies
-    internal var filtersCoordinator: FavoriteMoviesFiltersCoordinator!
-    internal var movieDetailsCoordinator: MovieDetailsCoordinator!
     internal let coordinatedViewController: Controller
     internal let presenter: Presenter
     
+    // MARK: - Child Coordinators
+    
+    internal var filtersCoordinator: FavoriteMoviesFiltersCoordinator!
+    internal var movieDetailsCoordinator: MovieDetailsCoordinator!
+    
     // MARK: - Publishers and Subscribers
     
+    @Published var filters: Filters = Filters()
     internal var subscribers: [AnyCancellable?] = []
     
     // MARK: - Initializers and Deinitializers
@@ -37,9 +41,10 @@ class FavoriteMoviesCoordinator: Coordinator {
         let viewModel = FavoriteMoviesControllerViewModel(dependencies: self.dependencies)
         let controller = FavoriteMoviesViewController(viewModel: viewModel)
         self.coordinatedViewController = UINavigationController(rootViewController: controller)
-        self.coordinatedViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
+        self.coordinatedViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
         
         viewModel.modalPresenter = self
+        self.bind(to: viewModel)
     }
     
     deinit {
@@ -57,11 +62,20 @@ class FavoriteMoviesCoordinator: Coordinator {
     }
     
     // MARK: - Binding
+    
+    func bind(to viewModel: FavoriteMoviesControllerViewModel) {
+        self.subscribers.append(self.$filters
+            .sink(receiveValue: { newFilter in
+                viewModel.applyFilter(newFilter)
+            })
+        )
+    }
 
     func bind(to modalCoordinator: FavoriteMoviesFiltersCoordinator) {
         self.subscribers.append(modalCoordinator.finishingPublisher
             .sink(receiveValue: { finished in
                 if finished {
+                    self.filters = self.filtersCoordinator.filters
                     self.filtersCoordinator = nil
                 }
             })
@@ -79,9 +93,11 @@ class FavoriteMoviesCoordinator: Coordinator {
     }
 }
 
+// MARK: - ModalPresenterDelegate
+
 extension FavoriteMoviesCoordinator: ModalPresenterDelegate {
     func showFilters() {
-        self.filtersCoordinator = FavoriteMoviesFiltersCoordinator(parent: self)
+        self.filtersCoordinator = FavoriteMoviesFiltersCoordinator(parent: self, filters: self.filters)
         self.filtersCoordinator.start()
         self.bind(to: self.filtersCoordinator)
     }

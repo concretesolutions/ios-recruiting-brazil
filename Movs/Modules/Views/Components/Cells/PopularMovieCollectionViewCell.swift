@@ -41,6 +41,8 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
     
     internal var viewModel: MovieViewModel! {
         didSet {
+            guard self.viewModel != nil else { return }
+            
             let favoriteStatus = self.viewModel.getFavoriteStatus()
             self.titleLabel.text = self.viewModel.title
             self.favoriteButton.setFavorited(favoriteStatus)
@@ -60,6 +62,16 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
         
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - UICollectionViewCell life cycle
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.poster.image = nil
+        self.viewModel = nil
+        self.titleLabel.text = nil
+        self.favoriteButton.setFavorited(false)
     }
     
     // MARK: - Actions

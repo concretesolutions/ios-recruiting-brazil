@@ -19,6 +19,7 @@ class FavoriteMoviesFiltersCoordinator: ModalCoordinator {
     // MARK: - Properties
     
     internal let dependencies: Dependencies
+    internal var filters: Filters
     internal var coordinatedViewController: Controller
     internal var presenter: Presenter
     
@@ -31,9 +32,10 @@ class FavoriteMoviesFiltersCoordinator: ModalCoordinator {
     
     // MARK: - Initializers and Deinitializers
     
-    init<Parent: Coordinator>(parent: Parent) {
+    init<Parent: Coordinator>(parent: Parent, filters: Filters) {
         self.presenter = parent.coordinatedViewController
         self.dependencies = parent.dependencies
+        self.filters = filters
                 
         let viewModel = FavoriteMoviesFiltersControllerViewModel(dependencies: self.dependencies)
         self.coordinatedViewController = FavoriteMoviesFiltersViewController(viewModel: viewModel)

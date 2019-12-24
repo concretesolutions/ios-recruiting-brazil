@@ -1,5 +1,5 @@
 //
-//  Errors.swift
+//  AppError.swift
 //  Movs
 //
 //  Created by Gabriel D'Luca on 18/12/19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ApplicationError {
+enum AppError {
     case none
     case networkError
     case searchError

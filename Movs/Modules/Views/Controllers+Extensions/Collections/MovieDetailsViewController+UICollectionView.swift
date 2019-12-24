@@ -16,7 +16,7 @@ extension MovieDetailsViewController: UICollectionViewDelegate { }
 
 extension MovieDetailsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.viewModel.genresNames.count
+        return self.viewModel.numberOfGenres
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -24,7 +24,7 @@ extension MovieDetailsViewController: UICollectionViewDataSource {
             fatalError()
         }
         
-        cell.nameLabel.text = self.viewModel.genresNames[indexPath.row]
+        cell.nameLabel.text = self.viewModel.genreNameForItemAt(indexPath: indexPath)
         return cell
     }
 }
@@ -33,9 +33,7 @@ extension MovieDetailsViewController: UICollectionViewDataSource {
 
 extension MovieDetailsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = self.viewModel.genresNames[indexPath.row].size(withAttributes: [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16.0, weight: .bold)
-        ])
+        let size = self.viewModel.sizeForItemAt(indexPath: indexPath)
         return CGSize(width: size.width + 24.0, height: size.height + 8.0)
     }
     

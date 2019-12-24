@@ -24,6 +24,11 @@ extension FavoriteMoviesViewController {
 extension FavoriteMoviesViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
-        self.viewModel.applySearch(searchText: text)
+        
+        if searchController.isActive {
+            self.viewModel.applySearch(searchText: text)
+        } else {
+            self.viewModel.resetSearch()
+        }
     }
 }

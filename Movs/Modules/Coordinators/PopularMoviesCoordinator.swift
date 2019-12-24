@@ -19,9 +19,12 @@ class PopularMoviesCoordinator: Coordinator {
     // MARK: - Properties
     
     internal let dependencies: Dependencies
-    internal var movieDetailsCoordinator: MovieDetailsCoordinator!
     internal let coordinatedViewController: Controller
     internal let presenter: Presenter
+    
+    // MARK: - Child Coordinators
+    
+    internal var movieDetailsCoordinator: MovieDetailsCoordinator!
     
     // MARK: - Publishers and Subscribers
     

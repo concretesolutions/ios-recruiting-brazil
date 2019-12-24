@@ -10,8 +10,7 @@ import Foundation
 
 enum SearchStatus {
     case none
-    case search
-    case filter
-    case searchAndFilter
-    case noResults
+    case searching
+    case filtering
+    case searchingAndFiltering
 }

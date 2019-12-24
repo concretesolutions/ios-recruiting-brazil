@@ -17,7 +17,7 @@ class PopularMoviesViewController: UIViewController {
     internal let screen = PopularMoviesViewScreen()
     internal let errorScreen = ErrorViewScreen()
     internal let viewModel: PopularMoviesControllerViewModel
-    internal var displayedError: ApplicationError = .none
+    internal var displayedError: AppError = .none
     
     // MARK: - Publishers and Subscribers
     
@@ -78,12 +78,12 @@ class PopularMoviesViewController: UIViewController {
             })
         )
         
-        self.subscribers.append(viewModel.$searchStatus
+        self.subscribers.append(viewModel.$hasSearchResults
             .receive(on: RunLoop.main)
-            .sink(receiveValue: { status in
-                if status == .noResults && self.displayedError == .none {
+            .sink(receiveValue: { hasResults in
+                if !hasResults && self.displayedError == .none {
                     self.showSearchError()
-                } else if status != .noResults && self.displayedError == .searchError {
+                } else if hasResults && self.displayedError == .searchError {
                     self.displayedError = .none
                     self.view = self.screen
                 }

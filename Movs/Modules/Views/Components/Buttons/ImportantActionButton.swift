@@ -36,7 +36,7 @@ class ImportantActionButton: UIButton {
         
         guard let buttonTouches = event?.touches(for: self) else { return }
         if let touch = buttonTouches.first {
-            self.circleLayer = ExpandableCircleLayer(toBounds: self.bounds, origin: touch.location(in: self), fillColor: UIColor(named: "palettePurple"))
+            self.circleLayer = ExpandableCircleLayer(toBounds: self.bounds, origin: touch.location(in: self), fillColor: UIColor(named: "palettePurple2"))
             self.layer.insertSublayer(self.circleLayer!, below: self.titleLabel?.layer)
         }
     }

@@ -85,12 +85,14 @@ class AppCoordinator: Coordinator {
         
         self.subscribers.append(self.dependencies.apiManager.$genres
             .sink(receiveValue: { fetchedGenres in
-                for genreDTO in fetchedGenres {
-                    let genre = Genre(genreDTO: genreDTO)
-                    self.dependencies.storageManager.storeGenre(genre: genre)
-                }
-                
                 self.dependencies.storageManager.deleteGenresIfNeeded(fetchedGenres: fetchedGenres)
+                for genreDTO in fetchedGenres {
+                    let storedGenresIDs = self.dependencies.storageManager.genres.map({ $0.id })
+                    if !storedGenresIDs.contains(Int64(genreDTO.id)) {
+                        let genre = Genre(genreDTO: genreDTO)
+                        self.dependencies.storageManager.storeGenre(genre: genre)
+                    }
+                }
             })
         )
     }

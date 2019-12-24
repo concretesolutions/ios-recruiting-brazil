@@ -17,7 +17,7 @@ class FavoriteMoviesViewController: UIViewController {
     internal let screen = FavoriteMoviesViewScreen()
     internal let errorScreen = ErrorViewScreen()
     internal let viewModel: FavoriteMoviesControllerViewModel
-    internal var displayedError: ApplicationError = .none
+    internal var displayedError: AppError = .none
     
     // MARK: - Publishers and Subscribers
     
@@ -64,7 +64,7 @@ class FavoriteMoviesViewController: UIViewController {
     // MARK: - Present
     
     @objc func presentFiltersModal() {
-        if let presentModal = self.viewModel.modalPresenter?.showFilters {
+        if let presentModal = self.viewModel.modalPresenter.showFilters {
             presentModal()
         }
     }
@@ -84,12 +84,12 @@ class FavoriteMoviesViewController: UIViewController {
             })
         )
         
-        self.subscribers.append(viewModel.$searchStatus
+        self.subscribers.append(viewModel.$hasSearchResults
             .receive(on: RunLoop.main)
-            .sink(receiveValue: { status in
-                if status == .noResults {
+            .sink(receiveValue: { hasResults in
+                if !hasResults && self.displayedError == .none {
                     self.showSearchError()
-                } else if self.displayedError == .searchError {
+                } else if hasResults && self.displayedError == .searchError {
                     self.displayedError = .none
                     self.view = self.screen
                 }

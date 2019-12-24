@@ -96,7 +96,7 @@ extension StorageManager {
         let fetchedIDs = fetchedGenres.map { $0.id }
         let removedGenres = self.genres.filter({ storedGenre in
             let storedID = Int(storedGenre.id)
-            return !fetchedIDs.contains(storedID)
+            return fetchedIDs.contains(storedID)
         })
         
         for genre in removedGenres {

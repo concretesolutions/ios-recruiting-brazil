@@ -16,7 +16,9 @@ class PopularMoviesControllerViewModel {
     private var dataSource: [Movie] = [] {
         willSet {
             if newValue.isEmpty, self.currentSearch != nil {
-                self.searchStatus = .noResults
+                self.hasSearchResults = false
+            } else {
+                self.hasSearchResults = true
             }
         }
         didSet {
@@ -33,13 +35,18 @@ class PopularMoviesControllerViewModel {
     
     // MARK: - Properties
 
-    weak var modalPresenter: ModalPresenterDelegate?
+    unowned var modalPresenter: ModalPresenterDelegate!
     internal let decoder = JSONDecoder()
+    internal var searchStatus: SearchStatus = .none
     internal var currentSearch: String?
-    internal var shouldFetchGenres: Bool {
+    
+    // MARK: - Outputs
+    
+    public var shouldFetchGenres: Bool {
         return self.apiManager.shouldFetchGenres()
     }
-    internal var shouldFetchNextPage: Bool {
+    
+    public var shouldFetchNextPage: Bool {
         return self.apiManager.shouldFetchNextPage()
     }
     
@@ -48,7 +55,7 @@ class PopularMoviesControllerViewModel {
     @Published var numberOfPopularMovies: Int = 0
     @Published var numberOfFavoriteMovies: Int = 0
     @Published var fetchStatus: MoviesAPIManager.FetchStatus = .none
-    @Published var searchStatus: SearchStatus = .none
+    @Published var hasSearchResults: Bool = true
     private var subscribers: [AnyCancellable?] = []
         
     // MARK: - Initializers and Deinitializers
@@ -121,7 +128,7 @@ extension PopularMoviesControllerViewModel {
     
     func didSelectItemAt(indexPath: IndexPath) {
         let movie = self.dataSource[indexPath.row]
-        if let showDetails = self.modalPresenter?.showMovieDetails {
+        if let showDetails = self.modalPresenter.showMovieDetails {
             showDetails(movie)
         }
     }
@@ -142,7 +149,7 @@ extension PopularMoviesControllerViewModel {
     }
     
     func filterMovies(_ movies: [Movie], searchText: String) {
-        self.searchStatus = .search
+        self.searchStatus = .searching
         self.dataSource = movies.filter({ $0.title.starts(with: searchText.capitalized) })
     }
     

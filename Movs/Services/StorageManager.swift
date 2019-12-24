@@ -14,7 +14,6 @@ class StorageManager {
     // MARK: - Properties
     
     internal let managedContext: NSManagedObjectContext
-    internal var genres: Set<CDGenre> = Set()
     
     // MARK: - Enums
     
@@ -24,6 +23,7 @@ class StorageManager {
     
     // MARK: - Publishers
     
+    @Published var genres: Set<CDGenre> = Set()
     @Published var favorites: Set<CDFavoriteMovie> = Set()
     
     // MARK: - Initializers and Deinitializers
