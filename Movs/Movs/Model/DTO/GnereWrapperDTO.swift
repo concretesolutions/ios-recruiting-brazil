@@ -9,5 +9,5 @@
 import Foundation
 
 struct GenreWrapperDTO: Decodable {
-    var genres: [GenreDTO]
+    private(set) var genres: [GenreDTO]
 }

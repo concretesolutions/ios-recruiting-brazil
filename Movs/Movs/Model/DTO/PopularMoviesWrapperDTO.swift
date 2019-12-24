@@ -9,10 +9,10 @@
 import Foundation
 
 struct PopularMoviesWrapperDTO: Decodable {
-    var page: Int
-    var results: [MovieDTO]
-    var totalResults: Int
-    var totalPages: Int
+    private(set) var page: Int
+    private(set) var results: [MovieDTO]
+    private(set) var totalResults: Int
+    private(set) var totalPages: Int
 
     enum CodingKeys: String, CodingKey {
         case page

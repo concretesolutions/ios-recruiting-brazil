@@ -10,19 +10,20 @@ import Foundation
 import Combine
 import UIKit
 
-class Movie: ObservableObject {
+class Movie {
 
-    var id: Int
-    var overview: String
-    var releaseDate: String
-    var genreIds: [Int]
-    var title: String
-    var posterPath: String?
-    @Published var isLiked: Bool = false 
+    private(set) var id: Int
+    private(set) var overview: String
+    private(set) var releaseDate: String
+    private(set) var genreIds: [Int]
+    private(set) var title: String
+    private(set) var posterPath: String?
+    
+    @Published var isLiked: Bool = false
     @Published var posterImage: UIImage = UIImage(named: "imagePlaceholder")!
 
     private var posterImageCancellable: AnyCancellable?
-
+    
     init(withMovie movie: MovieDTO) {
         self.id = movie.id
         self.overview = movie.overview
@@ -47,7 +48,12 @@ class Movie: ObservableObject {
     }
 
     private func setCombine() {
-        self.posterImageCancellable = MovsServiceAPI.getMoviePoster(fromPath: self.posterPath).assign(to: \.posterImage, on: self)
+        self.posterImageCancellable = MovsService.shared.getMoviePoster(fromPath: self.posterPath).assign(to: \.posterImage, on: self)
+    }
+    
+    func toggleFavorite() {
+        PersistenceService.toggleFavorite(self)
+        self.isLiked = PersistenceService.favoriteMovies.contains(self.id)
     }
 
 }

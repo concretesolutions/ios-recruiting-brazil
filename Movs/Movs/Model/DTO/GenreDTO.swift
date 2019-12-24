@@ -9,6 +9,6 @@
 import Foundation
 
 struct GenreDTO: Decodable {
-    var id: Int
-    var name: String
+    private(set) var id: Int
+    private(set) var name: String
 }

@@ -9,12 +9,12 @@
 import Foundation
 
 struct MovieWrapperDTO: Decodable {
-    var id: Int
-    var overview: String
-    var releaseDate: String
-    var genres: [GenreDTO]
-    var title: String
-    var posterPath: String?
+    private(set) var id: Int
+    private(set) var overview: String
+    private(set) var releaseDate: String
+    private(set) var genres: [GenreDTO]
+    private(set) var title: String
+    private(set) var posterPath: String?
 
     enum CodingKeys: String, CodingKey {
         case id

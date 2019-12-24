@@ -9,8 +9,8 @@
 import Foundation
 
 class Genre {
-    var id: Int
-    var name: String
+    private(set) var id: Int
+    private(set) var name: String
 
     init(withGenre genre: GenreDTO) {
         self.id = genre.id
