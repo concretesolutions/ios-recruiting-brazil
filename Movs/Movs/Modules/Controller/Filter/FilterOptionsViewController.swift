@@ -89,6 +89,15 @@ class FilterOptionsViewController: UIViewController, DatesFilterDelegate, Genres
     func applyFilter() {
         if self.selectedDates.isEmpty && self.selectedGenres.isEmpty {
             self.delegate?.isFiltering = false
+        } else if self.selectedDates.isEmpty {
+            self.delegate?.isFiltering = true
+            self.delegate?.filteredMovies = DataProvider.shared.favoriteMovies.filter { movie in self.selectedGenres.contains(where: { movie.genres.contains($0) })
+            }
+        } else if self.selectedGenres.isEmpty {
+            self.delegate?.isFiltering = true
+            self.delegate?.filteredMovies = DataProvider.shared.favoriteMovies.filter { movie in
+                self.selectedDates.contains(where: { $0 == movie.releaseYear })
+            }
         } else {
             self.delegate?.isFiltering = true
             self.delegate?.filteredMovies = DataProvider.shared.favoriteMovies.filter { movie in
