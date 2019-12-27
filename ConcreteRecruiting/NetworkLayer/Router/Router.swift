@@ -47,7 +47,6 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
             return completion(.failure(error))
             
         case .success(let data, let response):
-            let decoder = JSONDecoder()
             
             guard let response = response as? HTTPURLResponse else {
                 return completion(.failure(NetworkError.noJson))
@@ -57,8 +56,14 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
                 
             case 200...299:
                 do {
-                    let model = try decoder.decode(T.self, from: data)
-                    completion(.success(model))
+                    if type != Data.self {
+                        let decoder = JSONDecoder()
+                        let model = try decoder.decode(T.self, from: data)
+                        completion(.success(model))
+                    } else {
+                        guard let data = data as? T else { return completion(.failure(NetworkError.parsingError)) }
+                        completion(.success(data))
+                    }
                 } catch {
                     completion(.failure(NetworkError.parsingError))
                 }

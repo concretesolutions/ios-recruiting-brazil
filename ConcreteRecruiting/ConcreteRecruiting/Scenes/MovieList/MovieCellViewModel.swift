@@ -12,6 +12,8 @@ class MovieCellViewModel {
     
     var movie: Movie
     
+    var didAcquireBannerData: ((Data) -> Void)?
+    
     init(with movie: Movie) {
         self.movie = movie
     }
@@ -20,12 +22,19 @@ class MovieCellViewModel {
         return movie.title
     }
     
-    var bannerData: Data {
-        return Data()
-    }
-    
     var isFavorite: Bool {
         return movie.isFavorite
+    }
+    
+    func acquireBannerData() {
+        NetworkManager.getPosterImage(path: self.movie.bannerPath) { [weak self] (result) in
+            switch result {
+            case .success(let data):
+                self?.didAcquireBannerData?(data)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     func didTapFavorite() {

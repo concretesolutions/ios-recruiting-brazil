@@ -12,10 +12,19 @@ import NetworkLayer
 enum MovieEndPoint: EndPointType {
     
     case popularMovies(page: Int)
+    case getPosterImage(path: String)
     
     var baseUrl: URL {
-        guard let url = URL(string: NetworkManager.baseUrl) else { fatalError("Unable to create URL object!")}
-        return url
+        
+        switch self {
+        case .popularMovies:
+            guard let url = URL(string: NetworkManager.baseUrl) else { fatalError("Unable to create URL object!")}
+            return url
+        case .getPosterImage:
+            guard let url = URL(string: NetworkManager.baseImageUrl) else { fatalError("Unable to create URL object!")}
+            return url
+        }
+        
     }
     
     var path: String {
@@ -23,6 +32,8 @@ enum MovieEndPoint: EndPointType {
         switch self {
         case .popularMovies:
             return "/popular"
+        case .getPosterImage(let path):
+            return "/w139"+path
         }
         
     }
@@ -30,7 +41,7 @@ enum MovieEndPoint: EndPointType {
     var method: HTTPMethod {
         
         switch self {
-        case .popularMovies:
+        case .popularMovies, .getPosterImage:
             return .get
         }
     }
@@ -40,6 +51,8 @@ enum MovieEndPoint: EndPointType {
         switch self {
         case .popularMovies(let page):
             return .requestUrlParameters(["page": "\(page)", "api_key": NetworkManager.apiKey])
+        case .getPosterImage:
+            return .requestPlain
         }
         
     }
