@@ -11,7 +11,6 @@ import UIKit
 class MovieListDelegate: NSObject, UICollectionViewDelegateFlowLayout {
  
     
-    
     let viewModel: MovieListViewModel
     
     var mode: DisplayMethod = .grid
@@ -20,9 +19,8 @@ class MovieListDelegate: NSObject, UICollectionViewDelegateFlowLayout {
         self.viewModel = viewModel
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        self.viewModel.didSelect(at: indexPath)
     }
     
     // -Mark: FlowLayout delegate

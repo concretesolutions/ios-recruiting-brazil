@@ -28,6 +28,10 @@ class MovieListViewController: UIViewController {
         
         self.title = viewModel.title
         
+        self.viewModel.openDetailsScreen = { (viewModel) in
+            // TODO: Push details screen
+        }
+        
         let movieView = MovieListView()
         movieView.setup(with: self.viewModel)
         view = movieView
