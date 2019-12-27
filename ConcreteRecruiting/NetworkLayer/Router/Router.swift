@@ -82,7 +82,13 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
     private func createRequest(from route: EndPoint) throws -> URLRequest {
         let fullUrl = route.baseUrl.appendingPathComponent(route.path)
         
-        var request = URLRequest(url: fullUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10.0)
+        var cachePolicy: URLRequest.CachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        
+        if route.baseUrl.relativeString == NetworkManager.baseImageUrl {
+            cachePolicy = .returnCacheDataElseLoad
+        }
+        
+        var request = URLRequest(url: fullUrl, cachePolicy: cachePolicy, timeoutInterval: 10.0)
         
         request.httpMethod = route.method.rawValue
         

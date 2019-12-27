@@ -22,6 +22,15 @@ class MovieCellViewModel {
         return movie.title
     }
     
+    private var posterData = Data() {
+        didSet {
+            self.didAcquireBannerData?(self.posterData)
+        }
+    }
+    var bannerData: Data {
+            return posterData
+    }
+    
     var isFavorite: Bool {
         return movie.isFavorite
     }
@@ -30,7 +39,7 @@ class MovieCellViewModel {
         NetworkManager.getPosterImage(path: self.movie.bannerPath) { [weak self] (result) in
             switch result {
             case .success(let data):
-                self?.didAcquireBannerData?(data)
+                self?.posterData = data
             case .failure(let error):
                 print(error.localizedDescription)
             }

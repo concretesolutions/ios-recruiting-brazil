@@ -50,7 +50,16 @@ class MovieCollectionCell: UICollectionViewCell {
         self.viewModel = viewModel
         
         self.titleLabel.text = viewModel.movieTitle
+        self.bannerImageView.image = UIImage(data: viewModel.bannerData)
         self.isFavorite = viewModel.isFavorite
+        
+        self.viewModel.didAcquireBannerData = { [weak self] (data) in
+            DispatchQueue.main.async {
+                self?.bannerImageView.image = UIImage(data: data)
+            }
+        }
+        
+        self.viewModel.acquireBannerData()
         
     }
     

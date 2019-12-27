@@ -33,7 +33,7 @@ enum MovieEndPoint: EndPointType {
         case .popularMovies:
             return "/popular"
         case .getPosterImage(let path):
-            return "/w139"+path
+            return "/w185"+path
         }
         
     }
