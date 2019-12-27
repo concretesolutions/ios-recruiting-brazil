@@ -10,7 +10,6 @@ import UIKit
 
 class MovieListDelegate: NSObject, UICollectionViewDelegateFlowLayout {
  
-    
     let viewModel: MovieListViewModel
     
     var mode: DisplayMethod = .grid

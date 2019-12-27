@@ -29,7 +29,6 @@ class MovieListDataSource: NSObject, UICollectionViewDataSource {
         
         cell.setup(with: cellViewModel)
         
-        
         return cell
     }
     
