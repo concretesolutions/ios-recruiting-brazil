@@ -47,7 +47,6 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
             return completion(.failure(error))
             
         case .success(let data, let response):
-            let decoder = JSONDecoder()
             
             guard let response = response as? HTTPURLResponse else {
                 return completion(.failure(NetworkError.noJson))
@@ -57,8 +56,14 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
                 
             case 200...299:
                 do {
-                    let model = try decoder.decode(T.self, from: data)
-                    completion(.success(model))
+                    if type != Data.self {
+                        let decoder = JSONDecoder()
+                        let model = try decoder.decode(T.self, from: data)
+                        completion(.success(model))
+                    } else {
+                        guard let data = data as? T else { return completion(.failure(NetworkError.parsingError)) }
+                        completion(.success(data))
+                    }
                 } catch {
                     completion(.failure(NetworkError.parsingError))
                 }
@@ -77,7 +82,13 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
     private func createRequest(from route: EndPoint) throws -> URLRequest {
         let fullUrl = route.baseUrl.appendingPathComponent(route.path)
         
-        var request = URLRequest(url: fullUrl, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10.0)
+        var cachePolicy: URLRequest.CachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        
+        if route.baseUrl.relativeString == NetworkManager.baseImageUrl {
+            cachePolicy = .returnCacheDataElseLoad
+        }
+        
+        var request = URLRequest(url: fullUrl, cachePolicy: cachePolicy, timeoutInterval: 10.0)
         
         request.httpMethod = route.method.rawValue
         

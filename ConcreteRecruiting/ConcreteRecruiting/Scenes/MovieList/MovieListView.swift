@@ -17,6 +17,8 @@ class MovieListView: UIView {
         
         collectionView.register(MovieCollectionCell.self, forCellWithReuseIdentifier: "MovieCell")
         
+        collectionView.isHidden = true
+        
         return collectionView
     }()
     
@@ -41,13 +43,21 @@ class MovieListView: UIView {
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
         
-        activityIndicator.hidesWhenStopped = true
+        //activityIndicator.hidesWhenStopped = true
         
         return activityIndicator
     }()
     
-    lazy var datasource = MovieListDataSource()
-    lazy var delegate = MovieListDelegate()
+    var collectionDataSource: MovieListDataSource? {
+        didSet {
+            self.collectionView.dataSource = self.collectionDataSource
+        }
+    }
+    var collectionDelegate: MovieListDelegate? {
+        didSet {
+            self.collectionView.delegate = self.collectionDelegate
+        }
+    }
     
       override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,14 +65,76 @@ class MovieListView: UIView {
         self.backgroundColor = .systemGray6
         self.setupLayout()
        
-        collectionView.dataSource = self.datasource
-        collectionView.delegate = self.delegate
-        
       }
       
       required init?(coder: NSCoder) {
           fatalError("init(coder:) has not been implemented")
       }
+    
+    func setup(with viewModel: MovieListViewModel) {
+        
+        self.collectionDataSource = MovieListDataSource(with: viewModel)
+        self.collectionDelegate = MovieListDelegate(with: viewModel)
+        
+        viewModel.didChangeLoadingState = { [weak self] (isLoading) in
+            DispatchQueue.main.async {
+                if isLoading {
+                    self?.collectionView.isHidden = true
+                    self?.searchErrorView.isHidden = true
+                    self?.errorView.isHidden = true
+                    self?.activityIndicator.isHidden = false
+                    
+                    self?.activityIndicator.startAnimating()
+                
+                } else {
+                    self?.collectionView.isHidden = false
+                    self?.searchErrorView.isHidden = true
+                    self?.errorView.isHidden = true
+                    
+                    self?.activityIndicator.stopAnimating()
+                    
+                    self?.activityIndicator.isHidden = true
+                }
+                    
+            }
+        }
+        
+        viewModel.errorWhileLoadingMovies = { [weak self] (error) in
+            DispatchQueue.main.async {
+                self?.collectionView.isHidden = true
+                self?.searchErrorView.isHidden = true
+                self?.activityIndicator.isHidden = true
+                self?.errorView.isHidden = false
+            }
+            
+            print(error.localizedDescription)
+        }
+        
+        viewModel.noResultsFound = { [weak self] (rationale) in
+            DispatchQueue.main.async {
+                
+                self?.collectionView.isHidden = true
+                self?.searchErrorView.isHidden = false
+                self?.errorView.isHidden = true
+                self?.activityIndicator.isHidden = true
+            }
+            print(rationale)
+        }
+        
+        viewModel.reloadData = { [weak self] in
+            DispatchQueue.main.async {
+                self?.collectionView.isHidden = false
+                self?.searchErrorView.isHidden = true
+                self?.errorView.isHidden = true
+                self?.activityIndicator.isHidden = true
+                
+                self?.collectionView.reloadData()
+            }
+        }
+        
+        viewModel.didBind()
+        
+    }
 
 }
 

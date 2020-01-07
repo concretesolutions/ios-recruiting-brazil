@@ -10,7 +10,14 @@ import UIKit
 
 class MovieCollectionCell: UICollectionViewCell {
     
-    lazy var bannerImageView: UIImageView = UIImageView()
+    lazy var bannerImageView: UIImageView = {
+        let imageView = UIImageView()
+        
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        
+        return imageView
+    }()
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -42,12 +49,23 @@ class MovieCollectionCell: UICollectionViewCell {
         }
     }
     
-    func setup(with model: Movie) {
+    var viewModel: MovieCellViewModel!
+    
+    func setup(with viewModel: MovieCellViewModel) {
         
-        // TODO: Download image
+        self.viewModel = viewModel
         
-        self.titleLabel.text = model.title
-        self.isFavorite = model.isFavorite
+        self.titleLabel.text = viewModel.movieTitle
+        self.bannerImageView.image = UIImage(data: viewModel.bannerData)
+        self.isFavorite = viewModel.isFavorite
+        
+        self.viewModel.didAcquireBannerData = { [weak self] (data) in
+            DispatchQueue.main.async {
+                self?.bannerImageView.image = UIImage(data: data)
+            }
+        }
+        
+        self.viewModel.acquireBannerData()
         
     }
     
@@ -67,7 +85,7 @@ class MovieCollectionCell: UICollectionViewCell {
     }
     
     @objc func didTapFavorite() {
-        self.isFavorite = !self.isFavorite
+        viewModel.didTapFavorite()
     }
     
 }
@@ -91,13 +109,15 @@ extension MovieCollectionCell {
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: bannerImageView.bottomAnchor, constant: 8),
-            titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            titleLabel.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant: -8),
             titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8)
         ])
         
         NSLayoutConstraint.activate([
             favoriteButton.topAnchor.constraint(equalTo: bannerImageView.bottomAnchor, constant: 8),
             favoriteButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
+            favoriteButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.1),
             favoriteButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8)
         ])
         

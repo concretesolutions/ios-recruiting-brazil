@@ -24,4 +24,8 @@ class NetworkManager {
         
     }
     
+    static func getPosterImage(path: String, completion: @escaping (Result<Data, Error>) -> Void) {
+        router.request(.getPosterImage(path: path), type: Data.self, completion: completion)
+    }
+    
 }

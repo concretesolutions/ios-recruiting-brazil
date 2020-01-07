@@ -10,14 +10,31 @@ import UIKit
 
 class MovieListViewController: UIViewController {
 
+    let viewModel: MovieListViewModel
+    
+    init(with viewModel: MovieListViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        view = MovieListView()
+        self.title = viewModel.title
         
-        // TODO: Title should come from elsewhere
-        self.title = "Movies"
+        self.viewModel.openDetailsScreen = { (viewModel) in
+            // TODO: Push details screen
+        }
+        
+        let movieView = MovieListView()
+        movieView.setup(with: self.viewModel)
+        view = movieView
         
     }
 

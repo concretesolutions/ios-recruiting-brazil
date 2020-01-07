@@ -10,8 +10,14 @@ import UIKit
 
 class MovieListDataSource: NSObject, UICollectionViewDataSource {
     
+    let viewModel: MovieListViewModel
+    
+    init(with viewModel: MovieListViewModel) {
+        self.viewModel = viewModel
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return viewModel.numberOfMovies
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -19,8 +25,9 @@ class MovieListDataSource: NSObject, UICollectionViewDataSource {
             fatalError("Unable to dequeue a cell with the MovieCell identifier")
         }
         
-        cell.bannerImageView.image = #imageLiteral(resourceName: "Favorite-filled")
-        cell.titleLabel.text = "Harry Potter"
+        let cellViewModel = viewModel.getViewModel(for: indexPath)
+        
+        cell.setup(with: cellViewModel)
         
         return cell
     }
