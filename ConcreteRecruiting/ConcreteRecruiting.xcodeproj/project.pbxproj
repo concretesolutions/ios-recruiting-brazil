@@ -45,6 +45,7 @@
 		3FD59BC323B16B9E00FA4EBE /* MovieCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD59BC223B16B9E00FA4EBE /* MovieCellViewModel.swift */; };
 		3FE1E45B23B04FB300F18DD9 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE1E45A23B04FB300F18DD9 /* NetworkRouter.swift */; };
 		3FE1E46023B0536B00F18DD9 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE1E45F23B0536B00F18DD9 /* Router.swift */; };
+		3FE3346F23C435A3008D1273 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3346E23C435A3008D1273 /* MovieDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +146,7 @@
 		3FD59BC223B16B9E00FA4EBE /* MovieCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellViewModel.swift; sourceTree = "<group>"; };
 		3FE1E45A23B04FB300F18DD9 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		3FE1E45F23B0536B00F18DD9 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		3FE3346E23C435A3008D1273 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +260,7 @@
 		3F55C0B023AEE9D2008F38FC /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				3FE3346D23C4358F008D1273 /* MovieDetail */,
 				3F55C0B723AEEC40008F38FC /* MovieList */,
 			);
 			path = Scenes;
@@ -405,6 +408,14 @@
 				3FE1E45F23B0536B00F18DD9 /* Router.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		3FE3346D23C4358F008D1273 /* MovieDetail */ = {
+			isa = PBXGroup;
+			children = (
+				3FE3346E23C435A3008D1273 /* MovieDetailViewController.swift */,
+			);
+			path = MovieDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -651,6 +662,7 @@
 				3F4960FC23B142320077DC6B /* NetworkManager.swift in Sources */,
 				3F55C07F23AEDB7F008F38FC /* SceneDelegate.swift in Sources */,
 				3F4960FA23B141020077DC6B /* MovieEndPoint.swift in Sources */,
+				3FE3346F23C435A3008D1273 /* MovieDetailViewController.swift in Sources */,
 				3F55C0CA23AFBACD008F38FC /* Genre.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

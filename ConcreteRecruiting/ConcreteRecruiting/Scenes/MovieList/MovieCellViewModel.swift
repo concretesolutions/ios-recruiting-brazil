@@ -10,7 +10,7 @@ import Foundation
 
 class MovieCellViewModel {
     
-    var movie: Movie
+    private var movie: Movie
     
     var didAcquireBannerData: ((Data) -> Void)?
     
