@@ -29,7 +29,8 @@ class MovieListViewController: UIViewController {
         self.title = viewModel.title
         
         self.viewModel.openDetailsScreen = { (viewModel) in
-            // TODO: Push details screen
+            let detailViewController = MovieDetailViewController(with: viewModel)
+            self.navigationController?.pushViewController(detailViewController, animated: true)
         }
         
         let movieView = MovieListView()
