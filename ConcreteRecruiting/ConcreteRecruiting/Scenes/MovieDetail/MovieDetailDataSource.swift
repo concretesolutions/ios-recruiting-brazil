@@ -27,10 +27,15 @@ class MovieDetailDataSource: NSObject, UITableViewDataSource {
         /* TODO: Give indexPath to viewModel,
          * so it can figure what should give back
          */
- 
-        let text = viewModel.getTopic(for: indexPath)
         
-        cell.textLabel?.text = text
+        if indexPath.row == 0 {
+            cell.imageView?.image = UIImage(data: self.viewModel.bannerData)
+        } else {
+ 
+            let text = viewModel.getTopic(for: indexPath)
+            cell.textLabel?.text = text
+            
+        }
         
         //cell.setup(with: cellViewModel)
         

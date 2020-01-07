@@ -85,13 +85,13 @@ class MovieCellViewModel {
     
     func getTopic(for indexPath: IndexPath) -> String {
         switch indexPath.row {
-        case 0:
-            return movieTitle
         case 1:
-            return self.getFormattedYear()
+            return movieTitle
         case 2:
-            return ""
+            return self.getFormattedYear()
         case 3:
+            return ""
+        case 4:
             return self.movie.description
         default:
             return "Something wrong"
