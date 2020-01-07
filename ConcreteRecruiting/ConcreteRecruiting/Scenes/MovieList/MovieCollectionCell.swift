@@ -10,7 +10,14 @@ import UIKit
 
 class MovieCollectionCell: UICollectionViewCell {
     
-    lazy var bannerImageView: UIImageView = UIImageView()
+    lazy var bannerImageView: UIImageView = {
+        let imageView = UIImageView()
+        
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        
+        return imageView
+    }()
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()

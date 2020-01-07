@@ -29,7 +29,7 @@ class MovieListDelegate: NSObject, UICollectionViewDelegateFlowLayout {
         let blankSpace = (self.mode.spacing*2) + ((self.mode.itemsPerRow-1)*self.mode.spacing)
         
         let width = (collectionView.bounds.width - blankSpace) / self.mode.itemsPerRow
-        let height = width * 1.1
+        let height = width * 1.6
         
         let size = CGSize(width: width, height: height)
         
