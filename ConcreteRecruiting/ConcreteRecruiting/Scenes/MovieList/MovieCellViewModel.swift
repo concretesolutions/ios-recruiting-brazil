@@ -12,6 +12,14 @@ class MovieCellViewModel {
     
     private var movie: Movie
     
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: Locale.preferredLanguages.first!)
+        formatter.timeZone = TimeZone.autoupdatingCurrent
+        formatter.dateFormat = "YYYY"
+        return formatter
+    }()
+    
     var didAcquireBannerData: ((Data) -> Void)?
     
     init(with movie: Movie) {
@@ -28,12 +36,41 @@ class MovieCellViewModel {
         }
     }
     var bannerData: Data {
-            return posterData
+        return posterData
     }
     
     var isFavorite: Bool {
         return movie.isFavorite
     }
+    
+    var numberOfTopics: Int {
+        return 5
+    }
+    
+    //    var genres: String {
+    //        return getFormattedGenres()
+    //    }
+    
+    private func getFormattedYear() -> String {
+        
+        guard let date = self.movie.releaseDate else { return "" }
+        
+        let formattedDate = dateFormatter.string(from: date)
+        
+        return formattedDate
+    }
+    
+//    private func getFormattedGenres() -> String {
+//
+//        var genresText = ""
+//        let moreThanOne = self.movie.genres.count >= 2
+//
+//        for genre in self.movie.genres {
+//            genresText += genre.
+//        }
+//
+//        return genresText
+//    }
     
     func acquireBannerData() {
         NetworkManager.getPosterImage(path: self.movie.bannerPath) { [weak self] (result) in
@@ -43,6 +80,21 @@ class MovieCellViewModel {
             case .failure(let error):
                 print(error.localizedDescription)
             }
+        }
+    }
+    
+    func getTopic(for indexPath: IndexPath) -> String {
+        switch indexPath.row {
+        case 0:
+            return movieTitle
+        case 1:
+            return self.getFormattedYear()
+        case 2:
+            return ""
+        case 3:
+            return self.movie.description
+        default:
+            return "Something wrong"
         }
     }
     

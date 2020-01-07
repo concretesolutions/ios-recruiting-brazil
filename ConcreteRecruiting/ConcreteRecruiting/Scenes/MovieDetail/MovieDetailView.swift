@@ -19,6 +19,12 @@ class MovieDetailView: UIView {
         return tableView
     }()
     
+    var tableViewDataSource: MovieDetailDataSource? {
+        didSet {
+            self.tableView.dataSource = self.tableViewDataSource
+        }
+    }
+    
     override init(frame: CGRect) {
       super.init(frame: frame)
       
@@ -32,6 +38,9 @@ class MovieDetailView: UIView {
     }
     
     func setup(with viewModel: MovieCellViewModel) {
+        
+        self.tableViewDataSource = MovieDetailDataSource(with: viewModel)
+        
         
     }
     

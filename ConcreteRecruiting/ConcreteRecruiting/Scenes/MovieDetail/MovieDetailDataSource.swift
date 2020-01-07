@@ -17,8 +17,7 @@ class MovieDetailDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // TODO: Have this number come from the viewModel
-        return 0
+        return self.viewModel.numberOfTopics
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -29,7 +28,9 @@ class MovieDetailDataSource: NSObject, UITableViewDataSource {
          * so it can figure what should give back
          */
  
-        //let cellViewModel = viewModel.getViewModel(for: indexPath)
+        let text = viewModel.getTopic(for: indexPath)
+        
+        cell.textLabel?.text = text
         
         //cell.setup(with: cellViewModel)
         
