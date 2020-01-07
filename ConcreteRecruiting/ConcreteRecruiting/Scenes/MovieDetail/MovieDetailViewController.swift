@@ -14,8 +14,14 @@ class MovieDetailViewController: UIViewController {
     
     init(with viewModel: MovieCellViewModel) {
         self.viewModel = viewModel
-        
+
         super.init(nibName: nil, bundle: nil)
+        
+        let detailView = MovieDetailView()
+        detailView.setup(with: self.viewModel)
+        
+        self.view = detailView
+        
     }
     
     required init?(coder: NSCoder) {

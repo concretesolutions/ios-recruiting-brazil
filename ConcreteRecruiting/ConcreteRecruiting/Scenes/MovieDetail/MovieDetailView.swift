@@ -35,7 +35,16 @@ class MovieDetailView: UIView {
         
     }
     
-    func setupLayout() {
+}
+
+extension MovieDetailView {
+    
+     func addViews() {
+           self.addSubviews([tableView])
+       }
+       
+       func setupLayout() {
+           self.addViews()
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
