@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TabBarController.swift
 //  TheMovieDB
 //
 //  Created by Renato Lopes on 07/01/20.
@@ -8,12 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        delegate = self
     }
-
-
 }
 
