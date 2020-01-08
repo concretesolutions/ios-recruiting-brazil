@@ -19,11 +19,11 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     private func addItemsInTabBar() {
         let movies = MoviesViewController.init()
         movies.view.backgroundColor = .red
-        movies.title = NSLocalizedString("TITLE_MOVIES", comment: "Title bar movies")
+        movies.title = NSLocalizedString("Movies", comment: "Title Movies")
         
         let favorites = FavoritesViewController.init()
         favorites.view.backgroundColor = .blue
-        favorites.title = NSLocalizedString("TITLE_FAVORITES", comment: "Title bar movies")
+        favorites.title = NSLocalizedString("Favorites", comment: "Title Favorites")
 
         
         let listControllers = [movies,favorites]
