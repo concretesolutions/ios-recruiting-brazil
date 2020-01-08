@@ -10,9 +10,9 @@ import UIKit
 
 class MovieDetailViewController: UIViewController {
 
-    let viewModel: MovieCellViewModel
+    let viewModel: MovieDetailViewModel
     
-    init(with viewModel: MovieCellViewModel) {
+    init(with viewModel: MovieDetailViewModel) {
         self.viewModel = viewModel
 
         super.init(nibName: nil, bundle: nil)

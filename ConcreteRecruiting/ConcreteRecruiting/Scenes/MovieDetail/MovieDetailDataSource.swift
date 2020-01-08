@@ -10,14 +10,14 @@ import UIKit
 
 class MovieDetailDataSource: NSObject, UITableViewDataSource {
     
-    let viewModel: MovieCellViewModel
+    let viewModel: MovieDetailViewModel
     
-    init(with viewModel: MovieCellViewModel) {
+    init(with viewModel: MovieDetailViewModel) {
         self.viewModel = viewModel
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.numberOfTopics
+        return self.viewModel.numberOfSections
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

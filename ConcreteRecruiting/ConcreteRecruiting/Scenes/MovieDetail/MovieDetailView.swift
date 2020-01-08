@@ -37,7 +37,7 @@ class MovieDetailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(with viewModel: MovieCellViewModel) {
+    func setup(with viewModel: MovieDetailViewModel) {
         
         self.tableViewDataSource = MovieDetailDataSource(with: viewModel)
         
