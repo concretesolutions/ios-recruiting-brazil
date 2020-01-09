@@ -32,15 +32,27 @@ class FavoritesView: UIView {
         return tableView
     }()
     
+    var tableViewDataSource: FavoritesDataSource? {
+        didSet {
+            self.tableView.dataSource = self.tableViewDataSource
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         self.backgroundColor = .systemGray6
         setupLayout()
+        
+        setup()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setup() {
+        self.tableViewDataSource = FavoritesDataSource()
     }
     
 }

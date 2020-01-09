@@ -13,7 +13,6 @@ class FavoriteTableViewCell: UITableViewCell {
     lazy var posterImageView: UIImageView = {
         let imageView = UIImageView()
         
-        
         return imageView
     }()
     
@@ -44,7 +43,6 @@ class FavoriteTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -73,7 +71,7 @@ extension FavoriteTableViewCell {
             posterImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
             posterImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             posterImageView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 0.3),
-            posterImageView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+            posterImageView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -85,14 +83,14 @@ extension FavoriteTableViewCell {
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
             descriptionLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 16),
-            descriptionLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
+            descriptionLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16)
         ])
         
         NSLayoutConstraint.activate([
             yearLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 32),
             yearLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
+            yearLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 0.2)
         ])
-        
         
     }
     
