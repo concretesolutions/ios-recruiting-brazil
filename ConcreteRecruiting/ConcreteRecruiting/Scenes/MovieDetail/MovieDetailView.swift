@@ -41,9 +41,9 @@ class MovieDetailView: UIView {
         
         self.tableViewDataSource = MovieDetailDataSource(with: viewModel)
         
-        viewModel.didAcquireGenres = {
+        viewModel.didAcquireGenres = { [weak self] in
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self?.tableView.reloadData()
             }
         }
         
