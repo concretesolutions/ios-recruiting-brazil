@@ -23,10 +23,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let movieListVC = MovieListViewController(with: MovieListViewModel())
         let navigationController = UINavigationController(rootViewController: movieListVC)
-        
         navigationController.navigationBar.applyDefaultStyle()
         
-        self.window?.rootViewController = navigationController
+        let favoritesVC = FavoritesViewController()
+        let favoriteNavigationController = UINavigationController(rootViewController: favoritesVC)
+        favoriteNavigationController.navigationBar.applyDefaultStyle()
+        
+        self.window?.rootViewController = favoriteNavigationController
                 
     }
 

@@ -13,8 +13,10 @@ class FavoritesView: UIView {
     lazy var removeFilterButton: UIButton = {
         let button = UIButton()
         
-        button.setTitleColor(UIColor(named: "CellBlue"), for: .normal)
-        button.tintColor = UIColor(named: "MainYellow")
+        button.setTitleColor(UIColor(named: "MainYellow"), for: .normal)
+        button.backgroundColor = UIColor(named: "CellBlue")
+        
+        button.setTitle("Button", for: .normal)
         
         return button
     }()
@@ -22,6 +24,7 @@ class FavoritesView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.backgroundColor = .systemGray6
         setupLayout()
     }
     
