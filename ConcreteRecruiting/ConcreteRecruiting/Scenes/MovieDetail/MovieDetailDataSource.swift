@@ -29,7 +29,7 @@ class MovieDetailDataSource: NSObject, UITableViewDataSource {
          */
         
         if indexPath.row == 0 {
-            cell.imageView?.image = UIImage(data: self.viewModel.bannerData)
+            //cell.imageView?.image = UIImage(data: self.viewModel.bannerData)
         } else {
  
             let text = viewModel.getTopic(for: indexPath)

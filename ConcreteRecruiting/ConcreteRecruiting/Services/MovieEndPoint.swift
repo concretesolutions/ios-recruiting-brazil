@@ -13,11 +13,12 @@ enum MovieEndPoint: EndPointType {
     
     case popularMovies(page: Int)
     case getPosterImage(path: String)
+    case getMovieGenres
     
     var baseUrl: URL {
         
         switch self {
-        case .popularMovies:
+        case .popularMovies, .getMovieGenres:
             guard let url = URL(string: NetworkManager.baseUrl) else { fatalError("Unable to create URL object!")}
             return url
         case .getPosterImage:
@@ -34,6 +35,8 @@ enum MovieEndPoint: EndPointType {
             return "/popular"
         case .getPosterImage(let path):
             return "/w185"+path
+        case .getMovieGenres:
+            return "genre/movie/list"
         }
         
     }
@@ -41,7 +44,7 @@ enum MovieEndPoint: EndPointType {
     var method: HTTPMethod {
         
         switch self {
-        case .popularMovies, .getPosterImage:
+        case .popularMovies, .getPosterImage, .getMovieGenres:
             return .get
         }
     }
@@ -51,7 +54,7 @@ enum MovieEndPoint: EndPointType {
         switch self {
         case .popularMovies(let page):
             return .requestUrlParameters(["page": "\(page)", "api_key": NetworkManager.apiKey])
-        case .getPosterImage:
+        case .getPosterImage, .getMovieGenres:
             return .requestPlain
         }
         

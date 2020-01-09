@@ -20,9 +20,16 @@ class MovieDetailViewModel {
         return formatter
     }()
     
-    //    var genres: String {
-    //        return getFormattedGenres()
-    //    }
+    private var genres: [Genre] = [Genre]() {
+    
+        didSet {
+            self.didAcquireGenres?()
+        }
+        
+    }
+    
+    var didAcquireGenres: (() -> Void)?
+    
     
     init(movie: Movie) {
         self.movie = movie
@@ -57,19 +64,37 @@ class MovieDetailViewModel {
     }
     
     private func acquireMovieGenres() {
+        
+        NetworkManager.getMovieGenres { (result) in
+            switch result {
+            case .success(let response):
+                self.genres = response.genres
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
     }
     
-    //    private func getFormattedGenres() -> String {
-    //
-    //        var genresText = ""
-    //        let moreThanOne = self.movie.genres.count >= 2
-    //
-    //        for genre in self.movie.genres {
-    //            genresText += genre.
-    //        }
-    //
-    //        return genresText
-    //    }
+    private func getFormattedGenres() -> String {
+
+        var genresText = ""
+        let numberOfGenres = self.genres.count
+        
+        // TODO: Change to Localizable
+        if numberOfGenres == 0 {
+            return "No genre information"
+        }
+
+        for (index,genre) in self.genres.enumerated() {
+            genresText += genre.name
+            
+            let isLast = (index == self.genres.count-1)
+            genresText += (isLast ? "" : ",")
+        }
+
+        return genresText
+    }
     
     
 }

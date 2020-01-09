@@ -28,4 +28,8 @@ class NetworkManager {
         router.request(.getPosterImage(path: path), type: Data.self, completion: completion)
     }
     
+    static func getMovieGenres(completion: @escaping (Result<GenreApiResponse, Error>) -> Void) {
+        router.request(.getMovieGenres, type: GenreApiResponse.self, completion: completion)
+    }
+    
 }
