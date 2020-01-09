@@ -16,7 +16,7 @@ class MovieListViewModel {
     
     var didChangeLoadingState: ((Bool) -> Void)?
     var reloadData: (() -> Void)?
-    var openDetailsScreen: ((MovieCellViewModel) -> Void)?
+    var openDetailsScreen: ((MovieDetailViewModel) -> Void)?
     
     var noResultsFound: ((String) -> Void)?
     var errorWhileLoadingMovies: ((Error) -> Void)?
@@ -47,7 +47,7 @@ class MovieListViewModel {
     
     func didSelect(at indexPath: IndexPath) {
         
-        let viewModel = self.cellViewModels[indexPath.row]
+        let viewModel = self.cellViewModels[indexPath.row].getDetailViewModel()
         self.openDetailsScreen?(viewModel)
         
     }

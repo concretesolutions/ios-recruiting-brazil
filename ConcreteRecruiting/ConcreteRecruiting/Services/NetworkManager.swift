@@ -11,7 +11,7 @@ import NetworkLayer
 
 class NetworkManager {
     
-    static let baseUrl = "https://api.themoviedb.org/3/movie"
+    static let baseUrl = "https://api.themoviedb.org/3"
     static let baseImageUrl = "https://image.tmdb.org/t/p"
     static let apiKey = "d07322200307dc499064d61f72cbee14"
     
@@ -26,6 +26,10 @@ class NetworkManager {
     
     static func getPosterImage(path: String, completion: @escaping (Result<Data, Error>) -> Void) {
         router.request(.getPosterImage(path: path), type: Data.self, completion: completion)
+    }
+    
+    static func getMovieGenres(completion: @escaping (Result<GenreApiResponse, Error>) -> Void) {
+        router.request(.getMovieGenres, type: GenreApiResponse.self, completion: completion)
     }
     
 }

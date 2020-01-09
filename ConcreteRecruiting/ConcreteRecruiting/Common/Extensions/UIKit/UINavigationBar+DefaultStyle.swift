@@ -16,6 +16,7 @@ extension UINavigationBar {
         self.shadowImage = UIImage()
         
         self.barTintColor = UIColor(named: "MainYellow")
+        self.tintColor = UIColor(named: "CellBlue")
      
     }
     

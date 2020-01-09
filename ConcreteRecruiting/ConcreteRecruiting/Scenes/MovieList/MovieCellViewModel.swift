@@ -10,7 +10,15 @@ import Foundation
 
 class MovieCellViewModel {
     
-    var movie: Movie
+    private var movie: Movie
+    
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: Locale.preferredLanguages.first!)
+        formatter.timeZone = TimeZone.autoupdatingCurrent
+        formatter.dateFormat = "YYYY"
+        return formatter
+    }()
     
     var didAcquireBannerData: ((Data) -> Void)?
     
@@ -28,11 +36,41 @@ class MovieCellViewModel {
         }
     }
     var bannerData: Data {
-            return posterData
+        return posterData
     }
     
     var isFavorite: Bool {
         return movie.isFavorite
+    }
+    
+    var numberOfTopics: Int {
+        return 5
+    }
+    
+    var releaseYear: String {
+        
+        guard let date = self.movie.releaseDate else { return "" }
+        
+        let formattedDate = dateFormatter.string(from: date)
+        
+        return formattedDate
+    }
+    
+    var description: String {
+        return self.movie.description
+    }
+    
+    public func getDetailViewModel() -> MovieDetailViewModel {
+        return MovieDetailViewModel(movieViewModel: self)
+    }
+    
+    public func getMovieGenres(from genres: [Genre]) -> [Genre] {
+        
+        let movieGenres = genres.filter { (genre) -> Bool in
+            return self.movie.genres.contains(genre.id)
+        }
+        
+        return movieGenres
     }
     
     func acquireBannerData() {
