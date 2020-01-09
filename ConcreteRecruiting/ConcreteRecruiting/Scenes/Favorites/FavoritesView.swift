@@ -16,9 +16,20 @@ class FavoritesView: UIView {
         button.setTitleColor(UIColor(named: "MainYellow"), for: .normal)
         button.backgroundColor = UIColor(named: "CellBlue")
         
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        
         button.setTitle("Button", for: .normal)
         
         return button
+    }()
+    
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        
+        tableView.setEditing(true, animated: false)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+        return tableView
     }()
     
     override init(frame: CGRect) {
@@ -37,7 +48,7 @@ class FavoritesView: UIView {
 extension FavoritesView {
     
     func addViews() {
-        self.addSubviews([removeFilterButton])
+        self.addSubviews([removeFilterButton, tableView])
     }
     
     func setupLayout() {
@@ -47,7 +58,15 @@ extension FavoritesView {
         NSLayoutConstraint.activate([
             removeFilterButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             removeFilterButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            removeFilterButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor)
+            removeFilterButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            removeFilterButton.heightAnchor.constraint(equalToConstant: 56)
+        ])
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: self.removeFilterButton.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
         
     }
