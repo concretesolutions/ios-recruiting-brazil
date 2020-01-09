@@ -57,6 +57,10 @@ class MovieDetailViewModel {
         }
     }
     
+    func didTapFavorite() {
+        self.movieViewModel.didTapFavorite()
+    }
+    
     private func acquireMovieGenres() {
         
         NetworkManager.getMovieGenres { (result) in

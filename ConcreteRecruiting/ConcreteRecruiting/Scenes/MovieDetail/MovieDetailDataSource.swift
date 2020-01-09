@@ -27,7 +27,7 @@ class MovieDetailDataSource: NSObject, UITableViewDataSource {
         }
     
         let section = viewModel.getSection(for: indexPath)
-        cell.setup(with: section)
+        cell.setup(with: section, viewModel: viewModel)
         
         return cell
         

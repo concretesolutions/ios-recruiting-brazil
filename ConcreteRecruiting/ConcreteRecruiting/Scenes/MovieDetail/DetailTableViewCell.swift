@@ -33,10 +33,10 @@ class DetailTableViewCell: UITableViewCell {
         return button
     }()
     
+    var viewModel: MovieDetailViewModel?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        self.textLabel?.numberOfLines = 0
         
         setupLayout()
 
@@ -46,7 +46,7 @@ class DetailTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(with section: Section) {
+    func setup(with section: Section, viewModel: MovieDetailViewModel) {
         
         switch section {
         case .image(let data):
@@ -58,8 +58,14 @@ class DetailTableViewCell: UITableViewCell {
         case .textWithButton(let text):
             self.label.text = text
             self.favoriteButton.isHidden = false
+            self.viewModel = viewModel
+            self.favoriteButton.addTarget(self, action: #selector(didTapFavorite), for: .touchUpInside)
         }
         
+    }
+    
+    @objc private func didTapFavorite() {
+        self.viewModel?.didTapFavorite()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
