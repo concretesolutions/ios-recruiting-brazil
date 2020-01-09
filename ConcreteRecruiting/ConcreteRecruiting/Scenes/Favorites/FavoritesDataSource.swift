@@ -20,11 +20,13 @@ class FavoritesDataSource: NSObject, UITableViewDataSource {
             fatalError("Unable to dequeue a cell with the Cell Identifier")
         }
         
+        cell.posterImageView.image = UIImage(named: "Filter")
+        cell.titleLabel.text = "Thor"
+        cell.yearLabel.text = "2008"
+        cell.descriptionLabel.text = "Arroz Arroz Arroz"
+        
         return cell
         
     }
-    
-    
-    
     
 }
