@@ -32,7 +32,7 @@ enum MovieEndPoint: EndPointType {
         
         switch self {
         case .popularMovies:
-            return "/popular"
+            return "/movie/popular"
         case .getPosterImage(let path):
             return "/w185"+path
         case .getMovieGenres:
@@ -54,7 +54,9 @@ enum MovieEndPoint: EndPointType {
         switch self {
         case .popularMovies(let page):
             return .requestUrlParameters(["page": "\(page)", "api_key": NetworkManager.apiKey])
-        case .getPosterImage, .getMovieGenres:
+        case .getMovieGenres:
+            return .requestUrlParameters(["api_key": NetworkManager.apiKey])
+        case .getPosterImage:
             return .requestPlain
         }
         

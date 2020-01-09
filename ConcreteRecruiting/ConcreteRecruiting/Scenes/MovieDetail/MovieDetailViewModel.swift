@@ -10,7 +10,7 @@ import Foundation
 
 class MovieDetailViewModel {
     
-    private let movie: Movie
+    private let movieViewModel: MovieCellViewModel
     
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -30,35 +30,30 @@ class MovieDetailViewModel {
     
     var didAcquireGenres: (() -> Void)?
     
-    init(movie: Movie) {
-        self.movie = movie
+    init(movieViewModel: MovieCellViewModel) {
+        self.movieViewModel = movieViewModel
+        
+        self.acquireMovieGenres()
     }
     
     var numberOfSections: Int {
-        return 6
+        return 5
     }
     
-    private func getFormattedYear() -> String {
-        
-        guard let date = self.movie.releaseDate else { return "" }
-        
-        let formattedDate = dateFormatter.string(from: date)
-        
-        return formattedDate
-    } 
-    
-    func getTopic(for indexPath: IndexPath) -> String {
+    func getSection(for indexPath: IndexPath) -> Section {
         switch indexPath.row {
+        case 0:
+            return .image(data: self.movieViewModel.bannerData)
         case 1:
-            return self.movie.title
+            return .textWithButton(text: self.movieViewModel.movieTitle)
         case 2:
-            return self.getFormattedYear()
+            return .text(text: self.movieViewModel.releaseYear)
         case 3:
-            return ""
+            return .text(text: self.getFormattedGenres())
         case 4:
-            return self.movie.description
+            return .text(text: self.movieViewModel.description)
         default:
-            return "Something wrong"
+            return .text(text: "Something wrong")
         }
     }
     
@@ -67,7 +62,8 @@ class MovieDetailViewModel {
         NetworkManager.getMovieGenres { (result) in
             switch result {
             case .success(let response):
-                self.genres = response.genres
+                let movieGenres = self.movieViewModel.getMovieGenres(from: response.genres)
+                self.genres = movieGenres
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -96,4 +92,10 @@ class MovieDetailViewModel {
         return genresText
     }
     
+}
+
+enum Section {
+    case text(text: String)
+    case textWithButton(text: String)
+    case image(data: Data)
 }

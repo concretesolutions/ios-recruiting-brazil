@@ -13,7 +13,7 @@ class MovieDetailView: UIView {
     var tableView: UITableView = {
         let tableView = UITableView()
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.backgroundColor = .systemGray6
         
         return tableView
@@ -40,6 +40,12 @@ class MovieDetailView: UIView {
     func setup(with viewModel: MovieDetailViewModel) {
         
         self.tableViewDataSource = MovieDetailDataSource(with: viewModel)
+        
+        viewModel.didAcquireGenres = {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
         
     }
     

@@ -47,8 +47,30 @@ class MovieCellViewModel {
         return 5
     }
     
+    var releaseYear: String {
+        
+        guard let date = self.movie.releaseDate else { return "" }
+        
+        let formattedDate = dateFormatter.string(from: date)
+        
+        return formattedDate
+    }
+    
+    var description: String {
+        return self.movie.description
+    }
+    
     public func getDetailViewModel() -> MovieDetailViewModel {
-        return MovieDetailViewModel(movie: self.movie)
+        return MovieDetailViewModel(movieViewModel: self)
+    }
+    
+    public func getMovieGenres(from genres: [Genre]) -> [Genre] {
+        
+        let movieGenres = genres.filter { (genre) -> Bool in
+            return self.movie.genres.contains(genre.id)
+        }
+        
+        return movieGenres
     }
     
     func acquireBannerData() {

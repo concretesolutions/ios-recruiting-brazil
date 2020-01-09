@@ -22,22 +22,12 @@ class MovieDetailDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
-        /* TODO: Give indexPath to viewModel,
-         * so it can figure what should give back
-         */
-        
-        if indexPath.row == 0 {
-            //cell.imageView?.image = UIImage(data: self.viewModel.bannerData)
-        } else {
- 
-            let text = viewModel.getTopic(for: indexPath)
-            cell.textLabel?.text = text
-            
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? DetailTableViewCell else {
+            fatalError("Unable to dequeue cell with the Cell Identifier")
         }
-        
-        //cell.setup(with: cellViewModel)
+    
+        let section = viewModel.getSection(for: indexPath)
+        cell.setup(with: section)
         
         return cell
         
