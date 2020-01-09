@@ -27,7 +27,7 @@ class FavoritesView: UIView {
         let tableView = UITableView()
         
         tableView.setEditing(true, animated: false)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(FavoriteTableViewCell.self, forCellReuseIdentifier: "Cell")
         
         return tableView
     }()
