@@ -30,7 +30,6 @@ class MovieDetailViewModel {
     
     var didAcquireGenres: (() -> Void)?
     
-    
     init(movie: Movie) {
         self.movie = movie
     }
@@ -77,24 +76,24 @@ class MovieDetailViewModel {
     }
     
     private func getFormattedGenres() -> String {
-
-        var genresText = ""
+        
         let numberOfGenres = self.genres.count
         
         // TODO: Change to Localizable
         if numberOfGenres == 0 {
             return "No genre information"
         }
-
-        for (index,genre) in self.genres.enumerated() {
+        
+        var genresText = ""
+        
+        for (index, genre) in self.genres.enumerated() {
             genresText += genre.name
             
-            let isLast = (index == self.genres.count-1)
+            let isLast = (index == numberOfGenres-1)
             genresText += (isLast ? "" : ",")
         }
 
         return genresText
     }
-    
     
 }

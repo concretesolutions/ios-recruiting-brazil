@@ -41,7 +41,6 @@ class MovieDetailView: UIView {
         
         self.tableViewDataSource = MovieDetailDataSource(with: viewModel)
         
-        
     }
     
 }
