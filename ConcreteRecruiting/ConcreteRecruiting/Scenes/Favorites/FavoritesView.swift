@@ -26,7 +26,6 @@ class FavoritesView: UIView {
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         
-        tableView.setEditing(true, animated: false)
         tableView.register(FavoriteTableViewCell.self, forCellReuseIdentifier: "Cell")
         
         return tableView
