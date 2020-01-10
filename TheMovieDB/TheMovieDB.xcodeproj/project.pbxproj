@@ -18,6 +18,7 @@
 		FD1C596523C5703E000E63A3 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1C596423C5703E000E63A3 /* MoviesViewController.swift */; };
 		FD1C596723C5706C000E63A3 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1C596623C5706C000E63A3 /* FavoritesViewController.swift */; };
 		FD95E05323C57FD900D10AA8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FD95E05123C57FD900D10AA8 /* Localizable.strings */; };
+		FD95E05623C805C000D10AA8 /* MoviesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E05523C805C000D10AA8 /* MoviesCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		FD1C596623C5706C000E63A3 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		FD1C596823C57345000E63A3 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		FD95E05223C57FD900D10AA8 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		FD95E05523C805C000D10AA8 /* MoviesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,8 +141,8 @@
 		FD1C595A23C56059000E63A3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				FD1C596323C57013000E63A3 /* Favorites */,
 				FD1C596223C5700B000E63A3 /* Movies */,
+				FD1C596323C57013000E63A3 /* Favorites */,
 				FD1C592B23C55E90000E63A3 /* TabBarController.swift */,
 				FD1C593523C55E91000E63A3 /* LaunchScreen.storyboard */,
 			);
@@ -181,6 +183,7 @@
 		FD1C596223C5700B000E63A3 /* Movies */ = {
 			isa = PBXGroup;
 			children = (
+				FD95E05423C805B300D10AA8 /* UI */,
 				FD1C596423C5703E000E63A3 /* MoviesViewController.swift */,
 			);
 			path = Movies;
@@ -192,6 +195,14 @@
 				FD1C596623C5706C000E63A3 /* FavoritesViewController.swift */,
 			);
 			path = Favorites;
+			sourceTree = "<group>";
+		};
+		FD95E05423C805B300D10AA8 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				FD95E05523C805C000D10AA8 /* MoviesCollectionView.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD95E05623C805C000D10AA8 /* MoviesCollectionView.swift in Sources */,
 				FD1C592C23C55E90000E63A3 /* TabBarController.swift in Sources */,
 				FD1C596523C5703E000E63A3 /* MoviesViewController.swift in Sources */,
 				FD1C592823C55E90000E63A3 /* AppDelegate.swift in Sources */,
