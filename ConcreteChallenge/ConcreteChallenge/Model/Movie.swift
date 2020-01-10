@@ -8,9 +8,12 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 @objc(Movie)
 public class Movie: NSManagedObject, Decodable {
+
+    public var image: UIImage = .placeholder
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -18,7 +21,7 @@ public class Movie: NSManagedObject, Decodable {
         case overview
         case releaseDate = "release_date"
         case title
-        case genres = "genre_ids"
+        case genres = "genres"
     }
 
     // MARK: Codable
@@ -41,6 +44,10 @@ public class Movie: NSManagedObject, Decodable {
                 genre.addToMovies(self)
             }
         }
+    }
+
+    func isSaved() throws -> Bool {
+        return (try Self.queryById(Int(self.id))) != nil
     }
 
     func insertIntoContext() throws {

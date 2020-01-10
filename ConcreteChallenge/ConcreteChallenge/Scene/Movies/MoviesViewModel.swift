@@ -8,47 +8,66 @@
 
 import NetworkLayer
 
-class MoviesViewModel {
+class MoviesViewModel: ViewModel {
     enum State {
-        case loading, empty, list, grid
+        case loading, empty, show
     }
 
     var state: State = .empty {
         didSet {
-            switch state {
+            switch self.state {
             case .empty:
-                setEmptyLayout?()
+                self.setEmptyLayout?()
             case .loading:
-                setLoadingLayout?()
-            case .list:
-                setListLayout?()
-            case .grid:
-                setGridLayout?()
+                self.setLoadingLayout?()
+            case .show:
+                self.setShowLayout?()
             }
         }
     }
 
-    var movies = [Movie]()
+    var model = [MovieCellViewModel]()
 
-    var networkManager: NetworkManager<MovieService>!
+    var networkManager: AnyNetworkManager
+
+    init(networkManager: AnyNetworkManager = NetworkManager()) {
+        self.networkManager = networkManager
+    }
 
     // MARK: Coordinator actions
 
     var showMovieDetail: MovieClosure?
 
-    // MARK: View actions
+    // MARK: View updates
 
     var setLoadingLayout: VoidClosure?
     var setEmptyLayout: VoidClosure?
-    var setListLayout: VoidClosure?
-    var setGridLayout: VoidClosure?
+    var setShowLayout: VoidClosure?
 
-    // TODO: mock NetworkManager
-    init(networkManager: NetworkManager<MovieService> = NetworkManager()) {
-        self.networkManager = networkManager
+    var updateData: MovieCellViewModelClosure?
+
+    // MARK: User actions
+
+    func didSelectMovie(index: Int) {
+        showMovieDetail?(model[index].model)
     }
 
     func loadMovies() {
         state = .loading
+
+        networkManager.request(MovieService.popularMovies) { [weak self] (result: Result<MovieResponse, Error>) in
+            switch result {
+            case .success(let movieResponse):
+                DispatchQueue.main.async { [weak self] in
+                    let results = movieResponse.results.map({ MovieCellViewModel(model: $0) })
+                    self?.model = results
+                    self?.updateData?(results)
+                    self?.state = .show
+                }
+            case .failure(let error):
+                // TODO: send error to view
+                debugPrint(error)
+            }
+        }
     }
 }

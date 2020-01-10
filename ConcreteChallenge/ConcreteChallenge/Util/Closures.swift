@@ -6,5 +6,12 @@
 //  Copyright © 2019 Marcos Santos. All rights reserved.
 //
 
+import UIKit
+
 typealias VoidClosure = () -> Void
+
 typealias MovieClosure = (Movie) -> Void
+
+typealias ImageClosure = (UIImage?) -> Void
+
+typealias MovieCellViewModelClosure = ([MovieCellViewModel]) -> Void

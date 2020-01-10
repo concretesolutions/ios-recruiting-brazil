@@ -18,6 +18,7 @@ class UIImageCustomIconsSpec: QuickSpec {
 
             it("should not have nil images") {
 
+                expect(UIImage.placeholder).toNot(beNil())
                 expect(UIImage.listIcon).toNot(beNil())
                 expect(UIImage.Favorite.emptyIcon).toNot(beNil())
                 expect(UIImage.Favorite.fullIcon).toNot(beNil())

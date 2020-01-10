@@ -27,6 +27,12 @@ extension MovieService: NetworkService {
 
     var task: HTTPTask { .requestPlain }
 
-    var headers: Headers? { nil }
+    var headers: Headers? {
+        ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9" +
+            ".eyJhdWQiOiI1OTBmOTQwODQ5NDMzNmQ1OWE4MjNhYWI0YjMxODEwYiIsInN1YiI6IjVlMDEwOTQ0N" +
+            "zUxMTBkMDAxM2Q4MjAyNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ" +
+            ".ZgQyw4wodpbCqpq4tbttpKgmsAEDocc_njRuQS5MyG8",
+         "Content-Type": "application/json;charset=utf-8"]
+    }
 
 }

@@ -9,11 +9,13 @@
 import UIKit
 
 struct AppCoordinator: Coordinator {
-    let window: UIWindow
+    let window = UIWindow(frame: UIScreen.main.bounds)
+        .set(\.backgroundColor, to: .white)
+        .set(\.tintColor, to: .black)
+
     var rootViewController: UITabBarController
 
     init() {
-        self.window = UIWindow(frame: UIScreen.main.bounds)
         self.rootViewController = CustomTabBarController()
     }
 
@@ -26,8 +28,8 @@ struct AppCoordinator: Coordinator {
         favoritesCoordinator.start()
 
         rootViewController.viewControllers = [
-            moviesCoordinator.rootViewController,
-            favoritesCoordinator.rootViewController
+            moviesCoordinator.presenter,
+            favoritesCoordinator.presenter
         ]
 
         moviesCoordinator.presenter.tabBarItem.image = UIImage.listIcon
