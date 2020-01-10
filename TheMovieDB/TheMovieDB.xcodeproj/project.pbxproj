@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,10 +15,11 @@
 		FD1C593723C55E91000E63A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD1C593523C55E91000E63A3 /* LaunchScreen.storyboard */; };
 		FD1C594223C55E91000E63A3 /* TheMovieDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1C594123C55E91000E63A3 /* TheMovieDBTests.swift */; };
 		FD1C594D23C55E92000E63A3 /* TheMovieDBUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1C594C23C55E92000E63A3 /* TheMovieDBUITests.swift */; };
-		FD1C596523C5703E000E63A3 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1C596423C5703E000E63A3 /* MoviesViewController.swift */; };
 		FD1C596723C5706C000E63A3 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1C596623C5706C000E63A3 /* FavoritesViewController.swift */; };
 		FD95E05323C57FD900D10AA8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FD95E05123C57FD900D10AA8 /* Localizable.strings */; };
-		FD95E05623C805C000D10AA8 /* MoviesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E05523C805C000D10AA8 /* MoviesCollectionView.swift */; };
+		FD95E05C23C808F400D10AA8 /* Stevia in Frameworks */ = {isa = PBXBuildFile; productRef = FD95E05B23C808F400D10AA8 /* Stevia */; };
+		FD95E05E23C8095700D10AA8 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E05D23C8095700D10AA8 /* MoviesViewController.swift */; };
+		FD95E06123C8098700D10AA8 /* MovieGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E06023C8098700D10AA8 /* MovieGridView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,11 +54,11 @@
 		FD1C594823C55E92000E63A3 /* TheMovieDBUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheMovieDBUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD1C594C23C55E92000E63A3 /* TheMovieDBUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMovieDBUITests.swift; sourceTree = "<group>"; };
 		FD1C594E23C55E92000E63A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FD1C596423C5703E000E63A3 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		FD1C596623C5706C000E63A3 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		FD1C596823C57345000E63A3 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		FD95E05223C57FD900D10AA8 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		FD95E05523C805C000D10AA8 /* MoviesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionView.swift; sourceTree = "<group>"; };
+		FD95E05D23C8095700D10AA8 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
+		FD95E06023C8098700D10AA8 /* MovieGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD95E05C23C808F400D10AA8 /* Stevia in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,8 +185,8 @@
 		FD1C596223C5700B000E63A3 /* Movies */ = {
 			isa = PBXGroup;
 			children = (
-				FD95E05423C805B300D10AA8 /* UI */,
-				FD1C596423C5703E000E63A3 /* MoviesViewController.swift */,
+				FD95E05F23C8097400D10AA8 /* UI */,
+				FD95E05D23C8095700D10AA8 /* MoviesViewController.swift */,
 			);
 			path = Movies;
 			sourceTree = "<group>";
@@ -197,10 +199,10 @@
 			path = Favorites;
 			sourceTree = "<group>";
 		};
-		FD95E05423C805B300D10AA8 /* UI */ = {
+		FD95E05F23C8097400D10AA8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				FD95E05523C805C000D10AA8 /* MoviesCollectionView.swift */,
+				FD95E06023C8098700D10AA8 /* MovieGridView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -221,6 +223,9 @@
 			dependencies = (
 			);
 			name = TheMovieDB;
+			packageProductDependencies = (
+				FD95E05B23C808F400D10AA8 /* Stevia */,
+			);
 			productName = TheMovieDB;
 			productReference = FD1C592423C55E90000E63A3 /* TheMovieDB.app */;
 			productType = "com.apple.product-type.application";
@@ -294,6 +299,9 @@
 				"pt-BR",
 			);
 			mainGroup = FD1C591B23C55E90000E63A3;
+			packageReferences = (
+				FD95E05A23C808F400D10AA8 /* XCRemoteSwiftPackageReference "Stevia" */,
+			);
 			productRefGroup = FD1C592523C55E90000E63A3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -337,13 +345,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD95E05623C805C000D10AA8 /* MoviesCollectionView.swift in Sources */,
 				FD1C592C23C55E90000E63A3 /* TabBarController.swift in Sources */,
-				FD1C596523C5703E000E63A3 /* MoviesViewController.swift in Sources */,
 				FD1C592823C55E90000E63A3 /* AppDelegate.swift in Sources */,
 				FD1C593223C55E90000E63A3 /* TheMovieDB.xcdatamodeld in Sources */,
 				FD1C596723C5706C000E63A3 /* FavoritesViewController.swift in Sources */,
+				FD95E06123C8098700D10AA8 /* MovieGridView.swift in Sources */,
 				FD1C592A23C55E90000E63A3 /* SceneDelegate.swift in Sources */,
+				FD95E05E23C8095700D10AA8 /* MoviesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,6 +683,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FD95E05A23C808F400D10AA8 /* XCRemoteSwiftPackageReference "Stevia" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/freshOS/Stevia.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FD95E05B23C808F400D10AA8 /* Stevia */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FD95E05A23C808F400D10AA8 /* XCRemoteSwiftPackageReference "Stevia" */;
+			productName = Stevia;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		FD1C593023C55E90000E63A3 /* TheMovieDB.xcdatamodeld */ = {
