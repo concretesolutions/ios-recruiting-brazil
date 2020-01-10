@@ -50,6 +50,12 @@ class MovieDetailViewModel: ViewModel {
     var overview: String {
         model.overview
     }
+    var genres: String {
+        guard let genres = model.genres?.allObjects as? [Genre] else {
+            return "No genres"
+        }
+        return genres.map({ $0.name }).joined(separator: ", ")
+    }
     var releaseYear: String {
         let formatter = DateFormatter()
             .set(\.dateFormat, to: "YYYY")

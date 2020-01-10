@@ -23,13 +23,22 @@ class MovieDetailView: UIView, ViewCode {
         .set(\.clipsToBounds, to: true)
 
     lazy var titleLabel = UILabel()
-        .set(\.numberOfLines, to: 2)
+        .set(\.numberOfLines, to: 0)
         .set(\.font, to: UIFont.systemFont(ofSize: 20, weight: .bold))
 
     lazy var overviewLabel = UILabel()
         .set(\.numberOfLines, to: 0)
 
+    lazy var genresLabel = UILabel()
+        .set(\.numberOfLines, to: 0)
+        .set(\.textColor, to: .gray)
+        .run { label in
+            label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        }
+
     lazy var yearLabel = UILabel()
+        .set(\.textColor, to: .gray)
+        .set(\.textAlignment, to: .right)
 
     required override init(frame: CGRect) {
         super.init(frame: frame)
@@ -56,6 +65,8 @@ class MovieDetailView: UIView, ViewCode {
 
         contentView.addSubview(coverImageView)
         contentView.addSubview(titleLabel)
+        contentView.addSubview(genresLabel)
+        contentView.addSubview(yearLabel)
         contentView.addSubview(overviewLabel)
     }
 
@@ -83,8 +94,17 @@ class MovieDetailView: UIView, ViewCode {
             .anchor(leading: contentView.leadingAnchor, padding: 16)
             .anchor(trailing: contentView.trailingAnchor, padding: 16)
 
+        genresLabel
+            .anchor(top: titleLabel.bottomAnchor, padding: 8)
+            .anchor(leading: contentView.leadingAnchor, padding: 16)
+
+        yearLabel
+            .anchor(top: titleLabel.bottomAnchor, padding: 8)
+            .anchor(leading: genresLabel.trailingAnchor, padding: 16)
+            .anchor(trailing: contentView.trailingAnchor, padding: 16)
+
         overviewLabel
-            .anchor(top: titleLabel.bottomAnchor, padding: 16)
+            .anchor(top: genresLabel.bottomAnchor, padding: 16)
             .anchor(leading: contentView.leadingAnchor, padding: 16)
             .anchor(trailing: contentView.trailingAnchor, padding: 16)
             .anchor(bottom: contentView.bottomAnchor, padding: 16)

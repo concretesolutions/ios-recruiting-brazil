@@ -21,6 +21,8 @@ class MovieDetailViewController: UIViewController {
         self.view = movieDetailView
         self.title = ""
 
+        self.view.layer.addSublayer(Gradient.main(UIScreen.main.bounds.width, 200, color: .white))
+
         viewModel.setLoadingLayout = movieDetailView.setLoadingLayout
         viewModel.setShowLayout = setShowLayout
         viewModel.updateImage = updateImage
@@ -33,6 +35,7 @@ class MovieDetailViewController: UIViewController {
         movieDetailView.titleLabel.text = viewModel?.title
         movieDetailView.overviewLabel.text = viewModel?.overview
         movieDetailView.yearLabel.text = viewModel?.releaseYear
+        movieDetailView.genresLabel.text = viewModel?.genres
         updateImage()
 
         movieDetailView.loadingView.isHidden = true
