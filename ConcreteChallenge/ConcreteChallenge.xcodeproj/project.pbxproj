@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		2A269D98D68EC450FC0D8403 /* Pods_ConcreteChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4894D26B3459766828B0780 /* Pods_ConcreteChallengeTests.framework */; };
 		5524C7E3ABF47D1FADFED272 /* Pods_ConcreteChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E6896F8D20B5A130D89658 /* Pods_ConcreteChallenge.framework */; };
+		8D1761F523C8BC24003F53DB /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E4E5C23AC23BA0074C81E /* Movie.swift */; };
+		8D1761F623C8BC24003F53DB /* Movie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E4E5D23AC23BA0074C81E /* Movie+CoreDataProperties.swift */; };
+		8D1761F723C8BC24003F53DB /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E4E5B23AC23BA0074C81E /* Genre.swift */; };
+		8D1761F823C8BC24003F53DB /* Genre+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E4E5A23AC23BA0074C81E /* Genre+CoreDataProperties.swift */; };
 		8D3E4DB223AA93130074C81E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E4DB123AA93130074C81E /* AppDelegate.swift */; };
 		8D3E4DB723AA93130074C81E /* ConcreteChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E4DB523AA93130074C81E /* ConcreteChallenge.xcdatamodeld */; };
 		8D3E4DBB23AA93170074C81E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D3E4DBA23AA93170074C81E /* Assets.xcassets */; };
@@ -53,10 +57,6 @@
 		8D3E4E5523AC08A80074C81E /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E4E5423AC08A80074C81E /* MovieService.swift */; };
 		8D3E4E5723AC20920074C81E /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E4E5623AC20920074C81E /* MovieResponse.swift */; };
 		8D3E4E5923AC22A40074C81E /* GenreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E4E5823AC22A40074C81E /* GenreResponse.swift */; };
-		8D3E4E5E23AC23BA0074C81E /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E4E5C23AC23BA0074C81E /* Movie.swift */; };
-		8D3E4E5F23AC23BA0074C81E /* Genre+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E4E5A23AC23BA0074C81E /* Genre+CoreDataProperties.swift */; };
-		8D3E4E6023AC23BA0074C81E /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E4E5B23AC23BA0074C81E /* Genre.swift */; };
-		8D3E4E6123AC23BA0074C81E /* Movie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E4E5D23AC23BA0074C81E /* Movie+CoreDataProperties.swift */; };
 		8D3E4E6323ACFCEF0074C81E /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E4E6223ACFCEE0074C81E /* CoreDataManager.swift */; };
 		8D3E4E6623ACFE710074C81E /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E4E6523ACFE710074C81E /* CoreDataError.swift */; };
 		8D3E4E6B23AD5E190074C81E /* NSManagedObject+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E4E6A23AD5E190074C81E /* NSManagedObject+Helpers.swift */; };
@@ -895,6 +895,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D1761F523C8BC24003F53DB /* Movie.swift in Sources */,
+				8D1761F623C8BC24003F53DB /* Movie+CoreDataProperties.swift in Sources */,
+				8D1761F723C8BC24003F53DB /* Genre.swift in Sources */,
+				8D1761F823C8BC24003F53DB /* Genre+CoreDataProperties.swift in Sources */,
 				8D3E4E7E23AFA63F0074C81E /* MovieCollectionViewCell.swift in Sources */,
 				8D3E4DDB23AAA62C0074C81E /* AppCoordinator.swift in Sources */,
 				8D3E4DE323AAAF780074C81E /* MoviesCoordinator.swift in Sources */,
@@ -902,7 +906,6 @@
 				8D3E4E7A23AE551B0074C81E /* NSObject+BuilderChain.swift in Sources */,
 				8D3E4E0823ABDFB20074C81E /* CustomTabBarController.swift in Sources */,
 				8D3E4E6B23AD5E190074C81E /* NSManagedObject+Helpers.swift in Sources */,
-				8D3E4E6123AC23BA0074C81E /* Movie+CoreDataProperties.swift in Sources */,
 				8D3E4E5723AC20920074C81E /* MovieResponse.swift in Sources */,
 				8D3E4DB223AA93130074C81E /* AppDelegate.swift in Sources */,
 				8D3E4E8C23AFB1950074C81E /* UICollectionView+Helpers.swift in Sources */,
@@ -911,16 +914,13 @@
 				8D3E4DFC23ABB8AA0074C81E /* MovieDetailViewController.swift in Sources */,
 				8D3E4E7423AD6BB30074C81E /* Require.swift in Sources */,
 				8D3E4E5523AC08A80074C81E /* MovieService.swift in Sources */,
-				8D3E4E6023AC23BA0074C81E /* Genre.swift in Sources */,
 				8D3E4EA123B104120074C81E /* CollectionViewDataSource.swift in Sources */,
 				8D3E4E0223ABC4140074C81E /* UIImage+CustomIcons.swift in Sources */,
-				8D3E4E5F23AC23BA0074C81E /* Genre+CoreDataProperties.swift in Sources */,
 				8D3E4E6623ACFE710074C81E /* CoreDataError.swift in Sources */,
 				8D4DA80923BA85A400EA00E6 /* ImageLoader.swift in Sources */,
 				8D3E4E8223AFA6CE0074C81E /* TableViewDataSource.swift in Sources */,
 				8D3E4E8A23AFB1880074C81E /* UITableView+Helpers.swift in Sources */,
 				8D4DA80723BA778800EA00E6 /* Gradient.swift in Sources */,
-				8D3E4E5E23AC23BA0074C81E /* Movie.swift in Sources */,
 				8D3E4E7823AE4DA80074C81E /* BuilderChain.swift in Sources */,
 				8D3E4DF823ABB1F40074C81E /* MovieDetailCoordinator.swift in Sources */,
 				8D3E4E9E23B0F5660074C81E /* EmptyView.swift in Sources */,
