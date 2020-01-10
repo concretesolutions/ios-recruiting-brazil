@@ -19,10 +19,30 @@ class MovieDetailViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         self.view = movieDetailView
-        self.title = "Movies"
+        self.title = ""
 
         viewModel.setLoadingLayout = movieDetailView.setLoadingLayout
-        viewModel.setShowLayout = movieDetailView.setShowLayout
+        viewModel.setShowLayout = setShowLayout
+        viewModel.updateImage = updateImage
+
+        viewModel.loadImage()
+        viewModel.loadGenres()
+    }
+
+    func setShowLayout() {
+        movieDetailView.titleLabel.text = viewModel?.title
+        movieDetailView.overviewLabel.text = viewModel?.overview
+        movieDetailView.yearLabel.text = viewModel?.releaseYear
+        updateImage()
+
+        movieDetailView.loadingView.isHidden = true
+        movieDetailView.loadingView.stop()
+
+        movieDetailView.contentView.isHidden = false
+    }
+
+    func updateImage() {
+        movieDetailView.coverImageView.image = viewModel?.image
     }
 
     required init?(coder: NSCoder) {
