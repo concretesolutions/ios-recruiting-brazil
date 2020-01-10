@@ -75,7 +75,7 @@ extension FavoriteTableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 32),
+            titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 24),
             titleLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(greaterThanOrEqualTo: yearLabel.leadingAnchor, constant: -8)
         ])
@@ -87,7 +87,7 @@ extension FavoriteTableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            yearLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 32),
+            yearLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 24),
             yearLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
             yearLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 0.2)
         ])

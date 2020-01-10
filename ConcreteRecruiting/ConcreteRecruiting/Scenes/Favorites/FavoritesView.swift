@@ -38,6 +38,12 @@ class FavoritesView: UIView {
         }
     }
     
+    var tableViewDelegate: FavoritesDelegate? {
+        didSet {
+            self.tableView.delegate = self.tableViewDelegate
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -53,6 +59,7 @@ class FavoritesView: UIView {
     
     func setup() {
         self.tableViewDataSource = FavoritesDataSource()
+        self.tableViewDelegate = FavoritesDelegate()
     }
     
 }
