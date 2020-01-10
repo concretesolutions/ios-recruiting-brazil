@@ -13,7 +13,7 @@ import UIKit
 class FavoritesDelegate: NSObject, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 96
+        return 120
     }
     
     // TODO: Get this information from viewModel

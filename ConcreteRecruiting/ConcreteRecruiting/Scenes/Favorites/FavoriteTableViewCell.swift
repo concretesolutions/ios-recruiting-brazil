@@ -95,7 +95,7 @@ extension FavoriteTableViewCell {
         NSLayoutConstraint.activate([
             yearLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 24),
             yearLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
-            yearLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 0.2),
+            yearLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 0.1),
             yearLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 0)
         ])
         
