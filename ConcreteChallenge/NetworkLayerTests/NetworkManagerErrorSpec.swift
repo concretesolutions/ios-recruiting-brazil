@@ -14,7 +14,7 @@ import Nimble
 class NetworkManagerErrorSpec: QuickSpec {
 
     var session: NetworkSessionMock!
-    var networkManager: NetworkManager<NetworkServiceMock>!
+    var networkManager: NetworkManager!
 
     override func spec() {
         beforeEach {
@@ -26,9 +26,9 @@ class NetworkManagerErrorSpec: QuickSpec {
 
             it("should return error on invalid url") {
                 var error: Error?
-                var networkManager = NetworkManager<NetworkServiceInvalidURLMock>(session: self.session)
+                var networkManager = NetworkManager(session: self.session)
 
-                networkManager.request(.invalidURL) { (result: Result<UserMock, Error>) in
+                networkManager.request(NetworkServiceInvalidURLMock.invalidURL) { (result: Result<UserMock, Error>) in
                     guard case let .failure(err) = result else {
                         return fail("Expecting failure, got success")
                     }
@@ -41,7 +41,7 @@ class NetworkManagerErrorSpec: QuickSpec {
             it("should return error on empty data") {
                 var error: Error?
 
-                self.networkManager.request(.success) { (result: Result<UserMock, Error>) in
+                self.networkManager.request(NetworkServiceMock.success) { (result: Result<UserMock, Error>) in
                     guard case let .failure(err) = result else {
                         return fail("Expecting failure, got success")
                     }
@@ -58,7 +58,7 @@ class NetworkManagerErrorSpec: QuickSpec {
                 self.session.response = nil
                 self.networkManager.session = self.session
 
-                self.networkManager.request(.success) { (result: Result<UserMock, Error>) in
+                self.networkManager.request(NetworkServiceMock.success) { (result: Result<UserMock, Error>) in
                     guard case let .failure(err) = result else {
                         return fail("Expecting failure, got success")
                     }
@@ -75,7 +75,7 @@ class NetworkManagerErrorSpec: QuickSpec {
                 self.session.error = TestConstants.mockError()
                 self.networkManager.session = self.session
 
-                self.networkManager.request(.error) { (result: Result<UserMock, Error>) in
+                self.networkManager.request(NetworkServiceMock.error) { (result: Result<UserMock, Error>) in
                     guard case let .failure(err) = result else {
                         return fail("Expecting failure, got success")
                     }

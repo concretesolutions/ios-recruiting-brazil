@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct NetworkManager<ServiceType: NetworkService> {
+public struct NetworkManager: AnyNetworkManager {
     var task: NetworkSessionDataTask?
     var session: NetworkSession
 
@@ -16,9 +16,9 @@ public struct NetworkManager<ServiceType: NetworkService> {
         self.session = session
     }
 
-    public mutating func request<ResponseType: Decodable>(_ endpoint: ServiceType,
-                                                          _ completion: @escaping
-        (Result<ResponseType, Error>) -> Void) {
+    public mutating func request<ServiceType: NetworkService, ResponseType: Decodable>(
+        _ endpoint: ServiceType,
+        _ completion: @escaping (Result<ResponseType, Error>) -> Void) {
 
         let url = endpoint.baseURL.appendingPathComponent(endpoint.path)
         guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
@@ -50,7 +50,7 @@ public struct NetworkManager<ServiceType: NetworkService> {
         task?.cancel()
     }
 
-    func buildRequest(for endpoint: ServiceType, url: URL) -> URLRequest {
+    func buildRequest<ServiceType: NetworkService>(for endpoint: ServiceType, url: URL) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
         if let headers = endpoint.headers {

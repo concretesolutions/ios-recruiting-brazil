@@ -14,7 +14,7 @@ import Nimble
 class NetworkManagerSpec: QuickSpec {
 
     var session: NetworkSessionMock!
-    var networkManager: NetworkManager<NetworkServiceMock>!
+    var networkManager: NetworkManager!
 
     override func spec() {
         beforeEach {
@@ -32,7 +32,7 @@ class NetworkManagerSpec: QuickSpec {
                 self.session.data = try? expectedUser.encoded()
                 self.networkManager.session = self.session
 
-                self.networkManager.request(.success) { (result: Result<UserMock, Error>) in
+                self.networkManager.request(NetworkServiceMock.success) { (result: Result<UserMock, Error>) in
                     user = try? result.get()
                 }
                 expect(user).to(equal(expectedUser))
@@ -40,7 +40,7 @@ class NetworkManagerSpec: QuickSpec {
 
             it("should be cancellable") {
 
-                self.networkManager.request(.success) { (_: Result<UserMock, Error>) in
+                self.networkManager.request(NetworkServiceMock.success) { (_: Result<UserMock, Error>) in
                 }
                 expect(self.networkManager.task?.state).to(equal(.running))
 
@@ -51,9 +51,9 @@ class NetworkManagerSpec: QuickSpec {
             context("when doing post (sending data and headers)") {
 
                 let user = UserMock.testInstance()
-                var networkManager = NetworkManager<NetworkServiceMock>(session: NetworkSessionMock())
+                var networkManager = NetworkManager(session: NetworkSessionMock())
 
-                networkManager.request(.post(user)) { (_: Result<UserMock, Error>) in
+                networkManager.request(NetworkServiceMock.post(user)) { (_: Result<UserMock, Error>) in
                 }
                 let session = networkManager.session as? NetworkSessionMock
 

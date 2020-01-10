@@ -14,7 +14,7 @@ import Nimble
 class NetworkManagerResponseErrorSpec: QuickSpec {
 
     var session: NetworkSessionMock!
-    var networkManager: NetworkManager<NetworkServiceMock>!
+    var networkManager: NetworkManager!
 
     override func spec() {
         beforeEach {
@@ -35,7 +35,7 @@ class NetworkManagerResponseErrorSpec: QuickSpec {
                 self.session.data = try? JSONSerialization.data(withJSONObject: expectedUser, options: [])
                 self.networkManager.session = self.session
 
-                self.networkManager.request(.decodeError) { (result: Result<UserMock, Error>) in
+                self.networkManager.request(NetworkServiceMock.decodeError) { (result: Result<UserMock, Error>) in
                     guard case let .failure(err) = result else {
                         return fail("Expecting failure, got success")
                     }
