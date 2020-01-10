@@ -20,6 +20,8 @@
 		FD95E05C23C808F400D10AA8 /* Stevia in Frameworks */ = {isa = PBXBuildFile; productRef = FD95E05B23C808F400D10AA8 /* Stevia */; };
 		FD95E05E23C8095700D10AA8 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E05D23C8095700D10AA8 /* MoviesViewController.swift */; };
 		FD95E06123C8098700D10AA8 /* MovieGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E06023C8098700D10AA8 /* MovieGridView.swift */; };
+		FD95E06323C8231200D10AA8 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E06223C8231200D10AA8 /* Movie.swift */; };
+		FD95E06523C823C700D10AA8 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E06423C823C700D10AA8 /* Genre.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		FD95E05223C57FD900D10AA8 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		FD95E05D23C8095700D10AA8 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		FD95E06023C8098700D10AA8 /* MovieGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridView.swift; sourceTree = "<group>"; };
+		FD95E06223C8231200D10AA8 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		FD95E06423C823C700D10AA8 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +121,6 @@
 				FD1C595C23C5637A000E63A3 /* Resources */,
 				FD1C593823C55E91000E63A3 /* Info.plist */,
 				FD95E05123C57FD900D10AA8 /* Localizable.strings */,
-				FD1C593023C55E90000E63A3 /* TheMovieDB.xcdatamodeld */,
 			);
 			path = TheMovieDB;
 			sourceTree = "<group>";
@@ -171,6 +174,9 @@
 		FD1C595D23C56392000E63A3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FD1C593023C55E90000E63A3 /* TheMovieDB.xcdatamodeld */,
+				FD95E06223C8231200D10AA8 /* Movie.swift */,
+				FD95E06423C823C700D10AA8 /* Genre.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -345,12 +351,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD95E06523C823C700D10AA8 /* Genre.swift in Sources */,
 				FD1C592C23C55E90000E63A3 /* TabBarController.swift in Sources */,
 				FD1C592823C55E90000E63A3 /* AppDelegate.swift in Sources */,
 				FD1C593223C55E90000E63A3 /* TheMovieDB.xcdatamodeld in Sources */,
 				FD1C596723C5706C000E63A3 /* FavoritesViewController.swift in Sources */,
 				FD95E06123C8098700D10AA8 /* MovieGridView.swift in Sources */,
 				FD1C592A23C55E90000E63A3 /* SceneDelegate.swift in Sources */,
+				FD95E06323C8231200D10AA8 /* Movie.swift in Sources */,
 				FD95E05E23C8095700D10AA8 /* MoviesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
