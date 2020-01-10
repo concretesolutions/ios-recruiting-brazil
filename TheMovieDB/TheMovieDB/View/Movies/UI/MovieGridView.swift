@@ -11,7 +11,7 @@ import UIKit
 import Stevia
 
 class MovieGridView: UIView {
-    private var collectionView: UICollectionView
+    public var collectionView: UICollectionView
     private let marginEdgeInserts: CGFloat = 5
     init() {
         let layout = UICollectionViewFlowLayout.init()
@@ -39,6 +39,8 @@ class MovieGridView: UIView {
     }
     
     private func setupCollectionView() {
+        collectionView.backgroundColor = .gray
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "customCell")
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
                                               heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -47,7 +49,7 @@ class MovieGridView: UIView {
                                                      bottom: marginEdgeInserts,
                                                      trailing: marginEdgeInserts)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .fractionalWidth(0.25))
+                                               heightDimension: .fractionalHeight(0.33))
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                        subitems: [item])
