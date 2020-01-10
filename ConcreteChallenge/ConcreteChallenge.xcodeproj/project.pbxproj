@@ -9,13 +9,17 @@
 /* Begin PBXBuildFile section */
 		ECB786E123C8F0A400062B37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB786E023C8F0A400062B37 /* AppDelegate.swift */; };
 		ECB786E323C8F0A400062B37 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB786E223C8F0A400062B37 /* SceneDelegate.swift */; };
-		ECB786E523C8F0A400062B37 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB786E423C8F0A400062B37 /* ViewController.swift */; };
-		ECB786E823C8F0A400062B37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECB786E623C8F0A400062B37 /* Main.storyboard */; };
+		ECB786E523C8F0A400062B37 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB786E423C8F0A400062B37 /* MoviesViewController.swift */; };
 		ECB786EB23C8F0A400062B37 /* ConcreteChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ECB786E923C8F0A400062B37 /* ConcreteChallenge.xcdatamodeld */; };
 		ECB786ED23C8F0A500062B37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECB786EC23C8F0A500062B37 /* Assets.xcassets */; };
 		ECB786F023C8F0A500062B37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECB786EE23C8F0A500062B37 /* LaunchScreen.storyboard */; };
 		ECB786FB23C8F0A500062B37 /* ConcreteChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB786FA23C8F0A500062B37 /* ConcreteChallengeTests.swift */; };
 		ECB7870623C8F0A500062B37 /* ConcreteChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7870523C8F0A500062B37 /* ConcreteChallengeUITests.swift */; };
+		ECB7871523C8FBFD00062B37 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7871423C8FBFD00062B37 /* Router.swift */; };
+		ECB7871723C9022300062B37 /* ServiceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7871623C9022300062B37 /* ServiceLayer.swift */; };
+		ECB7871A23C90AC200062B37 /* MoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7871923C90AC200062B37 /* MoviesResponse.swift */; };
+		ECB7871C23C91ECB00062B37 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7871B23C91ECB00062B37 /* Movie.swift */; };
+		ECB7871E23C9232700062B37 /* MovieCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7871D23C9232700062B37 /* MovieCollection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +43,7 @@
 		ECB786DD23C8F0A400062B37 /* ConcreteChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConcreteChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECB786E023C8F0A400062B37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECB786E223C8F0A400062B37 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		ECB786E423C8F0A400062B37 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		ECB786E723C8F0A400062B37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ECB786E423C8F0A400062B37 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		ECB786EA23C8F0A400062B37 /* ConcreteChallenge.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConcreteChallenge.xcdatamodel; sourceTree = "<group>"; };
 		ECB786EC23C8F0A500062B37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECB786EF23C8F0A500062B37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +54,11 @@
 		ECB7870123C8F0A500062B37 /* ConcreteChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConcreteChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECB7870523C8F0A500062B37 /* ConcreteChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteChallengeUITests.swift; sourceTree = "<group>"; };
 		ECB7870723C8F0A500062B37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ECB7871423C8FBFD00062B37 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		ECB7871623C9022300062B37 /* ServiceLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLayer.swift; sourceTree = "<group>"; };
+		ECB7871923C90AC200062B37 /* MoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesResponse.swift; sourceTree = "<group>"; };
+		ECB7871B23C91ECB00062B37 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		ECB7871D23C9232700062B37 /* MovieCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +109,12 @@
 		ECB786DF23C8F0A400062B37 /* ConcreteChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				ECB7871D23C9232700062B37 /* MovieCollection.swift */,
+				ECB7871823C90AB600062B37 /* Models */,
+				ECB7871323C8FBED00062B37 /* Network */,
 				ECB786E023C8F0A400062B37 /* AppDelegate.swift */,
 				ECB786E223C8F0A400062B37 /* SceneDelegate.swift */,
-				ECB786E423C8F0A400062B37 /* ViewController.swift */,
-				ECB786E623C8F0A400062B37 /* Main.storyboard */,
+				ECB786E423C8F0A400062B37 /* MoviesViewController.swift */,
 				ECB786EC23C8F0A500062B37 /* Assets.xcassets */,
 				ECB786EE23C8F0A500062B37 /* LaunchScreen.storyboard */,
 				ECB786F123C8F0A500062B37 /* Info.plist */,
@@ -129,6 +139,24 @@
 				ECB7870723C8F0A500062B37 /* Info.plist */,
 			);
 			path = ConcreteChallengeUITests;
+			sourceTree = "<group>";
+		};
+		ECB7871323C8FBED00062B37 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				ECB7871423C8FBFD00062B37 /* Router.swift */,
+				ECB7871623C9022300062B37 /* ServiceLayer.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		ECB7871823C90AB600062B37 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ECB7871923C90AC200062B37 /* MoviesResponse.swift */,
+				ECB7871B23C91ECB00062B37 /* Movie.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,7 +265,6 @@
 			files = (
 				ECB786F023C8F0A500062B37 /* LaunchScreen.storyboard in Resources */,
 				ECB786ED23C8F0A500062B37 /* Assets.xcassets in Resources */,
-				ECB786E823C8F0A400062B37 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,9 +289,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECB7871A23C90AC200062B37 /* MoviesResponse.swift in Sources */,
 				ECB786EB23C8F0A400062B37 /* ConcreteChallenge.xcdatamodeld in Sources */,
-				ECB786E523C8F0A400062B37 /* ViewController.swift in Sources */,
+				ECB7871723C9022300062B37 /* ServiceLayer.swift in Sources */,
+				ECB786E523C8F0A400062B37 /* MoviesViewController.swift in Sources */,
+				ECB7871523C8FBFD00062B37 /* Router.swift in Sources */,
+				ECB7871E23C9232700062B37 /* MovieCollection.swift in Sources */,
 				ECB786E123C8F0A400062B37 /* AppDelegate.swift in Sources */,
+				ECB7871C23C91ECB00062B37 /* Movie.swift in Sources */,
 				ECB786E323C8F0A400062B37 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,14 +333,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		ECB786E623C8F0A400062B37 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ECB786E723C8F0A400062B37 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		ECB786EE23C8F0A500062B37 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -448,7 +472,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kaiquedamato.ConcreteChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -466,7 +490,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kaiquedamato.ConcreteChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
