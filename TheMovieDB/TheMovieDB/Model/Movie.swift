@@ -8,12 +8,18 @@
 
 import Foundation
 
-public struct Movie: Decodable {
-    let popularity, voteAverage: Double
-    let id, voteCount: Int
-    let title, posterPath, overview, releaseDate, backdropPath, originalLanguage, originalTitle: String
-    let adult, video: Bool
+struct Movie: Decodable {
+    let popularity: Double
+    let voteCount: Int
+    let video: Bool
+    let posterPath: String
+    let id: Int
+    let adult: Bool
+    let backdropPath, originalLanguage, originalTitle: String
     let genres: [Int]
+    let title: String
+    let voteAverage: Double
+    let overview, releaseDate: String
 
     enum CodingKeys: String, CodingKey {
         case popularity
