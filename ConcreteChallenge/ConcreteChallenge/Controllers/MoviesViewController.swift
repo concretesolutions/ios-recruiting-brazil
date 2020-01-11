@@ -71,7 +71,11 @@ extension MoviesViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let movie = movieCollection.movie(for: indexPath.row) else { return UITableViewCell() }
         
-        cell.posterView = PosterView(title: movie.title)
+        cell.posterView = PosterView(title: movie.title, imageURL: movie.posterURL)
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.clear
+        cell.selectedBackgroundView = backgroundView
         
         return cell
     }
@@ -81,6 +85,6 @@ extension MoviesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.frame.height * 0.7
+        return view.frame.height * 0.8
     }
 }

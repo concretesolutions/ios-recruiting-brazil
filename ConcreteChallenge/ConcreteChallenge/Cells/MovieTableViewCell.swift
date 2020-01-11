@@ -25,6 +25,14 @@ class MovieTableViewCell: UITableViewCell {
         guard let posterView = self.posterView else { return }
         
         posterView.translatesAutoresizingMaskIntoConstraints = false
+        
+        posterView.layer.shadowColor = UIColor.black.cgColor
+        posterView.layer.shadowOpacity = 0.8
+        posterView.layer.shadowOffset = .zero
+        posterView.layer.shadowRadius = 3
+        posterView.layer.shouldRasterize = true
+        posterView.layer.rasterizationScale = UIScreen.main.scale
+        
         contentView.addSubview(posterView)
         
         posterView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
