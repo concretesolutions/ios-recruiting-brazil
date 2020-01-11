@@ -27,6 +27,7 @@ class FavoritesView: UIView {
         let tableView = UITableView()
         
         tableView.register(FavoriteTableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.separatorColor = .systemGray6
         
         return tableView
     }()
