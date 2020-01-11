@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Movie: Decodable {
+struct Movie: Decodable, Hashable {
     let popularity: Double
     let voteCount: Int
     let video: Bool

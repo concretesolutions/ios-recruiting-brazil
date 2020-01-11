@@ -25,6 +25,7 @@
 		FD95E06823CA67D400D10AA8 /* ServiceAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E06723CA67D400D10AA8 /* ServiceAPIManager.swift */; };
 		FD95E06A23CA6C2F00D10AA8 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E06923CA6C2F00D10AA8 /* MovieViewModel.swift */; };
 		FD95E06C23CA7F5500D10AA8 /* PopularMoviesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E06B23CA7F5500D10AA8 /* PopularMoviesAPI.swift */; };
+		FD95E06F23CA851400D10AA8 /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E06E23CA851400D10AA8 /* Notification+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		FD95E06723CA67D400D10AA8 /* ServiceAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAPIManager.swift; sourceTree = "<group>"; };
 		FD95E06923CA6C2F00D10AA8 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieViewModel.swift; path = TheMovieDB/Service/MovieViewModel.swift; sourceTree = SOURCE_ROOT; };
 		FD95E06B23CA7F5500D10AA8 /* PopularMoviesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesAPI.swift; sourceTree = "<group>"; };
+		FD95E06E23CA851400D10AA8 /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 		FD1C592623C55E90000E63A3 /* TheMovieDB */ = {
 			isa = PBXGroup;
 			children = (
+				FD95E06D23CA84FF00D10AA8 /* Extensions */,
 				FD95E06623CA679D00D10AA8 /* Service */,
 				FD1C595B23C5636B000E63A3 /* Settings */,
 				FD1C595D23C56392000E63A3 /* Model */,
@@ -228,6 +231,14 @@
 				FD95E06723CA67D400D10AA8 /* ServiceAPIManager.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		FD95E06D23CA84FF00D10AA8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FD95E06E23CA851400D10AA8 /* Notification+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,6 +388,7 @@
 				FD95E06123C8098700D10AA8 /* MovieGridView.swift in Sources */,
 				FD1C592A23C55E90000E63A3 /* SceneDelegate.swift in Sources */,
 				FD95E06323C8231200D10AA8 /* Movie.swift in Sources */,
+				FD95E06F23CA851400D10AA8 /* Notification+Extension.swift in Sources */,
 				FD95E06A23CA6C2F00D10AA8 /* MovieViewModel.swift in Sources */,
 				FD95E06823CA67D400D10AA8 /* ServiceAPIManager.swift in Sources */,
 				FD95E05E23C8095700D10AA8 /* MoviesViewController.swift in Sources */,

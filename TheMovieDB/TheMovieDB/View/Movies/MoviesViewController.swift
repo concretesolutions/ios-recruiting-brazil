@@ -11,7 +11,7 @@ import UIKit
 
 class MoviesViewController: UIViewController {
     private let gridView = MovieGridView.init()
-    private var dataSource: UICollectionViewDiffableDataSource<Section, Int>!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Movie>!
     lazy var moviesViewModel: MovieViewModel = {
         return MovieViewModel.shared
     }()
@@ -20,10 +20,20 @@ class MoviesViewController: UIViewController {
         super.viewDidLoad()
         configurateDataSource()
         moviesViewModel.fetchMovies()
+        addObservers()
     }
     
     override func loadView() {
         view = gridView
+    }
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changedMovies), name: Notification.moviesUpdated.name, object: nil)
+    }
+    
+    @objc
+    func changedMovies() {
+        loadItems(withAnimation: true)
     }
 }
 
@@ -34,18 +44,17 @@ extension MoviesViewController {
     }
     
     private func configurateDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section,Int>.init(collectionView: gridView.collectionView , cellProvider: { (collection, indexPath, value) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<Section,Movie>.init(collectionView: gridView.collectionView , cellProvider: { (collection, indexPath, movie) -> UICollectionViewCell? in
             let cell = collection.dequeueReusableCell(withReuseIdentifier: "customCell", for: indexPath)
-            cell.backgroundColor = .red
             return cell
         })
         loadItems(withAnimation: false)
     }
     
-    private func snapshotDataSource() -> NSDiffableDataSourceSnapshot<Section, Int> {
-        var snapshot = NSDiffableDataSourceSnapshot<Section,Int>()
+    private func snapshotDataSource() -> NSDiffableDataSourceSnapshot<Section, Movie> {
+        var snapshot = NSDiffableDataSourceSnapshot<Section,Movie>()
         snapshot.appendSections([.first])
-        snapshot.appendItems(Array(1...10))
+        snapshot.appendItems(moviesViewModel.movies)
         return snapshot
     }
     

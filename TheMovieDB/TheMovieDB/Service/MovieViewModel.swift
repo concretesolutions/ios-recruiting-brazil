@@ -7,10 +7,15 @@
 //
 
 import Foundation
+import UIKit
 
 class MovieViewModel {
     public static let shared = MovieViewModel.init()
-    public var movies = [Movie]()
+    public var movies = [Movie]() {
+        didSet {
+            NotificationCenter.default.post(.moviesUpdated)
+        }
+    }
     private var pathURLMovies: String {
         get {
             return  "\(ServiceAPIManager.PathsAPI.https)\(ServiceAPIManager.PathsAPI.rootAPI)\(ServiceAPIManager.PathsAPI.versionAPI)\(ServiceAPIManager.PathsAPI.MovieAPI.movie)\(ServiceAPIManager.PathsAPI.MovieAPI.popular)"
