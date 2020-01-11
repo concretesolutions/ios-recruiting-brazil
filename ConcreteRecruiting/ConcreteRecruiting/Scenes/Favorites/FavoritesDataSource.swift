@@ -26,7 +26,7 @@ class FavoritesDataSource: NSObject, UITableViewDataSource {
         cell.posterImageView.image = UIImage(named: "Filter")
         cell.titleLabel.text = "Thor"
         cell.yearLabel.text = "2008"
-        cell.descriptionLabel.text = "Arroz Arroz Arroz"
+        cell.descriptionLabel.text = String.init(repeating: "Arroz ", count: 25)
         
         return cell
         
