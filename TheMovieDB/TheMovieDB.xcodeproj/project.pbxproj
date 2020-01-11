@@ -22,6 +22,9 @@
 		FD95E06123C8098700D10AA8 /* MovieGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E06023C8098700D10AA8 /* MovieGridView.swift */; };
 		FD95E06323C8231200D10AA8 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E06223C8231200D10AA8 /* Movie.swift */; };
 		FD95E06523C823C700D10AA8 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E06423C823C700D10AA8 /* Genre.swift */; };
+		FD95E06823CA67D400D10AA8 /* ServiceAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E06723CA67D400D10AA8 /* ServiceAPIManager.swift */; };
+		FD95E06A23CA6C2F00D10AA8 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E06923CA6C2F00D10AA8 /* MovieViewModel.swift */; };
+		FD95E06C23CA7F5500D10AA8 /* PopularMoviesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E06B23CA7F5500D10AA8 /* PopularMoviesAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +66,9 @@
 		FD95E06023C8098700D10AA8 /* MovieGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridView.swift; sourceTree = "<group>"; };
 		FD95E06223C8231200D10AA8 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		FD95E06423C823C700D10AA8 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		FD95E06723CA67D400D10AA8 /* ServiceAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAPIManager.swift; sourceTree = "<group>"; };
+		FD95E06923CA6C2F00D10AA8 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieViewModel.swift; path = TheMovieDB/Service/MovieViewModel.swift; sourceTree = SOURCE_ROOT; };
+		FD95E06B23CA7F5500D10AA8 /* PopularMoviesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +120,7 @@
 		FD1C592623C55E90000E63A3 /* TheMovieDB */ = {
 			isa = PBXGroup;
 			children = (
+				FD95E06623CA679D00D10AA8 /* Service */,
 				FD1C595B23C5636B000E63A3 /* Settings */,
 				FD1C595D23C56392000E63A3 /* Model */,
 				FD1C595A23C56059000E63A3 /* View */,
@@ -177,6 +184,7 @@
 				FD1C593023C55E90000E63A3 /* TheMovieDB.xcdatamodeld */,
 				FD95E06223C8231200D10AA8 /* Movie.swift */,
 				FD95E06423C823C700D10AA8 /* Genre.swift */,
+				FD95E06B23CA7F5500D10AA8 /* PopularMoviesAPI.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -184,6 +192,7 @@
 		FD1C595E23C56396000E63A3 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				FD95E06923CA6C2F00D10AA8 /* MovieViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -211,6 +220,14 @@
 				FD95E06023C8098700D10AA8 /* MovieGridView.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		FD95E06623CA679D00D10AA8 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				FD95E06723CA67D400D10AA8 /* ServiceAPIManager.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,9 +373,12 @@
 				FD1C592823C55E90000E63A3 /* AppDelegate.swift in Sources */,
 				FD1C593223C55E90000E63A3 /* TheMovieDB.xcdatamodeld in Sources */,
 				FD1C596723C5706C000E63A3 /* FavoritesViewController.swift in Sources */,
+				FD95E06C23CA7F5500D10AA8 /* PopularMoviesAPI.swift in Sources */,
 				FD95E06123C8098700D10AA8 /* MovieGridView.swift in Sources */,
 				FD1C592A23C55E90000E63A3 /* SceneDelegate.swift in Sources */,
 				FD95E06323C8231200D10AA8 /* Movie.swift in Sources */,
+				FD95E06A23CA6C2F00D10AA8 /* MovieViewModel.swift in Sources */,
+				FD95E06823CA67D400D10AA8 /* ServiceAPIManager.swift in Sources */,
 				FD95E05E23C8095700D10AA8 /* MoviesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

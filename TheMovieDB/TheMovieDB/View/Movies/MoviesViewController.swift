@@ -12,10 +12,14 @@ import UIKit
 class MoviesViewController: UIViewController {
     private let gridView = MovieGridView.init()
     private var dataSource: UICollectionViewDiffableDataSource<Section, Int>!
-
+    lazy var moviesViewModel: MovieViewModel = {
+        return MovieViewModel.shared
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configurateDataSource()
+        moviesViewModel.fetchMovies()
     }
     
     override func loadView() {
