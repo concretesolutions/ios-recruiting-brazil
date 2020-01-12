@@ -23,8 +23,7 @@ struct AppCoordinator: Coordinator {
         let moviesCoordinator = MoviesCoordinator()
         moviesCoordinator.start()
 
-        // TODO: implement favorites
-        let favoritesCoordinator = MoviesCoordinator()
+        let favoritesCoordinator = FavoritesCoordinator()
         favoritesCoordinator.start()
 
         rootViewController.viewControllers = [

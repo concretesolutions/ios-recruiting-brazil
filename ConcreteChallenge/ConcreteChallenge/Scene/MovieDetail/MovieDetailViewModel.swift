@@ -27,19 +27,19 @@ class MovieDetailViewModel: ViewModel {
 
     var model: Movie
 
-    var isFavorited = false
+    var isFavorited = false {
+        didSet {
+            updateFavoriteState?()
+        }
+    }
 
     var networkManager: AnyNetworkManager!
 
     init(movie: Movie, networkManager: AnyNetworkManager = NetworkManager()) {
         self.networkManager = networkManager
         self.model = movie
-        do {
-            self.isFavorited = try movie.isSaved()
-        } catch {
-            // TODO: send error to view
-            debugPrint(error)
-        }
+
+        loadFavoriteState()
     }
 
     // MARK: View content
@@ -73,12 +73,29 @@ class MovieDetailViewModel: ViewModel {
     var setLoadingLayout: VoidClosure?
     var setShowLayout: VoidClosure?
 
+    var updateFavoriteState: VoidClosure?
     var updateImage: VoidClosure?
 
     // MARK: User actions
 
+    @objc
     func favorite() {
-        // TODO: Favorite on movie detail
+        isFavorited = !isFavorited
+
+        do {
+            if isFavorited {
+                try model.deepCopy()
+                try CoreDataManager.shared.saveContext()
+            } else {
+                if let movieSaved = try Movie.queryById(Int(model.id)) {
+                    try CoreDataManager.getContext().delete(movieSaved)
+                    try CoreDataManager.shared.saveContext()
+                }
+            }
+        } catch {
+            // TODO: send error to view
+            debugPrint(error)
+        }
     }
 
     func loadImage() {
@@ -106,6 +123,15 @@ class MovieDetailViewModel: ViewModel {
                 // TODO: send error to view
                 debugPrint(error)
             }
+        }
+    }
+
+    func loadFavoriteState() {
+        do {
+            isFavorited = try model.isSaved()
+        } catch {
+            // TODO: send error to view
+            debugPrint(error)
         }
     }
 }

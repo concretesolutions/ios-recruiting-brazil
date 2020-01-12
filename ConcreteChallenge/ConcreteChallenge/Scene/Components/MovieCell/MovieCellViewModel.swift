@@ -16,7 +16,7 @@ class MovieCellViewModel: ViewModel {
 
     var isFavorited = false {
         didSet {
-            updateFavoriteButton?()
+            updateFavoriteState?()
         }
     }
 
@@ -36,6 +36,14 @@ class MovieCellViewModel: ViewModel {
     var title: String {
         model.title
     }
+    var overview: String {
+        model.overview
+    }
+    var releaseYear: String {
+        let formatter = DateFormatter()
+            .set(\.dateFormat, to: "YYYY")
+        return formatter.string(from: model.releaseDate)
+    }
     var favoriteIcon: UIImage {
         isFavorited
             ? UIImage.Favorite.fullIcon
@@ -45,7 +53,7 @@ class MovieCellViewModel: ViewModel {
 
     // MARK: View updates
 
-    var updateFavoriteButton: VoidClosure?
+    var updateFavoriteState: VoidClosure?
     var updateImage: VoidClosure?
 
     // MARK: User actions

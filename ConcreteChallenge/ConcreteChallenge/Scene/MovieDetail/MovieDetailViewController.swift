@@ -21,14 +21,17 @@ class MovieDetailViewController: UIViewController {
         self.view = movieDetailView
         self.title = ""
 
-        self.view.layer.addSublayer(Gradient.main(UIScreen.main.bounds.width, 200, color: .white))
-
         viewModel.setLoadingLayout = movieDetailView.setLoadingLayout
         viewModel.setShowLayout = setShowLayout
+        viewModel.updateFavoriteState = updateFavoriteState
         viewModel.updateImage = updateImage
 
         viewModel.loadImage()
         viewModel.loadGenres()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.loadFavoriteState()
     }
 
     func setShowLayout() {
@@ -36,12 +39,22 @@ class MovieDetailViewController: UIViewController {
         movieDetailView.overviewLabel.text = viewModel?.overview
         movieDetailView.yearLabel.text = viewModel?.releaseYear
         movieDetailView.genresLabel.text = viewModel?.genres
+
         updateImage()
 
         movieDetailView.loadingView.isHidden = true
         movieDetailView.loadingView.stop()
 
         movieDetailView.contentView.isHidden = false
+    }
+
+    func updateFavoriteState() {
+        self.navigationItem.setRightBarButton(
+            UIBarButtonItem(image: viewModel.favoriteIcon,
+                            style: .plain,
+                            target: viewModel,
+                            action: #selector(viewModel.favorite)),
+            animated: true)
     }
 
     func updateImage() {

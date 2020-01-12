@@ -30,7 +30,9 @@ class MoviesViewController: UIViewController {
         viewModel.setEmptyLayout = moviesView.setEmptyLayout
         viewModel.setShowLayout = moviesView.setShowLayout
         viewModel.updateData = updateData
+    }
 
+    override func viewWillAppear(_ animated: Bool) {
         viewModel.loadMovies()
     }
 

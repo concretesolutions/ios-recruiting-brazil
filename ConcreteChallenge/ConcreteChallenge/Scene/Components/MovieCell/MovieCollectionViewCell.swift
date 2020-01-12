@@ -42,11 +42,11 @@ class MovieCollectionViewCell: UICollectionViewCell, Cell {
 
         titleLabel.text = viewModel?.title
         viewModel?.updateImage = updateImage
-        viewModel?.updateFavoriteButton = updateFavoriteButton
+        viewModel?.updateFavoriteState = updateFavoriteState
         viewModel?.loadImage()
 
         updateImage()
-        updateFavoriteButton()
+        updateFavoriteState()
 
         contentView.layer.masksToBounds = true
         contentView.layer.cornerRadius = 8
@@ -83,7 +83,7 @@ class MovieCollectionViewCell: UICollectionViewCell, Cell {
         coverImageView.image = viewModel?.image
     }
 
-    func updateFavoriteButton() {
+    func updateFavoriteState() {
         favoriteButton.setImage(viewModel?.favoriteIcon, for: .normal)
     }
 }

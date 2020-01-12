@@ -55,6 +55,7 @@ class MovieDetailView: UIView, ViewCode {
         setupLayout()
 
         self.backgroundColor = .white
+        self.layer.addSublayer(Gradient.main(UIScreen.main.bounds.width, 200, color: .white))
     }
 
     func setupSubviews() {
