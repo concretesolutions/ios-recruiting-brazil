@@ -28,6 +28,17 @@ struct Movie: Decodable {
         case genres = "genre_ids"
     }
     
+    init(id: Int) {
+        
+        self.id = id
+        
+        self.title = ""
+        self.description = ""
+        self.bannerPath = ""
+        self.releaseDate = Date()
+        self.genres = [Int]()
+    }
+    
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
