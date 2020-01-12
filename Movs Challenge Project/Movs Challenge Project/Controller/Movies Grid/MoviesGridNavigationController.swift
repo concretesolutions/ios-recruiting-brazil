@@ -1,5 +1,5 @@
 //
-//  MainTabBarController.swift
+//  MoviesGridNavigationController.swift
 //  Movs Challenge Project
 //
 //  Created by Jezreel de Oliveira Barbosa on 12/01/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController {
+class MoviesGridNavigationController: UINavigationController {
     // Static Properties
     // Static Methods
     // Public Types
@@ -36,6 +36,7 @@ class MainTabBarController: UITabBarController {
     // Private Methods
     
     private func initController() {
-        viewControllers = [MoviesGridNavigationController(), FavoritesNavigationController()]
+        let item = UITabBarItem(title: "Movies", image: nil, selectedImage: nil)
+        tabBarItem = item
     }
 }
