@@ -23,12 +23,73 @@ class PlistFavoritesManagerTests: XCTestCase {
     }
 
     func testGetEmptyFavorites() {
-        let favorites = favoritesManager.getAllFavorites()
+        let favorites = self.favoritesManager.getAllFavorites()
         
-        assert(favorites.isEmpty)
+        XCTAssertTrue(favorites.isEmpty)
         
     }
     
+    func testSaveFavorite() {
+       
+        var favorites = self.favoritesManager.getAllFavorites()
+        
+        XCTAssertTrue(favorites.isEmpty)
+        
+        let movie = Movie(id: 1)
+        self.favoritesManager.addFavorite(movie)
+        
+        favorites = self.favoritesManager.getAllFavorites()
+        let numberOfFavorites = favorites.count
+        
+        XCTAssertEqual(numberOfFavorites, 1)
+        
+    }
     
+    func testNotSaveDuplicateFavorite() {
+        
+        var favorites = self.favoritesManager.getAllFavorites()
+        
+        XCTAssertTrue(favorites.isEmpty)
+        
+        let movies = Array.init(repeating: Movie(id: 2), count: 10)
+        
+        for movie in movies {
+            self.favoritesManager.addFavorite(movie)
+        }
+        
+        favorites = self.favoritesManager.getAllFavorites()
+        let numberOfFavorites = favorites.count
+        
+        XCTAssertEqual(numberOfFavorites, 1)
+        
+    }
+    
+    func testRemoveFavorite() {
+        
+        let movie = Movie(id: 3)
+        self.favoritesManager.addFavorite(movie)
+        
+        var favorites = self.favoritesManager.getAllFavorites()
+        var numberOfFavorites = favorites.count
+        
+        XCTAssertEqual(numberOfFavorites, 1)
+        
+        self.favoritesManager.removeFavorite(movie)
+        
+        favorites = self.favoritesManager.getAllFavorites()
+        numberOfFavorites = favorites.count
+        
+        XCTAssertEqual(numberOfFavorites, 0)
+        
+    }
+    
+    func testCheckFavoritePresence() {
+        
+        let movie = Movie(id: 3)
+        self.favoritesManager.addFavorite(movie)
+        
+        XCTAssertEqual(self.favoritesManager.checkForPresence(of: movie), true)
+        
+    }
     
 }
