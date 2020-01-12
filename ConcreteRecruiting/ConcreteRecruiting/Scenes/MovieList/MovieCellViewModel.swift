@@ -8,10 +8,10 @@
 
 import Foundation
 
-class MovieCellViewModel<IFavoriteManager> where IFavoriteManager: FavoritesManager, IFavoriteManager.Model == Movie {
+class MovieCellViewModel {
     
     private var movie: Movie
-    private var favoritesManager: IFavoriteManager
+    private var favoritesManager: FavoriteMoviesManager
     
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -23,7 +23,7 @@ class MovieCellViewModel<IFavoriteManager> where IFavoriteManager: FavoritesMana
     
     var didAcquireBannerData: ((Data) -> Void)?
     
-    init(with movie: Movie, favoritesManager: IFavoriteManager) {
+    init(with movie: Movie, favoritesManager: FavoriteMoviesManager) {
         self.movie = movie
         self.favoritesManager = favoritesManager
     }
@@ -88,9 +88,6 @@ class MovieCellViewModel<IFavoriteManager> where IFavoriteManager: FavoritesMana
     
     func didTapFavorite() {
         
-        movie.isFavorite = !movie.isFavorite
-        
-        // TODO: Persist the favorite somewhere
         if !self.isFavorite {
             self.favoritesManager.addFavorite(self.movie)
         } else {
