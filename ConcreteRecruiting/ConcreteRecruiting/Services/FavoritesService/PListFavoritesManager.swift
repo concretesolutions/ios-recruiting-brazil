@@ -42,11 +42,11 @@ class PListFavoritesManager: FavoritesManager {
         
     }
     
-    func checkForPresence(of model: Movie) -> Bool {
+    func checkForPresence(of model: Model) -> Bool {
         return getAllFavorites().contains(model.id)
     }
     
-    func addFavorite(_ model: Movie) {
+    func addFavorite(_ model: Model) {
         
         guard !checkForPresence(of: model) else { return }
         
@@ -58,7 +58,7 @@ class PListFavoritesManager: FavoritesManager {
         
     }
     
-    func removeFavorite(_ model: Movie) {
+    func removeFavorite(_ model: Model) {
         
         var favorites = getAllFavorites()
 
