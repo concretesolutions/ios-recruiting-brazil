@@ -10,6 +10,7 @@ import UIKit
 
 struct Movie: Decodable {
     
+    let id: Int
     let title: String
     let description: String
     let releaseDate: Date?
@@ -19,6 +20,7 @@ struct Movie: Decodable {
     var isFavorite: Bool = false
     
     enum CodingKeys: String, CodingKey {
+        case id
         case title
         case description = "overview"
         case releaseDate = "release_date"
@@ -26,9 +28,21 @@ struct Movie: Decodable {
         case genres = "genre_ids"
     }
     
+    init(id: Int) {
+        
+        self.id = id
+        
+        self.title = ""
+        self.description = ""
+        self.bannerPath = ""
+        self.releaseDate = Date()
+        self.genres = [Int]()
+    }
+    
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
+        self.id = try values.decode(Int.self, forKey: .id)
         self.title = try values.decode(String.self, forKey: .title)
         self.description = try values.decode(String.self, forKey: .description)
        
