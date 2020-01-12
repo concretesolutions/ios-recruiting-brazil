@@ -8,10 +8,10 @@
 
 import Foundation
 
-class MovieCellViewModel {
+class MovieCellViewModel<IFavoriteManager> where IFavoriteManager: FavoritesManager, IFavoriteManager.Model == Movie {
     
     private var movie: Movie
-    private var favoritesManager: FavoritesManager
+    private var favoritesManager: IFavoriteManager
     
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -23,7 +23,7 @@ class MovieCellViewModel {
     
     var didAcquireBannerData: ((Data) -> Void)?
     
-    init(with movie: Movie, favoritesManager: FavoritesManager) {
+    init(with movie: Movie, favoritesManager: IFavoriteManager) {
         self.movie = movie
         self.favoritesManager = favoritesManager
     }

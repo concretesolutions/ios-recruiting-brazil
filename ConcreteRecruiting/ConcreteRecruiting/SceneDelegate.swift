@@ -29,7 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let favoriteNavigationController = UINavigationController(rootViewController: favoritesVC)
         favoriteNavigationController.navigationBar.applyDefaultStyle()
         
-        self.window?.rootViewController = favoriteNavigationController
+        self.window?.rootViewController = navigationController
                 
     }
 
