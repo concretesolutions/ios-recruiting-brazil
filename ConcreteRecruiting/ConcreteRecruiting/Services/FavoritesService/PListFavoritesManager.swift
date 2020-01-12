@@ -17,6 +17,10 @@ class PListFavoritesManager: FavoritesManager {
     private let plistName = "/favorites.plist"
     private let plistPath: String
     
+    var favoritesPath: String {
+        return plistPath
+    }
+    
     init() {
         
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
