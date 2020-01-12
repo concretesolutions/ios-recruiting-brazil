@@ -11,6 +11,7 @@ import Foundation
 class MovieCellViewModel {
     
     private var movie: Movie
+    private var favoritesManager: FavoritesManager
     
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -22,8 +23,9 @@ class MovieCellViewModel {
     
     var didAcquireBannerData: ((Data) -> Void)?
     
-    init(with movie: Movie) {
+    init(with movie: Movie, favoritesManager: FavoritesManager) {
         self.movie = movie
+        self.favoritesManager = favoritesManager
     }
     
     var movieTitle: String {
@@ -40,7 +42,7 @@ class MovieCellViewModel {
     }
     
     var isFavorite: Bool {
-        return movie.isFavorite
+        return favoritesManager.checkForPresence(of: self.movie)
     }
     
     var numberOfTopics: Int {
@@ -89,6 +91,11 @@ class MovieCellViewModel {
         movie.isFavorite = !movie.isFavorite
         
         // TODO: Persist the favorite somewhere
+        if !self.isFavorite {
+            self.favoritesManager.addFavorite(self.movie)
+        } else {
+            self.favoritesManager.removeFavorite(self.movie)
+        }
         
     }
     
