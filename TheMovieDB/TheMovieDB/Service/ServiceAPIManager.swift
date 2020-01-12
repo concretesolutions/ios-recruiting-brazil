@@ -14,7 +14,7 @@ class ServiceAPIManager {
         public static let https = "https://"
         public static let rootAPI = "api.themoviedb.org"
         public static let versionAPI = "/3"
-        public static let api_key = "api_key"
+        public static let apiKey = "api_key"
         public static let language = "language"
         public static let page = "page"
         
@@ -23,8 +23,12 @@ class ServiceAPIManager {
             public static let popular = "/popular"
         }
         
+        struct PathImages {
+            public static let secureBaseUrl = "https://image.tmdb.org/t/p/"
+        }
+        
         public static func getKeyPath() -> String {
-            return "\(PathsAPI.api_key)\(PathsAPI.key)"
+            return "\(PathsAPI.apiKey)\(PathsAPI.key)"
         }
     }
     

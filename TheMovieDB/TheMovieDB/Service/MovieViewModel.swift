@@ -28,7 +28,7 @@ class MovieViewModel {
         let path = pathURLMovies
         guard var components = URLComponents.init(string: path) else { return }
         components.queryItems = [
-            URLQueryItem.init(name: ServiceAPIManager.PathsAPI.api_key, value: ServiceAPIManager.PathsAPI.key),
+            URLQueryItem.init(name: ServiceAPIManager.PathsAPI.apiKey, value: ServiceAPIManager.PathsAPI.key),
             URLQueryItem.init(name: ServiceAPIManager.PathsAPI.page, value: "1")
         ]
         guard let url = components.url else { return }
