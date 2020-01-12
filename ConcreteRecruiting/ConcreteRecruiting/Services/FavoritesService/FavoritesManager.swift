@@ -21,8 +21,4 @@ protocol FavoritesManager {
     
     func getAllFavorites() -> List
     
-    func getFavorites(by genres: [Genre], dates: [Date]) -> List
-    
-    func searchFavorites(with text: String) -> List
-    
 }
