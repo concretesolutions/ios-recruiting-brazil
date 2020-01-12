@@ -23,9 +23,7 @@ class PListFavoritesManager: FavoritesManager {
         self.plistPath = documentsPath.appending(self.plistName)
         
         if !fileManager.fileExists(atPath: self.plistPath) {
-            
             self.saveFavorites(List())
-
         }
         
     }
@@ -45,11 +43,7 @@ class PListFavoritesManager: FavoritesManager {
     }
     
     func checkForPresence(of model: Movie) -> Bool {
-        
-        let favorites = getAllFavorites()
-        //return favorites.contains(model.id)
-        
-        return true
+        return getAllFavorites().contains(model.id)
     }
     
     func addFavorite(_ model: Movie) {
@@ -57,7 +51,8 @@ class PListFavoritesManager: FavoritesManager {
         guard !checkForPresence(of: model) else { return }
         
         var favorites = getAllFavorites()
-        //favorites.append(movie.id)
+        
+        favorites.append(model.id)
         
         self.saveFavorites(favorites)
         
@@ -67,7 +62,7 @@ class PListFavoritesManager: FavoritesManager {
         
         var favorites = getAllFavorites()
 
-        //favorites.removeAll { $0 == movie.id }
+        favorites.removeAll { $0 == model.id }
         
         self.saveFavorites(favorites)
         
