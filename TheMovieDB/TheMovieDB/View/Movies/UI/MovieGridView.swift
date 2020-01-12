@@ -40,6 +40,7 @@ class MovieGridView: UIView {
     
     private func setupCollectionView() {
         collectionView.backgroundColor = .gray
+        let height = (UIScreen.main.bounds.height / 3)
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
                                               heightDimension: .fractionalHeight(1.0))
@@ -49,7 +50,7 @@ class MovieGridView: UIView {
                                                      bottom: marginEdgeInserts,
                                                      trailing: marginEdgeInserts)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .fractionalHeight(0.33))
+                                               heightDimension: .estimated(height))
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                        subitems: [item])

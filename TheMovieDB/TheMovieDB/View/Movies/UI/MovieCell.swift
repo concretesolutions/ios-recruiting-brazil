@@ -20,8 +20,8 @@ class MovieCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         subViews()
-        style()
         autolayout()
+        style()
     }
     
     required init?(coder: NSCoder) {
@@ -31,29 +31,28 @@ class MovieCell: UICollectionViewCell {
     private func subViews() {
         sv(posterImage, title, favoriteIcon)
     }
-    
     private func style() {
         backgroundColor = .blue
-        
         let font = UIFont.systemFont(ofSize: 12)
         title.textColor = .white
         title.font = font
-        
+        title.numberOfLines = 2
         posterImage.image = UIImage.init(named: "placeholder-movies")
-        
         favoriteIcon.image = UIImage.init(named: "favorites")
     }
     
     private func autolayout() {
+        let heightCell = (UIScreen.main.bounds.height / 3)
+        let favoriteSpace = (heightCell / 4)
+        
         posterImage.leading(margin).trailing(margin).top(margin)
-        posterImage.height(80%)
+        posterImage.height(heightCell - favoriteSpace)
         
         favoriteIcon.trailing(margin)
         favoriteIcon.Top == posterImage.Bottom + margin
-        favoriteIcon.height(32.0).width(32)
-        title.bottom(margin).leading(margin).Trailing == favoriteIcon.Leading
+        favoriteIcon.height(24).width(24)
+        title.bottom(margin).leading(margin).Trailing == (favoriteIcon.Leading + margin)
         title.Top == posterImage.Bottom
-        title.numberOfLines = 2
     }
     
     override func prepareForReuse() {
@@ -65,6 +64,5 @@ class MovieCell: UICollectionViewCell {
     
     public func fill(withMovie movie: Movie) {
         title.text = movie.title
-        
     }
 }
