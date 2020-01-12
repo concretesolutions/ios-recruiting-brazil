@@ -8,10 +8,7 @@
 
 import Foundation
 
-class PListFavoritesManager: FavoritesManager {
-    
-    typealias Model = Movie
-    typealias List = [Int]
+class PListFavoritesManager: FavoriteMoviesManager {
     
     private let fileManager = FileManager.default
     private let plistName = "/favorites.plist"
@@ -27,46 +24,46 @@ class PListFavoritesManager: FavoritesManager {
         self.plistPath = documentsPath.appending(self.plistName)
         
         if !fileManager.fileExists(atPath: self.plistPath) {
-            self.saveFavorites(List())
+            self.saveFavorites([Int]())
         }
         
     }
     
-    private func saveFavorites(_ favorites: List) {
+    private func saveFavorites(_ favorites: [Int]) {
         let convertedList = favorites as NSArray
         
         convertedList.write(toFile: self.plistPath, atomically: true)
     }
     
-    func getAllFavorites() -> List {
+    func getAllFavorites() -> [Int] {
         
-        let favorites = NSArray(contentsOfFile: self.plistPath) as? List
+        let favorites = NSArray(contentsOfFile: self.plistPath) as? [Int]
         
-        return favorites ?? List()
+        return favorites ?? [Int]()
         
     }
     
-    func checkForPresence(of model: Model) -> Bool {
-        return getAllFavorites().contains(model.id)
+    func checkForPresence(of movie: Movie) -> Bool {
+        return getAllFavorites().contains(movie.id)
     }
     
-    func addFavorite(_ model: Model) {
+    func addFavorite(_ movie: Movie) {
         
-        guard !checkForPresence(of: model) else { return }
+        guard !checkForPresence(of: movie) else { return }
         
         var favorites = getAllFavorites()
         
-        favorites.append(model.id)
+        favorites.append(movie.id)
         
         self.saveFavorites(favorites)
         
     }
     
-    func removeFavorite(_ model: Model) {
+    func removeFavorite(_ movie: Movie) {
         
         var favorites = getAllFavorites()
 
-        favorites.removeAll { $0 == model.id }
+        favorites.removeAll { $0 == movie.id }
         
         self.saveFavorites(favorites)
         

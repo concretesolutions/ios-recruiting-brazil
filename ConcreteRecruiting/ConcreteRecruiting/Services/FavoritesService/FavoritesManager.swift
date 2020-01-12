@@ -8,17 +8,14 @@
 
 import Foundation
 
-protocol FavoritesManager {
+protocol FavoriteMoviesManager {
     
-    associatedtype Model
-    associatedtype List
+    func checkForPresence(of movie: Movie) -> Bool
     
-    func checkForPresence(of model: Model) -> Bool
+    func addFavorite(_ movie: Movie)
     
-    func addFavorite(_ model: Model)
+    func removeFavorite(_ movie: Movie)
     
-    func removeFavorite(_ model: Model)
-    
-    func getAllFavorites() -> List
+    func getAllFavorites() -> [Int]
     
 }
