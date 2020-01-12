@@ -64,5 +64,6 @@ class MovieCell: UICollectionViewCell {
     
     public func fill(withMovie movie: Movie) {
         title.text = movie.title
+        posterImage.downloadImage(withPath: movie.posterPath, withDimension: .w185)
     }
 }
