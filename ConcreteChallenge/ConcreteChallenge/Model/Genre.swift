@@ -34,4 +34,14 @@ public class Genre: NSManagedObject, Decodable {
             context.insert(self)
         }
     }
+
+    @discardableResult
+    func deepCopy(saving: Bool = true) throws -> Genre {
+        let genre = try Genre(saving: saving)
+
+        genre.id = self.id
+        genre.name = self.name
+
+        return genre
+    }
 }

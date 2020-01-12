@@ -60,4 +60,21 @@ public class Movie: NSManagedObject, Decodable {
             }
         }
     }
+
+    @discardableResult
+    func deepCopy(saving: Bool = true) throws -> Movie {
+        let movie = try Movie(saving: saving)
+
+        movie.id = self.id
+        movie.imagePath = self.imagePath
+        movie.overview = self.overview
+        movie.releaseDate = self.releaseDate
+        movie.title = self.title
+
+        for genre in (self.genres?.allObjects as? [Genre]) ?? [] {
+            movie.addToGenres(try genre.deepCopy(saving: saving))
+        }
+
+        return movie
+    }
 }

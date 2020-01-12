@@ -9,15 +9,26 @@
 import UIKit
 
 class MovieCellViewModel: ViewModel {
-    enum State {
-        case unfavorited, favorited
-    }
-    var state: State = .unfavorited
+    enum State { case show }
+    var state: State = .show
 
     var model: Movie
 
-    init(model: Movie) {
-        self.model = model
+    var isFavorited = false {
+        didSet {
+            updateFavoriteButton?()
+        }
+    }
+
+    init(movie: Movie) {
+        self.model = movie
+
+        do {
+            self.isFavorited = try movie.isSaved()
+        } catch {
+            // TODO: send error to view
+            debugPrint(error)
+        }
     }
 
     // MARK: View content
@@ -26,18 +37,38 @@ class MovieCellViewModel: ViewModel {
         model.title
     }
     var favoriteIcon: UIImage {
-        if state == .favorited {
-            return UIImage.Favorite.fullIcon
-        }
-        return UIImage.Favorite.emptyIcon
+        isFavorited
+            ? UIImage.Favorite.fullIcon
+            : UIImage.Favorite.emptyIcon
     }
     var image: UIImage = UIImage.placeholder
 
     // MARK: View updates
 
+    var updateFavoriteButton: VoidClosure?
     var updateImage: VoidClosure?
 
     // MARK: User actions
+
+    @objc
+    func favorite() {
+        isFavorited = !isFavorited
+
+        do {
+            if isFavorited {
+                try model.deepCopy()
+                try CoreDataManager.shared.saveContext()
+            } else {
+                if let movieSaved = try Movie.queryById(Int(model.id)) {
+                    try CoreDataManager.getContext().delete(movieSaved)
+                    try CoreDataManager.shared.saveContext()
+                }
+            }
+        } catch {
+            // TODO: send error to view
+            debugPrint(error)
+        }
+    }
 
     func loadImage() {
         ImageLoader.loadImageUsingCache(from:

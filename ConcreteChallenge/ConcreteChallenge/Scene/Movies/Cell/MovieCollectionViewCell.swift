@@ -23,6 +23,7 @@ class MovieCollectionViewCell: UICollectionViewCell, Cell {
 
     var viewModel: MovieCellViewModel? {
         didSet {
+            favoriteButton.removeTarget(oldValue, action: #selector(oldValue?.favorite), for: .touchUpInside)
             setup()
         }
     }
@@ -40,13 +41,17 @@ class MovieCollectionViewCell: UICollectionViewCell, Cell {
         setupLayout()
 
         titleLabel.text = viewModel?.title
-        favoriteButton.setImage(viewModel?.favoriteIcon, for: .normal)
         viewModel?.updateImage = updateImage
+        viewModel?.updateFavoriteButton = updateFavoriteButton
         viewModel?.loadImage()
+
         updateImage()
+        updateFavoriteButton()
 
         contentView.layer.masksToBounds = true
         contentView.layer.cornerRadius = 8
+
+        favoriteButton.addTarget(viewModel, action: #selector(viewModel?.favorite), for: .touchUpInside)
     }
 
     func setupSubviews() {
@@ -76,5 +81,9 @@ class MovieCollectionViewCell: UICollectionViewCell, Cell {
 
     func updateImage() {
         coverImageView.image = viewModel?.image
+    }
+
+    func updateFavoriteButton() {
+        favoriteButton.setImage(viewModel?.favoriteIcon, for: .normal)
     }
 }

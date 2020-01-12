@@ -23,6 +23,6 @@ class CollectionViewDataSource<C: Cell & UICollectionViewCell>: NSObject, UIColl
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableCell(C.self, for: indexPath)
-            .set(\.viewModel, to: viewModels[indexPath.row])
+            .set(\.viewModel, to: viewModels[indexPath.item])
     }
 }

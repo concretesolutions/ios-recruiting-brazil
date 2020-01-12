@@ -59,7 +59,7 @@ class MoviesViewModel: ViewModel {
             switch result {
             case .success(let movieResponse):
                 DispatchQueue.main.async { [weak self] in
-                    let results = movieResponse.results.map({ MovieCellViewModel(model: $0) })
+                    let results = movieResponse.results.map({ MovieCellViewModel(movie: $0) })
                     self?.model = results
                     self?.updateData?(results)
                     self?.state = .show
