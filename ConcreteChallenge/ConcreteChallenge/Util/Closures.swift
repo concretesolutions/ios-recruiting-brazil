@@ -10,6 +10,8 @@ import UIKit
 
 typealias VoidClosure = () -> Void
 
+typealias ErrorClosure = (Error) -> Void
+
 typealias MovieClosure = (Movie) -> Void
 
 typealias ImageClosure = (UIImage?) -> Void

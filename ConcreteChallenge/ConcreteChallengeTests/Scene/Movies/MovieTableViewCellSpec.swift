@@ -19,7 +19,7 @@ class MovieTableViewCellSpec: QuickSpec {
 
             it("should call setup when set viewModel") {
 
-//                fail("TODO")
+//                fail("")
             }
         }
     }

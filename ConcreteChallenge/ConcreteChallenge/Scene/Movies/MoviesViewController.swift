@@ -30,6 +30,7 @@ class MoviesViewController: UIViewController {
         viewModel.setEmptyLayout = moviesView.setEmptyLayout
         viewModel.setShowLayout = moviesView.setShowLayout
         viewModel.updateData = updateData
+        viewModel.showError = showError
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +44,12 @@ class MoviesViewController: UIViewController {
     func updateData(viewModels: [MovieCellViewModel]) {
         self.collectionViewDataSource = CollectionViewDataSource<MovieCollectionViewCell>(viewModels: viewModel.model)
         moviesView.collectionView.dataSource = self.collectionViewDataSource
+    }
+
+    func showError(error: Error) {
+        self.showError(message: error.localizedDescription) { [weak self] in
+            self?.viewModel.loadMovies()
+        }
     }
 }
 

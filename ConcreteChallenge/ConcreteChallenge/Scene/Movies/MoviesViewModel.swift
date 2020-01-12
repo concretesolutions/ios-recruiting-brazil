@@ -10,7 +10,7 @@ import NetworkLayer
 
 class MoviesViewModel: ViewModel {
     enum State {
-        case loading, empty, show
+        case loading, empty, show, error(Error)
     }
 
     var state: State = .empty {
@@ -22,6 +22,10 @@ class MoviesViewModel: ViewModel {
                 self.setLoadingLayout?()
             case .show:
                 self.setShowLayout?()
+            case .error(let error):
+                DispatchQueue.main.async { [weak self] in
+                    self?.showError?(error)
+                }
             }
         }
     }
@@ -43,6 +47,7 @@ class MoviesViewModel: ViewModel {
     var setLoadingLayout: VoidClosure?
     var setEmptyLayout: VoidClosure?
     var setShowLayout: VoidClosure?
+    var showError: ErrorClosure?
 
     var updateData: MovieCellViewModelClosure?
 
@@ -65,8 +70,7 @@ class MoviesViewModel: ViewModel {
                     self?.state = .show
                 }
             case .failure(let error):
-                // TODO: send error to view
-                debugPrint(error)
+                self?.state = .error(error)
             }
         }
     }

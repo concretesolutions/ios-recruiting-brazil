@@ -11,7 +11,7 @@ import UIKit
 
 class MovieDetailViewModel: ViewModel {
     enum State {
-        case loading, show
+        case loading, show, error(Error)
     }
 
     var state: State = .loading {
@@ -21,6 +21,10 @@ class MovieDetailViewModel: ViewModel {
                 self.setLoadingLayout?()
             case .show:
                 self.setShowLayout?()
+            case .error(let error):
+                DispatchQueue.main.async { [weak self] in
+                    self?.showError?(error)
+                }
             }
         }
     }
@@ -72,6 +76,7 @@ class MovieDetailViewModel: ViewModel {
 
     var setLoadingLayout: VoidClosure?
     var setShowLayout: VoidClosure?
+    var showError: ErrorClosure?
 
     var updateFavoriteState: VoidClosure?
     var updateImage: VoidClosure?
@@ -93,8 +98,7 @@ class MovieDetailViewModel: ViewModel {
                 }
             }
         } catch {
-            // TODO: send error to view
-            debugPrint(error)
+            self.state = .error(error)
         }
     }
 
@@ -120,8 +124,7 @@ class MovieDetailViewModel: ViewModel {
                     self?.state = .show
                 }
             case .failure(let error):
-                // TODO: send error to view
-                debugPrint(error)
+                self?.state = .error(error)
             }
         }
     }
@@ -130,8 +133,7 @@ class MovieDetailViewModel: ViewModel {
         do {
             isFavorited = try model.isSaved()
         } catch {
-            // TODO: send error to view
-            debugPrint(error)
+            self.state = .error(error)
         }
     }
 }

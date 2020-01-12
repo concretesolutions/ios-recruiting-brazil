@@ -6,9 +6,11 @@
 //  Copyright © 2020 Marcos Santos. All rights reserved.
 //
 
+import Foundation
+
 class FavoritesViewModel: ViewModel {
     enum State {
-        case loading, empty, show
+        case loading, empty, show, error(Error)
     }
 
     var state: State = .empty {
@@ -20,6 +22,10 @@ class FavoritesViewModel: ViewModel {
                 self.setLoadingLayout?()
             case .show:
                 self.setShowLayout?()
+            case .error(let error):
+                DispatchQueue.main.async { [weak self] in
+                    self?.showError?(error)
+                }
             }
         }
     }
@@ -35,6 +41,7 @@ class FavoritesViewModel: ViewModel {
     var setLoadingLayout: VoidClosure?
     var setEmptyLayout: VoidClosure?
     var setShowLayout: VoidClosure?
+    var showError: ErrorClosure?
 
     var updateData: MovieCellViewModelClosure?
 
@@ -54,8 +61,7 @@ class FavoritesViewModel: ViewModel {
             self.updateData?(results)
             self.state = .show
         } catch {
-            // TODO: send error to view
-            debugPrint(error)
+            self.state = .error(error)
         }
     }
 }
