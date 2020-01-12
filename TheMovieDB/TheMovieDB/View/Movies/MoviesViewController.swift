@@ -33,7 +33,7 @@ class MoviesViewController: UIViewController {
     
     @objc
     func changedMovies() {
-        loadItems(withAnimation: true)
+        self.loadItems(withAnimation: true)
     }
 }
 
@@ -45,7 +45,9 @@ extension MoviesViewController {
     
     private func configurateDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section,Movie>.init(collectionView: gridView.collectionView , cellProvider: { (collection, indexPath, movie) -> UICollectionViewCell? in
-            let cell = collection.dequeueReusableCell(withReuseIdentifier: "customCell", for: indexPath)
+            guard let cell = collection.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell
+            else { return UICollectionViewCell() }
+            cell.fill(withMovie: movie)
             return cell
         })
         loadItems(withAnimation: false)
@@ -59,6 +61,8 @@ extension MoviesViewController {
     }
     
     private func loadItems(withAnimation animation: Bool) {
-        dataSource.apply(snapshotDataSource(), animatingDifferences: animation)
+        DispatchQueue.main.async {
+            self.dataSource.apply(self.snapshotDataSource(), animatingDifferences: animation)
+        }
     }
 }

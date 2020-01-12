@@ -40,7 +40,7 @@ class MovieGridView: UIView {
     
     private func setupCollectionView() {
         collectionView.backgroundColor = .gray
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "customCell")
+        collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
                                               heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
