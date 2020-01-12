@@ -26,6 +26,7 @@
 		FD95E06A23CA6C2F00D10AA8 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E06923CA6C2F00D10AA8 /* MovieViewModel.swift */; };
 		FD95E06C23CA7F5500D10AA8 /* PopularMoviesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E06B23CA7F5500D10AA8 /* PopularMoviesAPI.swift */; };
 		FD95E06F23CA851400D10AA8 /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E06E23CA851400D10AA8 /* Notification+Extension.swift */; };
+		FD95E07223CA8B1500D10AA8 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E07123CA8B1500D10AA8 /* MovieCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		FD95E06923CA6C2F00D10AA8 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieViewModel.swift; path = TheMovieDB/Service/MovieViewModel.swift; sourceTree = SOURCE_ROOT; };
 		FD95E06B23CA7F5500D10AA8 /* PopularMoviesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesAPI.swift; sourceTree = "<group>"; };
 		FD95E06E23CA851400D10AA8 /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
+		FD95E07123CA8B1500D10AA8 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,9 +124,9 @@
 		FD1C592623C55E90000E63A3 /* TheMovieDB */ = {
 			isa = PBXGroup;
 			children = (
+				FD1C595B23C5636B000E63A3 /* Settings */,
 				FD95E06D23CA84FF00D10AA8 /* Extensions */,
 				FD95E06623CA679D00D10AA8 /* Service */,
-				FD1C595B23C5636B000E63A3 /* Settings */,
 				FD1C595D23C56392000E63A3 /* Model */,
 				FD1C595A23C56059000E63A3 /* View */,
 				FD1C595E23C56396000E63A3 /* ViewModel */,
@@ -221,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				FD95E06023C8098700D10AA8 /* MovieGridView.swift */,
+				FD95E07123CA8B1500D10AA8 /* MovieCell.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD95E07223CA8B1500D10AA8 /* MovieCell.swift in Sources */,
 				FD95E06523C823C700D10AA8 /* Genre.swift in Sources */,
 				FD1C592C23C55E90000E63A3 /* TabBarController.swift in Sources */,
 				FD1C592823C55E90000E63A3 /* AppDelegate.swift in Sources */,
