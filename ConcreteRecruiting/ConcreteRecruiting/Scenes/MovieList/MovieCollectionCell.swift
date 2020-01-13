@@ -65,6 +65,10 @@ class MovieCollectionCell: UICollectionViewCell {
             }
         }
         
+        self.viewModel.didChangeFavoriteState = { [weak self] (isFavorite) in
+            self?.isFavorite = isFavorite
+        }
+        
         self.viewModel.acquireBannerData()
         
     }

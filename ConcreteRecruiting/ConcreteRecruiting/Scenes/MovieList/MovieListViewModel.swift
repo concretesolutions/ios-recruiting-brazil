@@ -62,7 +62,7 @@ class MovieListViewModel {
             case .failure(let error):
                 self?.errorWhileLoadingMovies?(error)
             case .success(let response):
-                self?.cellViewModels = response.movies.map {MovieCellViewModel(with: $0)}
+                self?.cellViewModels = response.movies.map {MovieCellViewModel(with: $0, favoritesManager: PListFavoritesManager())}
                 self?.reloadData?()
                 
             }
