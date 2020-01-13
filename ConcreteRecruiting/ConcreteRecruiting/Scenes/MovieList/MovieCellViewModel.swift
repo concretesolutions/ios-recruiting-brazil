@@ -22,6 +22,7 @@ class MovieCellViewModel {
     }()
     
     var didAcquireBannerData: ((Data) -> Void)?
+    var didChangeFavoriteState: ((Bool) -> Void)?
     
     init(with movie: Movie, favoritesManager: FavoriteMoviesManager) {
         self.movie = movie
@@ -93,6 +94,8 @@ class MovieCellViewModel {
         } else {
             self.favoritesManager.removeFavorite(self.movie)
         }
+     
+        self.didChangeFavoriteState?(self.isFavorite)
         
     }
     
