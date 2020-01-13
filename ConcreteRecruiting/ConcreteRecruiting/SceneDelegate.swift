@@ -31,6 +31,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [listNavigationController, favoriteNavigationController]
+        tabBarController.tabBar.applyDefaultStyle()
+        
+        let images = [
+            UIImage(named: "List"),
+            UIImage(named: "Favorite-empty")
+        ]
+        tabBarController.tabBar.items?[0].image = images[0]
+        tabBarController.tabBar.items?[1].image = images[1]
         
         self.window?.rootViewController = tabBarController
                 
