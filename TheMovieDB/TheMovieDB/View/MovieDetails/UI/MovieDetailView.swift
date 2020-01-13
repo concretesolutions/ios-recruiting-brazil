@@ -16,6 +16,7 @@ class MovieDetailView: UIScrollView {
     private var releaseDate = UILabel.init()
     private var genre = UILabel.init()
     private var overviewText = UILabel.init()
+    private(set) var favoriteButton = UIButton.init()
     private var scrollViewContainer = UIStackView.init()
     
     private let margin: CGFloat = 8
@@ -39,32 +40,52 @@ class MovieDetailView: UIScrollView {
         scrollViewContainer.addArrangedSubview(releaseDate)
         scrollViewContainer.addArrangedSubview(genre)
         scrollViewContainer.addArrangedSubview(overviewText)
+        scrollViewContainer.addArrangedSubview(favoriteButton)
     }
     
     private func style() {
         backgroundColor = .primaryColor
         let font = UIFont.boldSystemFont(ofSize: 18)
         title.font = font
-        title.textColor = .black
+        title.textColor = .textColor
         title.numberOfLines = -1
 
         releaseDate.font = font
-        releaseDate.textColor = .black
+        releaseDate.textColor = .textColor
         releaseDate.numberOfLines = -1
 
         genre.font = font
-        genre.textColor = .black
+        genre.textColor = .textColor
         genre.numberOfLines = -1
 
         overviewText.font = font
-        overviewText.textColor = .black
+        overviewText.textColor = .textColor
         overviewText.numberOfLines = -1
+        
+        postImage.border(withRadius: 20)
+        
+        let titleButton = NSLocalizedString("Favorite", comment: "Title favorite button in detail view")
+        favoriteButton.setTitle(titleButton, for: .normal)
+        favoriteButton.backgroundColor = .primaryColorButton
+        favoriteButton.setTitleColor(.textColorButton, for: .normal)
+        favoriteButton.border(withRadius: 8)
+        
         
         alwaysBounceHorizontal = false
         scrollViewContainer.axis = .vertical
         scrollViewContainer.translatesAutoresizingMaskIntoConstraints = false
         scrollViewContainer.spacing = 20
         self.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    public func movieIsFavorite(_ favorite: Bool) {
+        if favorite {
+            favoriteButton.setImage(UIImage.init(named: "favorites"), for: .normal)
+            favoriteButton.backgroundColor = .red
+        }else {
+            favoriteButton.setImage(UIImage.init(named: "favorites"), for: .normal)
+            favoriteButton.backgroundColor = .green
+        }
     }
     
     public func autolayout() {
@@ -81,6 +102,7 @@ class MovieDetailView: UIScrollView {
         self.Bottom == superView.safeAreaLayoutGuide.Bottom - margin
         self.Leading == superView.safeAreaLayoutGuide.Leading + margin
         self.Trailing == superView.safeAreaLayoutGuide.Trailing - margin
+        superView.backgroundColor = .primaryColor
     }
     public func fillView(withMovie movie: Movie) {
         title.text = movie.title
@@ -88,5 +110,6 @@ class MovieDetailView: UIScrollView {
         genre.text = "\(movie.genres)"
         overviewText.text = movie.overview
         postImage.downloadImage(withPath: movie.posterPath, withDimension: .w342)
+        movieIsFavorite(movie.isFavorite)
     }
 }

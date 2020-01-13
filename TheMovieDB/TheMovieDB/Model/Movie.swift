@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct Movie: Decodable, Hashable {
+class Movie: NSObject, Decodable {
+    
     let popularity: Double
     let voteCount: Int
     let video: Bool
@@ -20,6 +21,7 @@ struct Movie: Decodable, Hashable {
     let title: String
     let voteAverage: Double
     let overview, releaseDate: String
+    var isFavorite: Bool = false
 
     enum CodingKeys: String, CodingKey {
         case popularity
@@ -35,5 +37,9 @@ struct Movie: Decodable, Hashable {
         case voteAverage = "vote_average"
         case overview
         case releaseDate = "release_date"
+    }
+    
+    static func == (lhs: Movie, rhs: Movie) -> Bool {
+        return lhs.id == rhs.id
     }
 }

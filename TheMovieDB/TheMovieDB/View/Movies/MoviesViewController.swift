@@ -73,7 +73,7 @@ extension MoviesViewController {
 extension MoviesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailsController = MovieDetailsViewController.init()
-        detailsController.movie = moviesViewModel.movies[indexPath.row]
+        moviesViewModel.selectMovie(index: indexPath.row)
         self.navigationController?.pushViewController(detailsController, animated: true)
         
     }

@@ -32,12 +32,14 @@ class MovieCell: UICollectionViewCell {
         sv(posterImage, title, favoriteIcon)
     }
     private func style() {
+        self.border(withRadius: 8)
         backgroundColor = .secondColor
         let font = UIFont.systemFont(ofSize: 12)
-        title.textColor = .white
+        title.textColor = .textColor
         title.font = font
         title.numberOfLines = 2
         posterImage.image = UIImage.init(named: "placeholder-movies")
+        posterImage.border(withRadius: 8)
         favoriteIcon.image = UIImage.init(named: "favorites")
     }
     
@@ -56,7 +58,6 @@ class MovieCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
-        super.prepareForReuse()
         title.text = nil
         posterImage.image = nil
         favoriteIcon.image = nil
@@ -65,5 +66,11 @@ class MovieCell: UICollectionViewCell {
     public func fill(withMovie movie: Movie) {
         title.text = movie.title
         posterImage.downloadImage(withPath: movie.posterPath, withDimension: .w185)
+        
+        if movie.isFavorite {
+            favoriteIcon.backgroundColor = .green
+        } else {
+            favoriteIcon.backgroundColor = .black
+        }
     }
 }

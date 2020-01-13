@@ -13,5 +13,7 @@ extension UIColor {
     public static let primaryColor: UIColor = .yellow
     public static let secondColor: UIColor = .white
     public static let textColor: UIColor = .black
+    public static let primaryColorButton: UIColor = .darkGray
+    public static let textColorButton: UIColor = .white
 
 }

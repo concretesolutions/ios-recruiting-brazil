@@ -11,11 +11,13 @@ import UIKit
 
 class MovieViewModel {
     public static let shared = MovieViewModel.init()
-    public var movies = [Movie]() {
+    public var movies: [Movie] = [] {
         didSet {
             NotificationCenter.default.post(.moviesUpdated)
         }
     }
+    public var selectedMovie: Movie?
+    
     private var pathURLMovies: String {
         get {
             return  "\(ServiceAPIManager.PathsAPI.https)\(ServiceAPIManager.PathsAPI.rootAPI)\(ServiceAPIManager.PathsAPI.versionAPI)\(ServiceAPIManager.PathsAPI.MovieAPI.movie)\(ServiceAPIManager.PathsAPI.MovieAPI.popular)"
@@ -23,6 +25,17 @@ class MovieViewModel {
     }
     
     private init() { }
+    
+    public func selectMovie(index: Int) {
+        guard index >= 0 else { return }
+        self.selectedMovie = movies[index]
+
+    }
+    
+    public func changeFavorite() {
+        guard let movie = selectedMovie else { return }
+        movie.isFavorite = !movie.isFavorite
+    }
     
     public func fetchMovies() {
         let path = pathURLMovies
