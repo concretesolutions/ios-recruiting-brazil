@@ -22,14 +22,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.makeKeyAndVisible()
         
         let movieListVC = MovieListViewController(with: MovieListViewModel())
-        let navigationController = UINavigationController(rootViewController: movieListVC)
-        navigationController.navigationBar.applyDefaultStyle()
+        let listNavigationController = UINavigationController(rootViewController: movieListVC)
+        listNavigationController.navigationBar.applyDefaultStyle()
         
         let favoritesVC = FavoritesViewController()
         let favoriteNavigationController = UINavigationController(rootViewController: favoritesVC)
         favoriteNavigationController.navigationBar.applyDefaultStyle()
         
-        self.window?.rootViewController = navigationController
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [listNavigationController, favoriteNavigationController]
+        tabBarController.tabBar.applyDefaultStyle()
+        
+        let images = [
+            UIImage(named: "List"),
+            UIImage(named: "Favorite-empty")
+        ]
+        tabBarController.tabBar.items?[0].image = images[0]
+        tabBarController.tabBar.items?[1].image = images[1]
+        
+        self.window?.rootViewController = tabBarController
                 
     }
 
