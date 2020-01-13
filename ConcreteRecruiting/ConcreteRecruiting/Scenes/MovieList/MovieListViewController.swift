@@ -11,6 +11,7 @@ import UIKit
 class MovieListViewController: UIViewController {
 
     let viewModel: MovieListViewModel
+    let movieView = MovieListView()
     
     init(with viewModel: MovieListViewModel) {
         self.viewModel = viewModel
@@ -33,10 +34,12 @@ class MovieListViewController: UIViewController {
             self.navigationController?.pushViewController(detailViewController, animated: true)
         }
         
-        let movieView = MovieListView()
-        movieView.setup(with: self.viewModel)
         view = movieView
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        movieView.setup(with: self.viewModel)
     }
 
 }
