@@ -38,5 +38,7 @@ class MoviesGridNavigationController: UINavigationController {
     private func initController() {
         let item = UITabBarItem(title: "Movies", image: nil, selectedImage: nil)
         tabBarItem = item
+        
+        viewControllers = [PopularMoviesViewController()]
     }
 }
