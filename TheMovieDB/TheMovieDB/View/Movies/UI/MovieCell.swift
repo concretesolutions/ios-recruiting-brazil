@@ -32,7 +32,7 @@ class MovieCell: UICollectionViewCell {
         sv(posterImage, title, favoriteIcon)
     }
     private func style() {
-        backgroundColor = .blue
+        backgroundColor = .secondColor
         let font = UIFont.systemFont(ofSize: 12)
         title.textColor = .white
         title.font = font

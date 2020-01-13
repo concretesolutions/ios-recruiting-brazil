@@ -19,10 +19,13 @@ class MoviesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configurateDataSource()
+        configurateDelegate()
         moviesViewModel.fetchMovies()
         addObservers()
     }
-    
+    private func configurateDelegate() {
+        gridView.collectionView.delegate = self
+    }
     override func loadView() {
         view = gridView
     }
@@ -64,5 +67,14 @@ extension MoviesViewController {
         DispatchQueue.main.async {
             self.dataSource.apply(self.snapshotDataSource(), animatingDifferences: animation)
         }
+    }
+}
+
+extension MoviesViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailsController = MovieDetailsViewController.init()
+        detailsController.movie = moviesViewModel.movies[indexPath.row]
+        self.navigationController?.pushViewController(detailsController, animated: true)
+        
     }
 }
