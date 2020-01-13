@@ -33,6 +33,20 @@ class DetailTableViewCell: UITableViewCell {
         return button
     }()
     
+    var isFavorite: Bool = false {
+        didSet {
+            
+            var imageName = "Favorite-gray"
+            
+            if self.isFavorite {
+                imageName = "Favorite-filled"
+            }
+            
+            self.favoriteButton.setImage(UIImage(named: imageName), for: .normal)
+            
+        }
+    }
+    
     var viewModel: MovieDetailViewModel?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -58,8 +72,14 @@ class DetailTableViewCell: UITableViewCell {
         case .textWithButton(let text):
             self.label.text = text
             self.favoriteButton.isHidden = false
+            self.isFavorite = viewModel.isFavorite
             self.viewModel = viewModel
             self.favoriteButton.addTarget(self, action: #selector(didTapFavorite), for: .touchUpInside)
+            
+            self.viewModel?.didChangeFavoriteState = { [weak self] (isFavorite) in
+                self?.isFavorite = isFavorite
+            }
+            
         }
         
     }

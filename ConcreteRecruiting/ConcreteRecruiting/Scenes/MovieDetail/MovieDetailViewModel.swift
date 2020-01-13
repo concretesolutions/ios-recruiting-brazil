@@ -29,6 +29,11 @@ class MovieDetailViewModel {
     }
     
     var didAcquireGenres: (() -> Void)?
+    var didChangeFavoriteState: ((Bool) -> Void)? {
+        didSet {
+            self.movieViewModel.didChangeFavoriteState = self.didChangeFavoriteState
+        }
+    }
     
     init(movieViewModel: MovieCellViewModel) {
         self.movieViewModel = movieViewModel
@@ -38,6 +43,10 @@ class MovieDetailViewModel {
     
     var numberOfSections: Int {
         return 5
+    }
+    
+    var isFavorite: Bool {
+        return self.movieViewModel.isFavorite
     }
     
     func getSection(for indexPath: IndexPath) -> Section {
@@ -63,11 +72,11 @@ class MovieDetailViewModel {
     
     private func acquireMovieGenres() {
         
-        NetworkManager.getMovieGenres { (result) in
+        NetworkManager.getMovieGenres { [weak self] (result) in
             switch result {
             case .success(let response):
-                let movieGenres = self.movieViewModel.getMovieGenres(from: response.genres)
-                self.genres = movieGenres
+                let movieGenres = self?.movieViewModel.getMovieGenres(from: response.genres)
+                self?.genres = movieGenres ?? [Genre]()
             case .failure(let error):
                 print(error.localizedDescription)
             }
