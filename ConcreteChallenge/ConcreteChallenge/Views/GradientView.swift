@@ -23,6 +23,7 @@ class GradientView: UIView {
         gradientLayer.endPoint = self.endPoint
         gradientLayer.colors = self.colors
         gradientLayer.type = self.type
+        gradientLayer.locations = self.locations
     }
     
     public var colors: [CGColor] = [UIColor.clear.cgColor, UIColor.black.cgColor] {
@@ -49,4 +50,9 @@ class GradientView: UIView {
         }
     }
     
+    public var locations: [NSNumber] = [0.55, 1] {
+        didSet {
+            gradientLayer.locations = self.locations
+        }
+    }
 }

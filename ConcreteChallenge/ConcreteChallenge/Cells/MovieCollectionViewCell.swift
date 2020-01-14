@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieTableViewCell: UITableViewCell {
+class MovieCollectionViewCell: UICollectionViewCell {
     
     var posterView: PosterView? {
         didSet {
@@ -35,10 +35,10 @@ class MovieTableViewCell: UITableViewCell {
         
         contentView.addSubview(posterView)
         
-        posterView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-        posterView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-        posterView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        posterView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
+        posterView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        posterView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        posterView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        posterView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
 
 }

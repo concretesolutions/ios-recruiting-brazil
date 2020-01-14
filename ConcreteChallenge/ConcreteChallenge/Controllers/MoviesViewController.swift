@@ -8,22 +8,28 @@
 
 import UIKit
 
-class MoviesViewController: UIViewController {
+class MoviesViewController: UIViewController, UISearchResultsUpdating {
+
+    private let spacing: CGFloat = 16.0
     
     var movieCollection: MovieColletion
     
-    lazy var tableView: UITableView = {
-        var tableView = UITableView()
+    lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
         
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .white
-        tableView.separatorStyle = .none
-        tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "MovieCell")
+        layout.scrollDirection = .vertical
+        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        layout.minimumLineSpacing = spacing
+        layout.minimumInteritemSpacing = spacing
         
-        return tableView
+        var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .white
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
+        return collectionView
     }()
     
     init(movieCollection: MovieColletion) {
@@ -44,47 +50,72 @@ class MoviesViewController: UIViewController {
             switch result {
             case .success(let response):
                 self.movieCollection.addMovies(response.results)
-                self.tableView.reloadData()
+                self.collectionView.reloadData()
             case .failure(let error):
                 print(error)
             }
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        let search = UISearchController(searchResultsController: nil)
+        search.searchResultsUpdater = self
+        self.navigationItem.searchController = search
+    }
+    
     func addSubviews() {
-        view.addSubview(tableView)
+        view.addSubview(collectionView)
     }
     
     func setupConstraints() {
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        print("uhul")
     }
 }
 
-extension MoviesViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as? MovieTableViewCell else {
-            return UITableViewCell()
+extension MoviesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return movieCollection.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCollectionViewCell else {
+            return UICollectionViewCell()
         }
         
-        guard let movie = movieCollection.movie(for: indexPath.row) else { return UITableViewCell() }
+        guard let movie = movieCollection.movie(at: indexPath.row) else { return UICollectionViewCell() }
         
-        cell.posterView = PosterView(title: movie.title, imageURL: movie.posterURL)
-        
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = UIColor.clear
-        cell.selectedBackgroundView = backgroundView
+        cell.posterView = PosterView(for: movie)
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movieCollection.count
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = view.frame.height * 0.35
+        
+        let numberOfItemsPerRow: CGFloat = 2
+        let spacingBetweenCells: CGFloat = 16
+        
+        let totalSpacing = (2 * self.spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells)
+        
+        let width = (collectionView.bounds.width - totalSpacing) / numberOfItemsPerRow
+        return CGSize(width: width, height: height)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.frame.height * 0.8
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let movie = movieCollection.movie(at: indexPath.row) else { return }
+        
+        let movieDetailViewController = MovieDetailViewController(movie: movie)
+        
+        present(movieDetailViewController, animated: true, completion: nil)
     }
 }

@@ -21,7 +21,7 @@ class MovieColletion {
         self.movies.append(contentsOf: movies)
     }
     
-    func movie(for row: Int) -> Movie? {
-        return movies[safeIndex: row]
+    func movie(at index: Int) -> Movie? {
+        return movies[safeIndex: index]
     }
 }

@@ -11,6 +11,7 @@ import Foundation
 struct Movie: Codable {
     let title: String
     let posterPath: String?
+    let releaseDate: String
     var posterURL: URL {
         return URL(safeString: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")
     }
@@ -18,5 +19,6 @@ struct Movie: Codable {
     enum CodingKeys: String, CodingKey {
         case title
         case posterPath = "poster_path"
+        case releaseDate = "release_date"
     }
 }
