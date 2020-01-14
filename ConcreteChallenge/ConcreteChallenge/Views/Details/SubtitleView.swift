@@ -9,12 +9,16 @@
 import UIKit
 
 class SubtitleView: UIView {
+    
+    let rating: Double
+    let releaseDate: String
+    let genres: [Genre]
 
     lazy var ratingLabel: UILabel = {
         let ratingLabel = UILabel()
         
         ratingLabel.translatesAutoresizingMaskIntoConstraints = false
-        ratingLabel.text = "4.1"
+        ratingLabel.text = "\(rating)"
         ratingLabel.backgroundColor = .white
         ratingLabel.font = UIFont.systemFont(ofSize: 26, weight: .bold)
         ratingLabel.textColor = .black
@@ -30,7 +34,7 @@ class SubtitleView: UIView {
         let yearLabel = UILabel()
         
         yearLabel.translatesAutoresizingMaskIntoConstraints = false
-        yearLabel.text = "2008"
+        yearLabel.text = releaseDate
         yearLabel.font = UIFont.systemFont(ofSize: 18, weight: .light)
         yearLabel.textColor = .white
         
@@ -42,14 +46,19 @@ class SubtitleView: UIView {
         let genreLabel = UILabel()
         
         genreLabel.translatesAutoresizingMaskIntoConstraints = false
-        genreLabel.text = "Action, Adventure"
+        genreLabel.text = genres.description
         genreLabel.font = UIFont.systemFont(ofSize: 18, weight: .light)
         genreLabel.textColor = .white
+//        genreLabel.adjustsFontSizeToFitWidth = true
+//        genreLabel.numberOfLines = 0
         
         return genreLabel
     }()
     
-    init() {
+    init(rating: Double, releaseDate: String, genres: [Genre]) {
+        self.rating = rating
+        self.releaseDate = releaseDate
+        self.genres = genres
         super.init(frame: .zero)
         addSubviews()
         setupConstraints()
@@ -67,17 +76,16 @@ class SubtitleView: UIView {
     
     func setupConstraints() {
         ratingLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        ratingLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 24).isActive = true
+        ratingLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         ratingLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         ratingLabel.widthAnchor.constraint(equalToConstant: 48).isActive = true
         ratingLabel.heightAnchor.constraint(equalToConstant: 48).isActive = true
         
-        yearLabel.leadingAnchor.constraint(equalTo: ratingLabel.trailingAnchor, constant: 20).isActive = true
+        yearLabel.leadingAnchor.constraint(equalTo: ratingLabel.trailingAnchor, constant: 18).isActive = true
         yearLabel.topAnchor.constraint(equalTo: ratingLabel.topAnchor).isActive = true
         
         genreLabel.leadingAnchor.constraint(equalTo: yearLabel.leadingAnchor).isActive = true
         genreLabel.bottomAnchor.constraint(equalTo: ratingLabel.bottomAnchor).isActive = true
         genreLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     }
-    
 }

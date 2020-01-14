@@ -11,6 +11,20 @@ import UIKit
 class MovieDetailViewController: UIViewController {
     
     let movie: Movie
+    let genreCollection: GenreCollection
+    
+    lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.clipsToBounds = true
+        stackView.spacing = 36
+        stackView.alpha = 0
+        
+        return stackView
+    }()
     
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -44,17 +58,6 @@ class MovieDetailViewController: UIViewController {
         return anchorView
     }()
     
-    lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.clipsToBounds = true
-        
-        return stackView
-    }()
-    
     lazy var titleView: TitleView = {
         let titleView = TitleView(title: movie.title)
         
@@ -64,15 +67,32 @@ class MovieDetailViewController: UIViewController {
     }()
     
     lazy var subtitleView: SubtitleView = {
-       let subtitleView = SubtitleView()
+        let subtitleView = SubtitleView(rating: movie.voteAverage, releaseDate: movie.releaseYear, genres: genreCollection.genres(for: movie.genreIDs))
         
         subtitleView.translatesAutoresizingMaskIntoConstraints = false
         
         return subtitleView
     }()
     
-    init(movie: Movie) {
+    lazy var bodyView: BodyView = {
+        let bodyView = BodyView(text: movie.overview)
+        
+        bodyView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return bodyView
+    }()
+    
+    lazy var favoriteView: FavoriteView = {
+        let favoriteView = FavoriteView()
+        
+        favoriteView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return favoriteView
+    }()
+    
+    init(movie: Movie, genreCollection: GenreCollection) {
         self.movie = movie
+        self.genreCollection = genreCollection
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -88,6 +108,11 @@ class MovieDetailViewController: UIViewController {
         setupConstraints()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        animateStack()
+    }
+    
     func addSubviews() {
         view.addSubview(imageView)
         view.addSubview(blurView)
@@ -96,6 +121,8 @@ class MovieDetailViewController: UIViewController {
         
         stackView.addArrangedSubview(titleView)
         stackView.addArrangedSubview(subtitleView)
+        stackView.addArrangedSubview(bodyView)
+        stackView.addArrangedSubview(favoriteView)
     }
     
     func setupConstraints() {
@@ -112,10 +139,23 @@ class MovieDetailViewController: UIViewController {
         anchorView.topAnchor.constraint(equalTo: view.topAnchor, constant: 18).isActive = true
         anchorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         anchorView.heightAnchor.constraint(equalToConstant: 6).isActive = true
-        anchorView.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        anchorView.widthAnchor.constraint(equalToConstant: 38).isActive = true
         
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
         stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
-        stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        stackBottomConstraint = stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 30)
+        
+        stackBottomConstraint?.isActive = true
+    }
+    
+    var stackBottomConstraint: NSLayoutConstraint?
+    
+    func animateStack() {
+        stackBottomConstraint?.constant = 0
+        
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
+            self.stackView.alpha = 1
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 }

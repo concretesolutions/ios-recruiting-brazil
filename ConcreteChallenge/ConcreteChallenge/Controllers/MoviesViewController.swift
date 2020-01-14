@@ -12,7 +12,8 @@ class MoviesViewController: UIViewController, UISearchResultsUpdating {
 
     private let spacing: CGFloat = 16.0
     
-    var movieCollection: MovieColletion
+    let movieCollection: MovieColletion
+    let genreCollection: GenreCollection
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -32,8 +33,9 @@ class MoviesViewController: UIViewController, UISearchResultsUpdating {
         return collectionView
     }()
     
-    init(movieCollection: MovieColletion) {
+    init(movieCollection: MovieColletion, genreCollection: GenreCollection) {
         self.movieCollection = movieCollection
+        self.genreCollection = genreCollection
         super.init(nibName: nil, bundle: nil)
         
         addSubviews()
@@ -46,7 +48,7 @@ class MoviesViewController: UIViewController, UISearchResultsUpdating {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ServiceLayer.request(router: Router.getMovies) { (result: Result<MoviesResponse, Error>) in
+        ServiceLayer.request(router: .getMovies) { (result: Result<MoviesResponse, Error>) in
             switch result {
             case .success(let response):
                 self.movieCollection.addMovies(response.results)
@@ -114,7 +116,7 @@ extension MoviesViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let movie = movieCollection.movie(at: indexPath.row) else { return }
         
-        let movieDetailViewController = MovieDetailViewController(movie: movie)
+        let movieDetailViewController = MovieDetailViewController(movie: movie, genreCollection: genreCollection)
         
         present(movieDetailViewController, animated: true, completion: nil)
     }

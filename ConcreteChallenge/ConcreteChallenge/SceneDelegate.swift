@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let moviesViewController = MoviesViewController(movieCollection: MovieColletion())
+        let moviesViewController = MoviesViewController(movieCollection: MovieColletion(), genreCollection: GenreCollection())
         moviesViewController.title = "Movies"
         moviesViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .mostViewed, tag: 0)
         

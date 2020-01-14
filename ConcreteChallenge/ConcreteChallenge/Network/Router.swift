@@ -11,17 +11,18 @@ import Foundation
 enum Router {
     
     case getMovies
+    case getGenres
     
     var scheme: String {
         switch self {
-        case .getMovies:
+        case .getMovies, .getGenres:
             return "https"
         }
     }
     
     var host: String {
         switch self {
-        case .getMovies:
+        case .getMovies, .getGenres:
             return "api.themoviedb.org"
         }
     }
@@ -30,6 +31,8 @@ enum Router {
         switch self {
         case .getMovies:
             return "/3/movie/popular"
+        case .getGenres:
+            return "/3/genre/movie/list"
         }
     }
     
@@ -40,12 +43,15 @@ enum Router {
             return [URLQueryItem(name: "api_key", value: apiKey),
                     URLQueryItem(name: "language", value: "en-US"),
                     URLQueryItem(name: "page", value: "1")]
+        case .getGenres:
+            return [URLQueryItem(name: "api_key", value: apiKey),
+                    URLQueryItem(name: "language", value: "en-US")]
         }
     }
     
     var method: String {
         switch self {
-        case .getMovies:
+        case .getMovies, .getGenres:
             return "GET"
         }
     }

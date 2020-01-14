@@ -59,7 +59,7 @@ class TitleView: UIView {
         titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         titleLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: lineView.topAnchor, constant: -10).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: lineView.topAnchor, constant: -18).isActive = true
         
         lineView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         lineView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
