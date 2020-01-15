@@ -13,10 +13,6 @@ class PosterView: UIView {
     
     let movie: Movie
     
-//    let imageURL: URL
-//    let title: String
-//    let releaseDate: String
-    
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         
@@ -48,8 +44,6 @@ class PosterView: UIView {
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.numberOfLines = 2
         
-//        titleLabel.backgroundColor = .green
-        
         return titleLabel
     }()
     
@@ -61,22 +55,8 @@ class PosterView: UIView {
         subtitleLabel.textColor = .white
         subtitleLabel.font = UIFont.systemFont(ofSize: 10, weight: .light)
         
-//        subtitleLabel.backgroundColor = .yellow
-        
         return subtitleLabel
     }()
-    
-//    lazy var favoriteButton: UIButton = {
-//        let favoriteButton = UIButton(type: .system)
-//
-//        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
-//        favoriteButton.setImage(UIImage(named: "favorite"), for: .normal)
-//        favoriteButton.tintColor = .white
-//
-////        favoriteButton.backgroundColor = .red
-//
-//        return favoriteButton
-//    }()
     
     init(for movie: Movie) {
         self.movie = movie
@@ -94,7 +74,6 @@ class PosterView: UIView {
         imageView.addSubview(gradientView)
         self.addSubview(titleLabel)
         self.addSubview(subtitleLabel)
-//        self.addSubview(favoriteButton)
     }
     
     func setupConstraints() {
@@ -115,10 +94,5 @@ class PosterView: UIView {
         subtitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
         subtitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
         subtitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5).isActive = true
-        
-//        favoriteButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5).isActive = true
-//        favoriteButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
-//        favoriteButton.bottomAnchor.constraint(equalTo: subtitleLabel.bottomAnchor).isActive = true
-//        favoriteButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2).isActive = true
     }
 }

@@ -32,7 +32,7 @@ class MovieDetailViewController: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.kf.indicatorType = .activity
         imageView.kf.setImage(with: movie.posterURL)
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         
         return imageView
     }()

@@ -8,8 +8,8 @@
 
 import UIKit
 
-class MoviesViewController: UIViewController, UISearchResultsUpdating {
-
+class MoviesViewController: UIViewController, UISearchResultsUpdating, MovieCollectionDelegate {
+    
     private let spacing: CGFloat = 16.0
     
     let movieCollection: MovieColletion
@@ -38,6 +38,8 @@ class MoviesViewController: UIViewController, UISearchResultsUpdating {
         self.genreCollection = genreCollection
         super.init(nibName: nil, bundle: nil)
         
+        movieCollection.delegate = self
+        
         addSubviews()
         setupConstraints()
     }
@@ -48,15 +50,8 @@ class MoviesViewController: UIViewController, UISearchResultsUpdating {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ServiceLayer.request(router: .getMovies) { (result: Result<MoviesResponse, Error>) in
-            switch result {
-            case .success(let response):
-                self.movieCollection.addMovies(response.results)
-                self.collectionView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
+        
+        movieCollection.requestMovies()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,6 +76,10 @@ class MoviesViewController: UIViewController, UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         print("uhul")
+    }
+    
+    func reload() {
+        collectionView.reloadData()
     }
 }
 

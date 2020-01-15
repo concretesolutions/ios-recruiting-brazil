@@ -8,7 +8,14 @@
 
 import Foundation
 
+protocol MovieCollectionDelegate {
+    func reload()
+}
+
 class MovieColletion {
+    
+    var delegate: MovieCollectionDelegate?
+    
     private var movies = [Movie]()
     
     var count: Int {
@@ -17,11 +24,23 @@ class MovieColletion {
         }
     }
     
-    func addMovies(_ movies: [Movie]) {
-        self.movies.append(contentsOf: movies)
-    }
+//    func addMovies(_ movies: [Movie]) {
+//        self.movies.append(contentsOf: movies)
+//    }
     
     func movie(at index: Int) -> Movie? {
         return movies[safeIndex: index]
+    }
+    
+    func requestMovies() {
+        ServiceLayer.request(router: .getMovies) { (result: Result<MoviesResponse, Error>) in
+            switch result {
+            case .success(let response):
+                self.movies.append(contentsOf: response.results)
+                self.delegate?.reload()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }

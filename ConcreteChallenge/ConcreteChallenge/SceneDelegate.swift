@@ -18,12 +18,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
+        let movieCollection = MovieColletion()
         
-        let moviesViewController = MoviesViewController(movieCollection: MovieColletion(), genreCollection: GenreCollection())
+        let moviesViewController = MoviesViewController(movieCollection: movieCollection, genreCollection: GenreCollection())
         moviesViewController.title = "Movies"
         moviesViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .mostViewed, tag: 0)
         
-        let favoritesViewController = FavoritesViewController()
+        let favoritesViewController = FavoritesViewController(movieCollection: movieCollection)
         favoritesViewController.title = "Favorites"
         favoritesViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
         
