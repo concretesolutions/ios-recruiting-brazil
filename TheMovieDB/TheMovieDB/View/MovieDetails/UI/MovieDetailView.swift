@@ -81,11 +81,11 @@ class MovieDetailView: UIScrollView {
     
     public func movieIsFavorite(_ favorite: Bool) {
         if favorite {
-            favoriteButton.setImage(UIImage.init(named: "favorites"), for: .normal)
-            favoriteButton.backgroundColor = .red
+            favoriteButton.setImage(UIImage.init(named: "tagfavorite"), for: .normal)
+            favoriteButton.backgroundColor = .selectedButton
         }else {
-            favoriteButton.setImage(UIImage.init(named: "favorites"), for: .normal)
-            favoriteButton.backgroundColor = .green
+            favoriteButton.setImage(UIImage.init(named: "tagfavorite"), for: .normal)
+            favoriteButton.backgroundColor = .deselectedButton
         }
     }
     

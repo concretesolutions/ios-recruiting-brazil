@@ -23,10 +23,16 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         let favorites = FavoritesViewController.init()
         favorites.title = NSLocalizedString("Favorites", comment: "Title Favorites")
 
-        let tabItemMovies = UITabBarItem.init(tabBarSystemItem: .mostRecent, tag: 0)
+        let tabItemMovies = UITabBarItem.init(title: movies.title,
+                                              image: UIImage.init(named: "iconMovies")!.withRenderingMode(.alwaysOriginal),
+                                              tag: 0)
         movies.tabBarItem = tabItemMovies
         
-        let tabItemFavorites = UITabBarItem.init(tabBarSystemItem: .favorites, tag: 1)
+        let tabItemFavorites = UITabBarItem.init(title: favorites.title,
+                                                 image: UIImage.init(named: "iconFavorites")!.withRenderingMode(.alwaysOriginal),
+                                                 tag: 1)
+        
+
         favorites.tabBarItem = tabItemFavorites
         
         let listControllers = [movies,favorites]
