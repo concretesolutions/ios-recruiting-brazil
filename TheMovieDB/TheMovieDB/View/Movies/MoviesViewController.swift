@@ -12,7 +12,7 @@ import Combine
 
 class MoviesViewController: UIViewController {
     private let gridView = MovieGridView.init()
-    private var dataSource: UICollectionViewDiffableDataSource<Section, Movie>!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Movie>?
     lazy var moviesViewModel: MovieViewModel = {
         return MovieViewModel.shared
     }()
@@ -40,6 +40,7 @@ class MoviesViewController: UIViewController {
     @objc
     func changedMovies() {
         subscriber.forEach({ $0?.cancel() })
+        subscriber.removeAll()
         self.loadItems(withAnimation: true)
     }
 }
@@ -74,7 +75,8 @@ extension MoviesViewController {
     
     private func loadItems(withAnimation animation: Bool) {
         DispatchQueue.main.async {
-            self.dataSource.apply(self.snapshotDataSource(), animatingDifferences: animation)
+            guard let dtSource = self.dataSource else { return }
+            dtSource.apply(self.snapshotDataSource(), animatingDifferences: animation)
         }
     }
 }
