@@ -18,14 +18,15 @@ class ViewController: UIViewController{
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.collectionView.dataSource = self
-//        self.collectionView.delegate = self
+        self.collectionView.delegate = self
         
         self.collectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCell")
+        
     }
 
 }
 
-extension ViewController: UICollectionViewDataSource {
+extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
@@ -37,6 +38,14 @@ extension ViewController: UICollectionViewDataSource {
         cell.configureCell(name: self.items[indexPath.row])
         
         return cell
+    }
+}
+
+extension ViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let screenWidth = (view.frame.size.width - 45) / 2
+        return CGSize(width: screenWidth, height: screenWidth + 40)
     }
 }
 

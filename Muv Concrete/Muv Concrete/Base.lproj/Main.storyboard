@@ -32,44 +32,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="R64-6Y-yUs">
-                                <rect key="frame" x="0.0" y="124" width="414" height="689"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oKD-wb-Pu8">
+                                <rect key="frame" x="15" y="124" width="384" height="684"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Vic-VJ-e4g">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="15" id="fYX-ca-yEP">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCell" id="2bH-FI-nPJ" customClass="CollectionViewCell" customModule="Muv_Concrete" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="145" height="190"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCell" id="jN0-uc-b64" customClass="CollectionViewCell" customModule="Muv_Concrete" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JA6-Yw-E9f">
-                                            <rect key="frame" x="0.0" y="0.0" width="145" height="190"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9OH-S9-54n">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="145" height="190"/>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="a2K-lO-frv" id="lcF-YK-Pgv"/>
-                                    <outlet property="delegate" destination="a2K-lO-frv" id="TQu-Up-BXV"/>
+                                    <outlet property="dataSource" destination="a2K-lO-frv" id="Y7s-gy-NiG"/>
+                                    <outlet property="delegate" destination="a2K-lO-frv" id="tk5-PG-2fM"/>
                                 </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="R64-6Y-yUs" firstAttribute="top" secondItem="aJl-ac-WGk" secondAttribute="top" constant="80" id="5fx-Te-hz9"/>
-                            <constraint firstItem="R64-6Y-yUs" firstAttribute="leading" secondItem="aJl-ac-WGk" secondAttribute="leading" id="7IO-RM-UoS"/>
-                            <constraint firstItem="R64-6Y-yUs" firstAttribute="bottom" secondItem="aJl-ac-WGk" secondAttribute="bottom" id="9Ic-ku-atJ"/>
-                            <constraint firstItem="aJl-ac-WGk" firstAttribute="trailing" secondItem="R64-6Y-yUs" secondAttribute="trailing" id="kjh-nt-k4K"/>
+                            <constraint firstItem="aJl-ac-WGk" firstAttribute="bottom" secondItem="oKD-wb-Pu8" secondAttribute="bottom" constant="5" id="K0q-j0-Nww"/>
+                            <constraint firstItem="oKD-wb-Pu8" firstAttribute="leading" secondItem="aJl-ac-WGk" secondAttribute="leading" constant="15" id="QF2-4F-EBb"/>
+                            <constraint firstItem="oKD-wb-Pu8" firstAttribute="top" secondItem="aJl-ac-WGk" secondAttribute="top" constant="80" id="T16-NH-iyb"/>
+                            <constraint firstItem="aJl-ac-WGk" firstAttribute="trailing" secondItem="oKD-wb-Pu8" secondAttribute="trailing" constant="15" id="p0H-NL-B4N"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aJl-ac-WGk"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Movies" image="list_icon" id="dKW-0Y-quj"/>
                     <connections>
-                        <outlet property="collectionView" destination="R64-6Y-yUs" id="DkX-PB-sIr"/>
+                        <outlet property="collectionView" destination="oKD-wb-Pu8" id="wjb-W5-0Ay"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bw6-Wz-hD7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
