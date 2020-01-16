@@ -49,8 +49,6 @@ class SubtitleView: UIView {
         genreLabel.text = genres.description
         genreLabel.font = UIFont.systemFont(ofSize: 18, weight: .light)
         genreLabel.textColor = .white
-//        genreLabel.adjustsFontSizeToFitWidth = true
-//        genreLabel.numberOfLines = 0
         
         return genreLabel
     }()

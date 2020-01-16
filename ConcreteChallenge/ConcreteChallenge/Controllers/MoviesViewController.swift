@@ -12,6 +12,9 @@ class MoviesViewController: UIViewController, UISearchResultsUpdating, MovieColl
     
     private let spacing: CGFloat = 16.0
     
+    var isFetchingData = false
+    var loadingView: LoadingReusableView?
+    
     let movieCollection: MovieColletion
     let genreCollection: GenreCollection
     
@@ -29,7 +32,9 @@ class MoviesViewController: UIViewController, UISearchResultsUpdating, MovieColl
         collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
+        collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: Cells.movie)
+        collectionView.register(LoadingReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: Cells.loading)
+        
         return collectionView
     }()
     
@@ -89,7 +94,7 @@ extension MoviesViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.movie, for: indexPath) as? MovieCollectionViewCell else {
             return UICollectionViewCell()
         }
         
@@ -119,4 +124,55 @@ extension MoviesViewController: UICollectionViewDataSource, UICollectionViewDele
         
         present(movieDetailViewController, animated: true, completion: nil)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if isFetchingData {
+            return CGSize.zero
+        } else {
+            return CGSize(width: collectionView.bounds.size.width, height: 55)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionFooter {
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Cells.loading, for: indexPath) as! LoadingReusableView
+            
+            footerView.setup()
+            loadingView = footerView
+            
+            return footerView
+        }
+        return UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        if elementKind == UICollectionView.elementKindSectionFooter {
+            self.loadingView?.activityIndicator.startAnimating()
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        if elementKind == UICollectionView.elementKindSectionFooter {
+            self.loadingView?.activityIndicator.stopAnimating()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == movieCollection.count - 1 && !self.isFetchingData {
+            loadMoreData()
+        }
+    }
+
+    func loadMoreData() {
+        if !isFetchingData {
+            isFetchingData = true
+            movieCollection.requestMovies()
+            isFetchingData = false
+        }
+    }
 }
+
+
+
+
+

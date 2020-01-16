@@ -21,8 +21,6 @@ class TitleView: UIView {
         titleLabel.numberOfLines = 2
         titleLabel.adjustsFontSizeToFitWidth = true
         
-//        titleLabel.backgroundColor = .green
-        
         return titleLabel
     }()
     
@@ -31,8 +29,6 @@ class TitleView: UIView {
         
         lineView.translatesAutoresizingMaskIntoConstraints = false
         lineView.backgroundColor = .white
-        
-//        lineView.backgroundColor = .yellow
         
         return lineView
     }()

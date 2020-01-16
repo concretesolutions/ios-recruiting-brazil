@@ -22,7 +22,7 @@ class FavoritesViewController: UIViewController {
         let tableView = UITableView()
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(FavMovieTableViewCell.self, forCellReuseIdentifier: "FavMovieTableViewCell")
+        tableView.register(FavMovieTableViewCell.self, forCellReuseIdentifier: Cells.favorite)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -70,7 +70,7 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FavMovieTableViewCell", for: indexPath) as? FavMovieTableViewCell else { return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.favorite, for: indexPath) as? FavMovieTableViewCell else { return UITableViewCell()}
         
         let movie = favorites[indexPath.row]
         
@@ -89,7 +89,7 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
             complete(true)
         }
         
-        deleteAction.image = UIImage(named: "favorite")
+        deleteAction.image = UIImage(named: Images.heartHollow)
         deleteAction.backgroundColor = .black
         
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])

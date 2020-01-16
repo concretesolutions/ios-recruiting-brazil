@@ -55,6 +55,7 @@ class MovieDetailViewController: UIViewController {
         anchorView.backgroundColor = .lightGray
         anchorView.layer.cornerRadius = 3
         anchorView.layer.cornerCurve = .continuous
+        anchorView.alpha = 0.8
         
         return anchorView
     }()
@@ -87,8 +88,8 @@ class MovieDetailViewController: UIViewController {
         let favoriteButton = UIButton(type: .custom)
         
         favoriteButton.translatesAutoresizingMaskIntoConstraints = false
-        favoriteButton.setImage(UIImage(named: "favorite")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        favoriteButton.setImage(UIImage(named: "favoriteFilled")?.withRenderingMode(.alwaysTemplate), for: .selected)
+        favoriteButton.setImage(UIImage(named: Images.heartHollow)?.withRenderingMode(.alwaysTemplate), for: .normal)
+        favoriteButton.setImage(UIImage(named: Images.heartFilled)?.withRenderingMode(.alwaysTemplate), for: .selected)
         favoriteButton.tintColor = .white
         favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
         favoriteButton.isSelected = movie.isFavorite()
@@ -124,7 +125,7 @@ class MovieDetailViewController: UIViewController {
         view.addSubview(imageView)
         view.addSubview(blurView)
         view.addSubview(anchorView)
-        blurView.addSubview(stackView)
+        view.addSubview(stackView)
         
         stackView.addArrangedSubview(titleView)
         stackView.addArrangedSubview(subtitleView)
@@ -143,7 +144,7 @@ class MovieDetailViewController: UIViewController {
         blurView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         blurView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
-        anchorView.topAnchor.constraint(equalTo: view.topAnchor, constant: 18).isActive = true
+        anchorView.topAnchor.constraint(equalTo: view.topAnchor, constant: 14).isActive = true
         anchorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         anchorView.heightAnchor.constraint(equalToConstant: 6).isActive = true
         anchorView.widthAnchor.constraint(equalToConstant: 38).isActive = true
@@ -160,9 +161,9 @@ class MovieDetailViewController: UIViewController {
     func animateStack() {
         stackBottomConstraint?.constant = 0
         
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
             self.stackView.alpha = 1
-            self.blurView.layoutIfNeeded()
+            self.view.layoutIfNeeded()
         }, completion: nil)
     }
 }
