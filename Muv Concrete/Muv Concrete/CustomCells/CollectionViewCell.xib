@@ -10,23 +10,23 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCell" id="gTV-IL-0wX" customClass="CollectionViewCell" customModule="Muv_Concrete" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="145" height="190"/>
+            <rect key="frame" x="0.0" y="0.0" width="145" height="201"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="145" height="190"/>
+                <rect key="frame" x="0.0" y="0.0" width="145" height="201"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Pq-lq-xoa">
-                        <rect key="frame" x="0.0" y="0.0" width="145" height="190"/>
+                        <rect key="frame" x="0.0" y="0.0" width="145" height="201"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tray" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="GT7-Sa-9dJ">
-                                <rect key="frame" x="1" y="2.5" width="143" height="141.5"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GT7-Sa-9dJ">
+                                <rect key="frame" x="0.0" y="0.0" width="145" height="160"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="145" id="U2a-z2-9Km"/>
+                                    <constraint firstAttribute="height" constant="160" id="U2a-z2-9Km"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sFe-DJ-wOi">
-                                <rect key="frame" x="107" y="150" width="35" height="35"/>
+                                <rect key="frame" x="107" y="164" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="GxM-2f-Rpy"/>
                                     <constraint firstAttribute="height" constant="35" id="f2c-XC-EHk"/>
@@ -34,7 +34,7 @@
                                 <state key="normal" image="favorite_gray_icon"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9f-Hw-f8P">
-                                <rect key="frame" x="1" y="154" width="100" height="40"/>
+                                <rect key="frame" x="5" y="168" width="100" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="QcF-kX-5OA"/>
                                     <constraint firstAttribute="height" constant="40" id="k6E-kz-2T2"/>
@@ -46,13 +46,13 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="GT7-Sa-9dJ" secondAttribute="trailing" constant="1" id="1et-PQ-mB8"/>
-                            <constraint firstItem="D9f-Hw-f8P" firstAttribute="leading" secondItem="0Pq-lq-xoa" secondAttribute="leading" constant="1" id="LXz-Bm-Zy2"/>
+                            <constraint firstAttribute="trailing" secondItem="GT7-Sa-9dJ" secondAttribute="trailing" id="1et-PQ-mB8"/>
+                            <constraint firstItem="D9f-Hw-f8P" firstAttribute="leading" secondItem="0Pq-lq-xoa" secondAttribute="leading" constant="5" id="LXz-Bm-Zy2"/>
                             <constraint firstItem="D9f-Hw-f8P" firstAttribute="top" secondItem="GT7-Sa-9dJ" secondAttribute="bottom" constant="8" id="LYZ-Bv-GKP"/>
                             <constraint firstItem="sFe-DJ-wOi" firstAttribute="top" secondItem="GT7-Sa-9dJ" secondAttribute="bottom" constant="4" id="bPs-sx-DwN"/>
                             <constraint firstAttribute="trailing" secondItem="sFe-DJ-wOi" secondAttribute="trailing" constant="3" id="mFN-Pg-WV9"/>
-                            <constraint firstItem="GT7-Sa-9dJ" firstAttribute="top" secondItem="0Pq-lq-xoa" secondAttribute="top" constant="1" id="rzC-Fd-QPz"/>
-                            <constraint firstItem="GT7-Sa-9dJ" firstAttribute="leading" secondItem="0Pq-lq-xoa" secondAttribute="leading" constant="1" id="uIn-U0-KcC"/>
+                            <constraint firstItem="GT7-Sa-9dJ" firstAttribute="top" secondItem="0Pq-lq-xoa" secondAttribute="top" id="rzC-Fd-QPz"/>
+                            <constraint firstItem="GT7-Sa-9dJ" firstAttribute="leading" secondItem="0Pq-lq-xoa" secondAttribute="leading" id="uIn-U0-KcC"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -64,17 +64,16 @@
                 <constraint firstAttribute="trailing" secondItem="0Pq-lq-xoa" secondAttribute="trailing" id="ldW-8T-bqJ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <size key="customSize" width="142" height="178"/>
+            <size key="customSize" width="142" height="189"/>
             <connections>
                 <outlet property="favoriteButton" destination="sFe-DJ-wOi" id="OPS-Qd-yiv"/>
                 <outlet property="imageView" destination="GT7-Sa-9dJ" id="Mm5-uA-MWK"/>
                 <outlet property="titleLabel" destination="D9f-Hw-f8P" id="STH-Af-17d"/>
             </connections>
-            <point key="canvasLocation" x="203.62318840579712" y="187.5"/>
+            <point key="canvasLocation" x="203.62318840579712" y="191.18303571428569"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="favorite_gray_icon" width="17" height="16"/>
-        <image name="tray" catalog="system" width="64" height="44"/>
     </resources>
 </document>
