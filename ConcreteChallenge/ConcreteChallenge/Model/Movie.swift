@@ -31,31 +31,31 @@ public class Movie: NSManagedObject, Decodable {
 
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        self.id = try container.decode(Int64.self, forKey: .id)
-        self.imagePath = try container.decode(String.self, forKey: .imagePath)
-        self.overview = try container.decode(String.self, forKey: .overview)
-        self.title = try container.decode(String.self, forKey: .title)
+        id = try container.decode(Int64.self, forKey: .id)
+        imagePath = try container.decode(String.self, forKey: .imagePath)
+        overview = try container.decode(String.self, forKey: .overview)
+        title = try container.decode(String.self, forKey: .title)
 
-        self.releaseDate = try decoder.decode(CodingKeys.releaseDate, using: DateFormatter.databaseDate)
+        releaseDate = try decoder.decode(CodingKeys.releaseDate, using: DateFormatter.databaseDate)
 
         if let genres = try container.decodeIfPresent([Genre].self, forKey: .genres) {
             for genre in genres {
-                self.addToGenres(genre)
+                addToGenres(genre)
                 genre.addToMovies(self)
             }
         }
     }
 
     func isSaved() throws -> Bool {
-        return (try Self.queryById(Int(self.id))) != nil
+        return (try Self.queryById(Int(id))) != nil
     }
 
     func insertIntoContext() throws {
-        if !self.isInserted {
+        if !isInserted {
             let context = try CoreDataManager.getContext()
             context.insert(self)
 
-            for genre in (self.genres?.allObjects as? [Genre]) ?? [] {
+            for genre in (genres?.allObjects as? [Genre]) ?? [] {
                 try genre.insertIntoContext()
             }
         }
@@ -65,13 +65,13 @@ public class Movie: NSManagedObject, Decodable {
     func deepCopy(saving: Bool = true) throws -> Movie {
         let movie = try Movie(saving: saving)
 
-        movie.id = self.id
-        movie.imagePath = self.imagePath
-        movie.overview = self.overview
-        movie.releaseDate = self.releaseDate
-        movie.title = self.title
+        movie.id = id
+        movie.imagePath = imagePath
+        movie.overview = overview
+        movie.releaseDate = releaseDate
+        movie.title = title
 
-        for genre in (self.genres?.allObjects as? [Genre]) ?? [] {
+        for genre in (genres?.allObjects as? [Genre]) ?? [] {
             movie.addToGenres(try genre.deepCopy(saving: saving))
         }
 

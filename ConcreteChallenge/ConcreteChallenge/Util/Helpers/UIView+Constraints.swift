@@ -12,94 +12,94 @@ import UIKit
 extension UIView {
     @discardableResult
     func anchor(top: NSLayoutYAxisAnchor, padding: CGFloat = 0) -> Self {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.topAnchor.constraint(equalTo: top, constant: padding).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+        topAnchor.constraint(equalTo: top, constant: padding).isActive = true
         return self
     }
 
     @discardableResult
     func anchor(left: NSLayoutXAxisAnchor, padding: CGFloat = 0) -> Self {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.leftAnchor.constraint(equalTo: left, constant: padding).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+        leftAnchor.constraint(equalTo: left, constant: padding).isActive = true
         return self
     }
 
     @discardableResult
     func anchor(bottom: NSLayoutYAxisAnchor, padding: CGFloat = 0) -> Self {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.bottomAnchor.constraint(equalTo: bottom, constant: -padding).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+        bottomAnchor.constraint(equalTo: bottom, constant: -padding).isActive = true
         return self
     }
 
     @discardableResult
     func anchor(right: NSLayoutXAxisAnchor, padding: CGFloat = 0) -> Self {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.rightAnchor.constraint(equalTo: right, constant: -padding).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+        rightAnchor.constraint(equalTo: right, constant: -padding).isActive = true
         return self
     }
 
     @discardableResult
     func anchor(leading: NSLayoutXAxisAnchor, padding: CGFloat = 0) -> Self {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.leadingAnchor.constraint(equalTo: leading, constant: padding).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+        leadingAnchor.constraint(equalTo: leading, constant: padding).isActive = true
         return self
     }
 
     @discardableResult
     func anchor(trailing: NSLayoutXAxisAnchor, padding: CGFloat = 0) -> Self {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.trailingAnchor.constraint(equalTo: trailing, constant: -padding).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+        trailingAnchor.constraint(equalTo: trailing, constant: -padding).isActive = true
         return self
     }
 
     @discardableResult
     func anchor(centerX: NSLayoutXAxisAnchor, padding: CGFloat = 0) -> Self {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.centerXAnchor.constraint(equalTo: centerX, constant: padding//(paddingLeft ?? 0) - (paddingRight ?? 0)
+        translatesAutoresizingMaskIntoConstraints = false
+        centerXAnchor.constraint(equalTo: centerX, constant: padding//(paddingLeft ?? 0) - (paddingRight ?? 0)
         ).isActive = true
         return self
     }
 
     @discardableResult
     func anchor(centerY: NSLayoutYAxisAnchor, padding: CGFloat = 0) -> Self {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.centerYAnchor.constraint(equalTo: centerY, constant: padding//(paddingTop ?? 0) - (paddingBottom ?? 0)
+        translatesAutoresizingMaskIntoConstraints = false
+        centerYAnchor.constraint(equalTo: centerY, constant: padding//(paddingTop ?? 0) - (paddingBottom ?? 0)
         ).isActive = true
         return self
     }
 
     @discardableResult
     func anchor(widthConstant: CGFloat) -> Self {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+        widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
         return self
     }
 
     @discardableResult
     func anchor(heightConstant: CGFloat) -> Self {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+        heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
         return self
     }
 
     @discardableResult
     func anchor(width: NSLayoutDimension, padding: CGFloat = 0) -> Self {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.widthAnchor.constraint(equalTo: width, constant: -padding).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+        widthAnchor.constraint(equalTo: width, constant: -padding).isActive = true
         return self
     }
 
     @discardableResult
     func anchor(height: NSLayoutDimension) -> Self {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.heightAnchor.constraint(equalTo: height).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+        heightAnchor.constraint(equalTo: height).isActive = true
         return self
     }
 
     @discardableResult
     func anchor(aspectRatio: CGFloat) -> Self {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: aspectRatio).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+        widthAnchor.constraint(equalTo: heightAnchor, multiplier: aspectRatio).isActive = true
         return self
     }
 }

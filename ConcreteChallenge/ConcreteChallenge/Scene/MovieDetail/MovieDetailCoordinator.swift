@@ -19,6 +19,6 @@ struct MovieDetailCoordinator: Coordinator {
     }
 
     func start() {
-        self.presenter.pushViewController(rootViewController, animated: true)
+        presenter.pushViewController(rootViewController, animated: true)
     }
 }

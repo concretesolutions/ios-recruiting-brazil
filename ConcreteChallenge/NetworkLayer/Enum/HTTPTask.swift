@@ -8,5 +8,6 @@
 
 public enum HTTPTask {
     case requestPlain
-    case requestParameters(Encodable, ParametersEncoding)
+    case requestBodyParameters(Encodable)
+    case requestURLParameters([String : CustomStringConvertible])
 }

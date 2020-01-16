@@ -63,8 +63,6 @@ class FavoritesView: UIView, ViewCode {
         loadingView.stop()
 
         emptyView.isHidden = true
-
         tableView.isHidden = false
-        tableView.reloadData()
     }
 }

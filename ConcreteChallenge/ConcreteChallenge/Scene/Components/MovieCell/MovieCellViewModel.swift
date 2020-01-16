@@ -9,8 +9,12 @@
 import UIKit
 
 class MovieCellViewModel: ViewModel {
-    enum State { case show }
-    var state: State = .show
+    enum State { case show, error(Error) }
+    var state: State = .show {
+        didSet {
+            // TODO: send cell error to view
+        }
+    }
 
     var model: Movie
 
@@ -21,14 +25,8 @@ class MovieCellViewModel: ViewModel {
     }
 
     init(movie: Movie) {
-        self.model = movie
-
-        do {
-            self.isFavorited = try movie.isSaved()
-        } catch {
-            // TODO: send error to view
-            debugPrint(error)
-        }
+        model = movie
+        loadFavoriteState()
     }
 
     // MARK: View content
@@ -49,7 +47,13 @@ class MovieCellViewModel: ViewModel {
             ? UIImage.Favorite.fullIcon
             : UIImage.Favorite.emptyIcon
     }
-    var image: UIImage = UIImage.placeholder
+    var image: UIImage = UIImage.placeholder {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.updateImage?()
+            }
+        }
+    }
 
     // MARK: View updates
 
@@ -73,8 +77,7 @@ class MovieCellViewModel: ViewModel {
                 }
             }
         } catch {
-            // TODO: send error to view
-            debugPrint(error)
+            state = .error(error)
         }
     }
 
@@ -83,9 +86,14 @@ class MovieCellViewModel: ViewModel {
             URL(string: "https://image.tmdb.org/t/p/w500" + model.imagePath)
         ) { [weak self] image in
             self?.image = image
-            DispatchQueue.main.async {
-                self?.updateImage?()
-            }
+        }
+    }
+
+    func loadFavoriteState() {
+        do {
+            isFavorited = try model.isSaved()
+        } catch {
+            state = .error(error)
         }
     }
 }
