@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class MoviesViewController: UIViewController {
     private let gridView = MovieGridView.init()
@@ -15,6 +16,7 @@ class MoviesViewController: UIViewController {
     lazy var moviesViewModel: MovieViewModel = {
         return MovieViewModel.shared
     }()
+    var subscriber: [AnyCancellable?] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,7 @@ class MoviesViewController: UIViewController {
         moviesViewModel.fetchMovies()
         addObservers()
     }
+    
     private func configurateDelegate() {
         gridView.collectionView.delegate = self
     }
@@ -36,6 +39,7 @@ class MoviesViewController: UIViewController {
     
     @objc
     func changedMovies() {
+        subscriber.forEach({ $0?.cancel() })
         self.loadItems(withAnimation: true)
     }
 }
@@ -50,6 +54,11 @@ extension MoviesViewController {
         dataSource = UICollectionViewDiffableDataSource<Section,Movie>.init(collectionView: gridView.collectionView , cellProvider: { (collection, indexPath, movie) -> UICollectionViewCell? in
             guard let cell = collection.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell
             else { return UICollectionViewCell() }
+            
+            self.subscriber.append(movie.notification.receive(on: DispatchQueue.main).sink { (_) in
+                cell.fill(withMovie: movie)
+            })
+            
             cell.fill(withMovie: movie)
             return cell
         })

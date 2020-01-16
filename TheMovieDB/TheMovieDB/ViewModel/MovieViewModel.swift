@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class MovieViewModel {
     public static let shared = MovieViewModel.init()
@@ -29,7 +30,6 @@ class MovieViewModel {
     public func selectMovie(index: Int) {
         guard index >= 0 else { return }
         self.selectedMovie = movies[index]
-
     }
     
     public func changeFavorite() {

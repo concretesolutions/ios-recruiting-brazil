@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import Combine
 
-class Movie: NSObject, Decodable {
+class Movie: NSObject, Decodable, ObservableObject {
     
     let popularity: Double
     let voteCount: Int
@@ -22,7 +23,10 @@ class Movie: NSObject, Decodable {
     let voteAverage: Double
     let overview, releaseDate: String
     var isFavorite: Bool = false
-
+    
+    /*Use only to notification changes on Movie class*/
+    let notification = PassthroughSubject<Void,Never>()
+    
     enum CodingKeys: String, CodingKey {
         case popularity
         case voteCount = "vote_count"

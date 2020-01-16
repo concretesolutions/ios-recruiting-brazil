@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Stevia
+import Combine
 
 class MovieDetailView: UIScrollView {
     private var postImage = UIImageView.init()
@@ -18,7 +19,7 @@ class MovieDetailView: UIScrollView {
     private var overviewText = UILabel.init()
     private(set) var favoriteButton = UIButton.init()
     private var scrollViewContainer = UIStackView.init()
-    
+    var valueSubscriber: Cancellable!
     private let margin: CGFloat = 8
     
     init() {

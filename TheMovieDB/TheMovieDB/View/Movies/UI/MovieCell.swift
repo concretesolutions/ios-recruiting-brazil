@@ -66,11 +66,10 @@ class MovieCell: UICollectionViewCell {
     public func fill(withMovie movie: Movie) {
         title.text = movie.title
         posterImage.downloadImage(withPath: movie.posterPath, withDimension: .w185)
-        
         if movie.isFavorite {
-            favoriteIcon.backgroundColor = .green
+            favoriteIcon.backgroundColor = .blue
         } else {
-            favoriteIcon.backgroundColor = .black
+            favoriteIcon.backgroundColor = .red
         }
     }
 }
