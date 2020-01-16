@@ -12,25 +12,25 @@ class CustomCollectionViewFlowLayout: UICollectionViewFlowLayout {
     init(itemSize: CGSize, lineSpace: CGFloat = 16, leftSpace: CGFloat = 16) {
         super.init()
 
-        self.scrollDirection = .horizontal
+        scrollDirection = .horizontal
 
-        self.sectionInset = UIEdgeInsets(top: 0.0, left: leftSpace, bottom: 0.0, right: 0.0)
-        self.minimumLineSpacing = lineSpace
+        sectionInset = UIEdgeInsets(top: 0.0, left: leftSpace, bottom: 0.0, right: 0.0)
+        minimumLineSpacing = lineSpace
         self.itemSize = itemSize
     }
 
     init(columns: Int, padding: CGFloat = 16, aspectRatio: CGFloat = 1) {
         super.init()
 
-        self.sectionInset = UIEdgeInsets(top: padding, left: padding,
-                                         bottom: padding, right: padding)
-        self.minimumLineSpacing = padding
-        self.minimumInteritemSpacing = padding
+        sectionInset = UIEdgeInsets(top: padding, left: padding,
+                                    bottom: padding, right: padding)
+        minimumLineSpacing = padding
+        minimumInteritemSpacing = padding
 
         let columnCount = CGFloat(columns)
         let collectionViewSize = UIScreen.main.bounds.width - padding * (columnCount + 1)
-        self.itemSize = CGSize(width: collectionViewSize / columnCount,
-                               height: collectionViewSize / columnCount * aspectRatio)
+        itemSize = CGSize(width: collectionViewSize / columnCount,
+                          height: collectionViewSize / columnCount * aspectRatio)
     }
 
     required init?(coder: NSCoder) {

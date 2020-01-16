@@ -13,11 +13,7 @@ struct AppCoordinator: Coordinator {
         .set(\.backgroundColor, to: .white)
         .set(\.tintColor, to: .black)
 
-    var rootViewController: UITabBarController
-
-    init() {
-        self.rootViewController = CustomTabBarController()
-    }
+    var rootViewController = CustomTabBarController()
 
     func start() {
         let moviesCoordinator = MoviesCoordinator()

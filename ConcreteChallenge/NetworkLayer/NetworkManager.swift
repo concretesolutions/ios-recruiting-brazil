@@ -20,12 +20,11 @@ public struct NetworkManager: AnyNetworkManager {
         _ endpoint: ServiceType,
         _ completion: @escaping (Result<ResponseType, Error>) -> Void) {
 
-        let url = endpoint.baseURL.appendingPathComponent(endpoint.path)
-        guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+        guard let url = buildURL(for: endpoint) else {
             return completion(.failure(NetworkError.invalidURL))
         }
 
-        let request = buildRequest(for: endpoint, url: urlComponents.url!)
+        let request = buildRequest(for: endpoint, url: url)
 
         task = session.dataTask(with: request, completionHandler: { (data, response, error) in
             if let error = error {
@@ -50,16 +49,33 @@ public struct NetworkManager: AnyNetworkManager {
         task?.cancel()
     }
 
+    func buildURL<ServiceType: NetworkService>(for endpoint: ServiceType) -> URL? {
+        let url = endpoint.baseURL.appendingPathComponent(endpoint.path)
+
+        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            return nil
+        }
+
+        if case let .requestURLParameters(parameters) = endpoint.task {
+            urlComponents.queryItems = parameters.map({ key, value in
+                return URLQueryItem(name: key, value: String(describing: value))
+            })
+        }
+
+        return urlComponents.url
+    }
+
     func buildRequest<ServiceType: NetworkService>(for endpoint: ServiceType, url: URL) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
+
         if let headers = endpoint.headers {
             headers.forEach { key, value in
                 request.addValue(value, forHTTPHeaderField: key)
             }
         }
 
-        if case let .requestParameters(parameters, .body) = endpoint.task,
+        if case let .requestBodyParameters(parameters) = endpoint.task,
             let encodedParameters = try? parameters.encoded() {
             request.httpBody = encodedParameters
         }

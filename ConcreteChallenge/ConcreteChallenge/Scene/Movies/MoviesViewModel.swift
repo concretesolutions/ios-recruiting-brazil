@@ -15,24 +15,31 @@ class MoviesViewModel: ViewModel {
 
     var state: State = .empty {
         didSet {
-            switch self.state {
-            case .empty:
-                self.setEmptyLayout?()
-            case .loading:
-                self.setLoadingLayout?()
-            case .show:
-                self.setShowLayout?()
-            case .error(let error):
-                DispatchQueue.main.async { [weak self] in
-                    self?.showError?(error)
+            DispatchQueue.main.async { [weak self] in
+                switch self?.state {
+                case .empty: self?.setEmptyLayout?()
+                case .loading: self?.setLoadingLayout?()
+                case .show: self?.setShowLayout?()
+                case .error(let error): self?.showError?(error)
+                default: break
                 }
             }
         }
     }
 
-    var model = [MovieCellViewModel]()
+    var model = [MovieCellViewModel]() {
+        didSet {
+            // Update view only with the new data
+            let newViewModels: [MovieCellViewModel] = model.suffix(model.count - oldValue.count)
+            DispatchQueue.main.async { [weak self] in
+                self?.updateData?(newViewModels)
+            }
+        }
+    }
 
     var networkManager: AnyNetworkManager
+
+    var currentPage = 1
 
     init(networkManager: AnyNetworkManager = NetworkManager()) {
         self.networkManager = networkManager
@@ -58,17 +65,15 @@ class MoviesViewModel: ViewModel {
     }
 
     func loadMovies() {
-        state = .loading
+        networkManager.cancel()
 
-        networkManager.request(MovieService.popularMovies) { [weak self] (result: Result<MovieResponse, Error>) in
+        networkManager.request(MovieService.popularMovies(page: currentPage)
+        ) { [weak self] (result: Result<MovieResponse, Error>) in
             switch result {
             case .success(let movieResponse):
-                DispatchQueue.main.async { [weak self] in
-                    let results = movieResponse.results.map({ MovieCellViewModel(movie: $0) })
-                    self?.model = results
-                    self?.updateData?(results)
-                    self?.state = .show
-                }
+                self?.currentPage += 1
+                self?.model.append(contentsOf: movieResponse.results.map({ MovieCellViewModel(movie: $0) }))
+                self?.state = .show
             case .failure(let error):
                 self?.state = .error(error)
             }

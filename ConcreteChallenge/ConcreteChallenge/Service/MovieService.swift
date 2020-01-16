@@ -9,7 +9,7 @@
 import NetworkLayer
 
 enum MovieService {
-    case popularMovies
+    case popularMovies(page: Int)
     case movie(id: Int)
 }
 
@@ -25,7 +25,12 @@ extension MovieService: NetworkService {
 
     var method: HTTPMethod { .get }
 
-    var task: HTTPTask { .requestPlain }
+    var task: HTTPTask {
+        switch self {
+        case .popularMovies(let page): return .requestURLParameters(["page": page])
+        case .movie: return .requestPlain
+        }
+    }
 
     var headers: Headers? {
         ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9" +

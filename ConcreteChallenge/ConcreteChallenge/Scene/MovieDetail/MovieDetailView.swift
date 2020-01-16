@@ -54,8 +54,8 @@ class MovieDetailView: UIView, ViewCode {
         setupSubviews()
         setupLayout()
 
-        self.backgroundColor = .white
-        self.layer.addSublayer(Gradient.main(UIScreen.main.bounds.width, 200, color: .white))
+        backgroundColor = .white
+        layer.addSublayer(Gradient.main(UIScreen.main.bounds.width, 200, color: .white))
     }
 
     func setupSubviews() {
@@ -75,13 +75,13 @@ class MovieDetailView: UIView, ViewCode {
         loadingView.fillToSuperview()
 
         scrollView
-            .anchor(top: self.topAnchor)
-            .anchor(leading: self.leadingAnchor)
-            .anchor(trailing: self.trailingAnchor)
-            .anchor(bottom: self.safeAreaLayoutGuide.bottomAnchor)
+            .anchor(top: topAnchor)
+            .anchor(leading: leadingAnchor)
+            .anchor(trailing: trailingAnchor)
+            .anchor(bottom: safeAreaLayoutGuide.bottomAnchor)
 
         contentView
-            .anchor(width: self.widthAnchor)
+            .anchor(width: widthAnchor)
             .fillToSuperview(safeArea: false)
 
         coverImageView

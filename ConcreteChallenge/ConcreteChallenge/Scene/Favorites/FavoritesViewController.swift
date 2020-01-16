@@ -13,17 +13,18 @@ class FavoritesViewController: UIViewController {
 
     var viewModel: FavoritesViewModel!
 
-    var tableViewDataSource: TableViewDataSource<MovieTableViewCell>!
+    var tableViewDataSource = TableViewDataSource<MovieTableViewCell>(viewModels: [])
 
     init(viewModel: FavoritesViewModel = FavoritesViewModel()) {
         self.viewModel = viewModel
 
         super.init(nibName: nil, bundle: nil)
 
-        self.view = favoritesView
-        self.title = "Favorites"
+        view = favoritesView
+        title = "Favorites"
 
         favoritesView.tableView.register(MovieTableViewCell.self)
+        favoritesView.tableView.dataSource = tableViewDataSource
         favoritesView.tableView.delegate = self
 
         viewModel.setLoadingLayout = favoritesView.setLoadingLayout
@@ -41,18 +42,18 @@ class FavoritesViewController: UIViewController {
     }
 
     func updateData(viewModels: [MovieCellViewModel]) {
-        self.tableViewDataSource = TableViewDataSource<MovieTableViewCell>(viewModels: viewModel.model)
-        favoritesView.tableView.dataSource = self.tableViewDataSource
+        tableViewDataSource.viewModels = viewModels
+        favoritesView.tableView.reloadData()
     }
 }
 
 extension FavoritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        150
+        return 150
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        8
+        return 8
     }
 
     func tableView(_ tableView: UITableView,

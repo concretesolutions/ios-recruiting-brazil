@@ -29,6 +29,13 @@ class MoviesView: UIView, ViewCode {
         setup()
     }
 
+    func setup() {
+        setupSubviews()
+        setupLayout()
+
+        setLoadingLayout()
+    }
+
     func setupSubviews() {
         addSubview(collectionView)
         addSubview(loadingView)
@@ -64,8 +71,6 @@ class MoviesView: UIView, ViewCode {
         loadingView.stop()
 
         emptyView.isHidden = true
-
         collectionView.isHidden = false
-        collectionView.reloadData()
     }
 }

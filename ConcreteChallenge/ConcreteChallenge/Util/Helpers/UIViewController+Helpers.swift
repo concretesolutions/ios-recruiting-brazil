@@ -12,6 +12,6 @@ extension UIViewController {
     func showError(message: String?, completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Try Again", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: completion)
+        present(alert, animated: true, completion: completion)
     }
 }

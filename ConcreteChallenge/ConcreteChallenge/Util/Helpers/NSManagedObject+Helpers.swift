@@ -34,7 +34,7 @@ extension NSManagedObject {
                                                  sortDescriptors: [NSSortDescriptor]? = nil) throws -> [T] {
         let context = try CoreDataManager.getContext()
         let request = NSFetchRequest<NSFetchRequestResult>()
-        request.entity = self.entity()
+        request.entity = entity()
         request.predicate = predicate
         request.sortDescriptors = sortDescriptors
 
@@ -53,7 +53,7 @@ extension NSManagedObject {
     @discardableResult
     public static func queryById<T: NSManagedObject>(_ id: Int) throws -> T? {
         let predicate = NSPredicate(format: "id == %d", id)
-        let saved: [T] = try self.query(predicate: predicate)
+        let saved: [T] = try query(predicate: predicate)
 
         if saved.count > 0 {
             return saved.first!
@@ -64,7 +64,7 @@ extension NSManagedObject {
     public static func deleteAll() throws {
         let managedContext = try CoreDataManager.getContext()
 
-        if let name = self.entity().name {
+        if let name = entity().name {
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: name)
             fetchRequest.returnsObjectsAsFaults = false
 

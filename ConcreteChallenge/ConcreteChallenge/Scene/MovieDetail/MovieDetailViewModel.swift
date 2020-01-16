@@ -16,14 +16,12 @@ class MovieDetailViewModel: ViewModel {
 
     var state: State = .loading {
         didSet {
-            switch state {
-            case .loading:
-                self.setLoadingLayout?()
-            case .show:
-                self.setShowLayout?()
-            case .error(let error):
-                DispatchQueue.main.async { [weak self] in
-                    self?.showError?(error)
+            DispatchQueue.main.async { [weak self] in
+                switch self?.state {
+                case .loading: self?.setLoadingLayout?()
+                case .show: self?.setShowLayout?()
+                case .error(let error): self?.showError?(error)
+                default: break
                 }
             }
         }
@@ -31,7 +29,7 @@ class MovieDetailViewModel: ViewModel {
 
     var model: Movie
 
-    var isFavorited = false {
+    private var isFavorited = false {
         didSet {
             updateFavoriteState?()
         }
@@ -41,7 +39,7 @@ class MovieDetailViewModel: ViewModel {
 
     init(movie: Movie, networkManager: AnyNetworkManager = NetworkManager()) {
         self.networkManager = networkManager
-        self.model = movie
+        model = movie
 
         loadFavoriteState()
     }
@@ -70,7 +68,13 @@ class MovieDetailViewModel: ViewModel {
             ? UIImage.Favorite.fullIcon
             : UIImage.Favorite.emptyIcon
     }
-    var image: UIImage = UIImage.placeholder
+    var image: UIImage = UIImage.placeholder {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.updateImage?()
+            }
+        }
+    }
 
     // MARK: View updates
 
@@ -98,7 +102,7 @@ class MovieDetailViewModel: ViewModel {
                 }
             }
         } catch {
-            self.state = .error(error)
+            state = .error(error)
         }
     }
 
@@ -107,9 +111,6 @@ class MovieDetailViewModel: ViewModel {
             URL(string: "https://image.tmdb.org/t/p/w500" + model.imagePath)
         ) { [weak self] image in
             self?.image = image
-            DispatchQueue.main.async {
-                self?.updateImage?()
-            }
         }
     }
 
@@ -119,10 +120,8 @@ class MovieDetailViewModel: ViewModel {
         networkManager.request(MovieService.movie(id: Int(model.id))) { [weak self] (result: Result<Movie, Error>) in
             switch result {
             case .success(let movie):
-                DispatchQueue.main.async { [weak self] in
-                    self?.model = movie
-                    self?.state = .show
-                }
+                self?.model = movie
+                self?.state = .show
             case .failure(let error):
                 self?.state = .error(error)
             }
@@ -133,7 +132,7 @@ class MovieDetailViewModel: ViewModel {
         do {
             isFavorited = try model.isSaved()
         } catch {
-            self.state = .error(error)
+            state = .error(error)
         }
     }
 }

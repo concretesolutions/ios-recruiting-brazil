@@ -43,6 +43,7 @@ class MovieCollectionViewCell: UICollectionViewCell, Cell {
         titleLabel.text = viewModel?.title
         viewModel?.updateImage = updateImage
         viewModel?.updateFavoriteState = updateFavoriteState
+        viewModel?.loadFavoriteState()
         viewModel?.loadImage()
 
         updateImage()

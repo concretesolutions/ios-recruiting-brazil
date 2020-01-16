@@ -22,6 +22,10 @@ class CollectionViewDataSource<C: Cell & UICollectionViewCell>: NSObject, UIColl
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.item >= viewModels.count {
+            debugPrint("OPSSSS")
+            return collectionView.dequeueReusableCell(C.self, for: indexPath)
+        }
         return collectionView.dequeueReusableCell(C.self, for: indexPath)
             .set(\.viewModel, to: viewModels[indexPath.item])
     }

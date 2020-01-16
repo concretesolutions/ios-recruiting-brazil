@@ -15,22 +15,23 @@ class FavoritesViewModel: ViewModel {
 
     var state: State = .empty {
         didSet {
-            switch self.state {
-            case .empty:
-                self.setEmptyLayout?()
-            case .loading:
-                self.setLoadingLayout?()
-            case .show:
-                self.setShowLayout?()
-            case .error(let error):
-                DispatchQueue.main.async { [weak self] in
-                    self?.showError?(error)
+            DispatchQueue.main.async { [weak self] in
+                switch self?.state {
+                case .empty: self?.setEmptyLayout?()
+                case .loading: self?.setLoadingLayout?()
+                case .show: self?.setShowLayout?()
+                case .error(let error): self?.showError?(error)
+                default: break
                 }
             }
         }
     }
 
-    var model = [MovieCellViewModel]()
+    var model = [MovieCellViewModel]() {
+        didSet {
+            updateData?(model)
+        }
+    }
 
     // MARK: Coordinator actions
 
@@ -57,11 +58,10 @@ class FavoritesViewModel: ViewModel {
         do {
             let movies: [Movie] = try Movie.all()
             let results = movies.map({ MovieCellViewModel(movie: $0) })
-            self.model = results
-            self.updateData?(results)
-            self.state = .show
+            model = results
+            state = .show
         } catch {
-            self.state = .error(error)
+            state = .error(error)
         }
     }
 }

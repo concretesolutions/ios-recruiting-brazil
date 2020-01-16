@@ -24,12 +24,12 @@ public class Genre: NSManagedObject, Decodable {
 
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        self.id = try container.decode(Int64.self, forKey: .id)
-        self.name = try container.decode(String.self, forKey: .name)
+        id = try container.decode(Int64.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
     }
 
     func insertIntoContext() throws {
-        if !self.isInserted {
+        if !isInserted {
             let context = try CoreDataManager.getContext()
             context.insert(self)
         }
@@ -39,8 +39,8 @@ public class Genre: NSManagedObject, Decodable {
     func deepCopy(saving: Bool = true) throws -> Genre {
         let genre = try Genre(saving: saving)
 
-        genre.id = self.id
-        genre.name = self.name
+        genre.id = id
+        genre.name = name
 
         return genre
     }

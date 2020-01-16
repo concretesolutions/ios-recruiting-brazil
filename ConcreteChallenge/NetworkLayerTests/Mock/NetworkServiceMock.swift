@@ -56,7 +56,7 @@ extension NetworkServiceMock: NetworkService {
     var task: HTTPTask {
         switch self {
         case .post(let user):
-            return .requestParameters(user, .body)
+            return .requestBodyParameters(user)
         default:
             return .requestPlain
         }

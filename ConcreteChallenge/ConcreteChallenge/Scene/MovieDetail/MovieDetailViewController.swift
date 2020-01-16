@@ -18,8 +18,8 @@ class MovieDetailViewController: UIViewController {
 
         super.init(nibName: nil, bundle: nil)
 
-        self.view = movieDetailView
-        self.title = ""
+        view = movieDetailView
+        title = ""
 
         viewModel.setLoadingLayout = movieDetailView.setLoadingLayout
         viewModel.setShowLayout = setShowLayout
@@ -49,7 +49,7 @@ class MovieDetailViewController: UIViewController {
     }
 
     func updateFavoriteState() {
-        self.navigationItem.setRightBarButton(
+        navigationItem.setRightBarButton(
             UIBarButtonItem(image: viewModel.favoriteIcon,
                             style: .plain,
                             target: viewModel,
