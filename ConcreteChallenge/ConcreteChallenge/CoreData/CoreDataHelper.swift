@@ -21,18 +21,10 @@ struct CoreDataHelper {
         return context
     }()
     
-    static func save() {
-        do {
-            try context.save()
-        } catch let error {
-            print("Could not save \(error.localizedDescription)")
-        }
-    }
-    
-    static func delete(favoriteMovie: FavoriteMovie) {
-        context.delete(favoriteMovie)
+    static func newFavoriteMovie() -> FavoriteMovie {
+            let favoriteMovie = NSEntityDescription.insertNewObject(forEntityName: "FavoriteMovie", into: context) as! FavoriteMovie
 
-        save()
+            return favoriteMovie
     }
     
     static func retrieveFavoriteMovies() -> [FavoriteMovie] {
@@ -51,7 +43,7 @@ struct CoreDataHelper {
     static func favoriteMovie(for id: Int) -> FavoriteMovie? {
         do {
             let fetchRequest = NSFetchRequest<FavoriteMovie>(entityName: "FavoriteMovie")
-            fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+            fetchRequest.predicate = NSPredicate(format: "id == \(id)")
             let results = try context.fetch(fetchRequest)
 
             return results.first
@@ -62,4 +54,17 @@ struct CoreDataHelper {
         }
     }
     
+    static func save() {
+        do {
+            try context.save()
+        } catch let error {
+            print("Could not save \(error.localizedDescription)")
+        }
+    }
+    
+    static func delete(favoriteMovie: FavoriteMovie) {
+        context.delete(favoriteMovie)
+
+        save()
+    }
 }

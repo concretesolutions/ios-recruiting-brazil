@@ -115,7 +115,7 @@ extension MoviesViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let movie = movieCollection.movie(at: indexPath.row) else { return }
         
-        let movieDetailViewController = MovieDetailViewController(movie: movie, genreCollection: genreCollection)
+        let movieDetailViewController = MovieDetailViewController(movie: movie, movieCollection: movieCollection, genreCollection: genreCollection)
         
         present(movieDetailViewController, animated: true, completion: nil)
     }

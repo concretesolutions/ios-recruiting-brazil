@@ -11,6 +11,7 @@ import UIKit
 class MovieDetailViewController: UIViewController {
     
     let movie: Movie
+    let movieCollection: MovieColletion
     let genreCollection: GenreCollection
     
     lazy var stackView: UIStackView = {
@@ -82,16 +83,22 @@ class MovieDetailViewController: UIViewController {
         return bodyView
     }()
     
-    lazy var favoriteView: FavoriteView = {
-        let favoriteView = FavoriteView()
+    lazy var favoriteButton: UIButton = {
+        let favoriteButton = UIButton(type: .custom)
         
-        favoriteView.translatesAutoresizingMaskIntoConstraints = false
+        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
+        favoriteButton.setImage(UIImage(named: "favorite")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        favoriteButton.setImage(UIImage(named: "favoriteFilled")?.withRenderingMode(.alwaysTemplate), for: .selected)
+        favoriteButton.tintColor = .white
+        favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
+        favoriteButton.isSelected = movie.isFavorite()
         
-        return favoriteView
+        return favoriteButton
     }()
     
-    init(movie: Movie, genreCollection: GenreCollection) {
+    init(movie: Movie, movieCollection: MovieColletion, genreCollection: GenreCollection) {
         self.movie = movie
+        self.movieCollection = movieCollection
         self.genreCollection = genreCollection
         super.init(nibName: nil, bundle: nil)
     }
@@ -117,12 +124,12 @@ class MovieDetailViewController: UIViewController {
         view.addSubview(imageView)
         view.addSubview(blurView)
         view.addSubview(anchorView)
-        view.addSubview(stackView)
+        blurView.addSubview(stackView)
         
         stackView.addArrangedSubview(titleView)
         stackView.addArrangedSubview(subtitleView)
         stackView.addArrangedSubview(bodyView)
-        stackView.addArrangedSubview(favoriteView)
+        stackView.addArrangedSubview(favoriteButton)
     }
     
     func setupConstraints() {
@@ -155,7 +162,16 @@ class MovieDetailViewController: UIViewController {
         
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
             self.stackView.alpha = 1
-            self.view.layoutIfNeeded()
+            self.blurView.layoutIfNeeded()
         }, completion: nil)
+    }
+}
+
+extension MovieDetailViewController {
+    
+    @objc
+    func addToFavorites() {
+        movieCollection.updateState(for: movie)
+        favoriteButton.isSelected = movie.isFavorite()
     }
 }

@@ -9,6 +9,7 @@
 import Foundation
 
 struct Movie: Codable {
+    let id: Int
     let title: String
     let overview: String
     let releaseDate: String
@@ -35,11 +36,18 @@ struct Movie: Codable {
     }
     
     enum CodingKeys: String, CodingKey {
+        case id
         case title
         case overview
         case posterPath = "poster_path"
         case releaseDate = "release_date"
         case voteAverage = "vote_average"
         case genreIDs = "genre_ids"
+    }
+    
+    func isFavorite() -> Bool {
+        guard let _ = CoreDataHelper.favoriteMovie(for: id) else { return false }
+        
+        return true
     }
 }

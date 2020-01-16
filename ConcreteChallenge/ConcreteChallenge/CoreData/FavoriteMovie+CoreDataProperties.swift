@@ -16,9 +16,10 @@ extension FavoriteMovie {
         return NSFetchRequest<FavoriteMovie>(entityName: "FavoriteMovie")
     }
 
+    @NSManaged public var id: Int64
     @NSManaged public var title: String?
     @NSManaged public var releaseDate: String?
-    @NSManaged public var voteAverage: String?
+    @NSManaged public var voteAverage: Double
     @NSManaged public var overview: String?
 
 }

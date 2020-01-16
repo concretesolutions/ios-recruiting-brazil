@@ -12,6 +12,12 @@ class FavoritesViewController: UIViewController {
     
     let movieCollection: MovieColletion
     
+    var favorites = [Movie]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         
@@ -41,6 +47,11 @@ class FavoritesViewController: UIViewController {
         setupConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        favorites = movieCollection.getFavorites()
+    }
+    
     func addSubviews() {
         view.addSubview(tableView)
     }
@@ -55,17 +66,39 @@ class FavoritesViewController: UIViewController {
 
 extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movieCollection.count
+        return favorites.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FavMovieTableViewCell", for: indexPath) as? FavMovieTableViewCell else { return UITableViewCell()}
         
-        guard let movie = movieCollection.movie(at: indexPath.row) else { return UITableViewCell() }
+        let movie = favorites[indexPath.row]
         
         cell.setup(for: movie)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { _, _, complete in
+            tableView.beginUpdates()
+            self.movieCollection.updateState(for: self.favorites[indexPath.row])
+            self.favorites.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+            complete(true)
+        }
+        
+        deleteAction.image = UIImage(named: "favorite")
+        deleteAction.backgroundColor = .black
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        configuration.performsFirstActionWithFullSwipe = true
+        return configuration
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
