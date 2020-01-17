@@ -115,10 +115,11 @@ class MovieDetailView: UIScrollView {
     }
     
     public func placeholderGenres(withText: String?) -> String {
+        let template = NSLocalizedString("Genres", comment: "Genres description")
         if let text = withText {
-            return "Genres: \(text)"
+            return "\(template): \(text)"
         } else {
-            return "Genres: Not disponible"
+            return "\(template): "
         }
     }
 }
