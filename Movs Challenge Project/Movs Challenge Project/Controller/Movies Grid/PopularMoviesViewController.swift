@@ -30,7 +30,18 @@ class PopularMoviesViewController: UIViewController {
         initController()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // Override Methods
+    
+    override func viewDidLoad() {
+        
+        navigationItem.title = "Movies"
+        
+    }
+    
     // Private Types
     // Private Properties
     
@@ -46,25 +57,38 @@ class PopularMoviesViewController: UIViewController {
         popularMoviesView.collectionView.dataSource = self
         popularMoviesView.collectionView.delegate = self
         popularMoviesView.collectionView.register(PopularMovieCollectionViewCell.self, forCellWithReuseIdentifier: PopularMovieCollectionViewCell.reuseIdentifier)
+        PopularMovieCollectionViewCell.setSize(screenSize: UIScreen.main.bounds.size)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didDownloadPage), name: TmdbAPI.didDownloadPageNN, object: nil)
+        
+        TmdbAPI.fetchPopularMovies()
+    }
+    
+    @objc private func didDownloadPage() {
+        DispatchQueue.main.async {
+            self.popularMoviesView.collectionView.reloadData()
+        }
     }
 }
 
 extension PopularMoviesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return TmdbAPI.popularMoviePages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 16
+        return TmdbAPI.popularMoviePages.first(where: {$0.page == section + 1})?.movies.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularMovieCollectionViewCell.reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularMovieCollectionViewCell.reuseIdentifier, for: indexPath) as! PopularMovieCollectionViewCell
+        if let movie = TmdbAPI.popularMoviePages.first(where: {$0.page == indexPath.section + 1})?.movies[indexPath.row] {
+            cell.fill(movie: movie)
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let side = (popularMoviesView.bounds.width / 2.0) - (49.0 / 2.0)
-        return CGSize(width: side, height: side * (3.0/2.0))
+        return PopularMovieCollectionViewCell.size
     }
 }

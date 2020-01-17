@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0D03F38F23CFE16100636CA9 /* PopularMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D03F38E23CFE16100636CA9 /* PopularMovies.swift */; };
+		0D03F38F23CFE16100636CA9 /* PopularMoviePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D03F38E23CFE16100636CA9 /* PopularMoviePage.swift */; };
 		0D03F39123CFF3BA00636CA9 /* TmdbAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D03F39023CFF3BA00636CA9 /* TmdbAPI.swift */; };
+		0D03F39323D13CE600636CA9 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D03F39223D13CE600636CA9 /* Movie.swift */; };
+		0D03F39523D13F4A00636CA9 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D03F39423D13F4A00636CA9 /* Colors.xcassets */; };
+		0D03F39823D142C200636CA9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D03F39723D142C200636CA9 /* Colors.swift */; };
+		0D03F39A23D144A400636CA9 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D03F39923D144A400636CA9 /* ViewControllerExtension.swift */; };
 		0D5D6A6623CB9BE0001642D6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5D6A6523CB9BE0001642D6 /* MainTabBarController.swift */; };
 		0D5D6A6A23CBA16E001642D6 /* MoviesGridNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5D6A6923CBA16E001642D6 /* MoviesGridNavigationController.swift */; };
 		0D5D6A6C23CBA187001642D6 /* FavoritesNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5D6A6B23CBA187001642D6 /* FavoritesNavigationController.swift */; };
@@ -37,8 +41,12 @@
 /* Begin PBXFileReference section */
 		003CD05B6B85F9C63D9C56D1 /* Pods-Movs Challenge Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movs Challenge Project.release.xcconfig"; path = "Target Support Files/Pods-Movs Challenge Project/Pods-Movs Challenge Project.release.xcconfig"; sourceTree = "<group>"; };
 		0A57A07F8B6A3215F7352BBB /* Pods-Movs Challenge ProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movs Challenge ProjectTests.release.xcconfig"; path = "Target Support Files/Pods-Movs Challenge ProjectTests/Pods-Movs Challenge ProjectTests.release.xcconfig"; sourceTree = "<group>"; };
-		0D03F38E23CFE16100636CA9 /* PopularMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMovies.swift; sourceTree = "<group>"; };
+		0D03F38E23CFE16100636CA9 /* PopularMoviePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviePage.swift; sourceTree = "<group>"; };
 		0D03F39023CFF3BA00636CA9 /* TmdbAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmdbAPI.swift; sourceTree = "<group>"; };
+		0D03F39223D13CE600636CA9 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		0D03F39423D13F4A00636CA9 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		0D03F39723D142C200636CA9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		0D03F39923D144A400636CA9 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		0D5D6A6523CB9BE0001642D6 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		0D5D6A6923CBA16E001642D6 /* MoviesGridNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGridNavigationController.swift; sourceTree = "<group>"; };
 		0D5D6A6B23CBA187001642D6 /* FavoritesNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesNavigationController.swift; sourceTree = "<group>"; };
@@ -80,6 +88,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D03F39623D142B000636CA9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0D03F39723D142C200636CA9 /* Colors.swift */,
+				0D03F39923D144A400636CA9 /* ViewControllerExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		0D5D6A6723CBA10E001642D6 /* Movies Grid */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,9 +186,11 @@
 		0D83785823CAA1DE000E3565 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0D03F39623D142B000636CA9 /* Extensions */,
 				0D83783A23CA9F95000E3565 /* Movs_Challenge_Project.xcdatamodeld */,
-				0D03F38E23CFE16100636CA9 /* PopularMovies.swift */,
 				0D03F39023CFF3BA00636CA9 /* TmdbAPI.swift */,
+				0D03F38E23CFE16100636CA9 /* PopularMoviePage.swift */,
+				0D03F39223D13CE600636CA9 /* Movie.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -181,6 +200,7 @@
 			children = (
 				0D83783F23CA9F96000E3565 /* LaunchScreen.storyboard */,
 				0D83783D23CA9F96000E3565 /* Assets.xcassets */,
+				0D03F39423D13F4A00636CA9 /* Colors.xcassets */,
 			);
 			path = Bundle;
 			sourceTree = "<group>";
@@ -288,6 +308,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D03F39523D13F4A00636CA9 /* Colors.xcassets in Resources */,
 				0D83784123CA9F96000E3565 /* LaunchScreen.storyboard in Resources */,
 				0D83783E23CA9F96000E3565 /* Assets.xcassets in Resources */,
 			);
@@ -354,15 +375,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D03F39A23D144A400636CA9 /* ViewControllerExtension.swift in Sources */,
 				0D5D6A7323CCE022001642D6 /* PopularMoviesView.swift in Sources */,
+				0D03F39823D142C200636CA9 /* Colors.swift in Sources */,
 				0D5D6A7523CCE233001642D6 /* PopularMovieCollectionViewCell.swift in Sources */,
 				0D5D6A6A23CBA16E001642D6 /* MoviesGridNavigationController.swift in Sources */,
 				0D5D6A7023CCDFED001642D6 /* PopularMoviesViewController.swift in Sources */,
 				0D83783C23CA9F95000E3565 /* Movs_Challenge_Project.xcdatamodeld in Sources */,
-				0D03F38F23CFE16100636CA9 /* PopularMovies.swift in Sources */,
+				0D03F38F23CFE16100636CA9 /* PopularMoviePage.swift in Sources */,
 				0D5D6A6623CB9BE0001642D6 /* MainTabBarController.swift in Sources */,
 				0D03F39123CFF3BA00636CA9 /* TmdbAPI.swift in Sources */,
 				0D83783223CA9F95000E3565 /* AppDelegate.swift in Sources */,
+				0D03F39323D13CE600636CA9 /* Movie.swift in Sources */,
 				0D5D6A6C23CBA187001642D6 /* FavoritesNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

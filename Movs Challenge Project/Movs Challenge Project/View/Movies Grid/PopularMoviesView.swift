@@ -57,9 +57,8 @@ class PopularMoviesView: UIView {
     
     private func renderStyle() {
         style { (s) in
-            s.backgroundColor = .white
+            s.backgroundColor = .mvBackground
         }
-        
         collectionView.style { (s) in
             s.backgroundColor = .clear
             s.collectionViewLayout = collectionViewFlowLayout

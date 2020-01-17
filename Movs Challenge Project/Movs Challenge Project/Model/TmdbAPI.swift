@@ -11,18 +11,27 @@ import Foundation
 class TmdbAPI {
     // Static Properties
     
+    static let didDownloadPageNN = Notification.Name("com.concrete.Movs-Challenge-Project.TmdbAPI.didDownloadPageNN")
+    
     static private(set) var popularMoviePages: Set<PopularMoviePage> = []
+    
+    static private var page: Int = 1
     
     // Static Methods
     
-    static func fetchPopularMovies(forPage page: Int = 1) {
-        guard let url = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=72ee2814ce7d37165e7a836cc8cf9186&page=\(page)") else { return }
+    static func fetchPopularMovies() {
+        guard let url = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=72ee2814ce7d37165e7a836cc8cf9186&page=\(TmdbAPI.page)") else { return }
         let task = URLSession(configuration: .default).dataTask(with: url) { (data, response, error) in
             guard
                 let resource = data, error == nil,
                 let page = TmdbAPI.decodeJSONFile(from: resource, to: PopularMoviePage.self)
             else { return }
-            TmdbAPI.popularMoviePages.insert(page)
+            let (inserted, _) = TmdbAPI.popularMoviePages.insert(page)
+            if inserted {
+                NotificationCenter.default.post(name: TmdbAPI.didDownloadPageNN, object: nil)
+                TmdbAPI.page += 1
+                print("download page")
+            }
         }
         task.resume()
     }

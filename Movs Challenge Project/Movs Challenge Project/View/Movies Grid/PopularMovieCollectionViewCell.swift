@@ -13,11 +13,31 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
     // Static Properties
     
     static let reuseIdentifier: String = "PopularMovieCollectionViewCell"
+    static private(set) var size: CGSize = .zero
+    
+    static private let infoHeight: CGFloat = 50
     
     // Static Methods
+    
+    static func setSize(screenSize: CGSize) {
+        let width: CGFloat = (screenSize.width / 2.0) - (49.0 / 2.0)
+        let height: CGFloat = width * (3.0/2.0) + PopularMovieCollectionViewCell.infoHeight
+        PopularMovieCollectionViewCell.size = CGSize(width: width, height: height)
+    }
+    
     // Public Types
     // Public Properties
     // Public Methods
+    
+    func fill(movie: Movie) {
+        self.movie = movie
+        
+        posterImageView.image = movie.posterImage
+        titleLabel.text = movie.title
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updatePoster), name: Movie.didDownloadPosterImageNN, object: movie)
+    }
+    
     // Initialisation/Lifecycle Methods
     
     override init(frame: CGRect) {
@@ -42,23 +62,59 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
         return false
     }
     
+    override func prepareForReuse() {
+        posterImageView.image = nil
+        titleLabel.text = nil
+        
+        movie = nil
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // Private Types
     // Private Properties
+    
+    private let posterImageView = UIImageView()
+    private let titleLabel = UILabel()
+    
+    private weak var movie: Movie?
+    
     // Private Methods
     
+    @objc private func updatePoster() {
+        DispatchQueue.main.async {
+            self.posterImageView.image = self.movie?.posterImage
+        }
+    }
+    
     private func renderSuperView() {
-        
+        sv(
+            posterImageView,
+            titleLabel
+        )
     }
     
     private func renderLayout() {
+        posterImageView.width(PopularMovieCollectionViewCell.size.width)
+        posterImageView.widthConstraint?.priority = .required
+        posterImageView.height(PopularMovieCollectionViewCell.size.height - PopularMovieCollectionViewCell.infoHeight)
+        posterImageView.heightConstraint?.priority = .required
         
+        posterImageView.top(0).left(0).right(0)
+        posterImageView.Bottom == titleLabel.Top
+        
+        titleLabel.bottom(0).left(16).right(16).height(PopularMovieCollectionViewCell.infoHeight)
         
         layoutIfNeeded()
     }
     
     private func renderStyle() {
         style { (s) in
-            s.backgroundColor = .blue
+            s.backgroundColor = .darkGray
+        }
+        titleLabel.style { (s) in
+            s.textAlignment = .center
+            s.textColor = .mvYellow
+            s.numberOfLines = 2
         }
     }
 }
