@@ -7,3 +7,24 @@
 //
 
 import Foundation
+import Combine
+
+class Genre: NSObject, Decodable, ObservableObject {
+    
+    let id: Int
+    let name: String
+    
+    init(id: Int, name: String) {
+        self.id = id
+        self.name = name
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+    }
+    
+    static func == (lhs: Genre, rhs: Genre) -> Bool {
+        return lhs.id == rhs.id
+    }
+}

@@ -33,6 +33,9 @@
 		FD95E07B23CBD5D600D10AA8 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E07A23CBD5D600D10AA8 /* MovieDetailView.swift */; };
 		FD95E07F23CBF1EA00D10AA8 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E07E23CBF1EA00D10AA8 /* UIColor+Extension.swift */; };
 		FD95E08223CBFC2700D10AA8 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95E08123CBFC2700D10AA8 /* UIView+Extension.swift */; };
+		FDF18E7923D1484300CFB149 /* GenreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF18E7823D1484300CFB149 /* GenreViewModel.swift */; };
+		FDF18E7B23D14A7800CFB149 /* GenresAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF18E7A23D14A7800CFB149 /* GenresAPI.swift */; };
+		FDF18E7D23D1504400CFB149 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF18E7C23D1504400CFB149 /* Array+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +88,9 @@
 		FD95E07A23CBD5D600D10AA8 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 		FD95E07E23CBF1EA00D10AA8 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		FD95E08123CBFC2700D10AA8 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		FDF18E7823D1484300CFB149 /* GenreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreViewModel.swift; sourceTree = "<group>"; };
+		FDF18E7A23D14A7800CFB149 /* GenresAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresAPI.swift; sourceTree = "<group>"; };
+		FDF18E7C23D1504400CFB149 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +209,7 @@
 				FD95E06223C8231200D10AA8 /* Movie.swift */,
 				FD95E06423C823C700D10AA8 /* Genre.swift */,
 				FD95E06B23CA7F5500D10AA8 /* PopularMoviesAPI.swift */,
+				FDF18E7A23D14A7800CFB149 /* GenresAPI.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -249,6 +256,7 @@
 				FD95E07423CBC71E00D10AA8 /* UIImageView+Extension.swift */,
 				FD95E07E23CBF1EA00D10AA8 /* UIColor+Extension.swift */,
 				FD95E08123CBFC2700D10AA8 /* UIView+Extension.swift */,
+				FDF18E7C23D1504400CFB149 /* Array+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -282,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				FD95E06923CA6C2F00D10AA8 /* MovieViewModel.swift */,
+				FDF18E7823D1484300CFB149 /* GenreViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -434,8 +443,10 @@
 				FD1C592823C55E90000E63A3 /* AppDelegate.swift in Sources */,
 				FD1C593223C55E90000E63A3 /* TheMovieDB.xcdatamodeld in Sources */,
 				FD1C596723C5706C000E63A3 /* FavoritesViewController.swift in Sources */,
+				FDF18E7B23D14A7800CFB149 /* GenresAPI.swift in Sources */,
 				FD95E06C23CA7F5500D10AA8 /* PopularMoviesAPI.swift in Sources */,
 				FD95E06123C8098700D10AA8 /* MovieGridView.swift in Sources */,
+				FDF18E7D23D1504400CFB149 /* Array+Extension.swift in Sources */,
 				FD1C592A23C55E90000E63A3 /* SceneDelegate.swift in Sources */,
 				FD95E06323C8231200D10AA8 /* Movie.swift in Sources */,
 				FD95E06F23CA851400D10AA8 /* Notification+Extension.swift in Sources */,
@@ -443,6 +454,7 @@
 				FD95E07B23CBD5D600D10AA8 /* MovieDetailView.swift in Sources */,
 				FD95E06823CA67D400D10AA8 /* ServiceAPIManager.swift in Sources */,
 				FD95E08223CBFC2700D10AA8 /* UIView+Extension.swift in Sources */,
+				FDF18E7923D1484300CFB149 /* GenreViewModel.swift in Sources */,
 				FD95E05E23C8095700D10AA8 /* MoviesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
