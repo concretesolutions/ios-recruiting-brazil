@@ -94,11 +94,6 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
     }
     
     private func renderLayout() {
-        posterImageView.width(PopularMovieCollectionViewCell.size.width)
-        posterImageView.widthConstraint?.priority = .required
-        posterImageView.height(PopularMovieCollectionViewCell.size.height - PopularMovieCollectionViewCell.infoHeight)
-        posterImageView.heightConstraint?.priority = .required
-        
         posterImageView.top(0).left(0).right(0)
         posterImageView.Bottom == titleLabel.Top
         

@@ -35,13 +35,6 @@ class PopularMoviesViewController: UIViewController {
     }
     
     // Override Methods
-    
-    override func viewDidLoad() {
-        
-        navigationItem.title = "Movies"
-        
-    }
-    
     // Private Types
     // Private Properties
     
@@ -57,6 +50,7 @@ class PopularMoviesViewController: UIViewController {
         popularMoviesView.collectionView.dataSource = self
         popularMoviesView.collectionView.delegate = self
         popularMoviesView.collectionView.register(PopularMovieCollectionViewCell.self, forCellWithReuseIdentifier: PopularMovieCollectionViewCell.reuseIdentifier)
+        
         PopularMovieCollectionViewCell.setSize(screenSize: UIScreen.main.bounds.size)
         
         NotificationCenter.default.addObserver(self, selector: #selector(didDownloadPage), name: TmdbAPI.didDownloadPageNN, object: nil)

@@ -8,14 +8,9 @@
 
 import UIKit
 
-class PopularMoviePage: Decodable, Hashable {
+class PopularMoviePage: Decodable {
     // Static Properties
     // Static Methods
-    
-    static func == (lhs: PopularMoviePage, rhs: PopularMoviePage) -> Bool {
-        return lhs.page == rhs.page
-    }
-    
     // Public Types
     // Public Properties
     
@@ -26,11 +21,6 @@ class PopularMoviePage: Decodable, Hashable {
     let movies: [Movie]
     
     // Public Methods
-    
-    func hash(into hasher: inout Hasher) {
-        
-    }
-    
     // Initialisation/Lifecycle Methods
     
     required init(from decoder: Decoder) throws {

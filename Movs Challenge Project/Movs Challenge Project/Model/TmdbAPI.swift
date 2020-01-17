@@ -12,6 +12,7 @@ class TmdbAPI {
     // Static Properties
     
     static let didDownloadPageNN = Notification.Name("com.concrete.Movs-Challenge-Project.TmdbAPI.didDownloadPageNN")
+    static let didDownloadGenresNN = Notification.Name("com.concrete.Movs-Challenge-Project.TmdbAPI.didDownloadGenresNN")
     
     static private(set) var popularMoviePages: [PopularMoviePage] = []
     
@@ -23,7 +24,6 @@ class TmdbAPI {
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
         config.urlCache = nil
-
         let session = URLSession.init(configuration: config)
         
         guard let url = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=72ee2814ce7d37165e7a836cc8cf9186&language=en-US&page=\(TmdbAPI.page)") else { return }
@@ -40,9 +40,9 @@ class TmdbAPI {
             
             TmdbAPI.page += 1
         }
-        task.resume()
         
         URLCache.shared.removeCachedResponse(for: task)
+        task.resume()
     }
     
     static func decodeJSONFile<T>(from jsonResource: Data, to type: [T].Type) -> [T] where T: Decodable {
@@ -62,6 +62,29 @@ class TmdbAPI {
             print("Decode from json error")
             return nil
         }
+    }
+    
+    static func fetchGenres() {
+        let config = URLSessionConfiguration.default
+        config.requestCachePolicy = .reloadIgnoringLocalCacheData
+        config.urlCache = nil
+        let session = URLSession.init(configuration: config)
+        
+        guard let url = URL(string: "https://api.themoviedb.org/3/genre/movie/list?api_key=72ee2814ce7d37165e7a836cc8cf9186&language=en-US") else { return }
+        let task = session.dataTask(with: url) { (data, response, error) in
+            guard
+                let resource = data, error == nil,
+                let _ = TmdbAPI.decodeJSONFile(from: resource, to: Genres.self)
+            else { return }
+            
+            NotificationCenter.default.post(name: TmdbAPI.didDownloadGenresNN, object: nil)
+            
+            print(String(data: resource, encoding: .utf8)!)
+            print(Genres.list.values)
+        }
+        
+        URLCache.shared.removeCachedResponse(for: task)
+        task.resume()
     }
     
     // Public Types

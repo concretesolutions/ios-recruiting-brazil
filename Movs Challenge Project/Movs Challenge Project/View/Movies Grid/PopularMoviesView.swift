@@ -66,7 +66,6 @@ class PopularMoviesView: UIView {
         
         collectionViewFlowLayout.scrollDirection = .vertical
         collectionViewFlowLayout.minimumInteritemSpacing = 16
-        collectionViewFlowLayout.estimatedItemSize = CGSize(width: 120, height: 120)
         collectionViewFlowLayout.minimumLineSpacing = 16
         collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     }

@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window!.rootViewController = rootViewController
     window!.makeKeyAndVisible()
     
+    TmdbAPI.fetchGenres()
+    
     return true
   }
 
