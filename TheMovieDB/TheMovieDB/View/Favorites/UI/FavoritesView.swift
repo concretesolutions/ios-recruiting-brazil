@@ -31,9 +31,13 @@ class FavoritesView: UIView {
     
     private func style() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: FavoritesView.identifier)
+        tableView.rowHeight = 200.00
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .primaryColor
     }
     
     private func autolayout() {
         tableView.fillContainer()
     }
+    
 }

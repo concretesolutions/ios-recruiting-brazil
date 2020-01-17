@@ -58,6 +58,7 @@ class MovieCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         title.text = nil
         posterImage.image = nil
     }

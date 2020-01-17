@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Combine
+import Stevia
 
 class FavoritesViewController: UIViewController {
     
@@ -21,11 +22,15 @@ class FavoritesViewController: UIViewController {
         return MovieViewModel.shared
     }()
     private var dataSource: UITableViewDiffableDataSource<Section,Movie>?
-    var subscriber: [AnyCancellable?] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSourceTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loadItems(withAnimation: true)
     }
     
     override func loadView() {
@@ -36,6 +41,11 @@ class FavoritesViewController: UIViewController {
         dataSource = UITableViewDiffableDataSource<Section, Movie>.init(tableView: favoritesView.tableView, cellProvider: { (tableView, indexPath, movie) -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: FavoritesView.identifier, for: indexPath)
             cell.textLabel?.text = movie.title
+            cell.textLabel?.textColor = .textColor
+            cell.imageView?.image = UIImage.init(named: "placeholder-movies")
+            cell.imageView?.downloadImage(withPath: movie.posterPath, withDimension: .w92)
+            cell.imageView?.border(withRadius: 2.0, andColor: .black)
+            cell.backgroundColor = .clear
             return cell
             })
     
@@ -45,11 +55,6 @@ class FavoritesViewController: UIViewController {
     private func snapshotDataSource() -> NSDiffableDataSourceSnapshot<Section,Movie> {
         var snapshot = NSDiffableDataSourceSnapshot<Section,Movie>()
         snapshot.appendSections([.first])
-        moviesViewModel.movies.forEach({ (movie) in
-            self.subscriber.append(movie.notification.receive(on: DispatchQueue.main).sink { (_) in
-                self.loadItems(withAnimation: true)
-            })
-        })
         snapshot.appendItems(moviesViewModel.movies.filter({ $0.isFavorite }))
         return snapshot
     }
@@ -57,8 +62,6 @@ class FavoritesViewController: UIViewController {
     private func loadItems(withAnimation animation: Bool) {
         DispatchQueue.main.async {
             guard let dtSource = self.dataSource else { return }
-            self.subscriber.forEach({ $0?.cancel()})
-            self.subscriber.removeAll()
             dtSource.apply(self.snapshotDataSource(), animatingDifferences: animation)
         }
     }

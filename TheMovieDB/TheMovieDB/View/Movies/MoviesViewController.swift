@@ -37,10 +37,20 @@ class MoviesViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(changedMovies), name: Notification.moviesUpdated.name, object: nil)
     }
     
-    @objc
-    func changedMovies() {
+    private func cancelSubscribers() {
         subscriber.forEach({ $0?.cancel() })
         subscriber.removeAll()
+    }
+    
+    private func cancelSubscribe(at: Int) {
+        guard self.subscriber.count > (at + 1) else { return }
+        self.subscriber[at]?.cancel()
+        self.subscriber.remove(at: at)
+    }
+    
+    @objc
+    func changedMovies() {
+        cancelSubscribers()
         self.loadItems(withAnimation: true)
     }
 }
@@ -55,11 +65,11 @@ extension MoviesViewController {
         dataSource = UICollectionViewDiffableDataSource<Section,Movie>.init(collectionView: gridView.collectionView , cellProvider: { (collection, indexPath, movie) -> UICollectionViewCell? in
             guard let cell = collection.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell
             else { return UICollectionViewCell() }
-            
+            self.cancelSubscribe(at: indexPath.row)
             self.subscriber.append(movie.notification.receive(on: DispatchQueue.main).sink { (_) in
-                cell.fill(withMovie: movie)
+                print("ATT Movie -> \(movie.title)")
+                self.loadItems(withAnimation: true)
             })
-            
             cell.fill(withMovie: movie)
             return cell
         })
@@ -76,6 +86,7 @@ extension MoviesViewController {
     private func loadItems(withAnimation animation: Bool) {
         DispatchQueue.main.async {
             guard let dtSource = self.dataSource else { return }
+            self.cancelSubscribers()
             dtSource.apply(self.snapshotDataSource(), animatingDifferences: animation)
         }
     }

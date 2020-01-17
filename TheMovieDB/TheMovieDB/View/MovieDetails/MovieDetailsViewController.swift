@@ -31,7 +31,6 @@ class MovieDetailsViewController: UIViewController {
         movieViewModel.changeFavorite()
         guard let movie = movieViewModel.selectedMovie else { return }
         detailView.movieIsFavorite(movie.isFavorite)
-        movie.notification.send()
     }
         
     private func styleNavigation() {

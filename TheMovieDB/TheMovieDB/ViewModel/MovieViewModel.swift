@@ -35,6 +35,7 @@ class MovieViewModel {
     public func changeFavorite() {
         guard let movie = selectedMovie else { return }
         movie.isFavorite = !movie.isFavorite
+        movie.notification.send()
     }
     
     public func fetchMovies() {
