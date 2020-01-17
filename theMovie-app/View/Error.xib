@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ErrorView" customModule="theMovie_app" customModuleProvider="target">
+            <connections>
+                <outlet property="btError" destination="594-yF-Kcj" id="y0K-bL-bsc"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="MV5-n3-1Te"/>
+                <outlet property="ivError" destination="dyR-FA-ZE1" id="Oyx-Se-ZcO"/>
+                <outlet property="lbError" destination="H7n-3E-UAf" id="j0U-sD-s1g"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="error" translatesAutoresizingMaskIntoConstraints="NO" id="dyR-FA-ZE1">
+                    <rect key="frame" x="82" y="139" width="250" height="250"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="250" id="bRE-HV-RZ3"/>
+                        <constraint firstAttribute="height" constant="250" id="g1N-nu-gUk"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Um erro ocorreu. Por favor tente mais tarde." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H7n-3E-UAf">
+                    <rect key="frame" x="20" y="409" width="374" height="48"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="594-yF-Kcj">
+                    <rect key="frame" x="148" y="477" width="118" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="Tente novamente">
+                        <color key="titleColor" name="defaultcolor"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="dyR-FA-ZE1" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="82" id="0sw-ke-bee"/>
+                <constraint firstItem="H7n-3E-UAf" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="6zY-s0-5bW"/>
+                <constraint firstItem="dyR-FA-ZE1" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="95" id="Hj0-kJ-01Y"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="594-yF-Kcj" secondAttribute="trailing" constant="148" id="OlX-nR-dwu"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="H7n-3E-UAf" secondAttribute="trailing" constant="20" id="W2U-pW-tWX"/>
+                <constraint firstItem="594-yF-Kcj" firstAttribute="top" secondItem="H7n-3E-UAf" secondAttribute="bottom" constant="20" id="jbJ-Ul-vnE"/>
+                <constraint firstItem="594-yF-Kcj" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="148" id="qdp-21-Niq"/>
+                <constraint firstItem="H7n-3E-UAf" firstAttribute="top" secondItem="dyR-FA-ZE1" secondAttribute="bottom" constant="20" id="tNE-g5-hsw"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-120" y="-87"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="error" width="547" height="547"/>
+        <namedColor name="defaultcolor">
+            <color red="0.96899998188018799" green="0.80800002813339233" blue="0.35699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
