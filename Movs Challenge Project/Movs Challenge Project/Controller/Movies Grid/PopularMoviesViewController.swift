@@ -42,10 +42,14 @@ class PopularMoviesViewController: UIViewController {
         return self.view as! PopularMoviesView
     }
     
+    private let movieDetailsVC = MovieDetailsViewController()
+    
     // Private Methods
     
     private func initController() {
         self.view = PopularMoviesView()
+        
+        movieDetailsVC.setCustomNavigationBar(title: "Movie Details", color: .mvText)
         
         popularMoviesView.collectionView.dataSource = self
         popularMoviesView.collectionView.delegate = self
@@ -90,5 +94,11 @@ extension PopularMoviesViewController: UICollectionViewDataSource, UICollectionV
         if let moviePage = TmdbAPI.popularMoviePages.last, indexPath.section == moviePage.page - 1, indexPath.row >= moviePage.movies.count - 1 {
             TmdbAPI.fetchPopularMovies()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = TmdbAPI.popularMoviePages[indexPath.section].movies[indexPath.row]
+        movieDetailsVC.movie = movie
+        navigationController?.pushViewController(movieDetailsVC, animated: true)
     }
 }

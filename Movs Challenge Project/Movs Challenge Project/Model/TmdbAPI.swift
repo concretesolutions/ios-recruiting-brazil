@@ -45,13 +45,13 @@ class TmdbAPI {
         task.resume()
     }
     
-    static func decodeJSONFile<T>(from jsonResource: Data, to type: [T].Type) -> [T] where T: Decodable {
+    static func decodeJSONFile<T>(from jsonResource: Data, to type: [T].Type) -> [T]? where T: Decodable {
         if let decoded = try? JSONDecoder().decode(type, from: jsonResource) {
             return decoded
         }
         else {
             print("Decode from json error")
-            return []
+            return nil
         }
     }
     static func decodeJSONFile<T>(from jsonResource: Data, to type: T.Type) -> T? where T: Decodable {
@@ -78,9 +78,6 @@ class TmdbAPI {
             else { return }
             
             NotificationCenter.default.post(name: TmdbAPI.didDownloadGenresNN, object: nil)
-            
-            print(String(data: resource, encoding: .utf8)!)
-            print(Genres.list.values)
         }
         
         URLCache.shared.removeCachedResponse(for: task)
