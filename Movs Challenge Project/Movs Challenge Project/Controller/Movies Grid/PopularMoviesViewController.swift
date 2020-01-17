@@ -77,18 +77,24 @@ extension PopularMoviesViewController: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return TmdbAPI.popularMoviePages.first(where: {$0.page == section + 1})?.movies.count ?? 0
+        return TmdbAPI.popularMoviePages[section].movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularMovieCollectionViewCell.reuseIdentifier, for: indexPath) as! PopularMovieCollectionViewCell
-        if let movie = TmdbAPI.popularMoviePages.first(where: {$0.page == indexPath.section + 1})?.movies[indexPath.row] {
-            cell.fill(movie: movie)
-        }
+        let movie = TmdbAPI.popularMoviePages[indexPath.section].movies[indexPath.row]
+        cell.fill(movie: movie)
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return PopularMovieCollectionViewCell.size
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let moviePage = TmdbAPI.popularMoviePages.last, indexPath.section == moviePage.page - 1, indexPath.row >= moviePage.movies.count - 1 {
+            TmdbAPI.fetchPopularMovies()
+        }
     }
 }
