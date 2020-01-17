@@ -108,9 +108,17 @@ class MovieDetailView: UIScrollView {
     public func fillView(withMovie movie: Movie) {
         title.text = movie.title
         releaseDate.text = movie.releaseDate
-        genre.text = "\(movie.genres)"
+        genre.text = placeholderGenres(withText: GenreViewModel.shared.filterGenres(withIDs: movie.genres).descriptionAllGenres())
         overviewText.text = movie.overview
         postImage.downloadImage(withPath: movie.posterPath, withDimension: .w342)
         movieIsFavorite(movie.isFavorite)
+    }
+    
+    public func placeholderGenres(withText: String?) -> String {
+        if let text = withText {
+            return "Genres: \(text)"
+        } else {
+            return "Genres: Not disponible"
+        }
     }
 }

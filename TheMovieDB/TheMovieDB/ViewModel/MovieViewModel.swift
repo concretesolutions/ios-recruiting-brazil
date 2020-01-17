@@ -21,7 +21,7 @@ class MovieViewModel {
     
     private var pathURLMovies: String {
         get {
-            return  "\(ServiceAPIManager.PathsAPI.https)\(ServiceAPIManager.PathsAPI.rootAPI)\(ServiceAPIManager.PathsAPI.versionAPI)\(ServiceAPIManager.PathsAPI.MovieAPI.movie)\(ServiceAPIManager.PathsAPI.MovieAPI.popular)"
+            return  "\(ServiceAPIManager.PathsAPI.rootAPI)\(ServiceAPIManager.PathsAPI.versionAPI)\(ServiceAPIManager.PathsAPI.MovieAPI.movie)"
         }
     }
     
@@ -39,8 +39,7 @@ class MovieViewModel {
     }
     
     public func fetchMovies() {
-        let path = pathURLMovies
-        guard var components = URLComponents.init(string: path) else { return }
+        guard var components = URLComponents.init(string: pathURLMovies) else { return }
         components.queryItems = [
             URLQueryItem.init(name: ServiceAPIManager.PathsAPI.apiKey, value: ServiceAPIManager.PathsAPI.key),
             URLQueryItem.init(name: ServiceAPIManager.PathsAPI.page, value: "1")

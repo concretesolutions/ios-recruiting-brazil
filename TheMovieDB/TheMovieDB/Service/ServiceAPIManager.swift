@@ -11,16 +11,18 @@ import Foundation
 class ServiceAPIManager {
     struct PathsAPI {
         public static let key = "6192cea18be6726e8bf48424e7b43b27"
-        public static let https = "https://"
-        public static let rootAPI = "api.themoviedb.org"
+        public static let rootAPI = "https://api.themoviedb.org"
         public static let versionAPI = "/3"
         public static let apiKey = "api_key"
         public static let language = "language"
         public static let page = "page"
         
         struct MovieAPI {
-            public static let movie = "/movie"
-            public static let popular = "/popular"
+            public static let movie = "/movie/popular"
+        }
+        
+        struct GenreAPI {
+            public static let genre = "/genre/movie/list"
         }
         
         struct PathImages {

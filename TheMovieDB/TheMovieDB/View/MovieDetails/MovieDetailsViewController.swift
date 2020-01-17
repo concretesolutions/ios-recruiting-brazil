@@ -8,13 +8,20 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class MovieDetailsViewController: UIViewController {
     public var movieViewModel: MovieViewModel = {
         return MovieViewModel.shared
     }()
+    
+    public var genresViewModel: GenreViewModel = {
+        return GenreViewModel.shared
+    }()
+    
     private var detailView = MovieDetailView.init()
-
+    private var subscriber: AnyCancellable?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         styleNavigation()
@@ -24,6 +31,11 @@ class MovieDetailsViewController: UIViewController {
         detailView.autolayoutSuperView()
         detailView.favoriteButton.addTarget(self,
                                             action: #selector(selectFavoriteMovie), for: .touchUpInside)
+        
+        subscriber = genresViewModel.notification.receive(on: DispatchQueue.main).sink { (_) in
+            self.detailView.fillView(withMovie: movie)
+        }
+        
     }
     
     @objc
