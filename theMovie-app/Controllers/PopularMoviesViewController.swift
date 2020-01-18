@@ -99,15 +99,15 @@ extension PopularMoviesViewController: UICollectionViewDataSource, UICollectionV
         
         if searchText.isEmpty {
             movies = popularMovies.movies
+            errorView.isHidden = true
         } else {
             movies = popularMovies.movies.filter({$0.title.lowercased().contains(searchText.lowercased())})
-//            movies = popularMovies.movies.filter { (movie) -> Bool in
-//                hasResult = movie.title.lowercased().contains(searchText.lowercased())
-//                return hasResult
             }
         return movies
         }
     }
+
+    
 
 extension PopularMoviesViewController: PopularMoviesViewModelDelegate {
     
@@ -136,19 +136,18 @@ extension PopularMoviesViewController: ErrorViewDelegate {
 extension PopularMoviesViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+
         guard let searchText = searchBar.text else { return }
-        
+
         if filterMovies(searchText: searchText).count == 0 {
             errorView.type = .notFound(searchText: searchText)
             errorView.isHidden = false
+        } else {
+            errorView.isHidden = true
         }
          cvPopularMovies?.reloadData()
-
     }
-    
-    
-    
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         errorView.isHidden = true
         movies = popularMovies.movies
