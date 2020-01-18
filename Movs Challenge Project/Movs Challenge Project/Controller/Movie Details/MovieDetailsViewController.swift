@@ -66,10 +66,18 @@ class MovieDetailsViewController: UIViewController {
         }
     }
     
+    @objc private func didTouchFavoriteButton() {
+        if let movie = self.movie {
+            movie.isFavorite = !movie.isFavorite
+            movieView.fillView(with: movie)
+        }
+    }
+    
     private func initController() {
         self.view = MovieDetailsView()
         
         movieView.scrollView.delegate = self
+        movieView.favoriteMovieButton.addTarget(self, action: #selector(didTouchFavoriteButton), for: .touchUpInside)
     }
 }
 
@@ -78,7 +86,9 @@ extension MovieDetailsViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let backdropHeight = UIScreen.main.bounds.width * (9.0 / 16.0)
         let y = backdropHeight - (scrollView.contentOffset.y + backdropHeight)
-        let height = min(max(y, backdropHeight * 0.5), backdropHeight * 1.5)
-        movieView.backdropImageView.heightConstraint?.constant = height
+        let height = min(y, backdropHeight * 1.7)
+        let top = min((y - backdropHeight) * 0.3, 0.0)
+        movieView.backdropImageView.topConstraint?.constant = top
+        movieView.backdropImageView.heightConstraint?.constant = height - top
     }
 }

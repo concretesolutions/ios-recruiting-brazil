@@ -36,7 +36,8 @@ class MoviesGridNavigationController: UINavigationController {
     // Private Methods
     
     private func initController() {
-        tabBarItem = UITabBarItem(title: "Movies", image: nil, selectedImage: nil)
+        tabBarItem = UITabBarItem(title: "Movies", image: .listIcon, selectedImage: nil)
+        view.tintColor = .mvYellow
         
         let popularMoviesVC = PopularMoviesViewController()
         popularMoviesVC.setCustomNavigationBar(title: "Movies", color: .mvText)

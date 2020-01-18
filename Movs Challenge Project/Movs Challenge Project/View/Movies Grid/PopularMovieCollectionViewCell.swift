@@ -105,6 +105,7 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
     private func renderStyle() {
         style { (s) in
             s.backgroundColor = .darkGray
+            s.tintColor = .mvYellow
         }
         titleLabel.style { (s) in
             s.textAlignment = .center

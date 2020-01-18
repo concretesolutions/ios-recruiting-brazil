@@ -132,6 +132,7 @@ class MovieDetailsView: UIView {
     private func renderStyle() {
         style { (s) in
             s.backgroundColor = .mvBackground
+            s.tintColor = .mvYellow
         }
         
         scrollView.style { (s) in

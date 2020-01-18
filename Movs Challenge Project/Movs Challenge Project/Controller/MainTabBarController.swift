@@ -36,6 +36,7 @@ class MainTabBarController: UITabBarController {
     // Private Methods
     
     private func initController() {
+        view.tintColor = .mvYellow
         viewControllers = [MoviesGridNavigationController(), FavoritesNavigationController()]
     }
 }

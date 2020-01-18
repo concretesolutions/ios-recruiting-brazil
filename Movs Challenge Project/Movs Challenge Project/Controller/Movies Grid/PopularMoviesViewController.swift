@@ -69,6 +69,7 @@ class PopularMoviesViewController: UIViewController {
     }
 }
 
+// MARK: - CollectionView Delegate
 extension PopularMoviesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return TmdbAPI.popularMoviePages.count

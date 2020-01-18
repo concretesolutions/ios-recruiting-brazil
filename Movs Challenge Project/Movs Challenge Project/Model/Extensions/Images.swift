@@ -23,4 +23,9 @@ extension UIImage {
     class var favoriteEmptyIcon: UIImage {
         return UIImage(named: "favorite_empty_icon")!
     }
+    
+    /// List Icon
+    class var listIcon: UIImage {
+        return UIImage(named: "list_icon")!
+    }
 }

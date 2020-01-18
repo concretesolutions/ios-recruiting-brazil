@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class Movie: Decodable {
     // Static Properties
@@ -26,7 +27,11 @@ class Movie: Decodable {
     let backdropPath: String?
     let posterPath: String?
     
-    var isFavorite: Bool = false
+    var isFavorite: Bool = false {
+        didSet {
+            saveFavoriteInfo()
+        }
+    }
     
     var posterImage: UIImage? {
         if privatePosterImage == nil {
@@ -57,6 +62,8 @@ class Movie: Decodable {
         overview = try container.decode(String.self, forKey: .overview)
         backdropPath = try container.decode(String?.self, forKey: .backdropPath)
         posterPath = try container.decode(String?.self, forKey: .posterPath)
+        
+        getFavoriteInfo()
     }
     
     // Override Methods
@@ -97,5 +104,54 @@ class Movie: Decodable {
             NotificationCenter.default.post(name: Movie.didDownloadBackdropImageNN, object: self)
         }
         task.resume()
+    }
+    
+    private func getFavoriteInfo() {
+        DispatchQueue.main.async {
+            guard
+                let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+            else { return }
+            
+            let request = NSFetchRequest<NSManagedObject>(entityName: "MovieEntity")
+            
+            do {
+                if let profile = try context.fetch(request).first(where: { (object) -> Bool in
+                    object.value(forKey: "id") as? Int ?? 0 == self.id
+                }), let isFav = profile.value(forKey: "isFavorite") as? Bool {
+                    self.isFavorite = isFav
+                }
+            }
+            catch let error as NSError {
+                print("Could not fetch. \(error), \(error.userInfo)")
+            }
+        }
+    }
+    
+    private func saveFavoriteInfo() {
+        DispatchQueue.main.async {
+            guard
+                let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext,
+                let entity = NSEntityDescription.entity(forEntityName: "MovieEntity", in: context)
+            else { return }
+            
+            let request = NSFetchRequest<NSManagedObject>(entityName: "MovieEntity")
+            
+            do {
+                if let profile = try context.fetch(request).first(where: { (object) -> Bool in
+                    object.value(forKey: "id") as? Int ?? 0 == self.id
+                }) {
+                    profile.setValue(self.isFavorite, forKey: "isFavorite")
+                }
+                else {
+                    let profile = NSManagedObject(entity: entity, insertInto: context)
+                    profile.setValue(self.isFavorite, forKey: "isFavorite")
+                    profile.setValue(self.id, forKey: "id")
+                }
+                
+                try context.save()
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
     }
 }

@@ -58,6 +58,7 @@ class PopularMoviesView: UIView {
     private func renderStyle() {
         style { (s) in
             s.backgroundColor = .mvBackground
+            s.tintColor = .mvYellow
         }
         collectionView.style { (s) in
             s.backgroundColor = .clear
