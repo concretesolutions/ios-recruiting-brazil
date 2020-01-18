@@ -44,6 +44,12 @@ class PopularMoviesViewController: UIViewController {
     
     private let movieDetailsVC = MovieDetailsViewController()
     
+    private var lastPage: Int? {
+        return TmdbAPI.movies.max(by: {$0.page ?? -1 < $1.page ?? -1})?.page
+    }
+    
+    private var isFetchingNewPage: Bool = false
+    
     // Private Methods
     
     private func initController() {
@@ -59,12 +65,16 @@ class PopularMoviesViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(didDownloadPage), name: TmdbAPI.didDownloadPageNN, object: nil)
         
-        TmdbAPI.fetchPopularMovies()
+        TmdbAPI.fetchPopularMoviesSet()
     }
     
     @objc private func didDownloadPage() {
         DispatchQueue.main.async {
-            self.popularMoviesView.collectionView.reloadData()
+            if let page = self.lastPage, page - 1 >= 0 {
+                print(page)
+                self.popularMoviesView.collectionView.insertSections([page - 1])
+                self.isFetchingNewPage = false
+            }
         }
     }
     
@@ -73,22 +83,30 @@ class PopularMoviesViewController: UIViewController {
             movie.isFavorite = !movie.isFavorite
         }
     }
+    
+    private func moviesFiltered(by section: Int) -> Set<Movie> {
+        return TmdbAPI.movies.filter({($0.page ?? 0) - 1 == section})
+    }
 }
 
 // MARK: - CollectionView Delegate
 extension PopularMoviesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return TmdbAPI.popularMoviePages.count
+        return self.lastPage ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return TmdbAPI.popularMoviePages[section].movies.count
+        return moviesFiltered(by: section).count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularMovieCollectionViewCell.reuseIdentifier, for: indexPath) as! PopularMovieCollectionViewCell
-        let movie = TmdbAPI.popularMoviePages[indexPath.section].movies[indexPath.row]
-        cell.fill(movie: movie)
+        
+        let movies = moviesFiltered(by: indexPath.section)
+        if let movie = movies.first(where: {$0.index ?? -1 == indexPath.row}) {
+            cell.fill(movie: movie)
+        }
+        
         cell.favoriteMovieButton.addTarget(self, action: #selector(didTouchFavoriteButton(_:)), for: .touchUpInside)
         return cell
     }
@@ -98,14 +116,18 @@ extension PopularMoviesViewController: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let moviePage = TmdbAPI.popularMoviePages.last, indexPath.section == moviePage.page - 1, indexPath.row >= moviePage.movies.count - 1 {
-            TmdbAPI.fetchPopularMovies()
+        
+        if !self.isFetchingNewPage, (self.lastPage ?? 0) - 1 == indexPath.section, indexPath.row >= moviesFiltered(by: indexPath.section).count - 1  {
+            self.isFetchingNewPage = true
+            TmdbAPI.fetchPopularMoviesSet()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let movie = TmdbAPI.popularMoviePages[indexPath.section].movies[indexPath.row]
-        movieDetailsVC.movie = movie
-        navigationController?.pushViewController(movieDetailsVC, animated: true)
+        let movies = moviesFiltered(by: indexPath.section)
+        if let movie = movies.first(where: {$0.index ?? -1 == indexPath.row}) {
+            movieDetailsVC.movie = movie
+            navigationController?.pushViewController(movieDetailsVC, animated: true)
+        }
     }
 }

@@ -14,6 +14,9 @@ class FavoriteMoviesView: UIView {
     // Static Methods
     // Public Types
     // Public Properties
+    
+    let tableView = UITableView()
+    
     // Public Methods
     // Initialisation/Lifecycle Methods
     
@@ -40,18 +43,20 @@ class FavoriteMoviesView: UIView {
     
     private func renderSuperView() {
         sv(
-            
+            tableView
         )
     }
     
     private func renderLayout() {
+        tableView.left(0).right(0).Top == safeAreaLayoutGuide.Top
+        tableView.Bottom == safeAreaLayoutGuide.Bottom
         
         layoutIfNeeded()
     }
     
     private func renderStyle() {
         style { (s) in
-            
+            s.backgroundColor = .mvBackground
         }
     }
 }

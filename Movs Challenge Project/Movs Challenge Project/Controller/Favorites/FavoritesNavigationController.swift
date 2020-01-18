@@ -36,7 +36,11 @@ class FavoritesNavigationController: UINavigationController {
     // Private Methods
     
     private func initController() {
-        let item = UITabBarItem(title: "Favorites", image: nil, selectedImage: nil)
-        tabBarItem = item
+        tabBarItem = UITabBarItem(title: "Favorites", image: .favoriteEmptyIcon, selectedImage: nil)
+        view.tintColor = .mvYellow
+        
+        let favoriteMoviesVC = FavoriteMoviesViewController()
+        favoriteMoviesVC.setCustomNavigationBar(title: "Favorites", color: .mvText)
+        viewControllers = [favoriteMoviesVC]
     }
 }

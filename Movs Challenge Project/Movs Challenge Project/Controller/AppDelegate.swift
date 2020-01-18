@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window!.makeKeyAndVisible()
     
     TmdbAPI.fetchGenres()
+    TmdbAPI.fetchFavoriteMovies()
     
     return true
   }

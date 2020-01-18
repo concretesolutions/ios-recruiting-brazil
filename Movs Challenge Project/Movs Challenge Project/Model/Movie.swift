@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class Movie: Decodable {
+class Movie: Decodable, Hashable {
     // Static Properties
     
     static let didDownloadPosterImageNN = Notification.Name(rawValue: "com.concrete.Movs-Challenge-Project.Movie.didDownloadPosterImageNN")
@@ -18,7 +18,17 @@ class Movie: Decodable {
     static let favoriteInformationDidChangeNN = Notification.Name(rawValue: "com.concrete.Movs-Challenge-Project.Movie.favoriteInformationDidChangeNN")
     
     // Static Methods
+    
+    static func == (lhs: Movie, rhs: Movie) -> Bool {
+        lhs.id == rhs.id
+    }
+    
     // Public Types
+    
+    enum MovieError: Error {
+        case initError
+    }
+    
     // Public Properties
     
     let id: Int
@@ -50,8 +60,57 @@ class Movie: Decodable {
         return privateBackdropImage
     }
     
+    var page: Int? {
+        set {
+            if privatePage == nil {
+                privatePage = newValue
+            }
+        }
+        get {
+            return privatePage
+        }
+    }
+    
+    var index: Int? {
+        set {
+            if privateIndex == nil {
+                privateIndex = newValue
+            }
+        }
+        get {
+            return privateIndex
+        }
+    }
+    
     // Public Methods
+    
+    func hash(into hasher: inout Hasher) {
+        
+    }
+    
     // Initialisation/Lifecycle Methods
+    
+    init(profile: NSManagedObject) throws {
+        guard
+            let id = profile.value(forKey: "id") as? Int,
+            let title = profile.value(forKey: "title") as? String,
+            let releaseDate = profile.value(forKey: "releaseDate") as? Date,
+            let genreIds = profile.value(forKey: "genres") as? [Int],
+            let overview = profile.value(forKey: "overview") as? String,
+            let backdropPath = profile.value(forKey: "backdropPath") as? String,
+            let posterPath = profile.value(forKey: "posterPath") as? String,
+            let isFav = profile.value(forKey: "isFavorite") as? Bool
+        else { throw MovieError.initError }
+        
+        self.id = id
+        self.title = title
+        self.releaseDate = releaseDate
+        self.genreIds = genreIds
+        self.overview = overview
+        self.backdropPath = backdropPath
+        self.posterPath = posterPath
+        self.isFavorite = isFav
+    }
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -86,6 +145,9 @@ class Movie: Decodable {
     
     private var privatePosterImage: UIImage? = nil
     private var privateBackdropImage: UIImage? = nil
+    
+    private var privatePage: Int? = nil
+    private var privateIndex: Int? = nil
     
     // Private Methods
     
@@ -142,13 +204,19 @@ class Movie: Decodable {
             do {
                 if let profile = try context.fetch(request).first(where: { (object) -> Bool in
                     object.value(forKey: "id") as? Int ?? 0 == self.id
-                }) {
-                    profile.setValue(self.isFavorite, forKey: "isFavorite")
+                }), !self.isFavorite {
+                    context.delete(profile)
                 }
                 else {
                     let profile = NSManagedObject(entity: entity, insertInto: context)
-                    profile.setValue(self.isFavorite, forKey: "isFavorite")
                     profile.setValue(self.id, forKey: "id")
+                    profile.setValue(self.isFavorite, forKey: "isFavorite")
+                    profile.setValue(self.genreIds, forKey: "genres")
+                    profile.setValue(self.title, forKey: "title")
+                    profile.setValue(self.overview, forKey: "overview")
+                    profile.setValue(self.releaseDate, forKey: "releaseDate")
+                    profile.setValue(self.posterPath ?? "", forKey: "posterPath")
+                    profile.setValue(self.backdropPath ?? "", forKey: "backdropPath")
                 }
                 
                 try context.save()

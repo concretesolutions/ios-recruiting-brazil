@@ -63,6 +63,10 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
         renderStyle()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // Override Methods
     
     override var canBecomeFocused: Bool {

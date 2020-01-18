@@ -42,10 +42,27 @@ class FavoriteMoviesViewController: UIViewController {
         return self.view as! FavoriteMoviesView
     }
     
+    private var favoriteMovies: [Movie] {
+        return TmdbAPI.movies.filter({$0.isFavorite}).sorted(by: {$0.title < $1.title})
+    }
+    
     // Private Methods
     
     private func initController() {
         self.view = FavoriteMoviesView()
+        
+        favoriteView.tableView.dataSource = self
+        favoriteView.tableView.delegate = self
+        favoriteView.tableView.register(FavoriteMovieTableViewCell.self, forCellReuseIdentifier: FavoriteMovieTableViewCell.reuseIdentifier)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateFavoriteInformation), name: Movie.favoriteInformationDidChangeNN, object: nil)
+    }
+    
+    @objc func didUpdateFavoriteInformation() {
+        DispatchQueue.main.async {
+            print("favorite table view")
+            self.favoriteView.tableView.reloadData()
+        }
     }
 }
 
@@ -56,15 +73,16 @@ extension FavoriteMoviesViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return self.favoriteMovies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "") as! UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteMovieTableViewCell.reuseIdentifier) as! FavoriteMovieTableViewCell
+        cell.fill(movie: self.favoriteMovies[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 0.0
+        return FavoriteMovieTableViewCell.rowHeight
     }
 }
