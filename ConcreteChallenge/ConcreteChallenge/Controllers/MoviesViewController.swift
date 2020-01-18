@@ -18,6 +18,14 @@ class MoviesViewController: UIViewController, UISearchResultsUpdating, MovieColl
     let movieCollection: MovieColletion
     let genreCollection: GenreCollection
     
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    var isFiltering: Bool {
+      return searchController.isActive && !isSearchBarEmpty
+    }
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         
@@ -36,6 +44,16 @@ class MoviesViewController: UIViewController, UISearchResultsUpdating, MovieColl
         collectionView.register(LoadingReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: Cells.loading)
         
         return collectionView
+    }()
+    
+    lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Movies"
+        
+        return searchController
     }()
     
     init(movieCollection: MovieColletion, genreCollection: GenreCollection) {
@@ -63,9 +81,7 @@ class MoviesViewController: UIViewController, UISearchResultsUpdating, MovieColl
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        let search = UISearchController(searchResultsController: nil)
-        search.searchResultsUpdater = self
-        self.navigationItem.searchController = search
+        self.navigationItem.searchController = searchController
     }
     
     func addSubviews() {
@@ -80,6 +96,8 @@ class MoviesViewController: UIViewController, UISearchResultsUpdating, MovieColl
     }
     
     func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        movieCollection.filterContentForSearchText(searchBar.text!)
         print("uhul")
     }
     
@@ -90,6 +108,9 @@ class MoviesViewController: UIViewController, UISearchResultsUpdating, MovieColl
 
 extension MoviesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if isFiltering {
+            return movieCollection.countFilteredMovies
+        }
         return movieCollection.count
     }
     
@@ -98,9 +119,17 @@ extension MoviesViewController: UICollectionViewDataSource, UICollectionViewDele
             return UICollectionViewCell()
         }
         
-        guard let movie = movieCollection.movie(at: indexPath.row) else { return UICollectionViewCell() }
+        let movie: Movie?
         
-        cell.posterView = PosterView(for: movie)
+        if isFiltering {
+            movie = movieCollection.filteredMovie(at: indexPath.row)
+        } else {
+            movie = movieCollection.movie(at: indexPath.row)
+        }
+        
+        guard let m = movie else { return UICollectionViewCell() }
+        
+        cell.posterView = PosterView(for: m)
         
         return cell
     }
@@ -118,15 +147,23 @@ extension MoviesViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let movie = movieCollection.movie(at: indexPath.row) else { return }
+        let movie: Movie?
         
-        let movieDetailViewController = MovieDetailViewController(movie: movie, movieCollection: movieCollection, genreCollection: genreCollection)
+        if isFiltering {
+            movie = movieCollection.filteredMovie(at: indexPath.row)
+        } else {
+            movie = movieCollection.movie(at: indexPath.row)
+        }
+        
+        guard let m = movie else { return }
+        
+        let movieDetailViewController = MovieDetailViewController(movie: m, movieCollection: movieCollection, genreCollection: genreCollection)
         
         present(movieDetailViewController, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        if isFetchingData {
+        if isFetchingData || isFiltering {
             return CGSize.zero
         } else {
             return CGSize(width: collectionView.bounds.size.width, height: 55)

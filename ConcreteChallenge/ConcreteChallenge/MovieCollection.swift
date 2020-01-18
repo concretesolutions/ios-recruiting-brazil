@@ -17,6 +17,7 @@ class MovieColletion {
     var delegate: MovieCollectionDelegate?
     
     private var movies = [Movie]()
+    private var filteredMovies = [Movie]()
     private var favoriteMovies: [FavoriteMovie] {
         get {
             return CoreDataHelper.retrieveFavoriteMovies()
@@ -27,6 +28,26 @@ class MovieColletion {
         get {
             return movies.count
         }
+    }
+    
+    var countFilteredMovies: Int {
+        return filteredMovies.count
+    }
+    
+    func filterContentForSearchText(_ searchText: String) {
+        filteredMovies = movies.filter { (movie: Movie) -> Bool in
+            return movie.title.lowercased().contains(searchText.lowercased())
+        }
+        
+        for movie in filteredMovies {
+            print(movie.title)
+        }
+        
+        delegate?.reload()
+    }
+    
+    func filteredMovie(at index: Int) -> Movie? {
+        return filteredMovies[safeIndex: index]
     }
     
     func getFavorites() -> [Movie] {
