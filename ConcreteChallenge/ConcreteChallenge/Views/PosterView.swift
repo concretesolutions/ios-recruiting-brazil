@@ -12,6 +12,7 @@ import Kingfisher
 class PosterView: UIView {
     
     let movie: Movie
+    let notificationCenter = NotificationCenter.default
     
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -58,15 +59,36 @@ class PosterView: UIView {
         return subtitleLabel
     }()
     
+    lazy var triangleView: UIView = {
+        let triangleView = TriangleView()
+        
+        triangleView.translatesAutoresizingMaskIntoConstraints = false
+        triangleView.layer.shadowColor = UIColor.black.cgColor
+        triangleView.layer.shadowOpacity = 0.8
+        triangleView.layer.shadowOffset = .zero
+        triangleView.layer.shadowRadius = 3
+        triangleView.isHidden = !movie.isFavorite()
+        
+        return triangleView
+    }()
+    
     init(for movie: Movie) {
         self.movie = movie
         super.init(frame: .zero)
+        
         addSubviews()
         setupConstraints()
+        
+        notificationCenter.addObserver(self, selector: #selector(updateFavoriteMovies), name: Notification.Name("NewFavoriteMovie"), object: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc
+    func updateFavoriteMovies() {
+        triangleView.isHidden = !movie.isFavorite()
     }
     
     func addSubviews() {
@@ -74,6 +96,7 @@ class PosterView: UIView {
         imageView.addSubview(gradientView)
         self.addSubview(titleLabel)
         self.addSubview(subtitleLabel)
+        gradientView.addSubview(triangleView)
     }
     
     func setupConstraints() {
@@ -94,5 +117,10 @@ class PosterView: UIView {
         subtitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
         subtitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
         subtitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5).isActive = true
+        
+        triangleView.leadingAnchor.constraint(equalTo: gradientView.leadingAnchor).isActive = true
+        triangleView.topAnchor.constraint(equalTo: gradientView.topAnchor).isActive = true
+        triangleView.widthAnchor.constraint(equalTo: gradientView.widthAnchor, multiplier: 0.3).isActive = true
+        triangleView.heightAnchor.constraint(equalTo: triangleView.widthAnchor).isActive = true
     }
 }

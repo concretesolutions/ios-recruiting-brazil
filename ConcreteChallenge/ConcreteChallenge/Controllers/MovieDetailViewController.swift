@@ -13,6 +13,7 @@ class MovieDetailViewController: UIViewController {
     let movie: Movie
     let movieCollection: MovieColletion
     let genreCollection: GenreCollection
+    let notificationCenter = NotificationCenter.default
     
     lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -116,6 +117,11 @@ class MovieDetailViewController: UIViewController {
         setupConstraints()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        notificationCenter.post(name: Notification.Name("NewFavoriteMovie"), object: nil)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         animateStack()
@@ -161,7 +167,7 @@ class MovieDetailViewController: UIViewController {
     func animateStack() {
         stackBottomConstraint?.constant = 0
         
-        UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: [.curveEaseOut, .allowUserInteraction], animations: {
             self.stackView.alpha = 1
             self.view.layoutIfNeeded()
         }, completion: nil)

@@ -11,6 +11,7 @@ import UIKit
 class FavoritesViewController: UIViewController {
     
     let movieCollection: MovieColletion
+    let notificationCenter = NotificationCenter.default
     
     var favorites = [Movie]() {
         didSet {
@@ -41,7 +42,7 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .yellow
+        view.backgroundColor = .white
         
         addSubviews()
         setupConstraints()
@@ -50,6 +51,11 @@ class FavoritesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         favorites = movieCollection.getFavorites()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        notificationCenter.post(name: Notification.Name("NewFavoriteMovie"), object: nil)
     }
     
     func addSubviews() {
