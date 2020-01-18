@@ -27,6 +27,11 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
     
     // Public Types
     // Public Properties
+    
+    let favoriteMovieButton = UIButton(type: .custom)
+    
+    weak var movie: Movie?
+    
     // Public Methods
     
     func fill(movie: Movie) {
@@ -34,8 +39,10 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
         
         posterImageView.image = movie.posterImage
         titleLabel.text = movie.title
+        favoriteIconImageView.image = movie.isFavorite ? .favoriteFullIcon : .favoriteGrayIcon
         
         NotificationCenter.default.addObserver(self, selector: #selector(updatePoster), name: Movie.didDownloadPosterImageNN, object: movie)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateFavoriteIcon), name: Movie.favoriteInformationDidChangeNN, object: movie)
     }
     
     // Initialisation/Lifecycle Methods
@@ -65,7 +72,7 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         posterImageView.image = nil
         titleLabel.text = nil
-        
+        favoriteIconImageView.image = nil
         movie = nil
         NotificationCenter.default.removeObserver(self)
     }
@@ -75,8 +82,7 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
     
     private let posterImageView = UIImageView()
     private let titleLabel = UILabel()
-    
-    private weak var movie: Movie?
+    private let favoriteIconImageView = UIImageView()
     
     // Private Methods
     
@@ -86,10 +92,18 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    @objc private func updateFavoriteIcon() {
+        DispatchQueue.main.async {
+            self.favoriteIconImageView.image = self.movie?.isFavorite ?? false ? .favoriteFullIcon : .favoriteGrayIcon
+        }
+    }
+    
     private func renderSuperView() {
         sv(
             posterImageView,
-            titleLabel
+            titleLabel,
+            favoriteIconImageView,
+            favoriteMovieButton
         )
     }
     
@@ -97,7 +111,13 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
         posterImageView.top(0).left(0).right(0)
         posterImageView.Bottom == titleLabel.Top
         
-        titleLabel.bottom(0).left(16).right(16).height(PopularMovieCollectionViewCell.infoHeight)
+        titleLabel.bottom(0).left(8).height(PopularMovieCollectionViewCell.infoHeight)
+        
+        favoriteIconImageView.size(20).right(8).Left + 16 == titleLabel.Right
+        align(horizontally: titleLabel, favoriteIconImageView)
+        
+        favoriteMovieButton.bottom(0).right(0).Top == posterImageView.Bottom
+        favoriteMovieButton.Left == titleLabel.Right
         
         layoutIfNeeded()
     }
@@ -107,10 +127,16 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
             s.backgroundColor = .darkGray
             s.tintColor = .mvYellow
         }
+        
         titleLabel.style { (s) in
             s.textAlignment = .center
             s.textColor = .mvYellow
             s.numberOfLines = 2
+        }
+        
+        favoriteIconImageView.style { (s) in
+            s.contentMode = .scaleAspectFit
+            s.clipsToBounds = true
         }
     }
 }

@@ -15,6 +15,8 @@ class Movie: Decodable {
     static let didDownloadPosterImageNN = Notification.Name(rawValue: "com.concrete.Movs-Challenge-Project.Movie.didDownloadPosterImageNN")
     static let didDownloadBackdropImageNN = Notification.Name(rawValue: "com.concrete.Movs-Challenge-Project.Movie.didDownloadBackdropImageNN")
     
+    static let favoriteInformationDidChangeNN = Notification.Name(rawValue: "com.concrete.Movs-Challenge-Project.Movie.favoriteInformationDidChangeNN")
+    
     // Static Methods
     // Public Types
     // Public Properties
@@ -30,6 +32,7 @@ class Movie: Decodable {
     var isFavorite: Bool = false {
         didSet {
             saveFavoriteInfo()
+            NotificationCenter.default.post(name: Movie.favoriteInformationDidChangeNN, object: self)
         }
     }
     

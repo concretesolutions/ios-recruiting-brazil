@@ -67,6 +67,12 @@ class PopularMoviesViewController: UIViewController {
             self.popularMoviesView.collectionView.reloadData()
         }
     }
+    
+    @objc private func didTouchFavoriteButton(_ sender: UIButton) {
+        if let cell = sender.superview?.superview as? PopularMovieCollectionViewCell, let movie = cell.movie {
+            movie.isFavorite = !movie.isFavorite
+        }
+    }
 }
 
 // MARK: - CollectionView Delegate
@@ -83,7 +89,7 @@ extension PopularMoviesViewController: UICollectionViewDataSource, UICollectionV
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularMovieCollectionViewCell.reuseIdentifier, for: indexPath) as! PopularMovieCollectionViewCell
         let movie = TmdbAPI.popularMoviePages[indexPath.section].movies[indexPath.row]
         cell.fill(movie: movie)
-        
+        cell.favoriteMovieButton.addTarget(self, action: #selector(didTouchFavoriteButton(_:)), for: .touchUpInside)
         return cell
     }
     
