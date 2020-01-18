@@ -79,7 +79,7 @@ class PosterView: UIView {
         addSubviews()
         setupConstraints()
         
-        notificationCenter.addObserver(self, selector: #selector(updateFavoriteMovies), name: Notification.Name("NewFavoriteMovie"), object: nil)
+        notificationCenter.addObserver(self, selector: #selector(updateFavoriteMovies), name: Notification.Name(Notifications.newFavoriteMovie), object: nil)
     }
     
     required init?(coder: NSCoder) {

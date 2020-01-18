@@ -20,3 +20,7 @@ struct Cells {
     static let favorite = "favoriteCell"
     static let loading = "loadingCell"
 }
+
+struct Notifications {
+    static let newFavoriteMovie = "NewFavoriteMovie"
+}

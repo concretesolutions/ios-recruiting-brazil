@@ -55,7 +55,7 @@ class FavoritesViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        notificationCenter.post(name: Notification.Name("NewFavoriteMovie"), object: nil)
+        notificationCenter.post(name: Notification.Name(Notifications.newFavoriteMovie), object: nil)
     }
     
     func addSubviews() {

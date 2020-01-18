@@ -119,7 +119,7 @@ class MovieDetailViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        notificationCenter.post(name: Notification.Name("NewFavoriteMovie"), object: nil)
+        notificationCenter.post(name: Notification.Name(Notifications.newFavoriteMovie), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -178,7 +178,26 @@ extension MovieDetailViewController {
     
     @objc
     func addToFavorites() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+        
+        animateButton()
+        
         movieCollection.updateState(for: movie)
         favoriteButton.isSelected = movie.isFavorite()
+    }
+    
+    func animateButton() {
+        favoriteButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+
+        UIView.animate(withDuration: 0.3,
+                                   delay: 0,
+                                   usingSpringWithDamping: 0.30,
+                                   initialSpringVelocity: 6.0,
+                                   options: .allowUserInteraction,
+                                   animations: {
+                                    self.favoriteButton.transform = CGAffineTransform.identity
+            },
+                                   completion: nil)
     }
 }
