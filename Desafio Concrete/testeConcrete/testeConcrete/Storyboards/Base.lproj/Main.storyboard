@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,29 +18,31 @@
             <point key="canvasLocation" x="-718" y="-486"/>
         </scene>
         <!--Favorites-->
-        <scene sceneID="nYB-gM-3hy">
+        <scene sceneID="4zW-4S-Llt">
             <objects>
-                <viewController id="fDw-Iy-68i" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="eff-a3-JAU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tab2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zee-dz-9Rv">
-                                <rect key="frame" x="199" y="257" width="38" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="yPT-oX-XJT"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Favorites" image="heart" catalog="system" id="pfU-cA-QS3"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="11K-wi-zai" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController id="BTK-Ud-tVr" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favorites" id="PyO-vl-lm0"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aQh-Io-7S9">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="N4w-9W-wfb" kind="relationship" relationship="rootViewController" id="z5M-cB-p9R"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Wb-2S-tXS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1468" y="196"/>
+            <point key="canvasLocation" x="-1337" y="442"/>
+        </scene>
+        <!--FavoritesViewController-->
+        <scene sceneID="Rlz-F3-1GN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Favorites" referencedIdentifier="FavoritesViewController" id="N4w-9W-wfb" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="amZ-Y2-1gZ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2JY-xy-jia" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-522" y="442"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="WUC-ZG-XVT">
@@ -54,7 +55,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="RfQ-mq-JHe" kind="relationship" relationship="viewControllers" id="abc-bU-4WS"/>
-                        <segue destination="fDw-Iy-68i" kind="relationship" relationship="viewControllers" id="Qj2-h6-qZR"/>
+                        <segue destination="BTK-Ud-tVr" kind="relationship" relationship="viewControllers" id="lzT-a8-Cwu"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ElI-Jw-HA5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -80,7 +81,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="heart" catalog="system" width="64" height="54"/>
         <image name="list.dash" catalog="system" width="64" height="42"/>
     </resources>
 </document>

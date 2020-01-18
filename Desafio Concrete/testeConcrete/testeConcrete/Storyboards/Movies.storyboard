@@ -16,8 +16,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="yAt-18-amh">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="yAt-18-amh">
+                                <rect key="frame" x="0.0" y="263" width="414" height="599"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.8155969381" green="0.81573778389999996" blue="0.81558805700000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qDF-vu-EtI">
                                     <size key="itemSize" width="50" height="50"/>
@@ -26,37 +27,44 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="qlk-3S-Faj">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="vzW-or-HjI">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="20h-nZ-s9u">
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="aCu-sj-2c2">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
                                     <outlet property="delegate" destination="18W-gS-yEh" id="L5O-g9-8Am"/>
                                 </connections>
                             </collectionView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b47-Q4-SLx">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="qpD-Y1-Mdm"/>
+                                </items>
+                            </navigationBar>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ajj-Ee-xcx">
+                                <rect key="frame" x="0.0" y="88" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="yAt-18-amh" firstAttribute="top" secondItem="NcB-mC-DKn" secondAttribute="top" id="1BN-fn-bmc"/>
-                            <constraint firstItem="NcB-mC-DKn" firstAttribute="bottom" secondItem="yAt-18-amh" secondAttribute="bottom" id="dkH-A7-DcY"/>
-                            <constraint firstItem="NcB-mC-DKn" firstAttribute="trailing" secondItem="yAt-18-amh" secondAttribute="trailing" id="gjg-4O-vYQ"/>
-                            <constraint firstItem="yAt-18-amh" firstAttribute="leading" secondItem="NcB-mC-DKn" secondAttribute="leading" id="ivR-4y-GMT"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="NcB-mC-DKn"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="yAt-18-amh" id="B25-yj-xVO"/>
-                        <segue destination="wiF-Z2-cCL" kind="show" id="0q3-wk-Roa"/>
+                        <segue destination="wiF-Z2-cCL" kind="show" identifier="showDetail" id="0q3-wk-Roa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hNb-J5-jFi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="828" y="826"/>
+            <point key="canvasLocation" x="827.536231884058" y="825.66964285714278"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="l2Z-rL-sbb">
