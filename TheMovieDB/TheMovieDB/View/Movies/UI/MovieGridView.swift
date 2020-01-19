@@ -32,6 +32,7 @@ class MovieGridView: UIView {
     
     private func style() {
         setupCollectionView()
+        collectionView.keyboardDismissMode = .onDrag
     }
     
     private func autolayout() {

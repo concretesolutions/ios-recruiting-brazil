@@ -17,6 +17,9 @@ class MovieViewModel {
             NotificationCenter.default.post(.moviesUpdated)
         }
     }
+    
+    public var filteredMovies: [Movie] = []
+    
     public var selectedMovie: Movie?
     
     private var pathURLMovies: String {
@@ -27,9 +30,13 @@ class MovieViewModel {
     
     private init() { }
     
-    public func selectMovie(index: Int) {
+    public func selectMovie(index: Int, isFiltered: Bool = false) {
         guard index >= 0 else { return }
-        self.selectedMovie = movies[index]
+        if isFiltered {
+            self.selectedMovie = filteredMovies[index]
+        } else {
+            self.selectedMovie = movies[index]
+        }
     }
     
     public func changeFavorite(at index: Int? = nil) {
@@ -46,6 +53,12 @@ class MovieViewModel {
     
     public func delete(at index: Int) {
         movies.remove(at: index)
+    }
+    
+    public func filterMovies(withText text: String) {
+        filteredMovies = movies.filter { (movie) -> Bool in
+            return movie.title.lowercased().contains(text.lowercased())
+        }
     }
     
     public func fetchMovies() {

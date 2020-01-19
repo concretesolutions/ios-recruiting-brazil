@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Combine
 
-class MoviesViewController: UIViewController {
+class MoviesViewController: SearchBarViewController {
     private let gridView = MovieGridView.init()
     private var dataSource: UICollectionViewDiffableDataSource<Section, Movie>?
     lazy var moviesViewModel: MovieViewModel = {
@@ -82,11 +82,25 @@ extension MoviesViewController {
         return snapshot
     }
     
+    private func snapshotFilteredDataSource() -> NSDiffableDataSourceSnapshot<Section, Movie> {
+        guard var snapshot = dataSource?.snapshot() else {return snapshotDataSource()}
+        snapshot.deleteAllItems()
+        snapshot.appendSections([.first])
+        snapshot.appendItems(moviesViewModel.filteredMovies)
+        return snapshot
+    }
+    
     private func loadItems(withAnimation animation: Bool) {
         DispatchQueue.main.async {
+            
             guard let dtSource = self.dataSource else { return }
             self.cancelSubscribers()
-            dtSource.apply(self.snapshotDataSource(), animatingDifferences: animation)
+            
+            if self.searchIsFiltered {
+                dtSource.apply(self.snapshotFilteredDataSource(), animatingDifferences: animation)
+            }else {
+                dtSource.apply(self.snapshotDataSource(), animatingDifferences: animation)
+            }
         }
     }
 }
@@ -94,7 +108,18 @@ extension MoviesViewController {
 extension MoviesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailsController = MovieDetailsViewController.init()
-        moviesViewModel.selectMovie(index: indexPath.row)
+        detailsController.hidesBottomBarWhenPushed = true
+        moviesViewModel.selectMovie(index: indexPath.row, isFiltered: searchIsFiltered)
         self.navigationController?.pushViewController(detailsController, animated: true)
+    }
+}
+
+//MARK: - Function to search bar
+extension MoviesViewController {
+    override func updateSearchResults(for searchController: UISearchController) {
+        super.updateSearchResults(for: searchController)
+        guard let text = searchController.searchBar.text else { return }
+        moviesViewModel.filterMovies(withText: text)
+        loadItems(withAnimation: true)
     }
 }
