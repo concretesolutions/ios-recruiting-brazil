@@ -12,7 +12,6 @@ import UIKit
 
 class FavoritesView: UIView {
     public let tableView = UITableView()
-    public static let identifier = "favoritesCellIdentifier"
     
     init() {
         super.init(frame: .zero)
@@ -30,7 +29,7 @@ class FavoritesView: UIView {
     }
     
     private func style() {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: FavoritesView.identifier)
+        tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.identifier)
         tableView.rowHeight = 200.00
         tableView.separatorStyle = .none
         tableView.backgroundColor = .primaryColor

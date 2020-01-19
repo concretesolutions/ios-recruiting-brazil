@@ -62,10 +62,13 @@ class MovieCell: UICollectionViewCell {
         title.text = nil
         posterImage.image = nil
     }
-    
+    public func isFavoriteMovie(_ status: Bool) {
+        favoriteIcon.isHidden = !status
+
+    }
     public func fill(withMovie movie: Movie) {
         title.text = movie.title
         posterImage.downloadImage(withPath: movie.posterPath, withDimension: .w185)
-        favoriteIcon.isHidden = !movie.isFavorite
+        isFavoriteMovie(movie.isFavorite)
     }
 }

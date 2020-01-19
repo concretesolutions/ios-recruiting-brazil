@@ -32,10 +32,20 @@ class MovieViewModel {
         self.selectedMovie = movies[index]
     }
     
-    public func changeFavorite() {
-        guard let movie = selectedMovie else { return }
-        movie.isFavorite = !movie.isFavorite
-        movie.notification.send()
+    public func changeFavorite(at index: Int? = nil) {
+        if let changeIndex = index {
+            let movie = movies.filter({ $0.isFavorite })[changeIndex]
+            movie.isFavorite = !movie.isFavorite
+            movie.notification.send()
+        } else {
+            guard let movie = selectedMovie else { return }
+            movie.isFavorite = !movie.isFavorite
+            movie.notification.send()
+        }
+    }
+    
+    public func delete(at index: Int) {
+        movies.remove(at: index)
     }
     
     public func fetchMovies() {

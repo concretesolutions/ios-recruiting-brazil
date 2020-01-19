@@ -57,9 +57,6 @@ class MoviesViewController: UIViewController {
 
 //MARK: - Functions to CollectionView - DataSource
 extension MoviesViewController {
-    enum Section {
-        case first
-    }
     
     private func configurateDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section,Movie>.init(collectionView: gridView.collectionView , cellProvider: { (collection, indexPath, movie) -> UICollectionViewCell? in
@@ -67,8 +64,10 @@ extension MoviesViewController {
             else { return UICollectionViewCell() }
             self.cancelSubscribe(at: indexPath.row)
             self.subscriber.append(movie.notification.receive(on: DispatchQueue.main).sink { (_) in
-                print("ATT Movie -> \(movie.title)")
-                self.loadItems(withAnimation: true)
+                print("ATT Movie -> \(movie.title) = \(movie.isFavorite)")
+                print("Index -> \(indexPath.row)")
+                guard let currentCell = collection.cellForItem(at: indexPath) as? MovieCell else {return}
+                currentCell.isFavoriteMovie(movie.isFavorite)
             })
             cell.fill(withMovie: movie)
             return cell
@@ -97,6 +96,5 @@ extension MoviesViewController: UICollectionViewDelegate {
         let detailsController = MovieDetailsViewController.init()
         moviesViewModel.selectMovie(index: indexPath.row)
         self.navigationController?.pushViewController(detailsController, animated: true)
-        
     }
 }

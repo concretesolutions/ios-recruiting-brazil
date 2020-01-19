@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD09EDF923D3B91800F10043 /* SectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09EDF823D3B91800F10043 /* SectionDataSource.swift */; };
 		FD1C592823C55E90000E63A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1C592723C55E90000E63A3 /* AppDelegate.swift */; };
 		FD1C592A23C55E90000E63A3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1C592923C55E90000E63A3 /* SceneDelegate.swift */; };
 		FD1C592C23C55E90000E63A3 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1C592B23C55E90000E63A3 /* TabBarController.swift */; };
@@ -36,6 +37,7 @@
 		FDF18E7923D1484300CFB149 /* GenreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF18E7823D1484300CFB149 /* GenreViewModel.swift */; };
 		FDF18E7B23D14A7800CFB149 /* GenresAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF18E7A23D14A7800CFB149 /* GenresAPI.swift */; };
 		FDF18E7D23D1504400CFB149 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF18E7C23D1504400CFB149 /* Array+Extension.swift */; };
+		FDF18E7F23D374F000CFB149 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF18E7E23D374F000CFB149 /* FavoriteCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD09EDF823D3B91800F10043 /* SectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDataSource.swift; sourceTree = "<group>"; };
 		FD1C592423C55E90000E63A3 /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD1C592723C55E90000E63A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD1C592923C55E90000E63A3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +94,7 @@
 		FDF18E7823D1484300CFB149 /* GenreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreViewModel.swift; sourceTree = "<group>"; };
 		FDF18E7A23D14A7800CFB149 /* GenresAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresAPI.swift; sourceTree = "<group>"; };
 		FDF18E7C23D1504400CFB149 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		FDF18E7E23D374F000CFB149 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +185,7 @@
 				FD1C596323C57013000E63A3 /* Favorites */,
 				FD1C592B23C55E90000E63A3 /* TabBarController.swift */,
 				FD1C593523C55E91000E63A3 /* LaunchScreen.storyboard */,
+				FD09EDF823D3B91800F10043 /* SectionDataSource.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -265,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				FD4CCB1523D00F7500D3F352 /* FavoritesView.swift */,
+				FDF18E7E23D374F000CFB149 /* FavoriteCell.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -435,6 +441,7 @@
 			files = (
 				FD4CCB1623D00F7500D3F352 /* FavoritesView.swift in Sources */,
 				FD95E07923CBD4A100D10AA8 /* MovieDetailsViewController.swift in Sources */,
+				FD09EDF923D3B91800F10043 /* SectionDataSource.swift in Sources */,
 				FD95E07523CBC71E00D10AA8 /* UIImageView+Extension.swift in Sources */,
 				FD95E07223CA8B1500D10AA8 /* MovieCell.swift in Sources */,
 				FD95E07F23CBF1EA00D10AA8 /* UIColor+Extension.swift in Sources */,
@@ -454,6 +461,7 @@
 				FD95E07B23CBD5D600D10AA8 /* MovieDetailView.swift in Sources */,
 				FD95E06823CA67D400D10AA8 /* ServiceAPIManager.swift in Sources */,
 				FD95E08223CBFC2700D10AA8 /* UIView+Extension.swift in Sources */,
+				FDF18E7F23D374F000CFB149 /* FavoriteCell.swift in Sources */,
 				FDF18E7923D1484300CFB149 /* GenreViewModel.swift in Sources */,
 				FD95E05E23C8095700D10AA8 /* MoviesViewController.swift in Sources */,
 			);
