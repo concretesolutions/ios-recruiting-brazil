@@ -15,7 +15,7 @@ class MoviesCollectionDataSource:NSObject, UICollectionViewDataSource {
     override init(){
         super.init()
     }
-    var list:[Category] = [];
+    var list:[String] = ["Memes","Frenes","dembes"];
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return list.count
     }
@@ -24,6 +24,7 @@ class MoviesCollectionDataSource:NSObject, UICollectionViewDataSource {
           let cell = collectionView
               .dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
             cell.backgroundColor = .black
+
             // Configure the cell
             return cell
     }

@@ -9,6 +9,8 @@
 import Foundation
 
 class MovieDTO:Codable{
-    var page   :Int?
-    var results:[Movie]?
+    var page         :Int?
+    var results      :[Movie]?
+    var total_results:Int?
+    var total_pages  :Int?
 }

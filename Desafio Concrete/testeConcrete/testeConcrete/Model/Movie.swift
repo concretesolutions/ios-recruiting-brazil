@@ -10,11 +10,11 @@ import Foundation
 
 
 class Movie:Codable{
-    var popularity       : Int?;
+    var popularity       : Double?;
     var id               : Int?;
     var video            : Bool?;
     var vote_count       : Int?;
-    var vote_average     : Int?;
+    var vote_average     : Double?;
     var title            : String?;
     var release_date     : String?;
     var original_language: String?;

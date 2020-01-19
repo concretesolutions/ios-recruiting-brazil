@@ -10,18 +10,13 @@ import Foundation
 import UIKit
 
 class MovieViewController:UIViewController{
-    var list       = [1,2,3,4,5,6,7,8,9,10];
     let dataSource = MoviesCollectionDataSource()
     @IBOutlet weak var collectionView: UICollectionView!
-    
 }
 
 extension MovieViewController{
     override func viewDidLoad() {
         collectionView.dataSource = self.dataSource
-        CategoryService.getCategory(){_ in 
-            
-        }
     }
 }
 
@@ -29,5 +24,15 @@ extension MovieViewController:UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
+    }
+    
+}
+
+extension MovieViewController: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView,
+           layout collectionViewLayout: UICollectionViewLayout,
+           sizeForItemAt indexPath: IndexPath) -> CGSize{
+        
+        return CGSize(width: UIScreen.main.bounds.width/2.2, height: UIScreen.main.bounds.width/2.2 + 100)
     }
 }
