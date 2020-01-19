@@ -71,7 +71,6 @@ class PopularMoviesViewController: UIViewController {
     @objc private func didDownloadPage() {
         DispatchQueue.main.async {
             if let page = self.lastPage, page - 1 >= 0 {
-                print(page)
                 self.popularMoviesView.collectionView.insertSections([page - 1])
                 self.isFetchingNewPage = false
             }
@@ -84,7 +83,7 @@ class PopularMoviesViewController: UIViewController {
         }
     }
     
-    private func moviesFiltered(by section: Int) -> Set<Movie> {
+    private func moviesFiltered(by section: Int) -> [Movie] {
         return TmdbAPI.movies.filter({($0.page ?? 0) - 1 == section})
     }
 }
@@ -102,10 +101,8 @@ extension PopularMoviesViewController: UICollectionViewDataSource, UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularMovieCollectionViewCell.reuseIdentifier, for: indexPath) as! PopularMovieCollectionViewCell
         
-        let movies = moviesFiltered(by: indexPath.section)
-        if let movie = movies.first(where: {$0.index ?? -1 == indexPath.row}) {
-            cell.fill(movie: movie)
-        }
+        let movie = moviesFiltered(by: indexPath.section)[indexPath.row]
+        cell.fill(movie: movie)
         
         cell.favoriteMovieButton.addTarget(self, action: #selector(didTouchFavoriteButton(_:)), for: .touchUpInside)
         return cell
@@ -124,10 +121,8 @@ extension PopularMoviesViewController: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let movies = moviesFiltered(by: indexPath.section)
-        if let movie = movies.first(where: {$0.index ?? -1 == indexPath.row}) {
-            movieDetailsVC.movie = movie
-            navigationController?.pushViewController(movieDetailsVC, animated: true)
-        }
+        let movie = moviesFiltered(by: indexPath.section)[indexPath.row]
+        movieDetailsVC.movie = movie
+        navigationController?.pushViewController(movieDetailsVC, animated: true)
     }
 }

@@ -46,6 +46,8 @@ class FavoriteMoviesViewController: UIViewController {
         return TmdbAPI.movies.filter({$0.isFavorite}).sorted(by: {$0.title < $1.title})
     }
     
+    private var isDeletingWithCommit: Bool = false
+    
     // Private Methods
     
     private func initController() {
@@ -59,9 +61,10 @@ class FavoriteMoviesViewController: UIViewController {
     }
     
     @objc func didUpdateFavoriteInformation() {
-        DispatchQueue.main.async {
-            print("favorite table view")
-            self.favoriteView.tableView.reloadData()
+        if !self.isDeletingWithCommit {
+            DispatchQueue.main.async {
+                self.favoriteView.tableView.reloadData()
+            }
         }
     }
 }
@@ -84,5 +87,28 @@ extension FavoriteMoviesViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return FavoriteMovieTableViewCell.rowHeight
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: "Unfavorite") { (action, indexPath) in
+            self.isDeletingWithCommit = true
+            self.favoriteMovies[indexPath.row].isFavorite = false
+            DispatchQueue.main.async {
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            self.isDeletingWithCommit = false
+        }
+
+        return [delete]
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("delete?")
+        }
     }
 }
