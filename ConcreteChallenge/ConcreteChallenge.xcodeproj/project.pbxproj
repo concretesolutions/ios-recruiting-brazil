@@ -43,6 +43,9 @@
 		ECB7871E23C9232700062B37 /* MovieCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7871D23C9232700062B37 /* MovieCollection.swift */; };
 		ECB7872123C9286F00062B37 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7872023C9286F00062B37 /* FavoritesViewController.swift */; };
 		ECC2FC5123D445D90051EEBE /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2FC5023D445D90051EEBE /* EmptyStateView.swift */; };
+		ECD4E62E23D4C5F900F958FD /* MockAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD4E62D23D4C5F900F958FD /* MockAPIClient.swift */; };
+		ECD4E63123D4C75700F958FD /* MoviesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = ECD4E63023D4C75700F958FD /* MoviesResponse.json */; };
+		ECD4E63223D4D5EA00F958FD /* MoviesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = ECD4E63023D4C75700F958FD /* MoviesResponse.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +113,8 @@
 		ECB7871D23C9232700062B37 /* MovieCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollection.swift; sourceTree = "<group>"; };
 		ECB7872023C9286F00062B37 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		ECC2FC5023D445D90051EEBE /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		ECD4E62D23D4C5F900F958FD /* MockAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIClient.swift; sourceTree = "<group>"; };
+		ECD4E63023D4C75700F958FD /* MoviesResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MoviesResponse.json; sourceTree = "<group>"; };
 		F132F16167A428DDD1BCA265 /* Pods-ConcreteChallenge-ConcreteChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge-ConcreteChallengeUITests.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge-ConcreteChallengeUITests/Pods-ConcreteChallenge-ConcreteChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -254,8 +259,10 @@
 		ECB786F923C8F0A500062B37 /* ConcreteChallengeTests */ = {
 			isa = PBXGroup;
 			children = (
-				ECB786FA23C8F0A500062B37 /* ConcreteChallengeTests.swift */,
+				ECD4E63323D4DAF000F958FD /* Views */,
 				ECB786FC23C8F0A500062B37 /* Info.plist */,
+				ECD4E62D23D4C5F900F958FD /* MockAPIClient.swift */,
+				ECD4E63023D4C75700F958FD /* MoviesResponse.json */,
 			);
 			path = ConcreteChallengeTests;
 			sourceTree = "<group>";
@@ -297,6 +304,14 @@
 				EC9EC8B223C98D1400335A2B /* MovieDetailViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		ECD4E63323D4DAF000F958FD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ECB786FA23C8F0A500062B37 /* ConcreteChallengeTests.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -408,6 +423,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECD4E63223D4D5EA00F958FD /* MoviesResponse.json in Resources */,
 				ECB786F023C8F0A500062B37 /* LaunchScreen.storyboard in Resources */,
 				ECB786ED23C8F0A500062B37 /* Assets.xcassets in Resources */,
 			);
@@ -417,6 +433,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECD4E63123D4C75700F958FD /* MoviesResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,6 +591,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECB786FB23C8F0A500062B37 /* ConcreteChallengeTests.swift in Sources */,
+				ECD4E62E23D4C5F900F958FD /* MockAPIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

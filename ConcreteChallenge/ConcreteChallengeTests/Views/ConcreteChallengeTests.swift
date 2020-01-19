@@ -10,8 +10,14 @@ import XCTest
 @testable import ConcreteChallenge
 
 class ConcreteChallengeTests: XCTestCase {
+    
+    let mockAPI = MockApiClient()
+    var movies = [Movie]()
 
     override func setUp() {
+        mockAPI.fetchMovies { (success, moviesResponse) in
+            self.movies = moviesResponse!.results
+        }
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
