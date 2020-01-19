@@ -9,7 +9,7 @@
 import Foundation
 
 
-class Movie{
+class Movie:Codable{
     var popularity       : Int?;
     var id               : Int?;
     var video            : Bool?;
