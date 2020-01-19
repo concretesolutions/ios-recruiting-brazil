@@ -16,7 +16,6 @@ class MoviesViewController: SearchBarViewController {
     lazy var moviesViewModel: MovieViewModel = {
         return MovieViewModel.shared
     }()
-    var subscriber: [AnyCancellable?] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,23 +33,11 @@ class MoviesViewController: SearchBarViewController {
     }
     
     private func addObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(changedMovies), name: Notification.moviesUpdated.name, object: nil)
-    }
-    
-    private func cancelSubscribers() {
-        subscriber.forEach({ $0?.cancel() })
-        subscriber.removeAll()
-    }
-    
-    private func cancelSubscribe(at: Int) {
-        guard self.subscriber.count > (at + 1) else { return }
-        self.subscriber[at]?.cancel()
-        self.subscriber.remove(at: at)
+        NotificationCenter.default.addObserver(self, selector: #selector(changedMovies), name: .updatedMovies, object: nil)
     }
     
     @objc
     func changedMovies() {
-        cancelSubscribers()
         self.loadItems(withAnimation: true)
     }
 }
@@ -62,13 +49,6 @@ extension MoviesViewController {
         dataSource = UICollectionViewDiffableDataSource<Section,Movie>.init(collectionView: gridView.collectionView , cellProvider: { (collection, indexPath, movie) -> UICollectionViewCell? in
             guard let cell = collection.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell
             else { return UICollectionViewCell() }
-            self.cancelSubscribe(at: indexPath.row)
-            self.subscriber.append(movie.notification.receive(on: DispatchQueue.main).sink { (_) in
-                print("ATT Movie -> \(movie.title) = \(movie.isFavorite)")
-                print("Index -> \(indexPath.row)")
-                guard let currentCell = collection.cellForItem(at: indexPath) as? MovieCell else {return}
-                currentCell.isFavoriteMovie(movie.isFavorite)
-            })
             cell.fill(withMovie: movie)
             return cell
         })
@@ -92,10 +72,7 @@ extension MoviesViewController {
     
     private func loadItems(withAnimation animation: Bool) {
         DispatchQueue.main.async {
-            
             guard let dtSource = self.dataSource else { return }
-            self.cancelSubscribers()
-            
             if self.searchIsFiltered {
                 dtSource.apply(self.snapshotFilteredDataSource(), animatingDifferences: animation)
             }else {

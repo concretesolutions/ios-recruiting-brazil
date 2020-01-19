@@ -8,10 +8,6 @@
 
 import Foundation
 
-extension Notification {
-    public static let moviesUpdated = Notification.init(name: Notification.Name(rawValue: "moviesUpdated"))
-}
-
 extension Notification.Name {
-     public static let updateSelectedMovie = Notification.Name(rawValue: "updateSelectedMovie")
+     public static let updatedMovies = Notification.Name(rawValue: "updatedMovies")
 }

@@ -19,8 +19,8 @@ class MovieDetailView: UIScrollView {
     private var overviewText = UILabel.init()
     private(set) var favoriteButton = UIButton.init()
     private var scrollViewContainer = UIStackView.init()
-    var valueSubscriber: Cancellable!
     private let margin: CGFloat = 8
+    private var subscriber: [AnyCancellable?] = []
     
     init() {
         super.init(frame: .zero)
@@ -112,6 +112,13 @@ class MovieDetailView: UIScrollView {
         overviewText.text = movie.overview
         postImage.downloadImage(withPath: movie.posterPath, withDimension: .w342)
         movieIsFavorite(movie.isFavorite)
+        subscriber.append(movie.notification.receive(on: DispatchQueue.main).sink { (_) in
+            self.movieIsFavorite(movie.isFavorite)
+            
+        })
+        subscriber.append(GenreViewModel.shared.notification.receive(on: DispatchQueue.main).sink { (_) in
+            self.genre.text = self.placeholderGenres(withText: GenreViewModel.shared.filterGenres(withIDs: movie.genres).descriptionAllGenres())
+        })
     }
     
     public func placeholderGenres(withText: String?) -> String {

@@ -23,6 +23,7 @@ extension UIImageView {
     
     public func downloadImage(withPath: String,
                               withDimension dimension: DimensionDownloadImage) {
+        self.image = UIImage.init(named: "placeholder-movies")
         let path = "\(ServiceAPIManager.PathsAPI.PathImages.secureBaseUrl)\(dimension.rawValue)\(withPath)"
         
         guard let url = URL.init(string: path) else { return }

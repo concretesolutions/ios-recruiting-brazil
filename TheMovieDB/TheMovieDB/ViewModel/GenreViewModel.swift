@@ -13,15 +13,20 @@ import Combine
 final class GenreViewModel {
     public static let shared = GenreViewModel.init()
     
+    //TODO: Change
     private let urlPathGenre: String = {
         return "\(ServiceAPIManager.PathsAPI.rootAPI)\(ServiceAPIManager.PathsAPI.versionAPI)\(ServiceAPIManager.PathsAPI.GenreAPI.genre)"
     }()
+    
     public var genres: [Genre] = []
+    
     public let notification = PassthroughSubject<Void, Never>()
+    
     private init() {
         fetchAllGenres()
     }
     
+    //TODO: Change
     private func fetchAllGenres() {
         guard var components = URLComponents.init(string: urlPathGenre) else { return }
         components.queryItems = [

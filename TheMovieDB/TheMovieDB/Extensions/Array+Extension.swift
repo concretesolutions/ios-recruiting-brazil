@@ -12,7 +12,7 @@ extension Array where Element == Genre {
     func descriptionAllGenres() -> String? {
         var description = ""
         for genre in self {
-            description.append("/ \(genre.name)")
+            description.append(" / \(genre.name)")
         }
         return description
     }

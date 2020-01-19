@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Stevia
+import Combine
 
 class MovieCell: UICollectionViewCell {
     public static let identifier = "movieCellIdentifier"
@@ -16,6 +17,7 @@ class MovieCell: UICollectionViewCell {
     private var title = UILabel.init()
     private var favoriteIcon = UIImageView.init()
     private let margin: CGFloat = 8
+    private var subscriber: AnyCancellable?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -67,8 +69,15 @@ class MovieCell: UICollectionViewCell {
 
     }
     public func fill(withMovie movie: Movie) {
+        subscriber?.cancel()
         title.text = movie.title
         posterImage.downloadImage(withPath: movie.posterPath, withDimension: .w185)
         isFavoriteMovie(movie.isFavorite)
+        
+        subscriber = movie.notification.receive(on: DispatchQueue.main).sink { (_) in
+            self.title.text = movie.title
+            self.posterImage.downloadImage(withPath: movie.posterPath, withDimension: .w185)
+            self.isFavoriteMovie(movie.isFavorite)
+        }
     }
 }

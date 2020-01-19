@@ -12,9 +12,10 @@ import Combine
 
 class MovieViewModel {
     public static let shared = MovieViewModel.init()
+    
     public var movies: [Movie] = [] {
         didSet {
-            NotificationCenter.default.post(.moviesUpdated)
+            NotificationCenter.default.post(name: .updatedMovies, object: nil)
         }
     }
     
@@ -22,6 +23,7 @@ class MovieViewModel {
     
     public var selectedMovie: Movie?
     
+    //TODO: Change
     private var pathURLMovies: String {
         get {
             return  "\(ServiceAPIManager.PathsAPI.rootAPI)\(ServiceAPIManager.PathsAPI.versionAPI)\(ServiceAPIManager.PathsAPI.MovieAPI.movie)"
@@ -37,6 +39,11 @@ class MovieViewModel {
         } else {
             self.selectedMovie = movies[index]
         }
+    }
+    
+    public func favoriteMovie(at: Int) -> Movie? {
+        guard at >= 0 else { return nil }
+        return movies.filter({ $0.isFavorite })[at]
     }
     
     public func changeFavorite(at index: Int? = nil) {
@@ -61,6 +68,7 @@ class MovieViewModel {
         }
     }
     
+    //TODO: Change
     public func fetchMovies() {
         guard var components = URLComponents.init(string: pathURLMovies) else { return }
         components.queryItems = [
