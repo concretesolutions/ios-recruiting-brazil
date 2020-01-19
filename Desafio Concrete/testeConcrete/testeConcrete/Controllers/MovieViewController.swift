@@ -19,6 +19,9 @@ class MovieViewController:UIViewController{
 extension MovieViewController{
     override func viewDidLoad() {
         collectionView.dataSource = self.dataSource
+        CategoryService.getCategory(){_ in 
+            
+        }
     }
 }
 

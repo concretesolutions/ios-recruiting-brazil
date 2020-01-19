@@ -10,7 +10,12 @@ import UIKit
 
 class MoviesCollectionDataSource:NSObject, UICollectionViewDataSource {
     
-        var list = [1,2,3,4,5,6,7,8,9,10];
+    
+    
+    override init(){
+        super.init()
+    }
+    var list:[Category] = [];
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return list.count
     }
