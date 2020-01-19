@@ -94,7 +94,7 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         align(horizontally: titleLabel, dateLabel)
         
         overviewLabel.right(16).Top + 8 == titleLabel.Bottom
-        overviewLabel.bottom(8).Left + 16 == posterImageView.Right
+        overviewLabel.bottom(>=8).Left + 16 == posterImageView.Right
         
         layoutIfNeeded()
     }

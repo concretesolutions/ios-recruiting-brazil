@@ -48,10 +48,14 @@ class FavoriteMoviesViewController: UIViewController {
     
     private var isDeletingWithCommit: Bool = false
     
+    private let movieDetailsVC = MovieDetailsViewController()
+    
     // Private Methods
     
     private func initController() {
         self.view = FavoriteMoviesView()
+        
+        movieDetailsVC.setCustomNavigationBar(title: "Movie Details", color: .mvText)
         
         favoriteView.tableView.dataSource = self
         favoriteView.tableView.delegate = self
@@ -106,9 +110,9 @@ extension FavoriteMoviesViewController: UITableViewDataSource, UITableViewDelega
         return [delete]
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            print("delete?")
-        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let movie = self.favoriteMovies[indexPath.row]
+        movieDetailsVC.movie = movie
+        navigationController?.pushViewController(movieDetailsVC, animated: true)
     }
 }
