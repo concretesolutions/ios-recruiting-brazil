@@ -10,12 +10,16 @@ import UIKit
 
 class MoviesCollectionDataSource:NSObject, UICollectionViewDataSource {
     
-    
-    
     override init(){
         super.init()
+        PopularMoviesService.getPopularMovies(page: 1){
+            response in
+        
+            guard let popularList = response.success else{return }
+            self.list = popularList
+        }
     }
-    var list:[String] = ["Memes","Frenes","dembes"];
+    var list:[Movie] = [];
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return list.count
     }

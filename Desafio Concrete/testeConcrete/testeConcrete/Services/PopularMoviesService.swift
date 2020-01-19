@@ -14,7 +14,6 @@ class PopularMoviesService{
                 callBack(GeneralResponse<[Movie]>(error: .errorURL, success: nil))
                 return
             };
-        print(url.absoluteURL)
         let configuration = URLSessionConfiguration.default
         URLSession(configuration: configuration).dataTask(with: url){
             data,response,error in
