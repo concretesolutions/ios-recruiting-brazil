@@ -23,14 +23,9 @@ class MovieViewModel {
     
     public var selectedMovie: Movie?
     
-    //TODO: Change
-    private var pathURLMovies: String {
-        get {
-            return  "\(ServiceAPIManager.PathsAPI.rootAPI)\(ServiceAPIManager.PathsAPI.versionAPI)\(ServiceAPIManager.PathsAPI.MovieAPI.movie)"
-        }
-    }
+    public var movieService = MovieService.init()
     
-    private init() { }
+    private init() {}
     
     public func selectMovie(index: Int, isFiltered: Bool = false) {
         guard index >= 0 else { return }
@@ -68,20 +63,10 @@ class MovieViewModel {
         }
     }
     
-    //TODO: Change
-    public func fetchMovies() {
-        guard var components = URLComponents.init(string: pathURLMovies) else { return }
-        components.queryItems = [
-            URLQueryItem.init(name: ServiceAPIManager.PathsAPI.apiKey, value: ServiceAPIManager.PathsAPI.key),
-            URLQueryItem.init(name: ServiceAPIManager.PathsAPI.page, value: "1")
-        ]
-        guard let url = components.url else { return }
-        ServiceAPIManager.get(url: url) { (data, error)  in
-            guard let result = data else { return }
-            do {
-                let moviesDecode = try JSONDecoder().decode(PopularMoviesAPI.self, from: result)
-                self.movies = moviesDecode.movies
-            } catch { }
+    public func loadAllMovies() {
+        movieService.fetchMovies { (movies) in
+            self.movies = movies
         }
     }
+
 }

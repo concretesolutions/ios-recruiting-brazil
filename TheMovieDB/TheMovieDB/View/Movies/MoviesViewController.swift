@@ -21,7 +21,7 @@ class MoviesViewController: SearchBarViewController {
         super.viewDidLoad()
         configurateDataSource()
         configurateDelegate()
-        moviesViewModel.fetchMovies()
+        moviesViewModel.loadAllMovies()
         addObservers()
     }
     
