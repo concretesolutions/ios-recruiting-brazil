@@ -16,13 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-//        UINavigationBar.appearance().isTranslucent = false
         UITabBar.appearance().isTranslucent = false
         UITabBar.appearance().tintColor = .black
         
+        let defaults = UserDefaults.standard
+        defaults.set(1, forKey: UserDefaultsConstants.currentPage)
+        
         return true
     }
-
+    
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

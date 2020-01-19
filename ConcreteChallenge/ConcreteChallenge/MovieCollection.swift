@@ -8,14 +8,16 @@
 
 import Foundation
 
-protocol MovieCollectionDelegate {
+protocol MovieCollectionDelegate: class {
     func reload()
+    func failToFetch()
 }
 
 class MovieColletion {
     
-    var delegate: MovieCollectionDelegate?
+    weak var delegate: MovieCollectionDelegate?
     
+    private var userDefaults = UserDefaults.standard
     private var movies = [Movie]()
     private var filteredMovies = [Movie]()
     private var favoriteMovies: [FavoriteMovie] {
@@ -37,10 +39,6 @@ class MovieColletion {
     func filterContentForSearchText(_ searchText: String) {
         filteredMovies = movies.filter { (movie: Movie) -> Bool in
             return movie.title.lowercased().contains(searchText.lowercased())
-        }
-        
-        for movie in filteredMovies {
-            print(movie.title)
         }
         
         delegate?.reload()
@@ -65,13 +63,16 @@ class MovieColletion {
     }
     
     func requestMovies() {
+        let currentPage = userDefaults.integer(forKey: UserDefaultsConstants.currentPage)
+        
         ServiceLayer.request(router: .getMovies) { (result: Result<MoviesResponse, Error>) in
             switch result {
             case .success(let response):
+                self.userDefaults.set(currentPage + 1, forKey: UserDefaultsConstants.currentPage)
                 self.movies.append(contentsOf: response.results)
                 self.delegate?.reload()
-            case .failure(let error):
-                print(error)
+            case .failure:
+                self.delegate?.failToFetch()
             }
         }
     }

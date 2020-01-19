@@ -56,12 +56,23 @@ class MoviesViewController: UIViewController, UISearchResultsUpdating, MovieColl
         return searchController
     }()
     
+    lazy var emptyStateView: EmptyStateView = {
+        let emptyStateView = EmptyStateView()
+        
+        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
+        emptyStateView.isHidden = true
+        emptyStateView.delegate = self
+        
+        return emptyStateView
+    }()
+    
     init(movieCollection: MovieColletion, genreCollection: GenreCollection) {
         self.movieCollection = movieCollection
         self.genreCollection = genreCollection
         super.init(nibName: nil, bundle: nil)
         
         movieCollection.delegate = self
+        view.backgroundColor = .white
         
         addSubviews()
         setupConstraints()
@@ -75,6 +86,7 @@ class MoviesViewController: UIViewController, UISearchResultsUpdating, MovieColl
         super.viewDidLoad()
         
         movieCollection.requestMovies()
+        definesPresentationContext = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,9 +98,15 @@ class MoviesViewController: UIViewController, UISearchResultsUpdating, MovieColl
     
     func addSubviews() {
         view.addSubview(collectionView)
+        view.addSubview(emptyStateView)
     }
     
     func setupConstraints() {
+        emptyStateView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        emptyStateView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32).isActive = true
+        emptyStateView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
+        
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -98,15 +116,55 @@ class MoviesViewController: UIViewController, UISearchResultsUpdating, MovieColl
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         movieCollection.filterContentForSearchText(searchBar.text!)
-        print("uhul")
+        
+        updateUIForEmptySearch()
     }
     
     func reload() {
-        collectionView.reloadData()
+        isFetchingData = false
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func failToFetch() {
+        isFetchingData = false
+        
+        if movieCollection.count == 0 {
+            emptyStateView.state = .requestError
+            DispatchQueue.main.async {
+                self.collectionView.isHidden = true
+                self.emptyStateView.isHidden = false
+            }
+        }
     }
 }
 
-extension MoviesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension MoviesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, EmptyStateViewDelegate {
+    
+    func retryRequest() {
+        movieCollection.requestMovies()
+        
+        DispatchQueue.main.async {
+            self.collectionView.isHidden = false
+            self.emptyStateView.isHidden = true
+        }
+    }
+    
+    
+    func updateUIForEmptySearch() {
+        emptyStateView.state = .emptySearch
+        
+        if isFiltering && movieCollection.countFilteredMovies == 0 {
+            collectionView.isHidden = true
+            emptyStateView.isHidden = false
+        } else {
+            collectionView.isHidden = false
+            emptyStateView.isHidden = true
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isFiltering {
             return movieCollection.countFilteredMovies
@@ -204,12 +262,6 @@ extension MoviesViewController: UICollectionViewDataSource, UICollectionViewDele
         if !isFetchingData {
             isFetchingData = true
             movieCollection.requestMovies()
-            isFetchingData = false
         }
     }
 }
-
-
-
-
-

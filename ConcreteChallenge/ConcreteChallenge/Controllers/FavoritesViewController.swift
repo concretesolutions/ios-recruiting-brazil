@@ -15,7 +15,9 @@ class FavoritesViewController: UIViewController {
     
     var favorites = [Movie]() {
         didSet {
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -29,6 +31,14 @@ class FavoritesViewController: UIViewController {
         tableView.separatorStyle = .none
         
         return tableView
+    }()
+    
+    lazy var emptyStateView: EmptyStateView = {
+        let emptyStateView = EmptyStateView(state: .emptyFavorites)
+        
+        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return emptyStateView
     }()
     
     init(movieCollection: MovieColletion) {
@@ -59,10 +69,16 @@ class FavoritesViewController: UIViewController {
     }
     
     func addSubviews() {
+        view.addSubview(emptyStateView)
         view.addSubview(tableView)
     }
     
     func setupConstraints() {
+        emptyStateView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        emptyStateView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32).isActive = true
+        emptyStateView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
+        
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -72,6 +88,12 @@ class FavoritesViewController: UIViewController {
 
 extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if favorites.count == 0 {
+            tableView.isHidden = true
+        } else {
+            tableView.isHidden = false
+        }
+        
         return favorites.count
     }
     
