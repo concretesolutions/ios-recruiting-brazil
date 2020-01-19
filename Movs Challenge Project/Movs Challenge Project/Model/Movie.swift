@@ -154,7 +154,14 @@ class Movie: Decodable, Hashable {
     private func fetchPosterImage() {
         guard let path = self.posterPath, let url = URL(string: "https://image.tmdb.org/t/p/w342" + path) else { return }
         let task = URLSession(configuration: .default).dataTask(with: url) { (data, response, error) in
-            guard let data = data, error == nil, let image = UIImage(data: data) else { return }
+            guard let data = data, error == nil, let image = UIImage(data: data) else {
+                if response == nil {
+                    DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 1) {
+                        self.fetchPosterImage()
+                    }
+                }
+                return
+            }
             self.privatePosterImage = image
             NotificationCenter.default.post(name: Movie.didDownloadPosterImageNN, object: self)
         }
@@ -164,7 +171,14 @@ class Movie: Decodable, Hashable {
     private func fetchBackdropImage() {
         guard let path = self.backdropPath, let url = URL(string: "https://image.tmdb.org/t/p/w780" + path) else { return }
         let task = URLSession(configuration: .default).dataTask(with: url) { (data, response, error) in
-            guard let data = data, error == nil, let image = UIImage(data: data) else { return }
+            guard let data = data, error == nil, let image = UIImage(data: data) else {
+                if response == nil {
+                    DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 1) {
+                        self.fetchBackdropImage()
+                    }
+                }
+                return
+            }
             self.privateBackdropImage = image
             NotificationCenter.default.post(name: Movie.didDownloadBackdropImageNN, object: self)
         }
@@ -204,8 +218,10 @@ class Movie: Decodable, Hashable {
             do {
                 if let profile = try context.fetch(request).first(where: { (object) -> Bool in
                     object.value(forKey: "id") as? Int ?? 0 == self.id
-                }), !self.isFavorite {
-                    context.delete(profile)
+                }) {
+                    if !self.isFavorite {
+                        context.delete(profile)
+                    }
                 }
                 else {
                     let profile = NSManagedObject(entity: entity, insertInto: context)

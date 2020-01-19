@@ -43,6 +43,8 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
         
         NotificationCenter.default.addObserver(self, selector: #selector(updatePoster), name: Movie.didDownloadPosterImageNN, object: movie)
         NotificationCenter.default.addObserver(self, selector: #selector(updateFavoriteIcon), name: Movie.favoriteInformationDidChangeNN, object: movie)
+        
+        gradientView.removeFromSuperview()
     }
     
     // Initialisation/Lifecycle Methods
@@ -88,6 +90,8 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
     private let titleLabel = UILabel()
     private let favoriteIconImageView = UIImageView()
     
+    private let gradientView = GradientLoadingView()
+    
     // Private Methods
     
     @objc private func updatePoster() {
@@ -107,7 +111,8 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
             posterImageView,
             titleLabel,
             favoriteIconImageView,
-            favoriteMovieButton
+            favoriteMovieButton,
+            gradientView
         )
     }
     
@@ -122,6 +127,8 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
         
         favoriteMovieButton.bottom(0).right(0).Top == posterImageView.Bottom
         favoriteMovieButton.Left == titleLabel.Right
+        
+        gradientView.top(0).left(0).right(0).bottom(0)
         
         layoutIfNeeded()
     }
@@ -141,6 +148,10 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
         favoriteIconImageView.style { (s) in
             s.contentMode = .scaleAspectFit
             s.clipsToBounds = true
+        }
+        gradientView.style { (s) in
+            s.backgroundColor = .gray
+            s.makeAnimation()
         }
     }
 }
