@@ -42,11 +42,14 @@ class PopularMoviesViewController: UIViewController {
         return self.view as! PopularMoviesView
     }
     
-    private let movieDetailsVC = MovieDetailsViewController()
-    
-    private var lastPage: Int? {
-        return TmdbAPI.movies.max(by: {$0.page ?? -1 < $1.page ?? -1})?.page
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var searchText: String = ""
+    private var filteredMovies: [Movie] = []
+    private var isFiltering: Bool {
+      return searchController.isActive && !(searchController.searchBar.text?.isEmpty ?? true)
     }
+    
+    private let movieDetailsVC = MovieDetailsViewController()
     
     private var isFetchingNewPage: Bool = true
     private var isFetchingFirstPage: Bool = true
@@ -55,6 +58,12 @@ class PopularMoviesViewController: UIViewController {
     
     private func initController() {
         self.view = PopularMoviesView()
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Movies"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
         
         movieDetailsVC.setCustomNavigationBar(title: "Movie Details", color: .mvText)
         
@@ -73,49 +82,86 @@ class PopularMoviesViewController: UIViewController {
     
     @objc private func didDownloadPage() {
         DispatchQueue.main.async {
-            if let page = self.lastPage, page - 1 >= 0 {
-                self.isFetchingNewPage = false
-                self.isFetchingFirstPage = false
-                self.popularMoviesView.collectionView.reloadData()
-                self.popularMoviesView.collectionView.isUserInteractionEnabled = true
+            self.filterAPIMovies()
+            self.isFetchingNewPage = false
+            self.isFetchingFirstPage = false
+            self.popularMoviesView.collectionView.reloadData()
+            self.popularMoviesView.collectionView.isUserInteractionEnabled = true
+        }
+    }
+    
+    private func filterLocalMovies(for searchText: String) {
+        self.filteredMovies = TmdbAPI.movies.filter({ (movie) -> Bool in
+            return movie.title.lowercased().contains(searchText.lowercased())
+        }).sorted(by: { (a, b) -> Bool in
+            if a.title.prefix(searchText.count).lowercased() == searchText.lowercased() {
+                if b.title.prefix(searchText.count).lowercased() == searchText.lowercased() {
+                    return a.title.lowercased() < b.title.lowercased()
+                }
+                else {
+                    return true
+                }
             }
+            else if b.title.prefix(searchText.count).lowercased() == searchText.lowercased() {
+                return false
+            }
+            else {
+                return a.title.lowercased() < b.title.lowercased()
+            }
+        })
+        
+        DispatchQueue.main.async {
+            self.popularMoviesView.collectionView.reloadData()
         }
     }
     
-    @objc private func didTouchFavoriteButton(_ sender: UIButton) {
-        if let cell = sender.superview?.superview as? PopularMovieCollectionViewCell, let movie = cell.movie {
-            movie.isFavorite = !movie.isFavorite
-        }
-    }
-    
-    private func moviesFiltered(by section: Int) -> [Movie] {
-        return TmdbAPI.movies.filter({($0.page ?? 0) - 1 == section}).sorted(by: {$0.index ?? 0 < $1.index ?? 0})
+    private func filterAPIMovies() {
+        self.filteredMovies = TmdbAPI.movies.filter({ (movie) -> Bool in
+            return movie.title.lowercased().contains(searchText.lowercased())
+        }).sorted(by: { (a, b) -> Bool in
+            if a.searchIndex != nil {
+                if b.searchIndex != nil {
+                    return a.searchIndex! < b.searchIndex!
+                }
+                return true
+            }
+            else if b.searchIndex != nil {
+                return false
+            }
+            
+            if a.title.prefix(searchText.count).lowercased() == searchText.lowercased() {
+                if b.title.prefix(searchText.count).lowercased() == searchText.lowercased() {
+                    return a.title.lowercased() < b.title.lowercased()
+                }
+                return true
+            }
+            else if b.title.prefix(searchText.count).lowercased() == searchText.lowercased() {
+                return false
+            }
+            return a.title.lowercased() < b.title.lowercased()
+        })
     }
 }
 
 // MARK: - CollectionView Delegate
 extension PopularMoviesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if self.isFetchingFirstPage {
-            return 1
-        }
-        return self.lastPage ?? 0
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if self.isFetchingFirstPage {
-            return 20
+            return 10
         }
-        return moviesFiltered(by: section).count
+        return self.isFiltering ? filteredMovies.count : TmdbAPI.popularMovies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularMovieCollectionViewCell.reuseIdentifier, for: indexPath) as! PopularMovieCollectionViewCell
         
         if !self.isFetchingFirstPage {
-            let movie = moviesFiltered(by: indexPath.section)[indexPath.row]
+            let movie = self.isFiltering ? filteredMovies[indexPath.row] : TmdbAPI.popularMovies[indexPath.row]
             cell.fill(movie: movie)
-            cell.favoriteMovieButton.addTarget(self, action: #selector(didTouchFavoriteButton(_:)), for: .touchUpInside)
         }
             
         return cell
@@ -126,17 +172,42 @@ extension PopularMoviesViewController: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if !self.isFetchingNewPage, (self.lastPage ?? 0) - 1 == indexPath.section, indexPath.row >= moviesFiltered(by: indexPath.section).count - 1  {
+        if self.isFetchingNewPage { return }
+        if self.isFiltering, indexPath.row >= filteredMovies.count - 1 {
+            self.isFetchingNewPage = true
+            TmdbAPI.fetchMovies(query: self.searchText, newSearch: false)
+            return
+        }
+        if indexPath.row >= TmdbAPI.popularMovies.count - 1 {
             self.isFetchingNewPage = true
             TmdbAPI.fetchPopularMoviesSet()
+            return
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !self.isFetchingFirstPage {
-            let movie = moviesFiltered(by: indexPath.section)[indexPath.row]
+            let movie = self.isFiltering ? filteredMovies[indexPath.row] : TmdbAPI.popularMovies[indexPath.row]
             movieDetailsVC.movie = movie
             navigationController?.pushViewController(movieDetailsVC, animated: true)
+        }
+    }
+}
+
+// MARK: - Search Controller Update
+extension PopularMoviesViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if let text = searchController.searchBar.text, !text.isEmpty {
+            self.isFetchingNewPage = true
+            searchText = text
+            filterLocalMovies(for: text)
+            TmdbAPI.fetchMovies(query: text, newSearch: true)
+        }
+        else {
+            DispatchQueue.main.async {
+                TmdbAPI.searchTask.cancel()
+                self.popularMoviesView.collectionView.reloadData()
+            }
         }
     }
 }

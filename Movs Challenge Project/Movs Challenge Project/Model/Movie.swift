@@ -33,7 +33,7 @@ class Movie: Decodable, Hashable {
     
     let id: Int
     let title: String
-    let releaseDate: Date
+    let releaseDate: Date?
     let genreIds: [Int]
     let overview: String
     let backdropPath: String?
@@ -60,27 +60,8 @@ class Movie: Decodable, Hashable {
         return privateBackdropImage
     }
     
-    var page: Int? {
-        set {
-            if privatePage == nil {
-                privatePage = newValue
-            }
-        }
-        get {
-            return privatePage
-        }
-    }
-    
-    var index: Int? {
-        set {
-            if privateIndex == nil {
-                privateIndex = newValue
-            }
-        }
-        get {
-            return privateIndex
-        }
-    }
+    var popularIndex: Int? = nil
+    var searchIndex: Int? = nil
     
     // Public Methods
     
@@ -94,21 +75,18 @@ class Movie: Decodable, Hashable {
         guard
             let id = profile.value(forKey: "id") as? Int,
             let title = profile.value(forKey: "title") as? String,
-            let releaseDate = profile.value(forKey: "releaseDate") as? Date,
             let genreIds = profile.value(forKey: "genres") as? [Int],
             let overview = profile.value(forKey: "overview") as? String,
-            let backdropPath = profile.value(forKey: "backdropPath") as? String,
-            let posterPath = profile.value(forKey: "posterPath") as? String,
             let isFav = profile.value(forKey: "isFavorite") as? Bool
         else { throw MovieError.initError }
         
         self.id = id
         self.title = title
-        self.releaseDate = releaseDate
+        self.releaseDate = profile.value(forKey: "releaseDate") as? Date
         self.genreIds = genreIds
         self.overview = overview
-        self.backdropPath = backdropPath
-        self.posterPath = posterPath
+        self.backdropPath = profile.value(forKey: "backdropPath") as? String
+        self.posterPath = profile.value(forKey: "posterPath") as? String
         self.isFavorite = isFav
     }
     
@@ -119,7 +97,7 @@ class Movie: Decodable, Hashable {
         let dateString = try container.decode(String.self, forKey: .releaseDate)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        releaseDate = dateFormatter.date(from: dateString)!
+        releaseDate = dateFormatter.date(from: dateString)
         genreIds = try container.decode([Int].self, forKey: .genreIds)
         overview = try container.decode(String.self, forKey: .overview)
         backdropPath = try container.decode(String?.self, forKey: .backdropPath)
@@ -145,9 +123,6 @@ class Movie: Decodable, Hashable {
     
     private var privatePosterImage: UIImage? = nil
     private var privateBackdropImage: UIImage? = nil
-    
-    private var privatePage: Int? = nil
-    private var privateIndex: Int? = nil
     
     // Private Methods
     

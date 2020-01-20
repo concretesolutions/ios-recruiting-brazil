@@ -30,7 +30,9 @@ class MovieDetailsView: UIView {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd, yyyy"
-        dateLabel.text = dateFormatter.string(from: movie.releaseDate)
+        if let date = movie.releaseDate {
+            dateLabel.text = dateFormatter.string(from: date)
+        }
         
         var genreString = ""
         movie.genreIds.forEach { (id) in

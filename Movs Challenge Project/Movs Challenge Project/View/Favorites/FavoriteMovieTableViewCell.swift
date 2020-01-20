@@ -28,7 +28,9 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy"
-        dateLabel.text = dateFormatter.string(from: movie.releaseDate)
+        if let date = movie.releaseDate {
+            dateLabel.text = dateFormatter.string(from: date)
+        }
         
         overviewLabel.text = movie.overview
         

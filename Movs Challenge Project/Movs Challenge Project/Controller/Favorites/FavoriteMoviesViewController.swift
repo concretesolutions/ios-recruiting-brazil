@@ -42,9 +42,7 @@ class FavoriteMoviesViewController: UIViewController {
         return self.view as! FavoriteMoviesView
     }
     
-    private var favoriteMovies: [Movie] {
-        return TmdbAPI.movies.filter({$0.isFavorite}).sorted(by: {$0.title < $1.title})
-    }
+    private var favoriteMovies: [Movie] = TmdbAPI.movies.filter({$0.isFavorite}).sorted(by: {$0.title < $1.title})
     
     private var isDeletingWithCommit: Bool = false
     
@@ -67,6 +65,7 @@ class FavoriteMoviesViewController: UIViewController {
     @objc func didUpdateFavoriteInformation() {
         if !self.isDeletingWithCommit {
             DispatchQueue.main.async {
+                self.favoriteMovies = TmdbAPI.movies.filter({$0.isFavorite}).sorted(by: {$0.title < $1.title})
                 self.favoriteView.tableView.reloadData()
             }
         }
@@ -102,6 +101,7 @@ extension FavoriteMoviesViewController: UITableViewDataSource, UITableViewDelega
             self.isDeletingWithCommit = true
             self.favoriteMovies[indexPath.row].isFavorite = false
             DispatchQueue.main.async {
+                self.favoriteMovies = TmdbAPI.movies.filter({$0.isFavorite}).sorted(by: {$0.title < $1.title})
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
             self.isDeletingWithCommit = false

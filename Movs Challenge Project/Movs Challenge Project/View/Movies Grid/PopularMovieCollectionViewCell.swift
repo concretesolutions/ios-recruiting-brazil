@@ -28,8 +28,6 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
     // Public Types
     // Public Properties
     
-    let favoriteMovieButton = UIButton(type: .custom)
-    
     weak var movie: Movie?
     
     // Public Methods
@@ -111,7 +109,6 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
             posterImageView,
             titleLabel,
             favoriteIconImageView,
-            favoriteMovieButton,
             gradientView
         )
     }
@@ -124,9 +121,6 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
         
         favoriteIconImageView.size(20).right(8).Left + 16 == titleLabel.Right
         align(horizontally: titleLabel, favoriteIconImageView)
-        
-        favoriteMovieButton.bottom(0).right(0).Top == posterImageView.Bottom
-        favoriteMovieButton.Left == titleLabel.Right
         
         gradientView.top(0).left(0).right(0).bottom(0)
         
