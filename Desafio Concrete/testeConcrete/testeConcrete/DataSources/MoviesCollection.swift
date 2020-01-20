@@ -57,6 +57,11 @@ class MoviesCollectionDataSource:NSObject, UICollectionViewDataSource {
           let cell = collectionView
             .dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MovieCollectionViewCell
             cell.imageView.image = listMovie[indexPath.row].image
+        if(Armazenamento.estaFavoritado(id: listMovie[indexPath.row].movie!.id!)){
+            cell.favoriteSign.isHidden = false
+        } else{
+            cell.favoriteSign.isHidden = true
+        }
             // Configure the cell
             return cell
     }

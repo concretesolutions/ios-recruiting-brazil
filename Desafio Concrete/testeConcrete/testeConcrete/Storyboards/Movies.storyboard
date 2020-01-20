@@ -19,7 +19,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="csP-vj-ADb">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="MeQ-zH-YB2">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="MeQ-zH-YB2">
                                     <size key="itemSize" width="180" height="200"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -36,23 +36,25 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0yE-la-Fa1">
                                                     <rect key="frame" x="0.0" y="0.0" width="180" height="200"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4Z-YH-3Sr">
-                                                    <rect key="frame" x="126" y="8" width="46" height="30"/>
-                                                    <state key="normal" title="Button"/>
-                                                </button>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite_full_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Czr-VK-hxf">
+                                                    <rect key="frame" x="124" y="8" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="P3Y-Qy-4bP"/>
+                                                        <constraint firstAttribute="width" constant="50" id="mre-Td-x5j"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="l4Z-YH-3Sr" firstAttribute="leading" secondItem="4hC-tz-6Wg" secondAttribute="leading" constant="126" id="1eB-9P-KYb"/>
+                                                <constraint firstItem="Czr-VK-hxf" firstAttribute="top" secondItem="4hC-tz-6Wg" secondAttribute="top" constant="8" id="5wY-0U-NtK"/>
                                                 <constraint firstItem="0yE-la-Fa1" firstAttribute="leadingMargin" secondItem="4hC-tz-6Wg" secondAttribute="leadingMargin" id="EIc-r4-tNy"/>
                                                 <constraint firstItem="0yE-la-Fa1" firstAttribute="topMargin" secondItem="4hC-tz-6Wg" secondAttribute="topMargin" id="MjJ-xj-xz1"/>
-                                                <constraint firstItem="l4Z-YH-3Sr" firstAttribute="top" secondItem="4hC-tz-6Wg" secondAttribute="top" constant="8" id="N5A-1D-hjp"/>
+                                                <constraint firstAttribute="trailing" secondItem="Czr-VK-hxf" secondAttribute="trailing" constant="6" id="TtE-QM-hxI"/>
                                                 <constraint firstAttribute="bottom" secondItem="0yE-la-Fa1" secondAttribute="bottom" id="h0V-qU-oPo"/>
-                                                <constraint firstAttribute="trailing" secondItem="l4Z-YH-3Sr" secondAttribute="trailing" constant="8" id="h2B-lb-3gb"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="0yE-la-Fa1" secondAttribute="trailingMargin" id="qho-gJ-zaM"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
-                                            <outlet property="buttonFavorite" destination="l4Z-YH-3Sr" id="OpP-ez-zfe"/>
+                                            <outlet property="favoriteSign" destination="Czr-VK-hxf" id="ada-0u-bbU"/>
                                             <outlet property="imageView" destination="0yE-la-Fa1" id="8iB-6M-sBU"/>
                                         </connections>
                                     </collectionViewCell>
@@ -138,6 +140,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="favorite_full_icon" width="18" height="16"/>
         <image name="favorite_gray_icon" width="17" height="16"/>
     </resources>
 </document>

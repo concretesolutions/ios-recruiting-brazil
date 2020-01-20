@@ -21,6 +21,10 @@ extension MovieViewController{
         loadListeners()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        collectionView.reloadData()
+    }
+    
     func loadListeners(){
         NotificationCenter.default.addObserver(self, selector: #selector(finishedLoadData), name: Notification.finishedLoadedMovieAndPoster, object: nil)
     }
