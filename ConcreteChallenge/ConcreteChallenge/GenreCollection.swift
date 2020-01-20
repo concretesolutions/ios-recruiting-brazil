@@ -9,10 +9,13 @@
 import Foundation
 
 class GenreCollection {
+    private var serviceLayer: ServiceLayerProtocol
     private var genres = [Genre]()
     
-    init() {
-        ServiceLayer.request(router: .getGenres) { (result: Result<GenreResponse, Error>) in
+    init(serviceLayer: ServiceLayerProtocol) {
+        self.serviceLayer = serviceLayer
+        
+        serviceLayer.request(router: .getGenres) { (result: Result<GenreResponse, Error>) in
             switch result {
             case .success(let response):
                 self.genres = response.genres

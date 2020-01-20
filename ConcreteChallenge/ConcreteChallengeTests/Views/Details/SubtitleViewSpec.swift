@@ -15,14 +15,12 @@ class SubtitleViewSpec: QuickSpec {
     
     override func spec() {
         
-        let mockAPI = MockApiClient()
         var genres = [Genre]()
+        let genreCollection = GenreCollection(serviceLayer: ServiceLayerMock())
         
         describe("set up view") {
             beforeEach {
-                mockAPI.fetchGenres { (success, genreResponse) in
-                    genres = genreResponse!.genres
-                }
+                genres = genreCollection.genres(for: [28, 12, 16])
             }
             
             it("with basic layout") {

@@ -17,6 +17,7 @@ class MovieColletion {
     
     weak var delegate: MovieCollectionDelegate?
     
+    private var serviceLayer: ServiceLayerProtocol
     private var coreDataHelper = CoreDataHelper()
     private var userDefaults = UserDefaults.standard
     private var movies = [Movie]()
@@ -35,6 +36,10 @@ class MovieColletion {
     
     var countFilteredMovies: Int {
         return filteredMovies.count
+    }
+    
+    init(serviceLayer: ServiceLayerProtocol) {
+        self.serviceLayer = serviceLayer
     }
     
     func filterContentForSearchText(_ searchText: String) {
@@ -66,7 +71,7 @@ class MovieColletion {
     func requestMovies() {
         let currentPage = userDefaults.integer(forKey: UserDefaultsConstants.currentPage)
         
-        ServiceLayer.request(router: .getMovies) { (result: Result<MoviesResponse, Error>) in
+        serviceLayer.request(router: .getMovies) { (result: Result<MoviesResponse, Error>) in
             switch result {
             case .success(let response):
                 self.userDefaults.set(currentPage + 1, forKey: UserDefaultsConstants.currentPage)

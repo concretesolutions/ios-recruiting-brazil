@@ -41,18 +41,14 @@ class CoreDataHelperMock: CoreDataHelperProtocol {
 class MovieSpec: QuickSpec {
     override func spec() {
         
-        let mockAPI = MockApiClient()
-        var movies = [Movie]()
+        let movieCollection = MovieColletion(serviceLayer: ServiceLayerMock())
         var movie: Movie?
         
         describe("set up movie") {
             
-            beforeEach {
-                mockAPI.fetchMovies { (success, moviesResponse) in
-                    movies = moviesResponse!.results
-                }
-                
-                movie = movies.first!
+            beforeSuite {
+                movieCollection.requestMovies()
+                movie = movieCollection.movie(at: 0)
             }
             
             it("check release year") {

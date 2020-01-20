@@ -18,10 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        let movieCollection = MovieColletion()
+        let serviceLayer = ServiceLayer()
+        let movieCollection = MovieColletion(serviceLayer: serviceLayer)
         let tabBarInsets = UIEdgeInsets(top: 9, left: 0, bottom: -9, right: 0)
         
-        let moviesViewController = MoviesViewController(movieCollection: movieCollection, genreCollection: GenreCollection())
+        let moviesViewController = MoviesViewController(movieCollection: movieCollection, genreCollection: GenreCollection(serviceLayer: serviceLayer))
         let moviesTabBarItem = UITabBarItem(title: nil, image: UIImage(named: Images.listHollow), selectedImage: UIImage(named: Images.listFilled))
         
         moviesViewController.title = "Movies"

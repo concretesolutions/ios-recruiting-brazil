@@ -14,19 +14,17 @@ import Nimble_Snapshots
 class PosterViewSpec: QuickSpec {
     
     override func spec() {
-        
-        let mockAPI = MockApiClient()
-        var movies = [Movie]()
+    
+        let movieCollection = MovieColletion(serviceLayer: ServiceLayerMock())
         
         describe("set up view") {
+            
             beforeSuite {
-                mockAPI.fetchMovies { (success, moviesResponse) in
-                    movies = moviesResponse!.results
-                }
+                movieCollection.requestMovies()
             }
             
             it("with basic layout") {
-                let movie = movies.first!
+                let movie = movieCollection.movie(at: 0)!
                 movie.coreDataHelper = CoreDataHelperMock()
                 
                 let posterView = PosterView(for: movie)
@@ -37,7 +35,7 @@ class PosterViewSpec: QuickSpec {
             }
             
             it("with favorite layout") {
-                let movie = movies.last!
+                let movie = movieCollection.movie(at: 1)!
                 movie.coreDataHelper = CoreDataHelperMock()
                 
                 let posterView = PosterView(for: movie)

@@ -8,9 +8,13 @@
 
 import Foundation
 
-class ServiceLayer {
+protocol ServiceLayerProtocol: class {
+    func request<T: Codable>(router: Router, completion: @escaping (Result<T, Error>) -> ())
+}
+
+class ServiceLayer: ServiceLayerProtocol {
     
-    class func request<T: Codable>(router: Router, completion: @escaping (Result<T, Error>) -> ()) {
+    func request<T: Codable>(router: Router, completion: @escaping (Result<T, Error>) -> ()) {
         
         var components = URLComponents()
         components.scheme = router.scheme
@@ -45,5 +49,28 @@ class ServiceLayer {
         }
         
         dataTask.resume()
+    }
+}
+
+class ServiceLayerMock: ServiceLayerProtocol {
+    func request<T: Codable>(router: Router, completion: @escaping (Result<T, Error>) -> ()) {
+        var filePath = ""
+        
+        switch router {
+        case .getMovies:
+            filePath = "MoviesResponse"
+        case .getGenres:
+            filePath = "GenreResponse"
+        }
+        
+        MockApiClient.loadJSONDataFromFile(filePath: filePath) { (result: Result<Data, Error>) in
+            switch result {
+            case .success(let response):
+                let responseObject = try! JSONDecoder().decode(T.self, from: response)
+                completion(.success(responseObject))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 }
