@@ -34,4 +34,15 @@ extension UIImageView {
             }
         }
     }
+    
+    public func generateImageSequence(withPath path: String,
+                                      andRange range: ClosedRange<Int>) -> [UIImage] {
+        var images: [UIImage] = []
+        
+        for index in range {
+            guard let image = UIImage.init(named: "\(path)\(index)") else {continue}
+            images.append(image)
+        }
+        return images
+    }
 }

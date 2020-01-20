@@ -11,6 +11,9 @@
 		FD09EDFB23D4BACF00F10043 /* SearchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09EDFA23D4BACF00F10043 /* SearchBarViewController.swift */; };
 		FD09EDFF23D50DC100F10043 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09EDFE23D50DC100F10043 /* MovieService.swift */; };
 		FD09EE0123D50DC900F10043 /* GenreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09EE0023D50DC900F10043 /* GenreService.swift */; };
+		FD09EE0323D527B800F10043 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09EE0223D527B800F10043 /* EmptyView.swift */; };
+		FD09EE0523D52E0800F10043 /* EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09EE0423D52E0800F10043 /* EmptyState.swift */; };
+		FD09EE0723D53B8000F10043 /* UITableView+Extensio.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09EE0623D53B8000F10043 /* UITableView+Extensio.swift */; };
 		FD1C592823C55E90000E63A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1C592723C55E90000E63A3 /* AppDelegate.swift */; };
 		FD1C592A23C55E90000E63A3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1C592923C55E90000E63A3 /* SceneDelegate.swift */; };
 		FD1C592C23C55E90000E63A3 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1C592B23C55E90000E63A3 /* TabBarController.swift */; };
@@ -65,6 +68,9 @@
 		FD09EDFA23D4BACF00F10043 /* SearchBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarViewController.swift; sourceTree = "<group>"; };
 		FD09EDFE23D50DC100F10043 /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
 		FD09EE0023D50DC900F10043 /* GenreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreService.swift; sourceTree = "<group>"; };
+		FD09EE0223D527B800F10043 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		FD09EE0423D52E0800F10043 /* EmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyState.swift; sourceTree = "<group>"; };
+		FD09EE0623D53B8000F10043 /* UITableView+Extensio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensio.swift"; sourceTree = "<group>"; };
 		FD1C592423C55E90000E63A3 /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD1C592723C55E90000E63A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD1C592923C55E90000E63A3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +140,8 @@
 			children = (
 				FD09EDF823D3B91800F10043 /* SectionDataSource.swift */,
 				FD09EDFA23D4BACF00F10043 /* SearchBarViewController.swift */,
+				FD09EE0223D527B800F10043 /* EmptyView.swift */,
+				FD09EE0423D52E0800F10043 /* EmptyState.swift */,
 			);
 			path = Architecture;
 			sourceTree = "<group>";
@@ -279,6 +287,7 @@
 				FD95E07E23CBF1EA00D10AA8 /* UIColor+Extension.swift */,
 				FD95E08123CBFC2700D10AA8 /* UIView+Extension.swift */,
 				FDF18E7C23D1504400CFB149 /* Array+Extension.swift */,
+				FD09EE0623D53B8000F10043 /* UITableView+Extensio.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -462,6 +471,7 @@
 				FD95E07523CBC71E00D10AA8 /* UIImageView+Extension.swift in Sources */,
 				FD09EDFB23D4BACF00F10043 /* SearchBarViewController.swift in Sources */,
 				FD95E07223CA8B1500D10AA8 /* MovieCell.swift in Sources */,
+				FD09EE0323D527B800F10043 /* EmptyView.swift in Sources */,
 				FD09EDFF23D50DC100F10043 /* MovieService.swift in Sources */,
 				FD09EE0123D50DC900F10043 /* GenreService.swift in Sources */,
 				FD95E07F23CBF1EA00D10AA8 /* UIColor+Extension.swift in Sources */,
@@ -480,10 +490,12 @@
 				FD95E06A23CA6C2F00D10AA8 /* MovieViewModel.swift in Sources */,
 				FD95E07B23CBD5D600D10AA8 /* MovieDetailView.swift in Sources */,
 				FD95E06823CA67D400D10AA8 /* ServiceAPIManager.swift in Sources */,
+				FD09EE0523D52E0800F10043 /* EmptyState.swift in Sources */,
 				FD95E08223CBFC2700D10AA8 /* UIView+Extension.swift in Sources */,
 				FDF18E7F23D374F000CFB149 /* FavoriteCell.swift in Sources */,
 				FDF18E7923D1484300CFB149 /* GenreViewModel.swift in Sources */,
 				FD95E05E23C8095700D10AA8 /* MoviesViewController.swift in Sources */,
+				FD09EE0723D53B8000F10043 /* UITableView+Extensio.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

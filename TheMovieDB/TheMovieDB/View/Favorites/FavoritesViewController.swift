@@ -44,7 +44,10 @@ class FavoritesViewController: UIViewController {
     private func snapshotDataSource() -> NSDiffableDataSourceSnapshot<Section,Movie> {
         var snapshot = NSDiffableDataSourceSnapshot<Section,Movie>()
         snapshot.appendSections([.first])
-        snapshot.appendItems(moviesViewModel.movies.filter({ $0.isFavorite }))
+        let movies = moviesViewModel.movies.filter({ $0.isFavorite })
+        let state: EmptyState = movies.count == 0 ? .noData : .none
+        favoritesView.tableView.addEmptyState(state: state)
+        snapshot.appendItems(movies)
         return snapshot
     }
     
@@ -75,6 +78,11 @@ class MovieTableViewDataSource: UITableViewDiffableDataSource<Section, Movie> {
             var snap  = self.snapshot()
             snap.deleteItems([movie])
             self.apply(snap,animatingDifferences: true)
+            if snap.numberOfItems(inSection: Section.first) > 0 {
+                table.addEmptyState(state: .none)
+            } else {
+                table.addEmptyState(state: .loading)
+            }
         }
     }
 }
