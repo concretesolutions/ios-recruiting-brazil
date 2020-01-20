@@ -19,7 +19,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="csP-vj-ADb">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="MeQ-zH-YB2">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="MeQ-zH-YB2">
                                     <size key="itemSize" width="180" height="200"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -83,7 +83,6 @@
         <!--Movie Details View Controller-->
         <scene sceneID="l2Z-rL-sbb">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JVS-Ke-QT8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="wiF-Z2-cCL" customClass="MovieDetailsViewController" customModule="testeConcrete" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fpu-B2-EFa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -99,13 +98,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACU-C5-QBv" userLabel="genreLabel">
+                                <rect key="frame" x="0.0" y="398.5" width="414" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="FLm-2d-BPz" firstAttribute="trailing" secondItem="dsr-mG-Amf" secondAttribute="trailing" constant="20" id="Eax-Nu-C51"/>
                             <constraint firstItem="dsr-mG-Amf" firstAttribute="leading" secondItem="FLm-2d-BPz" secondAttribute="leading" constant="20" id="JIX-Tc-A6G"/>
                             <constraint firstItem="FLm-2d-BPz" firstAttribute="bottom" secondItem="dsr-mG-Amf" secondAttribute="bottom" id="POt-Sq-TBG"/>
+                            <constraint firstItem="dsr-mG-Amf" firstAttribute="top" secondItem="ACU-C5-QBv" secondAttribute="bottom" constant="8" id="eq0-Pr-wVW"/>
                             <constraint firstItem="dsr-mG-Amf" firstAttribute="top" secondItem="FLm-2d-BPz" secondAttribute="top" constant="339" id="fCu-Z3-dgN"/>
+                            <constraint firstItem="ACU-C5-QBv" firstAttribute="leading" secondItem="FLm-2d-BPz" secondAttribute="leading" id="hDx-Tj-zah"/>
+                            <constraint firstItem="FLm-2d-BPz" firstAttribute="trailing" secondItem="ACU-C5-QBv" secondAttribute="trailing" id="zMS-2r-Rxn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FLm-2d-BPz"/>
                     </view>
@@ -120,8 +128,10 @@
                         <outlet property="detailLabel" destination="dsr-mG-Amf" id="1aa-WJ-xC5"/>
                         <outlet property="favoriteButton" destination="Bti-AA-f8A" id="fXn-MF-eJz"/>
                         <outlet property="imageview" destination="4gM-Bh-aMW" id="7Z1-es-Svt"/>
+                        <outlet property="movieGenre" destination="ACU-C5-QBv" id="hm9-tF-hXg"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JVS-Ke-QT8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1828.985507246377" y="825.66964285714278"/>
         </scene>

@@ -9,8 +9,7 @@
 import UIKit
 
 class MoviesCollectionDataSource:NSObject, UICollectionViewDataSource {
-    var listMovie:[Movie] = [];
-    var listPoster:[UIImage] = []
+    var listMovie:[CollectionCellMovie] = [];
     override init(){
         super.init()
         loadListeners()
@@ -22,17 +21,18 @@ class MoviesCollectionDataSource:NSObject, UICollectionViewDataSource {
     }
     
     @objc func loadPosters(){
-            for movie in self.listMovie{
-                MovieService.getMoviePoster(urlPoster: movie.poster_path!){
+        for movie in self.listMovie{
+            MovieService.getMoviePoster(urlPoster: (movie.movie?.poster_path!)!){
                     response in
                     DispatchQueue.main.async {
-                        self.listPoster.append(response.success!)
-                        if(self.listPoster.count == self.listMovie.count){
+                        
+                        movie.image = response.success!
+                        if(self.listMovie.last?.image   != nil){
                             NotificationCenter.default.post(name: Notification.finishedLoadedMovieAndPoster, object: nil)
                         }
                     }
                 }
-            }
+        }
     }
     
     func loadMovies(){
@@ -40,7 +40,11 @@ class MoviesCollectionDataSource:NSObject, UICollectionViewDataSource {
             PopularMoviesService.getPopularMovies(page: 1){
                 response in
                 guard let popularList = response.success else{return }
-                self.listMovie = popularList
+                self.listMovie = []
+                for item in popularList{
+                    self.listMovie.append(CollectionCellMovie(movie: item, image: nil))
+                }
+
                 NotificationCenter.default.post(name: Notification.loadedPopularMovies, object: nil)
             }
         }
@@ -52,7 +56,7 @@ class MoviesCollectionDataSource:NSObject, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
           let cell = collectionView
             .dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MovieCollectionViewCell
-        cell.imageView.image = listPoster[indexPath.row]
+            cell.imageView.image = listMovie[indexPath.row].image
             // Configure the cell
             return cell
     }

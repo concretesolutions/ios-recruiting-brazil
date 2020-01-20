@@ -15,11 +15,24 @@ class MovieDetailsViewController: UIViewController {
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var imageview: UIImageView!
     @IBOutlet weak var favoriteButton: UIBarButtonItem!
+    @IBOutlet weak var movieGenre: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadDetails()
         loadFavorite()
+        loadGenres()
+    }
+    
+    func loadGenres(){
+        
+        CategoryService.getCategory(){
+            response in
+            DispatchQueue.main.async {
+                self.movieGenre.text = response.success?.filter({category in return (self.movie?.genre_ids?.contains(category.id))!}).map({element in return element.name}).joined(separator: "-")
+            }
+        }
     }
     
     func loadFavorite(){

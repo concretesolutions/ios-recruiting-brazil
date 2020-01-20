@@ -34,8 +34,8 @@ extension MovieViewController:UICollectionViewDelegate{
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! MovieDetailsViewController
-        vc.movie = dataSource.listMovie[selectIndex!]
-        vc.image = dataSource.listPoster[selectIndex!]
+        vc.movie = dataSource.listMovie[selectIndex!].movie
+        vc.image = dataSource.listMovie[selectIndex!].image
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
