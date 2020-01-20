@@ -28,4 +28,19 @@ extension UIImage {
     class var listIcon: UIImage {
         return UIImage(named: "list_icon")!
     }
+    
+    /// Search Image
+    class var searchImage: UIImage {
+        return UIImage(named: "Search")!
+    }
+    
+    /// Error Image
+    class var errorImage: UIImage {
+        return UIImage(named: "Error")!
+    }
+    
+    /// Heart Image
+    class var heartImage: UIImage {
+        return UIImage(named: "Heart")!
+    }
 }

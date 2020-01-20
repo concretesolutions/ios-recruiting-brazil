@@ -31,12 +31,43 @@ class MainTabBarController: UITabBarController {
     }
     
     // Override Methods
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        switch item {
+        case moviesGridNC.tabBarItem:
+            moviesGridCounter += 1
+            if moviesGridCounter >= 2 {
+                moviesGridNC.popularMoviesVC.popularMoviesView.collectionView.setContentOffset(.zero, animated: true)
+            }
+            
+            favoritesCounter = 0
+            
+        case favoritesNC.tabBarItem:
+            favoritesCounter += 1
+            if favoritesCounter >= 2 {
+                favoritesNC.favoriteMoviesVC.favoriteView.tableView.setContentOffset(.zero, animated: true)
+            }
+            
+            moviesGridCounter = 0
+            
+        default:
+            do { /* Nothing */ }
+        }
+    }
+    
     // Private Types
     // Private Properties
+    
+    private var moviesGridCounter = 1
+    private var favoritesCounter = 0
+    
+    private let moviesGridNC = MoviesGridNavigationController()
+    private let favoritesNC = FavoritesNavigationController()
+    
     // Private Methods
     
     private func initController() {
         view.tintColor = .mvYellow
-        viewControllers = [MoviesGridNavigationController(), FavoritesNavigationController()]
+        viewControllers = [moviesGridNC, favoritesNC]
     }
 }

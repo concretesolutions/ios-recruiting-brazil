@@ -13,6 +13,11 @@ class PopularMoviesViewController: UIViewController {
     // Static Methods
     // Public Types
     // Public Properties
+    
+    var popularMoviesView: PopularMoviesView {
+        return self.view as! PopularMoviesView
+    }
+    
     // Public Methods
     // Initialisation/Lifecycle Methods
     
@@ -37,10 +42,6 @@ class PopularMoviesViewController: UIViewController {
     // Override Methods
     // Private Types
     // Private Properties
-    
-    private var popularMoviesView: PopularMoviesView {
-        return self.view as! PopularMoviesView
-    }
     
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchText: String = ""
@@ -153,13 +154,27 @@ extension PopularMoviesViewController: UICollectionViewDataSource, UICollectionV
         if self.isFetchingFirstPage {
             return 10
         }
-        return self.isFiltering ? filteredMovies.count : TmdbAPI.popularMovies.count
+        if self.isFiltering {
+            if filteredMovies.count == 0 && !self.isFetchingNewPage{
+                self.popularMoviesView.emptyView.searchText = self.searchText
+                self.popularMoviesView.emptyView.isHidden = false
+            }
+            else {
+                self.popularMoviesView.emptyView.isHidden = true
+            }
+            
+            return filteredMovies.count
+        }
+        else {
+            self.popularMoviesView.emptyView.isHidden = true
+            return TmdbAPI.popularMovies.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularMovieCollectionViewCell.reuseIdentifier, for: indexPath) as! PopularMovieCollectionViewCell
         
-        if !self.isFetchingFirstPage {
+        if !self.isFetchingFirstPage{
             let movie = self.isFiltering ? filteredMovies[indexPath.row] : TmdbAPI.popularMovies[indexPath.row]
             cell.fill(movie: movie)
         }
@@ -175,7 +190,11 @@ extension PopularMoviesViewController: UICollectionViewDataSource, UICollectionV
         if self.isFetchingNewPage { return }
         if self.isFiltering, indexPath.row >= filteredMovies.count - 1 {
             self.isFetchingNewPage = true
-            TmdbAPI.fetchMovies(query: self.searchText, newSearch: false)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                TmdbAPI.fetchMovies(query: self.searchText, newSearch: false)
+            }
+            
             return
         }
         if indexPath.row >= TmdbAPI.popularMovies.count - 1 {

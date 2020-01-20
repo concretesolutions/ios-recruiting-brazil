@@ -18,6 +18,8 @@ class PopularMoviesView: UIView {
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     let collectionViewFlowLayout = UICollectionViewFlowLayout()
     
+    let emptyView = EmptySearchView()
+    
     // Public Methods
     // Initialisation/Lifecycle Methods
     
@@ -44,13 +46,17 @@ class PopularMoviesView: UIView {
     
     private func renderSuperView() {
         sv(
-            collectionView
+            collectionView,
+            emptyView
         )
     }
     
     private func renderLayout() {
         collectionView.left(0).right(0).Top == safeAreaLayoutGuide.Top
         collectionView.Bottom == safeAreaLayoutGuide.Bottom
+        
+        emptyView.left(0).right(0).Top == safeAreaLayoutGuide.Top
+        emptyView.Bottom == safeAreaLayoutGuide.Bottom
         
         layoutIfNeeded()
     }
@@ -69,5 +75,7 @@ class PopularMoviesView: UIView {
         collectionViewFlowLayout.minimumInteritemSpacing = 16
         collectionViewFlowLayout.minimumLineSpacing = 16
         collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        
+        emptyView.isHidden = true
     }
 }

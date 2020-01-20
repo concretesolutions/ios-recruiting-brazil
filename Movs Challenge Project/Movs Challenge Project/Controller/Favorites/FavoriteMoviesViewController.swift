@@ -13,6 +13,11 @@ class FavoriteMoviesViewController: UIViewController {
     // Static Methods
     // Public Types
     // Public Properties
+    
+    var favoriteView: FavoriteMoviesView {
+        return self.view as! FavoriteMoviesView
+    }
+    
     // Public Methods
     // Initialisation/Lifecycle Methods
     
@@ -38,22 +43,33 @@ class FavoriteMoviesViewController: UIViewController {
     // Private Types
     // Private Properties
     
-    private var favoriteView: FavoriteMoviesView {
-        return self.view as! FavoriteMoviesView
-    }
-    
-    private var favoriteMovies: [Movie] = TmdbAPI.movies.filter({$0.isFavorite}).sorted(by: {$0.title < $1.title})
+    private var favoriteMovies: [Movie] = []
     
     private var isDeletingWithCommit: Bool = false
     
     private let movieDetailsVC = MovieDetailsViewController()
+    
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var searchText: String = ""
+    private var filteredMovies: [Movie] = []
+    private var isFiltering: Bool {
+      return searchController.isActive && !(searchController.searchBar.text?.isEmpty ?? true)
+    }
     
     // Private Methods
     
     private func initController() {
         self.view = FavoriteMoviesView()
         
+        self.updateMovieArrays()
+        
         movieDetailsVC.setCustomNavigationBar(title: "Movie Details", color: .mvText)
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Movies"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
         
         favoriteView.tableView.dataSource = self
         favoriteView.tableView.delegate = self
@@ -62,12 +78,42 @@ class FavoriteMoviesViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(didUpdateFavoriteInformation), name: Movie.favoriteInformationDidChangeNN, object: nil)
     }
     
-    @objc func didUpdateFavoriteInformation() {
+    private func updateMovieArrays() {
+        self.favoriteMovies = TmdbAPI.movies.filter({$0.isFavorite}).sorted(by: {$0.title < $1.title})
+        self.filteredMovies = self.filteredMovies.filter({$0.isFavorite})
+    }
+    
+    @objc private func didUpdateFavoriteInformation() {
         if !self.isDeletingWithCommit {
             DispatchQueue.main.async {
-                self.favoriteMovies = TmdbAPI.movies.filter({$0.isFavorite}).sorted(by: {$0.title < $1.title})
+                self.updateMovieArrays()
                 self.favoriteView.tableView.reloadData()
             }
+        }
+    }
+    
+    private func filterLocalMovies(for searchText: String) {
+        self.filteredMovies = self.favoriteMovies.filter({ (movie) -> Bool in
+            return movie.title.lowercased().contains(searchText.lowercased())
+        }).sorted(by: { (a, b) -> Bool in
+            if a.title.prefix(searchText.count).lowercased() == searchText.lowercased() {
+                if b.title.prefix(searchText.count).lowercased() == searchText.lowercased() {
+                    return a.title.lowercased() < b.title.lowercased()
+                }
+                else {
+                    return true
+                }
+            }
+            else if b.title.prefix(searchText.count).lowercased() == searchText.lowercased() {
+                return false
+            }
+            else {
+                return a.title.lowercased() < b.title.lowercased()
+            }
+        })
+        
+        DispatchQueue.main.async {
+            self.favoriteView.tableView.reloadData()
         }
     }
 }
@@ -79,12 +125,29 @@ extension FavoriteMoviesViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.favoriteMovies.count
+        if self.isFiltering {
+            if filteredMovies.count == 0 {
+                self.favoriteView.emptySearchView.searchText = self.searchText
+                self.favoriteView.emptySearchView.isHidden = false
+            }
+            else {
+                self.favoriteView.emptySearchView.isHidden = true
+            }
+            
+            return filteredMovies.count
+        }
+        else {
+            self.favoriteView.emptySearchView.isHidden = true
+            return self.favoriteMovies.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteMovieTableViewCell.reuseIdentifier) as! FavoriteMovieTableViewCell
-        cell.fill(movie: self.favoriteMovies[indexPath.row])
+        
+        let movie = self.isFiltering ? self.filteredMovies[indexPath.row] : self.favoriteMovies[indexPath.row]
+        cell.fill(movie: movie)
+        
         return cell
     }
     
@@ -99,9 +162,12 @@ extension FavoriteMoviesViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Unfavorite") { (action, indexPath) in
             self.isDeletingWithCommit = true
-            self.favoriteMovies[indexPath.row].isFavorite = false
+            
+            let movie = self.isFiltering ? self.filteredMovies[indexPath.row] : self.favoriteMovies[indexPath.row]
+            movie.isFavorite = false
+            
             DispatchQueue.main.async {
-                self.favoriteMovies = TmdbAPI.movies.filter({$0.isFavorite}).sorted(by: {$0.title < $1.title})
+                self.updateMovieArrays()
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
             self.isDeletingWithCommit = false
@@ -114,5 +180,21 @@ extension FavoriteMoviesViewController: UITableViewDataSource, UITableViewDelega
         let movie = self.favoriteMovies[indexPath.row]
         movieDetailsVC.movie = movie
         navigationController?.pushViewController(movieDetailsVC, animated: true)
+    }
+}
+
+// MARK: - Search Controller Update
+extension FavoriteMoviesViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if let text = searchController.searchBar.text, !text.isEmpty {
+            searchText = text
+            filterLocalMovies(for: text)
+        }
+        else {
+            DispatchQueue.main.async {
+                self.updateMovieArrays()
+                self.favoriteView.tableView.reloadData()
+            }
+        }
     }
 }

@@ -1,24 +1,19 @@
 //
-//  FavoriteMoviesView.swift
+//  ErrorView.swift
 //  Movs Challenge Project
 //
-//  Created by Jezreel Barbosa on 17/01/20.
+//  Created by Jezreel Barbosa on 19/01/20.
 //  Copyright © 2020 Concrete. All rights reserved.
 //
 
 import UIKit
 import Stevia
 
-class FavoriteMoviesView: UIView {
+class ErrorView: UIView {
     // Static Properties
     // Static Methods
     // Public Types
     // Public Properties
-    
-    let tableView = UITableView()
-    
-    let emptySearchView = EmptySearchView()
-    
     // Public Methods
     // Initialisation/Lifecycle Methods
     
@@ -41,21 +36,22 @@ class FavoriteMoviesView: UIView {
     // Override Methods
     // Private Types
     // Private Properties
+    
+    private let errorImageView = UIImageView()
+    private let mensageTextLabel = UILabel()
+    
     // Private Methods
     
     private func renderSuperView() {
         sv(
-            tableView,
-            emptySearchView
+            errorImageView,
+            mensageTextLabel
         )
     }
     
     private func renderLayout() {
-        tableView.left(0).right(0).Top == safeAreaLayoutGuide.Top
-        tableView.Bottom == safeAreaLayoutGuide.Bottom
-        
-        emptySearchView.left(0).right(0).Top == safeAreaLayoutGuide.Top
-        emptySearchView.Bottom == safeAreaLayoutGuide.Bottom
+        errorImageView.size(200).centerHorizontally().Bottom - 16 == CenterY
+        mensageTextLabel.left(>=16).right(>=16).centerHorizontally().Top + 16 == CenterY
         
         layoutIfNeeded()
     }
@@ -64,10 +60,16 @@ class FavoriteMoviesView: UIView {
         style { (s) in
             s.backgroundColor = .mvBackground
         }
-        tableView.style { (s) in
-            s.separatorInset.left = 0
+        errorImageView.style { (s) in
+            s.image = .heartImage
+            s.tintColor = .mvYellow
         }
-        
-        emptySearchView.isHidden = true
+        mensageTextLabel.style { (s) in
+            s.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+            s.textColor = .mvText
+            s.textAlignment = .center
+            s.numberOfLines = 0
+            s.text = "An error has occurred. please try again."
+        }
     }
 }

@@ -13,6 +13,9 @@ class MoviesGridNavigationController: UINavigationController {
     // Static Methods
     // Public Types
     // Public Properties
+    
+    let popularMoviesVC = PopularMoviesViewController()
+    
     // Public Methods
     // Initialisation/Lifecycle Methods
     
@@ -39,7 +42,6 @@ class MoviesGridNavigationController: UINavigationController {
         tabBarItem = UITabBarItem(title: "Movies", image: .listIcon, selectedImage: nil)
         view.tintColor = .mvYellow
         
-        let popularMoviesVC = PopularMoviesViewController()
         popularMoviesVC.setCustomNavigationBar(title: "Movies", color: .mvText)
         viewControllers = [popularMoviesVC]
     }

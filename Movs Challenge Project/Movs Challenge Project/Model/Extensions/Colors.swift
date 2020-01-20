@@ -9,17 +9,17 @@
 import UIKit
 
 extension UIColor {
-    /// Yellow: #F7CE5B
+    /// Yellow
     class var mvYellow: UIColor {
         return UIColor(named: "mvYellow")!
     }
     
-    /// Text: Any#000000 Dark#FFFFFF
+    /// Text
     class var mvText: UIColor {
         return UIColor(named: "mvText")!
     }
     
-    /// Background: Any#FFFFFF Dark#000000
+    /// Background
     class var mvBackground: UIColor {
         return UIColor(named: "mvBackground")!
     }

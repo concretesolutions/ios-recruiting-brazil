@@ -13,6 +13,9 @@ class FavoritesNavigationController: UINavigationController {
     // Static Methods
     // Public Types
     // Public Properties
+
+    let favoriteMoviesVC = FavoriteMoviesViewController()
+    
     // Public Methods
     // Initialisation/Lifecycle Methods
     
@@ -39,7 +42,6 @@ class FavoritesNavigationController: UINavigationController {
         tabBarItem = UITabBarItem(title: "Favorites", image: .favoriteEmptyIcon, selectedImage: nil)
         view.tintColor = .mvYellow
         
-        let favoriteMoviesVC = FavoriteMoviesViewController()
         favoriteMoviesVC.setCustomNavigationBar(title: "Favorites", color: .mvText)
         viewControllers = [favoriteMoviesVC]
     }
