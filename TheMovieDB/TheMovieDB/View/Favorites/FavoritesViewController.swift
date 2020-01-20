@@ -12,7 +12,6 @@ import Combine
 import Stevia
 
 class FavoritesViewController: UIViewController {
-     
     private let favoritesView = FavoritesView.init()
     lazy var moviesViewModel: MovieViewModel = {
         return MovieViewModel.shared
@@ -81,7 +80,7 @@ class MovieTableViewDataSource: UITableViewDiffableDataSource<Section, Movie> {
             if snap.numberOfItems(inSection: Section.first) > 0 {
                 table.addEmptyState(state: .none)
             } else {
-                table.addEmptyState(state: .loading)
+                table.addEmptyState(state: .noData)
             }
         }
     }

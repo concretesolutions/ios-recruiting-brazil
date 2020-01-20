@@ -28,24 +28,23 @@ class EmptyView: UIView {
     }
     
     public func changeEmptyView(toState state: EmptyState) {
-        self.state = state
-        descriptionLabel.text = state.description
-        if state == .loading, let path = state.imagePath {
-            let images = emptyImage.generateImageSequence(withPath: path, andRange: 1...9)
-            emptyImage.animationImages = images
-            emptyImage.animationDuration = 4
-            emptyImage.animationRepeatCount = -1
-            emptyImage.startAnimating()
-        } else {
-            emptyImage.stopAnimating()
-            guard let path = state.imagePath,
-                  let img = UIImage.init(named: path)
-                else { return }
-            emptyImage.image = img
+        DispatchQueue.main.async {
+            self.state = state
+            self.descriptionLabel.text = state.description
+            if state == .loading, let path = state.imagePath {
+                let images = self.emptyImage.generateImageSequence(withPath: path, andRange: 1...9)
+                self.emptyImage.animationImages = images
+                self.emptyImage.animationDuration = 4
+                self.emptyImage.animationRepeatCount = -1
+                self.emptyImage.startAnimating()
+            } else {
+                self.emptyImage.stopAnimating()
+                guard let path = state.imagePath,
+                      let img = UIImage.init(named: path)
+                    else { return }
+                self.emptyImage.image = img
+            }
         }
-        
-        
-
     }
     
     private func subViews() {

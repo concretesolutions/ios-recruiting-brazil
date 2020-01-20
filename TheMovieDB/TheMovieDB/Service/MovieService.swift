@@ -15,7 +15,7 @@ class MovieService {
         }
     }
     
-    public func fetchMovies(resultMovies: @escaping (_ result: [Movie]) -> Void) {
+    public func fetchMovies(resultMovies: @escaping (_ result: [Movie], _ error: Error?) -> Void) {
         guard var components = URLComponents.init(string: pathMoviesURL) else { return }
         components.queryItems = [
             URLQueryItem.init(name: ServiceAPIManager.PathsAPI.apiKey, value: ServiceAPIManager.PathsAPI.key),
@@ -23,10 +23,14 @@ class MovieService {
         ]
         guard let url = components.url else { return }
         ServiceAPIManager.get(url: url) { (data, error)  in
+            
+            if error != nil {
+                resultMovies([], error)
+            }
             guard let resultData = data else { return }
             do {
                 let movies = try JSONDecoder().decode(PopularMoviesAPI.self, from: resultData)
-                resultMovies(movies.movies)
+                resultMovies(movies.movies, error)
             } catch { }
         }
     }

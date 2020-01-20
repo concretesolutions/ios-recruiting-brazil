@@ -10,4 +10,5 @@ import Foundation
 
 extension Notification.Name {
      public static let updatedMovies = Notification.Name(rawValue: "updatedMovies")
+     public static let networkError = Notification.Name(rawValue: "networkError")
 }

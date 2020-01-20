@@ -64,8 +64,13 @@ class MovieViewModel {
     }
     
     public func loadAllMovies() {
-        movieService.fetchMovies { (movies) in
-            self.movies = movies
+        movieService.fetchMovies { (movies, error) in
+            if error != nil {
+                NotificationCenter.default.post(name: .networkError,
+                                                object: nil)
+            } else {
+                self.movies = movies
+            }
         }
     }
 

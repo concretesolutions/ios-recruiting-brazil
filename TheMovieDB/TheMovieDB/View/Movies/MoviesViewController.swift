@@ -11,6 +11,7 @@ import UIKit
 import Combine
 
 class MoviesViewController: SearchBarViewController {
+    private let network = Network.shared
     private let gridView = MovieGridView.init()
     private var dataSource: UICollectionViewDiffableDataSource<Section, Movie>?
     lazy var moviesViewModel: MovieViewModel = {
@@ -23,6 +24,7 @@ class MoviesViewController: SearchBarViewController {
         configurateDelegate()
         moviesViewModel.loadAllMovies()
         addObservers()
+        gridView.collectionView.addEmptyState(state: .loading)
     }
     
     private func configurateDelegate() {
@@ -34,6 +36,20 @@ class MoviesViewController: SearchBarViewController {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(changedMovies), name: .updatedMovies, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(errorInLoadMovies), name: .networkError, object: nil)
+        network.observerNetwork { (status) in
+            if status == .connected {
+                self.gridView.collectionView.addEmptyState(state: .loading)
+                self.moviesViewModel.loadAllMovies()
+            } else {
+                self.errorInLoadMovies()
+            }
+        }
+    }
+    
+    @objc
+    func errorInLoadMovies() {
+        gridView.collectionView.addEmptyState(state: .networkError)
     }
     
     @objc
@@ -52,13 +68,15 @@ extension MoviesViewController {
             cell.fill(withMovie: movie)
             return cell
         })
-        loadItems(withAnimation: false)
     }
     
     private func snapshotDataSource() -> NSDiffableDataSourceSnapshot<Section, Movie> {
         var snapshot = NSDiffableDataSourceSnapshot<Section,Movie>()
         snapshot.appendSections([.first])
-        snapshot.appendItems(moviesViewModel.movies)
+        let allMovies = moviesViewModel.movies
+        let state: EmptyState = allMovies.count == 0 ? .noData : .none
+        gridView.collectionView.addEmptyState(state: state)
+        snapshot.appendItems(allMovies)
         return snapshot
     }
     
@@ -66,17 +84,26 @@ extension MoviesViewController {
         guard var snapshot = dataSource?.snapshot() else {return snapshotDataSource()}
         snapshot.deleteAllItems()
         snapshot.appendSections([.first])
-        snapshot.appendItems(moviesViewModel.filteredMovies)
+        let filtered = moviesViewModel.filteredMovies
+        let state: EmptyState = filtered.count == 0 ? .noResults : .none
+        gridView.collectionView.addEmptyState(state: state)
+        snapshot.appendItems(filtered)
         return snapshot
     }
     
     private func loadItems(withAnimation animation: Bool) {
         DispatchQueue.main.async {
-            guard let dtSource = self.dataSource else { return }
-            if self.searchIsFiltered {
-                dtSource.apply(self.snapshotFilteredDataSource(), animatingDifferences: animation)
-            }else {
-                dtSource.apply(self.snapshotDataSource(), animatingDifferences: animation)
+            if self.network.status == .connected {
+                guard let dtSource = self.dataSource else { return }
+                if self.searchIsFiltered {
+                    dtSource.apply(self.snapshotFilteredDataSource(),
+                                   animatingDifferences: animation)
+                }else {
+                    dtSource.apply(self.snapshotDataSource(),
+                                   animatingDifferences: animation)
+                }
+            } else {
+                self.errorInLoadMovies()
             }
         }
     }
