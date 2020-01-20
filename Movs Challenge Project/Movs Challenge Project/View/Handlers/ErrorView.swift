@@ -61,8 +61,7 @@ class ErrorView: UIView {
             s.backgroundColor = .mvBackground
         }
         errorImageView.style { (s) in
-            s.image = .heartImage
-            s.tintColor = .mvYellow
+            s.image = .errorImage
         }
         mensageTextLabel.style { (s) in
             s.font = UIFont.systemFont(ofSize: 17, weight: .regular)

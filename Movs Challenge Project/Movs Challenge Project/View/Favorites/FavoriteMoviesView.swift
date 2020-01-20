@@ -18,6 +18,7 @@ class FavoriteMoviesView: UIView {
     let tableView = UITableView()
     
     let emptySearchView = EmptySearchView()
+    let emptyFavoriteView = EmptyFavoriteView()
     
     // Public Methods
     // Initialisation/Lifecycle Methods
@@ -46,7 +47,8 @@ class FavoriteMoviesView: UIView {
     private func renderSuperView() {
         sv(
             tableView,
-            emptySearchView
+            emptySearchView,
+            emptyFavoriteView
         )
     }
     
@@ -56,6 +58,9 @@ class FavoriteMoviesView: UIView {
         
         emptySearchView.left(0).right(0).Top == safeAreaLayoutGuide.Top
         emptySearchView.Bottom == safeAreaLayoutGuide.Bottom
+        
+        emptyFavoriteView.left(0).right(0).Top == safeAreaLayoutGuide.Top
+        emptyFavoriteView.Bottom == safeAreaLayoutGuide.Bottom
         
         layoutIfNeeded()
     }
@@ -69,5 +74,6 @@ class FavoriteMoviesView: UIView {
         }
         
         emptySearchView.isHidden = true
+        emptyFavoriteView.isHidden = true
     }
 }

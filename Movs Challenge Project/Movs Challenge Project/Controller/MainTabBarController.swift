@@ -35,20 +35,14 @@ class MainTabBarController: UITabBarController {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         switch item {
         case moviesGridNC.tabBarItem:
-            moviesGridCounter += 1
-            if moviesGridCounter >= 2 {
+            if moviesGridNC.popularMoviesVC.view.window != nil {
                 moviesGridNC.popularMoviesVC.popularMoviesView.collectionView.setContentOffset(.zero, animated: true)
             }
             
-            favoritesCounter = 0
-            
         case favoritesNC.tabBarItem:
-            favoritesCounter += 1
-            if favoritesCounter >= 2 {
+            if favoritesNC.favoriteMoviesVC.view.window != nil {
                 favoritesNC.favoriteMoviesVC.favoriteView.tableView.setContentOffset(.zero, animated: true)
             }
-            
-            moviesGridCounter = 0
             
         default:
             do { /* Nothing */ }
@@ -57,9 +51,6 @@ class MainTabBarController: UITabBarController {
     
     // Private Types
     // Private Properties
-    
-    private var moviesGridCounter = 1
-    private var favoritesCounter = 0
     
     private let moviesGridNC = MoviesGridNavigationController()
     private let favoritesNC = FavoritesNavigationController()

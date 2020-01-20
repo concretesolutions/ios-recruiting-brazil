@@ -138,6 +138,7 @@ extension FavoriteMoviesViewController: UITableViewDataSource, UITableViewDelega
         }
         else {
             self.favoriteView.emptySearchView.isHidden = true
+            self.favoriteView.emptyFavoriteView.isHidden = !self.favoriteMovies.isEmpty
             return self.favoriteMovies.count
         }
     }
