@@ -14,5 +14,6 @@ import Foundation
 enum Errors{
     case errorJSON;
     case errorURL;
+    case errorDataImage;
 }
 

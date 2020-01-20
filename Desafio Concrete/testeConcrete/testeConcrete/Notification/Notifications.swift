@@ -11,4 +11,6 @@ import Foundation
 extension Notification{
     private static var standardName = "testeConcrete."
     static var choosedFilter = Notification.Name(rawValue: Notification.standardName+"choosedFile")
+    static var loadedPopularMovies = Notification.Name(rawValue: Notification.standardName+"loadedPopularMovies")
+    static var finishedLoadedMovieAndPoster = Notification.Name(rawValue: Notification.standardName+"finishedLoadedMovieAndPoster")
 }

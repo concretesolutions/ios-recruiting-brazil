@@ -12,18 +12,35 @@ import UIKit
 class MovieViewController:UIViewController{
     let dataSource = MoviesCollectionDataSource()
     @IBOutlet weak var collectionView: UICollectionView!
+    var selectIndex:Int?
 }
 
 extension MovieViewController{
     override func viewDidLoad() {
         collectionView.dataSource = self.dataSource
+        loadListeners()
+    }
+    
+    func loadListeners(){
+        NotificationCenter.default.addObserver(self, selector: #selector(finishedLoadData), name: Notification.finishedLoadedMovieAndPoster, object: nil)
+    }
+    
+    @objc func finishedLoadData(){
+        collectionView.reloadData()
     }
 }
 
 extension MovieViewController:UICollectionViewDelegate{
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! MovieDetailsViewController
+        vc.movie = dataSource.listMovie[selectIndex!]
+        vc.image = dataSource.listPoster[selectIndex!]
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
+        self.selectIndex = indexPath.row
+        performSegue(withIdentifier: "showDetail", sender: nil)
     }
     
 }

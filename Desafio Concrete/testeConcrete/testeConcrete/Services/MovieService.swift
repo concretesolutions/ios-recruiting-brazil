@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct MovieService{
     static func getMovies(callBack:@escaping (GeneralResponse<[Movie]>)->Void){
@@ -32,4 +33,30 @@ struct MovieService{
             callBack(GeneralResponse<[Movie]>(error: nil, success: moviesDTO.results))
                 }.resume()
         }
+    static func getMoviePoster(urlPoster:String,callBack:@escaping (GeneralResponse<UIImage>)->Void){
+        guard let url = URL(string:Constants.posterURL+"\(urlPoster)") else{
+                       callBack(GeneralResponse<UIImage>(error: .errorURL, success: nil))
+                       return
+                   };
+        let configuration = URLSessionConfiguration.default
+        URLSession(configuration: configuration).dataTask(with: url){
+           data,response,error in
+           guard error == nil,let resp = response as? HTTPURLResponse,resp.statusCode == 200 else{
+               callBack(GeneralResponse<UIImage>(error: .errorURL, success: nil))
+               return}
+            
+           guard let dataResponse = data else{
+               callBack(GeneralResponse<UIImage>(error: .errorURL, success: nil))
+               return
+           }
+            
+            guard let imageView = UIImage(data: dataResponse) else{
+                callBack(GeneralResponse<UIImage>(error: .errorDataImage, success: nil))
+                return
+            }
+        
+            callBack(GeneralResponse<UIImage>(error: nil, success: imageView))
+        }.resume()
+        
+    }
 }

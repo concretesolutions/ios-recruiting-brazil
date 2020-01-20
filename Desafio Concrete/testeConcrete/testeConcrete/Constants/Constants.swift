@@ -10,5 +10,6 @@ import Foundation
 
 struct Constants{
     public static var movieDBAPIkey = "d430281e4dac653c899f6fd4d1af26f0";
-    public static var movieURL = "https://api.themoviedb.org/3/";
+    public static var movieURL      = "https://api.themoviedb.org/3/";
+    public static var posterURL     = "https://image.tmdb.org/t/p/w185/"
 }
