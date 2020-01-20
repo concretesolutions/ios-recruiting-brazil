@@ -17,12 +17,13 @@ class MovieColletion {
     
     weak var delegate: MovieCollectionDelegate?
     
+    private var coreDataHelper = CoreDataHelper()
     private var userDefaults = UserDefaults.standard
     private var movies = [Movie]()
     private var filteredMovies = [Movie]()
     private var favoriteMovies: [FavoriteMovie] {
         get {
-            return CoreDataHelper.retrieveFavoriteMovies()
+            return coreDataHelper.retrieveFavoriteMovies()
         }
     }
     
@@ -78,10 +79,10 @@ class MovieColletion {
     }
     
     func updateState(for movie: Movie) {
-        if let movie = CoreDataHelper.favoriteMovie(for: movie.id) {
-            CoreDataHelper.delete(favoriteMovie: movie)
+        if let movie = coreDataHelper.favoriteMovie(for: movie.id) {
+            coreDataHelper.delete(favoriteMovie: movie)
         } else {
-            let favoriteMovie = CoreDataHelper.newFavoriteMovie()
+            let favoriteMovie = coreDataHelper.newFavoriteMovie()
             
             favoriteMovie.id = Int64(movie.id)
             favoriteMovie.title = movie.title
@@ -89,7 +90,7 @@ class MovieColletion {
             favoriteMovie.overview = movie.overview
             favoriteMovie.voteAverage = movie.voteAverage
             
-            CoreDataHelper.save()
+            coreDataHelper.save()
         }
     }
 }

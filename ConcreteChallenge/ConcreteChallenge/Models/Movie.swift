@@ -16,6 +16,7 @@ class Movie: Codable {
     let voteAverage: Double
     let genreIDs: [Int]
     
+    var coreDataHelper: CoreDataHelperProtocol = CoreDataHelper()
     private let posterPath: String?
     
     var posterURL: URL {
@@ -46,7 +47,7 @@ class Movie: Codable {
     }
     
     func isFavorite() -> Bool {
-        guard let _ = CoreDataHelper.favoriteMovie(for: id) else { return false }
+        guard let _ = coreDataHelper.favoriteMovie(for: id) else { return false }
         
         return true
     }

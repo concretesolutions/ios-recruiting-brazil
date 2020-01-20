@@ -19,14 +19,28 @@ class PosterViewSpec: QuickSpec {
         var movies = [Movie]()
         
         describe("set up view") {
-            beforeEach {
+            beforeSuite {
                 mockAPI.fetchMovies { (success, moviesResponse) in
                     movies = moviesResponse!.results
                 }
             }
             
             it("with basic layout") {
-                let posterView = PosterView(for: movies.first!)
+                let movie = movies.first!
+                movie.coreDataHelper = CoreDataHelperMock()
+                
+                let posterView = PosterView(for: movie)
+                posterView.frame = UIScreen.main.bounds
+                posterView.imageView.image = UIImage(named: "testImage")
+                
+                expect(posterView).to( haveValidSnapshot() )
+            }
+            
+            it("with favorite layout") {
+                let movie = movies.last!
+                movie.coreDataHelper = CoreDataHelperMock()
+                
+                let posterView = PosterView(for: movie)
                 posterView.frame = UIScreen.main.bounds
                 posterView.imageView.image = UIImage(named: "testImage")
                 
