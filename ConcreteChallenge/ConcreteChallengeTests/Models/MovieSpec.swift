@@ -11,33 +11,6 @@ import Nimble
 import Nimble_Snapshots
 @testable import ConcreteChallenge
 
-class CoreDataHelperMock: CoreDataHelperProtocol {
-    
-    func newFavoriteMovie() -> FavoriteMovie {
-        return FavoriteMovie()
-    }
-    
-    func retrieveFavoriteMovies() -> [FavoriteMovie] {
-        return [FavoriteMovie()]
-    }
-    
-    func favoriteMovie(for id: Int) -> FavoriteMovie? {
-        if id == 297761 {
-            return nil
-        }
-        
-        return FavoriteMovie()
-    }
-    
-    func save() {
-        print("oi")
-    }
-    
-    func delete(favoriteMovie: FavoriteMovie) {
-        print("oi")
-    }
-}
-
 class MovieSpec: QuickSpec {
     override func spec() {
         

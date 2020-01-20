@@ -18,7 +18,7 @@ class PosterView: UIView {
         let imageView = UIImageView()
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.kf.indicatorType = .activity
+//        imageView.kf.indicatorType = .activity
         imageView.kf.setImage(with: movie.posterURL)
         imageView.layer.cornerRadius = 5
         imageView.layer.cornerCurve = .continuous

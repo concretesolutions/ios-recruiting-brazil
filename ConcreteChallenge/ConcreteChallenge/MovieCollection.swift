@@ -18,7 +18,8 @@ class MovieColletion {
     weak var delegate: MovieCollectionDelegate?
     
     private var serviceLayer: ServiceLayerProtocol
-    private var coreDataHelper = CoreDataHelper()
+    private var coreDataHelper: CoreDataHelperProtocol
+    
     private var userDefaults = UserDefaults.standard
     private var movies = [Movie]()
     private var filteredMovies = [Movie]()
@@ -38,8 +39,9 @@ class MovieColletion {
         return filteredMovies.count
     }
     
-    init(serviceLayer: ServiceLayerProtocol) {
+    init(serviceLayer: ServiceLayerProtocol, coreDataHelper: CoreDataHelperProtocol = CoreDataHelper()) {
         self.serviceLayer = serviceLayer
+        self.coreDataHelper = coreDataHelper
     }
     
     func filterContentForSearchText(_ searchText: String) {

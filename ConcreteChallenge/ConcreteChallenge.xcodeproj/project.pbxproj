@@ -17,6 +17,8 @@
 		EC2D3C5F23D55076003C06E5 /* MockAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD4E62D23D4C5F900F958FD /* MockAPIClient.swift */; };
 		EC2D3C6123D55F64003C06E5 /* RouterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2D3C6023D55F64003C06E5 /* RouterSpec.swift */; };
 		EC2D3C6323D56218003C06E5 /* MovieDetailViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2D3C6223D56218003C06E5 /* MovieDetailViewControllerSpec.swift */; };
+		EC2D3C6923D569D0003C06E5 /* FavoritesViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2D3C6823D569D0003C06E5 /* FavoritesViewControllerSpec.swift */; };
+		EC2D3C6B23D5733B003C06E5 /* MoviesViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2D3C6A23D5733B003C06E5 /* MoviesViewControllerSpec.swift */; };
 		EC57905123CE2274004FA681 /* GenreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC57905023CE2274004FA681 /* GenreResponse.swift */; };
 		EC57905323CE229A004FA681 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC57905223CE229A004FA681 /* Genre.swift */; };
 		EC57905523CE3E30004FA681 /* GenreCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC57905423CE3E30004FA681 /* GenreCollection.swift */; };
@@ -94,6 +96,8 @@
 		EC2D3C5C23D543BD003C06E5 /* MovieSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSpec.swift; sourceTree = "<group>"; };
 		EC2D3C6023D55F64003C06E5 /* RouterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterSpec.swift; sourceTree = "<group>"; };
 		EC2D3C6223D56218003C06E5 /* MovieDetailViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewControllerSpec.swift; sourceTree = "<group>"; };
+		EC2D3C6823D569D0003C06E5 /* FavoritesViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewControllerSpec.swift; sourceTree = "<group>"; };
+		EC2D3C6A23D5733B003C06E5 /* MoviesViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewControllerSpec.swift; sourceTree = "<group>"; };
 		EC57905023CE2274004FA681 /* GenreResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreResponse.swift; sourceTree = "<group>"; };
 		EC57905223CE229A004FA681 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		EC57905423CE3E30004FA681 /* GenreCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreCollection.swift; sourceTree = "<group>"; };
@@ -215,6 +219,41 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		EC2D3C6423D5696F003C06E5 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				ECD4E63023D4C75700F958FD /* MoviesResponse.json */,
+				EC86E2B023D508BC003FD8DF /* GenreResponse.json */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		EC2D3C6523D56984003C06E5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EC2D3C5C23D543BD003C06E5 /* MovieSpec.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EC2D3C6623D5699D003C06E5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EC2D3C6223D56218003C06E5 /* MovieDetailViewControllerSpec.swift */,
+				EC2D3C6823D569D0003C06E5 /* FavoritesViewControllerSpec.swift */,
+				EC2D3C6A23D5733B003C06E5 /* MoviesViewControllerSpec.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		EC2D3C6723D569AA003C06E5 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				EC2D3C6023D55F64003C06E5 /* RouterSpec.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		EC57906323CFA712004FA681 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,14 +332,13 @@
 		ECB786F923C8F0A500062B37 /* ConcreteChallengeTests */ = {
 			isa = PBXGroup;
 			children = (
+				EC2D3C6723D569AA003C06E5 /* Network */,
+				EC2D3C6623D5699D003C06E5 /* Controllers */,
+				EC2D3C6523D56984003C06E5 /* Models */,
+				EC2D3C6423D5696F003C06E5 /* Mocks */,
 				ECD4E63323D4DAF000F958FD /* Views */,
 				ECB786FC23C8F0A500062B37 /* Info.plist */,
 				ECD4E62D23D4C5F900F958FD /* MockAPIClient.swift */,
-				ECD4E63023D4C75700F958FD /* MoviesResponse.json */,
-				EC86E2B023D508BC003FD8DF /* GenreResponse.json */,
-				EC2D3C5C23D543BD003C06E5 /* MovieSpec.swift */,
-				EC2D3C6023D55F64003C06E5 /* RouterSpec.swift */,
-				EC2D3C6223D56218003C06E5 /* MovieDetailViewControllerSpec.swift */,
 			);
 			path = ConcreteChallengeTests;
 			sourceTree = "<group>";
@@ -662,7 +700,9 @@
 				ECD4E62E23D4C5F900F958FD /* MockAPIClient.swift in Sources */,
 				EC86E2B423D50B39003FD8DF /* BodyViewSpec.swift in Sources */,
 				EC86E2AB23D505B8003FD8DF /* TitleViewSpec.swift in Sources */,
+				EC2D3C6923D569D0003C06E5 /* FavoritesViewControllerSpec.swift in Sources */,
 				EC2D3C5D23D543BD003C06E5 /* MovieSpec.swift in Sources */,
+				EC2D3C6B23D5733B003C06E5 /* MoviesViewControllerSpec.swift in Sources */,
 				ECE56F3323D4F928009ECD87 /* LoadingReusableViewSpec.swift in Sources */,
 				ECE56F3723D4FC40009ECD87 /* EmptyStateViewSpec.swift in Sources */,
 				EC2D3C6323D56218003C06E5 /* MovieDetailViewControllerSpec.swift in Sources */,
