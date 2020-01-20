@@ -25,6 +25,22 @@ class GenreCollection {
         }
     }
     
+    func getId(for genreType: String) -> Int {
+        var filteredGenres = [Genre]()
+        
+        filteredGenres = genres.filter { $0.name == genreType }
+        
+        return filteredGenres.first?.id ?? 0
+    }
+    
+    func getAllGenresTypes() -> [String] {
+        var data = [String]()
+        
+        data = genres.map { $0.name }
+        
+        return data
+    }
+    
     func genres(for ids: [Int]) -> [Genre] {
         var genres = [Genre]()
         

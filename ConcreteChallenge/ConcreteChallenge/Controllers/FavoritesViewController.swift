@@ -11,7 +11,11 @@ import UIKit
 class FavoritesViewController: UIViewController {
     
     let movieCollection: MovieColletion
+    let genreCollection: GenreCollection
     let notificationCenter = NotificationCenter.default
+    
+    var isFiltering = false
+    var chosenFilter: (date: String, genre: Int) = ("", 0)
     
     var favorites = [Movie]() {
         didSet {
@@ -41,8 +45,21 @@ class FavoritesViewController: UIViewController {
         return emptyStateView
     }()
     
-    init(movieCollection: MovieColletion) {
+    lazy var removeFilterButton: UIButton = {
+        let removeFilterButton = UIButton(type: .system)
+        
+        removeFilterButton.translatesAutoresizingMaskIntoConstraints = false
+        removeFilterButton.backgroundColor = .black
+        removeFilterButton.setTitleColor(.white, for: .normal)
+        removeFilterButton.titleLabel?.font =  UIFont.systemFont(ofSize: 18, weight: .regular)
+        removeFilterButton.addTarget(self, action: #selector(removeFilter), for: .touchUpInside)
+        
+        return removeFilterButton
+    }()
+    
+    init(movieCollection: MovieColletion, genreCollection: GenreCollection) {
         self.movieCollection = movieCollection
+        self.genreCollection = genreCollection
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -54,13 +71,34 @@ class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        let rightBarButtonItem = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(filter))
+        rightBarButtonItem.tintColor = .black
+        self.navigationItem.rightBarButtonItem  = rightBarButtonItem
+        navigationController?.navigationBar.isTranslucent = false
+        
         addSubviews()
         setupConstraints()
     }
     
+    @objc func filter() {
+        let filterViewController = FilterViewController(genreCollection: genreCollection)
+        let navigationController = UINavigationController(rootViewController: filterViewController)
+        
+        filterViewController.title = "Filter"
+        navigationController.navigationBar.tintColor = .black
+        filterViewController.delegate = self
+        
+        present(navigationController, animated: true, completion: nil)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        favorites = movieCollection.getFavorites()
+        
+        if isFiltering {
+            favorites = movieCollection.getFavorites(for: chosenFilter)
+        } else {
+            favorites = movieCollection.getFavorites()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -71,7 +109,10 @@ class FavoritesViewController: UIViewController {
     func addSubviews() {
         view.addSubview(emptyStateView)
         view.addSubview(tableView)
+        view.addSubview(removeFilterButton)
     }
+    
+    var buttonHeight: NSLayoutConstraint?
     
     func setupConstraints() {
         emptyStateView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -79,10 +120,25 @@ class FavoritesViewController: UIViewController {
         emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32).isActive = true
         emptyStateView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
         
+        removeFilterButton.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        removeFilterButton.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        removeFilterButton.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        buttonHeight = removeFilterButton.heightAnchor.constraint(equalToConstant: 0)
+        
+        buttonHeight?.isActive = true
+        
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: removeFilterButton.bottomAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
+    @objc
+    func removeFilter() {
+        isFiltering = false
+        favorites = movieCollection.getFavorites()
+        buttonHeight?.constant = 0
+        removeFilterButton.setTitle(nil, for: .normal)
     }
 }
 
@@ -131,5 +187,16 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return view.frame.height * 0.25
+    }
+}
+
+extension FavoritesViewController: FilterViewControllerDelegate {
+    func applyFilter(for date: String, genreID: Int) {
+        chosenFilter = (date, genreID)
+        isFiltering = true
+        buttonHeight?.constant = 48
+        removeFilterButton.setTitle("Remove Filter", for: .normal)
+        
+        favorites = movieCollection.getFavorites(for: chosenFilter)
     }
 }

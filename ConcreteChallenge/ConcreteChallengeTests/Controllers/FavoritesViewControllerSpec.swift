@@ -15,6 +15,7 @@ class FavoritesViewControllerSpec: QuickSpec {
     override func spec() {
         
         let movieCollection = MovieColletion(serviceLayer: ServiceLayerMock(), coreDataHelper: CoreDataHelperMock())
+        let genreCollection = GenreCollection(serviceLayer: ServiceLayerMock())
         var favoritesViewController: FavoritesViewController?
         
         describe("set up view") {
@@ -22,7 +23,7 @@ class FavoritesViewControllerSpec: QuickSpec {
             beforeSuite {
                 movieCollection.requestMovies()
                 
-                favoritesViewController = FavoritesViewController(movieCollection: movieCollection)
+                favoritesViewController = FavoritesViewController(movieCollection: movieCollection, genreCollection: genreCollection)
                 
                 let window = UIWindow(frame: UIScreen.main.bounds)
                 

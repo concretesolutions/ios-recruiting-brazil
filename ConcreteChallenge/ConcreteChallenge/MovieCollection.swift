@@ -85,6 +85,18 @@ class MovieColletion {
         }
     }
     
+    func getFavorites(for filter: (date: String, genre: Int)) -> [Movie] {
+        var movies = [Movie]()
+        let date = filter.date
+        let genre = filter.genre
+        
+        for favorite in favoriteMovies {
+            movies.append(contentsOf: self.movies.filter { $0.id == Int(favorite.id) && $0.releaseYear == date && $0.genreIDs.contains(genre) })
+        }
+        
+        return movies
+    }
+    
     func updateState(for movie: Movie) {
         if let movie = coreDataHelper.favoriteMovie(for: movie.id) {
             coreDataHelper.delete(favoriteMovie: movie)

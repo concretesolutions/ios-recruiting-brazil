@@ -20,22 +20,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         let serviceLayer = ServiceLayer()
         let movieCollection = MovieColletion(serviceLayer: serviceLayer)
+        let genreCollection = GenreCollection(serviceLayer: serviceLayer)
         let tabBarInsets = UIEdgeInsets(top: 9, left: 0, bottom: -9, right: 0)
         
-        let moviesViewController = MoviesViewController(movieCollection: movieCollection, genreCollection: GenreCollection(serviceLayer: serviceLayer))
+        let moviesViewController = MoviesViewController(movieCollection: movieCollection, genreCollection: genreCollection)
         let moviesTabBarItem = UITabBarItem(title: nil, image: UIImage(named: Images.listHollow), selectedImage: UIImage(named: Images.listFilled))
         
         moviesViewController.title = "Movies"
         moviesViewController.tabBarItem = moviesTabBarItem
         moviesTabBarItem.imageInsets = tabBarInsets
         
-        let favoritesViewController = FavoritesViewController(movieCollection: movieCollection)
+        let favoritesViewController = FavoritesViewController(movieCollection: movieCollection, genreCollection: genreCollection)
         let favoriteTabBarItem = UITabBarItem(title: nil, image: UIImage(named: Images.heartHollow), selectedImage: UIImage(named: Images.heartFilled))
         
         favoritesViewController.title = "Favorites"
         favoritesViewController.tabBarItem = favoriteTabBarItem
         favoriteTabBarItem.imageInsets = tabBarInsets
-        
         
         let controllers = [moviesViewController, favoritesViewController]
         
