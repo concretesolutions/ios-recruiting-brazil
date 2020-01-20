@@ -60,7 +60,7 @@ class TriangleView : UIView {
     }
     
     func setupConstraints() {
-        imageView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -frame.width/4).isActive = true
+        imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         imageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4).isActive = true
         imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4).isActive = true

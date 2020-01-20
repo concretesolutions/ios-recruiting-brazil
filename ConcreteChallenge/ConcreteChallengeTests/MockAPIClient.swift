@@ -10,19 +10,22 @@ import Foundation
 @testable import ConcreteChallenge
 
 final class MockApiClient {
+    func fetchGenres(completion: @escaping (Bool, GenreResponse?) -> Void) {
+        let filePath = "GenreResponse"
+        
+        MockApiClient.loadJSONDataFromFile(filePath: filePath) { (result: Result<Data, Error>) in
+            switch result {
+            case .success(let response):
+                let responseObject = try! JSONDecoder().decode(GenreResponse.self, from: response)
+                completion(true, responseObject)
+            case .failure:
+                completion(false, nil)
+            }
+        }
+    }
+    
     func fetchMovies(completion: @escaping (Bool, MoviesResponse?) -> Void) {
         let filePath = "MoviesResponse"
-        //          MockApiClient.loadJsonDataFromFile(filePath, completion: { data in
-        //              if let json = data {
-        //                  do {
-        //                      let films = try JSONDecoder().decode(FilmsData.self, from: json)
-        //                      completion(true, films)
-        //                  }
-        //                  catch _ as NSError {
-        //                      fatalError("Couldn't load data from \(filePath)")
-        //                  }
-        //              }
-        //          })
         
         MockApiClient.loadJSONDataFromFile(filePath: filePath) { (result: Result<Data, Error>) in
             switch result {
