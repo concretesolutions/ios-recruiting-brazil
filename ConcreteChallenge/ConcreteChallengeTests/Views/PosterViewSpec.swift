@@ -31,7 +31,7 @@ class PosterViewSpec: QuickSpec {
                 posterView.frame = UIScreen.main.bounds
                 posterView.imageView.image = UIImage(named: "testImage")
                 
-                expect(posterView).to( haveValidSnapshot() )
+                expect(posterView).toEventually( haveValidSnapshot() )
             }
             
             it("with favorite layout") {
@@ -42,7 +42,7 @@ class PosterViewSpec: QuickSpec {
                 posterView.frame = UIScreen.main.bounds
                 posterView.imageView.image = UIImage(named: "testImage")
                 
-                expect(posterView).to( haveValidSnapshot() )
+                expect(posterView).toEventually( haveValidSnapshot() )
             }
         }
     }
