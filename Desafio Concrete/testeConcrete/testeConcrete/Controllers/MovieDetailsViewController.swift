@@ -9,7 +9,6 @@
 import UIKit
 
 class MovieDetailsViewController: UIViewController {
-    var isFavorite = true
     var movie:Movie?
     var image:UIImage?
     @IBOutlet weak var detailLabel: UILabel!
@@ -21,7 +20,7 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadDetails()
-        loadFavorite()
+        loadIcon()
         loadGenres()
     }
     
@@ -35,16 +34,26 @@ class MovieDetailsViewController: UIViewController {
         }
     }
     
-    func loadFavorite(){
-        if(isFavorite){
+    func loadIcon(){
+        if(Armazenamento.estaFavoritado(id: movie!.id!)){
+            favoriteButton.image = UIImage(named: "favorite_full_icon")
+        }else{
             favoriteButton.image = UIImage(named: "favorite_empty_icon")
+        }
+    }
+    
+    
+    func loadFavorite(){
+        if(Armazenamento.estaFavoritado(id: movie!.id!)){
+            favoriteButton.image = UIImage(named: "favorite_empty_icon")
+            Armazenamento.desfavoritar(cell: movie!)
         }else{
             favoriteButton.image = UIImage(named: "favorite_full_icon")
+            Armazenamento.favoritar(cell: movie!)
         }
     }
     
     @IBAction func favoriteAction(_ sender: UIBarButtonItem) {
-        self.isFavorite = !self.isFavorite
         loadFavorite()
     }
     
