@@ -37,7 +37,7 @@ class MoviesVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = "Movies"
-        getPopularMoviesFromApi()
+        self.moviesCollectionView.reloadData()
     }
     
     func getPopularMoviesFromApi() {

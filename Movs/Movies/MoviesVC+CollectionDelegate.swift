@@ -13,7 +13,12 @@ extension MoviesVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let viewController = UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: "movieDetail") as? MovieDetailVC {
-            viewController.movie = self.movies[indexPath.row]
+            if (isSearchActive == false) {
+                viewController.movie = self.movies[indexPath.row]
+            }else{
+                viewController.movie = self.filteredMovies[indexPath.row]
+            }
+            
             self.navigationController?.pushViewController(viewController, animated: true)
         }
     }

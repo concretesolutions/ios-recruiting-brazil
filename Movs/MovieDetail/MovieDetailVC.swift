@@ -61,8 +61,8 @@ class MovieDetailVC: UIViewController {
         }
         //Verify if movie were favorited
         //Get Icon depends if movie was added or not
-        movieWasAdded = CoreDataDelegate.movieWasAdded(movie: self.movie!)
-        if(movieWasAdded == true){
+        self.movieWasAdded = CoreDataDelegate.movieWasAdded(movie: self.movie!)
+        if(self.movieWasAdded == true){
             self.movieDetailIsFavoritedBtn.setImage(UIImage(named: "favorite_icon"), for: UIControl.State.normal)
         }else{
             self.movieDetailIsFavoritedBtn.setImage(UIImage(named: "favorite_icon_empty"), for: UIControl.State.normal)
@@ -107,6 +107,8 @@ class MovieDetailVC: UIViewController {
             do {
                try context.save()
                self.movieDetailIsFavoritedBtn.setImage(UIImage(named: "favorite_icon"), for: UIControl.State.normal)
+                self.movieWasAdded = true
+                self.navigationController?.popViewController(animated: true)
             } catch {
                print(error.localizedDescription)
             }
