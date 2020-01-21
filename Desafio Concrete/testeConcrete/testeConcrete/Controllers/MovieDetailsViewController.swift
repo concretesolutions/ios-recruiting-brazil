@@ -46,7 +46,7 @@ class MovieDetailsViewController: UIViewController {
     func loadFavorite(){
         if(Armazenamento.estaFavoritado(id: movie!.id!)){
             favoriteButton.image = UIImage(named: "favorite_empty_icon")
-            Armazenamento.desfavoritar(cell: movie!)
+            Armazenamento.desfavoritar(id: movie!.id!)
         }else{
             favoriteButton.image = UIImage(named: "favorite_full_icon")
             Armazenamento.favoritar(cell: movie!, image: image!)

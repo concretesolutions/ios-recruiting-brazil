@@ -24,6 +24,7 @@ class Armazenamento{
         listaDeIds.append(cell.id!)
         UserDefaults().set(listaDeIds, forKey: persistencia)
         var dic:[String:String] = [:]
+        dic["id"]        = "\(cell.id!)"
         dic["titulo"]    = cell.title
         dic["descricao"] = cell.overview
         dic["ano"]       = cell.release_date
@@ -31,16 +32,16 @@ class Armazenamento{
         UserDefaults().set(dic, forKey: "\(cell.id!)")
         
     }
-    static func desfavoritar(cell:Movie){
+    static func desfavoritar(id:Int){
         var listaDeIds:[Int] = [];
         if(UserDefaults().array(forKey: persistencia) != nil){
             listaDeIds = UserDefaults().array(forKey: persistencia) as! [Int]
         }
         
-        listaDeIds = listaDeIds.filter({id in id != cell.id!})
+        listaDeIds = listaDeIds.filter({id in id != id})
         
         UserDefaults().set(listaDeIds, forKey: persistencia)
-        UserDefaults().set(nil, forKey: "\(String(describing: cell.id!))")
+        UserDefaults().set(nil, forKey: "\(String(describing: id))")
     }
     static func estaFavoritado(id:Int)->Bool{
         guard let lista = UserDefaults().array(forKey: persistencia) as? [Int] else{
