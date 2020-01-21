@@ -100,39 +100,3 @@ class MoviesFavoritedVC: UITableViewController {
         }
     }
 }
-
-extension MoviesFavoritedVC: NSFetchedResultsControllerDelegate {
-   
-    // whenever any object is modified this method will be notified
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-       
-        switch type {
-            case .delete:
-                if let indexPath = indexPath {
-                    // Delete the row from the data source
-                    tableView.deleteRows(at: [indexPath], with: .fade)
-                }
-                break
-            default:
-                tableView.reloadData()
-        }
-    }
-}
-
-extension MoviesFavoritedVC: UISearchResultsUpdating, UISearchBarDelegate {
-    func updateSearchResults(for searchController: UISearchController) {
-        loadfavoritedMovies(filtering: searchController.searchBar.text!)
-        tableView.reloadData()
-    }
-   
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        loadfavoritedMovies()
-        tableView.reloadData()
-       
-    }
-   
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        loadfavoritedMovies(filtering: searchBar.text!)
-        tableView.reloadData()
-    }
-}

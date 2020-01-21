@@ -35,6 +35,9 @@
 		5386208223D6584D00F32008 /* MoviesFavoritedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5386208123D6584D00F32008 /* MoviesFavoritedCell.swift */; };
 		5386208523D6932A00F32008 /* CoreDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5386208423D6932A00F32008 /* CoreDataDelegate.swift */; };
 		5386208723D69D1300F32008 /* GenericErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5386208623D69D1300F32008 /* GenericErrorView.swift */; };
+		5386208923D7323D00F32008 /* MoviesFavoritedVC+NSFetchedResultsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5386208823D7323D00F32008 /* MoviesFavoritedVC+NSFetchedResultsControllerDelegate.swift */; };
+		5386208B23D7329E00F32008 /* MoviesFavoritedVC+UISearchResultsUpdating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5386208A23D7329E00F32008 /* MoviesFavoritedVC+UISearchResultsUpdating.swift */; };
+		5386208D23D7330700F32008 /* MoviesFavoritedVC+UISearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5386208C23D7330700F32008 /* MoviesFavoritedVC+UISearchBarDelegate.swift */; };
 		7C07439B6FBD7BBB40C5568B /* Pods_Movs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3F050B6A6C6E6CD0AEB23DD /* Pods_Movs.framework */; };
 		98E5F2644020AA80D27191D6 /* Pods_Movs_MovsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80473AB7A793B0CA96BBB77C /* Pods_Movs_MovsUITests.framework */; };
 /* End PBXBuildFile section */
@@ -93,6 +96,9 @@
 		5386208123D6584D00F32008 /* MoviesFavoritedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesFavoritedCell.swift; sourceTree = "<group>"; };
 		5386208423D6932A00F32008 /* CoreDataDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataDelegate.swift; sourceTree = "<group>"; };
 		5386208623D69D1300F32008 /* GenericErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericErrorView.swift; sourceTree = "<group>"; };
+		5386208823D7323D00F32008 /* MoviesFavoritedVC+NSFetchedResultsControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoviesFavoritedVC+NSFetchedResultsControllerDelegate.swift"; sourceTree = "<group>"; };
+		5386208A23D7329E00F32008 /* MoviesFavoritedVC+UISearchResultsUpdating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoviesFavoritedVC+UISearchResultsUpdating.swift"; sourceTree = "<group>"; };
+		5386208C23D7330700F32008 /* MoviesFavoritedVC+UISearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoviesFavoritedVC+UISearchBarDelegate.swift"; sourceTree = "<group>"; };
 		6660306F7F2EF8915D3805CB /* Pods-Movs-MovsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movs-MovsUITests.release.xcconfig"; path = "Target Support Files/Pods-Movs-MovsUITests/Pods-Movs-MovsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		80473AB7A793B0CA96BBB77C /* Pods_Movs_MovsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs_MovsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88AD3902E46A29F62E0E9BA4 /* Pods-MovsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovsTests.debug.xcconfig"; path = "Target Support Files/Pods-MovsTests/Pods-MovsTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -267,6 +273,9 @@
 			children = (
 				5386207F23D6548800F32008 /* MoviesFavoritedVC.swift */,
 				5386208123D6584D00F32008 /* MoviesFavoritedCell.swift */,
+				5386208823D7323D00F32008 /* MoviesFavoritedVC+NSFetchedResultsControllerDelegate.swift */,
+				5386208A23D7329E00F32008 /* MoviesFavoritedVC+UISearchResultsUpdating.swift */,
+				5386208C23D7330700F32008 /* MoviesFavoritedVC+UISearchBarDelegate.swift */,
 			);
 			path = MoviesFavorited;
 			sourceTree = "<group>";
@@ -534,6 +543,8 @@
 				5386205C23D3F03C00F32008 /* MoviesVC+CollectionDataSource.swift in Sources */,
 				5386204E23D3774300F32008 /* MoviesVC.swift in Sources */,
 				5386206623D54D7200F32008 /* MoviesVC+UISearchBarDelegate.swift in Sources */,
+				5386208923D7323D00F32008 /* MoviesFavoritedVC+NSFetchedResultsControllerDelegate.swift in Sources */,
+				5386208B23D7329E00F32008 /* MoviesFavoritedVC+UISearchResultsUpdating.swift in Sources */,
 				5386204C23D3733200F32008 /* Constants.swift in Sources */,
 				5386206023D3F0FB00F32008 /* MoviesVC+SearchBarDelegate.swift in Sources */,
 				5386208023D6548800F32008 /* MoviesFavoritedVC.swift in Sources */,
@@ -550,6 +561,7 @@
 				5386201F23D34AFD00F32008 /* Movs.xcdatamodeld in Sources */,
 				5386201723D34AFD00F32008 /* SceneDelegate.swift in Sources */,
 				5386208723D69D1300F32008 /* GenericErrorView.swift in Sources */,
+				5386208D23D7330700F32008 /* MoviesFavoritedVC+UISearchBarDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
