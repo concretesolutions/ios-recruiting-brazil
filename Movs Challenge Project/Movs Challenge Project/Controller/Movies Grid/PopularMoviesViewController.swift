@@ -75,10 +75,15 @@ class PopularMoviesViewController: UIViewController {
         PopularMovieCollectionViewCell.setSize(screenSize: UIScreen.main.bounds.size)
         
         NotificationCenter.default.addObserver(self, selector: #selector(didDownloadPage), name: TmdbAPI.didDownloadPageNN, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(genericErrorDidHappen), name: TmdbAPI.genericErrorNN, object: nil)
         
         popularMoviesView.collectionView.isUserInteractionEnabled = false
         
         TmdbAPI.fetchPopularMoviesSet()
+    }
+    
+    @objc private func genericErrorDidHappen() {
+        self.popularMoviesView.errorView.isHidden = false
     }
     
     @objc private func didDownloadPage() {

@@ -89,8 +89,11 @@ class YearGenreFilterViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        favoriteMovies = []
         doneBlock?()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        favoriteMovies = []
     }
     
     // Private Types
@@ -165,14 +168,18 @@ extension YearGenreFilterViewController: UIPickerViewDataSource, UIPickerViewDel
             }
             else {
                 self.yearFilter = self.years[row]
+                self.genreFilter = nil
+                filterView.genresFilterPickerView.selectRow(0, inComponent: 0, animated: true)
             }
             
         case filterView.genresFilterPickerView:
             if row == 0 {
-                genreFilter = nil
+                self.genreFilter = nil
             }
             else {
                 self.genreFilter = self.genres[row].0
+                self.yearFilter = nil
+                filterView.yearFilterPickerView.selectRow(0, inComponent: 0, animated: true)
             }
             
         default:
