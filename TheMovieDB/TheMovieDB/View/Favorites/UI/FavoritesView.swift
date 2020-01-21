@@ -12,7 +12,6 @@ import UIKit
 
 class FavoritesView: UIView {
     public let tableView = UITableView()
-//    private var emptyView = EmptyView.init()
     
     init() {
         super.init(frame: .zero)
@@ -24,11 +23,6 @@ class FavoritesView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-//    public func changeBackground(to state: EmptyState) {
-//        emptyView.changeEmptyView(toState: state)
-//        tableView.backgroundView = emptyView
-//    }
     
     private func subViews() {
         sv(tableView)

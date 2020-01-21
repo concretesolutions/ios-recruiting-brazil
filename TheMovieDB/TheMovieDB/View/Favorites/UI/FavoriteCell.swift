@@ -15,8 +15,8 @@ class FavoriteCell: UITableViewCell {
     public var titleMovie = UILabel.init()
     public var favoriteButton = UIButton.init()
     public static let identifier = "favoriteCellIdentifier"
-    
     private var margin: CGFloat = 8
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         subViews()
@@ -30,6 +30,8 @@ class FavoriteCell: UITableViewCell {
     
     private func style() {
         favoriteButton.setImage(UIImage.init(named: "tagfavorite"), for: .normal)
+        titleMovie.numberOfLines = -1
+        backgroundColor = .clear
     }
     
     private func autolayout() {

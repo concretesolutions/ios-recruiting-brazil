@@ -105,22 +105,21 @@ class MovieDetailView: UIScrollView {
         self.Trailing == superView.safeAreaLayoutGuide.Trailing - margin
         superView.backgroundColor = .primaryColor
     }
+    
     public func fillView(withMovie movie: Movie) {
         title.text = movie.title
-        releaseDate.text = movie.releaseDate
+        releaseDate.text = movie.releaseDate?.dateToYear()
         overviewText.text = movie.overview
         postImage.downloadImage(withPath: movie.posterPath, withDimension: .w342)
         movieIsFavorite(movie.isFavorite)
         subscriber.append(movie.notification.receive(on: DispatchQueue.main).sink { (_) in
-        self.movieIsFavorite(movie.isFavorite)
-        guard let ids = movie.genres else { return }
-        self.genre.text = self.placeholderGenres(withText: GenreViewModel.shared.filterGenres(withIDs: ids).descriptionAllGenres())
-
-            
+            self.movieIsFavorite(movie.isFavorite)
+            guard let ids = movie.genres else { return }
+            self.genre.text = self.placeholderGenres(withText: GenreViewModel.shared.filterGenres(withIDs: ids).descriptionAllGenres())
         })
         subscriber.append(GenreViewModel.shared.notification.receive(on: DispatchQueue.main).sink { (_) in
-        guard let ids = movie.genres else { return }
-        self.genre.text = self.placeholderGenres(withText: GenreViewModel.shared.filterGenres(withIDs: ids ).descriptionAllGenres())
+            guard let ids = movie.genres else { return }
+            self.genre.text = self.placeholderGenres(withText: GenreViewModel.shared.filterGenres(withIDs: ids ).descriptionAllGenres())
         })
     }
     
