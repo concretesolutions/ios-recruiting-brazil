@@ -1,5 +1,5 @@
 //
-//  Movie.swift
+//  MovieResponse.swift
 //  TheMovieDB
 //
 //  Created by Renato Lopes on 09/01/20.
@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import Combine
 
-class Movie: NSObject, Decodable, ObservableObject {
+struct MovieResponse: Decodable {
     
     let popularity: Double
     let voteCount: Int
@@ -22,10 +21,6 @@ class Movie: NSObject, Decodable, ObservableObject {
     let title: String
     let voteAverage: Double
     let overview, releaseDate: String
-    var isFavorite: Bool = false
-    
-    /*Use only to notification changes on Movie class*/
-    let notification = PassthroughSubject<Void,Never>()
     
     enum CodingKeys: String, CodingKey {
         case popularity
@@ -41,9 +36,5 @@ class Movie: NSObject, Decodable, ObservableObject {
         case voteAverage = "vote_average"
         case overview
         case releaseDate = "release_date"
-    }
-    
-    static func == (lhs: Movie, rhs: Movie) -> Bool {
-        return lhs.id == rhs.id
     }
 }

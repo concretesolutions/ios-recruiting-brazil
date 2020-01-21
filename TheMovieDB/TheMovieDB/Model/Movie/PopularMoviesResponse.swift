@@ -1,5 +1,5 @@
 //
-//  PopularMoviesAPI.swift
+//  PopularMoviesResponse.swift
 //  TheMovieDB
 //
 //  Created by Renato Lopes on 11/01/20.
@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-struct PopularMoviesAPI: Decodable {
+struct PopularMoviesResponse: Decodable {
     let page, totalResults, totalPages: Int
-    let movies: [Movie]
+    let movies: [MovieResponse]
 
     enum CodingKeys: String, CodingKey {
         case page

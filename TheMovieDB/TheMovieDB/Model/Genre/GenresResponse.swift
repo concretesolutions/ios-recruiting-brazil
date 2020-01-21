@@ -1,5 +1,5 @@
 //
-//  GenresAPI.swift
+//  GenresResponse.swift
 //  TheMovieDB
 //
 //  Created by Renato Lopes on 16/01/20.
@@ -8,10 +8,6 @@
 
 import Foundation
 
-class GenresAPI: Decodable {
-    let genres: [Genre]
-
-    init(genres: [Genre]) {
-        self.genres = genres
-    }
+struct GenresResponse: Decodable {
+    let genres: [GenreResponse]
 }
