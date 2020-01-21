@@ -17,9 +17,9 @@ public enum EmptyState {
     
     var description: String? {
         switch self {
-            case .networkError: return NSLocalizedString("Ops! occurred error. Verify your connection with internet.", comment: "Network Error")
-            case .noResults: return NSLocalizedString("Not result", comment: "Not results in search")
-            case .noData: return NSLocalizedString("Not registers", comment: "Not informations saved")
+            case .networkError: return NSLocalizedString("Ops! error occurred. Verify your network connection.", comment: "Network Error")
+            case .noResults: return NSLocalizedString("No result", comment: "Not results in search")
+            case .noData: return NSLocalizedString("No registers", comment: "Not informations saved")
             case .loading: return NSLocalizedString("Loading, wait please.", comment: "Waiting download informations")
             case .none: return nil
         }
