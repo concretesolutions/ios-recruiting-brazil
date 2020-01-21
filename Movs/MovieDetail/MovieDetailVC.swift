@@ -18,9 +18,10 @@ class MovieDetailVC: UIViewController {
     @IBOutlet weak var movieDetailYear: UILabel!
     @IBOutlet weak var movieDetailGenders: UILabel!
     @IBOutlet weak var movieDetailOverview: UILabel!
-    @IBOutlet weak var movieDetailIsFavorited: UIImageView!
+    @IBOutlet weak var movieDetailIsFavoritedBtn: UIButton!
     
-    
+    var moviesDB: Movies!
+    var movieWasAdded:Bool = false
     var movie: Movie?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,11 +60,12 @@ class MovieDetailVC: UIViewController {
             self.movieDetailOverview.text = overview
         }
         //Verify if movie were favorited
-        let movieWasAdded = CoreDataDelegate.movieWasAdded(movie: self.movie!)
+        //Get Icon depends if movie was added or not
+        movieWasAdded = CoreDataDelegate.movieWasAdded(movie: self.movie!)
         if(movieWasAdded == true){
-            self.movieDetailIsFavorited.image = UIImage(named: "favorite_icon")
+            self.movieDetailIsFavoritedBtn.setImage(UIImage(named: "favorite_icon"), for: UIControl.State.normal)
         }else{
-            self.movieDetailIsFavorited.image = UIImage(named: "favorite_icon_empty")
+            self.movieDetailIsFavoritedBtn.setImage(UIImage(named: "favorite_icon_empty"), for: UIControl.State.normal)
         }
     }
     
@@ -77,5 +79,39 @@ class MovieDetailVC: UIViewController {
             }
         }
         return genresString
+    }
+    
+    @IBAction func favoriteMovie(_ sender: Any) {
+        if(self.movieWasAdded == false){
+            //Creating an instance from DB
+            moviesDB = Movies(context: context)
+            if let movieId = movie?.id {
+                moviesDB.id = Int32(movieId)
+            }
+            if let movieTitle = movie?.title {
+                moviesDB.title = movieTitle
+            }
+            if let movieOverview = movie?.overview {
+                moviesDB.overview = movieOverview
+            }
+            if let movieVoteAverage = movie?.vote_average {
+                moviesDB.vote_average = movieVoteAverage
+            }
+            if let moviePosterPath = movie?.poster_path {
+                moviesDB.poster_path = moviePosterPath
+            }
+            if let movieReleaseDate = movie?.release_date {
+                moviesDB.release_date = movieReleaseDate
+            }
+            
+            do {
+               try context.save()
+               self.movieDetailIsFavoritedBtn.setImage(UIImage(named: "favorite_icon"), for: UIControl.State.normal)
+            } catch {
+               print(error.localizedDescription)
+            }
+        }else{
+            print("movie has already been added!")
+        }
     }
 }

@@ -313,7 +313,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVs-mi-9lY">
-                                        <rect key="frame" x="12" y="490" width="42" height="50"/>
+                                        <rect key="frame" x="12" y="490" width="394" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -336,35 +336,43 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C4D-eG-UEu">
-                                        <rect key="frame" x="356" y="490" width="50" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fso-OF-OTS">
+                                        <rect key="frame" x="362" y="490" width="44" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="CEV-84-A27"/>
-                                            <constraint firstAttribute="height" constant="50" id="elU-En-gbx"/>
+                                            <constraint firstAttribute="height" constant="50" id="83C-8h-Hfm"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="f31-kf-MGZ"/>
                                         </constraints>
-                                    </imageView>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="favoriteMovie:" destination="gTE-83-lJx" eventType="touchUpInside" id="xWb-0O-5fg"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="dd8-x9-ADq" firstAttribute="top" secondItem="QTM-5B-hAD" secondAttribute="top" id="8i9-qI-79h"/>
                                     <constraint firstItem="Ww3-mV-skh" firstAttribute="leading" secondItem="WDU-EE-qQX" secondAttribute="leading" id="8mY-7R-DAv"/>
+                                    <constraint firstItem="fso-OF-OTS" firstAttribute="top" secondItem="LVs-mi-9lY" secondAttribute="top" id="EBM-42-iKZ"/>
+                                    <constraint firstItem="fso-OF-OTS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QTM-5B-hAD" secondAttribute="leading" symbolic="YES" id="H7w-Yy-Cza"/>
                                     <constraint firstItem="Ww3-mV-skh" firstAttribute="top" secondItem="WDU-EE-qQX" secondAttribute="bottom" constant="20" id="IfV-HO-0RY"/>
                                     <constraint firstItem="Ww3-mV-skh" firstAttribute="trailing" secondItem="WDU-EE-qQX" secondAttribute="trailing" id="LqJ-ri-TUu"/>
-                                    <constraint firstItem="LVs-mi-9lY" firstAttribute="top" secondItem="C4D-eG-UEu" secondAttribute="top" id="PyU-1c-vNB"/>
                                     <constraint firstItem="dd8-x9-ADq" firstAttribute="leading" secondItem="g7D-ms-L0M" secondAttribute="leading" id="Ryw-yL-2Dr"/>
+                                    <constraint firstItem="tBS-cA-U6W" firstAttribute="trailing" secondItem="fso-OF-OTS" secondAttribute="trailing" id="Tic-1V-Uxs"/>
                                     <constraint firstItem="tBS-cA-U6W" firstAttribute="top" secondItem="LVs-mi-9lY" secondAttribute="bottom" constant="20" id="Vfk-Rb-gbO"/>
                                     <constraint firstAttribute="trailing" secondItem="dd8-x9-ADq" secondAttribute="trailing" id="Vtu-T1-Xcy"/>
                                     <constraint firstItem="LVs-mi-9lY" firstAttribute="leading" secondItem="QTM-5B-hAD" secondAttribute="leading" constant="12" id="WPR-XC-oGo"/>
-                                    <constraint firstItem="QTM-5B-hAD" firstAttribute="trailing" secondItem="C4D-eG-UEu" secondAttribute="trailing" constant="8" id="XVL-ty-sKm"/>
+                                    <constraint firstItem="QTM-5B-hAD" firstAttribute="trailing" secondItem="fso-OF-OTS" secondAttribute="trailing" constant="8" id="acg-0F-ynJ"/>
                                     <constraint firstItem="tBS-cA-U6W" firstAttribute="leading" secondItem="LVs-mi-9lY" secondAttribute="leading" id="cXc-At-qDb"/>
-                                    <constraint firstItem="LVs-mi-9lY" firstAttribute="bottom" secondItem="C4D-eG-UEu" secondAttribute="bottom" id="fIG-iN-N9P"/>
+                                    <constraint firstItem="fso-OF-OTS" firstAttribute="bottom" secondItem="LVs-mi-9lY" secondAttribute="bottom" id="deK-aE-xp1"/>
                                     <constraint firstItem="dd8-x9-ADq" firstAttribute="centerX" secondItem="g7D-ms-L0M" secondAttribute="centerX" id="feQ-to-CnO"/>
-                                    <constraint firstItem="C4D-eG-UEu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LVs-mi-9lY" secondAttribute="trailing" constant="8" symbolic="YES" id="jUJ-0f-1tk"/>
+                                    <constraint firstItem="fso-OF-OTS" firstAttribute="top" secondItem="dd8-x9-ADq" secondAttribute="bottom" constant="40" id="iq5-ed-zni"/>
                                     <constraint firstAttribute="bottom" secondItem="dd8-x9-ADq" secondAttribute="bottom" constant="409" id="kT6-hT-uTd"/>
+                                    <constraint firstItem="LVs-mi-9lY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fso-OF-OTS" secondAttribute="trailing" id="mY5-oJ-ETs"/>
                                     <constraint firstItem="WDU-EE-qQX" firstAttribute="top" secondItem="tBS-cA-U6W" secondAttribute="bottom" constant="20" id="pAQ-zT-QNo"/>
-                                    <constraint firstItem="tBS-cA-U6W" firstAttribute="trailing" secondItem="C4D-eG-UEu" secondAttribute="trailing" id="sZf-Rp-huC"/>
+                                    <constraint firstItem="QTM-5B-hAD" firstAttribute="trailing" secondItem="fso-OF-OTS" secondAttribute="trailing" constant="8" id="rSg-hz-tRA"/>
                                     <constraint firstItem="WDU-EE-qQX" firstAttribute="leading" secondItem="tBS-cA-U6W" secondAttribute="leading" id="wze-j2-Nmx"/>
                                     <constraint firstItem="WDU-EE-qQX" firstAttribute="trailing" secondItem="tBS-cA-U6W" secondAttribute="trailing" id="x3N-8O-rWG"/>
-                                    <constraint firstItem="C4D-eG-UEu" firstAttribute="top" secondItem="dd8-x9-ADq" secondAttribute="bottom" constant="40" id="zn6-M4-qUV"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="QTM-5B-hAD"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="LBZ-Sz-fuL"/>
@@ -381,7 +389,7 @@
                     </view>
                     <connections>
                         <outlet property="movieDetailGenders" destination="WDU-EE-qQX" id="LVo-Gn-PCv"/>
-                        <outlet property="movieDetailIsFavorited" destination="C4D-eG-UEu" id="DgU-ne-6fV"/>
+                        <outlet property="movieDetailIsFavoritedBtn" destination="fso-OF-OTS" id="on8-t7-f8k"/>
                         <outlet property="movieDetailOverview" destination="Ww3-mV-skh" id="o4v-cX-gh3"/>
                         <outlet property="movieDetailPoster" destination="dd8-x9-ADq" id="LhC-TU-GYf"/>
                         <outlet property="movieDetailTitle" destination="LVs-mi-9lY" id="64c-KT-bfQ"/>
