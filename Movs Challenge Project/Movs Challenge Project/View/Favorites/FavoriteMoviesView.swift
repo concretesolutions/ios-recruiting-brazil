@@ -20,6 +20,11 @@ class FavoriteMoviesView: UIView {
     let emptySearchView = EmptySearchView()
     let emptyFavoriteView = EmptyFavoriteView()
     
+    let filterButton = UIButton(type: .custom)
+    let filterBarButton = UIBarButtonItem()
+    
+    let removeFilterHeaderView = RemoveFilterHeaderView()
+    
     // Public Methods
     // Initialisation/Lifecycle Methods
     
@@ -75,5 +80,13 @@ class FavoriteMoviesView: UIView {
         
         emptySearchView.isHidden = true
         emptyFavoriteView.isHidden = true
+        
+        filterButton.style { (s) in
+            s.setImage(.filterIcon, for: .normal)
+            s.tintColor = .mvYellow
+        }
+        filterBarButton.style { (s) in
+            s.customView = filterButton
+        }
     }
 }

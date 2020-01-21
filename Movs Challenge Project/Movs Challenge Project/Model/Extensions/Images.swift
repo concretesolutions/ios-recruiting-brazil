@@ -43,4 +43,9 @@ extension UIImage {
     class var heartImage: UIImage {
         return UIImage(named: "Heart")!
     }
+    
+    /// Filter Icon
+    class var filterIcon: UIImage {
+        return UIImage(named: "FilterIcon")!
+    }
 }

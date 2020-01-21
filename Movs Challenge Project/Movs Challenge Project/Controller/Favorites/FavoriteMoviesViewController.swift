@@ -43,11 +43,11 @@ class FavoriteMoviesViewController: UIViewController {
     // Private Types
     // Private Properties
     
-    private var favoriteMovies: [Movie] = []
-    
-    private var isDeletingWithCommit: Bool = false
-    
     private let movieDetailsVC = MovieDetailsViewController()
+    private let yearGenreFilterVC = YearGenreFilterViewController()
+    
+    private var favoriteMovies: [Movie] = []
+    private var isDeletingWithCommit: Bool = false
     
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchText: String = ""
@@ -55,6 +55,9 @@ class FavoriteMoviesViewController: UIViewController {
     private var isFiltering: Bool {
       return searchController.isActive && !(searchController.searchBar.text?.isEmpty ?? true)
     }
+    
+    private var genreFilter: Int?
+    private var yearFilter: String?
     
     // Private Methods
     
@@ -64,6 +67,10 @@ class FavoriteMoviesViewController: UIViewController {
         self.updateMovieArrays()
         
         movieDetailsVC.setCustomNavigationBar(title: "Movie Details", color: .mvText)
+        yearGenreFilterVC.setCustomNavigationBar(title: "Filter", color: .mvText)
+        
+        favoriteView.filterButton.addTarget(self, action: #selector(didTouchYearGenreFilterButton), for: .touchUpInside)
+        navigationItem.rightBarButtonItem = favoriteView.filterBarButton
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -76,10 +83,43 @@ class FavoriteMoviesViewController: UIViewController {
         favoriteView.tableView.register(FavoriteMovieTableViewCell.self, forCellReuseIdentifier: FavoriteMovieTableViewCell.reuseIdentifier)
         
         NotificationCenter.default.addObserver(self, selector: #selector(didUpdateFavoriteInformation), name: Movie.favoriteInformationDidChangeNN, object: nil)
+        
+        yearGenreFilterVC.doneBlock = {
+            DispatchQueue.main.async {
+                self.yearFilter = self.yearGenreFilterVC.yearFilter
+                self.genreFilter = self.yearGenreFilterVC.genreFilter
+                self.updateMovieArrays()
+                self.favoriteView.tableView.reloadData()
+            }
+        }
+        
+        favoriteView.removeFilterHeaderView.removeFilterButton.addTarget(self, action: #selector(removeFilterButtonDidPressed), for: .touchUpInside)
+    }
+    
+    @objc private func removeFilterButtonDidPressed() {
+        DispatchQueue.main.async {
+            self.yearFilter = nil
+            self.genreFilter = nil
+            self.updateMovieArrays()
+            self.favoriteView.tableView.reloadData()
+        }
     }
     
     private func updateMovieArrays() {
-        self.favoriteMovies = TmdbAPI.movies.filter({$0.isFavorite}).sorted(by: {$0.title < $1.title})
+        self.favoriteMovies = TmdbAPI.movies.filter({ (movie) -> Bool in
+            if !movie.isFavorite {
+                return false
+            }
+            if let genre = self.genreFilter, !movie.genreIds.contains(genre) {
+                return false
+            }
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy"
+            if let year = self.yearFilter, let movieDate = movie.releaseDate, dateFormatter.string(from: movieDate) != year {
+                return false
+            }
+            return true
+        }).sorted(by: {$0.title < $1.title})
         self.filteredMovies = self.filteredMovies.filter({$0.isFavorite})
     }
     
@@ -116,9 +156,15 @@ class FavoriteMoviesViewController: UIViewController {
             self.favoriteView.tableView.reloadData()
         }
     }
+    
+    @objc private func didTouchYearGenreFilterButton() {
+        let nv = UINavigationController(rootViewController: yearGenreFilterVC)
+        yearGenreFilterVC.favoriteMovies = TmdbAPI.movies.filter({ $0.isFavorite })
+        navigationController?.present(nv, animated: true, completion: nil)
+    }
 }
 
-// MARK: - TableView Delegate
+// MARK: - Table View Delegate
 extension FavoriteMoviesViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -181,6 +227,24 @@ extension FavoriteMoviesViewController: UITableViewDataSource, UITableViewDelega
         let movie = self.favoriteMovies[indexPath.row]
         movieDetailsVC.movie = movie
         navigationController?.pushViewController(movieDetailsVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if genreFilter != nil || yearFilter != nil {
+            return favoriteView.removeFilterHeaderView
+        }
+        else {
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if genreFilter != nil || yearFilter != nil {
+            return RemoveFilterHeaderView.rowHeight
+        }
+        else {
+            return 0
+        }
     }
 }
 

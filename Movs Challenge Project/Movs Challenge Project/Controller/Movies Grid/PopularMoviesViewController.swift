@@ -226,6 +226,7 @@ extension PopularMoviesViewController: UISearchResultsUpdating {
             DispatchQueue.main.async {
                 TmdbAPI.searchTask.cancel()
                 self.popularMoviesView.collectionView.reloadData()
+                self.isFetchingNewPage = false
             }
         }
     }
