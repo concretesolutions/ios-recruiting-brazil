@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Mer-sr-uLH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Mer-sr-uLH">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,7 +21,7 @@
         <scene sceneID="4zW-4S-Llt">
             <objects>
                 <navigationController id="BTK-Ud-tVr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favorites" id="PyO-vl-lm0"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="favorite_empty_icon" selectedImage="favorite_gray_icon" id="PyO-vl-lm0"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aQh-Io-7S9">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -81,6 +81,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="favorite_empty_icon" width="22" height="21"/>
+        <image name="favorite_gray_icon" width="17" height="16"/>
         <image name="list.dash" catalog="system" width="64" height="42"/>
     </resources>
 </document>
