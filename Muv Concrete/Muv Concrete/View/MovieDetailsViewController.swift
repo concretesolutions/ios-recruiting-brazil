@@ -10,10 +10,15 @@ import UIKit
 
 class MovieDetailsViewController: UIViewController {
 
+    var id: Int32?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print(id)
         // Do any additional setup after loading the view.
+        let coreData = CoreData()
+        let movie = coreData.getElementCoreData(id: id!)
+        print(movie?.overview, movie?.genreIDs)
     }
     
 
