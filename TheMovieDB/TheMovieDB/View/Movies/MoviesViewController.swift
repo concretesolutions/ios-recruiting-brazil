@@ -40,9 +40,10 @@ class MoviesViewController: SearchBarViewController {
         network.observerNetwork { (status) in
             if status == .connected {
                 self.gridView.collectionView.addEmptyState(state: .loading)
-                self.moviesViewModel.loadAllMovies()
+                self.moviesViewModel.requestMoviesInService()
             } else {
                 self.errorInLoadMovies()
+                self.moviesViewModel.loadAllMovies()
             }
         }
     }
@@ -74,8 +75,6 @@ extension MoviesViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Section,Movie>()
         snapshot.appendSections([.first])
         let allMovies = moviesViewModel.movies
-        let state: EmptyState = allMovies.count == 0 ? .noData : .none
-        gridView.collectionView.addEmptyState(state: state)
         snapshot.appendItems(allMovies)
         return snapshot
     }
@@ -85,26 +84,31 @@ extension MoviesViewController {
         snapshot.deleteAllItems()
         snapshot.appendSections([.first])
         let filtered = moviesViewModel.filteredMovies
-        let state: EmptyState = filtered.count == 0 ? .noResults : .none
-        gridView.collectionView.addEmptyState(state: state)
         snapshot.appendItems(filtered)
         return snapshot
+    }
+
+    public func changeBackground() {
+        if network.status == .desconected {
+            gridView.collectionView.addEmptyState(state: .networkError)
+        } else if searchIsFiltered, moviesViewModel.filteredMovies.count == 0 {
+            gridView.collectionView.addEmptyState(state: .noResults)
+        } else {
+            gridView.collectionView.addEmptyState(state: .none)
+        }
     }
     
     private func loadItems(withAnimation animation: Bool) {
         DispatchQueue.main.async { [weak self] in
         guard let self = self else { return }
-            if self.network.status == .connected {
-                guard let dtSource = self.dataSource else { return }
-                if self.searchIsFiltered {
-                    dtSource.apply(self.snapshotFilteredDataSource(),
-                                   animatingDifferences: animation)
-                }else {
-                    dtSource.apply(self.snapshotDataSource(),
-                                   animatingDifferences: animation)
-                }
-            } else {
-                self.errorInLoadMovies()
+            self.changeBackground()
+            guard let dtSource = self.dataSource else { return }
+            if self.searchIsFiltered {
+                dtSource.apply(self.snapshotFilteredDataSource(),
+                               animatingDifferences: animation)
+            }else {
+                dtSource.apply(self.snapshotDataSource(),
+                               animatingDifferences: animation)
             }
         }
     }
