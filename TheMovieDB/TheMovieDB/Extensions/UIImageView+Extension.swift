@@ -21,15 +21,17 @@ extension UIImageView {
         case original
     }
     
-    public func downloadImage(withPath: String,
+    public func downloadImage(withPath: String?,
                               withDimension dimension: DimensionDownloadImage) {
         self.image = UIImage.init(named: "placeholder-movies")
-        let path = "\(ServiceAPIManager.PathsAPI.PathImages.secureBaseUrl)\(dimension.rawValue)\(withPath)"
+        guard let urlPath = withPath else { return }
+        let path = "\(ServiceAPIManager.PathsAPI.PathImages.secureBaseUrl)\(dimension.rawValue)\(urlPath)"
         
         guard let url = URL.init(string: path) else { return }
         ServiceAPIManager.get(url: url) { (data, error) in
             guard error == nil, let imageData = data else { return }
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 self.image = UIImage.init(data: imageData)
             }
         }

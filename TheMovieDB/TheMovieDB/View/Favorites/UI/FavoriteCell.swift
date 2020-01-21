@@ -42,7 +42,8 @@ class FavoriteCell: UITableViewCell {
     
     public func fill(withMovie movie: Movie) {
         titleMovie.text = movie.title
-        posterImage.downloadImage(withPath: movie.posterPath, withDimension: .w154)
+        guard let path = movie.posterPath else { return }
+        posterImage.downloadImage(withPath: path, withDimension: .w154)
     }
     
     required init?(coder: NSCoder) {

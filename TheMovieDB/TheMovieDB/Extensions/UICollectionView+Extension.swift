@@ -10,11 +10,11 @@ import UIKit
 
 extension UICollectionView {
     public func addEmptyState(state: EmptyState) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
             let emptyView = EmptyView.init()
             emptyView.changeEmptyView(toState: state)
             self.backgroundView = emptyView
         }
-        
     }
 }

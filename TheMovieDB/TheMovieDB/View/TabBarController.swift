@@ -16,13 +16,11 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     private func addItemsInTabBar() {
-        //Create Controllers
         let movies = MoviesViewController.init()
         movies.title = NSLocalizedString("Movies", comment: "Title Movies")
         let favorites = FavoritesViewController.init()
         favorites.title = NSLocalizedString("Favorites", comment: "Title Favorites")
         
-        //Create tabBarItems
         let tabItemMovies = UITabBarItem.init(title: movies.title,
                                               image: UIImage.init(named: "iconMovies")!.withRenderingMode(.alwaysOriginal),
                                               tag: 0)

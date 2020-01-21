@@ -71,12 +71,16 @@ class MovieCell: UICollectionViewCell {
     public func fill(withMovie movie: Movie) {
         subscriber?.cancel()
         title.text = movie.title
-        posterImage.downloadImage(withPath: movie.posterPath, withDimension: .w185)
+        if let path = movie.posterPath {
+            posterImage.downloadImage(withPath: path, withDimension: .w185)
+        }
         isFavoriteMovie(movie.isFavorite)
         
         subscriber = movie.notification.receive(on: DispatchQueue.main).sink { (_) in
             self.title.text = movie.title
-            self.posterImage.downloadImage(withPath: movie.posterPath, withDimension: .w185)
+            if let path = movie.posterPath {
+                self.posterImage.downloadImage(withPath: path, withDimension: .w185)
+            }
             self.isFavoriteMovie(movie.isFavorite)
         }
     }

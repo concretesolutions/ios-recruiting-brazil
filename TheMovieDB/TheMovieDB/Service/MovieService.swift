@@ -23,14 +23,15 @@ class MovieService {
         ]
         guard let url = components.url else { return }
         ServiceAPIManager.get(url: url) { (data, error)  in
-            
             if error != nil {
                 resultMovies([], error)
             }
             guard let resultData = data else { return }
             do {
-                let movies = try JSONDecoder().decode(PopularMoviesAPI.self, from: resultData)
-                resultMovies(movies.movies, error)
+                let movies = try JSONDecoder().decode(PopularMoviesResponse.self, from: resultData)
+                MovieAdapter.parseMovies(movies.movies) { (result) in
+                    resultMovies(result, error)
+                }
             } catch { }
         }
     }

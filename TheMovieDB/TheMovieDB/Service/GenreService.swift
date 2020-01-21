@@ -22,11 +22,11 @@ class GenreService {
         ServiceAPIManager.get(url: url) { (data, error) in
             guard let result = data else { return }
             do {
-                let genresJson = try JSONDecoder().decode(GenresAPI.self, from: result)
-                resultGenres(genresJson.genres)
+                let genresJson = try JSONDecoder().decode(GenresResponse.self, from: result)
+                GenreAdapter.parseGenres(genresJson.genres) { (parseResult) in
+                    resultGenres(parseResult)
+                }
             } catch {}
         }
     }
-
-
 }

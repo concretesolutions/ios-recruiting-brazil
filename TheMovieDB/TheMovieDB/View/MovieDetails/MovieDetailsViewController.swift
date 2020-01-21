@@ -30,6 +30,11 @@ class MovieDetailsViewController: UIViewController {
                                             action: #selector(selectFavoriteMovie), for: .touchUpInside)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        genresViewModel.loadAllGenres()
+    }
+    
     @objc
     private func selectFavoriteMovie() {
         movieViewModel.changeFavorite()

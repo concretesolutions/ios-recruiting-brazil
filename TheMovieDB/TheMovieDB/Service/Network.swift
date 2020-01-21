@@ -16,8 +16,8 @@ enum NetworkStatus {
 
 class Network {
     private let monitor = NWPathMonitor()
-    
     public static let shared = Network.init()
+    
     public var status: NetworkStatus {
         get {
             if monitor.currentPath.status == .unsatisfied || monitor.currentPath.status == .requiresConnection {
@@ -27,6 +27,7 @@ class Network {
             }
         }
     }
+    
     private init() {
         let queue = DispatchQueue.global(qos: .background)
         monitor.start(queue: queue)

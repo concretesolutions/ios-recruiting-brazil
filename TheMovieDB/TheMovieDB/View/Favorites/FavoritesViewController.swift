@@ -51,8 +51,8 @@ class FavoritesViewController: UIViewController {
     }
     
     private func loadItems(withAnimation animation: Bool) {
-        DispatchQueue.main.async {
-            guard let dtSource = self.dataSource else { return }
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self, let dtSource = self.dataSource else { return }
             dtSource.apply(self.snapshotDataSource(), animatingDifferences: animation)
         }
     }
@@ -73,7 +73,8 @@ class MovieTableViewDataSource: UITableViewDiffableDataSource<Section, Movie> {
     }
     
     private func removeMovieInDataSource(_ movie: Movie, inTableView table: UITableView) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             var snap  = self.snapshot()
             snap.deleteItems([movie])
             self.apply(snap,animatingDifferences: true)

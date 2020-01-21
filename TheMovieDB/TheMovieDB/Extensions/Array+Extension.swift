@@ -9,10 +9,11 @@
 import Foundation
 
 extension Array where Element == Genre {
-    func descriptionAllGenres() -> String? {
-        var description = ""
+    func descriptionAllGenres() -> String {
+        var description: String = ""
         for genre in self {
-            description.append(" / \(genre.name)")
+            guard let name = genre.name else { continue }
+            description.append(" / \(name)")
         }
         return description
     }

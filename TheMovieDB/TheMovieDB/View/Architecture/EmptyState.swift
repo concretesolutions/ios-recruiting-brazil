@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 public enum EmptyState {
     case networkError
     case noResults

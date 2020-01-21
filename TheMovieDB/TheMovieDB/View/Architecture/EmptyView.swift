@@ -28,7 +28,8 @@ class EmptyView: UIView {
     }
     
     public func changeEmptyView(toState state: EmptyState) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+        guard let self = self else { return }
             self.state = state
             self.descriptionLabel.text = state.description
             if state == .loading, let path = state.imagePath {

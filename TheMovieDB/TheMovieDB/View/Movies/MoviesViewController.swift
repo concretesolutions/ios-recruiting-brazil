@@ -22,7 +22,7 @@ class MoviesViewController: SearchBarViewController {
         super.viewDidLoad()
         configurateDataSource()
         configurateDelegate()
-        moviesViewModel.loadAllMovies()
+        moviesViewModel.requestMoviesInService()
         addObservers()
         gridView.collectionView.addEmptyState(state: .loading)
     }
@@ -92,7 +92,8 @@ extension MoviesViewController {
     }
     
     private func loadItems(withAnimation animation: Bool) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+        guard let self = self else { return }
             if self.network.status == .connected {
                 guard let dtSource = self.dataSource else { return }
                 if self.searchIsFiltered {

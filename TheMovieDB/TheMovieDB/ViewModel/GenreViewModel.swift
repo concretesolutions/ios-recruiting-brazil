@@ -12,21 +12,37 @@ import Combine
 
 final class GenreViewModel {
     public static let shared = GenreViewModel.init()
-    
     private var genreService = GenreService.init()
-    
     public var genres: [Genre] = []
-    
     public let notification = PassthroughSubject<Void, Never>()
     
     private init() {
-        self.genreService.fetchGenres { (genres) in
-            self.genres = genres
+        requestGenres()
+    }
+    
+    public func loadAllGenres() {
+        GenreAdapter.getAllGenres { (genres) in
+            guard let returnGenres = genres else { return }
+            self.genres = returnGenres
             self.notification.send()
         }
     }
     
     public func filterGenres(withIDs ids: [Int]) -> [Genre] {
-        return genres.filter { ids.contains($0.id)}
+        return genres.filter { (genre) -> Bool in
+            guard let genreID = genre.idGenre else { return false }
+            return ids.contains { (value) -> Bool in
+                return "\(value)" == genreID
+            }
+        }
+    }
+    
+    public func requestGenres() {
+        self.genreService.fetchGenres { (genres) in
+            for genre in genres {
+                GenreAdapter.saveGenre(genre)
+            }
+        }
+        loadAllGenres()
     }
 }
