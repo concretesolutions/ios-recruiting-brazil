@@ -43,8 +43,10 @@ extension ServiceRoute: ServiceRouteProtocol {
     
     var query: [String : String]? {
         switch self {
-        case .movie, .popularMovie:
+        case .movie:
             return ["api_key" : "d754b7528022528ea868cd88d8b96c78"]
+        case .popularMovie(let page):
+            return ["api_key" : "d754b7528022528ea868cd88d8b96c78", "page":"\(page)"]
         case .search(let text):
             return ["api_key" : "d754b7528022528ea868cd88d8b96c78", "query": "\(text)"]
         }

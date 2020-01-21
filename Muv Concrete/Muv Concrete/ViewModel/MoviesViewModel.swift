@@ -13,17 +13,13 @@ class MoviesViewModel {
     var delegate: UIViewController?
     
     var arrayMovies: [Movie] = []
+    var pageRequest = 1
+    var limitPage: Int32 = 0
     
-    public func loadMovies(){
-        guard let delegate = delegate as? ViewController else {
-            return }
-        if delegate.arrayMovies.isEmpty {
-            requestMovies()
-        }
-    }
+//    salvar os ids em um array useDefaults
     
-    private func requestMovies(){
-        let serviceRouteMovies = ServiceRoute.popularMovie(1)
+    public func requestMovies(completionHandler: @escaping (Bool) -> Void){
+        let serviceRouteMovies = ServiceRoute.popularMovie(pageRequest)
         let request = Request.instance
         request.dispatch(endPoint: serviceRouteMovies, type: Content.self, completionHandler: { (data, response, error) in
             
@@ -38,7 +34,10 @@ class MoviesViewModel {
                 case 200:
                     DispatchQueue.main.async {
                         guard let data = data else { return }
-                        self.saveMovies(movies: data.results)
+                        self.limitPage = data.totalPages
+                        self.arrayMovies += data.results
+                        completionHandler(true)
+//                        self.saveMovies(movies: data.results)
                     }
                 default:
                     print("nao rolou")
@@ -48,10 +47,18 @@ class MoviesViewModel {
         })
     }
     
-    private func saveMovies(movies: [Movie]) {
-        arrayMovies = movies
-        guard let delegate = delegate as? ViewController else {
-        return }
-        delegate.loadMovies()
+    public func loadMoreMovies(indexPath: IndexPath, completionHandler: @escaping (Bool) -> Void) {
+        if indexPath.row == arrayMovies.count - 4, limitPage > pageRequest {
+            pageRequest += 1
+            print(pageRequest)
+            requestMovies(completionHandler: {
+                reloadCollectionView in
+                completionHandler(reloadCollectionView)
+            })
+        }
+    }
+    
+    public func getMovie(indexPath: IndexPath) -> Movie {
+        return arrayMovies[indexPath.row]
     }
 }

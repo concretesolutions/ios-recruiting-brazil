@@ -8,11 +8,13 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
+class MovieCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
+    
+    let identiifier = "MovieCollectionViewCell"
     
     var movie: Movie? {
         didSet {

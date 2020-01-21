@@ -31,7 +31,7 @@ public struct Request: NetworkProtocol {
                 fatalError("Error encoding body")
             }
         }
-        
+        print(urlRequest)
         URLSession.shared.dataTask(with: urlRequest){ (data, response, error) in
             
 //            if let error = error as NSError?,
