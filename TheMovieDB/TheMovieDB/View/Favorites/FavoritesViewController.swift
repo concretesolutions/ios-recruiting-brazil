@@ -25,6 +25,7 @@ class FavoritesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         loadItems(withAnimation: true)
+        favoritesView.tableView.delegate = self
     }
     
     override func loadView() {
@@ -87,4 +88,11 @@ class MovieTableViewDataSource: UITableViewDiffableDataSource<Section, Movie> {
     }
 }
 
-
+extension FavoritesViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailsController = MovieDetailsViewController.init()
+        detailsController.hidesBottomBarWhenPushed = true
+        MovieViewModel.shared.selectMovie(index: indexPath.row)
+        self.navigationController?.pushViewController(detailsController, animated: true)
+    }
+}
