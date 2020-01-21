@@ -9,8 +9,13 @@
 import UIKit
 
 class Movie: Codable {
+    var id: Int?
     var title: String?
     var overview: String?
     var vote_average: Float?
     var poster_path: String?
+    
+    var release_date: String?
+    var genres: [Genre]?
+    
 }
