@@ -9,13 +9,23 @@
 import UIKit
 
 class FavoritesViewController: UIViewController {
-    var chooseFavorite:[String:Int] = [:]
+    @IBOutlet weak var tabelafavoritos: UITableView!
+    let dataSource = FavoriteDataSource()
 }
 extension FavoritesViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabelafavoritos.dataSource = dataSource
+        tabelafavoritos.delegate   = self
     }
-    override func viewDidAppear(_ animated: Bool) {
-        print(chooseFavorite.count);
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.dataSource.loadFavoriteIds()
+        tabelafavoritos.reloadData()
+    }
+}
+extension FavoritesViewController:UITableViewDelegate{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UIScreen.main.bounds.height/5
     }
 }

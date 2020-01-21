@@ -49,7 +49,7 @@ class MovieDetailsViewController: UIViewController {
             Armazenamento.desfavoritar(cell: movie!)
         }else{
             favoriteButton.image = UIImage(named: "favorite_full_icon")
-            Armazenamento.favoritar(cell: movie!)
+            Armazenamento.favoritar(cell: movie!, image: image!)
         }
     }
     

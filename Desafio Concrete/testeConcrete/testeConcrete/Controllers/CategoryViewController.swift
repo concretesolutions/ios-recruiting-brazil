@@ -25,12 +25,7 @@ extension CategoryViewController{
 extension CategoryViewController:UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NotificationCenter.default.post(name: Notification.choosedFilter, object: nil)
-        guard let vc = self.navigationController?.viewControllers[0] as? FavoritesViewController else{
-            return
-        }
-        
-        vc.chooseFavorite["escolha"] = 1
-        vc.chooseFavorite["id"]      = dataSource.list[indexPath.row].id
+       
         self.navigationController?.popViewController(animated: true)
     }
 }
