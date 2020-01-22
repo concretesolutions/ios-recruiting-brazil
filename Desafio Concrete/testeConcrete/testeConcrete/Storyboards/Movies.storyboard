@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="18W-gS-yEh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="18W-gS-yEh">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,8 +16,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ZB0-KL-n3W">
+                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="csP-vj-ADb">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="144" width="414" height="732"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="MeQ-zH-YB2">
                                     <size key="itemSize" width="180" height="200"/>
@@ -66,16 +70,20 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="NcB-mC-DKn" firstAttribute="bottom" secondItem="csP-vj-ADb" secondAttribute="bottom" id="3bm-YK-aMk"/>
-                            <constraint firstItem="csP-vj-ADb" firstAttribute="leading" secondItem="NcB-mC-DKn" secondAttribute="leading" id="Eft-1L-K1d"/>
-                            <constraint firstItem="NcB-mC-DKn" firstAttribute="trailing" secondItem="csP-vj-ADb" secondAttribute="trailing" id="Pou-Zz-Fj4"/>
-                            <constraint firstItem="csP-vj-ADb" firstAttribute="top" secondItem="NcB-mC-DKn" secondAttribute="top" id="Zsk-Ud-Inu"/>
+                            <constraint firstItem="ZB0-KL-n3W" firstAttribute="top" secondItem="NcB-mC-DKn" secondAttribute="top" id="DoM-kE-qvt"/>
+                            <constraint firstItem="csP-vj-ADb" firstAttribute="trailing" secondItem="NcB-mC-DKn" secondAttribute="trailing" id="FAC-Hm-nYO"/>
+                            <constraint firstItem="csP-vj-ADb" firstAttribute="leading" secondItem="NcB-mC-DKn" secondAttribute="leading" id="UWq-Po-FqJ"/>
+                            <constraint firstItem="ZB0-KL-n3W" firstAttribute="leading" secondItem="NcB-mC-DKn" secondAttribute="leading" id="VgA-zm-y0a"/>
+                            <constraint firstAttribute="bottom" secondItem="csP-vj-ADb" secondAttribute="bottom" constant="20" symbolic="YES" id="kzY-fZ-Tgf"/>
+                            <constraint firstItem="csP-vj-ADb" firstAttribute="top" secondItem="ZB0-KL-n3W" secondAttribute="bottom" symbolic="YES" id="lzN-Bv-p4Y"/>
+                            <constraint firstItem="ZB0-KL-n3W" firstAttribute="trailing" secondItem="NcB-mC-DKn" secondAttribute="trailing" id="tT9-U7-Dvb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NcB-mC-DKn"/>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="csP-vj-ADb" id="DW2-fi-u4I"/>
+                        <outlet property="moviesearchbar" destination="ZB0-KL-n3W" id="Chl-lF-rAv"/>
                         <segue destination="wiF-Z2-cCL" kind="show" identifier="showDetail" id="0q3-wk-Roa"/>
                     </connections>
                 </viewController>

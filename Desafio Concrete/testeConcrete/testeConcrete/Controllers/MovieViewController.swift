@@ -14,11 +14,28 @@ class MovieViewController:UIViewController{
     @IBOutlet weak var collectionView: UICollectionView!
     var selectIndex:Int?
     
+    @IBOutlet weak var moviesearchbar: UISearchBar!
+    
 }
 
+
+extension MovieViewController:UISearchBarDelegate{
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if(searchText.count==0){
+            searchBar.resignFirstResponder()
+        }
+        dataSource.filtro = searchText;
+        self.collectionView.reloadData()
+    }
+}
 extension MovieViewController{
     override func viewDidLoad() {
         collectionView.dataSource = self.dataSource
+        self.moviesearchbar.delegate = self
         loadListeners()
     }
     

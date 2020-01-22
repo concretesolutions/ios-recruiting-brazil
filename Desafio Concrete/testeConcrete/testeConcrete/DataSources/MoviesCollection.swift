@@ -18,7 +18,7 @@ class MoviesCollectionDataSource:NSObject, UICollectionViewDataSource {
             }
             
             return listMovie.filter({cell in
-                return (cell.movie?.original_title!.lowercased().contains(filtro.lowercased()))!})
+                return (cell.movie?.title!.lowercased().contains(filtro.lowercased()))!})
         }
     }
     override init(){
