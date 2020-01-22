@@ -13,7 +13,14 @@ class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = Localizable.favorites
+        self.navigationItem.title = Localizable.movies
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: .filterIcon, style: .plain, target: self, action: #selector(self.filterAction))
+    }
+    
+    @objc private func filterAction() {
+        let view = FilterViewController()
+        let nav = NavigationController(rootViewController: view)
+        self.present(nav, animated: true, completion: nil)
     }
 
 }
