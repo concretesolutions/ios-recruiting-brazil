@@ -10,15 +10,25 @@ import Foundation
 import UIKit
 
 class FavoriteDataSource:NSObject,UITableViewDataSource{
-    
+    var filtro = ""
+    var listMovies = Array<Dictionary<String,String>>()
+    var filteredList:Array<Dictionary<String,String>>{
+        get{
+            if(filtro.count==0){
+                return listMovies
+            }
+            
+            return listMovies.filter({dict in return dict["titulo"]!.lowercased().contains(filtro.lowercased())})
+        }
+    }
     override init(){
         super.init()
         loadFavoriteIds()
     }
-    var listMovies = Array<Dictionary<String,String>>()
+    
     private static var persistencia = "persistencia"
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listMovies.count
+        return filteredList.count
     }
     
     func loadFavoriteIds(){
@@ -33,7 +43,7 @@ class FavoriteDataSource:NSObject,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! FavoriteTableCell
-        cell.titulo.text = listMovies[indexPath.row]["titulo"]
+        cell.titulo.text = filteredList[indexPath.row]["titulo"]
         
         cell.imageView!.image = UIImage(data: NSData(base64Encoded: listMovies[indexPath.row]["image"]!, options:  NSData.Base64DecodingOptions(rawValue: 0))! as Data)
         cell.descricao.text = listMovies[indexPath.row]["descricao"]!

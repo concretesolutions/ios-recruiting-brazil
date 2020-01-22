@@ -11,12 +11,16 @@ import UIKit
 class FavoritesViewController: UIViewController {
     @IBOutlet weak var tabelafavoritos: UITableView!
     let dataSource = FavoriteDataSource()
+    @IBOutlet weak var searchbar: UISearchBar!
+    
 }
 extension FavoritesViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         tabelafavoritos.dataSource = dataSource
         tabelafavoritos.delegate   = self
+        searchbar.delegate         = self
+        tabelafavoritos.keyboardDismissMode = .onDrag
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,5 +44,18 @@ extension FavoritesViewController:UITableViewDelegate{
         let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
 
         return swipeActions
+    }
+}
+extension FavoritesViewController:UISearchBarDelegate{
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder() // hides the keyboard.
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if(searchText.count==0){
+            searchBar.resignFirstResponder()
+        }
+        dataSource.filtro = searchText;
+        self.tabelafavoritos.reloadData()
     }
 }
