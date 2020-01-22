@@ -10,6 +10,17 @@ import UIKit
 
 class MoviesCollectionDataSource:NSObject, UICollectionViewDataSource {
     var listMovie:[CollectionCellMovie] = [];
+    var filtro = ""
+    var filteredList:[CollectionCellMovie]{
+        get{
+            if(filtro.count==0){
+                return listMovie
+            }
+            
+            return listMovie.filter({cell in
+                return (cell.movie?.original_title!.lowercased().contains(filtro.lowercased()))!})
+        }
+    }
     override init(){
         super.init()
         loadListeners()
@@ -50,14 +61,14 @@ class MoviesCollectionDataSource:NSObject, UICollectionViewDataSource {
         }
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return listMovie.count
+        return filteredList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
           let cell = collectionView
             .dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MovieCollectionViewCell
-            cell.imageView.image = listMovie[indexPath.row].image
-        if(Armazenamento.estaFavoritado(id: listMovie[indexPath.row].movie!.id!)){
+            cell.imageView.image = filteredList[indexPath.row].image
+        if(Armazenamento.estaFavoritado(id: filteredList[indexPath.row].movie!.id!)){
             cell.favoriteSign.isHidden = false
         } else{
             cell.favoriteSign.isHidden = true

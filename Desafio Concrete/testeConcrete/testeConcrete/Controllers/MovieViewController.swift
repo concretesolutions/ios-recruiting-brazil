@@ -13,6 +13,7 @@ class MovieViewController:UIViewController{
     let dataSource = MoviesCollectionDataSource()
     @IBOutlet weak var collectionView: UICollectionView!
     var selectIndex:Int?
+    
 }
 
 extension MovieViewController{
