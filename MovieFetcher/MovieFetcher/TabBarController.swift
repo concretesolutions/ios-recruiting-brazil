@@ -24,7 +24,7 @@ class TabBarController: UITabBarController {
     private func setUpBar(){
         
         //MoviesViewController
-        let moviesBar = UINavigationController(rootViewController: MoviesViewController())
+        let moviesBar = UINavigationController(rootViewController: ListViewController())
         moviesBar.tabBarItem.image = UIImage(named: "")
         moviesBar.tabBarItem.selectedImage = UIImage(named: "")
         

@@ -8,13 +8,14 @@
 
 import UIKit
 
-class MoviesViewController: UIViewController {
+class ListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .blue
         safeArea = view.layoutMarginsGuide
         setContraints()
+        getMovie()
         // Do any additional setup after loading the view.
     }
     
@@ -50,19 +51,46 @@ class MoviesViewController: UIViewController {
         
     }
     
+    private func getMovie(){
+           let anonymousFunc = {(fetchedData:MovieSearch) in
+               DispatchQueue.main.async {
+                for movie in fetchedData.results{
+                    dao.searchResults.append(movie)
+                }
+                   self.collectionView.reloadData()
+               }
+           }
+        api.movieSearch(urlStr: dao.fakeSearchURL, onCompletion: anonymousFunc)
+           
+       }
+    
+    private func getPosterImage(cell:MovieCollectionViewCell,imageUrl:String){
+        let url = "https://image.tmdb.org/t/p/w500\(imageUrl)"
+        let anonymousFunc = {(fetchedData:UIImage) in
+                DispatchQueue.main.async {
+                    cell.setUp(image: fetchedData)
+                }
+            }
+        api.retrieveImage(urlStr: url, onCompletion: anonymousFunc)
+        }
+    
+    
     
 }
 
 
-extension MoviesViewController:UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return dao.searchResults.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
+        let imageUrl = dao.searchResults[indexPath.row].poster_path
+        getPosterImage(cell: cell, imageUrl: imageUrl!)
+//        cell.setUp(image: )
         return cell
         
     }
