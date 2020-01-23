@@ -10,7 +10,7 @@ import Foundation
 
 enum ServiceRoute {
     
-    case movie(Int, Int)
+    case movie(Int32)
     case popularMovie(Int)
     case search(String, Int)
     
