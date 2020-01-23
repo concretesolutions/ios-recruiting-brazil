@@ -23,13 +23,16 @@ class MovieViewController: UIViewController {
         moviesViewModel.delegate = self
         configureUI()
         loadMovies()
+        
     }
     
     func configureUI(){
         activityView.center = self.view.center
         activityView.color = .gray
+        
         self.view.addSubview(activityView)
         activityView.startAnimating()
+        
     }
     
     func loadMovies() {
@@ -37,6 +40,7 @@ class MovieViewController: UIViewController {
                 self.collectionView.reloadData()
                 self.activityView.stopAnimating()
                 self.activityView.isHidden = true
+            
         })
     }
 }
@@ -45,6 +49,7 @@ extension MovieViewController: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return moviesViewModel.arrayMovies.count
+        
     }
        
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -54,15 +59,25 @@ extension MovieViewController: UICollectionViewDataSource, UICollectionViewDeleg
         cell.movie = moviesViewModel.getMovie(indexPath: indexPath)
         
         return cell
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         moviesViewModel.loadMoreMovies(indexPath: indexPath, completionHandler: {
             reload in
             self.collectionView.reloadData()
+            
         })
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movieDetailsViewController = MovieDetailsViewController()
+        let movie = moviesViewModel.arrayMovies[indexPath.row]
+        let coreData = CoreData()
+        coreData.saveCoreData(movie: movie)
+        movieDetailsViewController.id = movie.id
+        self.navigationController?.pushViewController(movieDetailsViewController, animated: false)
+    }
 }
 
 extension MovieViewController: UICollectionViewDelegateFlowLayout {
@@ -70,6 +85,7 @@ extension MovieViewController: UICollectionViewDelegateFlowLayout {
 
         let screenWidth = (view.frame.size.width - 45) / 2
         return CGSize(width: screenWidth, height: screenWidth * (4.8/3))
+        
     }
 }
 

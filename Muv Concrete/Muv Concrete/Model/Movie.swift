@@ -9,13 +9,13 @@
 import Foundation
 
 class Movie: Codable {
-    let id: Int
-    let title: String
-    let overview: String
-    let genreIDs: [Int]
-    let posterPath: String?
-    let backdropPath: String?
-    let releaseDate: String
+    var id: Int32
+    var title: String
+    var overview: String
+    var genreIDs: [Int]
+    var posterPath: String?
+    var backdropPath: String?
+    var releaseDate: String
     var isFavorite: Bool = false
 
     enum CodingKeys: String, CodingKey {
