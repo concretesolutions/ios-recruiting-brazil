@@ -19,8 +19,7 @@ class MoviesViewController: UIViewController {
     }
     
     var safeArea:UILayoutGuide!
-    
-    
+
     lazy var collectionView:UICollectionView = {
         
         //gridView
@@ -48,6 +47,7 @@ class MoviesViewController: UIViewController {
         collectionView.bottomAnchor.constraint(equalTo:safeArea.bottomAnchor).isActive = true
         collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        
     }
     
     
@@ -58,13 +58,31 @@ extension MoviesViewController:UICollectionViewDelegate, UICollectionViewDataSou
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath)
         return cell
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = self.view.frame.width/2.5
+        let height = self.view.frame.height/3
+        let size:CGSize = CGSize(width: width, height: height)
+        return size
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        self.present(MovieViewController(), animated: true) {
+            //tite
+        }
+        //perform segue to view
     }
     
     

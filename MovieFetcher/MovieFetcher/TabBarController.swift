@@ -14,7 +14,9 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.view.backgroundColor = .red
+        dao.cellWidth = self.view.bounds.width/3
         setUpBar()
+        
     }
     
     
