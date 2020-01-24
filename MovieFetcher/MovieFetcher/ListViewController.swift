@@ -17,9 +17,9 @@ class ListViewController: UIViewController {
         
         //gridView
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.minimumLineSpacing = CGFloat(16)
-        flowLayout.minimumInteritemSpacing = CGFloat(16)
-        
+        flowLayout.minimumLineSpacing = CGFloat(0)
+        flowLayout.minimumInteritemSpacing = CGFloat(0)
+        flowLayout.sectionInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
         let collectionView = UICollectionView(frame: CGRect(), collectionViewLayout: flowLayout)
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -55,6 +55,7 @@ class ListViewController: UIViewController {
            let anonymousFunc = {(fetchedData:MovieSearch) in
                DispatchQueue.main.async {
                 for movie in fetchedData.results{
+                    movie.isFavorite = false
                     dao.searchResults.append(movie)
                 }
                    self.collectionView.reloadData()
@@ -75,28 +76,26 @@ extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
-        guard let imageUrl = dao.searchResults[indexPath.row].poster_path else {fatalError("Could not retrieve poster image for cell")}
-        cell.setUp(imageName: imageUrl)
+        let movie = dao.searchResults[indexPath.row]
+        cell.setUp(movie:movie)
         return cell
         
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = self.view.frame.width/2.5
-        let height = self.view.frame.height/3
+        let width = self.view.frame.width/2
+        let height = self.view.frame.height/2
         let size:CGSize = CGSize(width: width, height: height)
         return size
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
-    }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        self.present(MovieViewController(), animated: true) {
-            //tite
+        let movie = dao.searchResults[indexPath.row]
+        let movieVc = MovieViewController()
+        movieVc.setMovie(movie: movie)
+        self.present(movieVc, animated: true) {
         }
-        //perform segue to view
+      
     }
     
     
