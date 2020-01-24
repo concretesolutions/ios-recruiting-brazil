@@ -16,5 +16,9 @@ extension UIImage {
     static var filterIcon = UIImage(named: "FilterIcon")
     static var listIcon = UIImage(named: "list_icon")
     static var searchIcon = UIImage(named: "search_icon")
+    
+    var base64EncodedString: String? {
+        return jpegData(compressionQuality: 1)?.base64EncodedString()
+    }
 }
 

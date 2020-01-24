@@ -30,5 +30,9 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         self.containerView.roundedCorners()
         self.containerView.shadow()
     }
-
+    
+    @IBAction func favorite(_ sender: UIButton) {
+        DataManager().save(with: self.movie!)
+    }
+    
 }

@@ -20,28 +20,45 @@ struct Popular: Codable {
     }
 }
 
+//protocol CoreDataMap {
+//    func map() -> [ String: Any ]
+//}
+//
+//extension Movie: CoreDataMap {
+//    func map() -> [String : Any] {
+//        return ["popularity" : self.popularity]
+//    }
+//}
+
 class Movie: Codable {
-    let popularity: Double
-    let voteCount: Int
-    let video: Bool
-    let posterPath: String
-    let id: Int
-    let adult: Bool
-    let backdropPath: String
-    let originalLanguage: String
-    let originalTitle: String
-    let genreIDS: [Int]
-    let title: String
-    let voteAverage: Double
-    let overview, releaseDate: String
+    
+    var popularity: Double = 0.0
+    var voteCount: Int = 0
+    var video: Bool = false
+    var posterPath: String = ""
+    var id: Int = 0
+    var adult: Bool = false
+    var backdropPath: String = ""
+    var originalLanguage: String = ""
+    var originalTitle: String = ""
+    var genreIDS = [Int]()
+    var title: String = ""
+    var voteAverage: Double = 0.0
+    var overview: String = ""
+    var releaseDate: String = ""
     
     private var _image: UIImage?
     var image: UIImage? {
-        guard let image = _image else {
-            self.downloadImage()
-            return nil
+        get {
+            guard let image = _image else {
+                self.downloadImage()
+                return nil
+            }
+            return image
         }
-        return image
+        set {
+            self._image = newValue
+        }
     }
 
     enum CodingKeys: String, CodingKey {
@@ -58,6 +75,10 @@ class Movie: Codable {
         case voteAverage = "vote_average"
         case overview
         case releaseDate = "release_date"
+    }
+    
+    required init() {
+
     }
     
     private func downloadImage() {
