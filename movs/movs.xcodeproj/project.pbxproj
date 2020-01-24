@@ -37,6 +37,11 @@
 		90A850FA23D6D87E0094A0F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90A850F923D6D87E0094A0F0 /* Assets.xcassets */; };
 		90A850FD23D6D87E0094A0F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90A850FB23D6D87E0094A0F0 /* LaunchScreen.storyboard */; };
 		90A8510823D6D87F0094A0F0 /* movsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A8510723D6D87F0094A0F0 /* movsTests.swift */; };
+		90F1EE3A23DA6D30001DA820 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F1EE3923DA6D30001DA820 /* URLSession.swift */; };
+		90F1EE3D23DA6D8D001DA820 /* Popular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F1EE3C23DA6D8D001DA820 /* Popular.swift */; };
+		90F1EE3F23DA6EF9001DA820 /* Genres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F1EE3E23DA6EF9001DA820 /* Genres.swift */; };
+		90F1EE4123DA74CD001DA820 /* APISettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 90F1EE4023DA74CD001DA820 /* APISettings.plist */; };
+		90F1EE4323DA75FA001DA820 /* APISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F1EE4223DA75FA001DA820 /* APISettings.swift */; };
 		E026F385849665B3C924827A /* Pods_movsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9E1622747F5727AFC8DB04 /* Pods_movsTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +95,11 @@
 		90A8510323D6D87F0094A0F0 /* movsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = movsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A8510723D6D87F0094A0F0 /* movsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = movsTests.swift; sourceTree = "<group>"; };
 		90A8510923D6D87F0094A0F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		90F1EE3923DA6D30001DA820 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
+		90F1EE3C23DA6D8D001DA820 /* Popular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popular.swift; sourceTree = "<group>"; };
+		90F1EE3E23DA6EF9001DA820 /* Genres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genres.swift; sourceTree = "<group>"; };
+		90F1EE4023DA74CD001DA820 /* APISettings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APISettings.plist; sourceTree = "<group>"; };
+		90F1EE4223DA75FA001DA820 /* APISettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISettings.swift; sourceTree = "<group>"; };
 		E7FDD7C7EC63D7D27E314009 /* Pods-movsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movsTests.release.xcconfig"; path = "Target Support Files/Pods-movsTests/Pods-movsTests.release.xcconfig"; sourceTree = "<group>"; };
 		FA5363155A2C4AC91A455217 /* Pods-movsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movsTests.debug.xcconfig"; path = "Target Support Files/Pods-movsTests/Pods-movsTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -154,6 +164,7 @@
 			children = (
 				902D957C23D7B9AC00267B1C /* Localizable.swift */,
 				902D957A23D7B7B900267B1C /* Localizable.strings */,
+				90F1EE4023DA74CD001DA820 /* APISettings.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -179,6 +190,7 @@
 				907DA77123D7D40F00AFA781 /* UITableViewCell.swift */,
 				907DA77F23D7F03800AFA781 /* UICollectionViewCell.swift */,
 				907DA78323D7F14700AFA781 /* UICollectionView.swift */,
+				90F1EE3923DA6D30001DA820 /* URLSession.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -206,6 +218,7 @@
 		90A850EC23D6D8790094A0F0 /* movs */ = {
 			isa = PBXGroup;
 			children = (
+				90F1EE3B23DA6D79001DA820 /* Entity */,
 				907DA77623D7DDB600AFA781 /* Extension */,
 				907DA77523D7DD9000AFA781 /* Inheritance */,
 				902D957323D7B75800267B1C /* Resources */,
@@ -228,6 +241,16 @@
 				90A8510923D6D87F0094A0F0 /* Info.plist */,
 			);
 			path = movsTests;
+			sourceTree = "<group>";
+		};
+		90F1EE3B23DA6D79001DA820 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				90F1EE3C23DA6D8D001DA820 /* Popular.swift */,
+				90F1EE3E23DA6EF9001DA820 /* Genres.swift */,
+				90F1EE4223DA75FA001DA820 /* APISettings.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		E803EBA61EE1DC3FA25DB075 /* Frameworks */ = {
@@ -325,6 +348,7 @@
 			files = (
 				902D958723D7CADC00267B1C /* FilterViewController.xib in Resources */,
 				90A850FD23D6D87E0094A0F0 /* LaunchScreen.storyboard in Resources */,
+				90F1EE4123DA74CD001DA820 /* APISettings.plist in Resources */,
 				902D957823D7B7B900267B1C /* Localizable.strings in Resources */,
 				90A850FA23D6D87E0094A0F0 /* Assets.xcassets in Resources */,
 				907DA77A23D7DF0600AFA781 /* EmptyTableView.xib in Resources */,
@@ -403,6 +427,8 @@
 				90A850EE23D6D8790094A0F0 /* AppDelegate.swift in Sources */,
 				902D956E23D7B37100267B1C /* FavoritesViewController.swift in Sources */,
 				902D957F23D7BB4500267B1C /* TabBarController.swift in Sources */,
+				90F1EE3F23DA6EF9001DA820 /* Genres.swift in Sources */,
+				90F1EE3A23DA6D30001DA820 /* URLSession.swift in Sources */,
 				907DA78423D7F14700AFA781 /* UICollectionView.swift in Sources */,
 				90A850F823D6D87A0094A0F0 /* movs.xcdatamodeld in Sources */,
 				90A850F023D6D8790094A0F0 /* SceneDelegate.swift in Sources */,
@@ -412,9 +438,11 @@
 				902D956723D7A5F600267B1C /* MoviesViewController.swift in Sources */,
 				907DA77423D7DC3C00AFA781 /* TableView.swift in Sources */,
 				907DA76E23D7D1E000AFA781 /* UIView.swift in Sources */,
+				90F1EE3D23DA6D8D001DA820 /* Popular.swift in Sources */,
 				902D957D23D7B9AC00267B1C /* Localizable.swift in Sources */,
 				902D958123D7BC9A00267B1C /* UIImage.swift in Sources */,
 				902D957223D7B63400267B1C /* String.swift in Sources */,
+				90F1EE4323DA75FA001DA820 /* APISettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

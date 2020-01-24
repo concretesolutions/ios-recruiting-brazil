@@ -15,6 +15,14 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var movieFavorite: UIButton!
     
+    var movie: Movie? {
+        willSet {
+            guard let movie = newValue else { return }
+            self.movieImage.image = movie.image
+            self.movieTitle.text = movie.title
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

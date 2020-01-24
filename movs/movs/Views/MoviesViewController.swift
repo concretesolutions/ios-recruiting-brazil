@@ -11,16 +11,29 @@ import UIKit
 class MoviesViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    var movies: [String] = ["1", "2", "3", "4", "5", "6"]
+    
+    internal var movies = [Movie]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.title = Localizable.movies
+        
         self.setupCollectionView()
+        self.getAPISettings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.download()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
         self.collectionView.reloadData()
     }
 
@@ -32,6 +45,29 @@ extension MoviesViewController {
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
     }
+    
+    internal func getAPISettings() {
+        if let fileURL = Bundle.main.url(forResource: "APISettings", withExtension: "plist") {
+            do {
+                let data = try Data.init(contentsOf: fileURL, options: .mappedIfSafe)
+                let decoder = PropertyListDecoder()
+                let settings = try decoder.decode(APISettings.self, from: data)
+                APISettings.shared = settings
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    internal func download() {
+        guard let settings = APISettings.shared else { return }
+        guard let url = settings.popular(page: 1) else { return }
+        
+        URLSession.shared.popularTask(with: url) { (popular, response, error) in
+            guard let movies = popular else { return }
+            self.movies = movies.results
+        }.resume()
+    }
 }
 
 extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -41,8 +77,7 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesCollectionViewCell.identifier, for: indexPath) as! MoviesCollectionViewCell
-        let item = self.movies[indexPath.row]
-        cell.movieTitle.text = item
+        cell.movie = self.movies[indexPath.row]
         return cell
     }
     
