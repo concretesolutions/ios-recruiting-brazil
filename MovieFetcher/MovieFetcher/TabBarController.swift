@@ -10,6 +10,7 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
+    //MARK: - Init Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -18,9 +19,7 @@ class TabBarController: UITabBarController {
         setUpBar()
         
     }
-    
-    
-    
+
     private func setUpBar(){
         
         //MoviesViewController

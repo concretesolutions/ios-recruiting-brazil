@@ -10,15 +10,7 @@ import UIKit
 
 class ListViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = .blue
-        safeArea = view.layoutMarginsGuide
-        setContraints()
-        getMovie()
-        // Do any additional setup after loading the view.
-    }
-    
+    //MARK: - Variables
     var safeArea:UILayoutGuide!
 
     lazy var collectionView:UICollectionView = {
@@ -41,16 +33,24 @@ class ListViewController: UIViewController {
         return collectionView
         
     }()
-    
-    func setContraints(){
+    //MARK: -Init methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = .blue
+        safeArea = view.layoutMarginsGuide
+        setContraints()
+        getMovie()
+        // Do any additional setup after loading the view.
+    }
+
+    private func setContraints(){
         
         collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor,constant: 0).isActive = true
         collectionView.bottomAnchor.constraint(equalTo:safeArea.bottomAnchor).isActive = true
         collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        
     }
-    
+    //MARK: - Complimentary Methods
     private func getMovie(){
            let anonymousFunc = {(fetchedData:MovieSearch) in
                DispatchQueue.main.async {
@@ -63,22 +63,9 @@ class ListViewController: UIViewController {
         api.movieSearch(urlStr: dao.fakeSearchURL, onCompletion: anonymousFunc)
            
        }
-    
-    private func getPosterImage(cell:MovieCollectionViewCell,imageUrl:String){
-        let url = "https://image.tmdb.org/t/p/w500\(imageUrl)"
-        let anonymousFunc = {(fetchedData:UIImage) in
-                DispatchQueue.main.async {
-                    cell.setUp(image: fetchedData)
-                }
-            }
-        api.retrieveImage(urlStr: url, onCompletion: anonymousFunc)
-        }
-    
-    
-    
 }
 
-
+//MARK:- Extensions and Delegates
 extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
     
@@ -88,9 +75,8 @@ extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
-        let imageUrl = dao.searchResults[indexPath.row].poster_path
-        getPosterImage(cell: cell, imageUrl: imageUrl!)
-//        cell.setUp(image: )
+        guard let imageUrl = dao.searchResults[indexPath.row].poster_path else {fatalError("Could not retrieve poster image for cell")}
+        cell.setUp(imageName: imageUrl)
         return cell
         
     }

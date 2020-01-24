@@ -15,7 +15,4 @@ class FavoritesViewController: UIViewController {
         self.view.backgroundColor = .purple
         // Do any additional setup after loading the view.
     }
-    
-
-
 }

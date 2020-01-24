@@ -38,6 +38,8 @@ final class API{
         task.resume()
         
     }
+    
+    
    
     
     func retrieveImage(urlStr:String,onCompletion:@escaping(UIImage)->()){
