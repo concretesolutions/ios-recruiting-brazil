@@ -9,11 +9,11 @@
 import UIKit
 
 class MovieViewController: UIViewController {
-   
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     let moviesViewModel = MoviesViewModel()
-    var activityView = UIActivityIndicatorView(style: .whiteLarge)
+    var movieSelected: Movie?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,25 +21,15 @@ class MovieViewController: UIViewController {
         self.collectionView.register(UINib(nibName: "MovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MovieCollectionViewCell")
         
         moviesViewModel.delegate = self
-        configureUI()
         loadMovies()
-        
-    }
-    
-    func configureUI(){
-        activityView.center = self.view.center
-        activityView.color = .gray
-        
-        self.view.addSubview(activityView)
-        activityView.startAnimating()
+        view.activityStartAnimating()
         
     }
     
     func loadMovies() {
         moviesViewModel.requestMovies(completionHandler: { reload in
-                self.collectionView.reloadData()
-                self.activityView.stopAnimating()
-                self.activityView.isHidden = true
+            self.collectionView.reloadData()
+            self.view.activityStopAnimating()
             
         })
     }
@@ -51,11 +41,11 @@ extension MovieViewController: UICollectionViewDataSource, UICollectionViewDeleg
         return moviesViewModel.arrayMovies.count
         
     }
-       
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let movieCell = MovieCollectionViewCell()
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: movieCell.identiifier, for: indexPath) as? MovieCollectionViewCell else { return UICollectionViewCell() }
-    
+        
         cell.movie = moviesViewModel.getMovie(indexPath: indexPath)
         
         return cell
@@ -70,22 +60,28 @@ extension MovieViewController: UICollectionViewDataSource, UICollectionViewDeleg
         })
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueMovieDetailViewController" {
+            if let detailViewController = segue.destination as? MovieDetailsViewController {
+                detailViewController.id = movieSelected?.id
+            }
+        }
+    } 
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let movieDetailsViewController = MovieDetailsViewController()
         let movie = moviesViewModel.arrayMovies[indexPath.row]
         let coreData = CoreData()
         coreData.saveCoreData(movie: movie)
-        movieDetailsViewController.id = movie.id
-        self.navigationController?.pushViewController(movieDetailsViewController, animated: false)
+        movieSelected = movie
+        performSegue(withIdentifier: "segueMovieDetailViewController", sender: self)
     }
 }
 
 extension MovieViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+        
         let screenWidth = (view.frame.size.width - 45) / 2
         return CGSize(width: screenWidth, height: screenWidth * (4.8/3))
-        
     }
 }
 

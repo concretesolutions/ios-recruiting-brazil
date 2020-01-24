@@ -20,7 +20,7 @@ class CoreData {
         movieCoreData?.id = movie.id
         movieCoreData?.backdropPath = movie.backdropPath
         movieCoreData?.title = movie.title
-        movieCoreData?.genreIDs = movie.genreIDs
+//        movieCoreData?.genreIDs = movie.genreIDs
         movieCoreData?.posterPath = movie.posterPath
         movieCoreData?.isFavorite = movie.isFavorite
         movieCoreData?.releaseDate = movie.releaseDate
@@ -28,7 +28,6 @@ class CoreData {
         
         do {
             try managedContext.save()
-            print("show")
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }

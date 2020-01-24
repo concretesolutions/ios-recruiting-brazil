@@ -10,26 +10,43 @@ import UIKit
 
 class MovieDetailsViewController: UIViewController {
 
+    @IBOutlet weak var movieImageView: UIImageView!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var genreLabel: UILabel!
+    @IBOutlet weak var overviewTextView: UITextView!
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    let detailViewModel = MovieDetailsViewModel()
     var id: Int32?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(id)
-        // Do any additional setup after loading the view.
         let coreData = CoreData()
         let movie = coreData.getElementCoreData(id: id!)
-        print(movie?.overview, movie?.genreIDs)
+        
+        view.activityStartAnimating()
+        detailViewModel.id = self.id
+        loadMovie()
+    }
+
+    func loadMovie() {
+        detailViewModel.requestMovie(completionHandler: { reload in
+            self.configureUI()
+        
+        })
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func configureUI() {
+        guard let movie = detailViewModel.getMovie() else { return }
+        DispatchQueue.main.async {
+            self.titleLabel.text = movie.title
+            self.dateLabel.text = movie.releaseDate
+//          generos
+            self.overviewTextView.text = movie.overview
+            self.movieImageView = self.detailViewModel.imageView
+            self.view.activityStopAnimating()
+        }
+        
     }
-    */
-
+    
 }

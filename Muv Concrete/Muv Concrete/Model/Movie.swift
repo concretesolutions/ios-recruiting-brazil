@@ -12,7 +12,7 @@ class Movie: Codable {
     var id: Int32
     var title: String
     var overview: String
-    var genreIDs: [Int]
+//    var genreIDs: [Int]
     var posterPath: String?
     var backdropPath: String?
     var releaseDate: String
@@ -20,7 +20,7 @@ class Movie: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id, title, overview
-        case genreIDs = "genre_ids"
+//        case genreIDs = "genre_ids"
         case posterPath = "poster_path"
         case backdropPath = "backdrop_path"
         case releaseDate = "release_date"

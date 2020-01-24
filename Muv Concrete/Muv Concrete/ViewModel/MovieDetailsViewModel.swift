@@ -14,10 +14,9 @@ class MovieDetailsViewModel {
     
     var id: Int32?
     var movie: Movie?
+    var imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 300, height: 350))
     
-//    salvar os ids em um array useDefaults
-    
-    public func requestMovies(completionHandler: @escaping (Bool) -> Void){
+    public func requestMovie(completionHandler: @escaping (Bool) -> Void){
         guard let idMovie = id else { return }
         
         let serviceRouteMovies = ServiceRoute.movie(idMovie)
@@ -36,6 +35,7 @@ class MovieDetailsViewModel {
                     DispatchQueue.main.async {
                         guard let data = data else { return }
                         self.movie = data
+                        self.setImage()
                         completionHandler(true)
 //                        self.saveMovies(movies: data.results)
                     }
@@ -47,7 +47,12 @@ class MovieDetailsViewModel {
         })
     }
     
-    public func getMovie(indexPath: IndexPath) -> Movie? {
+    public func getMovie() -> Movie? {
         return movie
+    }
+    
+    public func setImage() {
+        guard let path = movie?.posterPath else { return }
+        imageView.downloaded(from: path, contentMode: .scaleToFill)
     }
 }
