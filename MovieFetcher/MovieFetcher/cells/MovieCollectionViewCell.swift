@@ -12,6 +12,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     //MARK: - Variables
     var safeArea:UILayoutGuide!
     var movie:Movie!
+   
     
     lazy var poster:UIImageView = {
         let image = UIImageView()
@@ -47,7 +48,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
         label.textColor = .white
         label.font = label.font.withSize(18)
         label.adjustsFontSizeToFitWidth = true
-        debugPrint(label.font.lineHeight,label.numberOfLines)
         addSubview(label)
         return label
     }()
@@ -59,6 +59,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         guard let imageUrl = movie.poster_path else {fatalError("could not get poster url")}
         updatePosterImage(cell: self, imageUrl: imageUrl)
         self.title.text = movie.title
+    
     }
     
     override init(frame: CGRect) {
@@ -92,6 +93,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
                 self.favoriteButton.backgroundColor = .brown
             }else{
                 movie.isFavorite = true
+                dao.favoriteMovies.append(movie)
                 self.favoriteButton.backgroundColor = .yellow
             }
         }
@@ -108,7 +110,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
 
     }
     
-    
     func setContraints(){
         
         //Favorite Image
@@ -116,7 +117,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
         colorStripe.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         colorStripe.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         colorStripe.heightAnchor.constraint(equalToConstant: frame.height/3.5).isActive = true
-        
         
         //Poster
         poster.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -135,9 +135,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         //title
         title.topAnchor.constraint(equalTo: colorStripe.topAnchor, constant: 10).isActive = true
         title.leftAnchor.constraint(equalTo: colorStripe.leftAnchor, constant: frame.width/15).isActive = true
-        
-        
-        
+          
     }
     
 }

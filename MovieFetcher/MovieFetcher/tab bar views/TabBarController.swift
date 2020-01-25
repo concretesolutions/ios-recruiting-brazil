@@ -31,7 +31,6 @@ class TabBarController: UITabBarController {
         let favoritesBar = UINavigationController(rootViewController: FavoritesViewController())
         favoritesBar.tabBarItem.image = UIImage(named: "")
         favoritesBar.tabBarItem.selectedImage = UIImage(named: "")
-        
         //add to bar
         
         viewControllers = [moviesBar,favoritesBar]

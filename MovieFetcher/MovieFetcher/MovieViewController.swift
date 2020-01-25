@@ -37,21 +37,21 @@ class MovieViewController: UIViewController {
 //        return image
 //    }()
 
-//    
-//    lazy var genreLabel:UILabel = {
-//           let label = UILabel()
-//           label.translatesAutoresizingMaskIntoConstraints = false
-//           label.backgroundColor = .clear
-//           label.minimumScaleFactor = 0.6
-//           label.numberOfLines = 5
-//           label.lineBreakMode = .byTruncatingHead
-//           label.textColor = .white
-//           label.font = label.font.withSize(18)
-//           label.adjustsFontSizeToFitWidth = true
-//           debugPrint(label.font.lineHeight,label.numberOfLines)
-//           view.addSubview(label)
-//           return label
-//       }()
+    //
+    lazy var genreLabel:UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = .red
+        label.minimumScaleFactor = 0.6
+        label.numberOfLines = 5
+        label.lineBreakMode = .byTruncatingHead
+        label.textColor = .white
+        label.text = "Action"
+        label.font = label.font.withSize(18)
+        label.adjustsFontSizeToFitWidth = true
+        view.addSubview(label)
+        return label
+    }()
     
     lazy var movieName:UILabel = {
         let label = UILabel()
@@ -81,6 +81,7 @@ class MovieViewController: UIViewController {
     func setMovie(movie:Movie){
         self.movie = movie
         updatePosterImage(imageUrl: movie.backdrop_path)
+        self.cellIndexPath = movie.listIndexPath
     }
 
     private func updatePosterImage(imageUrl:String){
@@ -120,15 +121,22 @@ class MovieViewController: UIViewController {
         movieName.heightAnchor.constraint(equalToConstant: view.frame.height/20).isActive = true
         movieName.widthAnchor.constraint(equalToConstant: view.frame.width/2.5).isActive = true
         
+        
+        genreLabel.topAnchor.constraint(equalTo: poster.bottomAnchor, constant: view.frame.height/35).isActive = true
+        genreLabel.leftAnchor.constraint(equalTo: movieName.rightAnchor, constant: view.frame.height/25).isActive = true
+        genreLabel.heightAnchor.constraint(equalToConstant: view.frame.height/20).isActive = true
+        genreLabel.widthAnchor.constraint(equalToConstant: view.frame.width/2.5).isActive = true
     }
     
     @objc private func favoriteMovie(){
         if let movie = self.movie{
             if movie.isFavorite! {
                 movie.isFavorite = false
+                dao.favoriteMovies.remove(at: movie.listIndexPath!.row)
                 self.favoriteButton.backgroundColor = .brown
             }else{
                 movie.isFavorite = true
+                dao.favoriteMovies.append(movie)
                 self.favoriteButton.backgroundColor = .yellow
             }
         }

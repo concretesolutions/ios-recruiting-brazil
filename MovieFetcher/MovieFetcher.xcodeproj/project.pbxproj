@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		131E5AC123DCA936003052F5 /* FavoriteMovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131E5AC023DCA936003052F5 /* FavoriteMovieTableViewCell.swift */; };
 		136DC0D023D8E3F700F4AEA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136DC0CF23D8E3F700F4AEA3 /* AppDelegate.swift */; };
 		136DC0D223D8E3F700F4AEA3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136DC0D123D8E3F700F4AEA3 /* SceneDelegate.swift */; };
 		136DC0D423D8E3F700F4AEA3 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136DC0D323D8E3F700F4AEA3 /* TabBarController.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		131E5AC023DCA936003052F5 /* FavoriteMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieTableViewCell.swift; sourceTree = "<group>"; };
 		136DC0CC23D8E3F700F4AEA3 /* MovieFetcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieFetcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		136DC0CF23D8E3F700F4AEA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		136DC0D123D8E3F700F4AEA3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		131E5AC223DCC720003052F5 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				136DC10623D8FBC300F4AEA3 /* MovieCollectionViewCell.swift */,
+				131E5AC023DCA936003052F5 /* FavoriteMovieTableViewCell.swift */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
+		131E5AC323DCC736003052F5 /* tab bar views */ = {
+			isa = PBXGroup;
+			children = (
+				136DC0D323D8E3F700F4AEA3 /* TabBarController.swift */,
+				136DC10423D8F05F00F4AEA3 /* FavoritesViewController.swift */,
+				136DC10223D8F04800F4AEA3 /* ListViewController.swift */,
+			);
+			path = "tab bar views";
+			sourceTree = "<group>";
+		};
 		136DC0C323D8E3F700F4AEA3 = {
 			isa = PBXGroup;
 			children = (
@@ -113,11 +134,9 @@
 		136DC0CE23D8E3F700F4AEA3 /* MovieFetcher */ = {
 			isa = PBXGroup;
 			children = (
-				136DC0D323D8E3F700F4AEA3 /* TabBarController.swift */,
-				136DC10423D8F05F00F4AEA3 /* FavoritesViewController.swift */,
-				136DC10223D8F04800F4AEA3 /* ListViewController.swift */,
 				136DC11423DA431C00F4AEA3 /* MovieViewController.swift */,
-				136DC10623D8FBC300F4AEA3 /* MovieCollectionViewCell.swift */,
+				131E5AC323DCC736003052F5 /* tab bar views */,
+				131E5AC223DCC720003052F5 /* cells */,
 				136DC10823D9EF1D00F4AEA3 /* DAO */,
 				136DC0D823D8E3F900F4AEA3 /* Assets.xcassets */,
 				136DC0DD23D8E3F900F4AEA3 /* Info.plist */,
@@ -311,6 +330,7 @@
 				136DC0D023D8E3F700F4AEA3 /* AppDelegate.swift in Sources */,
 				136DC11323D9FD6400F4AEA3 /* API.swift in Sources */,
 				136DC0D223D8E3F700F4AEA3 /* SceneDelegate.swift in Sources */,
+				131E5AC123DCA936003052F5 /* FavoriteMovieTableViewCell.swift in Sources */,
 				136DC10723D8FBC300F4AEA3 /* MovieCollectionViewCell.swift in Sources */,
 				136DC10523D8F05F00F4AEA3 /* FavoritesViewController.swift in Sources */,
 				136DC10323D8F04800F4AEA3 /* ListViewController.swift in Sources */,

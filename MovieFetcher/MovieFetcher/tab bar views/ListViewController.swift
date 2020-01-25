@@ -8,14 +8,7 @@
 
 import UIKit
 
-class ListViewController: UIViewController,CellUpdate{
-    
-    func refreshFavorite(indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! MovieCollectionViewCell
-        cell.refreshFavorite()
-    }
-    
-
+class ListViewController: UIViewController{
     //MARK: - Variables
     var safeArea:UILayoutGuide!
     
@@ -48,6 +41,9 @@ class ListViewController: UIViewController,CellUpdate{
         getMovie()
         // Do any additional setup after loading the view.
     }
+    override func viewDidAppear(_ animated: Bool) {
+          self.collectionView.reloadData()
+      }
 
     private func setContraints(){
         
@@ -83,7 +79,9 @@ extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
         let movie = dao.searchResults[indexPath.row]
+        movie.listIndexPath = indexPath
         cell.setUp(movie:movie)
+        cell.refreshFavorite()
         return cell
         
     }
@@ -108,6 +106,15 @@ extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     
+    
+}
+extension ListViewController:CellUpdate{
+       func refreshFavorite(indexPath: IndexPath) {
+        debugPrint(self)
+        if let cell = collectionView.cellForItem(at:indexPath) as? MovieCollectionViewCell{
+        cell.refreshFavorite()
+        }else {return}
+       }
     
 }
 

@@ -24,6 +24,7 @@ class Movie:Codable{
     let video:Bool!
     let vote_average:Float!
     var isFavorite:Bool?
+    var listIndexPath:IndexPath?
     
     init(poster_path:String,overview:String,releaseDate:Date,id:Int,genre_ids:[Int],original_title:String,original_language:String,title:String,backdrop_path:String,popularity:Float,voteCount:Int,video:Bool,vote_average:Float,isFavorite:Bool) {
         

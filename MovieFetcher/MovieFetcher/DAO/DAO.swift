@@ -10,12 +10,13 @@ import Foundation
 import UIKit
 
 let dao = DAO()
-class DAO{
+class DAO:Codable{
     
     var cellWidth:CGFloat = 0
     let apiKey = "0c909c364c0bc846b72d0fe49ab71b83"
-    let fakeSearchURL = "https://api.themoviedb.org/3/search/movie?api_key=0c909c364c0bc846b72d0fe49ab71b83&query=Jack+Reacher"
+    let fakeSearchURL = "https://api.themoviedb.org/3/search/movie?api_key=0c909c364c0bc846b72d0fe49ab71b83&query=Frozen"
     var searchURL = "https://api.themoviedb.org/3/search/movie?api_key=0c909c364c0bc846b72d0fe49ab71b83&query="
     
     var searchResults:[Movie] = []
+    var favoriteMovies:[Movie] = []
 }
