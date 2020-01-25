@@ -11,8 +11,10 @@ import UIKit
 
 class CoreData {
     
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     func saveCoreData(movie: Movie) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let managedContext = appDelegate.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "MovieCoreData", in: managedContext)!
            
@@ -34,9 +36,9 @@ class CoreData {
         
     }
     
-    func getElementCoreData(id: Int32) -> [MovieCoreData]? {
+    func getElementCoreData() -> [MovieCoreData]? {
         var moviesList: [MovieCoreData]?
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.persistentContainer.viewContext
          
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "MovieCoreData")
@@ -44,12 +46,27 @@ class CoreData {
         do {
             moviesList = try managedContext.fetch(fetchRequest) as? [MovieCoreData]
             
-//            movieList = movieList?.filter( {$0.id == id })
-//            movieDetail = (movieList?.first)!
-            
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
         return moviesList
+    }
+    
+    func deleteElementCoreData(id: Int32) {
+        var moviesList: [MovieCoreData]?
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "MovieCoreData")
+        do {
+            moviesList = try managedContext.fetch(fetchRequest) as? [MovieCoreData]
+            moviesList = moviesList?.filter ({$0.id == id})
+            guard let movie = moviesList?.first else { return }
+            managedContext.delete(movie)
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
     }
 }

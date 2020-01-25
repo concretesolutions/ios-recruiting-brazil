@@ -13,7 +13,9 @@ class MovieDetailsViewModel {
     var delegate: UIViewController?
     
     var id: Int32?
-    var movie: Movie?
+    var movie: MovieId?
+    var genres = ""
+    var date = ""
     var imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 300, height: 350))
     
     public func requestMovie(completionHandler: @escaping (Bool) -> Void){
@@ -21,7 +23,7 @@ class MovieDetailsViewModel {
         
         let serviceRouteMovies = ServiceRoute.movie(idMovie)
         let request = Request.instance
-        request.dispatch(endPoint: serviceRouteMovies, type: Movie.self, completionHandler: { (data, response, error) in
+        request.dispatch(endPoint: serviceRouteMovies, type: MovieId.self, completionHandler: { (data, response, error) in
             
             guard let response = response else {
 //                self.delegate?.showAlert(withTitle: "Falha na conexão", andMessage: "Não foi possível comunicar com o servidor, tente novamente mais tarde.")
@@ -36,6 +38,8 @@ class MovieDetailsViewModel {
                         guard let data = data else { return }
                         self.movie = data
                         self.setImage()
+                        self.loadGenres(movie: data)
+                        self.loadDate(movie: data)
                         completionHandler(true)
 //                        self.saveMovies(movies: data.results)
                     }
@@ -47,8 +51,35 @@ class MovieDetailsViewModel {
         })
     }
     
-    public func getMovie() -> Movie? {
+    public func getMovie() -> MovieId? {
         return movie
+    }
+    
+    private func loadGenres(movie: MovieId) {
+        var arrayGenre: [String] = []
+        let genresMovie = movie.genres
+        arrayGenre = genresMovie.map({ $0.name })
+        genres = arrayGenre.joined(separator:", ")
+        print(genres)
+    }
+    
+    public func checkFavorite(id: Int32, completionHandler: @escaping (Bool) -> Void){
+        let defaults = UserDefaults.standard
+        let arrayFavoritesIds = defaults.array(forKey: "favoritesIds")
+        if arrayFavoritesIds != nil {
+            let arrayIds = arrayFavoritesIds as! [Int32]
+            if arrayIds.contains(id) {
+                completionHandler(true)
+            } else {
+                completionHandler(false)
+            }
+        }
+    }
+    
+    private func loadDate(movie: MovieId) {
+        if let date = movie.releaseDate.split(separator: "-").first {
+            self.date = String(date)
+        }
     }
     
     public func setImage() {

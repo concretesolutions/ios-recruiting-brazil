@@ -1,26 +1,25 @@
 //
-//  Movie.swift
+//  MovieId.swift
 //  Muv Concrete
 //
-//  Created by Mariaelena Silveira on 15/01/20.
+//  Created by Mariaelena Silveira on 25/01/20.
 //  Copyright © 2020 Mariaelena Silveira. All rights reserved.
 //
 
+
 import Foundation
 
-class Movie: Codable {
+class MovieId: Codable {
     var id: Int32
     var title: String
     var overview: String
-    var genreIDs: [Int]
+    var genres: [Genre]
     var posterPath: String?
     var backdropPath: String?
     var releaseDate: String
-    var isFavorite: Bool = false
 
     enum CodingKeys: String, CodingKey {
-        case id, title, overview
-        case genreIDs = "genre_ids"
+        case id, title, overview, genres
         case posterPath = "poster_path"
         case backdropPath = "backdrop_path"
         case releaseDate = "release_date"

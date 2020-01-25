@@ -23,9 +23,19 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     private func configure() {
+        let defaults = UserDefaults.standard
+        let arrayFavoritesIds = defaults.array(forKey: "favoritesIds")
         guard let movie = movie else { return }
+        let id = movie.id
         DispatchQueue.main.async {
             self.titleLabel.text = movie.title
+            
+            if arrayFavoritesIds != nil {
+                let arrayIds = arrayFavoritesIds as! [Int32]
+                if arrayIds.contains(id) {
+                    self.favoriteButton.isSelected = true
+                }
+            }
             
             if let imagePath = movie.posterPath {
                 self.imageView.downloaded(from: imagePath, contentMode: .scaleToFill)
@@ -37,25 +47,28 @@ class MovieCollectionViewCell: UICollectionViewCell {
         let defaults = UserDefaults.standard
         let arrayFavoritesIds = defaults.array(forKey: "favoritesIds")
         var arraySave: [Int32] = []
-        guard let id = movie?.id else { return }
+        guard let movie = movie else { return }
+        let id = movie.id
+        let coreData = CoreData()
         
         if favoriteButton.isSelected {
             favoriteButton.isSelected = false
-                if arrayFavoritesIds != nil {
-                    arraySave = arrayFavoritesIds as! [Int32]
-                    arraySave = arraySave.filter( {$0 != id })
-                }
+            if arrayFavoritesIds != nil {
+                arraySave = arrayFavoritesIds as! [Int32]
+                arraySave = arraySave.filter( {$0 != id })
+                coreData.deleteElementCoreData(id: id)
+            }
         } else {
             favoriteButton.isSelected = true
-                if arrayFavoritesIds != nil {
-                    arraySave = arrayFavoritesIds as! [Int32]
-                }
-                arraySave.append(id)
+            if arrayFavoritesIds != nil {
+                arraySave = arrayFavoritesIds as! [Int32]
+            }
+            coreData.saveCoreData(movie: movie)
+            arraySave.append(id)
             
         }
 
         defaults.set(arraySave, forKey: "favoritesIds")
-        print(defaults.array(forKey: "favoritesIds"))
     }
     
 }

@@ -14,7 +14,14 @@ class FavoriteViewModel {
     
     var arrayMovies: [MovieCoreData] = []
     
-//    salvar os ids em um array useDefaults
+    public func readCoreData(completionHandler: @escaping (Bool) -> Void) {
+        let coreData = CoreData()
+        if coreData.getElementCoreData() != nil {
+            arrayMovies = coreData.getElementCoreData()!
+            completionHandler(true)
+        }
+        
+    }
 
     
     public func getMovie(indexPath: IndexPath) -> MovieCoreData {

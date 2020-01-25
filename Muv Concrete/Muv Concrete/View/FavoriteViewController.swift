@@ -19,30 +19,30 @@ class FavoriteViewController: UIViewController {
         super.viewDidLoad()
 
         favoriteViewModel.delegate = self
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        view.activityStartAnimating()
+        favoriteViewModel.readCoreData(completionHandler: { reload in
+            self.configureUI()
+        })
     }
-    */
 
+    private func configureUI(){
+        tableView.reloadData()
+        view.activityStopAnimating()
+    }
 }
 
 extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayMovie.count
+        return favoriteViewModel.arrayMovies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let movieCell = FavoriteTableViewCell()
         guard let cell = Bundle.main.loadNibNamed(movieCell.identiifier, owner: self, options: nil)?.first as? FavoriteTableViewCell else { return UITableViewCell()}
+        
         cell.movie = favoriteViewModel.getMovie(indexPath: indexPath)
         
         return cell

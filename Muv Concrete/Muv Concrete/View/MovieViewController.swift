@@ -70,8 +70,6 @@ extension MovieViewController: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let movie = moviesViewModel.arrayMovies[indexPath.row]
-        let coreData = CoreData()
-        coreData.saveCoreData(movie: movie)
         movieSelected = movie
         performSegue(withIdentifier: "segueMovieDetailViewController", sender: self)
     }

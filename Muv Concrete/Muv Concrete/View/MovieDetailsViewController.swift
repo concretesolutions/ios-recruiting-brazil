@@ -10,6 +10,7 @@ import UIKit
 
 class MovieDetailsViewController: UIViewController {
 
+    @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
@@ -21,8 +22,6 @@ class MovieDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let coreData = CoreData()
-        let movie = coreData.getElementCoreData(id: id!)
         
         view.activityStartAnimating()
         detailViewModel.id = self.id
@@ -30,12 +29,19 @@ class MovieDetailsViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        print(UserDefaults.standard.array(forKey: "favoritesIds"))
+        checkFavorite()
     }
+    
+    func checkFavorite() {
+        guard let id = id else { return }
+        detailViewModel.checkFavorite(id: id, completionHandler: ({ set in
+            self.favoriteButton.isSelected = set
+        }))
+    }
+    
     func loadMovie() {
         detailViewModel.requestMovie(completionHandler: { reload in
             self.configureUI()
-        
         })
     }
     
@@ -43,8 +49,8 @@ class MovieDetailsViewController: UIViewController {
         guard let movie = detailViewModel.getMovie() else { return }
         DispatchQueue.main.async {
             self.titleLabel.text = movie.title
-            self.dateLabel.text = movie.releaseDate
-//          generos
+            self.dateLabel.text = self.detailViewModel.date
+            self.genreLabel.text = self.detailViewModel.genres
             self.overviewTextView.text = movie.overview
             self.movieImageView = self.detailViewModel.imageView
             self.view.activityStopAnimating()
