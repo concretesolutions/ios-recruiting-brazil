@@ -32,4 +32,30 @@ class MovieCollectionViewCell: UICollectionViewCell {
             }
         }
     }
+    
+    @IBAction func favorite(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        let arrayFavoritesIds = defaults.array(forKey: "favoritesIds")
+        var arraySave: [Int32] = []
+        guard let id = movie?.id else { return }
+        
+        if favoriteButton.isSelected {
+            favoriteButton.isSelected = false
+                if arrayFavoritesIds != nil {
+                    arraySave = arrayFavoritesIds as! [Int32]
+                    arraySave = arraySave.filter( {$0 != id })
+                }
+        } else {
+            favoriteButton.isSelected = true
+                if arrayFavoritesIds != nil {
+                    arraySave = arrayFavoritesIds as! [Int32]
+                }
+                arraySave.append(id)
+            
+        }
+
+        defaults.set(arraySave, forKey: "favoritesIds")
+        print(defaults.array(forKey: "favoritesIds"))
+    }
+    
 }

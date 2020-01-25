@@ -29,6 +29,9 @@ class MovieDetailsViewController: UIViewController {
         loadMovie()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        print(UserDefaults.standard.array(forKey: "favoritesIds"))
+    }
     func loadMovie() {
         detailViewModel.requestMovie(completionHandler: { reload in
             self.configureUI()
@@ -48,5 +51,4 @@ class MovieDetailsViewController: UIViewController {
         }
         
     }
-    
 }

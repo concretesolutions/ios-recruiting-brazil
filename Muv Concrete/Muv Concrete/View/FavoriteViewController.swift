@@ -13,9 +13,12 @@ class FavoriteViewController: UIViewController {
     let arrayMovie = [ "Thor", "avengers"]
     @IBOutlet weak var tableView: UITableView!
     
+    let favoriteViewModel = FavoriteViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        favoriteViewModel.delegate = self
         // Do any additional setup after loading the view.
     }
     
@@ -38,11 +41,12 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        cell.textLabel?.text = arrayMovie[indexPath.row]
-
+        let movieCell = FavoriteTableViewCell()
+        guard let cell = Bundle.main.loadNibNamed(movieCell.identiifier, owner: self, options: nil)?.first as? FavoriteTableViewCell else { return UITableViewCell()}
+        cell.movie = favoriteViewModel.getMovie(indexPath: indexPath)
+        
         return cell
+
     }
     
     
