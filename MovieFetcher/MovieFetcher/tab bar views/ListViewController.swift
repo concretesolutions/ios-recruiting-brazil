@@ -41,9 +41,14 @@ class ListViewController: UIViewController{
         getMovie()
         // Do any additional setup after loading the view.
     }
-    override func viewDidAppear(_ animated: Bool) {
-          self.collectionView.reloadData()
-      }
+    override func viewWillAppear(_ animated: Bool) {
+        DispatchQueue.main.async {
+            for cell in self.collectionView.visibleCells{
+                let movieCell = cell as! MovieCollectionViewCell
+                movieCell.refreshFavorite()
+            }
+        }
+    }
 
     private func setContraints(){
         
@@ -66,6 +71,7 @@ class ListViewController: UIViewController{
         api.movieSearch(urlStr: dao.fakeSearchURL, onCompletion: anonymousFunc)
            
        }
+    
 }
 
 //MARK:- Extensions and Delegates
@@ -109,12 +115,17 @@ extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSourc
     
 }
 extension ListViewController:CellUpdate{
-       func refreshFavorite(indexPath: IndexPath) {
-        debugPrint(self)
+    func updateList() {
+        self.collectionView.reloadData()
+    }
+    
+    func refreshFavorite(indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at:indexPath) as? MovieCollectionViewCell{
-        cell.refreshFavorite()
+            cell.refreshFavorite()
         }else {return}
-       }
+        
+        
+    }
     
 }
 

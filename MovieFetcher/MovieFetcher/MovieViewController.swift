@@ -151,10 +151,12 @@ class MovieViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        delegate.refreshFavorite(indexPath: cellIndexPath)
+//        delegate.refreshFavorite(indexPath: cellIndexPath)
+        delegate.updateList()
     }
 }
 
 protocol CellUpdate{
     func refreshFavorite(indexPath:IndexPath)
+    func updateList()
 }

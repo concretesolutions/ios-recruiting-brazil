@@ -10,7 +10,7 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
     
-    
+    var delegate:CellUpdate!
     var safeArea:UILayoutGuide!
     
     //MARK: - Variables
@@ -43,7 +43,7 @@ class FavoritesViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         self.tableView.reloadData()
     }
-    
+        
     private func setContraints(){
         
         tableView.topAnchor.constraint(equalTo: safeArea.topAnchor,constant: 0).isActive = true
@@ -75,13 +75,12 @@ extension FavoritesViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let movie = dao.searchResults[indexPath.row]
-        let movieVc = MovieViewController()
-        movieVc.setMovie(movie: movie)
-        movieVc.delegate = ListViewController()
-//        movieVc.cellIndexPath = movie.listIndexPath
-        self.present(movieVc, animated: true) {
-        }
+//        let movie = dao.searchResults[indexPath.row]
+//        let movieVc = MovieViewController()
+//        movieVc.setMovie(movie: movie)
+////        movieVc.cellIndexPath = movie.listIndexPath
+//        self.present(movieVc, animated: true) {
+//        }
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -101,7 +100,6 @@ extension FavoritesViewController:UITableViewDelegate,UITableViewDataSource{
                     break
                 }
             }
-            
             self.tableView.reloadData()
         }
         return action
