@@ -11,13 +11,14 @@ import UIKit
 class MovieViewController: UIViewController {
 
     var movie:Movie!
-    
-    var cell:MovieCollectionViewCell!
+    var delegate:CellUpdate!
+    var cellIndexPath:IndexPath!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setConstraints()
+        refreshFavorite()
         // Do any additional setup after loading the view.
     }
 
@@ -80,7 +81,6 @@ class MovieViewController: UIViewController {
     func setMovie(movie:Movie){
         self.movie = movie
         updatePosterImage(imageUrl: movie.backdrop_path)
-        
     }
 
     private func updatePosterImage(imageUrl:String){
@@ -92,6 +92,16 @@ class MovieViewController: UIViewController {
           }
           api.retrieveImage(urlStr: url, onCompletion: anonymousFunc)
       }
+    
+    func refreshFavorite(){
+        if let movie = self.movie{
+            if !movie.isFavorite! {
+                self.favoriteButton.backgroundColor = .brown
+            }else{
+                self.favoriteButton.backgroundColor = .yellow
+            }
+        }
+    }
     
     private func setConstraints(){
         
@@ -122,13 +132,14 @@ class MovieViewController: UIViewController {
                 self.favoriteButton.backgroundColor = .yellow
             }
         }
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        let listVC = ListViewController()
-        listVC.collectionView.reloadData()
-        
+        delegate.refreshFavorite(indexPath: cellIndexPath)
     }
-    
-    
+}
+
+protocol CellUpdate{
+    func refreshFavorite(indexPath:IndexPath)
 }

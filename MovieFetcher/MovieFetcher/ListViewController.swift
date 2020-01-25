@@ -8,11 +8,18 @@
 
 import UIKit
 
-class ListViewController: UIViewController {
+class ListViewController: UIViewController,CellUpdate{
+    
+    func refreshFavorite(indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! MovieCollectionViewCell
+        cell.refreshFavorite()
+    }
+    
 
     //MARK: - Variables
     var safeArea:UILayoutGuide!
-
+    
+    
     lazy var collectionView:UICollectionView = {
         
         //gridView
@@ -27,7 +34,6 @@ class ListViewController: UIViewController {
         //delegates
         collectionView.dataSource = self
         collectionView.delegate = self
-        
         //cell setup
         collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
         return collectionView
@@ -93,11 +99,16 @@ extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSourc
         let movie = dao.searchResults[indexPath.row]
         let movieVc = MovieViewController()
         movieVc.setMovie(movie: movie)
+        movieVc.cellIndexPath = indexPath
+        movieVc.delegate = self
+        dao.searchResults[indexPath.row] = movie
         self.present(movieVc, animated: true) {
         }
       
     }
     
     
+    
 }
+
 

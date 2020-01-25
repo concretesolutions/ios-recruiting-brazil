@@ -71,7 +71,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+ 
     
     //MARK: - Complimentary Methods
     //This function updates the cell`s poster image, accordingly to its url
@@ -99,7 +99,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     func refreshFavorite(){
         if let movie = self.movie{
-            if movie.isFavorite! {
+            if !movie.isFavorite! {
                 self.favoriteButton.backgroundColor = .brown
             }else{
                 self.favoriteButton.backgroundColor = .yellow
@@ -107,9 +107,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         }
 
     }
-    override func reloadInputViews() {
-        refreshFavorite()
-    }
+    
     
     func setContraints(){
         
@@ -141,4 +139,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
         
         
     }
+    
 }
+
