@@ -87,9 +87,17 @@ class MovieCollectionViewCell: UICollectionViewCell {
               }
     
     @objc private func favoriteMovie(){
+        let myId = movie.id
         if let movie = self.movie{
             if movie.isFavorite! {
-                movie.isFavorite = false
+                 movie.isFavorite = false
+                //                dao.favoriteMovies.remove(at: movie.listIndexPath!.row)
+                                for movieIndex in 0...dao.favoriteMovies.count{
+                                    if dao.favoriteMovies[movieIndex].id == myId{
+                                        dao.favoriteMovies.remove(at: movieIndex)
+                                        break
+                                    }
+                                }
                 self.favoriteButton.backgroundColor = .brown
             }else{
                 movie.isFavorite = true

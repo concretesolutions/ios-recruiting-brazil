@@ -81,7 +81,7 @@ class MovieViewController: UIViewController {
     func setMovie(movie:Movie){
         self.movie = movie
         updatePosterImage(imageUrl: movie.backdrop_path)
-        self.cellIndexPath = movie.listIndexPath
+//        self.cellIndexPath = movie.listIndexPath
     }
 
     private func updatePosterImage(imageUrl:String){
@@ -130,9 +130,16 @@ class MovieViewController: UIViewController {
     
     @objc private func favoriteMovie(){
         if let movie = self.movie{
+            let myId = movie.id
             if movie.isFavorite! {
                 movie.isFavorite = false
-                dao.favoriteMovies.remove(at: movie.listIndexPath!.row)
+//                dao.favoriteMovies.remove(at: movie.listIndexPath!.row)
+                for movieIndex in 0...dao.favoriteMovies.count - 1{
+                    if dao.favoriteMovies[movieIndex].id == myId{
+                        dao.favoriteMovies.remove(at: movieIndex)
+                        break
+                    }
+                }
                 self.favoriteButton.backgroundColor = .brown
             }else{
                 movie.isFavorite = true

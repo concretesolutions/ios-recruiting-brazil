@@ -79,7 +79,7 @@ extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
         let movie = dao.searchResults[indexPath.row]
-        movie.listIndexPath = indexPath
+//        movie.listIndexPath = indexPath
         cell.setUp(movie:movie)
         cell.refreshFavorite()
         return cell

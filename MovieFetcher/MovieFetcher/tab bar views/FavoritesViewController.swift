@@ -79,7 +79,7 @@ extension FavoritesViewController:UITableViewDelegate,UITableViewDataSource{
         let movieVc = MovieViewController()
         movieVc.setMovie(movie: movie)
         movieVc.delegate = ListViewController()
-        movieVc.cellIndexPath = movie.listIndexPath
+//        movieVc.cellIndexPath = movie.listIndexPath
         self.present(movieVc, animated: true) {
         }
     }
@@ -94,7 +94,14 @@ extension FavoritesViewController:UITableViewDelegate,UITableViewDataSource{
         
         let action = UIContextualAction(style: .normal, title: "Delete") { (action, view, completion) in
             dao.favoriteMovies.remove(at: indexPath.row)
-            dao.searchResults[indexPath.row].isFavorite = false
+            let cell  = self.tableView.cellForRow(at: indexPath) as! FavoriteMovieTableViewCell
+            for movieIndex in 0...dao.searchResults.count - 1{
+                if cell.movie.id == dao.searchResults[movieIndex].id{
+                    dao.searchResults[movieIndex].isFavorite = false
+                    break
+                }
+            }
+            
             self.tableView.reloadData()
         }
         return action
