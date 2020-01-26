@@ -13,10 +13,14 @@ class MoviesViewController: UIViewController {
     @IBOutlet weak var collectionView: CollectionView!
     
     internal var movies = [Movie]() {
+        willSet {
+            self.filteredMovie = newValue
+        }
+    }
+    
+    internal var filteredMovie = [Movie]() {
         didSet {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+            self.collectionView.reloadData()
         }
     }
     
@@ -76,10 +80,10 @@ extension MoviesViewController {
                     alert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
+                
+                guard let movies = popular else { return }
+                self.movies = movies.results
             }
-            
-            guard let movies = popular else { return }
-            self.movies = movies.results
         }.resume()
     }
     
@@ -95,12 +99,12 @@ extension MoviesViewController {
 
 extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies.count
+        return self.filteredMovie.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesCollectionViewCell.identifier, for: indexPath) as! MoviesCollectionViewCell
-        cell.movie = self.movies[indexPath.row]
+        cell.movie = self.filteredMovie[indexPath.row]
         return cell
     }
     
@@ -129,6 +133,31 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
 }
 
-extension MoviesViewController: UISearchBarDelegate {
+extension MoviesViewController: SearchBarDelegate {
+    func completeItems() -> [Movie] {
+        return self.movies
+    }
+
+    func filteredItems(items: [Movie]) {
+        self.filteredMovie = items
+    }
+
+    func filter(text: String, item: Movie) -> Bool {
+        return item.title.lowercased().contains(text.lowercased())
+    }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let text = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if text.isEmpty {
+            self.filteredItems(items: self.completeItems())
+        }else{
+            let items = self.completeItems().filter({ self.filter(text: text, item: $0) })
+            self.filteredItems(items: items)
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.filteredItems(items: self.completeItems())
+    }
 }
