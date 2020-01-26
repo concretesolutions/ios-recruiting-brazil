@@ -22,6 +22,9 @@ class ListViewController: UIViewController{
         flowLayout.sectionInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
         let collectionView = UICollectionView(frame: CGRect(), collectionViewLayout: flowLayout)
         view.addSubview(collectionView)
+        let refresh = UIRefreshControl()
+        refresh.addTarget(self, action: #selector(tite), for: .allEvents)
+        collectionView.refreshControl = refresh
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         //delegates
@@ -38,7 +41,7 @@ class ListViewController: UIViewController{
         self.view.backgroundColor = .blue
         safeArea = view.layoutMarginsGuide
         setContraints()
-        getMovie()
+        getMovie(page:1)
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +61,14 @@ class ListViewController: UIViewController{
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
     }
     //MARK: - Complimentary Methods
-    private func getMovie(){
+    
+    @objc func tite(){
+        debugPrint("teite")
+        collectionView.refreshControl?.endRefreshing()
+    }
+    
+    private func getMovie(page:Int){
+        let url = "https://api.themoviedb.org/3/movie/popular?api_key=0c909c364c0bc846b72d0fe49ab71b83&language=en-US&page=\(page)"
            let anonymousFunc = {(fetchedData:MovieSearch) in
                DispatchQueue.main.async {
                 for movie in fetchedData.results{
@@ -68,10 +78,13 @@ class ListViewController: UIViewController{
                    self.collectionView.reloadData()
                }
            }
-        api.movieSearch(urlStr: dao.fakeSearchURL, onCompletion: anonymousFunc)
+        api.movieSearch(urlStr: url, onCompletion: anonymousFunc)
            
        }
     
+   
+    
+
 }
 
 //MARK:- Extensions and Delegates
@@ -91,6 +104,13 @@ extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSourc
         return cell
         
     }
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == dao.searchResults.count - 1 {
+            let page = dao.page + 1
+
+            getMovie(page: page)
+           }
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.view.frame.width/2
@@ -103,7 +123,7 @@ extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSourc
         let movie = dao.searchResults[indexPath.row]
         let movieVc = MovieViewController()
         movieVc.setMovie(movie: movie)
-        movieVc.cellIndexPath = indexPath
+//        imovieVc.cellIndexPath = indexPath
         movieVc.delegate = self
         dao.searchResults[indexPath.row] = movie
         self.present(movieVc, animated: true) {

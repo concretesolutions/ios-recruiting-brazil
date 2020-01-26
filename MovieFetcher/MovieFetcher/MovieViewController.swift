@@ -12,7 +12,7 @@ class MovieViewController: UIViewController {
 
     var movie:Movie!
     var delegate:CellUpdate!
-    var cellIndexPath:IndexPath!
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()

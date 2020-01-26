@@ -10,9 +10,8 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
     
-    var delegate:CellUpdate!
     var safeArea:UILayoutGuide!
-    
+    var listView:ListViewController!
     //MARK: - Variables
     lazy var tableView:UITableView = {
         let tableView = UITableView()
@@ -37,6 +36,7 @@ class FavoritesViewController: UIViewController {
         self.view.backgroundColor = .purple
         safeArea = view.layoutMarginsGuide
         setContraints()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -75,12 +75,12 @@ extension FavoritesViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let movie = dao.searchResults[indexPath.row]
-//        let movieVc = MovieViewController()
-//        movieVc.setMovie(movie: movie)
-////        movieVc.cellIndexPath = movie.listIndexPath
-//        self.present(movieVc, animated: true) {
-//        }
+        let movie = dao.favoriteMovies[indexPath.row]
+        let movieVc = MovieViewController()
+        movieVc.setMovie(movie: movie)
+        movieVc.delegate = self.listView
+        self.present(movieVc, animated: true) {
+        }
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

@@ -12,7 +12,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     //MARK: - Variables
     var safeArea:UILayoutGuide!
     var movie:Movie!
-   
+    
     
     lazy var poster:UIImageView = {
         let image = UIImageView()
@@ -59,7 +59,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         guard let imageUrl = movie.poster_path else {fatalError("could not get poster url")}
         updatePosterImage(cell: self, imageUrl: imageUrl)
         self.title.text = movie.title
-    
+        
     }
     
     override init(frame: CGRect) {
@@ -68,36 +68,36 @@ class MovieCollectionViewCell: UICollectionViewCell {
         safeArea = layoutMarginsGuide
         setContraints()
     }
-        
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
- 
+    
     
     //MARK: - Complimentary Methods
     //This function updates the cell`s poster image, accordingly to its url
     private func updatePosterImage(cell:MovieCollectionViewCell,imageUrl:String){
-              let url = "https://image.tmdb.org/t/p/w500\(imageUrl)"
-              let anonymousFunc = {(fetchedData:UIImage) in
-                      DispatchQueue.main.async {
-                       cell.poster.image = fetchedData
-                      }
-                  }
-              api.retrieveImage(urlStr: url, onCompletion: anonymousFunc)
-              }
+        let url = "https://image.tmdb.org/t/p/w500\(imageUrl)"
+        let anonymousFunc = {(fetchedData:UIImage) in
+            DispatchQueue.main.async {
+                cell.poster.image = fetchedData
+            }
+        }
+        api.retrieveImage(urlStr: url, onCompletion: anonymousFunc)
+    }
     
     @objc private func favoriteMovie(){
         let myId = movie.id
         if let movie = self.movie{
             if movie.isFavorite! {
-                 movie.isFavorite = false
+                movie.isFavorite = false
                 //                dao.favoriteMovies.remove(at: movie.listIndexPath!.row)
-                                for movieIndex in 0...dao.favoriteMovies.count{
-                                    if dao.favoriteMovies[movieIndex].id == myId{
-                                        dao.favoriteMovies.remove(at: movieIndex)
-                                        break
-                                    }
-                                }
+                for movieIndex in 0...dao.favoriteMovies.count{
+                    if dao.favoriteMovies[movieIndex].id == myId{
+                        dao.favoriteMovies.remove(at: movieIndex)
+                        break
+                    }
+                }
                 self.favoriteButton.backgroundColor = .brown
             }else{
                 movie.isFavorite = true
@@ -115,7 +115,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
                 self.favoriteButton.backgroundColor = .yellow
             }
         }
-
+        
     }
     
     func setContraints(){
@@ -143,7 +143,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         //title
         title.topAnchor.constraint(equalTo: colorStripe.topAnchor, constant: 10).isActive = true
         title.leftAnchor.constraint(equalTo: colorStripe.leftAnchor, constant: frame.width/15).isActive = true
-          
+        
     }
     
 }
