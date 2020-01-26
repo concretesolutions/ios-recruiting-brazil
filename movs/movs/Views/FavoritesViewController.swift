@@ -89,10 +89,20 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let movie = self.filteredMovie[indexPath.row]
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        tableView.beginUpdates()
+        
+        let movie = self.movie[indexPath.row]
         DataManager().delete(movie)
-        tableView.reloadData()
+        self.movie.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        
+        tableView.endUpdates()
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
     }
     
 }
