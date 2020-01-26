@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,7 @@
 		905BF1A123DC7F900082CAC1 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905BF1A023DC7F900082CAC1 /* CollectionView.swift */; };
 		905BF1A523DCAC900082CAC1 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905BF1A423DCAC900082CAC1 /* Localizable.swift */; };
 		9062456B23DE0374000C0063 /* SearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9062456A23DE0374000C0063 /* SearchBarDelegate.swift */; };
+		9062456D23DE585A000C0063 /* MovieImageDownloadEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9062456C23DE585A000C0063 /* MovieImageDownloadEvent.swift */; };
 		907DA76E23D7D1E000AFA781 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907DA76D23D7D1E000AFA781 /* UIView.swift */; };
 		907DA77023D7D3D800AFA781 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907DA76F23D7D3D800AFA781 /* UITableView.swift */; };
 		907DA77223D7D40F00AFA781 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907DA77123D7D40F00AFA781 /* UITableViewCell.swift */; };
@@ -80,6 +81,7 @@
 		905BF1A023DC7F900082CAC1 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		905BF1A423DCAC900082CAC1 /* Localizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		9062456A23DE0374000C0063 /* SearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarDelegate.swift; sourceTree = "<group>"; };
+		9062456C23DE585A000C0063 /* MovieImageDownloadEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieImageDownloadEvent.swift; sourceTree = "<group>"; };
 		907DA76D23D7D1E000AFA781 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		907DA76F23D7D3D800AFA781 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		907DA77123D7D40F00AFA781 /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				90F1EE3E23DA6EF9001DA820 /* Genres.swift */,
 				90F1EE4223DA75FA001DA820 /* APISettings.swift */,
 				90F1EE4423DA9465001DA820 /* DataManager.swift */,
+				9062456C23DE585A000C0063 /* MovieImageDownloadEvent.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				90A850E623D6D8790094A0F0 /* Sources */,
 				90A850E723D6D8790094A0F0 /* Frameworks */,
 				90A850E823D6D8790094A0F0 /* Resources */,
+				B977EE635E2B50A48CEA8632 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -407,6 +411,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B977EE635E2B50A48CEA8632 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-movs/Pods-movs-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-movs/Pods-movs-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-movs/Pods-movs-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		BD3721F3F831A924CCD4CFE7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -461,6 +482,7 @@
 				90F1EE4523DA9465001DA820 /* DataManager.swift in Sources */,
 				902D958123D7BC9A00267B1C /* UIImage.swift in Sources */,
 				902D957223D7B63400267B1C /* String.swift in Sources */,
+				9062456D23DE585A000C0063 /* MovieImageDownloadEvent.swift in Sources */,
 				905BF1A523DCAC900082CAC1 /* Localizable.swift in Sources */,
 				90F1EE4323DA75FA001DA820 /* APISettings.swift in Sources */,
 			);

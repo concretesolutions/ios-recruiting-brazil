@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CEPCombine
 
 class MoviesViewController: UIViewController {
 
@@ -30,13 +31,13 @@ class MoviesViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationItem.title = Localizable.movies
+        self.navigationItem.largeTitleDisplayMode = .never
+        self.definesPresentationContext = true
         
         self.setupCollectionView()
         self.getAPISettings()
         self.setNavigation()
-        
-        self.navigationItem.largeTitleDisplayMode = .never
-        self.definesPresentationContext = true
+        self.setRules()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,6 +98,23 @@ extension MoviesViewController {
         
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
+    internal func setRules() {
+        CBEventManager
+            .getEvents(onType: MovieImageDownloadEvent.self)
+            .stream
+            .subscribe(completion: { event in
+                let movies = self
+                    .collectionView
+                    .indexPathsForVisibleItems
+                    .map({ indexPath in
+                        (self.filteredMovie[indexPath.row], indexPath)
+                    })
+                
+                guard let first = movies.first(where: { movie, _ in event.data.id == movie.id }) else { return }
+                self.collectionView.reloadItems(at: [first.1])
+            })
     }
 }
 

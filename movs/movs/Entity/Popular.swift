@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CEPCombine
 
 struct Popular: Codable {
     let page, totalResults, totalPages: Int
@@ -74,6 +75,8 @@ class Movie: Codable {
         URLSession.shared.imageTask(with: url) { image, response, error in
             if let image = image {
                 self._image = image
+                let event = MovieImageDownloadEvent(data: self)
+                CBEventManager.addEvent(event: event)
             }
         }.resume()
     }
