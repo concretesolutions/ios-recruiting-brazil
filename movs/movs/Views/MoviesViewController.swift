@@ -24,6 +24,8 @@ class MoviesViewController: UIViewController {
         }
     }
     
+    internal var page: Int = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +40,7 @@ class MoviesViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.download()
+        self.download(page: self.page)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -53,6 +55,7 @@ extension MoviesViewController {
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.emptyTitle = "Um erro ocorreu. Por favor, tente novamente."
+        self.collectionView.prefetchDataSource = self
     }
     
     internal func getAPISettings() {
@@ -68,12 +71,11 @@ extension MoviesViewController {
         }
     }
     
-    internal func download() {
+    internal func download(page: Int) {
         guard let settings = APISettings.shared else { return }
-        guard let url = settings.popular(page: 1) else { return }
+        guard let url = settings.popular(page: page) else { return }
         
         URLSession.shared.popularTask(with: url) { (popular, response, error) in
-            
             DispatchQueue.main.async {
                 if let error = error {
                     let alert = UIAlertController(title: Localizable.error, message: error.localizedDescription, preferredStyle: .alert)
@@ -82,7 +84,8 @@ extension MoviesViewController {
                 }
                 
                 guard let movies = popular else { return }
-                self.movies = movies.results
+                self.page = movies.page + 1
+                self.movies.append(contentsOf: movies.results)
             }
         }.resume()
     }
@@ -160,4 +163,12 @@ extension MoviesViewController: SearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.filteredItems(items: self.completeItems())
     }
+}
+
+extension MoviesViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        guard let last = indexPaths.last, last.row == (self.filteredMovie.count - 1) else { return }
+        self.download(page: self.page)
+    }
+    
 }
