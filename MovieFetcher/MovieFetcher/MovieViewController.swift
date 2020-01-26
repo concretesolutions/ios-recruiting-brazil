@@ -84,9 +84,14 @@ class MovieViewController: UIViewController {
     
     lazy var favoriteButton:UIButton = {
         let button = UIButton()
-        button.backgroundColor = .brown
+        button.backgroundColor = .clear
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
+        let normalButtonImage = UIImage(imageLiteralResourceName: "favorite_empty_icon")
+        button.setImage(normalButtonImage, for: .normal)
+        button.contentMode = .center
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
         button.addTarget(self, action: #selector(favoriteMovie), for: .touchDown)
         return button
     }()
@@ -163,9 +168,9 @@ class MovieViewController: UIViewController {
     func refreshFavorite(){
         if let movie = self.movie{
             if !movie.isFavorite! {
-                self.favoriteButton.backgroundColor = .brown
+                self.favoriteButton.setImage(UIImage(imageLiteralResourceName: "favorite_empty_icon"), for: .normal)
             }else{
-                self.favoriteButton.backgroundColor = .yellow
+                 self.favoriteButton.setImage(UIImage(imageLiteralResourceName: "favorite_full_icon"), for: .normal)
             }
         }
     }
@@ -227,11 +232,13 @@ class MovieViewController: UIViewController {
                         break
                     }
                 }
-                self.favoriteButton.backgroundColor = .brown
+//                self.favoriteButton.backgroundColor = .brown
+                self.favoriteButton.setImage(UIImage(imageLiteralResourceName: "favorite_empty_icon"), for: .normal)
             }else{
                 movie.isFavorite = true
                 dao.favoriteMovies.append(movie)
-                self.favoriteButton.backgroundColor = .yellow
+//                self.favoriteButton.backgroundColor = .yellow
+                self.favoriteButton.setImage(UIImage(imageLiteralResourceName: "favorite_full_icon"), for: .normal)
             }
         }
 
