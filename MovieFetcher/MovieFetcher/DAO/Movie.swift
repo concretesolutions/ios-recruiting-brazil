@@ -12,7 +12,7 @@ class Movie:Codable{
     
     let poster_path:String!
     let overview:String!
-    let releaseDate:Date!
+    let release_date:String!
     let id:Int!
     let genre_ids:[Int]!
     let original_title:String!
@@ -20,17 +20,17 @@ class Movie:Codable{
     let title:String!
     let backdrop_path:String!
     let popularity:Float!
-    let voteCount:Int!
+    let vote_count:Int!
     let video:Bool!
     let vote_average:Float!
     var isFavorite:Bool?
     var listIndexPath:IndexPath?
     
-    init(poster_path:String,overview:String,releaseDate:Date,id:Int,genre_ids:[Int],original_title:String,original_language:String,title:String,backdrop_path:String,popularity:Float,voteCount:Int,video:Bool,vote_average:Float,isFavorite:Bool) {
+    init(poster_path:String,overview:String,release_date:String,id:Int,genre_ids:[Int],original_title:String,original_language:String,title:String,backdrop_path:String,popularity:Float,vote_count:Int,video:Bool,vote_average:Float,isFavorite:Bool) {
         
         self.poster_path = poster_path
         self.overview = overview
-        self.releaseDate = releaseDate
+        self.release_date = release_date
         self.id = id
         self.genre_ids = genre_ids
         self.original_title = original_title
@@ -38,7 +38,7 @@ class Movie:Codable{
         self.title = title
         self.backdrop_path = backdrop_path
         self.popularity = popularity
-        self.voteCount = voteCount
+        self.vote_count = vote_count
         self.video = video
         self.vote_average = vote_average
         self.isFavorite = false

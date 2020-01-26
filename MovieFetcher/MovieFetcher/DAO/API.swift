@@ -67,6 +67,30 @@ final class API{
              
          }
     
+    func retrieveCategories(urlStr:String,onCompletion:@escaping(GenreResult)->()){
+       let urlString = urlStr
+        
+        guard let url = URL(string: urlString) else {fatalError("Could not retrieve random url")}
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, resp, err) in
+            
+            guard let data = data else{
+                
+                fatalError("Could not retrieve data")
+            }
+            
+            guard let genres = try? JSONDecoder().decode(GenreResult.self, from: data) else {
+                fatalError("Failed to decode movie")
+            
+            }
+            onCompletion(genres)
+            
+        }
+        
+        task.resume()
+    }
+}
+
         
         
         
@@ -74,4 +98,4 @@ final class API{
 
     
     
-}
+

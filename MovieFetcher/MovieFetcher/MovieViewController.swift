@@ -12,13 +12,16 @@ class MovieViewController: UIViewController {
 
     var movie:Movie!
     var delegate:CellUpdate!
-   
+    var safeArea:UILayoutGuide!
+    var myGenres:[String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(hex: dao.concreteDarkGray)
+        safeArea = view.layoutMarginsGuide
         setConstraints()
         refreshFavorite()
+        
         // Do any additional setup after loading the view.
     }
 
@@ -30,28 +33,39 @@ class MovieViewController: UIViewController {
         return image
     }()
     
-//    lazy var colorStripe:UIImageView = {
-//        let image = UIImageView()
-//        image.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(image)
-//        return image
-//    }()
+    lazy var colorStripe:UIImageView = {
+        let image = UIImageView()
+        image.backgroundColor = .white
+        image.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(image)
+        return image
+    }()
+    
+    lazy var bottonColorStripe:UIImageView = {
+        let image = UIImageView()
+        image.backgroundColor = .white
+        image.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(image)
+        return image
+    }()
 
     //
-    lazy var genreLabel:UILabel = {
+    lazy var movieReleaseDate:UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .red
+        label.backgroundColor = .clear
         label.minimumScaleFactor = 0.6
         label.numberOfLines = 5
         label.lineBreakMode = .byTruncatingHead
         label.textColor = .white
-        label.text = "Action"
-        label.font = label.font.withSize(18)
+        label.text = movie.release_date
+        label.font = label.font.withSize(20)
         label.adjustsFontSizeToFitWidth = true
         view.addSubview(label)
         return label
     }()
+    
+    
     
     lazy var movieName:UILabel = {
         let label = UILabel()
@@ -60,9 +74,9 @@ class MovieViewController: UIViewController {
         label.minimumScaleFactor = 0.6
         label.numberOfLines = 5
         label.lineBreakMode = .byTruncatingHead
-        label.textColor = .black
+        label.textColor = .white
         label.text = self.movie.title
-        label.font = label.font.withSize(18)
+        label.font = label.font.withSize(20)
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -77,12 +91,64 @@ class MovieViewController: UIViewController {
         return button
     }()
     
+    lazy var movieDescription:UITextView = {
+        let textView = UITextView()
+        textView.isScrollEnabled = true
+        textView.isUserInteractionEnabled = true
+        textView.isSelectable = true
+        textView.isEditable = false
+        textView.textColor = .white
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.text = self.movie.overview
+        textView.font = .systemFont(ofSize: 18)
+        
+        textView.backgroundColor = .clear
+        view.addSubview(textView)
+        return textView
+    }()
+    
+    lazy var genres:UITextView = {
+        let textView = UITextView()
+        textView.isScrollEnabled = true
+        textView.isUserInteractionEnabled = true
+        textView.isSelectable = true
+        textView.isEditable = false
+        textView.textColor = .white
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.text = self.myGenres.joined(separator: ",")
+        textView.font = .systemFont(ofSize: 18)
+        textView.backgroundColor = .clear
+        view.addSubview(textView)
+        return textView
+    }()
+    
     
     func setMovie(movie:Movie){
         self.movie = movie
         updatePosterImage(imageUrl: movie.backdrop_path)
+        updateGenres()
+//        self.movieDescription.text = movie.overview
 //        self.cellIndexPath = movie.listIndexPath
     }
+    
+     private func updateGenres(){
+        let url = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(dao.apiKey)&language=en-US"
+             let anonymousFunc = {(fetchedData:GenreResult) in
+                 DispatchQueue.main.async {
+                    for genre in fetchedData.genres{
+                        for id in self.movie.genre_ids{
+                            if genre.id == id{
+                                self.myGenres.append(genre.name)
+                            }
+                        }
+                    }
+                    self.genres.text = self.myGenres.joined(separator: "    ")
+                 }
+             }
+        api.retrieveCategories(urlStr: url, onCompletion: anonymousFunc)
+         }
+    
+    
 
     private func updatePosterImage(imageUrl:String){
           let url = "https://image.tmdb.org/t/p/w500\(imageUrl)"
@@ -111,7 +177,7 @@ class MovieViewController: UIViewController {
         poster.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
         poster.heightAnchor.constraint(equalToConstant: view.frame.height/2).isActive = true
         
-        favoriteButton.topAnchor.constraint(equalTo: poster.bottomAnchor, constant: view.frame.height/20).isActive = true
+        favoriteButton.bottomAnchor.constraint(equalTo: poster.bottomAnchor, constant: -view.frame.height/20).isActive = true
         favoriteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         favoriteButton.heightAnchor.constraint(equalToConstant: view.frame.height/15).isActive = true
         favoriteButton.widthAnchor.constraint(equalToConstant: view.frame.height/15).isActive = true
@@ -121,11 +187,32 @@ class MovieViewController: UIViewController {
         movieName.heightAnchor.constraint(equalToConstant: view.frame.height/20).isActive = true
         movieName.widthAnchor.constraint(equalToConstant: view.frame.width/2.5).isActive = true
         
+        movieReleaseDate.topAnchor.constraint(equalTo: poster.bottomAnchor, constant: view.frame.height/35).isActive = true
+        movieReleaseDate.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        movieReleaseDate.heightAnchor.constraint(equalToConstant: view.frame.height/20).isActive = true
+        movieReleaseDate.widthAnchor.constraint(equalToConstant: view.frame.width/2.5).isActive = true
         
-        genreLabel.topAnchor.constraint(equalTo: poster.bottomAnchor, constant: view.frame.height/35).isActive = true
-        genreLabel.leftAnchor.constraint(equalTo: movieName.rightAnchor, constant: view.frame.height/25).isActive = true
-        genreLabel.heightAnchor.constraint(equalToConstant: view.frame.height/20).isActive = true
-        genreLabel.widthAnchor.constraint(equalToConstant: view.frame.width/2.5).isActive = true
+        colorStripe.topAnchor.constraint(equalTo: movieReleaseDate.bottomAnchor,constant: 10).isActive = true
+        colorStripe.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        colorStripe.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        colorStripe.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        
+//        movieDescription.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10).isActive = true
+        movieDescription.topAnchor.constraint(equalTo: colorStripe.bottomAnchor,constant: 10).isActive = true
+        movieDescription.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        movieDescription.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        movieDescription.heightAnchor.constraint(equalToConstant: view.frame.height/7).isActive = true
+        
+        bottonColorStripe.topAnchor.constraint(equalTo: movieDescription.bottomAnchor,constant: 10).isActive = true
+        bottonColorStripe.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        bottonColorStripe.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        bottonColorStripe.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        
+        genres.topAnchor.constraint(equalTo: bottonColorStripe.bottomAnchor,constant: 10).isActive = true
+        genres.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        genres.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        genres.heightAnchor.constraint(equalToConstant: view.frame.height/7).isActive = true
+        
     }
     
     @objc private func favoriteMovie(){

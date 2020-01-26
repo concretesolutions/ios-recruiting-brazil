@@ -38,7 +38,7 @@ class ListViewController: UIViewController{
     //MARK: -Init methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .blue
+        self.view.backgroundColor = UIColor.init(hex: dao.concreteDarkGray)
         safeArea = view.layoutMarginsGuide
         setContraints()
         getMovie(page:1)
@@ -107,7 +107,6 @@ extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == dao.searchResults.count - 1 {
             let page = dao.page + 1
-
             getMovie(page: page)
            }
     }
