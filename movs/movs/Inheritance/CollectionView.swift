@@ -14,6 +14,8 @@ class CollectionView: UICollectionView {
     var emptyTitle: String?
     var emptySubtitle: String?
     
+    private let activityIndicator = UIActivityIndicatorView(style: .large)
+    
     override func reloadData() {
         super.reloadData()
         let count = self.numberOfItems(inSection: 0)
@@ -28,6 +30,16 @@ class CollectionView: UICollectionView {
         } else {
             self.backgroundView = UIView()
         }
+    }
+    
+    func addLoading() {
+        self.activityIndicator.startAnimating()
+        self.backgroundView = activityIndicator
+    }
+    
+    func removeLoading() {
+        self.activityIndicator.stopAnimating()
+        self.backgroundView = UIView()
     }
 }
 

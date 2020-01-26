@@ -14,6 +14,8 @@ class TableView: UITableView {
     var emptyTitle: String?
     var emptySubtitle: String?
     
+    private let activityIndicator = UIActivityIndicatorView(style: .large)
+    
     override func reloadData() {
         super.reloadData()
         let count = self.numberOfRows(inSection: 0)
@@ -28,5 +30,15 @@ class TableView: UITableView {
         } else {
             self.backgroundView = UIView()
         }
+    }
+    
+    func addLoading() {
+        self.activityIndicator.startAnimating()
+        self.backgroundView = activityIndicator
+    }
+    
+    func removeLoading() {
+        self.activityIndicator.stopAnimating()
+        self.backgroundView = UIView()
     }
 }

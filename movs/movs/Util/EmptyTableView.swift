@@ -27,7 +27,7 @@ class EmptyTableView: UIView {
     }
     
     private func commonInit() {
-        Bundle.main.loadNibNamed(self.identifier, owner: self, options: nil)
+        Bundle.main.loadNibNamed("EmptyTableView", owner: self, options: nil)
         self.contentView.frame = self.bounds
         self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.addSubview(self.contentView)

@@ -9,14 +9,16 @@
 import Foundation
 
 class Localizable {
-    static var movies = "movies".localized
-    static var favorites = "favorites".localized
-    static var back = "back".localized
-    static var filter = "filter".localized
-    static var date = "date".localized
-    static var apply = "apply".localized
-    static var favorite = "favorite".localized
-    static var unfavorite = "unfavorite".localized
-    static var removeFilter = "removeFilter".localized
-    static var genres = "genres".localized
+    static let movies = "movies".localized
+    static let favorites = "favorites".localized
+    static let back = "back".localized
+    static let filter = "filter".localized
+    static let date = "date".localized
+    static let apply = "apply".localized
+    static let favorite = "favorite".localized
+    static let unfavorite = "unfavorite".localized
+    static let removeFilter = "removeFilter".localized
+    static let genres = "genres".localized
+    static let error = "error".localized
+    static let ok = "ok".localized
 }

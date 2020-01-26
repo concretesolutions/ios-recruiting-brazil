@@ -32,7 +32,8 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func favorite(_ sender: UIButton) {
-        DataManager().save(with: self.movie!)
+        guard let movie = self.movie else { return }
+        DataManager().save(movie)
     }
     
 }

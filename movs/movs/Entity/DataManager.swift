@@ -58,11 +58,11 @@ class DataManager {
 }
 
 extension DataManager {
-    func save(_ movie: Movie){
+    func save(_ movie: Movie) {
         
-        let managedContext = self.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "MovieEntity", in: managedContext)!
-        let managed = NSManagedObject(entity: entity, insertInto: managedContext)
+        let context = self.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "MovieEntity", in: context)!
+        let managed = NSManagedObject(entity: entity, insertInto: context)
         
         managed.setValue(movie.id, forKey: "id")
         managed.setValue(movie.title, forKey: "title")
@@ -70,9 +70,31 @@ extension DataManager {
         managed.setValue(movie.image?.base64EncodedString, forKey: "image")
         
         do {
-            try managedContext.save()
+            try context.save()
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    func delete(_ movie: Movie) {
+        
+        let context = self.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieEntity")
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            let result = try context.fetch(request)
+            for data in result as! [NSManagedObject] {
+                let id = data.value(forKey: "id") as! Int
+                if id == movie.id {
+                    context.delete(data)
+                    try context.save()
+                    return
+                }
+            }
+        } catch {
+            let nserror = error as NSError
+            print("Could not delete. \(nserror), \(nserror.userInfo)")
         }
     }
     
@@ -97,7 +119,8 @@ extension DataManager {
                 movies.append(movie)
             }
         } catch {
-            print("Failed")
+            let nserror = error as NSError
+            print("Get movies error. \(nserror), \(nserror.userInfo)")
         }
         return movies
     }

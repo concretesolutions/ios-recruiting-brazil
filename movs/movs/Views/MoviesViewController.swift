@@ -10,7 +10,7 @@ import UIKit
 
 class MoviesViewController: UIViewController {
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: CollectionView!
     
     internal var movies = [Movie]() {
         didSet {
@@ -27,6 +27,10 @@ class MoviesViewController: UIViewController {
         
         self.setupCollectionView()
         self.getAPISettings()
+        self.setNavigation()
+        
+        self.navigationItem.largeTitleDisplayMode = .never
+        self.definesPresentationContext = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,12 +48,13 @@ extension MoviesViewController {
         self.collectionView.register(cell: MoviesCollectionViewCell.self)
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        self.collectionView.emptyTitle = "Um erro ocorreu. Por favor, tente novamente."
     }
     
     internal func getAPISettings() {
         if let fileURL = Bundle.main.url(forResource: "APISettings", withExtension: "plist") {
             do {
-                let data = try Data.init(contentsOf: fileURL, options: .mappedIfSafe)
+                let data = try Data(contentsOf: fileURL, options: .mappedIfSafe)
                 let decoder = PropertyListDecoder()
                 let settings = try decoder.decode(APISettings.self, from: data)
                 APISettings.shared = settings
@@ -64,9 +69,27 @@ extension MoviesViewController {
         guard let url = settings.popular(page: 1) else { return }
         
         URLSession.shared.popularTask(with: url) { (popular, response, error) in
+            
+            DispatchQueue.main.async {
+                if let error = error {
+                    let alert = UIAlertController(title: Localizable.error, message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+            
             guard let movies = popular else { return }
             self.movies = movies.results
         }.resume()
+    }
+    
+    internal func setNavigation() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+        
+        self.navigationItem.searchController = searchController
+        self.navigationItem.hidesSearchBarWhenScrolling = false
     }
 }
 
@@ -104,4 +127,8 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+}
+
+extension MoviesViewController: UISearchBarDelegate {
+    
 }

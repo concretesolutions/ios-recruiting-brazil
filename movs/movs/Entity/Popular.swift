@@ -20,16 +20,6 @@ struct Popular: Codable {
     }
 }
 
-//protocol CoreDataMap {
-//    func map() -> [ String: Any ]
-//}
-//
-//extension Movie: CoreDataMap {
-//    func map() -> [String : Any] {
-//        return ["popularity" : self.popularity]
-//    }
-//}
-
 class Movie: Codable {
     
     var popularity: Double = 0.0
@@ -60,6 +50,8 @@ class Movie: Codable {
             self._image = newValue
         }
     }
+    
+    required init() { }
 
     enum CodingKeys: String, CodingKey {
         case popularity
@@ -75,10 +67,6 @@ class Movie: Codable {
         case voteAverage = "vote_average"
         case overview
         case releaseDate = "release_date"
-    }
-    
-    required init() {
-
     }
     
     private func downloadImage() {
