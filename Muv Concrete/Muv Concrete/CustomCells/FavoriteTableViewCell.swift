@@ -26,10 +26,11 @@ class FavoriteTableViewCell: UITableViewCell {
     private func configure(){
         
         guard let movie = movie else { return }
+        if let date = movie.releaseDate?.split(separator: "-").first {
+            self.dateLabel.text = String(date)
+        }
         DispatchQueue.main.async {
             self.titleLabel.text = movie.title
-            let date = movie.releaseDate?.split(separator: "-").first
-            self.dateLabel.text = String(date!)
             self.overviewTextView.text = movie.overview
             if let imageUrlString = movie.posterPath {
                 self.movieImageView.downloaded(from: imageUrlString, contentMode: .scaleToFill)

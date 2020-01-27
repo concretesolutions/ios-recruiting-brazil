@@ -16,7 +16,6 @@ class MoviesViewModel {
     var pageRequest = 1
     var limitPage: Int32 = 0
     
-//    salvar os ids em um array useDefaults
     
     public func requestMovies(completionHandler: @escaping (Bool) -> Void){
         let serviceRouteMovies = ServiceRoute.popularMovie(pageRequest)
@@ -24,8 +23,7 @@ class MoviesViewModel {
         request.dispatch(endPoint: serviceRouteMovies, type: Content.self, completionHandler: { (data, response, error) in
             
             guard let response = response else {
-//                self.delegate?.showAlert(withTitle: "Falha na conexão", andMessage: "Não foi possível comunicar com o servidor, tente novamente mais tarde.")
-                print("Deu errado")
+                self.delegate?.showAlert(withTitle: "Falha na conexão", andMessage: "Não foi possível comunicar com o servidor, tente novamente mais tarde.")
                 return
             }
             
@@ -37,11 +35,10 @@ class MoviesViewModel {
                         self.limitPage = data.totalPages
                         self.arrayMovies += data.results
                         completionHandler(true)
-//                        self.saveMovies(movies: data.results)
                     }
                 default:
-                    print("nao rolou")
-//                    self.delegate?.showAlert(withTitle: "Alerta", andMessage: "Desculpa o transtorno, houve um erro inesperado.")
+                    completionHandler(false)
+                    self.delegate?.showAlert(withTitle: "Alerta", andMessage: "Desculpa o transtorno, houve um erro inesperado.")
                 }
             }
         })

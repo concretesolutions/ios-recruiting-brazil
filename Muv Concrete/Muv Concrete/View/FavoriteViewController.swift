@@ -10,25 +10,29 @@ import UIKit
 
 class FavoriteViewController: UIViewController {
 
-    let arrayMovie = [ "Thor", "avengers"]
     @IBOutlet weak var tableView: UITableView!
     
     let favoriteViewModel = FavoriteViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        touchScreenHideKeyboard()
         favoriteViewModel.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         view.activityStartAnimating()
+        loadFavoriteMovies()
+    }
+    
+    public func loadFavoriteMovies(){
         favoriteViewModel.readCoreData(completionHandler: { reload in
             self.configureUI()
         })
     }
 
-    private func configureUI(){
+    public func configureUI(){
         tableView.reloadData()
         view.activityStopAnimating()
     }
@@ -49,5 +53,21 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
 
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let unfavorite = unfavoriteAction(at: indexPath)
+        
+        return UISwipeActionsConfiguration(actions: [unfavorite])
+    }
+    
+    private func unfavoriteAction(at indexPath: IndexPath) -> UIContextualAction {
+        let unfavorite = UIContextualAction(style: .destructive, title: "Unfavorite") { (action, View, completionHandler) in
+            let movie = self.favoriteViewModel.arrayMovies[indexPath.row]
+            self.favoriteViewModel.arrayMovies.remove(at: indexPath.row)
+            self.favoriteViewModel.unfavorite(movie: movie)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            completionHandler(true)
+        }
+        return unfavorite
+    }
     
 }

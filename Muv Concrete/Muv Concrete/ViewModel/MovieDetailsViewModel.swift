@@ -26,8 +26,7 @@ class MovieDetailsViewModel {
         request.dispatch(endPoint: serviceRouteMovies, type: MovieId.self, completionHandler: { (data, response, error) in
             
             guard let response = response else {
-//                self.delegate?.showAlert(withTitle: "Falha na conexão", andMessage: "Não foi possível comunicar com o servidor, tente novamente mais tarde.")
-                print("Deu errado")
+                self.delegate?.showAlert(withTitle: "Falha na conexão", andMessage: "Não foi possível comunicar com o servidor, tente novamente mais tarde.")
                 return
             }
             
@@ -41,11 +40,9 @@ class MovieDetailsViewModel {
                         self.loadGenres(movie: data)
                         self.loadDate(movie: data)
                         completionHandler(true)
-//                        self.saveMovies(movies: data.results)
                     }
                 default:
-                    print("nao rolou")
-//                    self.delegate?.showAlert(withTitle: "Alerta", andMessage: "Desculpa o transtorno, houve um erro inesperado.")
+                    self.delegate?.showAlert(withTitle: "Alerta", andMessage: "Desculpa o transtorno, houve um erro inesperado.")
                 }
             }
         })
@@ -60,7 +57,6 @@ class MovieDetailsViewModel {
         let genresMovie = movie.genres
         arrayGenre = genresMovie.map({ $0.name })
         genres = arrayGenre.joined(separator:", ")
-        print(genres)
     }
     
     public func checkFavorite(id: Int32, completionHandler: @escaping (Bool) -> Void){

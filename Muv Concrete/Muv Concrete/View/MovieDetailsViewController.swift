@@ -45,6 +45,10 @@ class MovieDetailsViewController: UIViewController {
         })
     }
     
+    @IBAction func backButton(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     private func configureUI() {
         guard let movie = detailViewModel.getMovie() else { return }
         DispatchQueue.main.async {
@@ -52,7 +56,9 @@ class MovieDetailsViewController: UIViewController {
             self.dateLabel.text = self.detailViewModel.date
             self.genreLabel.text = self.detailViewModel.genres
             self.overviewTextView.text = movie.overview
-            self.movieImageView = self.detailViewModel.imageView
+            if let imagePath = movie.posterPath {
+                self.movieImageView.downloaded(from: imagePath, contentMode: .scaleToFill)
+            }
             self.view.activityStopAnimating()
         }
         

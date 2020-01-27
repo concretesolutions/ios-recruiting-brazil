@@ -16,8 +16,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o0d-CM-ckD">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ch5-ss-Egh">
+                                        <rect key="frame" x="180.5" y="38" width="53" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="PN5-ot-6Bp">
+                                        <rect key="frame" x="5" y="70" width="404" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="A2p-89-C7w"/>
+                                        </constraints>
+                                        <color key="barTintColor" red="0.96862745100000003" green="0.80784313730000001" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96862745100000003" green="0.80784313730000001" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="FLX-U1-C0j"/>
+                                    <constraint firstAttribute="bottom" secondItem="PN5-ot-6Bp" secondAttribute="bottom" constant="5" id="GTP-BY-2Nz"/>
+                                    <constraint firstItem="PN5-ot-6Bp" firstAttribute="leading" secondItem="o0d-CM-ckD" secondAttribute="leading" constant="5" id="IhN-6G-3aw"/>
+                                    <constraint firstItem="PN5-ot-6Bp" firstAttribute="top" secondItem="ch5-ss-Egh" secondAttribute="bottom" constant="8" id="UQZ-lm-XF3"/>
+                                    <constraint firstItem="ch5-ss-Egh" firstAttribute="centerX" secondItem="o0d-CM-ckD" secondAttribute="centerX" id="dV0-LZ-F5R"/>
+                                    <constraint firstAttribute="trailing" secondItem="PN5-ot-6Bp" secondAttribute="trailing" constant="5" id="pD8-EQ-zbG"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Lo-KS-Vrq">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="120" width="414" height="742"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="NjU-R1-X1K">
@@ -27,6 +55,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                 </prototypes>
@@ -36,12 +65,15 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="5Lo-KS-Vrq" firstAttribute="top" secondItem="o0d-CM-ckD" secondAttribute="bottom" id="8Go-AP-nyX"/>
+                            <constraint firstItem="o0d-CM-ckD" firstAttribute="top" secondItem="m2t-Zx-kiD" secondAttribute="top" id="FTO-3j-cvi"/>
                             <constraint firstItem="5Lo-KS-Vrq" firstAttribute="leading" secondItem="MKI-rE-yqZ" secondAttribute="leading" id="I1a-Wh-3U1"/>
                             <constraint firstItem="MKI-rE-yqZ" firstAttribute="bottom" secondItem="5Lo-KS-Vrq" secondAttribute="bottom" id="MUq-DM-AgX"/>
+                            <constraint firstItem="MKI-rE-yqZ" firstAttribute="trailing" secondItem="o0d-CM-ckD" secondAttribute="trailing" id="acm-bN-ISN"/>
                             <constraint firstItem="MKI-rE-yqZ" firstAttribute="trailing" secondItem="5Lo-KS-Vrq" secondAttribute="trailing" id="cck-q6-RaH"/>
-                            <constraint firstItem="5Lo-KS-Vrq" firstAttribute="top" secondItem="MKI-rE-yqZ" secondAttribute="top" id="o97-eT-TzJ"/>
+                            <constraint firstItem="o0d-CM-ckD" firstAttribute="leading" secondItem="m2t-Zx-kiD" secondAttribute="leading" id="wyT-rs-XKh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MKI-rE-yqZ"/>
                     </view>

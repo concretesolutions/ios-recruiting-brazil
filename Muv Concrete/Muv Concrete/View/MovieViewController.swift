@@ -18,20 +18,36 @@ class MovieViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        touchScreenHideKeyboard()
+        
         self.collectionView.register(UINib(nibName: "MovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MovieCollectionViewCell")
         
         moviesViewModel.delegate = self
         loadMovies()
-        view.activityStartAnimating()
+        
         
     }
     
     func loadMovies() {
+        view.activityStartAnimating()
         moviesViewModel.requestMovies(completionHandler: { reload in
-            self.collectionView.reloadData()
+            if reload {
+                self.collectionView.reloadData()
+            } else {
+                self.collectionView.isHidden = true
+                let updateButton = UIButton(frame: CGRect(x: self.view.frame.size.width / 2, y: self.view.frame.size.height / 2, width: 50, height: 40))
+                updateButton.backgroundColor = .green
+                updateButton.setTitle("Update", for: [])
+                updateButton.addTarget(self, action: #selector(self.update), for: .touchUpInside)
+
+                self.view.addSubview(updateButton)
+            }
             self.view.activityStopAnimating()
-            
         })
+    }
+    
+    @objc func update(sender: UIButton!) {
+      loadMovies()
     }
 }
 

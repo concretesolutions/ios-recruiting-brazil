@@ -24,7 +24,6 @@ class CoreData {
         movieCoreData?.title = movie.title
 //        movieCoreData?.genreIDs = movie.genreIDs
         movieCoreData?.posterPath = movie.posterPath
-        movieCoreData?.isFavorite = movie.isFavorite
         movieCoreData?.releaseDate = movie.releaseDate
         movieCoreData?.overview = movie.overview
         

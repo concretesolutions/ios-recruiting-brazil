@@ -16,8 +16,7 @@ class Movie: Codable {
     var posterPath: String?
     var backdropPath: String?
     var releaseDate: String
-    var isFavorite: Bool = false
-
+    
     enum CodingKeys: String, CodingKey {
         case id, title, overview
         case genreIDs = "genre_ids"
