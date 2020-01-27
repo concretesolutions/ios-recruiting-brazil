@@ -13,11 +13,13 @@ class FavoriteViewModel {
     var delegate: UIViewController?
     
     var arrayMovies: [MovieCoreData] = []
+    var arrayMoviesSave: [MovieCoreData] = []
     
     public func readCoreData(completionHandler: @escaping (Bool) -> Void) {
         let coreData = CoreData()
         if coreData.getElementCoreData() != nil {
-            arrayMovies = coreData.getElementCoreData()!
+            arrayMoviesSave = coreData.getElementCoreData()!
+            arrayMovies = arrayMoviesSave
             completionHandler(true)
         }
         
@@ -39,5 +41,21 @@ class FavoriteViewModel {
     
     public func getMovie(indexPath: IndexPath) -> MovieCoreData {
         return arrayMovies[indexPath.row]
+    }
+    
+    public func search(searchText: String, completionHandler: @escaping (Bool) -> Void ) {
+        guard !searchText.isEmpty else {
+            arrayMovies = arrayMoviesSave
+            completionHandler(true)
+            return
+        }
+        arrayMovies = arrayMoviesSave.filter({ movie -> Bool in
+            if let movieName = movie.title {
+                return movieName.contains(searchText)
+            }
+            return false
+        })
+        
+        completionHandler(true)
     }
 }

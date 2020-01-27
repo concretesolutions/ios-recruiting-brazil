@@ -11,6 +11,7 @@ import UIKit
 class MovieViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     let moviesViewModel = MoviesViewModel()
     var movieSelected: Movie?
@@ -23,8 +24,10 @@ class MovieViewController: UIViewController {
         self.collectionView.register(UINib(nibName: "MovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MovieCollectionViewCell")
         
         moviesViewModel.delegate = self
+        searchBar.delegate = self
         loadMovies()
         
+        searchBar.backgroundImage = UIImage()
         
     }
     
@@ -99,3 +102,14 @@ extension MovieViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension MovieViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        moviesViewModel.search(searchText: searchText, completionHandler: { result in
+            if result {
+                self.collectionView.reloadData()
+            }
+        })
+    }
+}

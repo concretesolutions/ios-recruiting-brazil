@@ -10,6 +10,7 @@ import UIKit
 
 class FavoriteViewController: UIViewController {
 
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
     let favoriteViewModel = FavoriteViewModel()
@@ -19,6 +20,8 @@ class FavoriteViewController: UIViewController {
         
         touchScreenHideKeyboard()
         favoriteViewModel.delegate = self
+        searchBar.delegate = self
+        searchBar.backgroundImage = UIImage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,4 +73,16 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
         return unfavorite
     }
     
+}
+
+extension FavoriteViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        favoriteViewModel.search(searchText: searchText, completionHandler: { result in
+            if result {
+                self.tableView.reloadData()
+            }
+        })
+    }
 }

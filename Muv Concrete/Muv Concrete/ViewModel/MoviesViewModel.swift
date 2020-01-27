@@ -13,6 +13,7 @@ class MoviesViewModel {
     var delegate: UIViewController?
     
     var arrayMovies: [Movie] = []
+    var arrayMoviesSave: [Movie] = []
     var pageRequest = 1
     var limitPage: Int32 = 0
     
@@ -33,6 +34,7 @@ class MoviesViewModel {
                     DispatchQueue.main.async {
                         guard let data = data else { return }
                         self.limitPage = data.totalPages
+                        self.arrayMoviesSave += data.results
                         self.arrayMovies += data.results
                         completionHandler(true)
                     }
@@ -57,5 +59,19 @@ class MoviesViewModel {
     
     public func getMovie(indexPath: IndexPath) -> Movie {
         return arrayMovies[indexPath.row]
+    }
+    
+    public func search(searchText: String, completionHandler: @escaping (Bool) -> Void ) {
+        guard !searchText.isEmpty else {
+            arrayMovies = arrayMoviesSave
+            completionHandler(true)
+            return
+        }
+        arrayMovies = arrayMoviesSave.filter({ movie -> Bool in
+            let movieName = movie.title
+            return movieName.contains(searchText)
+        })
+        
+        completionHandler(true)
     }
 }

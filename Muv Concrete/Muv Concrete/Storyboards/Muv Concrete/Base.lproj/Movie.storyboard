@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a2K-lO-frv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a2K-lO-frv">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -89,6 +89,7 @@
                     <tabBarItem key="tabBarItem" title="Movies" image="list_icon" id="dKW-0Y-quj"/>
                     <connections>
                         <outlet property="collectionView" destination="oKD-wb-Pu8" id="wjb-W5-0Ay"/>
+                        <outlet property="searchBar" destination="UEd-Aa-cWj" id="yRC-S3-1Zq"/>
                         <segue destination="MMq-zC-68y" kind="show" identifier="segueMovieDetailViewController" id="bwJ-vU-gog"/>
                     </connections>
                 </viewController>
@@ -251,7 +252,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0lu-Xy-waP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1369.5652173913045" y="-496.20535714285711"/>
+            <point key="canvasLocation" x="1278" y="-496"/>
         </scene>
     </scenes>
     <resources>
