@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
            let viewController = TabBarController()
            if let windowScene = scene as? UIWindowScene {
                self.window = UIWindow(windowScene: windowScene); self.window?.rootViewController = viewController; self.window?.makeKeyAndVisible()
-              api.retrieveFavorites()
+              dao.retrieveFavorites()
            }
        }
 
@@ -29,7 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
-        api.saveFavorites()
+        dao.saveFavorites()
         // The scene may re-connect later, as its session was not neccessarily discarded (see `application:didDiscardSceneSessions` instead).
     }
 

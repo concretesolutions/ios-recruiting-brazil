@@ -121,8 +121,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     func refreshFavorite(){
-        
-        
         //Update Favorite image
         if let movie = self.movie{
             
@@ -132,7 +130,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
                     break
                 }
             }
-        
             if !movie.isFavorite! {
                 self.favoriteButton.setImage(UIImage(imageLiteralResourceName: "favorite_gray_icon"), for: .normal)
             }else{
