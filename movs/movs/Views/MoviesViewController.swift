@@ -38,6 +38,7 @@ class MoviesViewController: UIViewController {
         self.getAPISettings()
         self.setNavigation()
         self.setRules()
+        self.getGenres()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +71,16 @@ extension MoviesViewController {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    internal func getGenres() {
+        guard let settings = APISettings.shared else { return }
+        guard let url = settings.genre() else { return }
+        
+        URLSession.shared.genresTask(with: url, completionHandler: { genres, response, error in
+            guard let genres = genres else { return }
+            Genres.shared = genres
+        }).resume()
     }
     
     internal func download(page: Int) {
@@ -131,6 +142,12 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        
+        let movie = self.filteredMovie[indexPath.row]
+        let detail = DetailMovieViewController()
+        detail.hidesBottomBarWhenPushed = true
+        detail.movie = movie
+        self.navigationController?.pushViewController(detail, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

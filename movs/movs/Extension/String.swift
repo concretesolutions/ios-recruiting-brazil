@@ -17,6 +17,12 @@ extension String {
         guard let dataDecoded = Data(base64Encoded: self, options: .ignoreUnknownCharacters) else { return nil }
         return UIImage(data: dataDecoded)
     }
+    
+    var date: Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.date(from: self)
+    }
 }
 
 

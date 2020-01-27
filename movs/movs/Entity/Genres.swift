@@ -10,6 +10,8 @@ import Foundation
 
 struct Genres: Codable {
     let genres: [Genre]
+    
+    static var shared: Genres?
 }
 
 struct Genre: Codable {
