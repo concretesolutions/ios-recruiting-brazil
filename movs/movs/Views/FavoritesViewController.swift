@@ -35,12 +35,20 @@ class FavoritesViewController: UIViewController {
         
         self.navigationItem.largeTitleDisplayMode = .never
         self.definesPresentationContext = true
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.async {
             self.movie = DataManager().getMovies()
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name:UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @objc private func filterAction() {
@@ -69,6 +77,18 @@ extension FavoritesViewController {
         
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
+    @objc internal func keyboardWillShow(notification: NSNotification) {
+        if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.height {
+            var newContentInset: UIEdgeInsets = self.tableView.contentInset
+            newContentInset.bottom = keyboardHeight + 20
+            self.tableView.contentInset = newContentInset
+        }
+    }
+    
+    @objc internal func keyboardWillHide(notification: NSNotification) {
+        self.tableView.contentInset = .zero
     }
 }
 

@@ -39,6 +39,9 @@ class MoviesViewController: UIViewController {
         self.setNavigation()
         self.setRules()
         self.getGenres()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +50,11 @@ class MoviesViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         self.collectionView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name:UIResponder.keyboardWillHideNotification, object: nil)
     }
 
 }
@@ -126,6 +134,18 @@ extension MoviesViewController {
                 guard let first = movies.first(where: { movie, _ in event.data.id == movie.id }) else { return }
                 self.collectionView.reloadItems(at: [first.1])
             })
+    }
+    
+    @objc internal func keyboardWillShow(notification: NSNotification) {
+        if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.height {
+            var newContentInset: UIEdgeInsets = self.collectionView.contentInset
+            newContentInset.bottom = keyboardHeight + 20
+            self.collectionView.contentInset = newContentInset
+        }
+    }
+    
+    @objc internal func keyboardWillHide(notification: NSNotification) {
+        self.collectionView.contentInset = .zero
     }
 }
 
