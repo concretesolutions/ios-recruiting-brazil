@@ -26,6 +26,7 @@ class DAO:Codable{
     var concreteYellow:String = "#F7CE5B"
     var concreteDarkYellow:String = "#D9971E"
     var concreteWhite:String = "#FFFFFF"
+    var concreteRed:String = "#FC1A03"
     
 }
     

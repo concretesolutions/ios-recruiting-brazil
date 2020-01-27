@@ -14,26 +14,26 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = .red
+        self.view.backgroundColor = .clear
         dao.cellWidth = self.view.bounds.width/3
         setUpBar()
-        
     }
 
     private func setUpBar(){
+        
+      
         
         //MoviesViewController
         let listView = ListViewController()
         let moviesBar = UINavigationController(rootViewController: listView)
         moviesBar.tabBarItem.image = UIImage(named: "")
-        moviesBar.tabBarItem.selectedImage = UIImage(named: "")
-        
+        moviesBar.tabBarItem.selectedImage = UIImage(named: "list_icon")
         //FavoritesViewController
         let fav = FavoritesViewController()
         let favoritesBar = UINavigationController(rootViewController: fav)
         fav.listView = listView
         favoritesBar.tabBarItem.image = UIImage(named: "")
-        favoritesBar.tabBarItem.selectedImage = UIImage(named: "")
+        favoritesBar.tabBarItem.selectedImage = UIImage(named: "favorite_empty_icon")
         //add to bar
         
         viewControllers = [moviesBar,favoritesBar]

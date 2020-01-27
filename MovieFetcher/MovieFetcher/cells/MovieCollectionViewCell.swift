@@ -23,7 +23,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     lazy var colorStripe:UIImageView = {
         let image = UIImageView()
-        image.backgroundColor = .darkGray
+        image.backgroundColor = UIColor.init(hex: dao.concreteDarkGray)
         image.translatesAutoresizingMaskIntoConstraints = false
         addSubview(image)
         return image

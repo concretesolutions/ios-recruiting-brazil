@@ -38,7 +38,7 @@ class ListViewController: UIViewController{
     //MARK: -Init methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.init(hex: dao.concreteDarkGray)
+        self.view.backgroundColor = UIColor.init(hex: dao.concreteRed)
         safeArea = view.layoutMarginsGuide
         setContraints()
         getMovie(page:1)

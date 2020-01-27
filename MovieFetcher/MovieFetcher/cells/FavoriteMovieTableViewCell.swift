@@ -29,7 +29,7 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         label.minimumScaleFactor = 0.6
         label.numberOfLines = 5
         label.lineBreakMode = .byTruncatingHead
-        label.textColor = .black
+        label.textColor = .white
         label.font = label.font.withSize(18)
         label.adjustsFontSizeToFitWidth = true
         addSubview(label)
@@ -39,11 +39,11 @@ class FavoriteMovieTableViewCell: UITableViewCell {
     lazy var releaseYear:UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .red
+        label.backgroundColor = .clear
         label.minimumScaleFactor = 0.6
         label.numberOfLines = 5
         label.lineBreakMode = .byTruncatingHead
-        label.textColor = .black
+        label.textColor = .white
         label.font = label.font.withSize(18)
         label.adjustsFontSizeToFitWidth = true
         addSubview(label)
@@ -57,7 +57,7 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         label.minimumScaleFactor = 0.6
         label.numberOfLines = 5
         label.lineBreakMode = .byTruncatingHead
-        label.textColor = .black
+        label.textColor = .white
         label.font = label.font.withSize(17)
         label.adjustsFontSizeToFitWidth = true
         addSubview(label)
@@ -66,9 +66,11 @@ class FavoriteMovieTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
           super.init(style: style, reuseIdentifier: reuseIdentifier)
-          self.backgroundColor = .lightGray
+        self.backgroundColor = UIColor.init(hex: dao.concreteDarkGray)
           self.layer.cornerRadius = 8
           self.selectionStyle = .none
+        self.layer.borderColor = UIColor.white.cgColor
+        self.layer.borderWidth = 1
           safeArea = layoutMarginsGuide
           setContraints()
           isUserInteractionEnabled = true
@@ -81,8 +83,8 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         guard let imageUrl = movie.poster_path else {fatalError("could not get poster url")}
         updatePosterImage(cell: self, imageUrl: imageUrl)
         self.movieTitle.text = movie.title
-//        debugPrint(movie.releaseDate)
-//        self.releaseYear.text = movie.releaseDate
+        let year = movie.release_date.components(separatedBy: "-")
+        self.releaseYear.text = year[0]
         movieDescription.text = movie.overview
         
     }
@@ -113,14 +115,13 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         posterImage.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 0).isActive = true
         posterImage.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
         posterImage.widthAnchor.constraint(equalToConstant: frame.height*2.5).isActive = true
-        posterImage.heightAnchor.constraint(equalToConstant: frame.height*3).isActive = true
 
         movieTitle.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10).isActive = true
         movieTitle.leftAnchor.constraint(equalTo: posterImage.rightAnchor, constant: 20).isActive = true
         movieTitle.heightAnchor.constraint(equalToConstant: frame.height).isActive = true
         
         releaseYear.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10).isActive = true
-        releaseYear.leftAnchor.constraint(equalTo: movieTitle.rightAnchor, constant: 20).isActive = true
+        releaseYear.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: 0).isActive = true
         releaseYear.heightAnchor.constraint(equalToConstant: frame.height).isActive = true
 
         movieDescription.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 10).isActive = true

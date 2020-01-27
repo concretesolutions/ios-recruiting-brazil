@@ -22,7 +22,7 @@ class FavoritesViewController: UIViewController {
         tableView.delegate = self
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 200
-        tableView.backgroundColor = .lightGray
+        tableView.backgroundColor = UIColor.init(hex: dao.concreteDarkGray)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.reloadData()
         return tableView
@@ -33,7 +33,7 @@ class FavoritesViewController: UIViewController {
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .purple
+        self.view.backgroundColor = UIColor.init(hex: dao.concreteRed)
         safeArea = view.layoutMarginsGuide
         setContraints()
         
