@@ -24,6 +24,5 @@ extension MovieCoreData {
     @NSManaged public var posterPath: String?
     @NSManaged public var backdropPath: String?
     @NSManaged public var releaseDate: String?
-    @NSManaged public var isFavorite: Bool
 
 }
