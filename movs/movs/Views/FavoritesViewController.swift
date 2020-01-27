@@ -20,7 +20,9 @@ class FavoritesViewController: UIViewController {
     
     internal var filteredMovie = [Movie]() {
         didSet {
-            self.tableView.reloadData()
+            UIView.transition(with: self.tableView, duration: 0.35, options: .transitionCrossDissolve, animations: {
+                self.tableView.reloadData()
+            }, completion: nil)
         }
     }
     
@@ -67,7 +69,9 @@ extension FavoritesViewController {
         self.tableView.backgroundColor = .clear
         self.tableView.addFooterView()
         self.tableView.register(cell: FavoritesTableViewCell.self)
-        self.tableView.emptyTitle = "Sua busca por \"x\" não resultou em nenhum resultado."
+        
+        self.tableView.emptyImage = UIImage.favoriteEmptyIcon
+        self.tableView.emptyTitle = Localizable.noFavorites
     }
     
     internal func setNavigation() {
@@ -144,6 +148,8 @@ extension FavoritesViewController: SearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let text = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.tableView.emptyImage = UIImage.searchIcon
+        self.tableView.emptyTitle = String(format: Localizable.searshText, text)
         
         if text.isEmpty {
             self.filteredItems(items: self.completeItems())
@@ -154,6 +160,9 @@ extension FavoritesViewController: SearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.tableView.emptyImage = UIImage.favoriteEmptyIcon
+        self.tableView.emptyTitle = Localizable.noFavorites
+        
         self.filteredItems(items: self.completeItems())
     }
 }
