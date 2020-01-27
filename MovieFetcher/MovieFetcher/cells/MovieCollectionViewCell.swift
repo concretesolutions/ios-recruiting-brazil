@@ -105,14 +105,34 @@ class MovieCollectionViewCell: UICollectionViewCell {
                  self.favoriteButton.setImage(UIImage(imageLiteralResourceName: "favorite_gray_icon"), for: .normal)
             }else{
                 movie.isFavorite = true
+                var alreadyFavorite = false
+                for movieFav in dao.favoriteMovies{
+                    if movie.id == movieFav.id{
+                        alreadyFavorite = true
+                        break
+                    }
+                }
+                if alreadyFavorite != true{
                 dao.favoriteMovies.append(movie)
+                }
                 self.favoriteButton.setImage(UIImage(imageLiteralResourceName: "favorite_full_icon"), for: .normal)
             }
         }
     }
     
     func refreshFavorite(){
+        
+        
+        //Update Favorite image
         if let movie = self.movie{
+            
+            for movieFav in dao.favoriteMovies{
+                if movie.id == movieFav.id{
+                    movie.isFavorite = true
+                    break
+                }
+            }
+        
             if !movie.isFavorite! {
                 self.favoriteButton.setImage(UIImage(imageLiteralResourceName: "favorite_gray_icon"), for: .normal)
             }else{
@@ -121,7 +141,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         }
         
     }
-    
+    //MARK:- Contraints
     func setContraints(){
         
         //Favorite Image

@@ -18,11 +18,9 @@ class TabBarController: UITabBarController {
         dao.cellWidth = self.view.bounds.width/3
         setUpBar()
     }
-
+    //MARK: - Complimentary methods
     private func setUpBar(){
-        
-      
-        
+
         //MoviesViewController
         let listView = ListViewController()
         let moviesBar = UINavigationController(rootViewController: listView)

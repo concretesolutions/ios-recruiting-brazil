@@ -9,7 +9,7 @@
 import UIKit
 
 class FavoriteMovieTableViewCell: UITableViewCell {
-
+    //MARK: - Variables
     var safeArea:UILayoutGuide!
     var movie:Movie!
     var listIndex:IndexPath!
@@ -63,7 +63,7 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         addSubview(label)
         return label
     }()
-    
+    //MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
           super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = UIColor.init(hex: dao.concreteDarkGray)
@@ -72,7 +72,7 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         self.layer.borderColor = UIColor.white.cgColor
         self.layer.borderWidth = 1
           safeArea = layoutMarginsGuide
-          setContraints()
+          setConstraints()
           isUserInteractionEnabled = true
           
       }
@@ -108,8 +108,8 @@ class FavoriteMovieTableViewCell: UITableViewCell {
                  api.retrieveImage(urlStr: url, onCompletion: anonymousFunc)
                  }
     
-    
-    func setContraints(){
+    //MARK: - Constraints
+    func setConstraints(){
         
         posterImage.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 0).isActive = true
         posterImage.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 0).isActive = true

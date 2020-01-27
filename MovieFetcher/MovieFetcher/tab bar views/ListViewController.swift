@@ -22,9 +22,6 @@ class ListViewController: UIViewController{
         flowLayout.sectionInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
         let collectionView = UICollectionView(frame: CGRect(), collectionViewLayout: flowLayout)
         view.addSubview(collectionView)
-        let refresh = UIRefreshControl()
-        refresh.addTarget(self, action: #selector(tite), for: .allEvents)
-        collectionView.refreshControl = refresh
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         //delegates
@@ -42,7 +39,6 @@ class ListViewController: UIViewController{
         safeArea = view.layoutMarginsGuide
         setContraints()
         getMovie(page:1)
-        // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         DispatchQueue.main.async {
@@ -52,7 +48,23 @@ class ListViewController: UIViewController{
             }
         }
     }
-
+    
+    //MARK: - Complimentary Methods
+    private func getMovie(page:Int){
+        let url = "https://api.themoviedb.org/3/movie/popular?api_key=0c909c364c0bc846b72d0fe49ab71b83&language=en-US&page=\(page)"
+        let anonymousFunc = {(fetchedData:MovieSearch) in
+            DispatchQueue.main.async {
+                for movie in fetchedData.results{
+                    movie.isFavorite = false
+                    dao.searchResults.append(movie)
+                }
+                self.collectionView.reloadData()
+            }
+        }
+        api.movieSearch(urlStr: url, onCompletion: anonymousFunc)
+    }
+    
+    //MARK:- Constraints
     private func setContraints(){
         
         collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor,constant: 0).isActive = true
@@ -60,31 +72,6 @@ class ListViewController: UIViewController{
         collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
     }
-    //MARK: - Complimentary Methods
-    
-    @objc func tite(){
-        debugPrint("teite")
-        collectionView.refreshControl?.endRefreshing()
-    }
-    
-    private func getMovie(page:Int){
-        let url = "https://api.themoviedb.org/3/movie/popular?api_key=0c909c364c0bc846b72d0fe49ab71b83&language=en-US&page=\(page)"
-           let anonymousFunc = {(fetchedData:MovieSearch) in
-               DispatchQueue.main.async {
-                for movie in fetchedData.results{
-                    movie.isFavorite = false
-                    dao.searchResults.append(movie)
-                }
-                   self.collectionView.reloadData()
-               }
-           }
-        api.movieSearch(urlStr: url, onCompletion: anonymousFunc)
-           
-       }
-    
-   
-    
-
 }
 
 //MARK:- Extensions and Delegates
@@ -98,7 +85,7 @@ extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
         let movie = dao.searchResults[indexPath.row]
-//        movie.listIndexPath = indexPath
+        //        movie.listIndexPath = indexPath
         cell.setUp(movie:movie)
         cell.refreshFavorite()
         return cell
@@ -108,7 +95,7 @@ extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSourc
         if indexPath.row == dao.searchResults.count - 1 {
             let page = dao.page + 1
             getMovie(page: page)
-           }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -117,21 +104,17 @@ extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSourc
         let size:CGSize = CGSize(width: width, height: height)
         return size
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let movie = dao.searchResults[indexPath.row]
         let movieVc = MovieViewController()
         movieVc.setMovie(movie: movie)
-//        imovieVc.cellIndexPath = indexPath
+        //        imovieVc.cellIndexPath = indexPath
         movieVc.delegate = self
         dao.searchResults[indexPath.row] = movie
         self.present(movieVc, animated: true) {
         }
-      
     }
-    
-    
-    
 }
 extension ListViewController:CellUpdate{
     func updateList() {

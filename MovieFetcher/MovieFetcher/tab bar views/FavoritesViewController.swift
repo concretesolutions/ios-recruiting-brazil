@@ -10,9 +10,10 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
     
+    //MARK: - Variables
     var safeArea:UILayoutGuide!
     var listView:ListViewController!
-    //MARK: - Variables
+    
     lazy var tableView:UITableView = {
         let tableView = UITableView()
         view.addSubview(tableView)
@@ -28,8 +29,6 @@ class FavoritesViewController: UIViewController {
         return tableView
     }()
     
-    
-    
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +42,7 @@ class FavoritesViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         self.tableView.reloadData()
     }
-        
+    //MARK:- Constraints
     private func setContraints(){
         
         tableView.topAnchor.constraint(equalTo: safeArea.topAnchor,constant: 0).isActive = true
