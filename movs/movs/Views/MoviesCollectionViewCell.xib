@@ -55,9 +55,14 @@
                                     <constraint firstAttribute="trailing" secondItem="mlN-hr-8Bg" secondAttribute="trailing" constant="8" id="zFh-ki-hdT"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="1lp-Ey-vCQ">
+                                <rect key="frame" x="88" y="84.5" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="1lp-Ey-vCQ" firstAttribute="centerY" secondItem="pYC-zN-sxS" secondAttribute="centerY" id="5S1-2V-mOu"/>
+                            <constraint firstItem="1lp-Ey-vCQ" firstAttribute="centerX" secondItem="pYC-zN-sxS" secondAttribute="centerX" id="6iO-xK-n92"/>
                             <constraint firstItem="pYC-zN-sxS" firstAttribute="top" secondItem="VX0-b6-PYz" secondAttribute="top" id="CV9-eY-ppx"/>
                             <constraint firstItem="ie5-uo-6I4" firstAttribute="top" secondItem="pYC-zN-sxS" secondAttribute="bottom" id="P74-p4-gWO"/>
                             <constraint firstItem="pYC-zN-sxS" firstAttribute="leading" secondItem="VX0-b6-PYz" secondAttribute="leading" id="UJR-2s-Ufc"/>
@@ -78,6 +83,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="229" height="262"/>
             <connections>
+                <outlet property="activityIndicator" destination="1lp-Ey-vCQ" id="qxj-lS-waL"/>
                 <outlet property="containerView" destination="VX0-b6-PYz" id="kF9-eZ-Hzi"/>
                 <outlet property="movieFavorite" destination="mlN-hr-8Bg" id="r9o-jM-Pjs"/>
                 <outlet property="movieImage" destination="pYC-zN-sxS" id="jUv-kc-iTk"/>

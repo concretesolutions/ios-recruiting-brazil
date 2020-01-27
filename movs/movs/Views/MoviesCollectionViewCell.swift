@@ -14,12 +14,20 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var movieFavorite: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var movie: Movie? {
         willSet {
             guard let movie = newValue else { return }
-            self.movieImage.image = movie.image
+            let image = movie.image
+            self.movieImage.image = image
             self.movieTitle.text = movie.title
+            
+            if image == nil {
+                self.activityIndicator.startAnimating()
+            }else{
+                self.activityIndicator.stopAnimating()
+            }
         }
     }
     
@@ -29,6 +37,9 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         self.containerView.backgroundColor = .darkGray
         self.containerView.roundedCorners()
         self.containerView.shadow()
+        
+        self.activityIndicator.color = .primary
+        self.activityIndicator.hidesWhenStopped = true
     }
     
     @IBAction func favorite(_ sender: UIButton) {
