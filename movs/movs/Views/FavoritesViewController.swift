@@ -58,7 +58,7 @@ extension FavoritesViewController {
         self.tableView.dataSource = self
         self.tableView.backgroundColor = .clear
         self.tableView.addFooterView()
-        self.tableView.register(cell: UITableViewCell.self)
+        self.tableView.register(cell: FavoritesTableViewCell.self)
         self.tableView.emptyTitle = "Sua busca por \"x\" não resultou em nenhum resultado."
     }
     
@@ -79,13 +79,11 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .value1, reuseIdentifier: UITableViewCell.identifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: FavoritesTableViewCell.identifier, for: indexPath) as! FavoritesTableViewCell
         
         let movie = self.filteredMovie[indexPath.row]
-        cell.selectionStyle = .none
-        cell.textLabel?.text = movie.title
-        cell.detailTextLabel?.text = movie.releaseDate
-        cell.detailTextLabel?.textColor = .primary
+        cell.movie = movie
+        
         return cell
     }
     
@@ -103,6 +101,10 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 130
     }
     
 }
