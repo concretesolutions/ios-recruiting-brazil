@@ -44,7 +44,7 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.async {
-            self.movie = DataManager().getMovies()
+            self.movie = DataManager.shared.getMovies()
         }
     }
     
@@ -116,7 +116,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.beginUpdates()
         
         let movie = self.movie[indexPath.row]
-        DataManager().delete(movie)
+        DataManager.shared.delete(movie)
         self.movie.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
         

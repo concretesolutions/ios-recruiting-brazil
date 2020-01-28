@@ -43,7 +43,7 @@ class DetailMovieViewController: UIViewController {
         
         self.items.append(movie.overview)
         
-        let favorite = DataManager().isFavorite(movie: movie)
+        let favorite = DataManager.shared.isFavorite(movie: movie)
         let text = favorite ? Localizable.unfavorite : Localizable.favorite
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: text, style: .done, target: self, action: #selector(self.favoriteAction))
     }
@@ -51,7 +51,7 @@ class DetailMovieViewController: UIViewController {
     @objc internal func favoriteAction() {
         guard let movie = self.movie else { return }
         
-        let dataManager = DataManager()
+        let dataManager = DataManager.shared
         let favorite = dataManager.isFavorite(movie: movie)
         
         if favorite {

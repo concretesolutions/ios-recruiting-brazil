@@ -29,7 +29,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
                 self.activityIndicator.stopAnimating()
             }
             
-            let isFavorite = DataManager().isFavorite(movie: movie)
+            let isFavorite = DataManager.shared.isFavorite(movie: movie)
             let imageFav = isFavorite ? UIImage.favoriteFullIcon : UIImage.favoriteEmptyIcon
             self.movieFavorite.image = imageFav
         }
@@ -48,7 +48,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     
     @IBAction func favorite(_ sender: UIButton) {
         guard let movie = self.movie else { return }
-        DataManager().save(movie)
+        DataManager.shared.save(movie)
     }
     
 }

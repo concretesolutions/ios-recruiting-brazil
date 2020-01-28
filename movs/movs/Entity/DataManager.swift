@@ -10,6 +10,12 @@ import CoreData
 
 class DataManager {
     
+    static let shared = DataManager()
+    
+    internal lazy var favorites: [Movie] = {
+        return self.getMovies()
+    }()
+    
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
@@ -72,6 +78,7 @@ extension DataManager {
         
         do {
             try context.save()
+            self.favorites.append(movie)
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
@@ -90,6 +97,7 @@ extension DataManager {
                 if id == movie.id {
                     context.delete(data)
                     try context.save()
+                    self.favorites.removeAll(where: { $0.id == movie.id })
                     return
                 }
             }
@@ -124,11 +132,13 @@ extension DataManager {
             let nserror = error as NSError
             print("Get movies error. \(nserror), \(nserror.userInfo)")
         }
+        
+        self.favorites = movies
         return movies
     }
     
     func isFavorite(movie: Movie) -> Bool {
-        return self.getMovies().contains(where: { $0.id == movie.id })
+        return self.favorites.contains(where: { $0.id == movie.id })
     }
     
 }
