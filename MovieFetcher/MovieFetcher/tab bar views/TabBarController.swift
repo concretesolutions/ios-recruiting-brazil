@@ -18,6 +18,8 @@ class TabBarController: UITabBarController {
         dao.cellWidth = self.view.bounds.width/3
         setUpBar()
     }
+    
+    
     //MARK: - Complimentary methods
     private func setUpBar(){
 

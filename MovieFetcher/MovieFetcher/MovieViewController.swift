@@ -148,7 +148,7 @@ class MovieViewController: UIViewController {
                 self.genres.text = self.myGenres.joined(separator: "    ")
             }
         }
-        api.retrieveCategories(urlStr: url, onCompletion: anonymousFunc)
+        api.retrieveCategories(urlStr: url, view: self, onCompletion: anonymousFunc)
     }
     
     private func updatePosterImage(imageUrl:String){

@@ -14,24 +14,54 @@ let api = API()
 final class API{
     
     
-    func movieSearch(urlStr:String,onCompletion:@escaping(MovieSearch)->()){
+    func movieSearch(urlStr:String,view:UIViewController,onCompletion:@escaping(MovieSearch)->()){
         
         let urlString = urlStr
         
-        guard let url = URL(string: urlString) else {fatalError("Could not retrieve random url")}
+        guard let url = URL(string: urlString) else {
+            
+            DispatchQueue.main.async {
+                dao.displayError(title: "Sorry", message: "We could't retrieve the movies at the time", view: view)
+            };return}
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, resp, err) in
+            
+            guard let data = data else{
+                DispatchQueue.main.async {
+                    dao.displayError(title: "Sorry", message: "We could't retrieve the movies at the time", view: view)
+                }
+                return
+            }
+            
+            guard let movie = try? JSONDecoder().decode(MovieSearch.self, from: data) else {
+                DispatchQueue.main.async {
+                    dao.displayError(title: "Sorry", message: "We could't retrieve the movies at the time", view: view)
+                }
+                return
+            }
+            onCompletion(movie)
+            
+        }
+        task.resume()
+    }
+    
+    func retrieveImage(urlStr:String,onCompletion:@escaping(UIImage)->()){
+        var placeholderImage:UIImage = UIImage(named: "image_not_found")!
+        let urlString = urlStr
+        
+        guard let url = URL(string: urlString) else {return}
         
         let task = URLSession.shared.dataTask(with: url) { (data, resp, err) in
             
             guard let data = data else{
                 
-                fatalError("Could not retrieve data")
+                return
             }
             
-            guard let movie = try? JSONDecoder().decode(MovieSearch.self, from: data) else {
-                fatalError("Failed to decode movie")
-            
+            if let image:UIImage = UIImage(data: data) {
+                placeholderImage = image
             }
-            onCompletion(movie)
+            onCompletion(placeholderImage)
             
         }
         
@@ -39,49 +69,31 @@ final class API{
         
     }
     
-    
-   
-    
-    func retrieveImage(urlStr:String,onCompletion:@escaping(UIImage)->()){
-        
+    func retrieveCategories(urlStr:String,view:UIViewController,onCompletion:@escaping(GenreResult)->()){
         let urlString = urlStr
-             
-             guard let url = URL(string: urlString) else {fatalError("Could not retrieve random url")}
-             
-             let task = URLSession.shared.dataTask(with: url) { (data, resp, err) in
-                 
-                 guard let data = data else{
-                     
-                     fatalError("Could not retrieve data")
-                 }
-                 
-                guard let image:UIImage = UIImage(data: data) else {
-                     fatalError("Failed to decode movie")
-                 
-                 }
-                 onCompletion(image)
-                 
-             }
-             
-             task.resume()
-             
-         }
-    
-    func retrieveCategories(urlStr:String,onCompletion:@escaping(GenreResult)->()){
-       let urlString = urlStr
         
-        guard let url = URL(string: urlString) else {fatalError("Could not retrieve random url")}
+        guard let url = URL(string: urlString) else {
+            DispatchQueue.main.async {
+                dao.displayError(title: "Sorry", message: "We could't retrieve the categories this time", view: view)
+            };return}
         
         let task = URLSession.shared.dataTask(with: url) { (data, resp, err) in
             
             guard let data = data else{
+                DispatchQueue.main.async {
+                    dao.displayError(title: "Sorry", message: "We could't retrieve the categories this time", view: view)
+                }
+                return
                 
-                fatalError("Could not retrieve data")
             }
             
             guard let genres = try? JSONDecoder().decode(GenreResult.self, from: data) else {
-                fatalError("Failed to decode movie")
-            
+                DispatchQueue.main.async {
+                    dao.displayError(title: "Sorry", message: "We could't retrieve the categories this time", view: view)
+                }
+                
+                return
+                
             }
             onCompletion(genres)
             
@@ -91,6 +103,6 @@ final class API{
     }
     
 }
-    
-   
+
+
 

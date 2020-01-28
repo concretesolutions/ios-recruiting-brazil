@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 let dao = DAO()
-class DAO:Codable{
+final class DAO:Codable{
     
     
     //MARK: Api info
@@ -23,6 +23,7 @@ class DAO:Codable{
     //MARK:- Data Storage
     var searchResults:[Movie] = []
     var favoriteMovies:[Movie] = []
+    var filteredMoviews:[Movie] = []
     
     //MARK:- Colors
     var concreteDarkGray:String = "#2D3047"
@@ -32,12 +33,24 @@ class DAO:Codable{
     var concreteRed:String = "#FC1A03"
     
     
+    
+    //MARK: - Error Messager
+    func displayError(title:String,message:String,view:UIViewController){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+
+        view.present(alert, animated: true)
+    }
+    
+
     //MARK: - Data Saving Methods
     func saveFavorites() {
            do {
                try dao.favoriteMovies.save(inFileNamed: "favoritesJson")
            } catch {
-               debugPrint("Cant save Player")
+               debugPrint("Cant save favorites")
            }
        }
 
@@ -45,7 +58,7 @@ class DAO:Codable{
            do {
                try dao.favoriteMovies.loadFrom(fileSystem: "favoritesJson")
            } catch {
-               debugPrint("Cant load Player")
+               debugPrint("Cant load favorites")
            }
        }
        
@@ -144,6 +157,8 @@ extension Decodable {
       }
     
 }
+
+
 
 
 

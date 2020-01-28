@@ -29,7 +29,7 @@ class FavoritesViewController: UIViewController {
         return tableView
     }()
     
-    //MARK: - Methods
+    //MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.init(hex: dao.concreteRed)
@@ -42,6 +42,9 @@ class FavoritesViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         self.tableView.reloadData()
     }
+    
+    //MARK: - Complimentary Methods
+
     //MARK:- Constraints
     private func setContraints(){
         
@@ -104,6 +107,11 @@ extension FavoritesViewController:UITableViewDelegate,UITableViewDataSource{
         return action
     }
 
+}
+
+enum FilterType {
+    case Release
+    case Date
 }
 
 

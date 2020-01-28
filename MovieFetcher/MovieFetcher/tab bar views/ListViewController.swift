@@ -51,7 +51,7 @@ class ListViewController: UIViewController{
     
     //MARK: - Complimentary Methods
     private func getMovie(page:Int){
-        let url = "https://api.themoviedb.org/3/movie/popular?api_key=0c909c364c0bc846b72d0fe49ab71b83&language=en-US&page=\(page)"
+        let url = "https://api.themoviedb.org/3/movie/popular?api_key=0c909c364c0bc846b72d0fe49ab71b83&language=en-US&page=\(page)" 
         let anonymousFunc = {(fetchedData:MovieSearch) in
             DispatchQueue.main.async {
                 for movie in fetchedData.results{
@@ -61,7 +61,7 @@ class ListViewController: UIViewController{
                 self.collectionView.reloadData()
             }
         }
-        api.movieSearch(urlStr: url, onCompletion: anonymousFunc)
+        api.movieSearch(urlStr: url, view: self, onCompletion: anonymousFunc)
     }
     
     //MARK:- Constraints
