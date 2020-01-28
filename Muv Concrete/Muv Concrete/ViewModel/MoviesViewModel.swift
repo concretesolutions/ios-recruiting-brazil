@@ -49,7 +49,6 @@ class MoviesViewModel {
     public func loadMoreMovies(indexPath: IndexPath, completionHandler: @escaping (Bool) -> Void) {
         if indexPath.row == arrayMovies.count - 4, limitPage > pageRequest {
             pageRequest += 1
-            print(pageRequest)
             requestMovies(completionHandler: {
                 reloadCollectionView in
                 completionHandler(reloadCollectionView)
