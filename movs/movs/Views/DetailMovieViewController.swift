@@ -42,6 +42,27 @@ class DetailMovieViewController: UIViewController {
         }
         
         self.items.append(movie.overview)
+        
+        let favorite = DataManager().isFavorite(movie: movie)
+        let text = favorite ? Localizable.unfavorite : Localizable.favorite
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: text, style: .done, target: self, action: #selector(self.favoriteAction))
+    }
+    
+    @objc internal func favoriteAction() {
+        guard let movie = self.movie else { return }
+        
+        let dataManager = DataManager()
+        let favorite = dataManager.isFavorite(movie: movie)
+        
+        if favorite {
+            dataManager.delete(movie)
+        } else {
+            dataManager.save(movie)
+        }
+        
+        guard let rightBarButtonItem = self.navigationItem.rightBarButtonItem else { return }
+        let text = !favorite ? Localizable.unfavorite : Localizable.favorite
+        rightBarButtonItem.title = text
     }
     
 }

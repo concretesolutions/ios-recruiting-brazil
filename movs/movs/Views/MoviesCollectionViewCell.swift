@@ -13,7 +13,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
-    @IBOutlet weak var movieFavorite: UIButton!
+    @IBOutlet weak var movieFavorite: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var movie: Movie? {
@@ -28,6 +28,10 @@ class MoviesCollectionViewCell: UICollectionViewCell {
             }else{
                 self.activityIndicator.stopAnimating()
             }
+            
+            let isFavorite = DataManager().isFavorite(movie: movie)
+            let imageFav = isFavorite ? UIImage.favoriteFullIcon : UIImage.favoriteEmptyIcon
+            self.movieFavorite.image = imageFav
         }
     }
     

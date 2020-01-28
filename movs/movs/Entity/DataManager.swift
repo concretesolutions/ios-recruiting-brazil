@@ -127,4 +127,8 @@ extension DataManager {
         return movies
     }
     
+    func isFavorite(movie: Movie) -> Bool {
+        return self.getMovies().contains(where: { $0.id == movie.id })
+    }
+    
 }

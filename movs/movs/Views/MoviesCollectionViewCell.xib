@@ -31,28 +31,24 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mlN-hr-8Bg">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite_gray_icon" translatesAutoresizingMaskIntoConstraints="NO" id="KS0-Ft-V8H">
                                         <rect key="frame" x="181" y="8" width="24" height="24"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="mlN-hr-8Bg" secondAttribute="height" multiplier="1:1" id="MpQ-BO-CE7"/>
+                                            <constraint firstAttribute="width" secondItem="KS0-Ft-V8H" secondAttribute="height" multiplier="1:1" id="tzN-Ww-Wnv"/>
                                         </constraints>
-                                        <state key="normal" image="favorite_gray_icon"/>
-                                        <connections>
-                                            <action selector="favorite:" destination="gTV-IL-0wX" eventType="touchUpInside" id="LN2-L0-5e5"/>
-                                        </connections>
-                                    </button>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="DcB-Nb-AOi"/>
-                                    <constraint firstAttribute="bottom" secondItem="mlN-hr-8Bg" secondAttribute="bottom" constant="8" id="aR4-IC-3Pt"/>
-                                    <constraint firstItem="mlN-hr-8Bg" firstAttribute="top" secondItem="ie5-uo-6I4" secondAttribute="top" constant="8" id="bh4-Io-Ylz"/>
+                                    <constraint firstAttribute="bottom" secondItem="KS0-Ft-V8H" secondAttribute="bottom" constant="8" id="Vcj-2I-Rhy"/>
+                                    <constraint firstItem="KS0-Ft-V8H" firstAttribute="top" secondItem="ie5-uo-6I4" secondAttribute="top" constant="8" id="bbV-qL-jGD"/>
+                                    <constraint firstItem="KS0-Ft-V8H" firstAttribute="leading" secondItem="OIp-F6-cIl" secondAttribute="trailing" constant="8" id="eP4-Dv-I0G"/>
+                                    <constraint firstAttribute="trailing" secondItem="KS0-Ft-V8H" secondAttribute="trailing" constant="8" id="eeY-RK-hCQ"/>
                                     <constraint firstItem="OIp-F6-cIl" firstAttribute="centerY" secondItem="ie5-uo-6I4" secondAttribute="centerY" id="egk-4M-bkq"/>
                                     <constraint firstItem="OIp-F6-cIl" firstAttribute="leading" secondItem="ie5-uo-6I4" secondAttribute="leading" constant="8" id="haB-8D-dPz"/>
                                     <constraint firstItem="OIp-F6-cIl" firstAttribute="top" secondItem="ie5-uo-6I4" secondAttribute="top" constant="8" id="nAo-Sr-nPn"/>
                                     <constraint firstAttribute="bottom" secondItem="OIp-F6-cIl" secondAttribute="bottom" constant="8" id="rRk-Qo-9Qk"/>
-                                    <constraint firstItem="mlN-hr-8Bg" firstAttribute="leading" secondItem="OIp-F6-cIl" secondAttribute="trailing" constant="8" id="x0t-Or-6h3"/>
-                                    <constraint firstAttribute="trailing" secondItem="mlN-hr-8Bg" secondAttribute="trailing" constant="8" id="zFh-ki-hdT"/>
                                 </constraints>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="1lp-Ey-vCQ">
@@ -85,7 +81,7 @@
             <connections>
                 <outlet property="activityIndicator" destination="1lp-Ey-vCQ" id="qxj-lS-waL"/>
                 <outlet property="containerView" destination="VX0-b6-PYz" id="kF9-eZ-Hzi"/>
-                <outlet property="movieFavorite" destination="mlN-hr-8Bg" id="r9o-jM-Pjs"/>
+                <outlet property="movieFavorite" destination="KS0-Ft-V8H" id="odX-rf-suh"/>
                 <outlet property="movieImage" destination="pYC-zN-sxS" id="jUv-kc-iTk"/>
                 <outlet property="movieTitle" destination="OIp-F6-cIl" id="OWo-jn-blV"/>
             </connections>
