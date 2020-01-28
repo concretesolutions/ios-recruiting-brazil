@@ -28,7 +28,7 @@ class SplashViewController: UIViewController {
      //MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.init(hex: dao.concreteDarkGray)
+        view.backgroundColor = UIColor.init(hex: dao.concreteGray)
         setConstraints()
 
     }

@@ -25,14 +25,18 @@ class TabBarController: UITabBarController {
 
         //MoviesViewController
         let listView = ListViewController()
+        listView.title = "Movies"
         let moviesBar = UINavigationController(rootViewController: listView)
-        moviesBar.tabBarItem.image = UIImage(named: "")
+        moviesBar.title = "Movies"
+        moviesBar.tabBarItem.image = UIImage(named: "list_icon")
         moviesBar.tabBarItem.selectedImage = UIImage(named: "list_icon")
         //FavoritesViewController
         let fav = FavoritesViewController()
+        fav.title = "Favorites"
         let favoritesBar = UINavigationController(rootViewController: fav)
         fav.listView = listView
-        favoritesBar.tabBarItem.image = UIImage(named: "")
+        favoritesBar.title = "Favorites"
+        favoritesBar.tabBarItem.image = UIImage(named: "favorite_empty_icon")
         favoritesBar.tabBarItem.selectedImage = UIImage(named: "favorite_empty_icon")
         //add to bar
         

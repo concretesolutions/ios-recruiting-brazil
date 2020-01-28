@@ -66,7 +66,7 @@ class FavoriteMovieTableViewCell: UITableViewCell {
     //MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
           super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = UIColor.init(hex: dao.concreteDarkGray)
+        self.backgroundColor = UIColor.init(hex: dao.concreteGray)
           self.layer.cornerRadius = 8
           self.selectionStyle = .none
         self.layer.borderColor = UIColor.white.cgColor

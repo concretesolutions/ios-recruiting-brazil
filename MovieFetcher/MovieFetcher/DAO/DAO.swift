@@ -23,24 +23,27 @@ final class DAO:Codable{
     //MARK:- Data Storage
     var searchResults:[Movie] = []
     var favoriteMovies:[Movie] = []
-    var filteredMoviews:[Movie] = []
+    var filteredFavorites:[Movie] = []
+    var filteredMovies:[Movie] = []
+    
+    
+    
     
     //MARK:- Colors
-    var concreteDarkGray:String = "#2D3047"
+//    var concreteDarkGray:String = "#2D3047"
+    var concreteGray:String = "#5A648A"
     var concreteYellow:String = "#F7CE5B"
     var concreteDarkYellow:String = "#D9971E"
     var concreteWhite:String = "#FFFFFF"
     var concreteRed:String = "#FC1A03"
-    
+//    var concretePurple = "#451c88"
+    var concreteDarkGray = "#0F1B4D"
     
     
     //MARK: - Error Messager
     func displayError(title:String,message:String,view:UIViewController){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-
         view.present(alert, animated: true)
     }
     
@@ -65,7 +68,7 @@ final class DAO:Codable{
     
 }
     
-    
+//MARK: - Extensions
 extension UIColor {
     public convenience init?(hex: String) {
         let r, g, b, a: CGFloat
@@ -158,7 +161,11 @@ extension Decodable {
     
 }
 
+//MARK: - Enums
 
-
-
+enum SearchType{
+    case title
+    case genre
+    case release
+}
 

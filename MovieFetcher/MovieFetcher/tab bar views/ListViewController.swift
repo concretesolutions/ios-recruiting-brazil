@@ -11,7 +11,7 @@ import UIKit
 class ListViewController: UIViewController{
     //MARK: - Variables
     var safeArea:UILayoutGuide!
-    
+    var isSearching:Bool = false
     
     lazy var collectionView:UICollectionView = {
         
@@ -32,10 +32,25 @@ class ListViewController: UIViewController{
         return collectionView
         
     }()
+    
+    lazy var searchBar:UISearchBar = {
+        let searchBar = UISearchBar()
+        view.addSubview(searchBar)
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.delegate = self
+        searchBar.barTintColor = .clear
+        searchBar.barStyle = .default
+        searchBar.isTranslucent = true
+        searchBar.enablesReturnKeyAutomatically = false
+        searchBar.placeholder = "Search for movies"
+        searchBar.showsCancelButton = true
+        return searchBar
+    }()
+    
     //MARK: -Init methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.init(hex: dao.concreteRed)
+        self.view.backgroundColor = UIColor.init(hex: dao.concreteDarkGray)
         safeArea = view.layoutMarginsGuide
         setContraints()
         getMovie(page:1)
@@ -67,7 +82,12 @@ class ListViewController: UIViewController{
     //MARK:- Constraints
     private func setContraints(){
         
-        collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor,constant: 0).isActive = true
+        searchBar.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
+        searchBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        searchBar.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        searchBar.heightAnchor.constraint(equalToConstant: view.frame.height/8).isActive = true
+        
+        collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor,constant: 0).isActive = true
         collectionView.bottomAnchor.constraint(equalTo:safeArea.bottomAnchor).isActive = true
         collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
@@ -79,15 +99,25 @@ extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSourc
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dao.searchResults.count
+        if !isSearching{ return dao.searchResults.count} else {return dao.filteredMovies.count}
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
-        let movie = dao.searchResults[indexPath.row]
-        //        movie.listIndexPath = indexPath
-        cell.setUp(movie:movie)
-        cell.refreshFavorite()
+        
+        if !isSearching{
+            let movie = dao.searchResults[indexPath.row]
+            movie.isFavorite = false
+            cell.setUp(movie:movie)
+            cell.refreshFavorite()
+        }else{
+            let movie = dao.filteredMovies[indexPath.row]
+             movie.isFavorite = false
+            cell.setUp(movie:movie)
+            cell.refreshFavorite()
+        }
+
+    
         return cell
         
     }
@@ -106,14 +136,15 @@ extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let movie = dao.searchResults[indexPath.row]
+        var movie = dao.searchResults[indexPath.row]
+        if isSearching{movie = dao.filteredMovies[indexPath.row]}
+        
         let movieVc = MovieViewController()
         movieVc.setMovie(movie: movie)
-        //        imovieVc.cellIndexPath = indexPath
         movieVc.delegate = self
         dao.searchResults[indexPath.row] = movie
-        self.present(movieVc, animated: true) {
-        }
+        self.present(movieVc, animated: true) 
+        
     }
 }
 extension ListViewController:CellUpdate{
@@ -127,6 +158,56 @@ extension ListViewController:CellUpdate{
         }else {return}
         
         
+    }
+    
+}
+
+extension ListViewController:UISearchBarDelegate{
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isSearching = false
+        collectionView.reloadData()
+        searchBar.endEditing(true)
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        if let text = searchBar.text{
+            if text != ""{
+                filterMovies(normalArray: dao.searchResults, filteredArray: dao.filteredMovies, name: text)
+            }else{
+                isSearching = false
+                dao.filteredFavorites = []
+                dao.filteredMovies = []
+                collectionView.reloadData()
+            }
+        }else{
+            isSearching = false
+            dao.filteredFavorites = []
+            dao.filteredMovies = []
+            collectionView.reloadData()
+        }
+        searchBar.endEditing(true)
+    }
+    
+    
+    func filterMovies(normalArray:[Movie],filteredArray:[Movie],name:String){
+        self.isSearching = true
+        
+        dao.filteredMovies = []
+        
+        let searchName = name.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
+        let url = dao.searchURL + searchName
+        
+        let anonymousFunc = {(fetchedData:MovieSearch) in
+            DispatchQueue.main.async {
+                for movie in fetchedData.results{
+                    dao.filteredMovies.append(movie)
+                }
+                debugPrint(dao.filteredMovies)
+                self.collectionView.reloadData()
+            }
+        }
+        api.movieSearch(urlStr: url , view: self, onCompletion: anonymousFunc)
     }
     
 }

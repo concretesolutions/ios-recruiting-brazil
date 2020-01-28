@@ -118,13 +118,15 @@ class MovieViewController: UIViewController {
     //MARK:- Init methods
     func setMovie(movie:Movie){
         self.movie = movie
-        updatePosterImage(imageUrl: movie.backdrop_path)
+        if let backdrop = movie.backdrop_path{
+        updatePosterImage(imageUrl: backdrop)
+        }else{return}
         updateGenres()
     }
     
     override func viewDidLoad() {
          super.viewDidLoad()
-         view.backgroundColor = UIColor(hex: dao.concreteDarkGray)
+         view.backgroundColor = UIColor(hex: dao.concreteGray)
          safeArea = view.layoutMarginsGuide
          setConstraints()
          refreshFavorite()

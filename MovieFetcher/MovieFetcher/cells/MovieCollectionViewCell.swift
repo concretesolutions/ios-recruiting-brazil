@@ -23,7 +23,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     lazy var colorStripe:UIImageView = {
         let image = UIImageView()
-        image.backgroundColor = UIColor.init(hex: dao.concreteDarkGray)
+        image.backgroundColor = UIColor.init(hex: dao.concreteGray)
         image.translatesAutoresizingMaskIntoConstraints = false
         addSubview(image)
         return image
@@ -60,7 +60,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     func setUp(movie:Movie){
         self.movie = movie
         self.poster.layer.masksToBounds = true
-        guard let imageUrl = movie.poster_path else {fatalError("could not get poster url")}
+        guard let imageUrl = movie.poster_path else {return}
         updatePosterImage(cell: self, imageUrl: imageUrl)
         self.title.text = movie.title
         
