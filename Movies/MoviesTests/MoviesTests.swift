@@ -7,9 +7,9 @@
 //
 
 import XCTest
-@testable import Muv_Concrete
+@testable import Movies
 
-class Muv_ConcreteTests: XCTestCase {
+class MoviesTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
