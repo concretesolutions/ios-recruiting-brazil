@@ -21,7 +21,9 @@ class MoviesViewController: UIViewController {
     
     internal var filteredMovie = [Movie]() {
         didSet {
-            self.collectionView.reloadData()
+            UIView.transition(with: self.collectionView, duration: 0.35, options: .transitionCrossDissolve, animations: {
+                self.collectionView.reloadData()
+            }, completion: nil)
         }
     }
     
@@ -64,7 +66,8 @@ extension MoviesViewController {
         self.collectionView.register(cell: MoviesCollectionViewCell.self)
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-        self.collectionView.emptyTitle = "Um erro ocorreu. Por favor, tente novamente."
+        self.collectionView.emptyImage = UIImage.error
+        self.collectionView.emptyTitle = Localizable.errorOccurred
         self.collectionView.prefetchDataSource = self
     }
     
@@ -206,6 +209,8 @@ extension MoviesViewController: SearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let text = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.collectionView.emptyImage = UIImage.searchIcon
+        self.collectionView.emptyTitle = String(format: Localizable.searshText, text)
         
         if text.isEmpty {
             self.filteredItems(items: self.completeItems())
@@ -216,6 +221,9 @@ extension MoviesViewController: SearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.collectionView.emptyImage = UIImage.error
+        self.collectionView.emptyTitle = Localizable.errorOccurred
+        
         self.filteredItems(items: self.completeItems())
     }
 }

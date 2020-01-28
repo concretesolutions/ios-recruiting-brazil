@@ -23,4 +23,5 @@ class Localizable {
     static let ok = "ok".localized
     static let searshText = "searshText".localized
     static let noFavorites = "noFavorites".localized
+    static let errorOccurred = "errorOccurred".localized
 }

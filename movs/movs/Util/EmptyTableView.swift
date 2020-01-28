@@ -37,7 +37,5 @@ class EmptyTableView: UIView {
         self.emptyImage.image = image
         self.emptyTitle.text = title
         self.emptySubtitle.text = subtitle
-        
-        self.emptyImage.setColor(.primary)
     }
 }
