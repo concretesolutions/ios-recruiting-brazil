@@ -13,6 +13,16 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var button: UIButton!
     
+    internal var list = [String]()
+    
+    var filterHandler: ((year: String, genre: Genre))?
+    
+    private var years = [String]()
+    private var genres: Genres?
+    
+    private var selectedYear: String = ""
+    private var selectedGenre: Genre?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,6 +30,12 @@ class FilterViewController: UIViewController {
         
         self.setButton()
         self.setTableView()
+        
+        self.list.append(Localizable.date)
+        self.list.append(Localizable.genres)
+        
+        self.years = ["2020", "2019", "2018"]
+        self.genres = Genres.shared
     }
 
     @IBAction func buttonAction(_ sender: UIButton) {
@@ -48,17 +64,31 @@ extension FilterViewController {
 extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return self.list.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: UITableViewCell.identifier)
+        let item = self.list[indexPath.row]
         cell.selectionStyle = .none
-        cell.textLabel?.text = "Title"
-        cell.detailTextLabel?.text = "Detail"
+        cell.textLabel?.text = item
+//        cell.detailTextLabel?.text = indexPath
         cell.detailTextLabel?.textColor = .primary
         cell.accessoryType = .disclosureIndicator
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let item = self.list[indexPath.row]
+        
+        let view = ListFilterViewController()
+        view.navigationItem.title = item
+        view.list = ["Um", "Dois", "Tres", "Quatro"]
+        view.choiseHandler = { item in
+            print(item)
+        }
+        self.navigationController?.pushViewController(view, animated: true)
     }
     
 }
