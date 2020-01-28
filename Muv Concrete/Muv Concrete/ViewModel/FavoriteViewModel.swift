@@ -26,17 +26,8 @@ class FavoriteViewModel {
     }
 
     public func unfavorite(movie: MovieCoreData) {
-        let id = movie.id
-        let defaults = UserDefaults.standard
-        let coreData = CoreData()
-        let arrayFavoritesIds = defaults.array(forKey: "favoritesIds")
-        var arraySave: [Int32] = []
-        if arrayFavoritesIds != nil {
-            arraySave = arrayFavoritesIds as! [Int32]
-            arraySave = arraySave.filter( {$0 != id })
-            coreData.deleteElementCoreData(id: id)
-        }
-        defaults.set(arraySave, forKey: "favoritesIds")
+        let favoriteManager = FavoriteManager()
+        favoriteManager.unfavorite(movie: movie)
     }
     
     public func getMovie(indexPath: IndexPath) -> MovieCoreData {

@@ -82,4 +82,19 @@ class MovieDetailsViewModel {
         guard let path = movie?.posterPath else { return }
         imageView.downloaded(from: path, contentMode: .scaleToFill)
     }
+    
+    public func favoriteAction(button: UIButton, completionHandler: @escaping (Bool) -> Void) {
+        let favoriteManager = FavoriteManager()
+        
+        guard let id = id else { return }
+        guard let movie = movie else { return }
+        
+        if button.isSelected {
+            favoriteManager.unfavorite(id: id)
+            completionHandler(false)
+        } else {
+            favoriteManager.favoriteAction(movie: movie)
+            completionHandler(true)
+        }
+    }
 }

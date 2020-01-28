@@ -63,4 +63,12 @@ class MovieDetailsViewController: UIViewController {
         }
         
     }
+    
+    @IBAction func favoriteAction(_ sender: Any) {
+        detailViewModel.favoriteAction(button: favoriteButton, completionHandler: { select in
+            self.favoriteButton.isSelected = select
+        })
+    }
+    
+    
 }

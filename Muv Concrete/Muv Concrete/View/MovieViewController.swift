@@ -31,11 +31,17 @@ class MovieViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        collectionView.reloadData()
+    }
+    
     func loadMovies() {
         view.activityStartAnimating()
         moviesViewModel.requestMovies(completionHandler: { reload in
             if reload {
                 self.collectionView.reloadData()
+                self.collectionView.isHidden = false
             } else {
                 self.collectionView.isHidden = true
                 let updateButton = UIButton(frame: CGRect(x: self.view.frame.size.width / 2, y: self.view.frame.size.height / 2, width: 50, height: 40))
@@ -50,7 +56,7 @@ class MovieViewController: UIViewController {
     }
     
     @objc func update(sender: UIButton!) {
-      loadMovies()
+        loadMovies()
     }
 }
 

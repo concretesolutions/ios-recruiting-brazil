@@ -34,6 +34,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
                 let arrayIds = arrayFavoritesIds as! [Int32]
                 if arrayIds.contains(id) {
                     self.favoriteButton.isSelected = true
+                } else {
+                    self.favoriteButton.isSelected = false
                 }
             }
             
@@ -44,31 +46,18 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func favorite(_ sender: Any) {
-        let defaults = UserDefaults.standard
-        let arrayFavoritesIds = defaults.array(forKey: "favoritesIds")
-        var arraySave: [Int32] = []
         guard let movie = movie else { return }
-        let id = movie.id
-        let coreData = CoreData()
+        let favoriteManager = FavoriteManager()
         
         if favoriteButton.isSelected {
             favoriteButton.isSelected = false
-            if arrayFavoritesIds != nil {
-                arraySave = arrayFavoritesIds as! [Int32]
-                arraySave = arraySave.filter( {$0 != id })
-                coreData.deleteElementCoreData(id: id)
-            }
+            favoriteManager.unfavorite(movie: movie)
+
         } else {
             favoriteButton.isSelected = true
-            if arrayFavoritesIds != nil {
-                arraySave = arrayFavoritesIds as! [Int32]
-            }
-            coreData.saveCoreData(movie: movie)
-            arraySave.append(id)
-            
+            favoriteManager.favoriteAction(movie: movie)
+   
         }
-
-        defaults.set(arraySave, forKey: "favoritesIds")
     }
     
 }
