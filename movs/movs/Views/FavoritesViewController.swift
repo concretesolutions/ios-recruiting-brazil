@@ -12,19 +12,11 @@ class FavoritesViewController: UIViewController {
 
     @IBOutlet weak var tableView: TableView!
     
-    internal var movie = [Movie]() {
-        willSet {
-            self.filteredMovie = newValue
-        }
-    }
+    internal var movies = [Movie]()
+    internal var filteredMovie = [Movie]()
     
-    internal var filteredMovie = [Movie]() {
-        didSet {
-            UIView.transition(with: self.tableView, duration: 0.35, options: .transitionCrossDissolve, animations: {
-                self.tableView.reloadData()
-            }, completion: nil)
-        }
-    }
+    private var filterYear: String?
+    private var filterGenre: Genre?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,24 +36,27 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.async {
-            self.movie = DataManager.shared.getMovies()
+            self.movies = DataManager.shared.getMovies()
+            self.filteredMovie = self.movies
+            self.reloadData()
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        self.clearFilter()
         NotificationCenter.default.removeObserver(self, name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name:UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    @objc private func filterAction() {
-        let view = FilterViewController()
-        let nav = NavigationController(rootViewController: view)
-        self.present(nav, animated: true, completion: nil)
     }
 
 }
 
 extension FavoritesViewController {
+    
+    internal func reloadData() {
+        UIView.transition(with: self.tableView, duration: 0.35, options: .transitionCrossDissolve, animations: {
+            self.tableView.reloadData()
+        }, completion: nil)
+    }
     
     internal func setTableView() {
         self.tableView.delegate = self
@@ -83,6 +78,23 @@ extension FavoritesViewController {
         self.navigationItem.hidesSearchBarWhenScrolling = false
     }
     
+    internal func filterMovies() {
+        var result = self.movies
+        if let genre = self.filterGenre {
+            result = result.filter({ $0.genreIDS.contains(genre.id) })
+        }
+        if let year = self.filterYear {
+            result = result.filter({ $0.releaseDate.contains(year) })
+        }
+        self.filteredMovie = result
+        self.reloadData()
+    }
+    
+    internal func clearFilter() {
+        self.filterGenre = nil
+        self.filterYear = nil
+    }
+    
     @objc internal func keyboardWillShow(notification: NSNotification) {
         if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.height {
             var newContentInset: UIEdgeInsets = self.tableView.contentInset
@@ -93,6 +105,25 @@ extension FavoritesViewController {
     
     @objc internal func keyboardWillHide(notification: NSNotification) {
         self.tableView.contentInset = .zero
+    }
+    
+    @objc internal func removeFilter() {
+        self.clearFilter()
+        self.filteredMovie = self.movies
+        self.reloadData()
+    }
+    
+    @objc private func filterAction() {
+        let view = FilterViewController()
+        view.filterHandler = { year, genre in
+            self.filterYear = year
+            self.filterGenre = genre
+            self.filterMovies()
+        }
+        view.selectedYear = self.filterYear
+        view.selectedGenre = self.filterGenre
+        let nav = NavigationController(rootViewController: view)
+        self.present(nav, animated: true, completion: nil)
     }
 }
 
@@ -115,9 +146,10 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         guard editingStyle == .delete else { return }
         tableView.beginUpdates()
         
-        let movie = self.movie[indexPath.row]
+        let movie = self.filteredMovie[indexPath.row]
         DataManager.shared.delete(movie)
-        self.movie.remove(at: indexPath.row)
+        self.filteredMovie.removeAll(where: { $0.id == movie.id })
+        self.movies.removeAll(where: { $0.id == movie.id })
         tableView.deleteRows(at: [indexPath], with: .automatic)
         
         tableView.endUpdates()
@@ -131,15 +163,30 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         return 130
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let button = UIButton(type: .custom)
+        button.setTitle(Localizable.removeFilter, for: .normal)
+        button.setTitleColor(.primary, for: .normal)
+        button.backgroundColor = .darkGray
+        button.addTarget(self, action: #selector(self.removeFilter), for: .touchUpInside)
+        return button
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return (self.filterGenre != nil || self.filterYear != nil) ? 60 : 0
+    }
+    
 }
 
 extension FavoritesViewController: SearchBarDelegate {
     func completeItems() -> [Movie] {
-        return self.movie
+        return self.movies
     }
 
     func filteredItems(items: [Movie]) {
+        self.clearFilter()
         self.filteredMovie = items
+        self.reloadData()
     }
 
     func filter(text: String, item: Movie) -> Bool {

@@ -14,6 +14,7 @@ class ListFilterViewController: UIViewController {
     
     var list = [String]()
     var choiseHandler: ((String) -> Void)?
+    var choise: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +32,14 @@ extension ListFilterViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.identifier, for: indexPath)
-        cell.textLabel?.text = self.list[indexPath.row]
+        let item = self.list[indexPath.row]
+        cell.textLabel?.text = item
+        if item == self.choise {
+            let image = UIImageView(image: UIImage.checkIcon)
+            cell.accessoryView = image
+        }else{
+            cell.accessoryView = UIView()
+        }
         return cell
     }
     

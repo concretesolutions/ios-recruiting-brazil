@@ -15,13 +15,13 @@ class FilterViewController: UIViewController {
     
     internal var list = [String]()
     
-    var filterHandler: ((year: String, genre: Genre))?
+    var filterHandler: ((String?, Genre?) -> Void)?
     
     private var years = [String]()
     private var genres: Genres?
     
-    private var selectedYear: String = ""
-    private var selectedGenre: Genre?
+    var selectedYear: String?
+    var selectedGenre: Genre?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,12 +34,18 @@ class FilterViewController: UIViewController {
         self.list.append(Localizable.date)
         self.list.append(Localizable.genres)
         
-        self.years = ["2020", "2019", "2018"]
+        let year = Calendar.current.component(.year, from: Date())
+        self.years = (0...20).map({ "\(year - $0)" })
         self.genres = Genres.shared
     }
 
     @IBAction func buttonAction(_ sender: UIButton) {
+        self.filterHandler?(self.selectedYear, self.selectedGenre)
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableView.reloadData()
     }
 }
 
@@ -72,7 +78,7 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
         let item = self.list[indexPath.row]
         cell.selectionStyle = .none
         cell.textLabel?.text = item
-//        cell.detailTextLabel?.text = indexPath
+        cell.detailTextLabel?.text = indexPath.row == 0 ? self.selectedYear : self.selectedGenre?.name
         cell.detailTextLabel?.textColor = .primary
         cell.accessoryType = .disclosureIndicator
         return cell
@@ -84,9 +90,14 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
         
         let view = ListFilterViewController()
         view.navigationItem.title = item
-        view.list = ["Um", "Dois", "Tres", "Quatro"]
+        view.list = indexPath.row == 0 ? self.years : self.genres?.genres.map({ $0.name }) ?? []
+        view.choise = indexPath.row == 0 ? self.selectedYear : self.selectedGenre?.name
         view.choiseHandler = { item in
-            print(item)
+            if indexPath.row == 0 {
+                self.selectedYear = item
+            }else{
+                self.selectedGenre = self.genres?.genres.first(where: { $0.name == item })
+            }
         }
         self.navigationController?.pushViewController(view, animated: true)
     }

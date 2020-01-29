@@ -72,6 +72,7 @@ extension DataManager {
         
         managed.setValue(movie.id, forKey: "id")
         managed.setValue(movie.title, forKey: "title")
+        managed.setValue(movie.genreIDS, forKey: "genreIDS")
         managed.setValue(movie.overview, forKey: "overview")
         managed.setValue(movie.releaseDate, forKey: "releaseDate")
         managed.setValue(movie.image?.base64EncodedString, forKey: "image")
@@ -123,6 +124,7 @@ extension DataManager {
                 let movie = Movie()
                 movie.id = data.value(forKey: "id") as! Int
                 movie.title = data.value(forKey: "title") as! String
+                movie.genreIDS = data.value(forKey: "genreIDS") as! [Int]
                 movie.overview = data.value(forKey: "overview") as! String
                 movie.releaseDate = data.value(forKey: "releaseDate") as! String
                 movie.image = (data.value(forKey: "image") as? String)?.base64ToImage
