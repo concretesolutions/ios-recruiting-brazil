@@ -12,6 +12,7 @@ import CEPCombine
 class MoviesViewController: UIViewController {
 
     @IBOutlet weak var collectionView: CollectionView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     internal var movies = [Movie]() {
         willSet {
@@ -41,6 +42,9 @@ class MoviesViewController: UIViewController {
         self.setNavigation()
         self.setRules()
         self.getGenres()
+        
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.color = .primary
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -95,11 +99,13 @@ extension MoviesViewController {
     }
     
     internal func download(page: Int) {
+        self.activityIndicator.startAnimating()
         guard let settings = APISettings.shared else { return }
         guard let url = settings.popular(page: page) else { return }
         
         URLSession.shared.popularTask(with: url) { (popular, response, error) in
             DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
                 if let error = error {
                     let alert = UIAlertController(title: Localizable.error, message: error.localizedDescription, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))

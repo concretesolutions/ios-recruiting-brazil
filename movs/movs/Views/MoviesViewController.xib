@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MoviesViewController" customModule="movs" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="36G-aD-eaF" id="CRK-dQ-kCT"/>
                 <outlet property="collectionView" destination="Bfg-pL-esq" id="u3g-zD-sYA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -28,10 +29,15 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="36G-aD-eaF">
+                    <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Bfg-pL-esq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Ch5-Np-iqd"/>
+                <constraint firstItem="36G-aD-eaF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="DeI-mO-6kY"/>
+                <constraint firstItem="36G-aD-eaF" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="EtC-wi-aPM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Bfg-pL-esq" secondAttribute="trailing" id="M4m-yq-N2X"/>
                 <constraint firstItem="Bfg-pL-esq" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="icJ-jf-NMj"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Bfg-pL-esq" secondAttribute="bottom" id="v2q-DH-vhC"/>
