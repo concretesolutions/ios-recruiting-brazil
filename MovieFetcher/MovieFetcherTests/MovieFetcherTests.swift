@@ -19,16 +19,34 @@ class MovieFetcherTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testApi() {
+        
+        var testMovie:MovieSearch!
+        
+        let anonymousFunc = {(fetchedData:MovieSearch) in
+            testMovie = fetchedData
+            XCTAssertNotNil(testMovie, "Returned a movie search")
+            XCTAssert(type(of: testMovie) == MovieSearch.self, "Movie conforms to movie search class")
         }
+        api.movieSearch(urlStr: dao.searchURL, view: UIViewController(), onCompletion: anonymousFunc)
     }
+    
+    func testRandomAPI(){
+        
+        var image:UIImage!
+        let photoURL = "https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg"
+        let anonymousFunc = {(fetchedData:UIImage) in
+            image = fetchedData
+            XCTAssertNotNil(image, "Returned a Image")
+            XCTAssert(type(of: image) == UIImage.self, "Result conforms to UIImage class")
+        }
+        api.retrieveImage(urlStr: photoURL, onCompletion: anonymousFunc)
+    }
+    
+    
+    
+
+  
+    
 
 }
