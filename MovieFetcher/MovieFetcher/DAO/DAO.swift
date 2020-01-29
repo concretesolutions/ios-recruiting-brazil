@@ -25,6 +25,7 @@ final class DAO:Codable{
     var favoriteMovies:[Movie] = []
     var filteredFavorites:[Movie] = []
     var filteredMovies:[Movie] = []
+    var filters:[String] = ["Genre","Title","Year"]
     
     
     

@@ -143,7 +143,7 @@ extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSourc
         movieVc.setMovie(movie: movie)
         movieVc.delegate = self
         dao.searchResults[indexPath.row] = movie
-        self.present(movieVc, animated: true) 
+        self.present(movieVc, animated: true)
         
     }
 }
