@@ -112,12 +112,12 @@ extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSourc
             cell.refreshFavorite()
         }else{
             let movie = dao.filteredMovies[indexPath.row]
-             movie.isFavorite = false
+            movie.isFavorite = false
             cell.setUp(movie:movie)
             cell.refreshFavorite()
         }
-
-    
+        
+        
         return cell
         
     }
@@ -138,7 +138,6 @@ extension ListViewController:UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         var movie = dao.searchResults[indexPath.row]
         if isSearching{movie = dao.filteredMovies[indexPath.row]}
-        
         let movieVc = MovieViewController()
         movieVc.setMovie(movie: movie)
         movieVc.delegate = self
@@ -176,13 +175,11 @@ extension ListViewController:UISearchBarDelegate{
                 filterMovies(normalArray: dao.searchResults, filteredArray: dao.filteredMovies, name: text)
             }else{
                 isSearching = false
-                dao.filteredFavorites = []
                 dao.filteredMovies = []
                 collectionView.reloadData()
             }
         }else{
             isSearching = false
-            dao.filteredFavorites = []
             dao.filteredMovies = []
             collectionView.reloadData()
         }

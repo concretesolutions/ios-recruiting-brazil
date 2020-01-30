@@ -54,7 +54,7 @@ class MovieViewController: UIViewController {
         view.addSubview(label)
         return label
     }()
-
+    
     lazy var movieName:UILabel = {
         let label = UILabel()
         view.addSubview(label)
@@ -119,22 +119,22 @@ class MovieViewController: UIViewController {
     func setMovie(movie:Movie){
         self.movie = movie
         if let backdrop = movie.backdrop_path{
-        updatePosterImage(imageUrl: backdrop)
+            updatePosterImage(imageUrl: backdrop)
         }else{return}
         updateGenres()
     }
     
     override func viewDidLoad() {
-         super.viewDidLoad()
-         view.backgroundColor = UIColor(hex: dao.concreteGray)
-         safeArea = view.layoutMarginsGuide
-         setConstraints()
-         refreshFavorite()
-     }
+        super.viewDidLoad()
+        view.backgroundColor = UIColor(hex: dao.concreteGray)
+        safeArea = view.layoutMarginsGuide
+        setConstraints()
+        refreshFavorite()
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
-          delegate.updateList()
-      }
+        delegate.updateList()
+    }
     //MARK: - Complimentary methods
     private func updateGenres(){
         let url = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(dao.apiKey)&language=en-US"
@@ -173,7 +173,7 @@ class MovieViewController: UIViewController {
         }
     }
     
-  
+    
     
     @objc private func favoriteMovie(){
         if let movie = self.movie{
@@ -191,7 +191,6 @@ class MovieViewController: UIViewController {
                 movie.isFavorite = true
                 var alreadyFavorite = false
                 for movieFav in dao.favoriteMovies{
-                    //check if movie has been favorited beore
                     if movie.id == movieFav.id{
                         alreadyFavorite = true
                         break
@@ -207,48 +206,48 @@ class MovieViewController: UIViewController {
     }
     //MARK: - Constraints
     private func setConstraints(){
-          
-          poster.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
-          poster.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
-          poster.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
-          poster.heightAnchor.constraint(equalToConstant: view.frame.height/2).isActive = true
-          
-          favoriteButton.bottomAnchor.constraint(equalTo: poster.bottomAnchor, constant: -view.frame.height/20).isActive = true
-          favoriteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-          favoriteButton.heightAnchor.constraint(equalToConstant: view.frame.height/15).isActive = true
-          favoriteButton.widthAnchor.constraint(equalToConstant: view.frame.height/15).isActive = true
-          
-          movieName.topAnchor.constraint(equalTo: poster.bottomAnchor, constant: view.frame.height/35).isActive = true
-          movieName.leftAnchor.constraint(equalTo: view.leftAnchor, constant: view.frame.height/25).isActive = true
-          movieName.heightAnchor.constraint(equalToConstant: view.frame.height/20).isActive = true
-          movieName.widthAnchor.constraint(equalToConstant: view.frame.width/2.5).isActive = true
-          
-          movieReleaseDate.topAnchor.constraint(equalTo: poster.bottomAnchor, constant: view.frame.height/35).isActive = true
-          movieReleaseDate.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
-          movieReleaseDate.heightAnchor.constraint(equalToConstant: view.frame.height/20).isActive = true
-          movieReleaseDate.widthAnchor.constraint(equalToConstant: view.frame.width/2.5).isActive = true
-          
-          colorStripe.topAnchor.constraint(equalTo: movieReleaseDate.bottomAnchor,constant: 10).isActive = true
-          colorStripe.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-          colorStripe.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-          colorStripe.heightAnchor.constraint(equalToConstant: 2).isActive = true
-          
-          movieDescription.topAnchor.constraint(equalTo: colorStripe.bottomAnchor,constant: 10).isActive = true
-          movieDescription.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-          movieDescription.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-          movieDescription.heightAnchor.constraint(equalToConstant: view.frame.height/7).isActive = true
-          
-          bottonColorStripe.topAnchor.constraint(equalTo: movieDescription.bottomAnchor,constant: 10).isActive = true
-          bottonColorStripe.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-          bottonColorStripe.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-          bottonColorStripe.heightAnchor.constraint(equalToConstant: 2).isActive = true
-          
-          genres.topAnchor.constraint(equalTo: bottonColorStripe.bottomAnchor,constant: 10).isActive = true
-          genres.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-          genres.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-          genres.heightAnchor.constraint(equalToConstant: view.frame.height/7).isActive = true
-          
-      }
+        
+        poster.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        poster.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        poster.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        poster.heightAnchor.constraint(equalToConstant: view.frame.height/2).isActive = true
+        
+        favoriteButton.bottomAnchor.constraint(equalTo: poster.bottomAnchor, constant: -view.frame.height/20).isActive = true
+        favoriteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        favoriteButton.heightAnchor.constraint(equalToConstant: view.frame.height/15).isActive = true
+        favoriteButton.widthAnchor.constraint(equalToConstant: view.frame.height/15).isActive = true
+        
+        movieName.topAnchor.constraint(equalTo: poster.bottomAnchor, constant: view.frame.height/35).isActive = true
+        movieName.leftAnchor.constraint(equalTo: view.leftAnchor, constant: view.frame.height/25).isActive = true
+        movieName.heightAnchor.constraint(equalToConstant: view.frame.height/20).isActive = true
+        movieName.widthAnchor.constraint(equalToConstant: view.frame.width/2.5).isActive = true
+        
+        movieReleaseDate.topAnchor.constraint(equalTo: poster.bottomAnchor, constant: view.frame.height/35).isActive = true
+        movieReleaseDate.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        movieReleaseDate.heightAnchor.constraint(equalToConstant: view.frame.height/20).isActive = true
+        movieReleaseDate.widthAnchor.constraint(equalToConstant: view.frame.width/2.5).isActive = true
+        
+        colorStripe.topAnchor.constraint(equalTo: movieReleaseDate.bottomAnchor,constant: 10).isActive = true
+        colorStripe.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        colorStripe.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        colorStripe.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        
+        movieDescription.topAnchor.constraint(equalTo: colorStripe.bottomAnchor,constant: 10).isActive = true
+        movieDescription.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        movieDescription.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        movieDescription.heightAnchor.constraint(equalToConstant: view.frame.height/7).isActive = true
+        
+        bottonColorStripe.topAnchor.constraint(equalTo: movieDescription.bottomAnchor,constant: 10).isActive = true
+        bottonColorStripe.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        bottonColorStripe.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        bottonColorStripe.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        
+        genres.topAnchor.constraint(equalTo: bottonColorStripe.bottomAnchor,constant: 10).isActive = true
+        genres.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        genres.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        genres.heightAnchor.constraint(equalToConstant: view.frame.height/7).isActive = true
+        
+    }
 }
 
 

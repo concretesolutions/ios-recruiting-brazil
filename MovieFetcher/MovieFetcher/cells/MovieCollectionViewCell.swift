@@ -95,14 +95,13 @@ class MovieCollectionViewCell: UICollectionViewCell {
         if let movie = self.movie{
             if movie.isFavorite! {
                 movie.isFavorite = false
-                //                dao.favoriteMovies.remove(at: movie.listIndexPath!.row)
                 for movieIndex in 0...dao.favoriteMovies.count{
                     if dao.favoriteMovies[movieIndex].id == myId{
                         dao.favoriteMovies.remove(at: movieIndex)
                         break
                     }
                 }
-                 self.favoriteButton.setImage(UIImage(imageLiteralResourceName: "favorite_gray_icon"), for: .normal)
+                self.favoriteButton.setImage(UIImage(imageLiteralResourceName: "favorite_gray_icon"), for: .normal)
             }else{
                 movie.isFavorite = true
                 var alreadyFavorite = false
@@ -113,7 +112,9 @@ class MovieCollectionViewCell: UICollectionViewCell {
                     }
                 }
                 if alreadyFavorite != true{
-                dao.favoriteMovies.append(movie)
+                    movie.isFavorite = true
+                    dao.favoriteMovies.append(movie)
+                    
                 }
                 self.favoriteButton.setImage(UIImage(imageLiteralResourceName: "favorite_full_icon"), for: .normal)
             }

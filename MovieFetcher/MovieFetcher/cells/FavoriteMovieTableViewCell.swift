@@ -65,17 +65,17 @@ class FavoriteMovieTableViewCell: UITableViewCell {
     }()
     //MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-          super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = UIColor.init(hex: dao.concreteGray)
-          self.layer.cornerRadius = 8
-          self.selectionStyle = .none
+        self.layer.cornerRadius = 8
+        self.selectionStyle = .none
         self.layer.borderColor = UIColor.white.cgColor
         self.layer.borderWidth = 1
-          safeArea = layoutMarginsGuide
-          setConstraints()
-          isUserInteractionEnabled = true
-          
-      }
+        safeArea = layoutMarginsGuide
+        setConstraints()
+        isUserInteractionEnabled = true
+        
+    }
     
     func setUp(movie:Movie){
         self.movie = movie
@@ -88,25 +88,24 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         movieDescription.text = movie.overview
         
     }
-      
-      required init?(coder: NSCoder) {
-          fatalError("init(coder:) has not been implemented")
-      }
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
     }
     
     private func updatePosterImage(cell:FavoriteMovieTableViewCell,imageUrl:String){
-                 let url = "https://image.tmdb.org/t/p/w500\(imageUrl)"
-                 let anonymousFunc = {(fetchedData:UIImage) in
-                         DispatchQueue.main.async {
-                          cell.posterImage.image = fetchedData
-                         }
-                     }
-                 api.retrieveImage(urlStr: url, onCompletion: anonymousFunc)
-                 }
+        let url = "https://image.tmdb.org/t/p/w500\(imageUrl)"
+        let anonymousFunc = {(fetchedData:UIImage) in
+            DispatchQueue.main.async {
+                cell.posterImage.image = fetchedData
+            }
+        }
+        api.retrieveImage(urlStr: url, onCompletion: anonymousFunc)
+    }
     
     //MARK: - Constraints
     func setConstraints(){
@@ -115,7 +114,7 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         posterImage.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 0).isActive = true
         posterImage.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
         posterImage.widthAnchor.constraint(equalToConstant: frame.height*2.5).isActive = true
-
+        
         movieTitle.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10).isActive = true
         movieTitle.leftAnchor.constraint(equalTo: posterImage.rightAnchor, constant: 20).isActive = true
         movieTitle.heightAnchor.constraint(equalToConstant: frame.height).isActive = true
@@ -123,11 +122,11 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         releaseYear.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10).isActive = true
         releaseYear.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: 0).isActive = true
         releaseYear.heightAnchor.constraint(equalToConstant: frame.height).isActive = true
-
+        
         movieDescription.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 10).isActive = true
         movieDescription.leftAnchor.constraint(equalTo: posterImage.rightAnchor, constant: 20).isActive = true
         movieDescription.heightAnchor.constraint(equalToConstant: frame.height).isActive = true
         movieDescription.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20).isActive = true
     }
-
+    
 }

@@ -27,7 +27,7 @@ class FavoritesViewController: UIViewController {
         tableView.estimatedRowHeight = 200
         tableView.backgroundColor = UIColor.init(hex: dao.concreteGray)
         tableView.rowHeight = UITableView.automaticDimension
-//        tableView.reloadData()
+        //        tableView.reloadData()
         return tableView
     }()
     
@@ -47,18 +47,18 @@ class FavoritesViewController: UIViewController {
     }()
     
     lazy var searchBar:UISearchBar = {
-          let searchBar = UISearchBar()
-          view.addSubview(searchBar)
-          searchBar.translatesAutoresizingMaskIntoConstraints = false
-          searchBar.delegate = self
-          searchBar.barTintColor = .clear
-          searchBar.barStyle = .default
-          searchBar.isTranslucent = true
-          searchBar.enablesReturnKeyAutomatically = false
-          searchBar.placeholder = "Search by \(searchFilter)"
-          searchBar.showsCancelButton = true
-          return searchBar
-      }()
+        let searchBar = UISearchBar()
+        view.addSubview(searchBar)
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.delegate = self
+        searchBar.barTintColor = .clear
+        searchBar.barStyle = .default
+        searchBar.isTranslucent = true
+        searchBar.enablesReturnKeyAutomatically = false
+        searchBar.placeholder = "Search by \(searchFilter)"
+        searchBar.showsCancelButton = true
+        return searchBar
+    }()
     
     lazy var filterButton:UIButton = {
         let button = UIButton()
@@ -99,7 +99,7 @@ class FavoritesViewController: UIViewController {
             filterTableView.isHidden = true
         }
     }
-
+    
     //MARK:- Constraints
     private func setContraints(){
         
@@ -123,7 +123,7 @@ class FavoritesViewController: UIViewController {
         favoritesTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         favoritesTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
-       
+        
     }
     
 }
@@ -131,7 +131,7 @@ class FavoritesViewController: UIViewController {
 extension FavoritesViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == favoritesTableView{
-        if !isSearching{ return dao.favoriteMovies.count} else {return dao.filteredFavorites.count}
+            if !isSearching{ return dao.favoriteMovies.count} else {return dao.filteredFavorites.count}
         }else{
             return dao.filters.count
         }
@@ -162,15 +162,15 @@ extension FavoritesViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == favoritesTableView{
-        return tableView.frame.height/3.5
+            return tableView.frame.height/3.5
         }else{
             return 60
         }
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-       if tableView == favoritesTableView{
-        return 200
+        if tableView == favoritesTableView{
+            return 200
         }else{
             return 60
         }
@@ -179,20 +179,13 @@ extension FavoritesViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if tableView == favoritesTableView{
-//        let movie = dao.favoriteMovies[indexPath.row]
-//        let movieVc = MovieViewController()
-//        movieVc.setMovie(movie: movie)
-//        movieVc.delegate = self.listView
-//        self.present(movieVc, animated: true) {
-        //        } var movie = dao.searchResults[indexPath.row]
-        var movie = dao.favoriteMovies[indexPath.row]
-        if isSearching{movie = dao.filteredFavorites[indexPath.row]}
-        
-        let movieVc = MovieViewController()
-        movieVc.setMovie(movie: movie)
-        movieVc.delegate = self.listView
-        
-        self.present(movieVc, animated: true)
+            var movie = dao.favoriteMovies[indexPath.row]
+            if isSearching{movie = dao.filteredFavorites[indexPath.row]}
+            movie.isFavorite = true
+            let movieVc = MovieViewController()
+            movieVc.setMovie(movie: movie)
+            movieVc.delegate = self.listView
+            self.present(movieVc, animated: true)
         }else{
             self.searchFilter = dao.filters[indexPath.row]
             self.filterTableView.isHidden = true
@@ -202,28 +195,39 @@ extension FavoritesViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if tableView == favoritesTableView{
-        let delete = deleteAction(at: indexPath)
-        delete.backgroundColor = .red
-        return UISwipeActionsConfiguration(actions: [delete])
+            if !self.isSearching{
+                let delete = deleteAction(at: indexPath)
+                delete.backgroundColor = .red
+                return UISwipeActionsConfiguration(actions: [delete])
+            }else{
+                return UISwipeActionsConfiguration()
+            }
         }
         return UISwipeActionsConfiguration()
     }
+    
     func deleteAction(at indexPath:IndexPath) ->UIContextualAction{
         
-        let action = UIContextualAction(style: .normal, title: "Delete") { (action, view, completion) in
+        let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
+            
             dao.favoriteMovies.remove(at: indexPath.row)
+            
             let cell  = self.favoritesTableView.cellForRow(at: indexPath) as! FavoriteMovieTableViewCell
             for movieIndex in 0...dao.searchResults.count - 1{
                 if cell.movie.id == dao.searchResults[movieIndex].id{
+                    
                     dao.searchResults[movieIndex].isFavorite = false
                     break
                 }
             }
+            
+            
             self.favoritesTableView.reloadData()
         }
+        
         return action
     }
-
+    
 }
 
 extension FavoritesViewController:UISearchBarDelegate{
@@ -237,8 +241,11 @@ extension FavoritesViewController:UISearchBarDelegate{
         
         if let text = searchBar.text{
             if text != ""{
+                debugPrint(dao.filteredMovies)
                 filterMovies(name: text, type: searchFilter)
+                debugPrint(dao.filteredMovies)
                 favoritesTableView.reloadData()
+                debugPrint(dao.filteredMovies)
             }else{
                 isSearching = false
                 dao.filteredFavorites = []
@@ -258,7 +265,7 @@ extension FavoritesViewController:UISearchBarDelegate{
         self.isSearching = true
         
         dao.filteredFavorites = []
-        
+        var filtered:[Movie] = []
         switch type {
         case "Genre":
             let url = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(dao.apiKey)&language=en-US"
@@ -276,7 +283,7 @@ extension FavoritesViewController:UISearchBarDelegate{
                         }
                         for id in movieIds{
                             if id.lowercased() == name.lowercased(){
-                                dao.filteredFavorites.append(movie)
+                                filtered.append(movie)
                                 break
                             }
                         }
@@ -292,19 +299,21 @@ extension FavoritesViewController:UISearchBarDelegate{
                     dao.filteredFavorites.append(movie)
                 }
             }
-        
+            
         case "Title":
-    
+            
             for movie in dao.favoriteMovies{
                 if movie.title.lowercased().contains(name.lowercased()){
+                    debugPrint(dao.filteredFavorites)
                     dao.filteredFavorites.append(movie)
+                    debugPrint(dao.filteredFavorites)
                 }
             }
             
         default:
             debugPrint("not a correct value")
         }
-        
+        debugPrint(dao.filteredFavorites)
         
     }
     

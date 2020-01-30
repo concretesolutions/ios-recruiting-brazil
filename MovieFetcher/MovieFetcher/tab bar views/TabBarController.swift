@@ -9,7 +9,7 @@
 import UIKit
 
 class TabBarController: UITabBarController {
-
+    
     //MARK: - Init Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class TabBarController: UITabBarController {
     
     //MARK: - Complimentary methods
     private func setUpBar(){
-
+        
         //MoviesViewController
         let listView = ListViewController()
         listView.title = "Movies"
@@ -30,6 +30,7 @@ class TabBarController: UITabBarController {
         moviesBar.title = "Movies"
         moviesBar.tabBarItem.image = UIImage(named: "list_icon")
         moviesBar.tabBarItem.selectedImage = UIImage(named: "list_icon")
+        
         //FavoritesViewController
         let fav = FavoritesViewController()
         fav.title = "Favorites"
@@ -38,7 +39,7 @@ class TabBarController: UITabBarController {
         favoritesBar.title = "Favorites"
         favoritesBar.tabBarItem.image = UIImage(named: "favorite_empty_icon")
         favoritesBar.tabBarItem.selectedImage = UIImage(named: "favorite_empty_icon")
-        //add to bar
+        
         
         viewControllers = [moviesBar,favoritesBar]
         
