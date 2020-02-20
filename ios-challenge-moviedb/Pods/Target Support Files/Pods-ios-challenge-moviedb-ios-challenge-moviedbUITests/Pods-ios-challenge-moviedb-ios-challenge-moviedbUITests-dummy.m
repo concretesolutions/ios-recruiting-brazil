@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_ios_challenge_moviedb_ios_challenge_moviedbUITests : NSObject
+@end
+@implementation PodsDummy_Pods_ios_challenge_moviedb_ios_challenge_moviedbUITests
+@end
