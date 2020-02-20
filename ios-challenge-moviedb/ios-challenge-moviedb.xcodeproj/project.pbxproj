@@ -200,6 +200,7 @@
 				655129B623FF23B10098589B /* Sources */,
 				655129B723FF23B10098589B /* Frameworks */,
 				655129B823FF23B10098589B /* Resources */,
+				A2CA2DBFC15B87ADE053DDB1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -237,6 +238,7 @@
 				655129D723FF23B20098589B /* Sources */,
 				655129D823FF23B20098589B /* Frameworks */,
 				655129D923FF23B20098589B /* Resources */,
+				025756993C61C9DAA03D7E4D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -319,6 +321,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		025756993C61C9DAA03D7E4D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-challenge-moviedb-ios-challenge-moviedbUITests/Pods-ios-challenge-moviedb-ios-challenge-moviedbUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-challenge-moviedb-ios-challenge-moviedbUITests/Pods-ios-challenge-moviedb-ios-challenge-moviedbUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios-challenge-moviedb-ios-challenge-moviedbUITests/Pods-ios-challenge-moviedb-ios-challenge-moviedbUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4FEE90BA7F0606FE9148B0DD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -361,6 +380,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A2CA2DBFC15B87ADE053DDB1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-challenge-moviedb/Pods-ios-challenge-moviedb-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-challenge-moviedb/Pods-ios-challenge-moviedb-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios-challenge-moviedb/Pods-ios-challenge-moviedb-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B2E02F1600CCC0A322A710DF /* [CP] Check Pods Manifest.lock */ = {
