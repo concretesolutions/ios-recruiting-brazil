@@ -15,6 +15,12 @@ class TabBarController: UITabBarController {
         self.tabBar.isTranslucent = false
         self.tabBar.tintColor = .blue
         self.tabBar.barTintColor = .white
+        MovieClient.getPopularMovies(page: 1) { (movies, error) in
+            print("Movies:\n", movies)
+        }
+        MovieClient.getAllGenres { (genres, error) in
+            print("Genres:\n", genres)
+        }
     }
     
     required init?(coder: NSCoder) {

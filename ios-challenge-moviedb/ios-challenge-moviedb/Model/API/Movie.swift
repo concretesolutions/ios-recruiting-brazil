@@ -16,22 +16,21 @@ class Movie: Codable {
     var posterPath: String
     var backdropPath: String
     var releaseDate: String
-    var genres: [Genre]
+    var genreIds: [Int]
     
     init(id: Int, title: String, overview: String, posterPath: String,
-         backdropPath: String, releaseDate: String, genres: [Genre]) {
+         backdropPath: String, releaseDate: String, genreIds: [Int]) {
         self.id = id
         self.title = title
         self.overview = overview
         self.posterPath = posterPath
         self.backdropPath = backdropPath
         self.releaseDate = releaseDate
-        self.genres = genres
+        self.genreIds = genreIds
     }
 }
 
 extension Movie {
-    
     enum CodingKeys: String, CodingKey {
         case id
         case title
@@ -39,6 +38,6 @@ extension Movie {
         case posterPath = "poster_path"
         case backdropPath = "backdrop_path"
         case releaseDate = "release_date"
-        case genres
+        case genreIds = "genre_ids"
     }
 }

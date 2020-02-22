@@ -20,7 +20,6 @@ class Genre: Codable {
 }
 
 extension Genre {
-    
     enum CodingKeys: String, CodingKey {
         case id
         case name
