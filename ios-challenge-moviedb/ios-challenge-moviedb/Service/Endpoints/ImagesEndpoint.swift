@@ -61,9 +61,9 @@ enum ImagesEndpoint: APIConfiguration {
      Function that creates an URL Request
      */
     func asURLRequest() throws -> URLRequest {
-        let baseURL = try Constants.ProductionServer.image.asURL()
-        
-        var urlRequest = URLRequest(url: baseURL.appendingPathComponent(path))
+        let baseAndPath = Constants.ProductionServer.base + path
+        let url = try baseAndPath.asURL()
+        var urlRequest = URLRequest(url: url)
         
         // Setting url request method
         urlRequest.method = method

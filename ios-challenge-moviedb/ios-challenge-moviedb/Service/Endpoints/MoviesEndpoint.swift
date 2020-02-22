@@ -53,11 +53,11 @@ enum MoviesEndpoint: APIConfiguration {
     var path: String {
         switch self {
         case .popularMovies(let page):
-            return "movie/popular?api_key=\(Constants.APIParameterKey.apiKey)&page=\(page)"
+            return "/movie/popular?api_key=\(Constants.APIParameterKey.apiKey)&page=\(page)"
         case .genres:
-            return "genre/movie/list?api_key=\(Constants.APIParameterKey.apiKey)"
+            return "/genre/movie/list?api_key=\(Constants.APIParameterKey.apiKey)"
         case .search(let text):
-            return "search/movie?api_key=\(Constants.APIParameterKey.apiKey)&query=\(text)"
+            return "/search/movie?api_key=\(Constants.APIParameterKey.apiKey)&query=\(text)"
         }
     }
     
@@ -77,10 +77,11 @@ enum MoviesEndpoint: APIConfiguration {
      Function that creates an URL Request
      */
     func asURLRequest() throws -> URLRequest {
-        let baseURL = try Constants.ProductionServer.base.asURL()
-        
-        var urlRequest = URLRequest(url: baseURL.appendingPathComponent(path))
-        
+        let baseAndPath = Constants.ProductionServer.base + path
+        let url = try baseAndPath.asURL()
+        var urlRequest = URLRequest(url: url)
+        print(urlRequest)
+
         // Setting url request method
         urlRequest.method = method
         
