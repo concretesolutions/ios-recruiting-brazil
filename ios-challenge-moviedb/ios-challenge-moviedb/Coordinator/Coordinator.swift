@@ -8,6 +8,9 @@
 
 import UIKit
 
+/**
+ Protocol used by Coordinators
+ */
 protocol Coordinator {
     var rootViewController: UIViewController { get }
     func start()

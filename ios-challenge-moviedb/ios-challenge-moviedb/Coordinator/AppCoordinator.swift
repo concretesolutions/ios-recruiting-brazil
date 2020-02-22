@@ -8,20 +8,20 @@
 
 import UIKit
 
+/**
+ Root Coordinator
+ */
 class AppCoordinator: Coordinator {
     
     var window: UIWindow
     var rootViewController: UIViewController
         
-    // Tem que especificar as classes
     private let moviesCoordinator: MoviesCoordinator
     private let favoritesCoordinator: FavoritesCoordinator
     
     init() {
-        
         let window = UIWindow(frame: UIScreen.main.bounds)
         self.window = window
-        
         self.rootViewController = TabBarController()
         self.moviesCoordinator = MoviesCoordinator()
         self.favoritesCoordinator = FavoritesCoordinator()
@@ -34,11 +34,13 @@ class AppCoordinator: Coordinator {
         
     }
     
+    // MARK: - Setup Window
     private func setupWindow() {
         self.window.rootViewController = rootViewController
         self.window.makeKeyAndVisible()
     }
     
+    // MARK: - Setup Tab Bar
     private func setupTabBar() {
         let moviesViewController = moviesCoordinator.rootViewController
         let favoritesViewController = favoritesCoordinator.rootViewController

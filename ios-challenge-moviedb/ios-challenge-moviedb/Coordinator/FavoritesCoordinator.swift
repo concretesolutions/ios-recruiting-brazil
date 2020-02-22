@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+/**
+ Coordinator Responsible for the Favorites View
+*/
 class FavoritesCoordinator: Coordinator {
     
     var rootViewController: UIViewController

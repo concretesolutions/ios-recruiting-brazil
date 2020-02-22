@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+/**
+ Coordinator Responsible for the Movies View
+*/
 class MoviesCoordinator: Coordinator {
     
     var rootViewController: UIViewController
