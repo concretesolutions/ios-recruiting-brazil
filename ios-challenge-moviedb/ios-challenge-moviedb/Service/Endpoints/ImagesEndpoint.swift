@@ -1,5 +1,5 @@
 //
-//  MoviesEndpoint.swift
+//  ImagesEndpoint.swift
 //  ios-challenge-moviedb
 //
 //  Created by Giovanni Severo Barros on 21/02/20.
@@ -9,31 +9,19 @@
 import Alamofire
 
 /**
- Movies Endpoints used to request movies related information
+ Images Endpoints used to request images related information
  
  - Return: The requested information
  */
-enum MoviesEndpoint: APIConfiguration {
+enum ImagesEndpoint: APIConfiguration {
     /**
-     Get popular Movies
+     Get Movie Image
      
      - Parameters:
-        - page: Requested Page
+        - width: Image width size
+        - path: Image path
      */
-    case popularMovies(page: Int)
-    
-    /**
-     Get all genres
-     */
-    case genres
-    
-    /**
-     Search
-     
-     - Parameters:
-        - text: String used to make the search
-     */
-    case search(text: String)
+    case movieImage(width: Int, path: String)
     
     // MARK: - Method
     /**
@@ -41,7 +29,7 @@ enum MoviesEndpoint: APIConfiguration {
      */
     var method: HTTPMethod {
         switch self {
-        case .search, .genres, .popularMovies:
+        case .movieImage:
             return .get
         }
     }
@@ -52,14 +40,9 @@ enum MoviesEndpoint: APIConfiguration {
      */
     var path: String {
         switch self {
-        case .popularMovies(let page):
-            return "movie/popular?api_key=\(Constants.APIParameterKey.apiKey)&page=\(page)"
-        case .genres:
-            return "genre/movie/list?api_key=\(Constants.APIParameterKey.apiKey)"
-        case .search(let text):
-            return "search/movie?api_key=\(Constants.APIParameterKey.apiKey)&query=\(text)"
+        case .movieImage(let width, let path):
+            return "w\(width)/\(path)"
         }
-
     }
     
     // MARK: - Parameters
@@ -68,7 +51,7 @@ enum MoviesEndpoint: APIConfiguration {
      */
     var parameters: Parameters? {
         switch self {
-        case .search, .genres, .popularMovies:
+        case .movieImage:
             return nil
         }
     }
@@ -78,7 +61,7 @@ enum MoviesEndpoint: APIConfiguration {
      Function that creates an URL Request
      */
     func asURLRequest() throws -> URLRequest {
-        let baseURL = try Constants.ProductionServer.base.asURL()
+        let baseURL = try Constants.ProductionServer.image.asURL()
         
         var urlRequest = URLRequest(url: baseURL.appendingPathComponent(path))
         
@@ -103,4 +86,5 @@ enum MoviesEndpoint: APIConfiguration {
         
         return urlRequest
     }
+
 }

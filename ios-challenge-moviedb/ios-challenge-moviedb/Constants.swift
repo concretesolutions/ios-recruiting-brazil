@@ -11,8 +11,8 @@ import Foundation
 struct Constants {
     // MARK: - Network Constants
     struct ProductionServer {
-        static let baseURL = "https://api.themoviedb.org/3/"
-        static let imageURL = "https://image.tmdb.org/t/p"
+        static let base = "https://api.themoviedb.org/3/"
+        static let image = "https://image.tmdb.org/t/p/"
     }
     struct APIParameterKey {
         static let apiKey = "ffc4ed77b7cb17c2465a2c2e9bb593b8"
