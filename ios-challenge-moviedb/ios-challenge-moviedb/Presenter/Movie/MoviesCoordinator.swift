@@ -23,4 +23,14 @@ class MoviesCoordinator: Coordinator {
     func start() {
         
     }
+    
+    func showMovieDetail(movie: Movie) {
+        
+    }
+}
+
+extension MoviesCoordinator: MovieViewPresenterDelegate {
+    func selectedMovie(movie: Movie) {
+        showMovieDetail(movie: movie)
+    }
 }
