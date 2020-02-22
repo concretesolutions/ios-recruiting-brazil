@@ -59,7 +59,6 @@ enum MoviesEndpoint: APIConfiguration {
         case .search(let text):
             return "search/movie?api_key=\(Constants.APIParameterKey.apiKey)&query=\(text)"
         }
-
     }
     
     // MARK: - Parameters
