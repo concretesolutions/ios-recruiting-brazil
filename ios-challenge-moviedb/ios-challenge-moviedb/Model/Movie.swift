@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Movie {
+class Movie: Codable {
     
     var id: Int
     var title: String

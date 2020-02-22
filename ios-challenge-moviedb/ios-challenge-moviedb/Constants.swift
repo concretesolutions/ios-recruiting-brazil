@@ -9,16 +9,17 @@
 import Foundation
 
 struct Constants {
-    
+    // MARK: - Network Constants
     struct ProductionServer {
-        static let baseURL = ""
+        static let baseURL = "https://api.themoviedb.org/3/"
+        static let imageURL = "https://image.tmdb.org/t/p"
     }
-    
     struct APIParameterKey {
         static let apiKey = "ffc4ed77b7cb17c2465a2c2e9bb593b8"
     }
 }
 
+// MARK: - Header Field
 enum HTTPHeaderField: String {
     case authentication = "Authorization"
     case contentType = "Content-Type"
@@ -26,6 +27,7 @@ enum HTTPHeaderField: String {
     case acceptEncoding = "Accept-Encoding"
 }
 
+// MARK: - JSON Path
 enum ContentType: String {
     case json = "application/json"
 }
