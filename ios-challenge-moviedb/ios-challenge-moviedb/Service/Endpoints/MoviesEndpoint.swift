@@ -80,7 +80,6 @@ enum MoviesEndpoint: APIConfiguration {
         let baseAndPath = Constants.ProductionServer.base + path
         let url = try baseAndPath.asURL()
         var urlRequest = URLRequest(url: url)
-        print(urlRequest)
 
         // Setting url request method
         urlRequest.method = method

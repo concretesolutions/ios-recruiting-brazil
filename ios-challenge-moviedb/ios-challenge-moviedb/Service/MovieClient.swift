@@ -19,7 +19,7 @@ class MovieClient {
     
     // TO DO: - Função de get popular movies / get genres / search
     
-    static func getPopularMovies(page: Int, completion: @escaping ([Movie]?, Error?) -> Void) {
+    static func getPopularMovies(page: Int, completion: @escaping (PopularMovies?, Error?) -> Void) {
         performRequest(route: .popularMovies(page: page)) { response in
             if response?.error == nil {
                 if let data = response?.data, let utf8Text = String(data: data, encoding: .utf8) {
@@ -27,7 +27,7 @@ class MovieClient {
                     do {
                         let jsonDecoder = JSONDecoder()
                         let decodedJson = try jsonDecoder.decode(PopularMovies.self, from: json)
-                        completion(decodedJson.movies, nil)
+                        completion(decodedJson, nil)
                     } catch {
                         completion(nil, error)
                     }

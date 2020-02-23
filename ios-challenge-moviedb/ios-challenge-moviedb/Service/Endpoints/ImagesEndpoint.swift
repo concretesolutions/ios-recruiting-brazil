@@ -41,7 +41,7 @@ enum ImagesEndpoint: APIConfiguration {
     var path: String {
         switch self {
         case .movieImage(let width, let path):
-            return "w\(width)/\(path)"
+            return "w\(width)\(path)"
         }
     }
     
@@ -54,6 +54,11 @@ enum ImagesEndpoint: APIConfiguration {
         case .movieImage:
             return nil
         }
+    }
+    
+    var imageUrl: URL? {
+        let url = Constants.ProductionServer.image + path
+        return URL(string: url)
     }
     
     // MARK: - Create URL Request

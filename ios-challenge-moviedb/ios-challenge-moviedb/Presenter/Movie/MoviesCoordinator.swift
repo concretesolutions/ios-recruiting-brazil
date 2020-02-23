@@ -15,8 +15,8 @@ class MoviesCoordinator: Coordinator {
     var rootViewController: UIViewController
     
     init() {
-        self.rootViewController = UIViewController()
-        self.rootViewController.view.backgroundColor = .blue
+        self.rootViewController = MovieViewController()
+//        self.rootViewController.view.backgroundColor = .blue
 
     }
     
