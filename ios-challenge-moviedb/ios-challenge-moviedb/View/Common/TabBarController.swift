@@ -13,14 +13,8 @@ class TabBarController: UITabBarController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.tabBar.isTranslucent = false
-        self.tabBar.tintColor = .blue
-        self.tabBar.barTintColor = .white
-//        MovieClient.getPopularMovies(page: 1) { (movies, error) in
-////            print("Movies:\n", movies)
-//        }
-//        MovieClient.getAllGenres { (genres, error) in
-//            print("Genres:\n", genres)
-//        }
+        self.tabBar.tintColor = .white
+        self.tabBar.barTintColor = .black
     }
     
     required init?(coder: NSCoder) {

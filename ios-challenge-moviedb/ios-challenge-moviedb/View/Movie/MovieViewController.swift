@@ -26,11 +26,12 @@ class MovieViewController: UIViewController {
         layout.minimumLineSpacing = Constants.MovieCollectionView.cellMargin
         layout.minimumInteritemSpacing = Constants.MovieCollectionView.cellMargin
         layout.estimatedItemSize = CGSize(width: Constants.MovieCollectionView.estimatedCellWidth,
-                                          height: Constants.MovieCollectionView.estimatedCellHeight)
+                                          height: Constants.MovieCollectionView.estimatedCellHeight + 30)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: Constants.MovieCollectionView.cellId)
+        collectionView.backgroundColor = .black
         
         return collectionView
     }()
@@ -49,21 +50,14 @@ class MovieViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             self?.presenter?.loadCollectionView(page: 1)
          }
-        print("ViewWillAppeal: ", presenter?.movies)
     }
     
     override func viewDidLoad() {
         setupUI()
-        self.movieCollectionView.reloadData()
-        
-        print("viewDidLoad: ", presenter?.movies)
-
     }
     
     func setupUI() {
-        movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
-        self.view.backgroundColor = .red
         self.view.addSubview(movieCollectionView)
         setupConstaints()
     }
@@ -77,25 +71,8 @@ class MovieViewController: UIViewController {
     }
 }
 
-extension MovieViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = calculateWidth()
-        return CGSize(width: width, height: width*1.5)
-    }
-    
-    func calculateWidth() -> CGFloat {
-        let estimatedWidth = self.estimatedCellWidth
-        let cellCount = floor(CGFloat(UIScreen.main.bounds.size.width / estimatedWidth))
-        let margin = CGFloat(self.cellMargin * 2)
-        let width = ((self.view.frame.size.width - cellMargin * cellCount - 1) - margin) / cellCount
-        
-        return width
-    }
-}
-
 extension MovieViewController: UICollectionViewDataSource {
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return presenter?.numberOfMovies ?? 0
     }
@@ -108,7 +85,7 @@ extension MovieViewController: UICollectionViewDataSource {
         if let movies = presenter?.movies {
             cell.movieImage.kf.indicatorType = .activity
             let movie = movies[indexPath.item]
-            print("Title: ", movie.title)
+            cell.movieTitle.text = movie.title
             let moviePosterImageURL = presenter?.getMovieImageURL(width: 200, path: movie.posterPath)
             cell.movieImage.kf.setImage(with: moviePosterImageURL) { result in
                 switch result {
