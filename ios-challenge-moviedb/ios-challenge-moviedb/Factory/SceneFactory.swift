@@ -10,12 +10,12 @@ import UIKit
 
 enum SceneFactory {
     
-    static func createFeedScene(delegate: MovieViewPresenterDelegate?) -> MovieViewController {
-        let movieViewController = MovieViewController()
-        let moviePresenter = MoviePresenter(viewController: movieViewController, delegate: delegate)
-        movieViewController.presenter = moviePresenter
-        return movieViewController
-    }
+//    static func createFeedScene(delegate: MovieViewPresenterDelegate?) -> MovieViewController {
+////        let movieViewController = MovieViewController()
+////        let moviePresenter = MoviePresenter(movieView: movieViewController, delegate: delegate)
+////        movieViewController.presenter = moviePresenter
+////        return movieViewController
+//    }
     
     static func createFavoritesScene() {
         

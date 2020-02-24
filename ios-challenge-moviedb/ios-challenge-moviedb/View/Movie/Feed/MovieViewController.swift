@@ -36,9 +36,9 @@ class MovieViewController: UIViewController {
         return collectionView
     }()
     
-    init() {
+    init(presenter: MoviePresenter) {
         super.init(nibName: nil, bundle: nil)
-        self.presenter = MoviePresenter(viewController: self, delegate: self)
+        self.presenter = presenter
     }
     
     required init?(coder: NSCoder) {
@@ -48,16 +48,17 @@ class MovieViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         // MARK: - Loads Movies Data
         DispatchQueue.main.async { [weak self] in
-            self?.presenter?.loadCollectionView(page: 1)
+            guard let `self` = self else { return }
+            self.presenter?.loadCollectionView(page: 1)
          }
-    }
-    
-    override func viewDidLoad() {
         setupUI()
     }
     
-    func setupUI() {
+    override func viewDidLoad() {
         movieCollectionView.dataSource = self
+    }
+    
+    func setupUI() {
         self.view.addSubview(movieCollectionView)
         setupConstaints()
     }
@@ -102,9 +103,12 @@ extension MovieViewController: UICollectionViewDataSource {
     }
 }
 
-extension MovieViewController: MovieViewPresenterDelegate {
-    func selectedMovie(movie: Movie) {
-        
+extension MovieViewController: MovieViewDelegate {
+    func reloadData() {
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else { return }
+            self.movieCollectionView.reloadData()
+        }
     }
 }
 

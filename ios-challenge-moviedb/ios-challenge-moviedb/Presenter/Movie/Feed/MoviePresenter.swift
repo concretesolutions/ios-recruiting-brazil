@@ -10,15 +10,11 @@ import Foundation
 
 protocol MovieViewDelegate {
     func reloadData()
-    func loadCollectionView(page: Int)
-    func getMovieImageURL(width: Int, path: String) -> URL?
-    func getMoreMovies()
-    func showMovieDetails(movie: Movie)
 }
 
-class MoviePresenter: MovieViewDelegate {
+class MoviePresenter {
     
-    var viewController: MovieViewController
+    internal var movieView: MovieViewDelegate?
     weak var delegate: MovieViewPresenterDelegate?
     
     var movies: [Movie] = []
@@ -26,18 +22,9 @@ class MoviePresenter: MovieViewDelegate {
     private var currentPage: Int = 1
     private var maxNumberOfPages: Int = 0
     
-    init(viewController: MovieViewController, delegate: MovieViewPresenterDelegate?) {
-        self.viewController = viewController
-        self.delegate = delegate
-    }
+    init() { }
     
-    func reloadData() {
-        DispatchQueue.main.async { [weak self] in
-            self?.viewController.movieCollectionView.reloadData()
-        }
-    }
-    
-    func loadCollectionView(page: Int) {
+    func loadCollectionView(page: Int) -> (()) {
         MovieClient.getPopularMovies(page: currentPage) { [weak self] (popularMoviesResponse, error) in
             guard let `self` = self else { return }
             if let response = popularMoviesResponse {
@@ -45,7 +32,7 @@ class MoviePresenter: MovieViewDelegate {
                 self.currentPage = 1
                 self.maxNumberOfPages = response.totalPages
                 self.numberOfMovies = self.movies.count
-                self.reloadData()
+                self.movieView?.reloadData()
             } else {
                 // Tratar o Erro
             }
