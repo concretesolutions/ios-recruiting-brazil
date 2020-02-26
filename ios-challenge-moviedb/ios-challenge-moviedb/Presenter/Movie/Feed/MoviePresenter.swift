@@ -14,7 +14,7 @@ protocol MovieViewDelegate {
 
 class MoviePresenter {
     
-    internal var movieView: MovieViewDelegate?
+    var movieView: MovieViewDelegate?
     weak var delegate: MovieViewPresenterDelegate?
     
     var movies: [Movie] = []
@@ -24,7 +24,7 @@ class MoviePresenter {
     
     init() { }
     
-    func loadCollectionView(page: Int) -> (()) {
+    func loadCollectionView(page: Int) {
         MovieClient.getPopularMovies(page: currentPage) { [weak self] (popularMoviesResponse, error) in
             guard let `self` = self else { return }
             if let response = popularMoviesResponse {
@@ -48,7 +48,9 @@ class MoviePresenter {
         return imageURL
     }
     
-    func showMovieDetails(movie: Movie) {
-        delegate?.selectedMovie(movie: movie)
+    func showMovieDetails(movie index: Int) {
+        let selectedMovie = movies[index]
+        print("Release date: ", selectedMovie.releaseDate)
+        delegate?.selectedMovie(movie: selectedMovie)
     }
 }

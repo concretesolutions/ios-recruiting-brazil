@@ -45,6 +45,17 @@ class AppCoordinator: Coordinator {
         let moviesViewController = moviesCoordinator.rootViewController
         let favoritesViewController = favoritesCoordinator.rootViewController
         
+        let moviesNavigation = UINavigationController(rootViewController: moviesViewController)
+        let favoritesNavigation = UINavigationController(rootViewController: favoritesViewController)
+        
+        moviesNavigation.navigationBar.prefersLargeTitles = true
+        moviesNavigation.navigationBar.isTranslucent = false
+        moviesNavigation.navigationItem.largeTitleDisplayMode = .automatic
+        moviesNavigation.navigationBar.tintColor = .white
+        
+        favoritesNavigation.navigationBar.prefersLargeTitles = true
+        favoritesNavigation.navigationBar.isTranslucent = false
+
         let moviesItem = UITabBarItem(title: "Movies",
                                       image: UIImage(named: "list_icon"),
                                       selectedImage: UIImage(named: "list_icon"))
@@ -53,14 +64,14 @@ class AppCoordinator: Coordinator {
                                          image: UIImage(named: "favorite_empty_icon"),
                                          selectedImage: UIImage(named: "favorite_empty_icon"))
         
-        moviesViewController.tabBarItem = moviesItem
-        favoritesViewController.tabBarItem = favoritesItem
+        moviesNavigation.tabBarItem = moviesItem
+        favoritesNavigation.tabBarItem = favoritesItem
         
         var controllers: [UIViewController] = []
-        controllers.append(moviesViewController)
-        controllers.append(favoritesViewController)
+        controllers.append(moviesNavigation)
+        controllers.append(favoritesNavigation)
         
         guard let tabBarController = rootViewController as? TabBarController else { return }
-        tabBarController.viewControllers = controllers
+        tabBarController.viewControllers = controllers        
     }
 }

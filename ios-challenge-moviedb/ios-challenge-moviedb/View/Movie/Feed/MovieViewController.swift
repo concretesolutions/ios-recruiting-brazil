@@ -39,6 +39,7 @@ class MovieViewController: UIViewController {
     init(presenter: MoviePresenter) {
         super.init(nibName: nil, bundle: nil)
         self.presenter = presenter
+        self.navigationItem.title = "Movies"
     }
     
     required init?(coder: NSCoder) {
@@ -56,6 +57,7 @@ class MovieViewController: UIViewController {
     
     override func viewDidLoad() {
         movieCollectionView.dataSource = self
+        movieCollectionView.delegate = self
     }
     
     func setupUI() {
@@ -87,6 +89,7 @@ extension MovieViewController: UICollectionViewDataSource {
             cell.movieImage.kf.indicatorType = .activity
             let movie = movies[indexPath.item]
             cell.movieTitle.text = movie.title
+            print(movie.releaseDate)
             let moviePosterImageURL = presenter?.getMovieImageURL(width: 200, path: movie.posterPath)
             cell.movieImage.kf.setImage(with: moviePosterImageURL) { result in
                 switch result {
@@ -100,6 +103,12 @@ extension MovieViewController: UICollectionViewDataSource {
             // Tratar o erro
         }
         return cell
+    }
+}
+
+extension MovieViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter?.showMovieDetails(movie: indexPath.item)
     }
 }
 

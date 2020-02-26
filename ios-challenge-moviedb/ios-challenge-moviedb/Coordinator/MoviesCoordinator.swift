@@ -18,6 +18,7 @@ class MoviesCoordinator: Coordinator {
         let moviePresenter = MoviePresenter()
         self.rootViewController = MovieViewController(presenter: moviePresenter)
         moviePresenter.movieView = self.rootViewController as! MovieViewController
+        moviePresenter.delegate = self
     }
     
     func start() {
@@ -25,7 +26,18 @@ class MoviesCoordinator: Coordinator {
     }
     
     func showMovieDetail(movie: Movie) {
-        
+        let detailVC = createDetailVC(show: movie)
+        guard let navigationController = rootViewController.navigationController else { fatalError() }
+        navigationController.pushViewController(detailVC, animated: true)
+    }
+    
+    func createDetailVC(show movie: Movie) -> MovieDetailViewController {
+        let movieDetailPresenter = MovieDetailPresenter()
+        let viewController = MovieDetailViewController(presenter: movieDetailPresenter,
+                                                       movie: movie)
+        movieDetailPresenter.movieView = viewController
+        movieDetailPresenter.delegate = self
+        return viewController
     }
 }
 
@@ -33,4 +45,8 @@ extension MoviesCoordinator: MovieViewPresenterDelegate {
     func selectedMovie(movie: Movie) {
         showMovieDetail(movie: movie)
     }
+}
+
+extension MoviesCoordinator: MovieDetailPresenterDelegate {
+    
 }
