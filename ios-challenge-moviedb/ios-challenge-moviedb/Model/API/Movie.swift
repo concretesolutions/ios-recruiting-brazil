@@ -17,6 +17,7 @@ class Movie: Codable {
     var backdropPath: String
     var releaseDate: String
     var genreIds: [Int]
+    var isFavorite: Bool = false
     
     init(id: Int, title: String, overview: String, posterPath: String,
          backdropPath: String, releaseDate: String, genreIds: [Int]) {
