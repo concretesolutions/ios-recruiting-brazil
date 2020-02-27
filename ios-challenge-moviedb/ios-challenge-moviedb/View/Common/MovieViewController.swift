@@ -36,10 +36,10 @@ class MovieViewController: UIViewController {
         return collectionView
     }()
     
-    init(presenter: MoviePresenter) {
+    init(presenter: MoviePresenter, title: String) {
         super.init(nibName: nil, bundle: nil)
         self.presenter = presenter
-        self.navigationItem.title = "Movies"
+        self.navigationItem.title = title
     }
     
     required init?(coder: NSCoder) {
