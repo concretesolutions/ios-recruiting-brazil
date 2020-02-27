@@ -1,5 +1,5 @@
 //
-//  MoviesCoordinator.swift
+//  FavoritesCoordinator.swift
 //  ios-challenge-moviedb
 //
 //  Created by Giovanni Severo Barros on 20/02/20.
@@ -8,14 +8,14 @@
 
 import UIKit
 /**
- Coordinator Responsible for the Movies View
+ Coordinator Responsible for the Favorites View
 */
-class MoviesCoordinator: Coordinator {
+class FavoritesCoordinator: Coordinator {
     
     var rootViewController: UIViewController
     
     init() {
-        let moviePresenter = MoviePresenter()
+        let moviePresenter = FavoriteMoviePresenter()
         self.rootViewController = MovieViewController(presenter: moviePresenter)
         moviePresenter.movieView = self.rootViewController as! MovieViewController
         moviePresenter.delegate = self
@@ -40,7 +40,7 @@ class MoviesCoordinator: Coordinator {
     }
 }
 
-extension MoviesCoordinator: MovieViewPresenterDelegate {
+extension FavoritesCoordinator: MovieViewPresenterDelegate {
     func selectedMovie(movie: Movie) {
         showMovieDetail(movie: movie)
     }

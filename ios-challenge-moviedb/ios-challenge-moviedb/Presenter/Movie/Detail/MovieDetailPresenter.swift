@@ -15,7 +15,6 @@ protocol MovieDetailViewDelegate {
 class MovieDetailPresenter {
     
     var movieView: MovieDetailViewDelegate?
-    weak var delegate: MovieDetailPresenterDelegate?
     
     init() {
         
