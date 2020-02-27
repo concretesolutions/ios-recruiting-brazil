@@ -33,7 +33,6 @@ class MovieDetailPresenter {
                 for id in ids {
                     for genre in genres {
                         if genre.id == id {
-                            print(genre.name)
                             movieGenresString.append(genre.name)
                         }
                     }
@@ -43,6 +42,33 @@ class MovieDetailPresenter {
                 // tratar o erro
                 completion(nil)
             }
+        }
+    }
+}
+
+extension MovieDetailPresenter: FavoriteMoviesProtocol {
+    func isMovieFavorite(movie: Movie) -> Bool {
+        let favoriteMovies = LocalData.object.getAllFavoriteMovies()
+        if favoriteMovies[movie.id] == nil {
+            return false
+        }
+        return true
+    }
+    
+    func handleMovieFavorite(movie: Movie) {
+        if isMovieFavorite(movie: movie) == false {
+            LocalData.object.makeMovieFavorite(movie: movie)
+        } else {
+            LocalData.object.makeMovieNotFavorite(movie: movie)
+        }
+    }
+    
+    func changeButtonImage(button: UIButton, movie: Movie) {
+        let isFavorite = isMovieFavorite(movie: movie)
+        if isFavorite == true {
+            button.setImage(UIImage(named: Constants.FavoriteButton.imageNamedFull), for: .normal)
+        } else {
+            button.setImage(UIImage(named: Constants.FavoriteButton.imageNamedNormal), for: .normal)
         }
     }
 }

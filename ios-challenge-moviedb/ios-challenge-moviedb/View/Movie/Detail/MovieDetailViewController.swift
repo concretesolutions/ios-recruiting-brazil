@@ -28,7 +28,6 @@ class MovieDetailViewController: UIViewController {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 8.0
         imageView.clipsToBounds = true
-        
         return imageView
     }()
     
@@ -70,6 +69,15 @@ class MovieDetailViewController: UIViewController {
         return label
     }()
     
+    var favoriteButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: Constants.FavoriteButton.imageNamedNormal), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(handleFavorite(_:)), for: .touchUpInside)
+        return button
+    }()
+    
     init(presenter: MovieDetailPresenter?, movie: Movie) {
         self.movie = movie
         self.presenter = presenter
@@ -83,8 +91,9 @@ class MovieDetailViewController: UIViewController {
         applyGradient()
     }
     
-    override func viewDidLoad() {
-
+    @objc func handleFavorite(_ sender: UIButton) {
+        presenter?.handleMovieFavorite(movie: self.movie)
+        presenter?.changeButtonImage(button: sender, movie: movie)
     }
     
     func applyGradient() {
@@ -108,7 +117,8 @@ class MovieDetailViewController: UIViewController {
         self.scrollView.addSubview(movieGenre)
         self.scrollView.addSubview(movieReleaseDate)
         self.scrollView.addSubview(movieDetail)
-        
+        self.scrollView.addSubview(favoriteButton)
+            
         setupConstaints()
     }
     
@@ -126,9 +136,16 @@ class MovieDetailViewController: UIViewController {
         movieImage.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width).isActive = true
         movieImage.heightAnchor.constraint(equalToConstant: 210).isActive = true
         
+        
+        // MARK: - Favorite Button Constraint
+        favoriteButton.topAnchor.constraint(equalTo: movieImage.bottomAnchor, constant: -20).isActive = true
+        favoriteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+        favoriteButton.widthAnchor.constraint(equalToConstant: 32).isActive = true
+        favoriteButton.heightAnchor.constraint(equalToConstant: 31).isActive = true
+        
         // MARK: - Movie Title
         movieTitle.topAnchor.constraint(equalTo: movieImage.bottomAnchor, constant: -20).isActive = true
-        movieTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+        movieTitle.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant: -10).isActive = true
         movieTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         
         // MARK: - Movie Genre
@@ -152,7 +169,7 @@ class MovieDetailViewController: UIViewController {
         movieTitle.text = movie.title
         movieDetail.text = movie.overview
         movieReleaseDate.text = String(movie.releaseDate.prefix(4))
-        
+        presenter?.changeButtonImage(button: favoriteButton, movie: movie)
         presenter?.getGenres(ids: movie.genreIds, completion: { [weak self] (genres) in
             guard let `self` = self else { return }
             if let genres = genres {

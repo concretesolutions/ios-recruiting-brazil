@@ -24,6 +24,11 @@ struct Constants {
         static let cellMargin: CGFloat = 10
         static let cellId: String = "movieCollectionViewCell"
     }
+
+    struct FavoriteButton {
+        static let imageNamedNormal = "favorite_default_icon"
+        static let imageNamedFull = "favorite_full_icon"
+    }
 }
 
 // MARK: - Header Field

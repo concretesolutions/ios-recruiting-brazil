@@ -20,17 +20,14 @@ final class JSONDataAccess {
     /// The single instance of `DataAccess`
     static let object = JSONDataAccess()
     private init() {
-        jsonPathFavorite = URL(fileURLWithPath: jsonDirectory.appending("favorite.json"))
-        jsonPathGenre = URL(fileURLWithPath: jsonDirectory.appending("genre.json"))
+        jsonPathFavorite = URL(fileURLWithPath: jsonDirectory.appending("/favorite.json"))
+        jsonPathGenre = URL(fileURLWithPath: jsonDirectory.appending("/genre.json"))
     }
     
     // MARK: - Methods
     
     func isFavorite(movie: Movie) {
-        saveFavorites(favorites: [movie.id:movie])
-        
         var favoriteGenres: [String] = []
-        
         for genre in LocalData.object.getAllGenres() {
             for genreId in movie.genreIds {
                 if genre.key == genreId {
@@ -39,11 +36,14 @@ final class JSONDataAccess {
             }
         }
         let genreString = favoriteGenres.joined(separator: ", ")
-        saveFavoriteMovieGenres(genres: [movie.id: genreString])    }
+        saveFavoriteMovieGenres(genres: [movie.id:genreString])
+        saveFavorites(newFavorite: movie, type: .add)
+    }
     
     func isNotFavorite(movie: Movie) {
         var favoriteMovies = LocalData.object.getAllFavoriteMovies()
-        favoriteMovies.removeValue(forKey: movie.id)
+        favoriteMovies.removeValue(forKey:movie.id)
+        saveFavorites(newFavorite: movie, type: .remove)
     }
     
     ///Loads the SaveData saved in Json
@@ -52,11 +52,11 @@ final class JSONDataAccess {
         do {
             let favoriteMoviesData = try Data(contentsOf: jsonPathFavorite)
             let favoriteMovies = try JSONDecoder().decode([Int:Movie].self, from: favoriteMoviesData)
+            saveData.favoriteMovies = favoriteMovies
             
             let favoriteMovieGenresData = try Data(contentsOf: jsonPathGenre)
-            let favoriteMovieGenres = try JSONDecoder().decode([Int:String].self, from: favoriteMovieGenresData)
             
-            saveData.favoriteMovies = favoriteMovies
+            let favoriteMovieGenres = try JSONDecoder().decode([Int:String].self, from: favoriteMovieGenresData)
             saveData.favoriteGenres = favoriteMovieGenres
         } catch {
             // Tratar o erro
@@ -65,11 +65,19 @@ final class JSONDataAccess {
     }
     
     ///Saves the SaveData in Json
-    private func saveFavorites(favorites: [Int:Movie]) {
+    private func saveFavorites(newFavorite: Movie, type: SaveType) {
+        var favorites = LocalData.object.getAllFavoriteMovies()
+        if type == .add {
+            favorites[newFavorite.id] = newFavorite
+        } else {
+            favorites.removeValue(forKey:newFavorite.id)
+        }
+        print("saveFavorites: ", favorites.count)
         do {
             try JSONEncoder().encode(favorites).write(to: self.jsonPathFavorite)
         } catch {
             // Tratar o erro
+            print("não conseguiu salvar nos favoritor")
         }
         return
     }
@@ -82,4 +90,9 @@ final class JSONDataAccess {
         }
         return
     }
+}
+
+enum SaveType {
+    case add
+    case remove
 }

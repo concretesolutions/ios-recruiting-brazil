@@ -34,6 +34,7 @@
 		65D4F69C240623470049A184 /* LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4F69B240623470049A184 /* LocalData.swift */; };
 		65D4F69E2406234F0049A184 /* SaveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4F69D2406234F0049A184 /* SaveData.swift */; };
 		65D4F6A02406255D0049A184 /* DAOJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4F69F2406255D0049A184 /* DAOJSON.swift */; };
+		65D4F6A3240795A50049A184 /* FavoriteMoviesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4F6A2240795A50049A184 /* FavoriteMoviesProtocol.swift */; };
 		65E4C3DE24013F6A00CC72ED /* GenreList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E4C3DD24013F6A00CC72ED /* GenreList.swift */; };
 		65E4C3E72401794D00CC72ED /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E4C3E62401794D00CC72ED /* MovieViewController.swift */; };
 		65E4C3E92401795D00CC72ED /* MoviePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E4C3E82401795D00CC72ED /* MoviePresenter.swift */; };
@@ -95,6 +96,7 @@
 		65D4F69B240623470049A184 /* LocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
 		65D4F69D2406234F0049A184 /* SaveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveData.swift; sourceTree = "<group>"; };
 		65D4F69F2406255D0049A184 /* DAOJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOJSON.swift; sourceTree = "<group>"; };
+		65D4F6A2240795A50049A184 /* FavoriteMoviesProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesProtocol.swift; sourceTree = "<group>"; };
 		65E4C3DD24013F6A00CC72ED /* GenreList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreList.swift; sourceTree = "<group>"; };
 		65E4C3E62401794D00CC72ED /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
 		65E4C3E82401795D00CC72ED /* MoviePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePresenter.swift; sourceTree = "<group>"; };
@@ -183,13 +185,12 @@
 		655129BC23FF23B10098589B /* ios-challenge-moviedb */ = {
 			isa = PBXGroup;
 			children = (
+				65D4F6A12407946C0049A184 /* Common */,
 				655129EE23FF37C80098589B /* Model */,
 				655129EF23FF37CF0098589B /* View */,
 				65E4C3E1240177FA00CC72ED /* Presenter */,
 				655129F123FF3FFB0098589B /* Coordinator */,
 				65512A07240084C10098589B /* Service */,
-				655129BD23FF23B10098589B /* AppDelegate.swift */,
-				65512A08240084D60098589B /* Constants.swift */,
 				655129C623FF23B20098589B /* Assets.xcassets */,
 				655129CB23FF23B20098589B /* Info.plist */,
 			);
@@ -320,11 +321,21 @@
 			path = Local;
 			sourceTree = "<group>";
 		};
+		65D4F6A12407946C0049A184 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				655129BD23FF23B10098589B /* AppDelegate.swift */,
+				65512A08240084D60098589B /* Constants.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		65E4C3E1240177FA00CC72ED /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
 				65E4C3E3240178E100CC72ED /* Favorite */,
 				65E4C3E2240178DB00CC72ED /* Movie */,
+				65D4F6A2240795A50049A184 /* FavoriteMoviesProtocol.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -621,6 +632,7 @@
 				655129F923FF51F50098589B /* TabBarController.swift in Sources */,
 				65512A122400D33C0098589B /* MovieClient.swift in Sources */,
 				65512A0124007E3D0098589B /* Movie.swift in Sources */,
+				65D4F6A3240795A50049A184 /* FavoriteMoviesProtocol.swift in Sources */,
 				65512A0E24008BA20098589B /* MoviesEndpoint.swift in Sources */,
 				65E4C3E92401795D00CC72ED /* MoviePresenter.swift in Sources */,
 				65E4C3E72401794D00CC72ED /* MovieViewController.swift in Sources */,
@@ -810,7 +822,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 95YRNG7UFK;
 				INFOPLIST_FILE = "ios-challenge-moviedb/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -830,7 +842,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 95YRNG7UFK;
 				INFOPLIST_FILE = "ios-challenge-moviedb/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

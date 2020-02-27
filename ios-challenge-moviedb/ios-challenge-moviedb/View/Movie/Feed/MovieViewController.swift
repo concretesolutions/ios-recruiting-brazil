@@ -60,6 +60,19 @@ class MovieViewController: UIViewController {
         movieCollectionView.delegate = self
     }
     
+    @objc func handleFavorite(_ sender: UIButton) {
+        var cellMovie: Movie?
+        guard let movies = presenter?.movies else { return }
+        for movie in movies {
+            if movie.id == sender.tag {
+                cellMovie = movie
+            }
+        }
+        guard let movie = cellMovie else { return }
+        presenter?.handleMovieFavorite(movie: movie)
+        presenter?.changeButtonImage(button: sender, movie: movie)
+     }
+    
     func setupUI() {
         self.view.addSubview(movieCollectionView)
         setupConstaints()
@@ -89,7 +102,9 @@ extension MovieViewController: UICollectionViewDataSource {
             cell.movieImage.kf.indicatorType = .activity
             let movie = movies[indexPath.item]
             cell.movieTitle.text = movie.title
-            print(movie.releaseDate)
+            presenter?.changeButtonImage(button: cell.favoriteButton, movie: movie)
+            cell.favoriteButton.tag = movie.id
+            cell.favoriteButton.addTarget(self, action: #selector(handleFavorite(_:)), for: .touchUpInside)
             let moviePosterImageURL = presenter?.getMovieImageURL(width: 200, path: movie.posterPath)
             cell.movieImage.kf.setImage(with: moviePosterImageURL) { result in
                 switch result {

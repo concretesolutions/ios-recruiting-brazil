@@ -9,8 +9,6 @@
 import Foundation
 
 final class LocalData {
-    
-    
     // MARK: Singleton
     
     /// The single instance of `LocalData`
@@ -32,9 +30,13 @@ final class LocalData {
     
     func makeMovieFavorite(movie: Movie) {
         JSONDataAccess.object.isFavorite(movie: movie)
+        local = JSONDataAccess.object.loadSave()
+        print("LocalData: ", local.favoriteMovies.count)
     }
     
     func makeMovieNotFavorite(movie: Movie) {
         JSONDataAccess.object.isNotFavorite(movie: movie)
+        local = JSONDataAccess.object.loadSave()
+        print("LocalData: ", local.favoriteMovies.count)
     }
 }
