@@ -16,7 +16,9 @@ class FavoriteMoviePresenter: MoviePresenter {
     
     override func loadCollectionView(page: Int? = nil) {
         let favoriteMovies = LocalData.object.getAllFavoriteMovies()
-        movies.append(contentsOf: favoriteMovies.values)
+        var moviesHelper: [Movie] = []
+        moviesHelper.append(contentsOf: favoriteMovies.values)
+        self.movies = moviesHelper
         self.numberOfMovies = movies.count
         self.movieView?.reloadData()
     }
