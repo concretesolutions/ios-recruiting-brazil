@@ -124,7 +124,7 @@ extension MovieViewController: UICollectionViewDataSource {
                 switch result {
                 case .failure(let error): print("Não foi possivel carregar a imagem:", error.localizedDescription)
                     // Tratar o error
-                cell.movieImage.image = UIImage(named: Constants.ErrorValues.imageLoadingError)
+                cell.movieImage.image = UIImage(named: Constants.ErrorValues.loadingImageError)
                 default: break
                 }
             }

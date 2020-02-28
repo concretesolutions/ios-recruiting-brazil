@@ -185,7 +185,7 @@ class MovieDetailViewController: UIViewController {
             guard let `self` = self else { return }
             switch result {
             case .failure(let error): print("Não foi possivel carregar a imagem:", error.localizedDescription)
-            self.movieImage.image = UIImage(named: Constants.ErrorValues.imageLoadingError)
+            self.movieImage.image = UIImage(named: Constants.ErrorValues.loadingImageError)
             default: break
                 
             }

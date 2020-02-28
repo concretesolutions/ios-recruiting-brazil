@@ -33,9 +33,11 @@ struct Constants {
     struct ErrorValues {
         static let popularMoviesText = "Couldn't retrieve data, check your Internet and try again."
         static let favoriteMovieText = "It seems you don't have any Favorite Movie..."
+        static let searchMovieText = "Couldn't find Movie Searched"
         static let popularImageName = "error_icon"
         static let favoriteImageName = "error_icon"
-        static let imageLoadingError = "error_image_icon"
+        static let loadingImageError = "error_image_icon"
+        static let searchImageError = "error_icon"
     }
 }
 

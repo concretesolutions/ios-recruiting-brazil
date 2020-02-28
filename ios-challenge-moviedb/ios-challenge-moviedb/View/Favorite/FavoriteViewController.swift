@@ -41,7 +41,7 @@ class FavoriteViewController: UIViewController {
     }()
     
     var errorView: ErrorView = {
-        let errorView = ErrorView(errorImageName: Constants.ErrorValues.popularImageName, errorText: Constants.ErrorValues.popularMoviesText)
+        let errorView = ErrorView(errorImageName: Constants.ErrorValues.searchImageError, errorText: Constants.ErrorValues.searchMovieText)
         errorView.translatesAutoresizingMaskIntoConstraints = false
         return errorView
     }()
@@ -141,7 +141,7 @@ extension FavoriteViewController: UICollectionViewDataSource {
                 switch result {
                 case .failure(let error): print("Não foi possivel carregar a imagem:", error.localizedDescription)
                     // Tratar o error
-                cell.movieImage.image = UIImage(named: Constants.ErrorValues.imageLoadingError)
+                cell.movieImage.image = UIImage(named: Constants.ErrorValues.loadingImageError)
                 default: break
                 }
             }
@@ -183,6 +183,7 @@ extension FavoriteViewController: MovieViewDelegate {
 extension FavoriteViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard !searchText.isEmpty else {
+            checkIfNeedsToRemoveError()
             searchedMovies = presenter?.movies
             reloadData()
             return
@@ -194,8 +195,18 @@ extension FavoriteViewController: UISearchBarDelegate {
         
         if searchedMovies?.count == 0 {
             searchedMovies = nil
+            showError(imageName: errorView.errorImageName, text: errorView.errorText)
+        } else {
+            checkIfNeedsToRemoveError()
         }
+        
         reloadData()
+    }
+    
+    func checkIfNeedsToRemoveError() {
+        if errorView.superview != nil {
+            removeError()
+        }
     }
 }
 
