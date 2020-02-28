@@ -16,7 +16,7 @@ class MoviesCoordinator: Coordinator {
     
     init() {
         let moviePresenter = MoviePresenter()
-        self.rootViewController = MovieViewController(presenter: moviePresenter, title: "Movies")
+        self.rootViewController = MovieViewController(presenter: moviePresenter)
         moviePresenter.movieView = self.rootViewController as! MovieViewController
         moviePresenter.delegate = self
     }

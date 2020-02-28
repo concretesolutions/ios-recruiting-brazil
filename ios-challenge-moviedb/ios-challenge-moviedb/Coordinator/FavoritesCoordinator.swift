@@ -16,8 +16,8 @@ class FavoritesCoordinator: Coordinator {
     
     init() {
         let moviePresenter = FavoriteMoviePresenter()
-        self.rootViewController = MovieViewController(presenter: moviePresenter, title: "Favorites")
-        moviePresenter.movieView = self.rootViewController as! MovieViewController
+        self.rootViewController = FavoriteViewController(presenter: moviePresenter)
+        moviePresenter.movieView = self.rootViewController as! FavoriteViewController
         moviePresenter.delegate = self
     }
     

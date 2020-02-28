@@ -1,15 +1,15 @@
 //
-//  MovieCollectionViewController.swift
+//  FavoriteViewController.swift
 //  ios-challenge-moviedb
 //
-//  Created by Giovanni Severo Barros on 22/02/20.
+//  Created by Giovanni Severo Barros on 28/02/20.
 //  Copyright © 2020 Giovanni Severo Barros. All rights reserved.
 //
 
 import UIKit
 import Kingfisher
 
-class MovieViewController: UIViewController {
+class FavoriteViewController: UIViewController {
     
     var presenter: MoviePresenter?
     
@@ -17,7 +17,7 @@ class MovieViewController: UIViewController {
     private var cellMargin: CGFloat = Constants.MovieCollectionView.cellMargin
     
     var fetchingMoreMovies: Bool = false
-    
+        
     var movieCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -44,10 +44,20 @@ class MovieViewController: UIViewController {
         return errorView
     }()
     
-    init(presenter: MoviePresenter, title: String) {
+    var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.searchBarStyle = UISearchBar.Style.prominent
+        searchBar.placeholder = " Search for Favorite Movies..."
+        searchBar.sizeToFit()
+        searchBar.isTranslucent = false
+        searchBar.backgroundImage = UIImage()
+        return searchBar
+    }()
+    
+    init(presenter: MoviePresenter) {
         super.init(nibName: nil, bundle: nil)
         self.presenter = presenter
-        self.navigationItem.title = title
+        self.navigationItem.title = "Favorites"
     }
     
     required init?(coder: NSCoder) {
@@ -55,18 +65,22 @@ class MovieViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
-    }
-    
-    override func viewDidLoad() {
         // MARK: - Loads Movies Data
         DispatchQueue.main.async { [weak self] in
             guard let `self` = self else { return }
             self.presenter?.loadCollectionView(page: 1)
          }
+    }
+    
+    override func viewDidLoad() {
         setupUI()
         movieCollectionView.dataSource = self
         movieCollectionView.delegate = self
+    }
+    
+    func setupSearchBar() {
+        searchBar.delegate = self
+        self.navigationItem.titleView = searchBar
     }
     
     @objc func handleFavorite(_ sender: UIButton) {
@@ -101,7 +115,7 @@ class MovieViewController: UIViewController {
     }
 }
 
-extension MovieViewController: UICollectionViewDataSource {
+extension FavoriteViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return presenter?.numberOfMovies ?? 0
@@ -133,25 +147,13 @@ extension MovieViewController: UICollectionViewDataSource {
     }
 }
 
-extension MovieViewController: UICollectionViewDelegate {
+extension FavoriteViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter?.showMovieDetails(movie: indexPath.item)
     }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offSetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        
-        if offSetY > contentHeight - scrollView.frame.height {
-            if !self.fetchingMoreMovies {
-                self.presenter?.getMoreMovies()
-                print("Pega mais")
-            }
-        }
-    }
 }
 
-extension MovieViewController: MovieViewDelegate {
+extension FavoriteViewController: MovieViewDelegate {
     
     func showError(imageName: String, text: String) {
         self.view.addSubview(errorView)
@@ -174,4 +176,11 @@ extension MovieViewController: MovieViewDelegate {
         }
     }
 }
+
+extension FavoriteViewController: UISearchBarDelegate {
+    
+
+}
+
+
 
