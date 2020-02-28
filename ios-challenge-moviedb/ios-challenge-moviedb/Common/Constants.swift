@@ -29,6 +29,14 @@ struct Constants {
         static let imageNamedNormal = "favorite_default_icon"
         static let imageNamedFull = "favorite_full_icon"
     }
+    
+    struct ErrorValues {
+        static let popularMoviesText = "Couldn't retrieve data, check your Internet and try again."
+        static let favoriteMovieText = "It seems you don't have any Favorite Movie..."
+        static let popularImageName = "error_icon"
+        static let favoriteImageName = "error_icon"
+        static let imageLoadingError = "error_image_icon"
+    }
 }
 
 // MARK: - Header Field

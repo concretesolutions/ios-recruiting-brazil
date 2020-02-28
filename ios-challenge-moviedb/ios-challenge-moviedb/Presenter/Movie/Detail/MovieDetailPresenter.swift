@@ -38,7 +38,6 @@ class MovieDetailPresenter {
                 }
                 completion(movieGenresString)
             } else {
-                // tratar o erro
                 completion(nil)
             }
         }

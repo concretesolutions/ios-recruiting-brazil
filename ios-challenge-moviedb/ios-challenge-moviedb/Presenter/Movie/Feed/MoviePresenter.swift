@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol MovieViewDelegate {
+protocol MovieViewDelegate: ErrorDelegate {
     func reloadData()
 }
 
@@ -34,7 +34,7 @@ class MoviePresenter {
                 self.numberOfMovies = self.movies.count
                 self.movieView?.reloadData()
             } else {
-                // Tratar o Erro
+                self.movieView?.showError(imageName: Constants.ErrorValues.popularImageName, text: Constants.ErrorValues.popularMoviesText)
             }
         }
     }

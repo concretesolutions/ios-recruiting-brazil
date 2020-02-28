@@ -58,9 +58,7 @@ final class JSONDataAccess {
             
             let favoriteMovieGenres = try JSONDecoder().decode([Int:String].self, from: favoriteMovieGenresData)
             saveData.favoriteGenres = favoriteMovieGenres
-        } catch {
-            // Tratar o erro
-        }
+        } catch { }
         return saveData
     }
     
@@ -76,7 +74,6 @@ final class JSONDataAccess {
         do {
             try JSONEncoder().encode(favorites).write(to: self.jsonPathFavorite)
         } catch {
-            // Tratar o erro
             print("não conseguiu salvar nos favoritor")
         }
         return
@@ -87,6 +84,8 @@ final class JSONDataAccess {
             try JSONEncoder().encode(genres).write(to: self.jsonPathFavorite)
         } catch {
             // Tratar o erro
+            print("Não foi possivel salvar")
+
         }
         return
     }

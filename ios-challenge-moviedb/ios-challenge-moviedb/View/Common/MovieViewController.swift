@@ -36,6 +36,12 @@ class MovieViewController: UIViewController {
         return collectionView
     }()
     
+    var errorView: ErrorView = {
+        let errorView = ErrorView(errorImageName: Constants.ErrorValues.popularImageName, errorText: Constants.ErrorValues.popularMoviesText)
+        errorView.translatesAutoresizingMaskIntoConstraints = false
+        return errorView
+    }()
+    
     init(presenter: MoviePresenter, title: String) {
         super.init(nibName: nil, bundle: nil)
         self.presenter = presenter
@@ -85,6 +91,11 @@ class MovieViewController: UIViewController {
         movieCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         movieCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
     }
+    
+    func setupErrorContraints() {
+        errorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        errorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
 }
 
 extension MovieViewController: UICollectionViewDataSource {
@@ -92,12 +103,12 @@ extension MovieViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return presenter?.numberOfMovies ?? 0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.MovieCollectionView.cellId, for: indexPath) as? MovieCollectionViewCell else {
             fatalError("Wrong Cell ID")
         }
-        
+
         if let movies = presenter?.movies {
             cell.movieImage.kf.indicatorType = .activity
             let movie = movies[indexPath.item]
@@ -110,12 +121,10 @@ extension MovieViewController: UICollectionViewDataSource {
                 switch result {
                 case .failure(let error): print("Não foi possivel carregar a imagem:", error.localizedDescription)
                     // Tratar o error
+                cell.movieImage.image = UIImage(named: Constants.ErrorValues.imageLoadingError)
                 default: break
-                    
                 }
             }
-        } else {
-            // Tratar o erro
         }
         return cell
     }
@@ -128,6 +137,20 @@ extension MovieViewController: UICollectionViewDelegate {
 }
 
 extension MovieViewController: MovieViewDelegate {
+    
+    func showError(imageName: String, text: String) {
+        self.view.addSubview(errorView)
+        errorView.errorText = text
+        errorView.errorImageName = imageName
+        errorView.setupUI()
+        errorView.setupConstraints()
+        setupErrorContraints()
+    }
+    
+    func removeError() {
+        errorView.removeFromSuperview()
+    }
+    
     func reloadData() {
         DispatchQueue.main.async { [weak self] in
             guard let `self` = self else { return }

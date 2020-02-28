@@ -16,10 +16,15 @@ class FavoriteMoviePresenter: MoviePresenter {
     
     override func loadCollectionView(page: Int? = nil) {
         let favoriteMovies = LocalData.object.getAllFavoriteMovies()
-        var moviesHelper: [Movie] = []
-        moviesHelper.append(contentsOf: favoriteMovies.values)
-        self.movies = moviesHelper
-        self.numberOfMovies = movies.count
-        self.movieView?.reloadData()
+            var moviesHelper: [Movie] = []
+            moviesHelper.append(contentsOf: favoriteMovies.values)
+            self.movies = moviesHelper
+            self.numberOfMovies = movies.count
+            self.movieView?.reloadData()
+        
+        if favoriteMovies.count == 0 {
+            self.movieView?.showError(imageName: Constants.ErrorValues.favoriteImageName, text: Constants.ErrorValues.favoriteMovieText)
+            self.movieView?.reloadData()
+        }
     }
 }

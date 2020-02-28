@@ -181,10 +181,11 @@ class MovieDetailViewController: UIViewController {
         })
         
         let imageURL = presenter?.getMovieImageURL(width: 780, path: movie.backdropPath)
-        movieImage.kf.setImage(with: imageURL) { result in
+        movieImage.kf.setImage(with: imageURL) { [weak self] result in
+            guard let `self` = self else { return }
             switch result {
             case .failure(let error): print("Não foi possivel carregar a imagem:", error.localizedDescription)
-            // Tratar o error
+            self.movieImage.image = UIImage(named: Constants.ErrorValues.imageLoadingError)
             default: break
                 
             }
