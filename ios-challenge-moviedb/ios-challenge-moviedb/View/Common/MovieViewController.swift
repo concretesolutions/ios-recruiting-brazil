@@ -16,6 +16,8 @@ class MovieViewController: UIViewController {
     private var estimatedCellWidth: CGFloat = Constants.MovieCollectionView.estimatedCellWidth
     private var cellMargin: CGFloat = Constants.MovieCollectionView.cellMargin
     
+    var fetchingMoreMovies: Bool = false
+    
     var movieCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -53,15 +55,16 @@ class MovieViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+
+    }
+    
+    override func viewDidLoad() {
         // MARK: - Loads Movies Data
         DispatchQueue.main.async { [weak self] in
             guard let `self` = self else { return }
             self.presenter?.loadCollectionView(page: 1)
          }
         setupUI()
-    }
-    
-    override func viewDidLoad() {
         movieCollectionView.dataSource = self
         movieCollectionView.delegate = self
     }
@@ -116,7 +119,7 @@ extension MovieViewController: UICollectionViewDataSource {
             presenter?.changeButtonImage(button: cell.favoriteButton, movie: movie)
             cell.favoriteButton.tag = movie.id
             cell.favoriteButton.addTarget(self, action: #selector(handleFavorite(_:)), for: .touchUpInside)
-            let moviePosterImageURL = presenter?.getMovieImageURL(width: 200, path: movie.posterPath)
+            let moviePosterImageURL = presenter?.getMovieImageURL(width: 200, path: movie.posterPath ?? "")
             cell.movieImage.kf.setImage(with: moviePosterImageURL) { result in
                 switch result {
                 case .failure(let error): print("Não foi possivel carregar a imagem:", error.localizedDescription)
@@ -133,6 +136,18 @@ extension MovieViewController: UICollectionViewDataSource {
 extension MovieViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter?.showMovieDetails(movie: indexPath.item)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offSetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offSetY > contentHeight - scrollView.frame.height {
+            if !self.fetchingMoreMovies {
+                self.presenter?.getMoreMovies()
+                print("Pega mais")
+            }
+        }
     }
 }
 
@@ -155,6 +170,7 @@ extension MovieViewController: MovieViewDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let `self` = self else { return }
             self.movieCollectionView.reloadData()
+            self.fetchingMoreMovies = false
         }
     }
 }

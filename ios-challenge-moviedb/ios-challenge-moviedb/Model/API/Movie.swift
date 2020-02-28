@@ -13,8 +13,8 @@ class Movie: Codable {
     var id: Int
     var title: String
     var overview: String
-    var posterPath: String
-    var backdropPath: String
+    var posterPath: String?
+    var backdropPath: String?
     var releaseDate: String
     var genreIds: [Int]
     var isFavorite: Bool = false

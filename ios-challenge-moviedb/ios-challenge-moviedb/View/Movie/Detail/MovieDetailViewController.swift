@@ -180,7 +180,7 @@ class MovieDetailViewController: UIViewController {
             }
         })
         
-        let imageURL = presenter?.getMovieImageURL(width: 780, path: movie.backdropPath)
+        let imageURL = presenter?.getMovieImageURL(width: 780, path: movie.backdropPath ?? "")
         movieImage.kf.setImage(with: imageURL) { [weak self] result in
             guard let `self` = self else { return }
             switch result {
