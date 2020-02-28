@@ -17,6 +17,8 @@ class FavoriteViewController: UIViewController {
     private var cellMargin: CGFloat = Constants.MovieCollectionView.cellMargin
     
     var fetchingMoreMovies: Bool = false
+    
+    private var searchedMovies: [Movie]?
         
     var movieCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -44,16 +46,6 @@ class FavoriteViewController: UIViewController {
         return errorView
     }()
     
-    var searchBar: UISearchBar = {
-        let searchBar = UISearchBar()
-        searchBar.searchBarStyle = UISearchBar.Style.prominent
-        searchBar.placeholder = " Search for Favorite Movies..."
-        searchBar.sizeToFit()
-        searchBar.isTranslucent = false
-        searchBar.backgroundImage = UIImage()
-        return searchBar
-    }()
-    
     init(presenter: MoviePresenter) {
         super.init(nibName: nil, bundle: nil)
         self.presenter = presenter
@@ -69,6 +61,7 @@ class FavoriteViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             guard let `self` = self else { return }
             self.presenter?.loadCollectionView(page: 1)
+            self.searchedMovies = self.presenter?.movies
          }
     }
     
@@ -76,11 +69,6 @@ class FavoriteViewController: UIViewController {
         setupUI()
         movieCollectionView.dataSource = self
         movieCollectionView.delegate = self
-    }
-    
-    func setupSearchBar() {
-        searchBar.delegate = self
-        self.navigationItem.titleView = searchBar
     }
     
     @objc func handleFavorite(_ sender: UIButton) {
@@ -99,6 +87,21 @@ class FavoriteViewController: UIViewController {
     func setupUI() {
         self.view.addSubview(movieCollectionView)
         setupConstaints()
+        setupSearchBar()
+    }
+    
+    func setupSearchBar() {
+        let searchController = UISearchController()
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        let searchBar = navigationItem.searchController?.searchBar
+        searchBar?.searchBarStyle = UISearchBar.Style.prominent
+        searchBar?.placeholder = "Search for Movies..."
+        searchBar?.sizeToFit()
+        searchBar?.isTranslucent = false
+        searchBar?.tintColor = .white
+        searchBar?.barTintColor = .white
+        searchBar?.delegate = self
     }
     
     func setupConstaints() {
@@ -118,7 +121,7 @@ class FavoriteViewController: UIViewController {
 extension FavoriteViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter?.numberOfMovies ?? 0
+        return searchedMovies?.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -126,7 +129,7 @@ extension FavoriteViewController: UICollectionViewDataSource {
             fatalError("Wrong Cell ID")
         }
 
-        if let movies = presenter?.movies {
+        if let movies = self.searchedMovies {
             cell.movieImage.kf.indicatorType = .activity
             let movie = movies[indexPath.item]
             cell.movieTitle.text = movie.title
@@ -178,8 +181,22 @@ extension FavoriteViewController: MovieViewDelegate {
 }
 
 extension FavoriteViewController: UISearchBarDelegate {
-    
-
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else {
+            searchedMovies = presenter?.movies
+            reloadData()
+            return
+        }
+        searchedMovies = presenter?.movies.filter({ (movie) -> Bool in
+            guard let text = searchBar.text else { return false }
+            return movie.title.contains(text)
+        })
+        
+        if searchedMovies?.count == 0 {
+            searchedMovies = nil
+        }
+        reloadData()
+    }
 }
 
 
