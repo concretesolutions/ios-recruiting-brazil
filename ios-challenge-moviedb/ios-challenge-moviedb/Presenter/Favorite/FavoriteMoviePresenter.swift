@@ -21,7 +21,6 @@ class FavoriteMoviePresenter: MoviePresenter {
             self.movies = moviesHelper
             self.numberOfMovies = movies.count
             self.movieView?.reloadData()
-        
         if favoriteMovies.count == 0 {
             self.movieView?.showError(imageName: Constants.ErrorValues.favoriteImageName, text: Constants.ErrorValues.favoriteMovieText)
             self.movieView?.reloadData()

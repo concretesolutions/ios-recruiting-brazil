@@ -13,6 +13,7 @@ import Foundation
 struct SaveData: Codable {
     var favoriteMovies: [Int:Movie] = [:]
     var favoriteGenres: [Int:String] = [:]
+    var allGenres: [Genre]
     
     /**
      Update the local information

@@ -42,7 +42,6 @@ class MoviePresenter {
     
     func getMoreMovies() {
         currentPage += 1
-        print(currentPage)
         self.movieView?.fetchingMoreMovies = true
         MovieClient.getPopularMovies(page: currentPage) { [weak self] (popularMoviesResponse, error) in
             guard let `self` = self else { return }
@@ -53,7 +52,6 @@ class MoviePresenter {
                 self.maxNumberOfPages = response.totalPages
                 self.numberOfMovies = self.movies.count
                 self.movieView?.reloadData()
-                print("deu bom")
             }
         }
     }

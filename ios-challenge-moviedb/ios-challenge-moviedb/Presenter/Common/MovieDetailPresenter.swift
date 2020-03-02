@@ -41,17 +41,15 @@ class MovieDetailPresenter {
         } else {
             let genres = LocalData.object.getAllGenres()
             movieGenresString = self.setupGenre(ids: ids, genres: genres)
+            completion(movieGenresString)
         }
     }
     
     func setupGenre(ids: [Int], genres: [Genre]) -> [String] {
         var movieGenresString: [String] = []
-        print(ids)
-        print(genres)
         for id in ids {
             for genre in genres {
                 if genre.id == id {
-                    print(genre.name)
                     movieGenresString.append(genre.name)
                 }
             }
@@ -61,12 +59,9 @@ class MovieDetailPresenter {
     
     func setupGenre(ids: [Int], genres: [Int:String]) -> [String] {
         var movieGenresString: [String] = []
-        print(ids)
-        print(genres)
         for id in ids {
             for genre in genres {
                 if genre.key == id {
-                    print(genre.value)
                     movieGenresString.append(genre.value)
                 }
             }

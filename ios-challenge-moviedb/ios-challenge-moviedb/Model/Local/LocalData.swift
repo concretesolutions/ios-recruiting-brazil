@@ -25,6 +25,17 @@ final class LocalData {
     
     private init() {
         local = JSONDataAccess.object.loadSave()
+        self.saveAllGenres()
+    }
+    
+    func saveAllGenres() {
+        MovieClient.getAllGenres { [weak self] (genres, error) in
+            guard let `self` = self else { return }
+            if let genres = genres {
+                self.local.allGenres = genres
+                JSONDataAccess.object.saveAllGenres(genres: genres)
+            }
+        }
     }
     
     /**
@@ -32,8 +43,8 @@ final class LocalData {
      
      - Return: The Genres of an Favorite Movie
      */
-    func getAllGenres() -> [Int:String] {
-        return local.favoriteGenres
+    func getAllGenres() -> [Genre] {
+        return local.allGenres
     }
     
     /**

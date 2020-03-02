@@ -106,7 +106,6 @@ extension MovieViewController: UICollectionViewDelegate {
         if offSetY > contentHeight - scrollView.frame.height {
             if !self.fetchingMoreMovies {
                 self.presenter?.getMoreMovies()
-                print("Pega mais")
             }
         }
     }
