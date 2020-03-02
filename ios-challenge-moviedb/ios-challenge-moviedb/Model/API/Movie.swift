@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+Model of Movie
+ */
 class Movie: Codable {
     
     var id: Int

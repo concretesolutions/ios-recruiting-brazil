@@ -8,17 +8,30 @@
 
 import Alamofire
 
-
+/**
+ Perform requests to Movie related Stuff
+ */
 class MovieClient {
+    /**
+     Create requests based on the parameters received
+     
+     - Parameters:
+        - route: What type of *Endpoint* that will be used on the *Request*
+        - completion: Return Data or Error
+     */
     @discardableResult
     private static func performRequest(route: MoviesEndpoint, completion: @escaping (DataResponse<Any, AFError>?) -> Void) -> DataRequest {
         return AF.request(route).validate().responseJSON() { (response: DataResponse<Any, AFError>?) in
             completion(response)
         }
     }
+    /**
+     Perform an request to get all Popular Movies
     
-    // TO DO: - Função de get popular movies / get genres / search
-    
+     - Parameters:
+        - page: Requested Page
+        - completion: Return all popular Movies or an Error
+     */
     static func getPopularMovies(page: Int, completion: @escaping (PopularMovies?, Error?) -> Void) {
         performRequest(route: .popularMovies(page: page)) { response in
             if response?.error == nil {
@@ -37,7 +50,12 @@ class MovieClient {
             }
         }
     }
-    
+        /**
+     Perform an request to get all Genres
+     
+     - Parameters:
+        - completion: Return all Genres an Error
+     */
     static func getAllGenres(completion: @escaping ([Genre]?, Error?) -> Void) {
         performRequest(route: .genres) { response in
             if response?.error == nil {

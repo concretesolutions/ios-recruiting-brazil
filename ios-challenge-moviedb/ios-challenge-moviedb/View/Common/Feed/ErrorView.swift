@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+/**
+Error Feedback View
+ */
 class ErrorView: UIView {
     
     var errorImageName: String

@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+Model of Genre
+ */
 class Genre: Codable {
     
     var id: Int

@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+Model Popular Movies request result
+ */
 class PopularMovies: Codable {
     var page: Int
     var totalResults: Int

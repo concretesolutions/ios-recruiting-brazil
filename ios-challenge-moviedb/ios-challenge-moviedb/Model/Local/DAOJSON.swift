@@ -8,16 +8,31 @@
 
 import Foundation
 
+/**
+ *Singleton* Responsible for all *JSON* related actions
+ */
 final class JSONDataAccess {
     
     // MARK: Singleton
     
+    /**
+     Base path of JSON Directory
+     */
     private let jsonDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+    /**
+     Path of JSON Favorites
+     */
     private var jsonPathFavorite: URL
+    /**
+     Path of JSON Genres
+     */
     private var jsonPathGenre: URL
 
     
     /// The single instance of `DataAccess`
+    /**
+     The single instance of `DataAccess`
+     */
     static let object = JSONDataAccess()
     private init() {
         jsonPathFavorite = URL(fileURLWithPath: jsonDirectory.appending("/favorite.json"))
@@ -26,6 +41,12 @@ final class JSONDataAccess {
     
     // MARK: - Methods
     
+    /**
+       Make an Movie into a Favorite Movie
+       
+       - Parameters:
+       - movie: Movie to set as Favorite
+       */
     func isFavorite(movie: Movie) {
         var favoriteGenres: [String] = []
         for genre in LocalData.object.getAllGenres() {
@@ -40,13 +61,21 @@ final class JSONDataAccess {
         saveFavorites(newFavorite: movie, type: .add)
     }
     
+    /**
+     Make an Movie into a not Favorite Movie
+     
+     - Parameters:
+     - movie: Movie to set as not Favorite
+     */
     func isNotFavorite(movie: Movie) {
         var favoriteMovies = LocalData.object.getAllFavoriteMovies()
         favoriteMovies.removeValue(forKey:movie.id)
         saveFavorites(newFavorite: movie, type: .remove)
     }
     
-    ///Loads the SaveData saved in Json
+    /**
+     Loads the SaveData saved in JSON
+     */
     func loadSave() -> SaveData {
         var saveData: SaveData = SaveData(favoriteMovies: [:], favoriteGenres: [:])
         do {
@@ -61,8 +90,10 @@ final class JSONDataAccess {
         } catch { }
         return saveData
     }
-    
-    ///Saves the SaveData in Json
+
+    /**
+     Saves the Favorites in JSON
+     */
     private func saveFavorites(newFavorite: Movie, type: SaveType) {
         var favorites = LocalData.object.getAllFavoriteMovies()
         if type == .add {
@@ -79,18 +110,23 @@ final class JSONDataAccess {
         return
     }
     
+    /**
+     Saves the Favorites Genres in Json
+     */
     private func saveFavoriteMovieGenres(genres: [Int:String]) {
         do {
             try JSONEncoder().encode(genres).write(to: self.jsonPathFavorite)
         } catch {
             // Tratar o erro
             print("Não foi possivel salvar")
-
         }
         return
     }
 }
 
+/**
+Type of save action
+ */
 enum SaveType {
     case add
     case remove

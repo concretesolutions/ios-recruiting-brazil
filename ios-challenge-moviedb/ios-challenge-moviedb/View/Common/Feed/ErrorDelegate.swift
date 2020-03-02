@@ -7,7 +7,9 @@
 //
 
 import Foundation
-
+/**
+Error Delegate
+ */
 protocol ErrorDelegate {
     func showError(imageName: String, text: String)
     func removeError()

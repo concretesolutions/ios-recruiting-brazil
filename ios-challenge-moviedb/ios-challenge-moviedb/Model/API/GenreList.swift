@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+Model Genres request result
+ */
 class GenreList: Codable {
     var genres: [Genre]
 }
