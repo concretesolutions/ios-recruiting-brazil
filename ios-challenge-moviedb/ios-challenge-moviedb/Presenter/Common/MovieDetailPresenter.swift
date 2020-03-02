@@ -15,9 +15,10 @@ protocol MovieDetailViewDelegate {
 class MovieDetailPresenter {
     
     var movieView: MovieDetailViewDelegate?
+    var isLocalData: Bool
     
-    init() {
-        
+    init(isLocalData: Bool) {
+        self.isLocalData = isLocalData
     }
     
     func getMovieImageURL(width: Int, path: String) -> URL? {
@@ -27,20 +28,50 @@ class MovieDetailPresenter {
     
     func getGenres(ids: [Int], completion: @escaping ([String]?) -> Void) {
         var movieGenresString: [String] = []
-        MovieClient.getAllGenres { (genres, error) in
-            if let genres = genres {
-                for id in ids {
-                    for genre in genres {
-                        if genre.id == id {
-                            movieGenresString.append(genre.name)
-                        }
-                    }
+        if !isLocalData {
+            MovieClient.getAllGenres { [weak self] (genres, error) in
+                guard let `self` = self else { return }
+                if let genres = genres {
+                    movieGenresString = self.setupGenre(ids: ids, genres: genres)
+                    completion(movieGenresString)
+                } else {
+                    completion(nil)
                 }
-                completion(movieGenresString)
-            } else {
-                completion(nil)
+            }
+        } else {
+            let genres = LocalData.object.getAllGenres()
+            movieGenresString = self.setupGenre(ids: ids, genres: genres)
+        }
+    }
+    
+    func setupGenre(ids: [Int], genres: [Genre]) -> [String] {
+        var movieGenresString: [String] = []
+        print(ids)
+        print(genres)
+        for id in ids {
+            for genre in genres {
+                if genre.id == id {
+                    print(genre.name)
+                    movieGenresString.append(genre.name)
+                }
             }
         }
+        return movieGenresString
+    }
+    
+    func setupGenre(ids: [Int], genres: [Int:String]) -> [String] {
+        var movieGenresString: [String] = []
+        print(ids)
+        print(genres)
+        for id in ids {
+            for genre in genres {
+                if genre.key == id {
+                    print(genre.value)
+                    movieGenresString.append(genre.value)
+                }
+            }
+        }
+        return movieGenresString
     }
 }
 

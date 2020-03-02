@@ -170,6 +170,7 @@ class MovieDetailViewController: UIViewController {
         movieDetail.text = movie.overview
         movieReleaseDate.text = String(movie.releaseDate.prefix(4))
         presenter?.changeButtonImage(button: favoriteButton, movie: movie)
+        print(movie.genreIds)
         presenter?.getGenres(ids: movie.genreIds, completion: { [weak self] (genres) in
             guard let `self` = self else { return }
             if let genres = genres {
