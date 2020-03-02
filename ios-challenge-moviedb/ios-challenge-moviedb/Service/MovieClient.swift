@@ -27,7 +27,7 @@ class MovieClient {
     }
     /**
      Perform an request to get all Popular Movies
-    
+     
      - Parameters:
         - page: Requested Page
         - completion: Return all popular Movies or an Error
@@ -73,9 +73,5 @@ class MovieClient {
                 completion(nil, response?.error)
             }
         }
-    }
-    
-    static func searchMovie(text: String, completion: @escaping ([Movie]?, Error?) -> Void) {
-//        performRequest(route: .search(text: <#T##String#>), completion: <#T##(DataResponse<Any, AFError>?) -> Void#>)
     }
 }

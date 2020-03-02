@@ -27,21 +27,13 @@ enum MoviesEndpoint: APIConfiguration {
      */
     case genres
     
-    /**
-     Search
-     
-     - Parameters:
-        - text: String used to make the search
-     */
-    case search(text: String)
-    
     // MARK: - Method
     /**
      Method that will be used depending on endpoint case
      */
     var method: HTTPMethod {
         switch self {
-        case .search, .genres, .popularMovies:
+        case .genres, .popularMovies:
             return .get
         }
     }
@@ -56,8 +48,6 @@ enum MoviesEndpoint: APIConfiguration {
             return "/movie/popular?api_key=\(Constants.APIParameterKey.apiKey)&page=\(page)"
         case .genres:
             return "/genre/movie/list?api_key=\(Constants.APIParameterKey.apiKey)"
-        case .search(let text):
-            return "/search/movie?api_key=\(Constants.APIParameterKey.apiKey)&query=\(text)"
         }
     }
     
@@ -67,7 +57,7 @@ enum MoviesEndpoint: APIConfiguration {
      */
     var parameters: Parameters? {
         switch self {
-        case .search, .genres, .popularMovies:
+        case .genres, .popularMovies:
             return nil
         }
     }
