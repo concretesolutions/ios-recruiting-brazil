@@ -25,16 +25,22 @@ class FavoritesCoordinator: Coordinator {
         
     }
     
-    func showMovieDetail(movie: Movie) {
+    private func createMovieFeed() {
+        let moviePresenter = FavoriteMoviePresenter()
+        self.rootViewController = FavoriteViewController(presenter: moviePresenter)
+        moviePresenter.movieView = self.rootViewController as! FavoriteViewController
+        moviePresenter.delegate = self
+    }
+    
+    private func showMovieDetail(movie: Movie) {
         let detailVC = createDetailVC(show: movie)
         guard let navigationController = rootViewController.navigationController else { fatalError() }
         navigationController.pushViewController(detailVC, animated: true)
     }
     
-    func createDetailVC(show movie: Movie) -> MovieDetailViewController {
-        let movieDetailPresenter = MovieDetailPresenter()
-        let viewController = MovieDetailViewController(presenter: movieDetailPresenter,
-                                                       movie: movie)
+    private func createDetailVC(show movie: Movie) -> MovieDetailViewController {
+        let movieDetailPresenter = MovieDetailPresenter(isLocalData: true)
+        let viewController = MovieDetailViewController(presenter: movieDetailPresenter, movie: movie)
         movieDetailPresenter.movieView = viewController
         return viewController
     }

@@ -32,7 +32,7 @@ class MoviesCoordinator: Coordinator {
     }
     
     func createDetailVC(show movie: Movie) -> MovieDetailViewController {
-        let movieDetailPresenter = MovieDetailPresenter()
+        let movieDetailPresenter = MovieDetailPresenter(isLocalData: false)
         let viewController = MovieDetailViewController(presenter: movieDetailPresenter,
                                                        movie: movie)
         movieDetailPresenter.movieView = viewController

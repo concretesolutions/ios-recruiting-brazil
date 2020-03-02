@@ -25,13 +25,11 @@ class AppCoordinator: Coordinator {
         self.rootViewController = TabBarController()
         self.moviesCoordinator = MoviesCoordinator()
         self.favoritesCoordinator = FavoritesCoordinator()
-        
-        setupWindow()
-        setupTabBar()
     }
     
     func start() {
-        
+        setupWindow()
+        setupTabBar()
     }
     
     // MARK: - Setup Window

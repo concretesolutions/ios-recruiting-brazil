@@ -27,4 +27,9 @@ class FavoriteMoviePresenter: MoviePresenter {
             self.movieView?.reloadData()
         }
     }
+    
+    func showMovieDetails(movie index: Int, from data: [Movie]) {
+        let selectedMovie = data[index]
+        delegate?.selectedMovie(movie: selectedMovie)
+    }
 }
