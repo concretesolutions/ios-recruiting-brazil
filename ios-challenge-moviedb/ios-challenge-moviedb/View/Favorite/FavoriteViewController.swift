@@ -11,14 +11,16 @@ import Kingfisher
 
 class FavoriteViewController: UIViewController {
     
-    var presenter: MoviePresenter?
+    var presenter: FavoriteMoviePresenter?
+    
+    private var collectionViewDataSource: FavoritesCollectionViewDataSource?
     
     private var estimatedCellWidth: CGFloat = Constants.MovieCollectionView.estimatedCellWidth
     private var cellMargin: CGFloat = Constants.MovieCollectionView.cellMargin
     
     var fetchingMoreMovies: Bool = false
     
-    private var searchedMovies: [Movie]?
+    var searchedMovies: [Movie]?
         
     var movieCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -46,8 +48,9 @@ class FavoriteViewController: UIViewController {
         return errorView
     }()
     
-    init(presenter: MoviePresenter) {
+    init(presenter: FavoriteMoviePresenter) {
         super.init(nibName: nil, bundle: nil)
+        self.collectionViewDataSource = FavoritesCollectionViewDataSource(viewController: self)
         self.presenter = presenter
         self.navigationItem.title = "Favorites"
     }
@@ -67,22 +70,9 @@ class FavoriteViewController: UIViewController {
     
     override func viewDidLoad() {
         setupUI()
-        movieCollectionView.dataSource = self
+        movieCollectionView.dataSource = collectionViewDataSource
         movieCollectionView.delegate = self
     }
-    
-    @objc func handleFavorite(_ sender: UIButton) {
-        var cellMovie: Movie?
-        guard let movies = presenter?.movies else { return }
-        for movie in movies {
-            if movie.id == sender.tag {
-                cellMovie = movie
-            }
-        }
-        guard let movie = cellMovie else { return }
-        presenter?.handleMovieFavorite(movie: movie)
-        presenter?.changeButtonImage(button: sender, movie: movie)
-     }
     
     func setupUI() {
         self.view.addSubview(movieCollectionView)
@@ -118,41 +108,10 @@ class FavoriteViewController: UIViewController {
     }
 }
 
-extension FavoriteViewController: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchedMovies?.count ?? 0
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.MovieCollectionView.cellId, for: indexPath) as? MovieCollectionViewCell else {
-            fatalError("Wrong Cell ID")
-        }
-
-        if let movies = self.searchedMovies {
-            cell.movieImage.kf.indicatorType = .activity
-            let movie = movies[indexPath.item]
-            cell.movieTitle.text = movie.title
-            presenter?.changeButtonImage(button: cell.favoriteButton, movie: movie)
-            cell.favoriteButton.tag = movie.id
-            cell.favoriteButton.addTarget(self, action: #selector(handleFavorite(_:)), for: .touchUpInside)
-            let moviePosterImageURL = presenter?.getMovieImageURL(width: 200, path: movie.posterPath ?? "")
-            cell.movieImage.kf.setImage(with: moviePosterImageURL) { result in
-                switch result {
-                case .failure(let error): print("Não foi possivel carregar a imagem:", error.localizedDescription)
-                    // Tratar o error
-                cell.movieImage.image = UIImage(named: Constants.ErrorValues.loadingImageError)
-                default: break
-                }
-            }
-        }
-        return cell
-    }
-}
-
 extension FavoriteViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presenter?.showMovieDetails(movie: indexPath.item)
+        guard let movies = searchedMovies else { return }
+        presenter?.showMovieDetails(movie: indexPath.item, from: movies)
     }
 }
 

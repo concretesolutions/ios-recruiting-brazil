@@ -13,6 +13,8 @@ class MovieViewController: UIViewController {
     
     var presenter: MoviePresenter?
     
+    private var collectionViewDataSource: MovieCollectionViewDataSource?
+    
     private var estimatedCellWidth: CGFloat = Constants.MovieCollectionView.estimatedCellWidth
     private var cellMargin: CGFloat = Constants.MovieCollectionView.cellMargin
     
@@ -46,8 +48,9 @@ class MovieViewController: UIViewController {
     
     init(presenter: MoviePresenter) {
         super.init(nibName: nil, bundle: nil)
-        self.presenter = presenter
         self.navigationItem.title = "Movies"
+        self.presenter = presenter
+        self.collectionViewDataSource = MovieCollectionViewDataSource(viewController: self)
     }
     
     required init?(coder: NSCoder) {
@@ -65,29 +68,18 @@ class MovieViewController: UIViewController {
             self.presenter?.loadCollectionView(page: 1)
          }
         setupUI()
-        movieCollectionView.dataSource = self
+        movieCollectionView.dataSource = collectionViewDataSource
         movieCollectionView.delegate = self
     }
     
-    @objc func handleFavorite(_ sender: UIButton) {
-        var cellMovie: Movie?
-        guard let movies = presenter?.movies else { return }
-        for movie in movies {
-            if movie.id == sender.tag {
-                cellMovie = movie
-            }
-        }
-        guard let movie = cellMovie else { return }
-        presenter?.handleMovieFavorite(movie: movie)
-        presenter?.changeButtonImage(button: sender, movie: movie)
-     }
-    
+    // MARK: - Setup UI
     func setupUI() {
         self.view.addSubview(movieCollectionView)
-        setupConstaints()
+        setupConstraints()
     }
-    
-    func setupConstaints() {
+    // MARK: - Setup Constraints
+    func setupConstraints() {
+        
         // MARK: - Collection View Constraints
         movieCollectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
         movieCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
@@ -101,38 +93,7 @@ class MovieViewController: UIViewController {
     }
 }
 
-extension MovieViewController: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter?.numberOfMovies ?? 0
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.MovieCollectionView.cellId, for: indexPath) as? MovieCollectionViewCell else {
-            fatalError("Wrong Cell ID")
-        }
-
-        if let movies = presenter?.movies {
-            cell.movieImage.kf.indicatorType = .activity
-            let movie = movies[indexPath.item]
-            cell.movieTitle.text = movie.title
-            presenter?.changeButtonImage(button: cell.favoriteButton, movie: movie)
-            cell.favoriteButton.tag = movie.id
-            cell.favoriteButton.addTarget(self, action: #selector(handleFavorite(_:)), for: .touchUpInside)
-            let moviePosterImageURL = presenter?.getMovieImageURL(width: 200, path: movie.posterPath ?? "")
-            cell.movieImage.kf.setImage(with: moviePosterImageURL) { result in
-                switch result {
-                case .failure(let error): print("Não foi possivel carregar a imagem:", error.localizedDescription)
-                    // Tratar o error
-                cell.movieImage.image = UIImage(named: Constants.ErrorValues.loadingImageError)
-                default: break
-                }
-            }
-        }
-        return cell
-    }
-}
-
+// MARK: - Collection View Delegate
 extension MovieViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter?.showMovieDetails(movie: indexPath.item)
@@ -151,6 +112,7 @@ extension MovieViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - Movie View Delegate
 extension MovieViewController: MovieViewDelegate {
     
     func showError(imageName: String, text: String) {
