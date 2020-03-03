@@ -58,7 +58,7 @@ class MovieViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
+        self.movieCollectionView.reloadData()
     }
     
     override func viewDidLoad() {
