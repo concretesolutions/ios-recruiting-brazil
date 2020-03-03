@@ -2,10 +2,11 @@ language: swift
 os: osx
 cache:
   - Carthage/
-install:
+before_install:
   - chmod +x scripts/root_setup.sh
-  - sh scripts/root_setup.sh
   - chmod +x scripts/setup.sh
+install:
+  - sh scripts/root_setup.sh
   - sh scripts/setup.sh
 script:
   - bundle exec fastlane build
