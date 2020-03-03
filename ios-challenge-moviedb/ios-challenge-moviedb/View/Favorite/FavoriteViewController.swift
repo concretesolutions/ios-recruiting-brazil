@@ -65,6 +65,11 @@ class FavoriteViewController: UIViewController {
             guard let `self` = self else { return }
             self.presenter?.loadCollectionView(page: 1)
             self.searchedMovies = self.presenter?.movies
+            if self.searchedMovies?.count == 0 {
+                self.showError(imageName: self.errorView.errorImageName, text: self.errorView.errorText)
+            } else {
+                self.removeError()
+            }
          }
     }
     
