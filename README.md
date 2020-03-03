@@ -1,6 +1,6 @@
 ### Solution by Gabriel Reynoso
 
-[Travis CI](https://travis-ci.com/reybriel/ios-recruiting-brazil)
+[![Build Status](https://travis-ci.com/reybriel/ios-recruiting-brazil.svg?branch=master)](https://travis-ci.com/reybriel/ios-recruiting-brazil)
 
 # Concrete iOS Recruit Challenge
 
