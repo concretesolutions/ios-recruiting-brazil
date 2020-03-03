@@ -1,6 +1,6 @@
 # Travis CI
 if [ ! -z "$ON_CI" ]; then
-    bundle update --bundler
+    gem install bundler:2.0.2
 fi
 
 # Dependencies
