@@ -1,0 +1,24 @@
+default_platform(:ios)
+
+platform :ios do
+  scheme = ENV["SCHEME"]
+  test_device = ENV["TEST_DEVICE"]
+  build_path = ENV["BUILD_OUTPUT_PATH"]
+
+  desc "Build the app to run tests."
+  lane :build do
+    config = ENV["CONFIGURATION"]
+    scan(
+      scheme: scheme, clean: true, device: test_device,
+      configuration: config, derived_data_path: build_path,
+      build_for_testing: true)
+  end
+
+  desc "Run the app unit tests."
+  lane :test do
+    scan(
+      scheme: scheme, device: test_device,
+      derived_data_path: build_path,
+      test_without_building: true)
+  end
+end
