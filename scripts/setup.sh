@@ -1,8 +1,8 @@
 # Travis CI
-if ON_CI == 1; then
+if [ ! -z "$ON_CI" ] then
     bundle update --bundler
 fi
 
 # Dependencies
-carthage bootstrap --platform ios --cache-builds --no-use-binaries
+carthage bootstrap --platform ios --cache-builds
 bundle install
