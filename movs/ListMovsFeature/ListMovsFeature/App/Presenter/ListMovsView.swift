@@ -7,7 +7,10 @@
 //
 
 import Foundation
+import UIKit
 
 protocol ListMovsView: AnyObject {
     func loadViewController()
+    func setTitle(_ text: String)
+    func setItemBar(image: UIImage?)
 }

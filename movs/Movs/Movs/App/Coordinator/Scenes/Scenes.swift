@@ -34,16 +34,19 @@ extension Scenes {
         
         
     }
-    
+}
+
+//MARK: - TabBarView Build -
+extension Scenes {
     private func tabBarView(_ scenes: [Scenes]) -> MyTabBarController {
         let tabBarController = MyTabBarController()
         var listViews = [UIViewController]()
         scenes.forEach {
-            let view = $0.buildScene()
+            let view = self.createScene($0)
             view.tabBarItem = self.createTabBarItem(by: $0, tag: listViews.count)
             listViews.append(view)
         }
-        tabBarController.viewControllers = listViews        
+        tabBarController.viewControllers = listViews
         return tabBarController
     }
     
@@ -58,5 +61,9 @@ extension Scenes {
         case .tabBarView(_):
             return UITabBarItem(tabBarSystemItem: .bookmarks, tag: 3)
         }
+    }
+    private func createScene(_ scene: Scenes) -> UIViewController {
+        let viewController = scene.buildScene()
+        return UINavigationController(rootViewController: viewController)
     }
 }

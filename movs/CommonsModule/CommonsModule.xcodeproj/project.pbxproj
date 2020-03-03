@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28416080240DF9B800C239CC /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2841607F240DF9B800C239CC /* UIViewController+Extensions.swift */; };
 		D86306EE240DBE2F00961B3A /* CommonsModule.h in Headers */ = {isa = PBXBuildFile; fileRef = D86306EC240DBE2F00961B3A /* CommonsModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D86306F7240DBE4F00961B3A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86306F5240DBE4F00961B3A /* BaseViewController.swift */; };
 		D86306F8240DBE4F00961B3A /* StateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86306F6240DBE4F00961B3A /* StateViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2841607F240DF9B800C239CC /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		D86306E9240DBE2F00961B3A /* CommonsModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonsModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86306EC240DBE2F00961B3A /* CommonsModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonsModule.h; sourceTree = "<group>"; };
 		D86306ED240DBE2F00961B3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -31,6 +33,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2841607E240DF99100C239CC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2841607F240DF9B800C239CC /* UIViewController+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		D86306DF240DBE2F00961B3A = {
 			isa = PBXGroup;
 			children = (
@@ -50,6 +60,7 @@
 		D86306EB240DBE2F00961B3A /* CommonsModule */ = {
 			isa = PBXGroup;
 			children = (
+				2841607E240DF99100C239CC /* Extensions */,
 				D86306F4240DBE4F00961B3A /* UI */,
 				D86306EC240DBE2F00961B3A /* CommonsModule.h */,
 				D86306ED240DBE2F00961B3A /* Info.plist */,
@@ -146,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D86306F8240DBE4F00961B3A /* StateViewController.swift in Sources */,
+				28416080240DF9B800C239CC /* UIViewController+Extensions.swift in Sources */,
 				D86306F7240DBE4F00961B3A /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

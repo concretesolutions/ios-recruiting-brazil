@@ -6,10 +6,10 @@
 //  Copyright © 2020 Marcos Felipe Souza. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum ScenesType {
     case root
     case push
-    case presentation
+    case presentation(UIModalPresentationStyle)
 }

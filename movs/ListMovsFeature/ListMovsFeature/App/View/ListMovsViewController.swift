@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import Common
-
+import CommonsModule
+import AssertModule
 
 enum ListMovsHandleState {
     case loading
@@ -68,6 +68,21 @@ extension ListMovsViewController {
 
 //MARK: -Action by Presenter-
 extension ListMovsViewController: ListMovsView {
+    
+    func setItemBar(image: UIImage?) {
+        self.tabBarItem.image = image
+    }
+    
+    func setTitle(_ text: String) {
+        self.title = text
+    }
+    
+    func setItemBar(image: String) {
+        self.tabBarItem.image = UIImage(named: image,
+                                        in: Bundle.main,
+                                        compatibleWith: nil)
+    }
+    
     func loadViewController() {
         self.view.backgroundColor = .systemPink
         self.button.addTarget(self, action: #selector(tapOnButton), for: .touchDown)
@@ -79,7 +94,7 @@ extension ListMovsViewController {
     func setupContraints() {
         self.view.addSubview(self.button)
         NSLayoutConstraint.activate([
-            self.button.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20),
+            self.button.topAnchor.constraint(equalTo: self.topAnchorSafeArea, constant: 20),
             self.button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.button.heightAnchor.constraint(equalToConstant: 150),
         ])

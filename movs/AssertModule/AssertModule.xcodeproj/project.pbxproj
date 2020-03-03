@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2841607D240DF53900C239CC /* Asserts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2841607C240DF53900C239CC /* Asserts.swift */; };
 		D86306D4240DBDA000961B3A /* AssertModule.h in Headers */ = {isa = PBXBuildFile; fileRef = D86306D2240DBDA000961B3A /* AssertModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D86306DB240DBDBD00961B3A /* Asserts.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D86306DA240DBDBD00961B3A /* Asserts.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2841607C240DF53900C239CC /* Asserts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asserts.swift; sourceTree = "<group>"; };
 		D86306CF240DBDA000961B3A /* AssertModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssertModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86306D2240DBDA000961B3A /* AssertModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssertModule.h; sourceTree = "<group>"; };
 		D86306D3240DBDA000961B3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -29,6 +31,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2841607B240DF52600C239CC /* UIImages */ = {
+			isa = PBXGroup;
+			children = (
+				2841607C240DF53900C239CC /* Asserts.swift */,
+			);
+			path = UIImages;
+			sourceTree = "<group>";
+		};
 		D86306C5240DBDA000961B3A = {
 			isa = PBXGroup;
 			children = (
@@ -48,6 +58,7 @@
 		D86306D1240DBDA000961B3A /* AssertModule */ = {
 			isa = PBXGroup;
 			children = (
+				2841607B240DF52600C239CC /* UIImages */,
 				D86306D2240DBDA000961B3A /* AssertModule.h */,
 				D86306D3240DBDA000961B3A /* Info.plist */,
 				D86306DA240DBDBD00961B3A /* Asserts.xcassets */,
@@ -98,6 +109,7 @@
 				TargetAttributes = {
 					D86306CE240DBDA000961B3A = {
 						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1130;
 					};
 				};
 			};
@@ -135,6 +147,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2841607D240DF53900C239CC /* Asserts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +277,7 @@
 		D86306D8240DBDA000961B3A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = V2686JM7D9;
@@ -281,6 +295,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.mfelipesp.AssertModule;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -289,6 +304,7 @@
 		D86306D9240DBDA000961B3A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = V2686JM7D9;

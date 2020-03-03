@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AssertModule
 
 class ListMovsPresenter {
     
@@ -24,6 +25,8 @@ class ListMovsPresenter {
 extension ListMovsPresenter {
     func loading() {
         self.view.loadViewController()
+        self.view.setTitle("Movies")
+        self.view.setItemBar(image: Asserts.TabBarItems.movies)
     }
     
     func tapOnButton(){

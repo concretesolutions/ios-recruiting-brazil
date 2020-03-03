@@ -10,6 +10,9 @@ import UIKit
 
 class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
 
+    var tagSelected: Int = 0
+    var viewControllerSelected: UIViewController = UIViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
@@ -17,12 +20,12 @@ class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     // UITabBarDelegate
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        print("Selected item")
+        self.tagSelected = item.tag
     }
 
     // UITabBarControllerDelegate
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        print("Selected view controller")
+        self.viewControllerSelected = viewController
     }
 
 }
