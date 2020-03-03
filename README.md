@@ -2,8 +2,6 @@
 
 [![Build Status](https://travis-ci.com/reybriel/ios-recruiting-brazil.svg?branch=master)](https://travis-ci.com/reybriel/ios-recruiting-brazil)
 
-[Travis CI](https://travis-ci.com/reybriel/ios-recruiting-brazil)
-
 # Concrete iOS Recruit Challenge
 
 ---
