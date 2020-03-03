@@ -1,5 +1,5 @@
 # Travis CI
-if [ ! -z "$ON_CI" ] then
+if [ ! -z "$ON_CI" ]; then
     bundle update --bundler
 fi
 
