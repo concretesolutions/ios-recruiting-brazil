@@ -135,3 +135,18 @@ extension MovieViewController: MovieViewDelegate {
         }
     }
 }
+
+extension MovieViewController: FavoriteMoviesProtocol {
+    func handleMovieFavorite(movie: Movie) {
+        presenter?.handleMovieFavoriteTap(movie: movie)
+    }
+    
+    func changeButtonImage(button: UIButton, movie: Movie) {
+        let isFavorite = presenter?.handleChangeButtonImage(movie: movie)
+        if isFavorite == true {
+            button.setImage(UIImage(named: Constants.FavoriteButton.imageNamedFull), for: .normal)
+        } else {
+            button.setImage(UIImage(named: Constants.FavoriteButton.imageNamedNormal), for: .normal)
+        }
+    }
+}

@@ -92,8 +92,8 @@ class MovieDetailViewController: UIViewController {
     }
     
     @objc func handleFavorite(_ sender: UIButton) {
-        presenter?.handleMovieFavorite(movie: self.movie)
-        presenter?.changeButtonImage(button: sender, movie: movie)
+        handleMovieFavorite(movie: self.movie)
+        changeButtonImage(button: sender, movie: movie)
     }
     
     func applyGradient() {
@@ -169,7 +169,7 @@ class MovieDetailViewController: UIViewController {
         movieTitle.text = movie.title
         movieDetail.text = movie.overview
         movieReleaseDate.text = String(movie.releaseDate.prefix(4))
-        presenter?.changeButtonImage(button: favoriteButton, movie: movie)
+        changeButtonImage(button: favoriteButton, movie: movie)
         presenter?.getGenres(ids: movie.genreIds, completion: { [weak self] (genres) in
             guard let `self` = self else { return }
             if let genres = genres {
@@ -194,6 +194,23 @@ class MovieDetailViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension MovieDetailViewController: FavoriteMoviesProtocol {
+    
+    func handleMovieFavorite(movie: Movie) {
+        presenter?.handleMovieFavoriteTap(movie: movie)
+    }
+    
+    func changeButtonImage(button: UIButton, movie: Movie) {
+        let isFavorite = presenter?.handleChangeButtonImage(movie: movie)
+        
+        if isFavorite == true {
+            button.setImage(UIImage(named: Constants.FavoriteButton.imageNamedFull), for: .normal)
+        } else {
+            button.setImage(UIImage(named: Constants.FavoriteButton.imageNamedNormal), for: .normal)
+        }
     }
 }
 

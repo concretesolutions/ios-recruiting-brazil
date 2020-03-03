@@ -6,7 +6,6 @@
 //  Copyright © 2020 Giovanni Severo Barros. All rights reserved.
 //
 
-import UIKit
 import Kingfisher
 
 protocol MovieDetailViewDelegate {
@@ -68,9 +67,7 @@ class MovieDetailPresenter {
         }
         return movieGenresString
     }
-}
-
-extension MovieDetailPresenter: FavoriteMoviesProtocol {
+    
     func isMovieFavorite(movie: Movie) -> Bool {
         let favoriteMovies = LocalData.object.getAllFavoriteMovies()
         if favoriteMovies[movie.id] == nil {
@@ -78,21 +75,17 @@ extension MovieDetailPresenter: FavoriteMoviesProtocol {
         }
         return true
     }
-    
-    func handleMovieFavorite(movie: Movie) {
+
+    func handleMovieFavoriteTap(movie: Movie) {
         if isMovieFavorite(movie: movie) == false {
             LocalData.object.makeMovieFavorite(movie: movie)
         } else {
             LocalData.object.makeMovieNotFavorite(movie: movie)
         }
     }
-    
-    func changeButtonImage(button: UIButton, movie: Movie) {
+
+    func handleChangeButtonImage(movie: Movie) -> Bool {
         let isFavorite = isMovieFavorite(movie: movie)
-        if isFavorite == true {
-            button.setImage(UIImage(named: Constants.FavoriteButton.imageNamedFull), for: .normal)
-        } else {
-            button.setImage(UIImage(named: Constants.FavoriteButton.imageNamedNormal), for: .normal)
-        }
+        return isFavorite
     }
 }

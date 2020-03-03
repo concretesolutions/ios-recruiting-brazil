@@ -65,7 +65,6 @@ final class LocalData {
     func makeMovieFavorite(movie: Movie) {
         JSONDataAccess.object.isFavorite(movie: movie)
         local = JSONDataAccess.object.loadSave()
-        print("LocalData: ", local.favoriteMovies.count)
     }
     
     /**
@@ -77,6 +76,5 @@ final class LocalData {
     func makeMovieNotFavorite(movie: Movie) {
         JSONDataAccess.object.isNotFavorite(movie: movie)
         local = JSONDataAccess.object.loadSave()
-        print("LocalData: ", local.favoriteMovies.count)
     }
 }

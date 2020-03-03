@@ -6,10 +6,9 @@
 //  Copyright © 2020 Giovanni Severo Barros. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol FavoriteMoviesProtocol {
-    
     func handleMovieFavorite(movie: Movie)
-    func isMovieFavorite(movie: Movie) -> Bool
+    func changeButtonImage(button: UIButton, movie: Movie) 
 }
