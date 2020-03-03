@@ -54,10 +54,13 @@ extension Scenes {
         
         switch scene {
         case .listMovsFeature:
-            let image = UIImage(named: "list_icon")
-            return UITabBarItem(title: "Movies", image: image, tag: tag)
+            return UITabBarItem(title: "Movies",
+                                image: Assets.TabBarItems.movies,
+                                tag: tag)
         case .favoriteFeature:
-            return UITabBarItem(title: "Favorites", image: UIImage(named: "favorite_gray_icon"), tag: tag)
+            return UITabBarItem(title: "Favorites",
+                                image: Assets.TabBarItems.favoriteEmpty,
+                                tag: tag)
         case .tabBarView(_):
             return UITabBarItem(tabBarSystemItem: .bookmarks, tag: 3)
         }

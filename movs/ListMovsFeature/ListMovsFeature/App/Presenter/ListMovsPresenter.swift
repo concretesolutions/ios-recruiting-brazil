@@ -26,7 +26,6 @@ extension ListMovsPresenter {
     func loading() {
         self.view.loadViewController()
         self.view.setTitle("Movies")
-        self.view.setItemBar(image: Asserts.TabBarItems.movies)
     }
     
     func tapOnButton(){

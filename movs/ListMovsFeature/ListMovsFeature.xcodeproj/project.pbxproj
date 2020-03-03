@@ -14,10 +14,11 @@
 		D86306BF240DBA4300961B3A /* ListMovsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86306B9240DBA4300961B3A /* ListMovsPresenter.swift */; };
 		D86306C0240DBA4300961B3A /* ListMovsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86306BB240DBA4300961B3A /* ListMovsViewController.swift */; };
 		D86306C1240DBA4300961B3A /* ListMovsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86306BD240DBA4300961B3A /* ListMovsRouter.swift */; };
-		D86306DD240DBE0500961B3A /* AssertModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D86306DC240DBE0500961B3A /* AssertModule.framework */; };
-		D86306DE240DBE0500961B3A /* AssertModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D86306DC240DBE0500961B3A /* AssertModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D86306FA240DBF9800961B3A /* CommonsModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D86306F9240DBF9800961B3A /* CommonsModule.framework */; };
-		D86306FB240DBF9800961B3A /* CommonsModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D86306F9240DBF9800961B3A /* CommonsModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D878E677240F1732007DC2C8 /* AssertModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D878E675240F1732007DC2C8 /* AssertModule.framework */; };
+		D878E678240F1732007DC2C8 /* AssertModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D878E675240F1732007DC2C8 /* AssertModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D878E679240F1732007DC2C8 /* CommonsModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D878E676240F1732007DC2C8 /* CommonsModule.framework */; };
+		D878E67A240F1732007DC2C8 /* CommonsModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D878E676240F1732007DC2C8 /* CommonsModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D89A4F3A240EE5F600E75A26 /* EmptySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89A4F39240EE5F600E75A26 /* EmptySearchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,14 +32,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D86306B5240DBA2F00961B3A /* Embed Frameworks */ = {
+		D878E67B240F1732007DC2C8 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D86306DE240DBE0500961B3A /* AssertModule.framework in Embed Frameworks */,
-				D86306FB240DBF9800961B3A /* CommonsModule.framework in Embed Frameworks */,
+				D878E678240F1732007DC2C8 /* AssertModule.framework in Embed Frameworks */,
+				D878E67A240F1732007DC2C8 /* CommonsModule.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -59,6 +60,10 @@
 		D86306BD240DBA4300961B3A /* ListMovsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListMovsRouter.swift; sourceTree = "<group>"; };
 		D86306DC240DBE0500961B3A /* AssertModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AssertModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86306F9240DBF9800961B3A /* CommonsModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CommonsModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8630702240EC5D500961B3A /* AssertModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AssertModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D878E675240F1732007DC2C8 /* AssertModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AssertModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D878E676240F1732007DC2C8 /* CommonsModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CommonsModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D89A4F39240EE5F600E75A26 /* EmptySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySearchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D86306DD240DBE0500961B3A /* AssertModule.framework in Frameworks */,
-				D86306FA240DBF9800961B3A /* CommonsModule.framework in Frameworks */,
+				D878E677240F1732007DC2C8 /* AssertModule.framework in Frameworks */,
+				D878E679240F1732007DC2C8 /* CommonsModule.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +109,7 @@
 		D8630699240DBA2400961B3A /* ListMovsFeature */ = {
 			isa = PBXGroup;
 			children = (
+				D8630703240EE4C700961B3A /* SupportingFile */,
 				D86306B6240DBA4300961B3A /* App */,
 				D863069A240DBA2400961B3A /* ListMovsFeature.h */,
 				D863069B240DBA2400961B3A /* Info.plist */,
@@ -123,6 +129,9 @@
 		D86306B1240DBA2F00961B3A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D878E675240F1732007DC2C8 /* AssertModule.framework */,
+				D878E676240F1732007DC2C8 /* CommonsModule.framework */,
+				D8630702240EC5D500961B3A /* AssertModule.framework */,
 				D86306F9240DBF9800961B3A /* CommonsModule.framework */,
 				D86306DC240DBE0500961B3A /* AssertModule.framework */,
 				D86306B2240DBA2F00961B3A /* Common.framework */,
@@ -152,6 +161,7 @@
 		D86306BA240DBA4300961B3A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D89A4F38240EE5CD00E75A26 /* SearchView */,
 				D86306BB240DBA4300961B3A /* ListMovsViewController.swift */,
 			);
 			path = View;
@@ -163,6 +173,21 @@
 				D86306BD240DBA4300961B3A /* ListMovsRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		D8630703240EE4C700961B3A /* SupportingFile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SupportingFile;
+			sourceTree = "<group>";
+		};
+		D89A4F38240EE5CD00E75A26 /* SearchView */ = {
+			isa = PBXGroup;
+			children = (
+				D89A4F39240EE5F600E75A26 /* EmptySearchView.swift */,
+			);
+			path = SearchView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,7 +212,7 @@
 				D8630693240DBA2400961B3A /* Sources */,
 				D8630694240DBA2400961B3A /* Frameworks */,
 				D8630695240DBA2400961B3A /* Resources */,
-				D86306B5240DBA2F00961B3A /* Embed Frameworks */,
+				D878E67B240F1732007DC2C8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -275,6 +300,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D89A4F3A240EE5F600E75A26 /* EmptySearchView.swift in Sources */,
 				D86306BE240DBA4300961B3A /* ListMovsView.swift in Sources */,
 				D86306C1240DBA4300961B3A /* ListMovsRouter.swift in Sources */,
 				D86306BF240DBA4300961B3A /* ListMovsPresenter.swift in Sources */,

@@ -27,9 +27,14 @@ open class ListMovsViewController: BaseViewController {
         }
     }
     
-    let button: UIButton = {
-        let view = UIButton(type: UIButton.ButtonType.system)
-        view.setTitle("Tap here", for: .normal)
+    let emptySearchView: EmptySearchView = {
+        let search = EmptySearchView()
+        search.translatesAutoresizingMaskIntoConstraints = false
+        return search
+    }()
+    
+    let searchBarView: UISearchBar = {
+        let view = UISearchBar()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -40,8 +45,11 @@ open class ListMovsViewController: BaseViewController {
 extension ListMovsViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
-        setupContraints()
         self.presenter.loading()
+        self.view.addSubview(self.searchBarView)
+        self.view.addSubview(self.emptySearchView)
+        self.searchBarView.delegate = self
+        self.setupContraints()
     }
 }
 
@@ -77,28 +85,37 @@ extension ListMovsViewController: ListMovsView {
         self.title = text
     }
     
-    func setItemBar(image: String) {
+    func setItemBar(image: String) {        
         self.tabBarItem.image = UIImage(named: image,
                                         in: Bundle.main,
                                         compatibleWith: nil)
     }
     
     func loadViewController() {
-        self.view.backgroundColor = .systemPink
-        self.button.addTarget(self, action: #selector(tapOnButton), for: .touchDown)
+        self.view.backgroundColor = Colors.whiteNormal
     }
 }
 
 //MARK: -Setup View-
 extension ListMovsViewController {
     func setupContraints() {
-        self.view.addSubview(self.button)
         NSLayoutConstraint.activate([
-            self.button.topAnchor.constraint(equalTo: self.topAnchorSafeArea, constant: 20),
-            self.button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            self.button.heightAnchor.constraint(equalToConstant: 150),
-        ])
-        
+            self.searchBarView.topAnchor.constraint(equalTo: self.topAnchorSafeArea),
+            self.searchBarView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.searchBarView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            
+            self.emptySearchView.topAnchor.constraint(equalTo: self.searchBarView.bottomAnchor),
+            self.emptySearchView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.emptySearchView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.emptySearchView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+        ])        
     }
 }
 
+
+//MARK: - UISearchBarDelegate -
+extension ListMovsViewController: UISearchBarDelegate {
+    public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        print(searchBar.text)
+    }
+}
