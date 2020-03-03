@@ -31,17 +31,16 @@ final class JSONDataAccess {
      Path of JSON Genres
      */
     private var jsonPathAllGenre: URL
-
-
     
     /// The single instance of `DataAccess`
     /**
      The single instance of `DataAccess`
      */
     static let object = JSONDataAccess()
+    
     private init() {
         jsonPathFavorite = URL(fileURLWithPath: jsonDirectory.appending("/favorite.json"))
-        jsonPathGenre = URL(fileURLWithPath: jsonDirectory.appending("/genre.json"))
+        jsonPathGenre = URL(fileURLWithPath: jsonDirectory.appending("/moviesgenre.json"))
         jsonPathAllGenre = URL(fileURLWithPath: jsonDirectory.appending("/allgenre.json"))
     }
     
@@ -96,8 +95,10 @@ final class JSONDataAccess {
             let allGenresData = try Data(contentsOf: jsonPathAllGenre)
             let allGenres = try JSONDecoder().decode([Genre].self, from: allGenresData)
             saveData.allGenres = allGenres
-            print("All Genres: ", allGenres)
-        } catch { }
+        } catch {
+            print("Não foi possivel Carregar as informações")
+        }
+        
         return saveData
     }
 
@@ -124,9 +125,8 @@ final class JSONDataAccess {
      */
     private func saveFavoriteMovieGenres(genres: [Int:String]) {
         do {
-            try JSONEncoder().encode(genres).write(to: self.jsonPathFavorite)
+            try JSONEncoder().encode(genres).write(to: self.jsonPathGenre)
         } catch {
-            // Tratar o erro
             print("Não foi possivel salvar")
         }
         return
@@ -138,6 +138,7 @@ final class JSONDataAccess {
         } catch {
             print("Não foi possivel salvar localmente os saves")
         }
+        return
     }
 }
 

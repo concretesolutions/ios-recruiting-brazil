@@ -63,6 +63,7 @@ class FavoriteViewController: UIViewController {
         // MARK: - Loads Movies Data
         DispatchQueue.main.async { [weak self] in
             guard let `self` = self else { return }
+
             self.presenter?.loadCollectionView(page: 1)
             self.searchedMovies = self.presenter?.movies
             if self.searchedMovies?.count == 0 {

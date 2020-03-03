@@ -13,7 +13,7 @@ import Foundation
  */
 final class LocalData {
     // MARK: Singleton
-    
+
     /**
      The single instance of *LocalData*
      */
