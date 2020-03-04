@@ -11,6 +11,9 @@
 		164A3302240FE8AD00EF88C5 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164A3301240FE8AD00EF88C5 /* Coordinator.swift */; };
 		164A3305240FEBC800EF88C5 /* AllMoviesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164A3304240FEBC800EF88C5 /* AllMoviesCoordinator.swift */; };
 		164A3308240FEC0C00EF88C5 /* FavoriteMoviesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164A3307240FEC0C00EF88C5 /* FavoriteMoviesCoordinator.swift */; };
+		164A3312240FFAC900EF88C5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 164A3311240FFAC900EF88C5 /* Localizable.strings */; };
+		164A331C240FFBF400EF88C5 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164A3319240FFBF400EF88C5 /* Strings.swift */; };
+		164A331D240FFBF400EF88C5 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164A331A240FFBF400EF88C5 /* Assets.swift */; };
 		169F2B23240E948900AD1315 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169F2B22240E948900AD1315 /* AppDelegate.swift */; };
 		169F2B2C240E948A00AD1315 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 169F2B2B240E948A00AD1315 /* Assets.xcassets */; };
 		169F2B2F240E948A00AD1315 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 169F2B2D240E948A00AD1315 /* LaunchScreen.storyboard */; };
@@ -35,6 +38,9 @@
 		164A3301240FE8AD00EF88C5 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		164A3304240FEBC800EF88C5 /* AllMoviesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMoviesCoordinator.swift; sourceTree = "<group>"; };
 		164A3307240FEC0C00EF88C5 /* FavoriteMoviesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesCoordinator.swift; sourceTree = "<group>"; };
+		164A3311240FFAC900EF88C5 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		164A3319240FFBF400EF88C5 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		164A331A240FFBF400EF88C5 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		169F2B1F240E948900AD1315 /* Movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		169F2B22240E948900AD1315 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		169F2B2B240E948A00AD1315 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -82,7 +88,9 @@
 		16119891240FDD7500C82B21 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				164A3318240FFBF400EF88C5 /* Generated */,
 				169F2B2D240E948A00AD1315 /* LaunchScreen.storyboard */,
+				164A3311240FFAC900EF88C5 /* Localizable.strings */,
 				169F2B2B240E948A00AD1315 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -136,6 +144,15 @@
 				164A3307240FEC0C00EF88C5 /* FavoriteMoviesCoordinator.swift */,
 			);
 			path = FavoriteMovies;
+			sourceTree = "<group>";
+		};
+		164A3318240FFBF400EF88C5 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				164A3319240FFBF400EF88C5 /* Strings.swift */,
+				164A331A240FFBF400EF88C5 /* Assets.swift */,
+			);
+			path = Generated;
 			sourceTree = "<group>";
 		};
 		169F2B16240E948900AD1315 = {
@@ -197,7 +214,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 169F2B3E240E948A00AD1315 /* Build configuration list for PBXNativeTarget "Movie" */;
 			buildPhases = (
-				16F0D746240E97B1009ACAE8 /* Linting & Formating */,
+				16F0D746240E97B1009ACAE8 /* Linting, Formating & Generating */,
 				16F0D74D240E9BC3009ACAE8 /* Carthage Copy Frameworks */,
 				169F2B1B240E948900AD1315 /* Sources */,
 				169F2B1C240E948900AD1315 /* Frameworks */,
@@ -275,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				169F2B2F240E948A00AD1315 /* LaunchScreen.storyboard in Resources */,
+				164A3312240FFAC900EF88C5 /* Localizable.strings in Resources */,
 				169F2B2C240E948A00AD1315 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,7 +307,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		16F0D746240E97B1009ACAE8 /* Linting & Formating */ = {
+		16F0D746240E97B1009ACAE8 /* Linting, Formating & Generating */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -298,14 +316,14 @@
 			);
 			inputPaths = (
 			);
-			name = "Linting & Formating";
+			name = "Linting, Formating & Generating";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./scripts/root_setup.sh\n\nswiftformat .\nswiftlint\n";
+			shellScript = "./scripts/root_setup.sh\n\n[ ! -d \"Movie/Resources/Generated\" ] && mkdir Movie/Resources/Generated\nswiftgen config run\nswiftformat .\nswiftlint\n";
 		};
 		16F0D74D240E9BC3009ACAE8 /* Carthage Copy Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -339,9 +357,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				164A3302240FE8AD00EF88C5 /* Coordinator.swift in Sources */,
+				164A331D240FFBF400EF88C5 /* Assets.swift in Sources */,
 				169F2B23240E948900AD1315 /* AppDelegate.swift in Sources */,
 				16119895240FE5D500C82B21 /* InitialCoordinator.swift in Sources */,
 				164A3308240FEC0C00EF88C5 /* FavoriteMoviesCoordinator.swift in Sources */,
+				164A331C240FFBF400EF88C5 /* Strings.swift in Sources */,
 				164A3305240FEBC800EF88C5 /* AllMoviesCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
