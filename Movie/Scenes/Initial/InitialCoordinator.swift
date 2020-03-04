@@ -7,9 +7,9 @@ final class InitialCoordinator: Coordinator {
         Observable.zip(AllMoviesCoordinator().start(), FavoritesMoviesCoordinator().start())
             .take(1)
             .map { allMoviesVC, favoriteMoviesVC in
-                let tabBarController = UITabBarController()
-                tabBarController.setViewControllers([allMoviesVC, favoriteMoviesVC], animated: false)
-                return tabBarController
+                UITabBarController()
+                    .createMovieTabBar()
+                    .with(viewControllers: [allMoviesVC, favoriteMoviesVC])
             }
     }
 }

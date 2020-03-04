@@ -1,13 +1,13 @@
 import class RxSwift.Observable
-import class UIKit.UITabBarItem
-import class UIKit.UIViewController
+import UIKit
 
 final class AllMoviesCoordinator: Coordinator {
     func start() -> Observable<UIViewController> {
         let viewController = UIViewController()
         viewController.view.backgroundColor = .red
-        viewController.tabBarItem = UITabBarItem(title: L10n.TabBar.allMovies,
-                                                 image: nil, selectedImage: nil)
+        viewController.tabBarItem = UITabBarItem()
+            .createMovieTabBarItem()
+            .with(title: L10n.TabBar.allMovies)
         return Observable.just(viewController)
     }
 }

@@ -6,8 +6,9 @@ final class FavoritesMoviesCoordinator: Coordinator {
     func start() -> Observable<UIViewController> {
         let viewController = UIViewController()
         viewController.view.backgroundColor = .yellow
-        viewController.tabBarItem = UITabBarItem(title: L10n.TabBar.favoriteMovies,
-                                                 image: nil, selectedImage: nil)
+        viewController.tabBarItem = UITabBarItem()
+            .createMovieTabBarItem()
+            .with(title: L10n.TabBar.favoriteMovies)
         return Observable.just(viewController)
     }
 }
