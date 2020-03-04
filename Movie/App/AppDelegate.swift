@@ -1,16 +1,26 @@
+import class RxSwift.DisposeBag
 import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    var window: UIWindow?
+
+    private let disposeBag = DisposeBag()
+
     func application(_: UIApplication,
                      didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        InitialCoordinator().start()
+            .subscribe(onNext: { [weak self] viewController in
+                self?.present(initial: viewController)
+            }).disposed(by: disposeBag)
+
         return true
     }
 
-    // MARK: UISceneSession Lifecycle
-
-    func application(_: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession,
-                     options _: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        return UISceneConfiguration(name: "Movie Scene", sessionRole: connectingSceneSession.role)
+    private func present(initial viewController: UIViewController) {
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        self.window = window
     }
 }
