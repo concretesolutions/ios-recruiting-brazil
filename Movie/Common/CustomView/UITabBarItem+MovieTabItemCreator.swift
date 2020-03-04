@@ -3,14 +3,21 @@ import UIKit
 protocol MovieTabItemCreator {
     func createMovieTabBarItem() -> UITabBarItem
     func with(title: String) -> UITabBarItem
-    func with(image: UIImage, selectedImage: UIImage) -> UITabBarItem
+    func with(image: UIImage) -> UITabBarItem
 }
 
 extension UITabBarItem: MovieTabItemCreator {
+    private var normalColor: UIColor {
+        ColorName.secondary.color.withAlphaComponent(0.6)
+    }
+
+    private var selectedColor: UIColor {
+        ColorName.secondary.color
+    }
+
     func createMovieTabBarItem() -> UITabBarItem {
-        let color = ColorName.secondary.color
-        setTitleTextAttributes([.foregroundColor: color.withAlphaComponent(0.6)], for: .normal)
-        setTitleTextAttributes([.foregroundColor: color], for: .selected)
+        setTitleTextAttributes([.foregroundColor: normalColor], for: .normal)
+        setTitleTextAttributes([.foregroundColor: selectedColor], for: .selected)
         return self
     }
 
@@ -19,9 +26,9 @@ extension UITabBarItem: MovieTabItemCreator {
         return self
     }
 
-    func with(image: UIImage, selectedImage: UIImage) -> UITabBarItem {
-        self.image = image
-        self.selectedImage = selectedImage
+    func with(image: UIImage) -> UITabBarItem {
+        self.image = image.withTintColor(normalColor)
+        selectedImage = image.withTintColor(selectedColor)
         return self
     }
 }

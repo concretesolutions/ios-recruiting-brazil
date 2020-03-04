@@ -9,6 +9,7 @@ final class FavoritesMoviesCoordinator: Coordinator {
         viewController.tabBarItem = UITabBarItem()
             .createMovieTabBarItem()
             .with(title: L10n.TabBar.favoriteMovies)
+            .with(image: Asset.favoriteEmptyIcon.image)
         return Observable.just(viewController)
     }
 }

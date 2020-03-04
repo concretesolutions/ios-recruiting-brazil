@@ -8,6 +8,7 @@ final class AllMoviesCoordinator: Coordinator {
         viewController.tabBarItem = UITabBarItem()
             .createMovieTabBarItem()
             .with(title: L10n.TabBar.allMovies)
+            .with(image: Asset.listIcon.image)
         return Observable.just(viewController)
     }
 }
