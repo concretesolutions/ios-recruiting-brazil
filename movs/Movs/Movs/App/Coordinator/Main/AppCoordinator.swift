@@ -51,11 +51,11 @@ extension AppCoordinator {
         
         switch scene {
         case .tabBarView(_):
-            guard let myTabBar = scene.buildScene() as? MyTabBarController else { return }
+            guard let myTabBar = scene.buildScene(appCoordinator: self) as? MyTabBarController else { return }
             self.tabBarViewController = myTabBar
             viewController = self.tabBarViewController
         default:
-            viewController = scene.buildScene()
+            viewController = scene.buildScene(appCoordinator: self)
         }
         self.currentViewController = viewController
     }

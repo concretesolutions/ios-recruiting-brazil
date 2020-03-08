@@ -32,5 +32,16 @@ public extension Assets {
         public static let searchIcon = UIImage(named: "search_icon",
                                                in: Assets.bundleFramework,
                                                compatibleWith: nil)
+        public static let failureIcon = UIImage(named: "failure_icon",
+                                                in: Assets.bundleFramework,
+                                                compatibleWith: nil)
+        
+        public static let favoriteFullIcon = UIImage(named: "favorite_full_icon",
+                                                    in: Assets.bundleFramework,
+                                                    compatibleWith: nil)
+        
+        public static let favoriteGrayIcon = UIImage(named: "favorite_gray_icon",
+                                                    in: Assets.bundleFramework,
+                                                    compatibleWith: nil)
     }
 }

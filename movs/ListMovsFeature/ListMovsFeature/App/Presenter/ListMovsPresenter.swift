@@ -7,16 +7,16 @@
 //
 
 import Foundation
-import AssertModule
 
 class ListMovsPresenter {
-    
     weak var view: ListMovsView!
-    unowned var router: ListMovsRouter!
+    unowned var router: ListMovsRouter
+    var service: ListMovsServiceType
     
-    init(view: ListMovsView, router: ListMovsRouter) {
+    init(view: ListMovsView, router: ListMovsRouter, service: ListMovsServiceType) {
         self.view = view
         self.router = router
+        self.service = service
     }
 }
 
@@ -26,6 +26,7 @@ extension ListMovsPresenter {
     func loading() {
         self.view.loadViewController()
         self.view.setTitle("Movies")
+        self.service.fetchDatas()
     }
     
     func tapOnButton(){

@@ -12,15 +12,26 @@ open class ListMovsRouter {
     
     var presenter: ListMovsPresenter!
     var view: ListMovsViewController!
+    var service: ListMovsServiceType!
+    
+    
+    public var showSearchView: () -> Void = {  
+        print("GOTT HERE")
+    }
     
     /// just module on open
     public init() {}
     
     public func makeUI() -> ListMovsViewController {
         self.view = ListMovsViewController()
-        self.presenter = ListMovsPresenter(view: view, router: self)
+        self.service = ListMovsService()
+        self.presenter = ListMovsPresenter(view: view, router: self, service: service)
         self.view.presenter = self.presenter
         return view
+    }
+    
+    public func showSearchVie2w() {
+        self.showSearchView()
     }
     
 }
