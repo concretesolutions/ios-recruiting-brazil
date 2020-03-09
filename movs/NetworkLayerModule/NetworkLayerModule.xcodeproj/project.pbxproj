@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D871EC3C2416E1930053E76D /* HTTPMethodAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D871EC3B2416E1930053E76D /* HTTPMethodAPI.swift */; };
 		D8D22E4C241488BB00F4AF4B /* NetworkLayerModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D22E42241488BB00F4AF4B /* NetworkLayerModule.framework */; };
 		D8D22E51241488BB00F4AF4B /* NetworkLayerModuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D22E50241488BB00F4AF4B /* NetworkLayerModuleTests.swift */; };
 		D8D22E53241488BB00F4AF4B /* NetworkLayerModule.h in Headers */ = {isa = PBXBuildFile; fileRef = D8D22E45241488BB00F4AF4B /* NetworkLayerModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -17,7 +18,6 @@
 		D8D22E6B24148CB800F4AF4B /* ReaderInfoPList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D22E6A24148CB800F4AF4B /* ReaderInfoPList.swift */; };
 		D8D22E6D24148D0400F4AF4B /* InfoPListValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D22E6C24148D0400F4AF4B /* InfoPListValues.swift */; };
 		D8D22E6F24148DEE00F4AF4B /* ListMovsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D22E6E24148DEE00F4AF4B /* ListMovsAPI.swift */; };
-		D8D22E7124148E3C00F4AF4B /* HttpMethodAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D22E7024148E3C00F4AF4B /* HttpMethodAPI.swift */; };
 		D8D22E76241490F100F4AF4B /* BaseRequestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D22E75241490F100F4AF4B /* BaseRequestAPI.swift */; };
 		D8D22E7F24149C0000F4AF4B /* MovsListRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D22E7E24149C0000F4AF4B /* MovsListRequestModel.swift */; };
 		D8D22E812414A0A100F4AF4B /* InvalidAccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D22E802414A0A100F4AF4B /* InvalidAccessModel.swift */; };
@@ -34,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D871EC3B2416E1930053E76D /* HTTPMethodAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethodAPI.swift; sourceTree = "<group>"; };
 		D8D22E42241488BB00F4AF4B /* NetworkLayerModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkLayerModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D22E45241488BB00F4AF4B /* NetworkLayerModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkLayerModule.h; sourceTree = "<group>"; };
 		D8D22E46241488BB00F4AF4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,7 +48,6 @@
 		D8D22E6A24148CB800F4AF4B /* ReaderInfoPList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderInfoPList.swift; sourceTree = "<group>"; };
 		D8D22E6C24148D0400F4AF4B /* InfoPListValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPListValues.swift; sourceTree = "<group>"; };
 		D8D22E6E24148DEE00F4AF4B /* ListMovsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMovsAPI.swift; sourceTree = "<group>"; };
-		D8D22E7024148E3C00F4AF4B /* HttpMethodAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethodAPI.swift; sourceTree = "<group>"; };
 		D8D22E75241490F100F4AF4B /* BaseRequestAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequestAPI.swift; sourceTree = "<group>"; };
 		D8D22E7E24149C0000F4AF4B /* MovsListRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsListRequestModel.swift; sourceTree = "<group>"; };
 		D8D22E802414A0A100F4AF4B /* InvalidAccessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvalidAccessModel.swift; sourceTree = "<group>"; };
@@ -96,7 +96,6 @@
 			children = (
 				D8D22E6924148CA300F4AF4B /* Helper */,
 				D8D22E6424148B3300F4AF4B /* Environment */,
-				D8D22E5E241488F700F4AF4B /* CoreData */,
 				D8D22E5D241488E900F4AF4B /* Models */,
 				D8D22E5C241488E000F4AF4B /* API */,
 				D8D22E45241488BB00F4AF4B /* NetworkLayerModule.h */,
@@ -132,13 +131,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		D8D22E5E241488F700F4AF4B /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
 		D8D22E6424148B3300F4AF4B /* Environment */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,8 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				D8D22E62241489B900F4AF4B /* MTDBAPI.swift */,
-				D8D22E7024148E3C00F4AF4B /* HttpMethodAPI.swift */,
 				D8D22E75241490F100F4AF4B /* BaseRequestAPI.swift */,
+				D871EC3B2416E1930053E76D /* HTTPMethodAPI.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -292,9 +284,9 @@
 				D8D22E76241490F100F4AF4B /* BaseRequestAPI.swift in Sources */,
 				D8D22E6F24148DEE00F4AF4B /* ListMovsAPI.swift in Sources */,
 				D8D22E6B24148CB800F4AF4B /* ReaderInfoPList.swift in Sources */,
-				D8D22E7124148E3C00F4AF4B /* HttpMethodAPI.swift in Sources */,
 				D8D22E7F24149C0000F4AF4B /* MovsListRequestModel.swift in Sources */,
 				D8D22E812414A0A100F4AF4B /* InvalidAccessModel.swift in Sources */,
+				D871EC3C2416E1930053E76D /* HTTPMethodAPI.swift in Sources */,
 				D8D22E63241489B900F4AF4B /* MTDBAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

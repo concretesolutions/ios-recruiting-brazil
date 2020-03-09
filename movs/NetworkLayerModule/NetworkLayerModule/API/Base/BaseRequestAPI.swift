@@ -57,7 +57,6 @@ open class BaseRequestAPI {
         }
         
         var urlRequest = URLRequest(url: url, cachePolicy: api.cachePolicy, timeoutInterval: api.timeOut)
-        urlRequest.httpMethod = api.method.rawValue
         return urlRequest
     }
     

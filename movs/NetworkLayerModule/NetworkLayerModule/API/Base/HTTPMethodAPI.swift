@@ -1,13 +1,13 @@
 //
-//  HttpMethod.swift
+//  HTTPMethodAPI.swift
 //  NetworkLayerModule
 //
-//  Created by Marcos Felipe Souza on 07/03/20.
+//  Created by Marcos Felipe Souza on 09/03/20.
 //  Copyright © 2020 Marcos Felipe Souza. All rights reserved.
 //
 
 import Foundation
 
-public enum HTTPMethodAPI: String {
+enum HTTPMethodAPI: String {
     case get = "GET"
 }

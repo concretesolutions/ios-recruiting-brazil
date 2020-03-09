@@ -21,7 +21,6 @@ public enum MtdbAPIError: Error {
 
 public protocol MtdbAPI  {
     var token: String { get }
-    var method: HTTPMethodAPI { get }
     var path: String { get }
     var baseUrl: String { get }
     var headers: APIHeaders { get }
@@ -51,9 +50,6 @@ extension MtdbAPI {
         return 20
     }
     
-    public var method: HTTPMethodAPI {
-        return .get
-    }
     public var headers: APIHeaders {
         return APIHeaders()
     }

@@ -46,8 +46,8 @@ extension ListMovsService: ListMovsServiceType {
 extension ListMovsService {
     private func wrapperModels(from requestModel: MovsListRequestModel) -> MovsListViewData {
         var viewData = MovsListViewData()
-        requestModel.items.forEach { item in
-            viewData.items.append(MovsItemViewData(imageMovieURL: item.posterPath, isFavorite: false, movieName: item.name ?? ""))
+        requestModel.items?.forEach { item in
+            viewData.items.append(MovsItemViewData(imageMovieURL: item.posterPath ?? "/", isFavorite: false, movieName: item.name ?? ""))
         }
         return viewData
     }

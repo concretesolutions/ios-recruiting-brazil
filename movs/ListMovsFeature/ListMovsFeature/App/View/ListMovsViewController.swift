@@ -21,6 +21,8 @@ open class ListMovsViewController: BaseViewController {
     
     var presenter: ListMovsPresenter!
     
+    private let cellReuse = "GridCell"
+    
     private var stateUI: ListMovsHandleState? {
         didSet {
             self.stateHandleUI()
@@ -39,11 +41,26 @@ open class ListMovsViewController: BaseViewController {
         return search
     }()
     
-    lazy var successSearchView: MovsSearchView = {
-        let search = MovsSearchView()
-        search.translatesAutoresizingMaskIntoConstraints = false
-        return search
+    
+    lazy var gridView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 8, right: 10)
+        
+        let cellInLine: CGFloat = 2
+        let width = self.view.bounds.width / ( cellInLine + 1.0 )
+        let height = width * 1.5
+        
+        layout.itemSize = CGSize(width: width, height: height)
+
+        let collection = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
+        collection.register(ItemMovsCollectionViewCell.self, forCellWithReuseIdentifier: cellReuse)
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.dataSource = self
+        collection.backgroundColor = .clear
+        return collection
     }()
+    
     
     lazy var searchBarView: UISearchBar = {
         let view = UISearchBar()
@@ -72,6 +89,8 @@ open class ListMovsViewController: BaseViewController {
         view.stopAnimating()
         return view
     }()
+    
+    var viewData: MovsListViewData?
 
 }
 
@@ -81,8 +100,6 @@ extension ListMovsViewController {
         super.viewDidLoad()
         self.setupSearchBarView()
         self.setupLoadingView()
-        self.searchBarView.delegate = self
-                
         self.view.backgroundColor = Colors.whiteNormal
         self.navigationController?.navigationBar.barTintColor = Colors.yellowLight
         self.tabBarController?.tabBar.barTintColor = Colors.yellowLight
@@ -170,22 +187,12 @@ extension ListMovsViewController {
     }
     
     private func setupSuccessView(with viewData: MovsListViewData) {
-        if !self.view.subviews.contains(self.successSearchView) {
-            self.view.addSubview(self.successSearchView)
-            self.setCenterViewConstraint(view: self.successSearchView)            
-            self.successSearchView.model = viewData
+        if !self.view.subviews.contains(self.gridView) {
+            self.view.addSubview(self.gridView)
+            self.setCenterViewConstraint(view: self.gridView)
         }
-        
-        self.successSearchView.loadImage = { [weak self] viewData in
-            
-            var resultData: Data?
-            
-            self?.presenter.loadImage(with: viewData) { data in
-                resultData = data
-            }
-            return resultData
-        }
-        
+        self.viewData = viewData
+        self.gridView.reloadData()
     }
     
     private func setupLoadingView() {
@@ -215,14 +222,6 @@ extension ListMovsViewController {
     }
 }
 
-
-//MARK: - UISearchBarDelegate -
-extension ListMovsViewController: UISearchBarDelegate {
-    public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        print(searchBar.text)
-    }
-}
-
 //MARK: - UITextFieldDelegate -
 extension ListMovsViewController: UITextFieldDelegate {
     public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -230,3 +229,32 @@ extension ListMovsViewController: UITextFieldDelegate {
     }
 }
 
+//MARK: -Collection View DataSource -
+extension ListMovsViewController: UICollectionViewDataSource {
+    
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.viewData?.items.count ?? 0
+    }
+
+    
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let successCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellReuse, for: indexPath) as! ItemMovsCollectionViewCell
+        self.loadImage(collectionView, at: indexPath)
+        return successCell
+    }
+    
+    private func loadImage(_ collectionView: UICollectionView, at indexPath: IndexPath) {
+        if let itemViewData = self.viewData?.items[indexPath.item] {
+            self.presenter.loadImage(with: itemViewData) { [weak self] data in
+                if let data = data,
+                    let cell = collectionView.cellForItem(at: indexPath) as? ItemMovsCollectionViewCell {
+                    
+                    self?.viewData?.items[indexPath.item].imageMovieData = data
+                    cell.model = self?.viewData?.items[indexPath.item]
+                    cell.posterUIImageView.image = UIImage(data: data)
+                }
+            }
+        }
+    }
+    
+}

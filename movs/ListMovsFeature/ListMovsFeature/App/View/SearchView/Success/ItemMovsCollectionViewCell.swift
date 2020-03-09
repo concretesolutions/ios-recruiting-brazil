@@ -11,12 +11,30 @@ import AssertModule
 
 class ItemMovsCollectionViewCell: UICollectionViewCell {
         
-    var model: MovsItemViewData?
+    
+    var cancelProcessImage: (() -> Void)?
+    
+    var model: MovsItemViewData? {
+        didSet {
+            /// ajuste o local
+            if let data = model?.imageMovieData {
+                self.posterUIImageView.image = UIImage(data: data)
+            }
+            self.titleMovieLabel.text = model?.movieName
+                        
+            if model?.isFavorite ?? false {
+                favoriteButton.setImage(Assets.Images.favoriteFullIcon, for: .normal)
+            } else {
+                favoriteButton.setImage(Assets.Images.favoriteGrayIcon, for: .normal)
+            }
+        }
+    }
     
     var posterUIImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = Colors.blueDark
         return imageView
     }()
     
@@ -51,29 +69,21 @@ class ItemMovsCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        if let cancelProcess = self.cancelProcessImage {
+            cancelProcess()
+        }
     }
     
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.posterUIImageView.image = Assets.Images.searchIcon
         self.addSubview(self.posterUIImageView)
         self.addSubview(self.viewContent)
         
         self.viewContent.addSubview(self.titleMovieLabel)
         self.viewContent.addSubview(self.favoriteButton)
         self.makeConstraints()
-        
-        
-        
-        /// ajuste o local
-        self.titleMovieLabel.text = model?.movieName
-                   
-       if model?.isFavorite ?? false {
-           favoriteButton.setImage(Assets.Images.favoriteFullIcon, for: .normal)
-       } else {
-           favoriteButton.setImage(Assets.Images.favoriteGrayIcon, for: .normal)
-       }
+                
     }
     
     private func makeConstraints() {        
@@ -90,7 +100,7 @@ class ItemMovsCollectionViewCell: UICollectionViewCell {
             
             self.titleMovieLabel.topAnchor.constraint(equalTo: self.viewContent.topAnchor),
             self.titleMovieLabel.leadingAnchor.constraint(equalTo: self.viewContent.leadingAnchor),
-            self.titleMovieLabel.trailingAnchor.constraint(equalTo: self.viewContent.trailingAnchor),
+            self.titleMovieLabel.trailingAnchor.constraint(equalTo: self.favoriteButton.leadingAnchor, constant: -2),
             self.titleMovieLabel.bottomAnchor.constraint(equalTo: self.viewContent.bottomAnchor),
             
             self.favoriteButton.heightAnchor.constraint(equalToConstant: 40),

@@ -11,12 +11,12 @@ import Foundation
 
 // MARK: - MovsListRequest
 public struct MovsListRequestModel: Codable {
-    public let createdBy, movsListRequestDescription: String
-    public let favoriteCount: Int
-    public let id: String
-    public let items: [Item]
-    public let itemCount: Int
-    public let iso639_1, name: String
+    public let createdBy, movsListRequestDescription: String?
+    public let favoriteCount: Int?
+    public let id: String?
+    public let items: [Item]?
+    public let itemCount: Int?
+    public let iso639_1, name: String?
     public let posterPath: JSONNull?
 
     public enum CodingKeys: String, CodingKey {
@@ -34,16 +34,16 @@ public struct MovsListRequestModel: Codable {
 // MARK: - Item
 public struct Item: Codable {
     public let originalName: String?
-    public let id: Int
-    public let mediaType: String
+    public let id: Int?
+    public let mediaType: String?
     public let name: String?
-    public let popularity: Double
-    public let voteCount: Int
-    public let voteAverage: Double
+    public let popularity: Double?
+    public let voteCount: Int?
+    public let voteAverage: Double?
     public let firstAirDate: String?
-    public let posterPath: String
-    public let genreIDS: [Int]
-    public let originalLanguage, backdropPath, overview: String
+    public let posterPath: String?
+    public let genreIDS: [Int]?
+    public let originalLanguage, backdropPath, overview: String?
     public let originCountry: [String]?
     public let video: Bool?
     public let title, releaseDate, originalTitle: String?

@@ -12,5 +12,6 @@ struct InfoPListValues {
     struct API {
         static let key = "API_KEY"
         static let domain = "API_DOMAIN"
+        static let imageDomain = "API_IMAGE_DOMAIN"
     }
 }

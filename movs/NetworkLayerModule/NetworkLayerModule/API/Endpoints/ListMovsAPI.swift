@@ -24,5 +24,17 @@ extension ListMovsAPI {
         }
     }
     
+    public var baseUrl: String {
+        switch self {
+        case .downloadImage(let image):
+            let result: String = ReaderInfoPlist.value(for: InfoPListValues.API.imageDomain)
+            return result
+        default:
+            let result: String = ReaderInfoPlist.value(for: InfoPListValues.API.domain)
+            return result
+        }
+        
+    }
+    
 }
 

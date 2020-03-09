@@ -25,7 +25,9 @@ open class ListMovsRouter {
     public func makeUI() -> ListMovsViewController {
         self.view = ListMovsViewController()
         self.service = ListMovsService()
-        self.presenter = ListMovsPresenter(view: view, router: self, service: service)
+        self.presenter = ListMovsPresenter(view: self.view,
+                                           router: self,
+                                           service: self.service)
         self.view.presenter = self.presenter
         return view
     }
