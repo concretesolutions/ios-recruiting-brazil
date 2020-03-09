@@ -12,7 +12,7 @@ import AssertModule
 
 enum ListMovsHandleState {
     case loading(Bool)
-    case success
+    case success(MovsListViewData)
     case failure
     case emptySearch(String)
 }
@@ -40,12 +40,12 @@ open class ListMovsViewController: BaseViewController {
     }()
     
     lazy var successSearchView: MovsSearchView = {
-        let search = MovsSearchView(model: 3)
+        let search = MovsSearchView()
         search.translatesAutoresizingMaskIntoConstraints = false
         return search
     }()
     
-    let searchBarView: UISearchBar = {
+    lazy var searchBarView: UISearchBar = {
         let view = UISearchBar()
         view.barTintColor = Colors.yellowLight
         view.searchTextField.backgroundColor = Colors.yellowDark
@@ -53,8 +53,9 @@ open class ListMovsViewController: BaseViewController {
         view.layer.borderColor = Colors.yellowLight.cgColor
         view.placeholder = "Search"
         view.image(for: .search, state: .normal)
-        
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.searchTextField.delegate = self
+                
         return view
     }()
     
@@ -82,6 +83,7 @@ extension ListMovsViewController {
         self.setupLoadingView()
         self.searchBarView.delegate = self
                 
+        self.view.backgroundColor = Colors.whiteNormal
         self.navigationController?.navigationBar.barTintColor = Colors.yellowLight
         self.tabBarController?.tabBar.barTintColor = Colors.yellowLight
     }
@@ -99,8 +101,8 @@ extension ListMovsViewController {
         switch state {
         case .loading(let isShowing):
             isShowing ? self.loadingView.startAnimating() : self.loadingView.stopAnimating()
-        case .success:
-            self.setupSuccessView()
+        case .success(let successModel):
+            self.setupSuccessView(with: successModel)
         case .failure:
             self.setupErrorView()
         case .emptySearch(let message):
@@ -112,6 +114,12 @@ extension ListMovsViewController {
 
 //MARK: -Action by Presenter-
 extension ListMovsViewController: ListMovsView {
+    
+    
+    func showSuccess(viewData: MovsListViewData) {
+        self.stateUI = .success(viewData)
+    }
+    
     func showEmptyCard(message: String) {
         self.stateUI = .emptySearch(message)
     }
@@ -141,12 +149,6 @@ extension ListMovsViewController: ListMovsView {
                                         in: Bundle.main,
                                         compatibleWith: nil)
     }
-    
-    func loadViewController() {
-        self.view.backgroundColor = Colors.whiteNormal
-        //self.stateUI = .emptySearch("Batman é melhor que Bruce Waynner")        
-        self.stateUI = .success
-    }
 }
 
 //MARK: -Setup View-
@@ -157,7 +159,7 @@ extension ListMovsViewController {
             self.view.addSubview(self.emptySearchView)
             self.setCenterViewConstraint(view: self.emptySearchView)
         }
-        self.emptySearchView.setMessageNotFound(message)
+        self.emptySearchView.message = message
     }
     
     private func setupErrorView() {
@@ -167,11 +169,23 @@ extension ListMovsViewController {
         }
     }
     
-    private func setupSuccessView() {
+    private func setupSuccessView(with viewData: MovsListViewData) {
         if !self.view.subviews.contains(self.successSearchView) {
             self.view.addSubview(self.successSearchView)
-            self.setCenterViewConstraint(view: self.successSearchView)
+            self.setCenterViewConstraint(view: self.successSearchView)            
+            self.successSearchView.model = viewData
         }
+        
+        self.successSearchView.loadImage = { [weak self] viewData in
+            
+            var resultData: Data?
+            
+            self?.presenter.loadImage(with: viewData) { data in
+                resultData = data
+            }
+            return resultData
+        }
+        
     }
     
     private func setupLoadingView() {
@@ -187,6 +201,7 @@ extension ListMovsViewController {
             self.searchBarView.topAnchor.constraint(equalTo: self.topAnchorSafeArea),
             self.searchBarView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.searchBarView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.searchBarView.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
     
@@ -204,6 +219,13 @@ extension ListMovsViewController {
 //MARK: - UISearchBarDelegate -
 extension ListMovsViewController: UISearchBarDelegate {
     public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        print(searchBar.text)
+    }
+}
+
+//MARK: - UITextFieldDelegate -
+extension ListMovsViewController: UITextFieldDelegate {
+    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print(searchBar.text)
     }
 }

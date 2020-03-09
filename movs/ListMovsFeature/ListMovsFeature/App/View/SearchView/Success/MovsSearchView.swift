@@ -11,16 +11,9 @@ import UIKit
 class MovsSearchView: UIView {
     
     private let cellReuse = "Cell"
-    var model = 0
-
-    init(model: Int) {
-        self.model = model
-        super.init(frame: .zero)
-    }
+    var model: MovsListViewData?
+    var loadImage: ((_ viewData: MovsItemViewData) -> Data?)?
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     lazy var gridView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -69,13 +62,20 @@ extension MovsSearchView: UICollectionViewDelegateFlowLayout {
 extension MovsSearchView: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.model
+        return self.model?.items.count ?? 0
     }
 
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let successCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellReuse, for: indexPath) as! ItemMovsCollectionViewCell
-        successCell.model = indexPath.item
+        
+        if let itemViewData = self.model?.items[indexPath.item] {
+            successCell.model = itemViewData
+            if let data: Data = self.loadImage?(itemViewData) {
+                successCell.posterUIImageView.image = UIImage(data: data)
+            }
+        }
+        
         return successCell
     }
     

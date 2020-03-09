@@ -9,9 +9,19 @@
 import AssertModule
 
 class EmptySearchView: BaseSearchView {
+    
+    let messageDefault = "A busca por '%@' não resultou em nenhum resultado."
+    var message: String = "" {
+        didSet {
+            let message = String(format: messageDefault, self.message)
+            setMessageNotFound(message)
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         baseImageView.image = Assets.Images.searchIcon?.withRenderingMode(.alwaysTemplate)
+        
     }
 }
 

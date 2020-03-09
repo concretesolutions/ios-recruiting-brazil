@@ -6,8 +6,10 @@
 //  Copyright © 2020 Marcos Felipe Souza. All rights reserved.
 //
 
-import Foundation
+import NetworkLayerModule
 
 protocol ListMovsServiceType: AnyObject {
-    func fetchDatas()
+    func fetchDatas(typeData: ListMovsDataType, handler completion: @escaping (Result<MovsListViewData, MtdbAPIError>) -> Void )
+    func loadImage(with url: String, completion: @escaping (Result<Data, MtdbAPIError>) -> Void )
+    func stopRequest()
 }

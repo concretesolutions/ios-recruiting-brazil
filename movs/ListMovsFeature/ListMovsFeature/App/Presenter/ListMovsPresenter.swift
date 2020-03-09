@@ -6,7 +6,7 @@
 //  Copyright © 2020 Marcos Felipe Souza. All rights reserved.
 //
 
-import Foundation
+import NetworkLayerModule
 
 class ListMovsPresenter {
     weak var view: ListMovsView!
@@ -24,9 +24,38 @@ class ListMovsPresenter {
 //MARK: - Binding UI -
 extension ListMovsPresenter {
     func loading() {
-        self.view.loadViewController()
+        
         self.view.setTitle("Movies")
-        self.service.fetchDatas()
+        self.view.showLoading()
+        self.service.fetchDatas(typeData: .cartoon) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let success):
+                    self?.view.showSuccess(viewData: success)
+                case .failure(_):
+                    self?.view.showErrorCard()
+                }
+                self?.view.hideLoading()
+            }
+        }
+        
+    }
+    
+    func loadImage(with viewData: MovsItemViewData, completion: @escaping (_ data: Data?) -> Void ) {
+        self.service.loadImage(with: viewData.imageMovieURL) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    completion(data)
+                case .failure(_):
+                    completion(nil)
+                }
+            }
+        }
+    }
+    
+    func stopLoad() {
+        self.service.stopRequest()
     }
     
     func tapOnButton(){

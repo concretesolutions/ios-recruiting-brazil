@@ -10,10 +10,10 @@ import Foundation
 import UIKit
 
 protocol ListMovsView: AnyObject {
-    func loadViewController()
     func setTitle(_ text: String)
     func setItemBar(image: UIImage?)
     func showEmptyCard(message: String)
+    func showSuccess(viewData: MovsListViewData)
     func showErrorCard()
     func showLoading()
     func hideLoading()

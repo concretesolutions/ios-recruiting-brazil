@@ -11,7 +11,7 @@ import AssertModule
 
 class ItemMovsCollectionViewCell: UICollectionViewCell {
         
-    var model: Int = 0
+    var model: MovsItemViewData?
     
     var posterUIImageView: UIImageView = {
         let imageView = UIImageView()
@@ -64,13 +64,16 @@ class ItemMovsCollectionViewCell: UICollectionViewCell {
         self.viewContent.addSubview(self.favoriteButton)
         self.makeConstraints()
         
-        if model % 2 == 0 {
-            favoriteButton.setImage(Assets.Images.favoriteFullIcon, for: .normal)
-        } else {
-            favoriteButton.setImage(Assets.Images.favoriteGrayIcon, for: .highlighted)
-        }
         
         
+        /// ajuste o local
+        self.titleMovieLabel.text = model?.movieName
+                   
+       if model?.isFavorite ?? false {
+           favoriteButton.setImage(Assets.Images.favoriteFullIcon, for: .normal)
+       } else {
+           favoriteButton.setImage(Assets.Images.favoriteGrayIcon, for: .normal)
+       }
     }
     
     private func makeConstraints() {        

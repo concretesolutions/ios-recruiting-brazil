@@ -11,7 +11,6 @@ import AssertModule
 
 class BaseSearchView: UIView {
 
-    let messageDefault = "A busca por '%@' não resultou em nenhum resultado."
     
     let messageLabel: UILabel = {
         let label = UILabel()
@@ -32,7 +31,7 @@ class BaseSearchView: UIView {
     }()
     
     func setMessageNotFound(_ message: String) {
-        self.messageLabel.text = String(format: messageDefault, message)
+        self.messageLabel.text = message
     }
 }
 
