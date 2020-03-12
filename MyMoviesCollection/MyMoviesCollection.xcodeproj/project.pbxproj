@@ -10,9 +10,9 @@
 		A742422B2419D1A300AE94FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A742422A2419D1A300AE94FE /* AppDelegate.swift */; };
 		A742422D2419D1A300AE94FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A742422C2419D1A300AE94FE /* SceneDelegate.swift */; };
 		A742422F2419D1A300AE94FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A742422E2419D1A300AE94FE /* ViewController.swift */; };
-		A74242322419D1A300AE94FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74242302419D1A300AE94FE /* Main.storyboard */; };
 		A74242342419D1AA00AE94FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A74242332419D1AA00AE94FE /* Assets.xcassets */; };
 		A74242372419D1AA00AE94FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74242352419D1AA00AE94FE /* LaunchScreen.storyboard */; };
+		A74242452419DD0C00AE94FE /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74242442419DD0C00AE94FE /* RootViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,10 +20,10 @@
 		A742422A2419D1A300AE94FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A742422C2419D1A300AE94FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A742422E2419D1A300AE94FE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A74242312419D1A300AE94FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A74242332419D1AA00AE94FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A74242362419D1AA00AE94FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A74242382419D1AA00AE94FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A74242442419DD0C00AE94FE /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +56,63 @@
 		A74242292419D1A300AE94FE /* MyMoviesCollection */ = {
 			isa = PBXGroup;
 			children = (
+				A74242412419DC0000AE94FE /* Shared */,
+				A742423E2419DAB500AE94FE /* Scenes */,
 				A742422A2419D1A300AE94FE /* AppDelegate.swift */,
 				A742422C2419D1A300AE94FE /* SceneDelegate.swift */,
 				A742422E2419D1A300AE94FE /* ViewController.swift */,
-				A74242302419D1A300AE94FE /* Main.storyboard */,
 				A74242332419D1AA00AE94FE /* Assets.xcassets */,
 				A74242352419D1AA00AE94FE /* LaunchScreen.storyboard */,
 				A74242382419D1AA00AE94FE /* Info.plist */,
 			);
 			path = MyMoviesCollection;
+			sourceTree = "<group>";
+		};
+		A742423E2419DAB500AE94FE /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				A74242402419DB2500AE94FE /* Favorites */,
+				A742423F2419DAC100AE94FE /* MoviesList */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		A742423F2419DAC100AE94FE /* MoviesList */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MoviesList;
+			sourceTree = "<group>";
+		};
+		A74242402419DB2500AE94FE /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		A74242412419DC0000AE94FE /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				A74242432419DCA000AE94FE /* Model */,
+				A74242422419DC1E00AE94FE /* View */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		A74242422419DC1E00AE94FE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A74242442419DD0C00AE94FE /* RootViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A74242432419DCA000AE94FE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +175,6 @@
 			files = (
 				A74242372419D1AA00AE94FE /* LaunchScreen.storyboard in Resources */,
 				A74242342419D1AA00AE94FE /* Assets.xcassets in Resources */,
-				A74242322419D1A300AE94FE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +187,7 @@
 			files = (
 				A742422F2419D1A300AE94FE /* ViewController.swift in Sources */,
 				A742422B2419D1A300AE94FE /* AppDelegate.swift in Sources */,
+				A74242452419DD0C00AE94FE /* RootViewController.swift in Sources */,
 				A742422D2419D1A300AE94FE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,14 +195,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A74242302419D1A300AE94FE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A74242312419D1A300AE94FE /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A74242352419D1AA00AE94FE /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -287,6 +327,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M2Z8KTGT88;
 				INFOPLIST_FILE = MyMoviesCollection/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -294,7 +335,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.merli.MyMoviesCollection;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -305,6 +346,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M2Z8KTGT88;
 				INFOPLIST_FILE = MyMoviesCollection/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -312,7 +354,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.merli.MyMoviesCollection;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
