@@ -20,15 +20,13 @@ class MainTabBarViewController: UITabBarController {
     // MARK: Class functions
     
     private func configView() {
-        let vc1 = UIViewController()
-        vc1.view.backgroundColor = .red
+        let moviesCollectionViewController = MoviesCollectionCollectionViewController()
         let tabBar1 = UITabBarItem(tabBarSystemItem: .downloads, tag: 0)
-        vc1.tabBarItem = tabBar1
-        let vc2 = UIViewController()
-        vc2.view.backgroundColor = .blue
+        moviesCollectionViewController.tabBarItem = tabBar1
+        let favoritesTableViewController = FavoritesTableViewController()
         let tabBar2 = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
-        vc2.tabBarItem = tabBar2
-        self.viewControllers = [vc1, vc2]
+        favoritesTableViewController.tabBarItem = tabBar2
+        self.viewControllers = [moviesCollectionViewController, favoritesTableViewController]
     }
     
 }
