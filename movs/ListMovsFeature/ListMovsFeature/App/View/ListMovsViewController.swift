@@ -225,7 +225,7 @@ extension ListMovsViewController {
 //MARK: - UITextFieldDelegate -
 extension ListMovsViewController: UITextFieldDelegate {
     public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print(searchBar.text)
+//        print(searchBar.text)
     }
 }
 
@@ -239,22 +239,11 @@ extension ListMovsViewController: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let successCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellReuse, for: indexPath) as! ItemMovsCollectionViewCell
-        self.loadImage(collectionView, at: indexPath)
+        if var itemViewData = self.viewData?.items[indexPath.item] {
+            itemViewData.imageMovieURLAbsolute = self.presenter.urlForLoad(with: itemViewData)
+            successCell.model = itemViewData
+        }
+        
         return successCell
     }
-    
-    private func loadImage(_ collectionView: UICollectionView, at indexPath: IndexPath) {
-        if let itemViewData = self.viewData?.items[indexPath.item] {
-            self.presenter.loadImage(with: itemViewData) { [weak self] data in
-                if let data = data,
-                    let cell = collectionView.cellForItem(at: indexPath) as? ItemMovsCollectionViewCell {
-                    
-                    self?.viewData?.items[indexPath.item].imageMovieData = data
-                    cell.model = self?.viewData?.items[indexPath.item]
-                    cell.posterUIImageView.image = UIImage(data: data)
-                }
-            }
-        }
-    }
-    
 }

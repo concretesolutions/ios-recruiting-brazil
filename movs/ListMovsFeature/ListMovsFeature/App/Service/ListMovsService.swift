@@ -14,6 +14,10 @@ class ListMovsService {
 
 //MARK: - Implementation Protocol -
 extension ListMovsService: ListMovsServiceType {
+    func absoluteUrlImage(with url: String) -> String {
+        return ListMovsAPI.downloadImage(url).absoluteURL.absoluteString
+    }
+    
     func fetchDatas(typeData: ListMovsDataType,
                     handler completion: @escaping (Result<MovsListViewData, MtdbAPIError>) -> Void ) {
         
@@ -30,13 +34,6 @@ extension ListMovsService: ListMovsServiceType {
         }
     }
     
-    func loadImage(with url: String, completion: @escaping (Result<Data, MtdbAPIError>) -> Void ) {
-        let api = ListMovsAPI.downloadImage(url)
-        self.base = BaseRequestAPI(api: api, completion: { result in
-            completion(result)
-        })
-    }
-    
     func stopRequest() {
         self.base?.stop()
     }
@@ -47,7 +44,10 @@ extension ListMovsService {
     private func wrapperModels(from requestModel: MovsListRequestModel) -> MovsListViewData {
         var viewData = MovsListViewData()
         requestModel.items?.forEach { item in
-            viewData.items.append(MovsItemViewData(imageMovieURL: item.posterPath ?? "/", isFavorite: false, movieName: item.name ?? ""))
+            viewData.items.append(
+                MovsItemViewData(imageMovieURL: item.posterPath ?? "/",
+                                 isFavorite: false,
+                                 movieName: (item.originalName ?? item.originalTitle) ?? ""))
         }
         return viewData
     }

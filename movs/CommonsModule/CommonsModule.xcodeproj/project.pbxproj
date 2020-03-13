@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		28416080240DF9B800C239CC /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2841607F240DF9B800C239CC /* UIViewController+Extensions.swift */; };
+		D817DA3C241C0A54006CB722 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D817DA3B241C0A54006CB722 /* ImageCache.swift */; };
+		D817DA41241C18A2006CB722 /* Data+PrettyPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D817DA40241C18A2006CB722 /* Data+PrettyPrint.swift */; };
 		D86306EE240DBE2F00961B3A /* CommonsModule.h in Headers */ = {isa = PBXBuildFile; fileRef = D86306EC240DBE2F00961B3A /* CommonsModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D86306F7240DBE4F00961B3A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86306F5240DBE4F00961B3A /* BaseViewController.swift */; };
 		D86306F8240DBE4F00961B3A /* StateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86306F6240DBE4F00961B3A /* StateViewController.swift */; };
@@ -15,6 +17,8 @@
 
 /* Begin PBXFileReference section */
 		2841607F240DF9B800C239CC /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		D817DA3B241C0A54006CB722 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		D817DA40241C18A2006CB722 /* Data+PrettyPrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+PrettyPrint.swift"; sourceTree = "<group>"; };
 		D86306E9240DBE2F00961B3A /* CommonsModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonsModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86306EC240DBE2F00961B3A /* CommonsModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonsModule.h; sourceTree = "<group>"; };
 		D86306ED240DBE2F00961B3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -37,8 +41,17 @@
 			isa = PBXGroup;
 			children = (
 				2841607F240DF9B800C239CC /* UIViewController+Extensions.swift */,
+				D817DA40241C18A2006CB722 /* Data+PrettyPrint.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D817DA3A241C0A40006CB722 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				D817DA3B241C0A54006CB722 /* ImageCache.swift */,
+			);
+			path = Cache;
 			sourceTree = "<group>";
 		};
 		D86306DF240DBE2F00961B3A = {
@@ -60,6 +73,7 @@
 		D86306EB240DBE2F00961B3A /* CommonsModule */ = {
 			isa = PBXGroup;
 			children = (
+				D817DA3A241C0A40006CB722 /* Cache */,
 				2841607E240DF99100C239CC /* Extensions */,
 				D86306F4240DBE4F00961B3A /* UI */,
 				D86306EC240DBE2F00961B3A /* CommonsModule.h */,
@@ -158,6 +172,8 @@
 			files = (
 				D86306F8240DBE4F00961B3A /* StateViewController.swift in Sources */,
 				28416080240DF9B800C239CC /* UIViewController+Extensions.swift in Sources */,
+				D817DA3C241C0A54006CB722 /* ImageCache.swift in Sources */,
+				D817DA41241C18A2006CB722 /* Data+PrettyPrint.swift in Sources */,
 				D86306F7240DBE4F00961B3A /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

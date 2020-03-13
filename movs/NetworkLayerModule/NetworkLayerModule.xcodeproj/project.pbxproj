@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D817DA3F241C0D32006CB722 /* NLLoadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D817DA3E241C0D32006CB722 /* NLLoadImage.swift */; };
+		D817DA44241C18BB006CB722 /* CommonsModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D817DA43241C18BB006CB722 /* CommonsModule.framework */; };
+		D817DA45241C18BB006CB722 /* CommonsModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D817DA43241C18BB006CB722 /* CommonsModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D871EC3C2416E1930053E76D /* HTTPMethodAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D871EC3B2416E1930053E76D /* HTTPMethodAPI.swift */; };
 		D8D22E4C241488BB00F4AF4B /* NetworkLayerModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D22E42241488BB00F4AF4B /* NetworkLayerModule.framework */; };
 		D8D22E51241488BB00F4AF4B /* NetworkLayerModuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D22E50241488BB00F4AF4B /* NetworkLayerModuleTests.swift */; };
@@ -33,7 +36,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D817DA46241C18BB006CB722 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D817DA45241C18BB006CB722 /* CommonsModule.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		D817DA3E241C0D32006CB722 /* NLLoadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NLLoadImage.swift; sourceTree = "<group>"; };
+		D817DA43241C18BB006CB722 /* CommonsModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CommonsModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D871EC3B2416E1930053E76D /* HTTPMethodAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethodAPI.swift; sourceTree = "<group>"; };
 		D8D22E42241488BB00F4AF4B /* NetworkLayerModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkLayerModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D22E45241488BB00F4AF4B /* NetworkLayerModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkLayerModule.h; sourceTree = "<group>"; };
@@ -58,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D817DA44241C18BB006CB722 /* CommonsModule.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +92,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D817DA3D241C0D15006CB722 /* LoadImage */ = {
+			isa = PBXGroup;
+			children = (
+				D817DA3E241C0D32006CB722 /* NLLoadImage.swift */,
+			);
+			path = LoadImage;
+			sourceTree = "<group>";
+		};
+		D817DA42241C18BB006CB722 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D817DA43241C18BB006CB722 /* CommonsModule.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D8D22E38241488BB00F4AF4B = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +115,7 @@
 				D8D22E44241488BB00F4AF4B /* NetworkLayerModule */,
 				D8D22E4F241488BB00F4AF4B /* NetworkLayerModuleTests */,
 				D8D22E43241488BB00F4AF4B /* Products */,
+				D817DA42241C18BB006CB722 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,6 +153,7 @@
 		D8D22E5C241488E000F4AF4B /* API */ = {
 			isa = PBXGroup;
 			children = (
+				D817DA3D241C0D15006CB722 /* LoadImage */,
 				D8D22E7324148EA100F4AF4B /* Base */,
 				D8D22E7224148E9300F4AF4B /* Endpoints */,
 			);
@@ -189,6 +227,7 @@
 				D8D22E3E241488BB00F4AF4B /* Sources */,
 				D8D22E3F241488BB00F4AF4B /* Frameworks */,
 				D8D22E40241488BB00F4AF4B /* Resources */,
+				D817DA46241C18BB006CB722 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -288,6 +327,7 @@
 				D8D22E812414A0A100F4AF4B /* InvalidAccessModel.swift in Sources */,
 				D871EC3C2416E1930053E76D /* HTTPMethodAPI.swift in Sources */,
 				D8D22E63241489B900F4AF4B /* MTDBAPI.swift in Sources */,
+				D817DA3F241C0D32006CB722 /* NLLoadImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,7 +484,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = NetworkLayerModule/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -471,7 +511,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = NetworkLayerModule/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

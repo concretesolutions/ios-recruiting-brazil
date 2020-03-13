@@ -7,9 +7,7 @@
 //
 
 import Foundation
-
-///Temporary Global Cache Memory.
-var cacheGlobal: [String: Data] = [:]
+import CommonsModule
 
 open class BaseRequestAPI {
     
@@ -29,16 +27,19 @@ open class BaseRequestAPI {
     
     @discardableResult
     public init(api: MtdbAPI, completion: @escaping (Result<Data, MtdbAPIError>) -> Void) {
-        
-        let hasCache = cacheGlobal.contains(where: { $0.key == api.absoluteURL.absoluteString })
-        if  hasCache {
-            if let dataInCache = cacheGlobal[api.absoluteURL.absoluteString] {
-                completion(.success(dataInCache))
-                return
-            }
+        guard let urlRequest = buildUrlRequest(api: api) else {
+            completion(.failure(.baseUrlInvalid))
+            return
         }
         
-        self.requestData(api: api, completion: completion)
+        self.dataTask = self.urlSession.dataTask(with: urlRequest, completionHandler: { (data, urlResponse, error) in
+            if let data = data {
+                completion(.success(data))
+            } else {
+                completion(.failure(.emptyData))
+            }
+        })
+        self.dataTask?.resume()
     }
     
     private func buildUrlRequest(api: MtdbAPI) -> URLRequest? {
@@ -56,34 +57,20 @@ open class BaseRequestAPI {
             return nil
         }
         
-        var urlRequest = URLRequest(url: url, cachePolicy: api.cachePolicy, timeoutInterval: api.timeOut)
+        let urlRequest = URLRequest(url: url, cachePolicy: api.cachePolicy, timeoutInterval: api.timeOut)
         return urlRequest
     }
     
-    private func requestData(api: MtdbAPI, completion: @escaping (Result<Data, MtdbAPIError>) -> Void) {
-        guard let urlRequest = buildUrlRequest(api: api) else {
-            completion(.failure(.baseUrlInvalid))
-            return
-        }
-        
-        self.dataTask = self.urlSession.dataTask(with: urlRequest, completionHandler: { (data, urlResponse, error) in
-            if let data = data {
-                cacheGlobal[api.absoluteURL.absoluteString] = data
-                completion(.success(data))
-            } else {
-                completion(.failure(.emptyData))
-            }
-        })
-        self.dataTask?.resume()
-    }
-    
     private func requestJson<Model: Decodable>(api: MtdbAPI, completion: @escaping (Result<Model, MtdbAPIError>) -> Void) {
+        
         guard let urlRequest = buildUrlRequest(api: api) else {
             completion(.failure(.baseUrlInvalid))
             return
         }
         
+        self.log(request: urlRequest)
         self.dataTask = self.urlSession.dataTask(with: urlRequest) { (data, urlResponse, error) in
+            self.log(data: data, response: urlResponse as? HTTPURLResponse, error: error)
             if let httpResponse = urlResponse as? HTTPURLResponse {
                 print("error \(httpResponse.statusCode)")
             }
@@ -118,4 +105,72 @@ open class BaseRequestAPI {
         }
         dataTask?.resume()
     }
+}
+
+//MARK: Loggin
+extension BaseRequestAPI {
+    
+    func log(request: URLRequest){
+        
+        let urlString = request.url?.absoluteString ?? ""
+        let components = NSURLComponents(string: urlString)
+        
+        let method = request.httpMethod != nil ? "\(request.httpMethod!)": ""
+        let path = "\(components?.path ?? "")"
+        let query = "\(components?.query ?? "")"
+        let host = "\(components?.host ?? "")"
+        
+        var requestLog = "\n---------- OUT ---------->\n"
+        requestLog += "\(urlString)"
+        requestLog += "\n\n"
+        requestLog += "\(method) \(path)?\(query) HTTP/1.1\n"
+        requestLog += "Host: \(host)\n"
+        for (key,value) in request.allHTTPHeaderFields ?? [:] {
+            requestLog += "\(key): \(value)\n"
+        }
+        if let body = request.httpBody{
+                        
+            let bodyString = NSString(data: body, encoding: String.Encoding.utf8.rawValue) ?? "Can't render body; not utf8 encoded";
+            requestLog += "\n\(body.prettyPrintedJSONString)\n"
+        }
+        
+        requestLog += "\n------------------------->\n";
+        print(requestLog)
+    }
+    
+    func log(data: Data?, response: HTTPURLResponse?, error: Error?){
+        
+        let urlString = response?.url?.absoluteString
+        let components = NSURLComponents(string: urlString ?? "")
+        
+        let path = "\(components?.path ?? "")"
+        let query = "\(components?.query ?? "")"
+        
+        var responseLog = "\n<---------- IN ----------\n"
+        if let urlString = urlString {
+            responseLog += "\(urlString)"
+            responseLog += "\n\n"
+        }
+        
+        if let statusCode =  response?.statusCode{
+            responseLog += "HTTP \(statusCode) \(path)?\(query)\n"
+        }
+        if let host = components?.host{
+            responseLog += "Host: \(host)\n"
+        }
+        for (key,value) in response?.allHeaderFields ?? [:] {
+            responseLog += "\(key): \(value)\n"
+        }
+        if let body = data{
+            let bodyString = NSString(data: body, encoding: String.Encoding.utf8.rawValue) ?? "Can't render body; not utf8 encoded";
+            responseLog += "\n\(bodyString)\n"
+        }
+        if let error = error{
+            responseLog += "\nError: \(error.localizedDescription)\n"
+        }
+        
+        responseLog += "<------------------------\n";
+        print(responseLog)
+    }
+    
 }

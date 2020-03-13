@@ -24,7 +24,6 @@ class ListMovsPresenter {
 //MARK: - Binding UI -
 extension ListMovsPresenter {
     func loading() {
-        
         self.view.setTitle("Movies")
         self.view.showLoading()
         self.service.fetchDatas(typeData: .cartoon) { [weak self] result in
@@ -41,17 +40,8 @@ extension ListMovsPresenter {
         
     }
     
-    func loadImage(with viewData: MovsItemViewData, completion: @escaping (_ data: Data?) -> Void ) {
-        self.service.loadImage(with: viewData.imageMovieURL) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let data):
-                    completion(data)
-                case .failure(_):
-                    completion(nil)
-                }
-            }
-        }
+    func urlForLoad(with viewData: MovsItemViewData) -> String {
+        return self.service.absoluteUrlImage(with: viewData.imageMovieURL)
     }
     
     func stopLoad() {

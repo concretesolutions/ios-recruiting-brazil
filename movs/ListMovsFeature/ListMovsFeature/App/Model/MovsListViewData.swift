@@ -15,7 +15,7 @@ public struct MovsListViewData {
 
 public struct MovsItemViewData {
     public var imageMovieURL: String = ""
-    public var imageMovieData: Data = Data()
+    public var imageMovieURLAbsolute: String = ""
     public var isFavorite: Bool = false
     public var movieName: String = "No name"
 }
