@@ -10,6 +10,8 @@ import UIKit
 
 class MoviesCollectionViewCell: UICollectionViewCell {
     
+    // MARK: Properties
+    
     private lazy var bannerView: UIImageView = {
        let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -27,23 +29,42 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .center
-        label.textColor = UIColor(red: 45.0 / 255.0, green: 48.0 / 255.0, blue: 71.0 / 255.0, alpha: 1.0)
+        label.textColor = ColorSystem.cYellowDark
+        label.numberOfLines = 2
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     private lazy var favoriteButton: UIButton = {
        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        let icon = #imageLiteral(resourceName: "favorite_gray_icon")
+        button.setImage(icon, for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
+    
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         addViews()
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+      super.prepareForReuse()
+      
+      setCell(with: .none)
+    }
 
-    func addViews(){
-        backgroundColor = .lightGray
+    // MARK: - Class Functions
+    
+    private func addViews(){
+        backgroundColor = ColorSystem.cBlueDark
         contentView.addSubview(bannerView)
         contentView.addSubview(infosView)
         infosView.addSubview(titleText)
@@ -60,7 +81,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         infosView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
         titleText.topAnchor.constraint(equalTo: infosView.topAnchor, constant: 5).isActive = true
-        titleText.leadingAnchor.constraint(equalTo: infosView.leadingAnchor).isActive = true
+        titleText.leadingAnchor.constraint(equalTo: infosView.leadingAnchor, constant: 3).isActive = true
         titleText.trailingAnchor.constraint(equalTo: infosView.trailingAnchor, constant: -30).isActive = true
         titleText.bottomAnchor.constraint(equalTo: infosView.bottomAnchor, constant: -5).isActive = true
         
@@ -70,9 +91,14 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         favoriteButton.heightAnchor.constraint(equalToConstant: 35.0).isActive = true
 
     }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    
+    public func setCell(with movie: Movie?) {
+        if let movie = movie {
+            titleText.text = movie.title
+        } else {
+            //start loading and set placeholders
+        }
+        
     }
     
 }

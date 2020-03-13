@@ -19,8 +19,8 @@ class MainTabBarViewController: UITabBarController {
     // MARK: Class functions
     
     private func configView() {
-        self.tabBar.barTintColor = UIColor(red: 247.0 / 255.0, green: 206.0 / 255.0, blue: 91.0 / 255.0, alpha: 1.0)
-        self.tabBar.tintColor = UIColor(red: 45.0 / 255.0, green: 48.0 / 255.0, blue: 71.0 / 255.0, alpha: 1.0)
+        self.tabBar.barTintColor = ColorSystem.cYellowDark
+        self.tabBar.tintColor = ColorSystem.cBlueDark
         let moviesCollectionViewController = MoviesCollectionCollectionViewController(collectionViewLayout: MoviesListFlowLayout())
         let tabBar1 = UITabBarItem(title: "Movies", image: #imageLiteral(resourceName: "list_icon"), tag: 0)
         moviesCollectionViewController.tabBarItem = tabBar1

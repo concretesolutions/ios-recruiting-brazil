@@ -51,6 +51,12 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MoviesCollectionViewCell
+        guard let collectionViewModel = viewModel else { return cell }
+        if collectionViewModel.isLoadingCell(for: indexPath) {
+            cell.setCell(with: .none)
+        } else {
+            cell.setCell(with: collectionViewModel.movie(at: indexPath.row))
+        }
         return cell
     }
     

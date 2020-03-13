@@ -19,7 +19,7 @@ final class MoviesViewModel {
     private var total = 0
     private var isFetchInProgress = false
     
-    let client = TheMovieDBClient()
+    let client = MoviesAPIClient()
     
     init(delegate: MoviesViewModelDelegate) {
         self.delegate = delegate
@@ -35,6 +35,10 @@ final class MoviesViewModel {
     
     func movie(at index: Int) -> Movie {
         return movies[index]
+    }
+    
+    public func isLoadingCell(for indexPath: IndexPath) -> Bool {
+        return indexPath.row >= currentCount
     }
     
     func fetchPopularMovies() {

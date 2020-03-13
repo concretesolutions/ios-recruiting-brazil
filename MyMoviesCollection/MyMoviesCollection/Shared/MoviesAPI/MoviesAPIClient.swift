@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class TheMovieDBClient {
+final class MoviesAPIClient {
     private lazy var corpoURL: URL = {
         return URL(string: "https://api.themoviedb.org/3/")!
     }()
