@@ -14,7 +14,6 @@ class MainTabBarViewController: UITabBarController {
         super.viewDidLoad()
 
         configView()
-        
     }
 
     // MARK: Class functions
