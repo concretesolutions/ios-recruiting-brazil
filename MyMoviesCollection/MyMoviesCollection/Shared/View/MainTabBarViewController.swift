@@ -20,7 +20,7 @@ class MainTabBarViewController: UITabBarController {
     // MARK: Class functions
     
     private func configView() {
-        let moviesCollectionViewController = MoviesCollectionCollectionViewController()
+        let moviesCollectionViewController = MoviesCollectionCollectionViewController(collectionViewLayout: MoviesListFlowLayout())
         let tabBar1 = UITabBarItem(tabBarSystemItem: .downloads, tag: 0)
         moviesCollectionViewController.tabBarItem = tabBar1
         let favoritesTableViewController = FavoritesTableViewController()

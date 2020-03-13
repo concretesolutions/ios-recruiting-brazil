@@ -10,8 +10,12 @@ import UIKit
 
 class FavoritesTableViewController: UITableViewController {
 
+    private let reuseIdentifier = "favcell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.register(FavoritesTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
 
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -28,6 +32,11 @@ class FavoritesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return 4
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! FavoritesTableViewCell
+        return cell
     }
 
 }
