@@ -17,5 +17,6 @@ protocol ListMovsView: AnyObject {
     func showErrorCard()
     func showLoading()
     func hideLoading()
+    func reloadData(with viewData: MovsListViewData)
     //func showSuccessCard(viewData: T)
 }

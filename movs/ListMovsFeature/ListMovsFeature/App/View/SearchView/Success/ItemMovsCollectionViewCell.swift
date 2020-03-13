@@ -17,7 +17,7 @@ class ItemMovsCollectionViewCell: UICollectionViewCell {
     private let nsLoadImage = NLLoadImage()
     private var isLoadingImage: Bool = false
     
-    
+    public var favoriteMovie: ((_ viewData: MovsItemViewData) -> Void)?
     //MARK: Model
     var model: MovsItemViewData? {
         didSet {
@@ -61,7 +61,6 @@ class ItemMovsCollectionViewCell: UICollectionViewCell {
     
     var favoriteButton: UIButton = {
         let button = UIButton()
-        button.addTarget(self, action: #selector(didTapFavoriteButton), for: .touchDown)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -113,13 +112,17 @@ extension ItemMovsCollectionViewCell {
         self.viewContent.addSubview(self.favoriteButton)
         self.makeConstraints()
                 
+        favoriteButton.addTarget(self, action: #selector(didTapFavoriteButton), for: .touchDown)
     }
 }
 
 //MARK: - Events UI -
 extension ItemMovsCollectionViewCell {
     @objc func didTapFavoriteButton() {
-        print("Favoritou")
+        if var model = self.model {
+            model.isFavorite.toggle()
+            favoriteMovie?(model)
+        }
     }
 }
 

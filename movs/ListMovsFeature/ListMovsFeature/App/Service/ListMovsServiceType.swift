@@ -9,7 +9,7 @@
 import NetworkLayerModule
 
 protocol ListMovsServiceType: AnyObject {
-    func fetchDatas(typeData: ListMovsDataType, handler completion: @escaping (Result<MovsListViewData, MtdbAPIError>) -> Void )
+    func fetchDatas(typeData: ListMovsDataType, handler completion: @escaping (Result<MovsListRequestModel, MtdbAPIError>) -> Void )
     func absoluteUrlImage(with url: String) -> String
     func stopRequest()
 }

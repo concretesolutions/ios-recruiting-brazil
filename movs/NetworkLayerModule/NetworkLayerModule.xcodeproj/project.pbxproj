@@ -14,7 +14,6 @@
 		D8D22E4C241488BB00F4AF4B /* NetworkLayerModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D22E42241488BB00F4AF4B /* NetworkLayerModule.framework */; };
 		D8D22E51241488BB00F4AF4B /* NetworkLayerModuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D22E50241488BB00F4AF4B /* NetworkLayerModuleTests.swift */; };
 		D8D22E53241488BB00F4AF4B /* NetworkLayerModule.h in Headers */ = {isa = PBXBuildFile; fileRef = D8D22E45241488BB00F4AF4B /* NetworkLayerModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D8D22E612414897300F4AF4B /* NetworkLayerModule.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D8D22E5F2414897300F4AF4B /* NetworkLayerModule.xcdatamodeld */; };
 		D8D22E63241489B900F4AF4B /* MTDBAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D22E62241489B900F4AF4B /* MTDBAPI.swift */; };
 		D8D22E6724148B8100F4AF4B /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D8D22E6624148B8100F4AF4B /* Debug.xcconfig */; };
 		D8D22E6824148B8700F4AF4B /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D8D22E6524148B7100F4AF4B /* Release.xcconfig */; };
@@ -60,7 +59,6 @@
 		D8D22E4B241488BB00F4AF4B /* NetworkLayerModuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkLayerModuleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D22E50241488BB00F4AF4B /* NetworkLayerModuleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayerModuleTests.swift; sourceTree = "<group>"; };
 		D8D22E52241488BB00F4AF4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D8D22E602414897300F4AF4B /* NetworkLayerModule.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NetworkLayerModule.xcdatamodel; sourceTree = "<group>"; };
 		D8D22E62241489B900F4AF4B /* MTDBAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTDBAPI.swift; sourceTree = "<group>"; };
 		D8D22E6524148B7100F4AF4B /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D8D22E6624148B8100F4AF4B /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -111,7 +109,6 @@
 		D8D22E38241488BB00F4AF4B = {
 			isa = PBXGroup;
 			children = (
-				D8D22E5F2414897300F4AF4B /* NetworkLayerModule.xcdatamodeld */,
 				D8D22E44241488BB00F4AF4B /* NetworkLayerModule */,
 				D8D22E4F241488BB00F4AF4B /* NetworkLayerModuleTests */,
 				D8D22E43241488BB00F4AF4B /* Products */,
@@ -319,7 +316,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8D22E6D24148D0400F4AF4B /* InfoPListValues.swift in Sources */,
-				D8D22E612414897300F4AF4B /* NetworkLayerModule.xcdatamodeld in Sources */,
 				D8D22E76241490F100F4AF4B /* BaseRequestAPI.swift in Sources */,
 				D8D22E6F24148DEE00F4AF4B /* ListMovsAPI.swift in Sources */,
 				D8D22E6B24148CB800F4AF4B /* ReaderInfoPList.swift in Sources */,
@@ -594,19 +590,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		D8D22E5F2414897300F4AF4B /* NetworkLayerModule.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				D8D22E602414897300F4AF4B /* NetworkLayerModule.xcdatamodel */,
-			);
-			currentVersion = D8D22E602414897300F4AF4B /* NetworkLayerModule.xcdatamodel */;
-			path = NetworkLayerModule.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = D8D22E39241488BB00F4AF4B /* Project object */;
 }

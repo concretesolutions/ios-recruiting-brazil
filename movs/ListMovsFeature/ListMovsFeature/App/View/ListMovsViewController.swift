@@ -15,6 +15,7 @@ enum ListMovsHandleState {
     case success(MovsListViewData)
     case failure
     case emptySearch(String)
+    case reloadData(MovsListViewData)
 }
 
 open class ListMovsViewController: BaseViewController {
@@ -124,14 +125,18 @@ extension ListMovsViewController {
             self.setupErrorView()
         case .emptySearch(let message):
             self.setupEmptyView(with: message)
+        case .reloadData(let successModel):
+            self.viewData = successModel
+            self.gridView.reloadData()
         }
-        self.presenter.tapOnButton()
     }
 }
 
 //MARK: -Action by Presenter-
 extension ListMovsViewController: ListMovsView {
-    
+    func reloadData(with viewData: MovsListViewData) {
+        self.stateUI = .reloadData(viewData)
+    }
     
     func showSuccess(viewData: MovsListViewData) {
         self.stateUI = .success(viewData)
@@ -239,9 +244,11 @@ extension ListMovsViewController: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let successCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellReuse, for: indexPath) as! ItemMovsCollectionViewCell
-        if var itemViewData = self.viewData?.items[indexPath.item] {
-            itemViewData.imageMovieURLAbsolute = self.presenter.urlForLoad(with: itemViewData)
+        if let itemViewData = self.viewData?.items[indexPath.item] {
             successCell.model = itemViewData
+            successCell.favoriteMovie = { [weak self] itemView in
+                self?.presenter.favoriteMovie(itemView)
+            }
         }
         
         return successCell
