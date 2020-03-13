@@ -18,7 +18,7 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.backgroundColor = .red
+        collectionView.backgroundColor = .white
         collectionView.register(MoviesCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.collectionViewLayout = MoviesListFlowLayout()
         collectionView.contentInsetAdjustmentBehavior = .always

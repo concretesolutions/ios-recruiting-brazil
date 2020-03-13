@@ -17,7 +17,6 @@ class FavoritesTableViewController: UITableViewController {
         
         self.tableView.register(FavoritesTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
 
-        self.tableView.backgroundColor = .blue
         // self.clearsSelectionOnViewWillAppear = false
 
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
