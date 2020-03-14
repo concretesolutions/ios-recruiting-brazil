@@ -19,7 +19,7 @@ class FavoritesTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let navTopItem = self.navigationController?.navigationBar.topItem {
+        if let navTopItem = navigationController?.navigationBar.topItem {
             navTopItem.titleView = .none
             navTopItem.title = "Favorites"
         }

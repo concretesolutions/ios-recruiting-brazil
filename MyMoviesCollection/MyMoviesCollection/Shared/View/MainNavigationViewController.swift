@@ -25,6 +25,7 @@ class MainNavigationViewController: UINavigationController {
     private func setUpNavigation() {
         navigationBar.isTranslucent = false
         navigationBar.barTintColor = ColorSystem.cYellowDark
+        navigationBar.tintColor = ColorSystem.cBlueDark
         view.backgroundColor = .white
     }
     

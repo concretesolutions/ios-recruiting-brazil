@@ -37,7 +37,7 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let navTopItem = self.navigationController?.navigationBar.topItem {
+        if let navTopItem = navigationController?.navigationBar.topItem {
             navTopItem.titleView = .none
             navTopItem.title = "Movies"
         }
@@ -97,6 +97,11 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
     
     // MARK: UICollectionViewDelegate
 
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailViewController = MovieDetailViewController()
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
 }
 
 // MARK: - UICollectionView MoviesViewModelDelegate
