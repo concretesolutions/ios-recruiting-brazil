@@ -29,7 +29,6 @@ class LoadImageWithCache {
         if let imageFromCache = imageCache.object(forKey: url.absoluteString as NSString) as? UIImage {
             imageView.image = imageFromCache
             let poster = MoviePosterResponse.init(banner: imageView.image ?? imageFromCache)
-            print("Usou o cache")
             completion(Result.success(poster))
             return
         }

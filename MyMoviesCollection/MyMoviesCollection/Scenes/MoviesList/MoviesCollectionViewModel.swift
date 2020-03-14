@@ -54,25 +54,13 @@ final class MoviesViewModel {
                     self.delegate?.onFetchFailed(with: errorMov.reason)
                 }
             case .success(let responseMov):
-                //self.client.fetchMoviesGenres() { resultGen in
-                    //switch resultGen {
-                    //case .failure(let errorGen):
-                        //DispatchQueue.main.async {
-                            self.isFetchInProgress = false
-                            //self.delegate?.onFetchFailed(with: errorGen.reason)
-                        //}
-                    //case .success(let responseGen):
-                        DispatchQueue.main.async {
-                            //self.genres.append(contentsOf: responseGen.genres)
-                            self.currentPage += 1
-                            self.total = responseMov.totalResults
-                            self.movies.append(contentsOf: responseMov.movies)
-                            self.isFetchInProgress = false
-                            self.delegate?.onFetchCompleted(with: .none)
-                        }
-                        
-                    //}
-                //}
+                DispatchQueue.main.async {
+                    self.currentPage += 1
+                    self.total = responseMov.totalResults
+                    self.movies.append(contentsOf: responseMov.movies)
+                    self.isFetchInProgress = false
+                    self.delegate?.onFetchCompleted(with: .none)
+                }
             }
         }
     }
