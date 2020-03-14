@@ -10,13 +10,14 @@ import UIKit
 
 class MainTabBarViewController: UITabBarController {
 
+    // MARK: - ViewController life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configView()
     }
 
-    // MARK: Class functions
+    // MARK: - Class functions
     
     private func configView() {
         self.tabBar.barTintColor = ColorSystem.cYellowDark

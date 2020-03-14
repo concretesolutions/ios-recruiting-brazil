@@ -10,7 +10,7 @@ import UIKit
 
 class MoviesCollectionViewCell: UICollectionViewCell {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     private lazy var bannerView: UIImageView = {
        let view = UIImageView()

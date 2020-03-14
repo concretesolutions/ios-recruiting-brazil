@@ -20,6 +20,8 @@ class LoadImageWithCache {
 
     var imageURLString: String?
     
+    // MARK: - Class Functions
+    
     func downloadMovieAPIImage(posterUrl: String, imageView: UIImageView, completion: @escaping (Result<MoviePosterResponse, ResponseError>) -> Void) {
         let urlConcat = "https://image.tmdb.org/t/p/w500" + posterUrl
         guard let url = URL(string: urlConcat) else {

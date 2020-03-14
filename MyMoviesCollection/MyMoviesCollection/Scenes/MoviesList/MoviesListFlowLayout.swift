@@ -10,6 +10,8 @@ import UIKit
 
 class MoviesListFlowLayout: UICollectionViewFlowLayout {
     
+    // MARK: - Properties
+    
     private let itemsPerRow: CGFloat = 2
     private let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 5.0, right: 10.0)
     
@@ -19,6 +21,8 @@ class MoviesListFlowLayout: UICollectionViewFlowLayout {
         let widthPerItem = availableWidth / itemsPerRow
         return CGSize(width: widthPerItem, height: (widthPerItem * 1.5))
     }
+    
+    // MARK: - Class Funcitons
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return sectionInsets

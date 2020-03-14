@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 enum ResponseError: Error {
     case rede
     case decoding

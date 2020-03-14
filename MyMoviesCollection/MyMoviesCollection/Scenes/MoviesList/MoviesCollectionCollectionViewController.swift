@@ -10,6 +10,8 @@ import UIKit
 
 class MoviesCollectionCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, Alerts {
 
+    // MARK: - Properties
+    
     private let reuseIdentifier = "movcell"
     private let itemsPerRow: CGFloat = 2
     private let numOfSects = 2
@@ -24,6 +26,8 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
         indicator.startAnimating()
         return indicator
     }()
+    
+    // MARK: - ViewController life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +51,8 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
         }
     }
     
+    // MARK: - Class Functions
+    
     private func isLoadingCell(for indexPath: IndexPath) -> Bool {
         let soma = (indexPath.section * 2) + 3
         guard let viewModelCount = viewModel?.currentCount else {
@@ -55,8 +61,18 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
         return soma >= viewModelCount
     }
     
+    private func setUpLoading() {
+        view.addSubview(loadingIndicator)
+        loadingIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        loadingIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        loadingIndicator.widthAnchor.constraint(equalToConstant: 35.0).isActive = true
+        loadingIndicator.heightAnchor.constraint(equalToConstant: 35.0).isActive = true
+        loadingIndicator.style = .large
+        loadingIndicator.startAnimating()
+    }
     
-    // MARK: UICollectionViewDataSource
+    
+    // MARK: - UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         guard let numOfMovs = viewModel?.currentCount else { return 0 }
@@ -113,19 +129,7 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
         return sectionInsets.left
     }
     
-    // MARK: Class Funcitons
-    
-    private func setUpLoading() {
-        view.addSubview(loadingIndicator)
-        loadingIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        loadingIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        loadingIndicator.widthAnchor.constraint(equalToConstant: 35.0).isActive = true
-        loadingIndicator.heightAnchor.constraint(equalToConstant: 35.0).isActive = true
-        loadingIndicator.style = .large
-        loadingIndicator.startAnimating()
-    }
-    
-    // MARK: UICollectionViewDelegate
+    // MARK: - UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         var cellIndex: Int = 0

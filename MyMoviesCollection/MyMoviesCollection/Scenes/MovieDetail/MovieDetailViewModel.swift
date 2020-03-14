@@ -13,17 +13,29 @@ protocol MovieDetailViewModelDelegate: class {
 }
 
 final class MovieDetailViewModel {
-    private weak var delegate: MovieDetailViewModelDelegate?
-    private var genres: [Genres] = []
-    private var isFetchInProgress = false
     
-    let client = MoviesAPIClient()
+    // MARK: - Initializer
     
     init(delegate: MovieDetailViewModelDelegate) {
         self.delegate = delegate
     }
     
-    func fetchMovieDetail() {
+    // MARK: - Properties
+    
+    private weak var delegate: MovieDetailViewModelDelegate?
+    private var genres: [Genres] = []
+    private var genresAppended: String = ""
+    private var isFetchInProgress = false
+    
+    let client = MoviesAPIClient()
+    
+    // MARK: - Class Functions
+    
+    public func getGenres() -> [Genres] {
+        return genres
+    }
+    
+    public func fetchMovieDetail() {
         guard !isFetchInProgress else {
             return
         }
@@ -44,6 +56,26 @@ final class MovieDetailViewModel {
                 }
             }
         }
+    }
+    
+    public func findGens(genIds: [Int]) -> String {
+        var finalGenString = ""
+        for i in 0..<genIds.count {
+            finalGenString.append(contentsOf: getGenById(from: genIds[i]))
+            if i != (genIds.count - 1) {
+                finalGenString.append(contentsOf: ", ")
+            }
+        }
+        return finalGenString
+    }
+    
+    private func getGenById(from id: Int) -> String {
+        for index in 0..<genres.count  {
+            if genres[index].id == id {
+                return genres[index].name
+            }
+        }
+        return ""
     }
     
 }

@@ -10,7 +10,11 @@ import UIKit
 
 class FavoritesTableViewController: UITableViewController {
 
+    // MARK: - Properties
+    
     private let reuseIdentifier = "favcell"
+
+    // MARK: - ViewController life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +30,7 @@ class FavoritesTableViewController: UITableViewController {
         
     }
 
-    // MARK: - Table view data source
+    // MARK: - TableView DataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         

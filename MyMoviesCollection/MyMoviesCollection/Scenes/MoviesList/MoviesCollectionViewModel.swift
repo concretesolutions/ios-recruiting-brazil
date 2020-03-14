@@ -13,6 +13,15 @@ protocol MoviesViewModelDelegate: class {
 }
 
 final class MoviesViewModel {
+    
+    // MARK: - Initializer
+    
+    init(delegate: MoviesViewModelDelegate) {
+        self.delegate = delegate
+    }
+    
+    // MARK: - Properties
+    
     private weak var delegate: MoviesViewModelDelegate?
     private var movies: [Movie] = []
     private var currentPage = 1
@@ -20,10 +29,6 @@ final class MoviesViewModel {
     private var isFetchInProgress = false
     
     let client = MoviesAPIClient()
-    
-    init(delegate: MoviesViewModelDelegate) {
-        self.delegate = delegate
-    }
     
     var totalCount: Int {
         return total
@@ -33,15 +38,13 @@ final class MoviesViewModel {
         return movies.count
     }
     
-    func movie(at index: Int) -> Movie {
+    // MARK: - Class Functions
+    
+    public func movie(at index: Int) -> Movie {
         return movies[index]
     }
     
-    public func isLoadingCell(for indexPath: IndexPath) -> Bool {
-        return indexPath.row >= currentCount
-    }
-    
-    func fetchPopularMovies() {
+    public func fetchPopularMovies() {
         guard !isFetchInProgress else {
             return
         }

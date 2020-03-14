@@ -10,9 +10,12 @@ import UIKit
 
 class MovieDetailViewController: UIViewController, Alerts {
     
+    // MARK: - Properties
+    
     private lazy var imageView: UIImageView = {
         let poster = UIImageView()
         poster.translatesAutoresizingMaskIntoConstraints = false
+        poster.contentMode = .scaleAspectFit
         return poster
     }()
     
@@ -35,9 +38,10 @@ class MovieDetailViewController: UIViewController, Alerts {
         return year
     }()
     
-    private lazy var overview: UILabel = {
-        let descrp = UILabel()
+    private lazy var overview: UITextView = {
+        let descrp = UITextView()
         descrp.translatesAutoresizingMaskIntoConstraints = false
+        descrp.isUserInteractionEnabled = false
         return descrp
     }()
     
@@ -50,24 +54,39 @@ class MovieDetailViewController: UIViewController, Alerts {
     private lazy var favButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        let icon = #imageLiteral(resourceName: "favorite_empty_icon")
-        btn.setImage(icon, for: .normal)
+        let iconNormal = #imageLiteral(resourceName: "favorite_empty_icon")
+        btn.setImage(iconNormal, for: .normal)
+        let iconSelected = #imageLiteral(resourceName: "favorite_full_icon")
+        btn.setImage(iconSelected, for: .selected)
         btn.imageView?.contentMode = .scaleAspectFit
         return btn
+    }()
+    
+    private lazy var loadingIndicator: UIActivityIndicatorView = {
+        let ind = UIActivityIndicatorView()
+        ind.translatesAutoresizingMaskIntoConstraints = false
+        ind.style = .medium
+        ind.hidesWhenStopped = true
+        return ind
     }()
     
     private var viewModel: MovieDetailViewModel?
     public var movieToPresent: Movie?
 
+    // MARK: - ViewController life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = MovieDetailViewModel(delegate: self)
-        viewModel?.fetchMovieDetail()
         setUpView()
         setMovieDetails()
+        viewModel = MovieDetailViewModel(delegate: self)
+        viewModel?.fetchMovieDetail()
     }
     
+    // MARK: - Class Functions
+    
     private func setUpView() {
+        self.view.backgroundColor = .white
         view.addSubview(imageView)
         view.addSubview(infosView)
         infosView.addSubview(titleLabel)
@@ -75,6 +94,7 @@ class MovieDetailViewController: UIViewController, Alerts {
         infosView.addSubview(genres)
         infosView.addSubview(overview)
         titleLabel.addSubview(favButton)
+        imageView.addSubview(loadingIndicator)
         
         imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
         imageView.bottomAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -111,6 +131,9 @@ class MovieDetailViewController: UIViewController, Alerts {
         favButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         favButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
+        loadingIndicator.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
+        loadingIndicator.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
+        
     }
     
     private func setMovieDetails() {
@@ -119,12 +142,12 @@ class MovieDetailViewController: UIViewController, Alerts {
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async {
-                    //self.activityIndicator.stopAnimating()
+                    self.loadingIndicator.stopAnimating()
                 }
                 debugPrint("Erro ao baixar imagem: \(error.reason)")
             case .success(let response):
                 DispatchQueue.main.async {
-                    //self.activityIndicator.stopAnimating()
+                    self.loadingIndicator.stopAnimating()
                     self.imageView.image = response.banner
                 }
             }
@@ -135,24 +158,22 @@ class MovieDetailViewController: UIViewController, Alerts {
         }
     }
     
-    private func setGenresInfo() {
-    }
-    
 }
 
 // MARK: - MovieDetailViewModelDelegate
 
 extension MovieDetailViewController: MovieDetailViewModelDelegate {
     func onFetchCompleted() {
+        guard let movieGens = movieToPresent?.generedIds else { return }
         DispatchQueue.main.async {
-            //self.loadingIndicator.stopAnimating()
-            //self.collectionView.reloadData()
+            self.genres.text = self.viewModel?.findGens(genIds: movieGens)
+            self.loadingIndicator.stopAnimating()
         }
     }
     
     func onFetchFailed(with reason: String) {
         DispatchQueue.main.async {
-            //self.loadingIndicator.stopAnimating()
+            self.loadingIndicator.stopAnimating()
         }
         let title = "Alerta"
         let action = UIAlertAction(title: "OK", style: .default)
