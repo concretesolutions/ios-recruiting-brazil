@@ -44,6 +44,14 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.hidesWhenStopped = true
+        indicator.style = .medium
+        return indicator
+    }()
+    
     // MARK: - Initializer
     
     override init(frame: CGRect) {
@@ -66,6 +74,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     private func addViews(){
         backgroundColor = ColorSystem.cBlueDark
         contentView.addSubview(bannerView)
+        bannerView.addSubview(activityIndicator)
         contentView.addSubview(infosView)
         infosView.addSubview(titleText)
         infosView.addSubview(favoriteButton)
@@ -74,6 +83,9 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         bannerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         bannerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         bannerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -60).isActive = true
+        
+        activityIndicator.centerYAnchor.constraint(equalTo: bannerView.centerYAnchor).isActive = true
+        activityIndicator.centerXAnchor.constraint(equalTo: bannerView.centerXAnchor).isActive = true
         
         infosView.topAnchor.constraint(equalTo: bannerView.bottomAnchor).isActive = true
         infosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
@@ -93,10 +105,26 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     }
     
     public func setCell(with movie: Movie?) {
+        activityIndicator.startAnimating()
         if let movie = movie {
             titleText.text = movie.title
+            LoadImageWithCache.shared.downloadMovieAPIImage(posterUrl: movie.posterUrl, imageView: bannerView, completion: { result in
+                switch result {
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
+                    }
+                    debugPrint("Erro ao baixar imagem: \(error.reason)")
+                case .success(let response):
+                    DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
+                        self.bannerView.image = response.banner
+                    }
+                }
+            })
         } else {
-            //start loading and set placeholders
+            activityIndicator.stopAnimating()
+            bannerView.image = #imageLiteral(resourceName: "placeholder")
         }
         
     }

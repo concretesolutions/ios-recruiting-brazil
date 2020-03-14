@@ -22,14 +22,18 @@ class LoadImageWithCache {
     
     func downloadMovieAPIImage(posterUrl: String, imageView: UIImageView, completion: @escaping (Result<MoviePosterResponse, ResponseError>) -> Void) {
         let urlConcat = "https://image.tmdb.org/t/p/w500" + posterUrl
-        let url = URL(string: urlConcat)
-        if let imageFromCache = imageCache.object(forKey: (urlConcat as AnyObject) as! NSString) as? UIImage {
+        guard let url = URL(string: urlConcat) else {
+            completion(Result.failure(ResponseError.rede))
+            return
+        }
+        if let imageFromCache = imageCache.object(forKey: url.absoluteString as NSString) as? UIImage {
             imageView.image = imageFromCache
-            let poster = MoviePosterResponse.init(banner: imageView.image!)
+            let poster = MoviePosterResponse.init(banner: imageView.image ?? imageFromCache)
+            print("Usou o cache")
             completion(Result.success(poster))
             return
         }
-        URLSession.shared.dataTask(with: url!, completionHandler: { data, response, error in
+        URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
             guard
                 let httpResponse = response as? HTTPURLResponse, httpResponse.hasSuccessStatusCode,
                 let data = data
@@ -37,9 +41,12 @@ class LoadImageWithCache {
                     completion(Result.failure(ResponseError.rede))
                     return
             }
-            let downloadedImage = UIImage(data: data)!
-            self.imageCache.setObject(downloadedImage, forKey: (urlConcat as AnyObject) as! NSString)
-            let image = MoviePosterResponse.init(banner: downloadedImage)
+            guard let imageToCache = UIImage(data: data) else {
+                completion(Result.failure(ResponseError.rede))
+                return
+            }
+            self.imageCache.setObject(imageToCache, forKey: urlConcat as NSString)
+            let image = MoviePosterResponse.init(banner: imageToCache)
             completion(Result.success(image))
         }).resume()
     }
