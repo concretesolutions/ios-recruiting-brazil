@@ -14,12 +14,16 @@ class FavoritesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.tableView.register(FavoritesTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let navTopItem = self.navigationController?.navigationBar.topItem {
+            navTopItem.titleView = .none
+            navTopItem.title = "Favorites"
+        }
+        
     }
 
     // MARK: - Table view data source

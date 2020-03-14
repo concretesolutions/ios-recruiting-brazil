@@ -35,6 +35,14 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
         setUpLoading()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let navTopItem = self.navigationController?.navigationBar.topItem {
+            navTopItem.titleView = .none
+            navTopItem.title = "Movies"
+        }
+    }
+    
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
