@@ -12,6 +12,8 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
+    private var didConfigViews: Bool = false
+    
     private lazy var bannerView: UIImageView = {
        let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -56,7 +58,10 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addViews()
+        if !didConfigViews {
+            addViews()
+            didConfigViews = true
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -65,7 +70,10 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
       super.prepareForReuse()
-      addViews()
+      if !didConfigViews {
+        addViews()
+        didConfigViews = true
+      }
       setCell(with: .none)
     }
 
@@ -126,7 +134,6 @@ class MoviesCollectionViewCell: UICollectionViewCell {
                 }
             })
         } else {
-            activityIndicator.stopAnimating()
             bannerView.image = #imageLiteral(resourceName: "placeholder")
         }
         

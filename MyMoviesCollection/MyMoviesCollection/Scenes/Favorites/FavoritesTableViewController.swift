@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoritesTableViewController: UITableViewController {
+class FavoritesTableViewController: UITableViewController, Alerts {
 
     // MARK: - Properties
     
@@ -44,8 +44,21 @@ class FavoritesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! FavoritesTableViewCell
-        cell.textLabel?.text = "Teste"
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+         return "Unfavorite"
     }
 
 }

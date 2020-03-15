@@ -113,7 +113,10 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MoviesCollectionViewCell
-        guard let collectionViewModel = viewModel else { return cell }
+        guard let collectionViewModel = viewModel else {
+            cell.setCell(with: .none)
+            return cell
+        }
         if collectionViewModel.currentCount > 0 {
             var cellIndex: Int = 0
             if (indexPath.row == 0) {
