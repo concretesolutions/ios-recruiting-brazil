@@ -41,7 +41,7 @@ class MovieDetailViewController: UIViewController, Alerts {
     private lazy var overview: UITextView = {
         let descrp = UITextView()
         descrp.translatesAutoresizingMaskIntoConstraints = false
-        descrp.isUserInteractionEnabled = false
+        descrp.isEditable = false
         return descrp
     }()
     
@@ -56,8 +56,8 @@ class MovieDetailViewController: UIViewController, Alerts {
         btn.translatesAutoresizingMaskIntoConstraints = false
         let iconNormal = #imageLiteral(resourceName: "favorite_empty_icon")
         btn.setImage(iconNormal, for: .normal)
-        let iconSelected = #imageLiteral(resourceName: "favorite_full_icon")
-        btn.setImage(iconSelected, for: .selected)
+        let iconSelected = #imageLiteral(resourceName: "favorite_gray_icon")
+        btn.setImage(iconSelected, for: .highlighted)
         btn.imageView?.contentMode = .scaleAspectFit
         return btn
     }()
@@ -83,6 +83,14 @@ class MovieDetailViewController: UIViewController, Alerts {
         viewModel?.fetchMovieDetail()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        setUpFavButton()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        setUpBorders()
+    }
+    
     // MARK: - Class Functions
     
     private func setUpView() {
@@ -93,7 +101,7 @@ class MovieDetailViewController: UIViewController, Alerts {
         infosView.addSubview(yearLabel)
         infosView.addSubview(genres)
         infosView.addSubview(overview)
-        titleLabel.addSubview(favButton)
+        infosView.addSubview(favButton)
         imageView.addSubview(loadingIndicator)
         
         imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
@@ -101,13 +109,13 @@ class MovieDetailViewController: UIViewController, Alerts {
         imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
         imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
         
-        infosView.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 1).isActive = true
+        infosView.topAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         infosView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         infosView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
         infosView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
         
         titleLabel.topAnchor.constraint(equalTo: infosView.topAnchor).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: infosView.trailingAnchor).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: infosView.trailingAnchor, constant: -45).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: infosView.leadingAnchor).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 45).isActive = true
         
@@ -127,13 +135,25 @@ class MovieDetailViewController: UIViewController, Alerts {
         overview.bottomAnchor.constraint(equalTo: infosView.bottomAnchor).isActive = true
         
         favButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
-        favButton.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: -5).isActive = true
-        favButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        favButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        favButton.trailingAnchor.constraint(equalTo: infosView.trailingAnchor).isActive = true
+        favButton.widthAnchor.constraint(equalToConstant: 45).isActive = true
+        favButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
         
         loadingIndicator.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
         loadingIndicator.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
         
+    }
+    
+    private func setUpFavButton() {
+        favButton.addTarget(self, action: #selector(favoriteMovie), for: .touchUpInside)
+        //favButton.isEnabled = true
+    }
+    
+    private func setUpBorders() {
+        titleLabel.layer.addBottomBorders()
+        yearLabel.layer.addBottomBorders()
+        favButton.layer.addBottomBorders()
+        genres.layer.addBottomBorders()
     }
     
     private func setMovieDetails() {
@@ -155,7 +175,11 @@ class MovieDetailViewController: UIViewController, Alerts {
         DispatchQueue.main.async {
             self.yearLabel.text = self.movieToPresent?.releaseDate
             self.overview.text = self.movieToPresent?.overview
+            self.titleLabel.text = self.movieToPresent?.title
         }
+    }
+    
+    @objc func favoriteMovie(sender: UIButton!) {
     }
     
 }

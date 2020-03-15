@@ -34,6 +34,7 @@
 		A795C2AB241D23C100755B84 /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A795C2AA241D23C100755B84 /* MovieDetailViewModel.swift */; };
 		A795C2AD241D26BB00755B84 /* GenresResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A795C2AC241D26BB00755B84 /* GenresResponse.swift */; };
 		A795C2AF241D26DB00755B84 /* Genres.swift in Sources */ = {isa = PBXBuildFile; fileRef = A795C2AE241D26DB00755B84 /* Genres.swift */; };
+		A795C2B4241DAA0B00755B84 /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A795C2B3241DAA0B00755B84 /* CALayer+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		A795C2AA241D23C100755B84 /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
 		A795C2AC241D26BB00755B84 /* GenresResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresResponse.swift; sourceTree = "<group>"; };
 		A795C2AE241D26DB00755B84 /* Genres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genres.swift; sourceTree = "<group>"; };
+		A795C2B3241DAA0B00755B84 /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 		A730E98C241B0CE6006AD615 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A795C2B2241DA9F100755B84 /* Extensions */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 		A74242292419D1A300AE94FE /* MyMoviesCollection */ = {
 			isa = PBXGroup;
 			children = (
+				A795C2B0241DA29500755B84 /* Managers */,
 				A730E98C241B0CE6006AD615 /* Utils */,
 				A74242412419DC0000AE94FE /* Shared */,
 				A742423E2419DAB500AE94FE /* Scenes */,
@@ -224,6 +228,29 @@
 				A795C2AA241D23C100755B84 /* MovieDetailViewModel.swift */,
 			);
 			path = MovieDetail;
+			sourceTree = "<group>";
+		};
+		A795C2B0241DA29500755B84 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				A795C2B1241DA2A400755B84 /* CoreData */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		A795C2B1241DA2A400755B84 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		A795C2B2241DA9F100755B84 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A795C2B3241DAA0B00755B84 /* CALayer+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,6 +346,7 @@
 				A742422B2419D1A300AE94FE /* AppDelegate.swift in Sources */,
 				A795C2AB241D23C100755B84 /* MovieDetailViewModel.swift in Sources */,
 				A730E9A7241C101A006AD615 /* Alerts.swift in Sources */,
+				A795C2B4241DAA0B00755B84 /* CALayer+Extensions.swift in Sources */,
 				A795C2A6241C704100755B84 /* MovieDetailViewController.swift in Sources */,
 				A742422D2419D1A300AE94FE /* SceneDelegate.swift in Sources */,
 			);
