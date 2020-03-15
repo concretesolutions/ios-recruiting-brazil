@@ -13,12 +13,15 @@ class FavoritesTableViewController: UITableViewController, Alerts {
     // MARK: - Properties
     
     private let reuseIdentifier = "favcell"
+    private var viewModel: FavoritesListViewModel?
 
     // MARK: - ViewController life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.register(FavoritesTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        viewModel = FavoritesListViewModel(delegate: self)
+        viewModel?.fetchFavorites()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -61,4 +64,17 @@ class FavoritesTableViewController: UITableViewController, Alerts {
          return "Unfavorite"
     }
 
+}
+
+
+extension FavoritesTableViewController: FavoritesListViewModelDelegate {
+    func onFetchCompleted() {
+        print("gay")
+    }
+    
+    func onFetchFailed(with reason: String) {
+        print("gayzao")
+    }
+    
+    
 }

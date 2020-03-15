@@ -56,8 +56,8 @@ class MovieDetailViewController: UIViewController, Alerts {
         btn.translatesAutoresizingMaskIntoConstraints = false
         let iconNormal = #imageLiteral(resourceName: "favorite_empty_icon")
         btn.setImage(iconNormal, for: .normal)
-        let iconSelected = #imageLiteral(resourceName: "favorite_gray_icon")
-        btn.setImage(iconSelected, for: .highlighted)
+        let iconSelected = #imageLiteral(resourceName: "favorite_full_icon")
+        btn.setImage(iconSelected, for: .selected)
         btn.imageView?.contentMode = .scaleAspectFit
         return btn
     }()
@@ -72,6 +72,7 @@ class MovieDetailViewController: UIViewController, Alerts {
     
     private var viewModel: MovieDetailViewModel?
     public var movieToPresent: Movie?
+    private var isFavorite: Bool = false
 
     // MARK: - ViewController life cycle
     
@@ -146,7 +147,29 @@ class MovieDetailViewController: UIViewController, Alerts {
     
     private func setUpFavButton() {
         favButton.addTarget(self, action: #selector(favoriteMovie), for: .touchUpInside)
-        //favButton.isEnabled = true
+        favButton.isEnabled = false
+        checkIfFavorite()
+    }
+    
+    private func checkIfFavorite() {
+        guard let idFavorite = movieToPresent?.id else {
+            return
+        }
+        viewModel?.checkIfFavorite(id: idFavorite, completion: { result in
+            if result {
+                self.isFavorite = true
+            } else {
+                self.isFavorite = false
+            }
+            self.updateFavButtonFeedback()
+        })
+    }
+    
+    private func updateFavButtonFeedback() {
+        DispatchQueue.main.async {
+            self.favButton.isSelected = self.isFavorite
+            self.favButton.isEnabled = true
+        }
     }
     
     private func setUpBorders() {
@@ -180,6 +203,15 @@ class MovieDetailViewController: UIViewController, Alerts {
     }
     
     @objc func favoriteMovie(sender: UIButton!) {
+        if !isFavorite {
+            guard let movie = movieToPresent else {
+                return
+            }
+            viewModel?.favoriteMovie(movie: movie, completion: { (success) in
+                self.isFavorite = true
+                self.favButton.isSelected = true
+            })
+        }
     }
     
 }
@@ -187,7 +219,7 @@ class MovieDetailViewController: UIViewController, Alerts {
 // MARK: - MovieDetailViewModelDelegate
 
 extension MovieDetailViewController: MovieDetailViewModelDelegate {
-    func onFetchCompleted() {
+    func fetchGenresCompleted() {
         guard let movieGens = movieToPresent?.generedIds else { return }
         DispatchQueue.main.async {
             self.genres.text = self.viewModel?.findGens(genIds: movieGens)
@@ -195,7 +227,7 @@ extension MovieDetailViewController: MovieDetailViewModelDelegate {
         }
     }
     
-    func onFetchFailed(with reason: String) {
+    func fetchGenresFailed(with reason: String) {
         DispatchQueue.main.async {
             self.loadingIndicator.stopAnimating()
         }

@@ -10,7 +10,7 @@ import Foundation
 
 struct Movie: Decodable {
     let title: String?
-    let id: Int64?
+    let id: Int32?
     let posterUrl: String?
     let overview: String?
     let releaseDate: String?
@@ -25,7 +25,7 @@ struct Movie: Decodable {
         case generedIds = "genre_ids"
     }
     
-    init(title: String, id: Int64, posterUrl: String, overview: String, releaseDate: String, generedIds: [Int]) {
+    init(title: String, id: Int32, posterUrl: String, overview: String, releaseDate: String, generedIds: [Int]) {
         self.title = title
         self.id = id
         self.posterUrl = posterUrl
@@ -37,7 +37,7 @@ struct Movie: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let title = (try? container.decode(String.self, forKey: .title)) ?? ""
-        let id = (try? container.decode(Int64.self, forKey: .id)) ?? 0
+        let id = (try? container.decode(Int32.self, forKey: .id)) ?? 0
         let posterUrl = (try? container.decode(String.self, forKey: .posterUrl)) ?? ""
         let overview = (try? container.decode(String.self, forKey: .overview)) ?? ""
         let releaseDate = (try? container.decode(String.self, forKey: .releaseDate)) ?? ""

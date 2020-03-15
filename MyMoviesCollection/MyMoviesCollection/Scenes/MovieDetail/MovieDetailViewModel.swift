@@ -7,9 +7,11 @@
 //
 
 import Foundation
+import CoreData
+
 protocol MovieDetailViewModelDelegate: class {
-    func onFetchCompleted()
-    func onFetchFailed(with reason: String)
+    func fetchGenresCompleted()
+    func fetchGenresFailed(with reason: String)
 }
 
 final class MovieDetailViewModel {
@@ -45,14 +47,14 @@ final class MovieDetailViewModel {
             case .failure(let error):
                 DispatchQueue.main.async {
                     self.isFetchInProgress = false
-                    self.delegate?.onFetchFailed(with: error.reason)
+                    self.delegate?.fetchGenresFailed(with: error.reason)
                 }
             case .success(let response):
                 self.isFetchInProgress = false
                 DispatchQueue.main.async {
                     self.genres = response.genres
                     self.isFetchInProgress = false
-                    self.delegate?.onFetchCompleted()
+                    self.delegate?.fetchGenresCompleted()
                 }
             }
         }
@@ -76,6 +78,44 @@ final class MovieDetailViewModel {
             }
         }
         return ""
+    }
+    
+    public func favoriteMovie(movie: Movie, completion: @escaping(_ saved: Bool) -> Void) {
+        guard let entity = NSEntityDescription.entity(forEntityName: "FavoriteMovie", in: PersistanceService.context) else {
+            completion(false)
+            return
+        }
+        let movieToPersist = NSManagedObject(entity: entity, insertInto: PersistanceService.context)
+        movieToPersist.setValue(movie.title, forKey: "title")
+        movieToPersist.setValue(movie.overview, forKey: "overview")
+        movieToPersist.setValue(movie.releaseDate, forKey: "year")
+        movieToPersist.setValue(movie.posterUrl, forKey: "posterUrl")
+        if let idToSave = movie.id {
+            movieToPersist.setValue(idToSave, forKey: "id")
+        }
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavMovie")
+        fetchRequest.includesPropertyValues = false
+        
+        PersistanceService.saveContext()
+        completion(true)
+        
+    }
+    
+    public func checkIfFavorite(id: Int32, completion: @escaping(_ result: Bool) -> Void) {
+        let managedObjCont = PersistanceService.context
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
+        let predicate = NSPredicate(format: "id == %d", id)
+        fetchRequest.predicate = predicate
+        do {
+            let result = try managedObjCont.fetch(fetchRequest)
+            if result.count > 0 {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        } catch {
+            completion(false)
+        }
     }
     
 }
