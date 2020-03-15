@@ -48,6 +48,11 @@ final class MoviesViewModel {
         guard !isFetchInProgress else {
             return
         }
+        if currentCount != 0 && total != 0 {
+            guard total > currentCount else {
+                return
+            }
+        }
         isFetchInProgress = true
         client.fetchPopularMovies(page: currentPage) { resultMov in
             switch resultMov {

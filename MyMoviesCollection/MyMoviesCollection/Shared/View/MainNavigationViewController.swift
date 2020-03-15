@@ -12,7 +12,6 @@ class MainNavigationViewController: UINavigationController {
 
     // MARK: - Properties
     
-    let mainTabBarViewController = MainTabBarViewController()
     
     // MARK: - ViewController life cycle
     

@@ -31,6 +31,7 @@ final class MoviesAPIClient {
         }
         urlComponents?.queryItems = queryItems
         urlRequest.url = urlComponents?.url
+        print("Calling => \(String(describing: urlRequest))")
         session.dataTask(with: urlRequest, completionHandler: { data, response, error in
             guard
                 let httpResponse = response as? HTTPURLResponse, httpResponse.hasSuccessStatusCode,

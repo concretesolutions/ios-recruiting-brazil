@@ -18,6 +18,7 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
     private let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 5.0, right: 10.0)
     private var shouldShowLoadingCell = false
     private var viewModel: MoviesViewModel?
+    public var reloadMovies: Bool = true
     
     private let loadingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
@@ -39,8 +40,15 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
         collectionView.delegate = self
         collectionView.dataSource = self
         viewModel = MoviesViewModel(delegate: self)
-        viewModel?.fetchPopularMovies()
         setUpLoading()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let viewModelCount = viewModel?.currentCount, viewModelCount < 1 {
+            viewModel?.fetchPopularMovies()
+        } else if reloadMovies {
+            viewModel?.fetchPopularMovies()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,6 +57,13 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
             navTopItem.titleView = .none
             navTopItem.title = "Movies"
         }
+    }
+    
+    deinit {
+        guard viewModel != nil else {
+            return
+        }
+        viewModel = nil
     }
     
     // MARK: - Class Functions
@@ -153,6 +168,7 @@ extension MoviesCollectionCollectionViewController: MoviesViewModelDelegate {
         DispatchQueue.main.async {
             self.loadingIndicator.stopAnimating()
             self.collectionView.reloadData()
+            self.reloadMovies = false
         }
     }
     
