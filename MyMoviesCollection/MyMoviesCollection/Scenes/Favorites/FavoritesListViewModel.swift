@@ -62,6 +62,27 @@ final class FavoritesListViewModel {
             }
         }
     }
+    
+    public func deleteFavorite(line: Int, completion: @escaping(_ result: Bool) -> Void) {
+        let managedObjCont = PersistanceService.context
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
+        let lineToDelete = favMovies[line].id
+        let predicate = NSPredicate(format: "id == %d", lineToDelete)
+        fetchRequest.predicate = predicate
+        var didDeleted = false
+        do {
+            let items = try managedObjCont.fetch(fetchRequest) as! [FavoriteMovie]
+            for item in items {
+                managedObjCont.delete(item)
+                didDeleted = true
+            }
+            favMovies.remove(at: line)
+            PersistanceService.saveContext()
+            completion(didDeleted)
+        } catch {
+            completion(false)
+        }
+    }
 
 
 }

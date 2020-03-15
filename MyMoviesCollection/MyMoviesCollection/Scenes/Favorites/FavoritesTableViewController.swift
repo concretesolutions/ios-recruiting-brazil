@@ -53,6 +53,20 @@ class FavoritesTableViewController: UITableViewController, Alerts {
         loadingIndicator.startAnimating()
     }
     
+    private func deleteMovie(index: IndexPath) {
+        viewModel?.deleteFavorite(line: index.row, completion: { success in
+            if success {
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            } else {
+                let title = "Alerta"
+                let action = UIAlertAction(title: "OK", style: .default)
+                self.displayAlert(with: title , message: "Erro ao deletar do favorito", actions: [action])
+            }
+        })
+    }
+    
     // MARK: - TableView DataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -87,7 +101,10 @@ class FavoritesTableViewController: UITableViewController, Alerts {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
-            // To Do: Add remove favorite logic
+            let action = UIAlertAction(title: "Desfavoritar", style: .destructive) { (result) in
+                self.deleteMovie(index: indexPath)
+            }
+            displayAlert(with: "Alerta", message: "Deseja mesmo desfavoritar o filme?", actions: [action])
         }
     }
     
