@@ -30,11 +30,11 @@ final class MoviesViewModel {
     
     let client = MoviesAPIClient()
     
-    var totalCount: Int {
+    private var totalCount: Int {
         return total
     }
     
-    var currentCount: Int {
+    public var currentCount: Int {
         return movies.count
     }
     

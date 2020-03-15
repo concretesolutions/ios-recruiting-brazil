@@ -186,6 +186,7 @@ extension MoviesCollectionCollectionViewController: MoviesViewModelDelegate {
 }
 
 // MARK: - UICollectionViewDataSourcePrefetching
+
 extension MoviesCollectionCollectionViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         if indexPaths.contains(where: isLoadingCell) {

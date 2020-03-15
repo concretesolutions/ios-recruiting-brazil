@@ -94,7 +94,7 @@ class FavoritesTableViewCell: UITableViewCell {
         
         bannerView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         bannerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        bannerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        bannerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -1).isActive = true
         bannerView.widthAnchor.constraint(equalToConstant: 110).isActive = true
         
         activityIndicator.centerYAnchor.constraint(equalTo: bannerView.centerYAnchor).isActive = true
@@ -103,7 +103,7 @@ class FavoritesTableViewCell: UITableViewCell {
         infosView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         infosView.leadingAnchor.constraint(equalTo: bannerView.trailingAnchor).isActive = true
         infosView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        infosView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        infosView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -1).isActive = true
 
         titleText.topAnchor.constraint(equalTo: infosView.topAnchor, constant: 10).isActive = true
         titleText.leadingAnchor.constraint(equalTo: infosView.leadingAnchor, constant: 10).isActive = true
@@ -120,6 +120,34 @@ class FavoritesTableViewCell: UITableViewCell {
         year.topAnchor.constraint(equalTo: infosView.topAnchor, constant: 10).isActive = true
         year.widthAnchor.constraint(equalToConstant: 55).isActive = true
         
+    }
+    
+    public func setCell(with movie: FavoriteMovie?) {
+        activityIndicator.startAnimating()
+        if let movie = movie {
+            titleText.text = movie.title
+            overview.text = movie.overview
+            year.text = movie.year
+            guard let posterUrl = movie.posterUrl else {
+                return
+            }
+            LoadImageWithCache.shared.downloadMovieAPIImage(posterUrl: posterUrl, imageView: bannerView, completion: { result in
+                switch result {
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
+                    }
+                    debugPrint("Erro ao baixar imagem: \(error.reason)")
+                case .success(let response):
+                    DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
+                        self.bannerView.image = response.banner
+                    }
+                }
+            })
+        } else {
+            bannerView.image = #imageLiteral(resourceName: "placeholder")
+        }
     }
 
 }

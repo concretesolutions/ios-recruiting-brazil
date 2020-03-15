@@ -25,32 +25,42 @@ final class FavoritesListViewModel {
     // MARK: - Properties
     
     private weak var delegate: FavoritesListViewModelDelegate?
-    private var movies: [FavoriteMovie] = []
-   // private var isFetchInProgress = false
+    private var favMovies: [FavoriteMovie] = []
+    private var isFetchInProgress = false
+    
+    public var currentCount: Int {
+        return favMovies.count
+    }
         
     // MARK: - Class Functions
     
+    public func movie(at index: Int) -> FavoriteMovie {
+        return favMovies[index]
+    }
+    
     public func getMovies() -> [FavoriteMovie] {
-        return movies
+        return favMovies
     }
     
     public func fetchFavorites() {
-        //guard !isFetchInProgress else {
-//            return
-        //}
-        //isFetchInProgress = true
+        guard !isFetchInProgress else {
+            return
+        }
+        isFetchInProgress = true
         let managedObjCont = PersistanceService.context
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
         do {
-            //let favMovies = try (managedObjCont.fetch(fetchRequest) as! [FavoriteMovie])
-            //movies = favMovies
-            //print(favMovies)
+            favMovies = try ((managedObjCont.fetch(fetchRequest)) as? [FavoriteMovie] ?? [])
+            DispatchQueue.main.async {
+                self.isFetchInProgress = false
+                self.delegate?.onFetchCompleted()
+            }
         } catch {
-            //let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            //displayAlert(with: "Alerta", message: "Erro ao buscar favoritos!", actions: [action])
+            DispatchQueue.main.async {
+                self.isFetchInProgress = false
+                self.delegate?.onFetchFailed(with: "Erro ao carregar favoritos")
+            }
         }
-
-
     }
 
 
