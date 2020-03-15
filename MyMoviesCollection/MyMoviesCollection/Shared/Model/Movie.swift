@@ -9,12 +9,12 @@
 import Foundation
 
 struct Movie: Decodable {
-    let title: String
-    let id: Int
-    let posterUrl: String
-    let overview: String
-    let releaseDate: String
-    let generedIds: [Int]
+    let title: String?
+    let id: Int64?
+    let posterUrl: String?
+    let overview: String?
+    let releaseDate: String?
+    let generedIds: [Int?]
     
     enum CodingKeys: String, CodingKey {
         case title = "original_title"
@@ -25,7 +25,7 @@ struct Movie: Decodable {
         case generedIds = "genre_ids"
     }
     
-    init(title: String, id: Int, posterUrl: String, overview: String, releaseDate: String, generedIds: [Int]) {
+    init(title: String, id: Int64, posterUrl: String, overview: String, releaseDate: String, generedIds: [Int]) {
         self.title = title
         self.id = id
         self.posterUrl = posterUrl
@@ -36,12 +36,12 @@ struct Movie: Decodable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let title = try container.decode(String.self, forKey: .title)
-        let id = try container.decode(Int.self, forKey: .id)
-        let posterUrl = try container.decode(String.self, forKey: .posterUrl)
-        let overview = try container.decode(String.self, forKey: .overview)
-        let releaseDate = try container.decode(String.self, forKey: .releaseDate)
-        let generedIds = try container.decode([Int].self, forKey: .generedIds)
+        let title = (try? container.decode(String.self, forKey: .title)) ?? ""
+        let id = (try? container.decode(Int64.self, forKey: .id)) ?? 0
+        let posterUrl = (try? container.decode(String.self, forKey: .posterUrl)) ?? ""
+        let overview = (try? container.decode(String.self, forKey: .overview)) ?? ""
+        let releaseDate = (try? container.decode(String.self, forKey: .releaseDate)) ?? ""
+        let generedIds = (try? container.decode([Int].self, forKey: .generedIds)) ?? []
         self.init(title: title, id: id, posterUrl: posterUrl, overview: overview, releaseDate: releaseDate, generedIds: generedIds)
     }
     

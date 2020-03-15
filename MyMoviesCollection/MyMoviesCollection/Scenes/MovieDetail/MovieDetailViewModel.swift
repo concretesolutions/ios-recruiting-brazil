@@ -58,10 +58,10 @@ final class MovieDetailViewModel {
         }
     }
     
-    public func findGens(genIds: [Int]) -> String {
+    public func findGens(genIds: [Int?]) -> String {
         var finalGenString = ""
         for i in 0..<genIds.count {
-            finalGenString.append(contentsOf: getGenById(from: genIds[i]))
+            finalGenString.append(contentsOf: getGenById(from: genIds[i] ?? 0))
             if i != (genIds.count - 1) {
                 finalGenString.append(contentsOf: ", ")
             }

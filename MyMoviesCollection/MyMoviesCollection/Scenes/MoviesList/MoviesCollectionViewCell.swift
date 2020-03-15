@@ -65,7 +65,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
       super.prepareForReuse()
-      
+      addViews()
       setCell(with: .none)
     }
 
@@ -108,7 +108,10 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         activityIndicator.startAnimating()
         if let movie = movie {
             titleText.text = movie.title
-            LoadImageWithCache.shared.downloadMovieAPIImage(posterUrl: movie.posterUrl, imageView: bannerView, completion: { result in
+            guard let posterUrl = movie.posterUrl else {
+                return
+            }
+            LoadImageWithCache.shared.downloadMovieAPIImage(posterUrl: posterUrl, imageView: bannerView, completion: { result in
                 switch result {
                 case .failure(let error):
                     DispatchQueue.main.async {
