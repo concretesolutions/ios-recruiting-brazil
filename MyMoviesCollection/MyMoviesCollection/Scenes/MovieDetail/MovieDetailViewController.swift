@@ -181,7 +181,7 @@ class MovieDetailViewController: UIViewController, Alerts {
     
     private func setMovieDetails() {
         guard let movieUrl = movieToPresent?.posterUrl else { return }
-        LoadImageWithCache.shared.downloadMovieAPIImage(posterUrl: movieUrl, imageView: imageView, completion: { result in
+        LoadImageWithCache.shared.downloadMovieAPIImage(posterUrl: movieUrl, completion: { result in
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async {

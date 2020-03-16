@@ -112,7 +112,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
             guard let posterUrl = movie.posterUrl else {
                 return
             }
-            LoadImageWithCache.shared.downloadMovieAPIImage(posterUrl: posterUrl, imageView: bannerView, completion: { result in
+            LoadImageWithCache.shared.downloadMovieAPIImage(posterUrl: posterUrl, completion: { result in
                 switch result {
                 case .failure(let error):
                     DispatchQueue.main.async {
@@ -139,6 +139,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
             })
         } else {
             bannerView.image = #imageLiteral(resourceName: "placeholder")
+            favoriteButton.isSelected = false
         }
         
     }

@@ -22,15 +22,14 @@ class LoadImageWithCache {
     
     // MARK: - Class Functions
     
-    func downloadMovieAPIImage(posterUrl: String, imageView: UIImageView, completion: @escaping (Result<MoviePosterResponse, ResponseError>) -> Void) {
+    func downloadMovieAPIImage(posterUrl: String, completion: @escaping (Result<MoviePosterResponse, ResponseError>) -> Void) {
         let urlConcat = "https://image.tmdb.org/t/p/w500" + posterUrl
         guard let url = URL(string: urlConcat) else {
             completion(Result.failure(ResponseError.rede))
             return
         }
         if let imageFromCache = imageCache.object(forKey: url.absoluteString as NSString) as? UIImage {
-            imageView.image = imageFromCache
-            let poster = MoviePosterResponse.init(banner: imageView.image ?? imageFromCache)
+            let poster = MoviePosterResponse.init(banner: imageFromCache)
             completion(Result.success(poster))
             return
         }
