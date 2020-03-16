@@ -62,7 +62,7 @@ class FavoritesTableViewController: UITableViewController, Alerts {
             } else {
                 let title = "Alerta"
                 let action = UIAlertAction(title: "OK", style: .default)
-                self.displayAlert(with: title , message: "Erro ao deletar do favorito", actions: [action])
+                self.displayAlert(with: title , message: kDeleteFavoriteError, actions: [action])
             }
         })
     }
@@ -104,7 +104,7 @@ class FavoritesTableViewController: UITableViewController, Alerts {
             let action = UIAlertAction(title: "Desfavoritar", style: .destructive) { (result) in
                 self.deleteMovie(index: indexPath)
             }
-            displayAlert(with: "Alerta", message: "Deseja mesmo desfavoritar o filme?", actions: [action])
+            displayAlert(with: "Alerta", message: kUnfavoriteConfirmation, actions: [action])
         }
     }
     
@@ -128,9 +128,8 @@ extension FavoritesTableViewController: FavoritesListViewModelDelegate {
         DispatchQueue.main.async {
             self.loadingIndicator.stopAnimating()
         }
-        let title = "Alerta"
         let action = UIAlertAction(title: "OK", style: .default)
-        displayAlert(with: title , message: reason, actions: [action])
+        displayAlert(with: "Alerta" , message: reason, actions: [action])
     }
     
     

@@ -12,12 +12,12 @@ class PersistanceManager {
     
     let managedObjectContext = PersistanceService.context
     
-    func fetchFavoritesList() throws -> [FavoriteMovie] {
+    public func fetchFavoritesList() throws -> [FavoriteMovie] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
         return try (managedObjectContext.fetch(request) as? [FavoriteMovie] ?? [])
     }
     
-    func saveFavorite(movie: Movie) throws {
+    public func saveFavorite(movie: Movie) throws {
         let movieToSave = FavoriteMovie(context: managedObjectContext)
         movieToSave.title = movie.title
         movieToSave.id = movie.id ?? 0
@@ -26,5 +26,14 @@ class PersistanceManager {
         movieToSave.posterUrl = movie.posterUrl
       
         try managedObjectContext.save()
+    }
+    
+    public func deleteFavorite(id: Int32) throws {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
+        let predicate = NSPredicate(format: "id == %d", id)
+        request.predicate = predicate
+        
+        try managedObjectContext.fetch(request)
+         
     }
 }

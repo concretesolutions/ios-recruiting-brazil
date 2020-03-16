@@ -179,9 +179,8 @@ extension MoviesCollectionCollectionViewController: MoviesViewModelDelegate {
         DispatchQueue.main.async {
             self.loadingIndicator.stopAnimating()
         }
-        let title = "Alerta"
         let action = UIAlertAction(title: "OK", style: .default)
-        displayAlert(with: title , message: reason, actions: [action])
+        displayAlert(with: "Alerta" , message: reason, actions: [action])
     }
 }
 
