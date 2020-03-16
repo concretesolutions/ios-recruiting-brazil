@@ -41,6 +41,7 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
         collectionView.dataSource = self
         viewModel = MoviesViewModel(delegate: self)
         setUpLoading()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCollection), name: NSNotification.Name(rawValue: "reloadMovies"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +65,7 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
             return
         }
         viewModel = nil
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "reloadMovies"), object: nil)
     }
     
     // MARK: - Class Functions
@@ -84,6 +86,12 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
         loadingIndicator.heightAnchor.constraint(equalToConstant: 35.0).isActive = true
         loadingIndicator.style = .large
         loadingIndicator.startAnimating()
+    }
+    
+    @objc func reloadCollection() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
     

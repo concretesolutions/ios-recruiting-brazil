@@ -210,6 +210,7 @@ class MovieDetailViewController: UIViewController, Alerts {
             viewModel?.favoriteMovie(movie: movie, completion: { (success) in
                 self.isFavorite = true
                 self.favButton.isSelected = true
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadMovies"), object: nil)
             })
         }
     }
