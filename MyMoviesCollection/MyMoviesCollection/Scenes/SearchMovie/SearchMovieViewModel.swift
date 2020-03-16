@@ -45,12 +45,12 @@ final class SearchMovieViewModel {
         return movies[index]
     }
     
-    public func fetchSearchMovies() {
+    public func fetchSearchMovies(text: String) {
         guard !isFetchInProgress else {
             return
         }
         isFetchInProgress = true
-        client.fetchSearchMovie(text: "Thor") { resultMov in
+        client.fetchSearchMovie(text: text) { resultMov in
             switch resultMov {
             case .failure(let errorMov):
                 DispatchQueue.main.async {

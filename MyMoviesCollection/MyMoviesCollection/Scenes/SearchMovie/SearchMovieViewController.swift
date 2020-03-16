@@ -10,6 +10,7 @@ import UIKit
 
 class SearchMovieViewController: UICollectionViewController, Alerts, UICollectionViewDelegateFlowLayout {
 
+    // MARK: - Properties
 
     public var searchString = ""
     private let reuseIdentifier = "movcell"
@@ -26,6 +27,32 @@ class SearchMovieViewController: UICollectionViewController, Alerts, UICollectio
         return indicator
     }()
     
+    lazy var noResultsView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var imageView: UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.image = #imageLiteral(resourceName: "search_icon")
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
+    
+    lazy var label: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.boldSystemFont(ofSize: 26.0)
+        label.textColor = ColorSystem.cBlueDark
+        label.numberOfLines = 3
+        label.textAlignment = .center
+        return label
+    }()
+    
+    // MARK: - ViewController life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
@@ -34,7 +61,7 @@ class SearchMovieViewController: UICollectionViewController, Alerts, UICollectio
         collectionView.delegate = self
         collectionView.dataSource = self
         viewModel = SearchMovieViewModel(delegate: self)
-        viewModel?.fetchSearchMovies()
+        viewModel?.fetchSearchMovies(text: searchString)
     }
     
     deinit {
@@ -43,8 +70,34 @@ class SearchMovieViewController: UICollectionViewController, Alerts, UICollectio
         }
         viewModel = nil
     }
+    
+    // MARK: - Class Functions
 
-    // MARK: UICollectionViewDataSource
+    private func setUpNoResultsView() {
+        view.addSubview(noResultsView)
+        noResultsView.addSubview(imageView)
+        noResultsView.addSubview(label)
+        
+        noResultsView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        noResultsView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        noResultsView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        noResultsView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        
+        imageView.bottomAnchor.constraint(equalTo: noResultsView.centerYAnchor).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: noResultsView.leadingAnchor).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: noResultsView.trailingAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: (view.frame.height / 4)).isActive = true
+        
+        label.topAnchor.constraint(equalTo: noResultsView.centerYAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: noResultsView.leadingAnchor, constant: 45).isActive = true
+        label.trailingAnchor.constraint(equalTo: noResultsView.trailingAnchor, constant: -45).isActive = true
+        label.heightAnchor.constraint(equalToConstant: (view.frame.height / 4)).isActive = true
+        
+        label.text = "Sua busca por \u{22}\(searchString)\u{22} não resultou em nenhum resultado."
+        
+    }
+    
+    // MARK: - UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         guard let numOfMovs = viewModel?.currentCount else { return 0 }
@@ -113,6 +166,9 @@ extension SearchMovieViewController: SearchMovieViewModelDelegate {
         DispatchQueue.main.async {
             self.loadingIndicator.stopAnimating()
             self.collectionView.reloadData()
+        }
+        if viewModel?.currentCount == 0 {
+            setUpNoResultsView()
         }
     }
     
