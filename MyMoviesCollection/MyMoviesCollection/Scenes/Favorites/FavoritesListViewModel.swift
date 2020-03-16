@@ -47,10 +47,9 @@ final class FavoritesListViewModel {
             return
         }
         isFetchInProgress = true
-        let managedObjCont = PersistanceService.context
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
         do {
-            favMovies = try ((managedObjCont.fetch(fetchRequest)) as? [FavoriteMovie] ?? [])
+            let dataManager = PersistanceManager()
+            favMovies = try dataManager.fetchFavoritesList()
             DispatchQueue.main.async {
                 self.isFetchInProgress = false
                 self.delegate?.onFetchCompleted()

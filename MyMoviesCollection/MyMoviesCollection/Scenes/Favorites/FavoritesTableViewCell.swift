@@ -30,7 +30,7 @@ class FavoritesTableViewCell: UITableViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textAlignment = .left
         label.textColor = ColorSystem.cBlueDark
-        label.numberOfLines = 1
+        label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
@@ -75,10 +75,15 @@ class FavoritesTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setCell(with: .none)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    override func prepareForReuse() {
+        setCell(with: .none)
     }
     
     // MARK: - Class Functions
@@ -136,6 +141,7 @@ class FavoritesTableViewCell: UITableViewCell {
                 case .failure(let error):
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()
+                        self.bannerView.image = #imageLiteral(resourceName: "placeholder")
                     }
                     debugPrint("Erro ao baixar imagem: \(error.reason)")
                 case .success(let response):

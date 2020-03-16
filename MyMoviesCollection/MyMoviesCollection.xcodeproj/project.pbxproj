@@ -38,8 +38,6 @@
 		A795C2B6241E7D2300755B84 /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A795C2B5241E7D2300755B84 /* PersistanceManager.swift */; };
 		A795C2B8241E845400755B84 /* PersistanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A795C2B7241E845400755B84 /* PersistanceService.swift */; };
 		A795C2BA241ED49700755B84 /* FavoritesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A795C2B9241ED49700755B84 /* FavoritesListViewModel.swift */; };
-		A795C2BD241ED8DD00755B84 /* Movie+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A795C2BC241ED8DD00755B84 /* Movie+CoreDataClass.swift */; };
-		A795C2BF241ED8F600755B84 /* Movie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A795C2BE241ED8F600755B84 /* Movie+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,8 +74,6 @@
 		A795C2B5241E7D2300755B84 /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		A795C2B7241E845400755B84 /* PersistanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceService.swift; sourceTree = "<group>"; };
 		A795C2B9241ED49700755B84 /* FavoritesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListViewModel.swift; sourceTree = "<group>"; };
-		A795C2BC241ED8DD00755B84 /* Movie+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A795C2BE241ED8F600755B84 /* Movie+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,7 +247,6 @@
 		A795C2B1241DA2A400755B84 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				A795C2A7241D1BC700755B84 /* FavoriteMovieCoreData.xcdatamodeld */,
 				A795C2BB241ED8BD00755B84 /* Entities */,
 				A795C2B5241E7D2300755B84 /* PersistanceManager.swift */,
 				A795C2B7241E845400755B84 /* PersistanceService.swift */,
@@ -270,8 +265,7 @@
 		A795C2BB241ED8BD00755B84 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				A795C2BC241ED8DD00755B84 /* Movie+CoreDataClass.swift */,
-				A795C2BE241ED8F600755B84 /* Movie+CoreDataProperties.swift */,
+				A795C2A7241D1BC700755B84 /* FavoriteMovieCoreData.xcdatamodeld */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -364,7 +358,6 @@
 				A7424249241A574900AE94FE /* MoviesCollectionCollectionViewController.swift in Sources */,
 				A730E989241B037A006AD615 /* MoviesCollectionViewCell.swift in Sources */,
 				A730E996241BFF81006AD615 /* HTTPResponse.swift in Sources */,
-				A795C2BF241ED8F600755B84 /* Movie+CoreDataProperties.swift in Sources */,
 				A730E99B241C0065006AD615 /* Movie.swift in Sources */,
 				A730E994241BFF57006AD615 /* Result.swift in Sources */,
 				A795C2AD241D26BB00755B84 /* GenresResponse.swift in Sources */,
@@ -375,7 +368,6 @@
 				A730E9A7241C101A006AD615 /* Alerts.swift in Sources */,
 				A795C2B4241DAA0B00755B84 /* CALayer+Extensions.swift in Sources */,
 				A795C2A6241C704100755B84 /* MovieDetailViewController.swift in Sources */,
-				A795C2BD241ED8DD00755B84 /* Movie+CoreDataClass.swift in Sources */,
 				A742422D2419D1A300AE94FE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

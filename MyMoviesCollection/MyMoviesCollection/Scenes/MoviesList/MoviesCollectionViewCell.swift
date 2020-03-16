@@ -11,9 +11,7 @@ import UIKit
 class MoviesCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
-    
-    private var didConfigViews: Bool = false
-    
+        
     private lazy var bannerView: UIImageView = {
        let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -58,10 +56,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        if !didConfigViews {
-            addViews()
-            didConfigViews = true
-        }
+        addViews()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -69,12 +64,8 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
-      super.prepareForReuse()
-      if !didConfigViews {
-        addViews()
-        didConfigViews = true
-      }
-      setCell(with: .none)
+        super.prepareForReuse()
+        setCell(with: .none)
     }
 
     // MARK: - Class Functions
@@ -124,6 +115,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
                 case .failure(let error):
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()
+                        self.bannerView.image = #imageLiteral(resourceName: "placeholder")
                     }
                     debugPrint("Erro ao baixar imagem: \(error.reason)")
                 case .success(let response):

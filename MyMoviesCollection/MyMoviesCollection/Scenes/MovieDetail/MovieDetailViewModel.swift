@@ -81,24 +81,13 @@ final class MovieDetailViewModel {
     }
     
     public func favoriteMovie(movie: Movie, completion: @escaping(_ saved: Bool) -> Void) {
-        guard let entity = NSEntityDescription.entity(forEntityName: "FavoriteMovie", in: PersistanceService.context) else {
+        do {
+            let dataManager = PersistanceManager()
+            try dataManager.saveFavorite(movie: movie)
+            completion(true)
+        } catch {
             completion(false)
-            return
         }
-        let movieToPersist = NSManagedObject(entity: entity, insertInto: PersistanceService.context)
-        movieToPersist.setValue(movie.title, forKey: "title")
-        movieToPersist.setValue(movie.overview, forKey: "overview")
-        movieToPersist.setValue(movie.releaseDate, forKey: "year")
-        movieToPersist.setValue(movie.posterUrl, forKey: "posterUrl")
-        if let idToSave = movie.id {
-            movieToPersist.setValue(idToSave, forKey: "id")
-        }
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavMovie")
-        fetchRequest.includesPropertyValues = false
-        
-        PersistanceService.saveContext()
-        completion(true)
-        
     }
     
     public func checkIfFavorite(id: Int32, completion: @escaping(_ result: Bool) -> Void) {
