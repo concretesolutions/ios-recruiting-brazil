@@ -28,11 +28,23 @@ class PersistanceManager {
         try managedObjectContext.save()
     }
     
-    public func deleteFavorite(id: Int32) throws {
+    public func deleteFavorite(id: Int32) -> Bool {
+        var didDeleted = false
         let predicate = NSPredicate(format: "id == %d", id)
         fetchRequest.predicate = predicate
-        
-        try managedObjectContext.fetch(fetchRequest)
+        do {
+            if let items = try managedObjectContext.fetch(fetchRequest) as? [FavoriteMovie] {
+                for item in items {
+                    managedObjectContext.delete(item)
+                    didDeleted = true
+                }
+                return didDeleted
+            } else {
+                return false
+            }
+        } catch {
+            return false
+        }
     }
     
     public func checkFavorite(id: Int32) throws -> [FavoriteMovie] {

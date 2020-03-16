@@ -66,7 +66,8 @@ final class FavoritesListViewModel {
         let idToDelete = favMovies[line].id
         let dataManager = PersistanceManager()
         do {
-            try dataManager.deleteFavorite(id: idToDelete)
+            let results = try dataManager.deleteFavorite(id: idToDelete)
+            
             favMovies.remove(at: line)
             PersistanceService.saveContext()
             completion(true)

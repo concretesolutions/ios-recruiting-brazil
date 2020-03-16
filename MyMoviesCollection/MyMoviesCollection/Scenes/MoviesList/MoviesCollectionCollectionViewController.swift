@@ -28,6 +28,12 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
         return indicator
     }()
     
+    private lazy var searchBar: UISearchBar = {
+        let bar = UISearchBar()
+        bar.barTintColor = ColorSystem.cYellowDark
+        return bar
+    }()
+    
     // MARK: - ViewController life cycle
     
     override func viewDidLoad() {
@@ -40,7 +46,7 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
         collectionView.delegate = self
         collectionView.dataSource = self
         viewModel = MoviesViewModel(delegate: self)
-        setUpLoading()
+        setUpViews()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCollection), name: NSNotification.Name(rawValue: "reloadMovies"), object: nil)
     }
     
@@ -78,14 +84,19 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
         return soma >= viewModelCount
     }
     
-    private func setUpLoading() {
+    private func setUpViews() {
         view.addSubview(loadingIndicator)
-        loadingIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        loadingIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        view.addSubview(searchBar)
+        loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         loadingIndicator.widthAnchor.constraint(equalToConstant: 35.0).isActive = true
         loadingIndicator.heightAnchor.constraint(equalToConstant: 35.0).isActive = true
         loadingIndicator.style = .large
         loadingIndicator.startAnimating()
+        
+        searchBar.topAnchor.constraint(equalTo: navigationController?.navigationBar.bottomAnchor ?? self.view.topAnchor).isActive = true
+        searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     }
     
     @objc func reloadCollection() {
