@@ -36,6 +36,13 @@ class FavoritesTableViewController: UITableViewController, Alerts {
         viewModel?.fetchFavorites()
         setUpView()
     }
+    
+    deinit {
+        guard viewModel != nil else {
+            return
+        }
+        viewModel = nil
+    }
 
     // MARK: - Class Functions
     
@@ -57,6 +64,7 @@ class FavoritesTableViewController: UITableViewController, Alerts {
         viewModel?.deleteFavorite(line: index.row, completion: { success in
             if success {
                 DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadMovies"), object: nil)
                     self.tableView.reloadData()
                 }
             } else {

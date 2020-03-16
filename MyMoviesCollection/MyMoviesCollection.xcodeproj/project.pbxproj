@@ -39,6 +39,9 @@
 		A795C2B6241E7D2300755B84 /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A795C2B5241E7D2300755B84 /* PersistanceManager.swift */; };
 		A795C2B8241E845400755B84 /* PersistanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A795C2B7241E845400755B84 /* PersistanceService.swift */; };
 		A795C2BA241ED49700755B84 /* FavoritesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A795C2B9241ED49700755B84 /* FavoritesListViewModel.swift */; };
+		A7F9B128241F9C7600113412 /* SearchMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F9B127241F9C7600113412 /* SearchMovieViewController.swift */; };
+		A7F9B12A241FA50700113412 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F9B129241FA50700113412 /* UIViewController+Extensions.swift */; };
+		A7F9B12C241FA7F900113412 /* SearchMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F9B12B241FA7F900113412 /* SearchMovieViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +79,9 @@
 		A795C2B5241E7D2300755B84 /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		A795C2B7241E845400755B84 /* PersistanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceService.swift; sourceTree = "<group>"; };
 		A795C2B9241ED49700755B84 /* FavoritesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListViewModel.swift; sourceTree = "<group>"; };
+		A7F9B127241F9C7600113412 /* SearchMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieViewController.swift; sourceTree = "<group>"; };
+		A7F9B129241FA50700113412 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		A7F9B12B241FA7F900113412 /* SearchMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +187,7 @@
 		A742423E2419DAB500AE94FE /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				A7F9B126241F9BF100113412 /* SearchMovie */,
 				A795C2A4241C701B00755B84 /* MovieDetail */,
 				A74242402419DB2500AE94FE /* Favorites */,
 				A742423F2419DAC100AE94FE /* MoviesList */,
@@ -261,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				A795C2B3241DAA0B00755B84 /* CALayer+Extensions.swift */,
+				A7F9B129241FA50700113412 /* UIViewController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -271,6 +279,15 @@
 				A795C2A7241D1BC700755B84 /* FavoriteMovieCoreData.xcdatamodeld */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		A7F9B126241F9BF100113412 /* SearchMovie */ = {
+			isa = PBXGroup;
+			children = (
+				A7F9B127241F9C7600113412 /* SearchMovieViewController.swift */,
+				A7F9B12B241FA7F900113412 /* SearchMovieViewModel.swift */,
+			);
+			path = SearchMovie;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,12 +381,15 @@
 				A730E996241BFF81006AD615 /* HTTPResponse.swift in Sources */,
 				A730E99B241C0065006AD615 /* Movie.swift in Sources */,
 				A730E994241BFF57006AD615 /* Result.swift in Sources */,
+				A7F9B128241F9C7600113412 /* SearchMovieViewController.swift in Sources */,
 				A795C2AD241D26BB00755B84 /* GenresResponse.swift in Sources */,
 				A730E9A2241C0120006AD615 /* MoviesAPIClient.swift in Sources */,
 				A742424B241A576500AE94FE /* FavoritesTableViewController.swift in Sources */,
+				A7F9B12C241FA7F900113412 /* SearchMovieViewModel.swift in Sources */,
 				A742422B2419D1A300AE94FE /* AppDelegate.swift in Sources */,
 				A795C2AB241D23C100755B84 /* MovieDetailViewModel.swift in Sources */,
 				A730E9A7241C101A006AD615 /* Alerts.swift in Sources */,
+				A7F9B12A241FA50700113412 /* UIViewController+Extensions.swift in Sources */,
 				A795C2B4241DAA0B00755B84 /* CALayer+Extensions.swift in Sources */,
 				A795C2A6241C704100755B84 /* MovieDetailViewController.swift in Sources */,
 				A742422D2419D1A300AE94FE /* SceneDelegate.swift in Sources */,

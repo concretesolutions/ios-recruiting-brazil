@@ -1,28 +1,29 @@
 //
-//  MoviesCollectionViewModel.swift
+//  SearchMovieViewModel.swift
 //  MyMoviesCollection
 //
-//  Created by Filipe Merli on 13/03/20.
+//  Created by Filipe Merli on 16/03/20.
 //  Copyright © 2020 Filipe Merli. All rights reserved.
 //
 
 import Foundation
-protocol MoviesViewModelDelegate: class {
+
+protocol SearchMovieViewModelDelegate: class {
     func onFetchCompleted()
     func onFetchFailed(with reason: String)
 }
 
-final class MoviesViewModel {
+final class SearchMovieViewModel {
     
     // MARK: - Initializer
     
-    init(delegate: MoviesViewModelDelegate) {
+    init(delegate: SearchMovieViewModelDelegate) {
         self.delegate = delegate
     }
     
     // MARK: - Properties
     
-    private weak var delegate: MoviesViewModelDelegate?
+    private weak var delegate: SearchMovieViewModelDelegate?
     private var movies: [Movie] = []
     private var currentPage = 1
     private var total = 0
@@ -44,17 +45,12 @@ final class MoviesViewModel {
         return movies[index]
     }
     
-    public func fetchPopularMovies() {
+    public func fetchSearchMovies() {
         guard !isFetchInProgress else {
             return
         }
-        if currentCount != 0 && total != 0 {
-            guard total > currentCount else {
-                return
-            }
-        }
         isFetchInProgress = true
-        client.fetchPopularMovies(page: currentPage) { resultMov in
+        client.fetchSearchMovie(text: "Thor") { resultMov in
             switch resultMov {
             case .failure(let errorMov):
                 DispatchQueue.main.async {

@@ -92,6 +92,13 @@ class MovieDetailViewController: UIViewController, Alerts {
         setUpBorders()
     }
     
+    deinit {
+        guard viewModel != nil else {
+            return
+        }
+        viewModel = nil
+    }
+    
     // MARK: - Class Functions
     
     private func setUpView() {

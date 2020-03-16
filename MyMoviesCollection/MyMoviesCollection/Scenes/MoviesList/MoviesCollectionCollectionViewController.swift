@@ -30,7 +30,8 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
     
     private lazy var searchBar: UISearchBar = {
         let bar = UISearchBar()
-        bar.barTintColor = ColorSystem.cYellowDark
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.tintColor = ColorSystem.cYellowDark
         return bar
     }()
     
@@ -46,8 +47,11 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
         collectionView.delegate = self
         collectionView.dataSource = self
         viewModel = MoviesViewModel(delegate: self)
-        setUpViews()
+        setUpLoading()
+        searchBar.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCollection), name: NSNotification.Name(rawValue: "reloadMovies"), object: nil)
+        self.hideKeyboardWhenTappedAround()
+        collectionView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +68,10 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
             navTopItem.titleView = .none
             navTopItem.title = "Movies"
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        setUpSearchBar()
     }
     
     deinit {
@@ -84,9 +92,8 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
         return soma >= viewModelCount
     }
     
-    private func setUpViews() {
+    private func setUpLoading() {
         view.addSubview(loadingIndicator)
-        view.addSubview(searchBar)
         loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         loadingIndicator.widthAnchor.constraint(equalToConstant: 35.0).isActive = true
@@ -94,9 +101,22 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
         loadingIndicator.style = .large
         loadingIndicator.startAnimating()
         
+    }
+    
+    private func setUpSearchBar() {
+        view.addSubview(searchBar)
         searchBar.topAnchor.constraint(equalTo: navigationController?.navigationBar.bottomAnchor ?? self.view.topAnchor).isActive = true
         searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        searchBar.placeholder = "Search"
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        
     }
     
     @objc func reloadCollection() {
@@ -104,8 +124,7 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
             self.collectionView.reloadData()
         }
     }
-    
-    
+        
     // MARK: - UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -186,7 +205,7 @@ class MoviesCollectionCollectionViewController: UICollectionViewController, UICo
 // MARK: - MoviesViewModelDelegate
 
 extension MoviesCollectionCollectionViewController: MoviesViewModelDelegate {
-    func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
+    func onFetchCompleted() {
         DispatchQueue.main.async {
             self.loadingIndicator.stopAnimating()
             self.collectionView.reloadData()
@@ -211,5 +230,15 @@ extension MoviesCollectionCollectionViewController: UICollectionViewDataSourcePr
             viewModel?.fetchPopularMovies()
         }
     }
-    
+}
+
+// MARK: - SearchBar Delegate
+
+extension MoviesCollectionCollectionViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let layout = MoviesListFlowLayout()
+        let searchViewController = SearchMovieViewController(collectionViewLayout: layout)
+        searchViewController.searchString = searchBar.text ?? ""
+        navigationController?.pushViewController(searchViewController, animated: true)
+    }
 }
