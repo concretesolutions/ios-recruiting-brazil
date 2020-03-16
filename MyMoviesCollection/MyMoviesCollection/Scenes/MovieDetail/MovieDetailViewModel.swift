@@ -81,8 +81,8 @@ final class MovieDetailViewModel {
     }
     
     public func favoriteMovie(movie: Movie, completion: @escaping(_ saved: Bool) -> Void) {
+        let dataManager = PersistanceManager()
         do {
-            let dataManager = PersistanceManager()
             try dataManager.saveFavorite(movie: movie)
             completion(true)
         } catch {
@@ -91,12 +91,9 @@ final class MovieDetailViewModel {
     }
     
     public func checkIfFavorite(id: Int32, completion: @escaping(_ result: Bool) -> Void) {
-        let managedObjCont = PersistanceService.context
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
-        let predicate = NSPredicate(format: "id == %d", id)
-        fetchRequest.predicate = predicate
+        let dataManager = PersistanceManager()
         do {
-            let result = try managedObjCont.fetch(fetchRequest)
+            let result = try dataManager.checkFavorite(id: id)
             if result.count > 0 {
                 completion(true)
             } else {

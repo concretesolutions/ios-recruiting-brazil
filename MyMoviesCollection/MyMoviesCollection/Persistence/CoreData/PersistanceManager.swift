@@ -11,10 +11,10 @@ import CoreData
 class PersistanceManager {
     
     let managedObjectContext = PersistanceService.context
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
     
     public func fetchFavoritesList() throws -> [FavoriteMovie] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
-        return try (managedObjectContext.fetch(request) as? [FavoriteMovie] ?? [])
+        return try (managedObjectContext.fetch(fetchRequest) as? [FavoriteMovie] ?? [])
     }
     
     public func saveFavorite(movie: Movie) throws {
@@ -29,11 +29,15 @@ class PersistanceManager {
     }
     
     public func deleteFavorite(id: Int32) throws {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
         let predicate = NSPredicate(format: "id == %d", id)
-        request.predicate = predicate
+        fetchRequest.predicate = predicate
         
-        try managedObjectContext.fetch(request)
-         
+        try managedObjectContext.fetch(fetchRequest)
+    }
+    
+    public func checkFavorite(id: Int32) throws -> [FavoriteMovie] {
+        let predicate = NSPredicate(format: "id == %d", id)
+        fetchRequest.predicate = predicate
+        return try (managedObjectContext.fetch(fetchRequest) as? [FavoriteMovie] ?? [])
     }
 }

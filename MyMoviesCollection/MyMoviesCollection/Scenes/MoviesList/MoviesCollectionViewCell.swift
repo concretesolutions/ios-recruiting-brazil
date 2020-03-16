@@ -38,8 +38,10 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     private lazy var favoriteButton: UIButton = {
        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let icon = #imageLiteral(resourceName: "favorite_gray_icon")
-        button.setImage(icon, for: .normal)
+        let iconForNormal = #imageLiteral(resourceName: "favorite_gray_icon")
+        button.setImage(iconForNormal, for: .normal)
+        let iconForSelected = #imageLiteral(resourceName: "favorite_full_icon")
+        button.setImage(iconForSelected, for: .selected)
         button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
@@ -125,10 +127,34 @@ class MoviesCollectionViewCell: UICollectionViewCell {
                     }
                 }
             })
+            guard let id = movie.id else {
+                return
+            }
+            checkIfFavorite(id: id, completion: { result in
+                if result {
+                    DispatchQueue.main.async {
+                        self.favoriteButton.isSelected = true
+                    }
+                }
+            })
         } else {
             bannerView.image = #imageLiteral(resourceName: "placeholder")
         }
         
+    }
+    
+    private func checkIfFavorite(id: Int32, completion: @escaping(_ result: Bool) -> Void) {
+        let dataManager = PersistanceManager()
+        do {
+            let result = try dataManager.checkFavorite(id: id)
+            if result.count > 0 {
+                completion(true)
+            } else {
+            completion(false)
+        }
+        } catch {
+            completion(false)
+        }
     }
     
 }
