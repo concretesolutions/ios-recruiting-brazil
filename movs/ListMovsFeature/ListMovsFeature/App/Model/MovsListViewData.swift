@@ -9,6 +9,7 @@
 import Foundation
 
 public struct MovsListViewData {
+    public var textInSearchBar: String = ""
     public var items: [MovsItemViewData] = []
 }
 

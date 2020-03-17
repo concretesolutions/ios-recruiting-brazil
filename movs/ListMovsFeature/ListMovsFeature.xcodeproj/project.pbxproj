@@ -109,9 +109,7 @@
 		D805FEA12411502400AA5A8B /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				D869EB2524145E9000BB8C2B /* ListMovsService.swift */,
-				D869EB2724145EE600BB8C2B /* ListMovsServiceType.swift */,
-				D8D22E7C24149AF300F4AF4B /* ListMovsDataType.swift */,
+				D8EB4590242127C500144C76 /* ListView */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -184,8 +182,7 @@
 		D86306B7240DBA4300961B3A /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				D86306B8240DBA4300961B3A /* ListMovsView.swift */,
-				D86306B9240DBA4300961B3A /* ListMovsPresenter.swift */,
+				D8EB458E242127A500144C76 /* ListView */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -193,8 +190,7 @@
 		D86306BA240DBA4300961B3A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D89A4F38240EE5CD00E75A26 /* SearchView */,
-				D86306BB240DBA4300961B3A /* ListMovsViewController.swift */,
+				D8EB458D2421279600144C76 /* ListView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -202,7 +198,7 @@
 		D86306BC240DBA4300961B3A /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				D86306BD240DBA4300961B3A /* ListMovsRouter.swift */,
+				D8EB458F242127B300144C76 /* ListView */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -247,6 +243,42 @@
 				D8D22E832414A2EA00F4AF4B /* MovsListViewData.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D8EB458D2421279600144C76 /* ListView */ = {
+			isa = PBXGroup;
+			children = (
+				D89A4F38240EE5CD00E75A26 /* SearchView */,
+				D86306BB240DBA4300961B3A /* ListMovsViewController.swift */,
+			);
+			path = ListView;
+			sourceTree = "<group>";
+		};
+		D8EB458E242127A500144C76 /* ListView */ = {
+			isa = PBXGroup;
+			children = (
+				D86306B8240DBA4300961B3A /* ListMovsView.swift */,
+				D86306B9240DBA4300961B3A /* ListMovsPresenter.swift */,
+			);
+			path = ListView;
+			sourceTree = "<group>";
+		};
+		D8EB458F242127B300144C76 /* ListView */ = {
+			isa = PBXGroup;
+			children = (
+				D86306BD240DBA4300961B3A /* ListMovsRouter.swift */,
+			);
+			path = ListView;
+			sourceTree = "<group>";
+		};
+		D8EB4590242127C500144C76 /* ListView */ = {
+			isa = PBXGroup;
+			children = (
+				D869EB2524145E9000BB8C2B /* ListMovsService.swift */,
+				D869EB2724145EE600BB8C2B /* ListMovsServiceType.swift */,
+				D8D22E7C24149AF300F4AF4B /* ListMovsDataType.swift */,
+			);
+			path = ListView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

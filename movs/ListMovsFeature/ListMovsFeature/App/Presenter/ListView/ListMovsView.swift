@@ -18,5 +18,4 @@ protocol ListMovsView: AnyObject {
     func showLoading()
     func hideLoading()
     func reloadData(with viewData: MovsListViewData)
-    //func showSuccessCard(viewData: T)
 }

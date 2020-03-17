@@ -50,7 +50,29 @@ extension ListMovsPresenter {
             }
             return copyItem
         }
-        self.view.reloadData(with: self.viewDataModel)
+//        self.view.reloadData(with: self.viewDataModel)
+        self.searchingModel(self.viewDataModel.textInSearchBar)
+    }
+    
+    func searchingModel(_ search: String) {        
+        
+        let isEmpty = search.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        
+        if  isEmpty {
+            self.view.reloadData(with: self.viewDataModel)
+            
+        } else {
+            self.viewDataModel.textInSearchBar = search
+            let itemsSearched = self.itemsInSearching(with: search)
+            self.view.reloadData(with: MovsListViewData(textInSearchBar: search, items: itemsSearched))
+        }
+    }
+}
+
+//MARK: -Privates func-
+extension ListMovsPresenter {
+    private func itemsInSearching(with text: String) -> [MovsItemViewData] {
+        return self.viewDataModel.items.filter { $0.movieName.contains(text) }
     }
 }
 

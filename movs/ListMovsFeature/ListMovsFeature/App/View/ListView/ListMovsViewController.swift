@@ -15,7 +15,9 @@ enum ListMovsHandleState {
     case success(MovsListViewData)
     case failure
     case emptySearch(String)
+    case searching(String)
     case reloadData(MovsListViewData)
+    case favoriteMovie(MovsItemViewData)
 }
 
 open class ListMovsViewController: BaseViewController {
@@ -73,7 +75,7 @@ open class ListMovsViewController: BaseViewController {
         view.image(for: .search, state: .normal)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.searchTextField.delegate = self
-                
+        view.delegate = self
         return view
     }()
     
@@ -119,15 +121,27 @@ extension ListMovsViewController {
         switch state {
         case .loading(let isShowing):
             isShowing ? self.loadingView.startAnimating() : self.loadingView.stopAnimating()
+        
         case .success(let successModel):
             self.setupSuccessView(with: successModel)
+        
         case .failure:
             self.setupErrorView()
+        
         case .emptySearch(let message):
             self.setupEmptyView(with: message)
+        
         case .reloadData(let successModel):
             self.viewData = successModel
             self.gridView.reloadData()
+        
+        case .searching(let searching):
+            self.searchBarView.resignFirstResponder()
+            self.presenter.searchingModel(searching)
+        
+        case .favoriteMovie(let itemView):
+            self.presenter.favoriteMovie(itemView)
+            self.searchBarView.resignFirstResponder()
         }
     }
 }
@@ -228,11 +242,25 @@ extension ListMovsViewController {
 }
 
 //MARK: - UITextFieldDelegate -
-extension ListMovsViewController: UITextFieldDelegate {
+extension ListMovsViewController: UITextFieldDelegate, UISearchBarDelegate {
     public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        print(searchBar.text)
+        guard let search = searchBar.text else { return }
+        self.stateUI = .searching(search)
+    }
+    
+    public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if searchBar.text == "" {
+            self.stateUI = .searching("")
+        }
+    }
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == "" {
+            self.stateUI = .searching("")
+        }
     }
 }
+
+
 
 //MARK: -Collection View DataSource -
 extension ListMovsViewController: UICollectionViewDataSource {
@@ -247,7 +275,7 @@ extension ListMovsViewController: UICollectionViewDataSource {
         if let itemViewData = self.viewData?.items[indexPath.item] {
             successCell.model = itemViewData
             successCell.favoriteMovie = { [weak self] itemView in
-                self?.presenter.favoriteMovie(itemView)
+                self?.stateUI = .favoriteMovie(itemView)
             }
         }
         
