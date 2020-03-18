@@ -18,6 +18,7 @@ enum ListMovsHandleState {
     case searching(String)
     case reloadData(MovsListViewData)
     case favoriteMovie(MovsItemViewData)
+    case showDetail(MovsItemViewData)
 }
 
 open class ListMovsViewController: BaseViewController {
@@ -51,15 +52,19 @@ open class ListMovsViewController: BaseViewController {
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 8, right: 10)
         
         let cellInLine: CGFloat = 2
-        let width = self.view.bounds.width / ( cellInLine + 1.0 )
+        let width = (self.view.bounds.width / ( cellInLine + 1.0 ) ) + 35 //Right + Left + Between
         let height = width * 1.5
         
         layout.itemSize = CGSize(width: width, height: height)
 
+        layout.minimumInteritemSpacing = 2
+        layout.minimumLineSpacing = 2
+        
         let collection = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
         collection.register(ItemMovsCollectionViewCell.self, forCellWithReuseIdentifier: cellReuse)
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.dataSource = self
+        collection.delegate = self
         collection.backgroundColor = .clear
         return collection
     }()
@@ -68,13 +73,17 @@ open class ListMovsViewController: BaseViewController {
     lazy var searchBarView: UISearchBar = {
         let view = UISearchBar()
         view.barTintColor = Colors.yellowLight
-        view.searchTextField.backgroundColor = Colors.yellowDark
+        
         view.layer.borderWidth = 1
         view.layer.borderColor = Colors.yellowLight.cgColor
         view.placeholder = "Search"
         view.image(for: .search, state: .normal)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.searchTextField.delegate = self
+        if #available(iOS 13.0, *) {
+            view.searchTextField.backgroundColor = Colors.yellowDark
+            view.searchTextField.delegate = self
+        }
+        
         view.delegate = self
         return view
     }()
@@ -142,6 +151,9 @@ extension ListMovsViewController {
         case .favoriteMovie(let itemView):
             self.presenter.favoriteMovie(itemView)
             self.searchBarView.resignFirstResponder()
+            
+        case .showDetail(let itemView):
+            self.presenter.showDetail(itemView)
         }
     }
 }
@@ -280,5 +292,12 @@ extension ListMovsViewController: UICollectionViewDataSource {
         }
         
         return successCell
+    }
+}
+
+extension ListMovsViewController: UICollectionViewDelegateFlowLayout {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let item = self.viewData?.items[indexPath.item] else { return }
+        self.stateUI = .showDetail(item)
     }
 }

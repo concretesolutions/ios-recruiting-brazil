@@ -28,6 +28,10 @@
 		D8D22E7B24149A1D00F4AF4B /* NetworkLayerModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D8D22E7924149A1D00F4AF4B /* NetworkLayerModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D8D22E7D24149AF300F4AF4B /* ListMovsDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D22E7C24149AF300F4AF4B /* ListMovsDataType.swift */; };
 		D8D22E842414A2EA00F4AF4B /* MovsListViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D22E832414A2EA00F4AF4B /* MovsListViewData.swift */; };
+		D8EB459424213EE600144C76 /* DetailItemMovsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB459324213EE600144C76 /* DetailItemMovsRouter.swift */; };
+		D8EB459624213F1400144C76 /* DetailItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB459524213F1400144C76 /* DetailItemViewController.swift */; };
+		D8EB459A24215B3B00144C76 /* DetailItemMovsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB459924215B3B00144C76 /* DetailItemMovsPresenter.swift */; };
+		D8EB459C24215B6D00144C76 /* DetailItemMovsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB459B24215B6D00144C76 /* DetailItemMovsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +86,10 @@
 		D8D22E7924149A1D00F4AF4B /* NetworkLayerModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NetworkLayerModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D22E7C24149AF300F4AF4B /* ListMovsDataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMovsDataType.swift; sourceTree = "<group>"; };
 		D8D22E832414A2EA00F4AF4B /* MovsListViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsListViewData.swift; sourceTree = "<group>"; };
+		D8EB459324213EE600144C76 /* DetailItemMovsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemMovsRouter.swift; sourceTree = "<group>"; };
+		D8EB459524213F1400144C76 /* DetailItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemViewController.swift; sourceTree = "<group>"; };
+		D8EB459924215B3B00144C76 /* DetailItemMovsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemMovsPresenter.swift; sourceTree = "<group>"; };
+		D8EB459B24215B6D00144C76 /* DetailItemMovsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemMovsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +190,7 @@
 		D86306B7240DBA4300961B3A /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				D8EB459824215B2500144C76 /* DetailView */,
 				D8EB458E242127A500144C76 /* ListView */,
 			);
 			path = Presenter;
@@ -190,6 +199,7 @@
 		D86306BA240DBA4300961B3A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8EB459724213F1700144C76 /* DetailView */,
 				D8EB458D2421279600144C76 /* ListView */,
 			);
 			path = View;
@@ -198,6 +208,7 @@
 		D86306BC240DBA4300961B3A /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				D8EB459224213EC400144C76 /* DetailView */,
 				D8EB458F242127B300144C76 /* ListView */,
 			);
 			path = Router;
@@ -279,6 +290,31 @@
 				D8D22E7C24149AF300F4AF4B /* ListMovsDataType.swift */,
 			);
 			path = ListView;
+			sourceTree = "<group>";
+		};
+		D8EB459224213EC400144C76 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				D8EB459324213EE600144C76 /* DetailItemMovsRouter.swift */,
+			);
+			path = DetailView;
+			sourceTree = "<group>";
+		};
+		D8EB459724213F1700144C76 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				D8EB459524213F1400144C76 /* DetailItemViewController.swift */,
+			);
+			path = DetailView;
+			sourceTree = "<group>";
+		};
+		D8EB459824215B2500144C76 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				D8EB459924215B3B00144C76 /* DetailItemMovsPresenter.swift */,
+				D8EB459B24215B6D00144C76 /* DetailItemMovsView.swift */,
+			);
+			path = DetailView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -395,13 +431,17 @@
 				D89A4F3A240EE5F600E75A26 /* EmptySearchView.swift in Sources */,
 				D86306BE240DBA4300961B3A /* ListMovsView.swift in Sources */,
 				D869EB2624145E9000BB8C2B /* ListMovsService.swift in Sources */,
+				D8EB459624213F1400144C76 /* DetailItemViewController.swift in Sources */,
 				D86306C1240DBA4300961B3A /* ListMovsRouter.swift in Sources */,
 				D869EB2E2414666600BB8C2B /* ItemMovsCollectionViewCell.swift in Sources */,
 				D805FEA02410674600AA5A8B /* BaseSearchView.swift in Sources */,
 				D86306BF240DBA4300961B3A /* ListMovsPresenter.swift in Sources */,
 				D86306C0240DBA4300961B3A /* ListMovsViewController.swift in Sources */,
+				D8EB459424213EE600144C76 /* DetailItemMovsRouter.swift in Sources */,
 				D8D22E7D24149AF300F4AF4B /* ListMovsDataType.swift in Sources */,
+				D8EB459C24215B6D00144C76 /* DetailItemMovsView.swift in Sources */,
 				D805FE9E24105F8000AA5A8B /* ErrorSearchView.swift in Sources */,
+				D8EB459A24215B3B00144C76 /* DetailItemMovsPresenter.swift in Sources */,
 				D8D22E842414A2EA00F4AF4B /* MovsListViewData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

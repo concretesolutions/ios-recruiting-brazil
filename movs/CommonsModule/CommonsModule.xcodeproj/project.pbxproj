@@ -13,6 +13,8 @@
 		D86306EE240DBE2F00961B3A /* CommonsModule.h in Headers */ = {isa = PBXBuildFile; fileRef = D86306EC240DBE2F00961B3A /* CommonsModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D86306F7240DBE4F00961B3A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86306F5240DBE4F00961B3A /* BaseViewController.swift */; };
 		D86306F8240DBE4F00961B3A /* StateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86306F6240DBE4F00961B3A /* StateViewController.swift */; };
+		D8EB45A1242241D200144C76 /* BaseTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB45A0242241D200144C76 /* BaseTableViewDataSource.swift */; };
+		D8EB45A4242242ED00144C76 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB45A3242242ED00144C76 /* BaseTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		D86306ED240DBE2F00961B3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D86306F5240DBE4F00961B3A /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		D86306F6240DBE4F00961B3A /* StateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateViewController.swift; sourceTree = "<group>"; };
+		D8EB45A0242241D200144C76 /* BaseTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewDataSource.swift; sourceTree = "<group>"; };
+		D8EB45A3242242ED00144C76 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,10 +89,20 @@
 		D86306F4240DBE4F00961B3A /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D8EB45A2242242C500144C76 /* BaseDefaultTableView */,
 				D86306F5240DBE4F00961B3A /* BaseViewController.swift */,
 				D86306F6240DBE4F00961B3A /* StateViewController.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		D8EB45A2242242C500144C76 /* BaseDefaultTableView */ = {
+			isa = PBXGroup;
+			children = (
+				D8EB45A0242241D200144C76 /* BaseTableViewDataSource.swift */,
+				D8EB45A3242242ED00144C76 /* BaseTableViewCell.swift */,
+			);
+			path = BaseDefaultTableView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,6 +187,8 @@
 				D86306F8240DBE4F00961B3A /* StateViewController.swift in Sources */,
 				28416080240DF9B800C239CC /* UIViewController+Extensions.swift in Sources */,
 				D817DA3C241C0A54006CB722 /* ImageCache.swift in Sources */,
+				D8EB45A1242241D200144C76 /* BaseTableViewDataSource.swift in Sources */,
+				D8EB45A4242242ED00144C76 /* BaseTableViewCell.swift in Sources */,
 				D817DA41241C18A2006CB722 /* Data+PrettyPrint.swift in Sources */,
 				D86306F7240DBE4F00961B3A /* BaseViewController.swift in Sources */,
 			);

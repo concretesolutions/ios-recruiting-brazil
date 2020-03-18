@@ -43,5 +43,9 @@ public extension Assets {
         public static let favoriteGrayIcon = UIImage(named: "favorite_gray_icon",
                                                     in: Assets.bundleFramework,
                                                     compatibleWith: nil)
+        
+        public static let defaultImageMovs = UIImage(named: "default_image_movs",
+                                                     in: Assets.bundleFramework,
+                                                     compatibleWith: nil)
     }
 }

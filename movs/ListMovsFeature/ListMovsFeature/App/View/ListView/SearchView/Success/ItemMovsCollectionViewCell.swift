@@ -52,8 +52,10 @@ class ItemMovsCollectionViewCell: UICollectionViewCell {
     var titleMovieLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Thor"
-        label.font = UIFont(name: "Avenir Next", size: 16)
+        label.font = FontAssets.avenirTextCell
+        label.numberOfLines = 1
+        label.minimumScaleFactor = 0.3
+        label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
         label.textColor = Colors.yellowLight
         return label
@@ -76,12 +78,12 @@ extension ItemMovsCollectionViewCell {
             self.posterUIImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.75),
             
             self.viewContent.topAnchor.constraint(equalTo: self.posterUIImageView.bottomAnchor),
-            self.viewContent.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            self.viewContent.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.viewContent.leadingAnchor.constraint(equalTo: self.posterUIImageView.leadingAnchor),
+            self.viewContent.trailingAnchor.constraint(equalTo: self.posterUIImageView.trailingAnchor),
             self.viewContent.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
             self.titleMovieLabel.topAnchor.constraint(equalTo: self.viewContent.topAnchor),
-            self.titleMovieLabel.leadingAnchor.constraint(equalTo: self.viewContent.leadingAnchor),
+            self.titleMovieLabel.leadingAnchor.constraint(equalTo: self.viewContent.leadingAnchor, constant: 2),
             self.titleMovieLabel.trailingAnchor.constraint(equalTo: self.favoriteButton.leadingAnchor, constant: -2),
             self.titleMovieLabel.bottomAnchor.constraint(equalTo: self.viewContent.bottomAnchor),
             
@@ -139,14 +141,22 @@ extension ItemMovsCollectionViewCell {
         }
         self.isLoadingImage = true
         
-        self.nsLoadImage.loadImage(absoluteUrl: urlString) { data in
-            DispatchQueue.main.async {
-                guard let data = data,
-                    let image = UIImage(data: data) else { return }
+        self.nsLoadImage.loadImage(absoluteUrl: urlString) { [weak self] data in
+            self?.setImage(with: data, andUrl: urlString)
+        }
+    }
+    
+    private func setImage(with data: Data?, andUrl urlString: String) {
+        DispatchQueue.main.async {
+            if let data = data,
+                let image = UIImage(data: data) {
                 ImageCache.shared.setImage(image, in: urlString)
                 self.posterUIImageView.image = image
                 self.isLoadingImage = false
+            } else {
+                self.posterUIImageView.image = Assets.Images.defaultImageMovs
             }
+            
         }
     }
 }

@@ -10,7 +10,7 @@ import NetworkLayerModule
 
 class ListMovsPresenter {
     weak var view: ListMovsView!
-    unowned var router: ListMovsRouter
+    var router: ListMovsRouter
     var service: ListMovsServiceType
     var viewDataModel = MovsListViewData()
     
@@ -66,6 +66,10 @@ extension ListMovsPresenter {
             let itemsSearched = self.itemsInSearching(with: search)
             self.view.reloadData(with: MovsListViewData(textInSearchBar: search, items: itemsSearched))
         }
+    }
+    
+    func showDetail(_ itemView: MovsItemViewData) {
+        self.router.showDetailView(with: itemView)
     }
 }
 

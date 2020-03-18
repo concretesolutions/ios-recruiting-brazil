@@ -12,6 +12,7 @@
 		D86306DB240DBDBD00961B3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D86306DA240DBDBD00961B3A /* Assets.xcassets */; };
 		D878E67E240F2114007DC2C8 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878E67D240F2114007DC2C8 /* Colors.swift */; };
 		D878E681240F2185007DC2C8 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878E680240F2185007DC2C8 /* UIColor+Extension.swift */; };
+		D8EB459F242172BC00144C76 /* FontAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EB459E242172BC00144C76 /* FontAssets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		D86306DA240DBDBD00961B3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D878E67D240F2114007DC2C8 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		D878E680240F2185007DC2C8 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		D8EB459E242172BC00144C76 /* FontAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontAssets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 		D86306D1240DBDA000961B3A /* AssertModule */ = {
 			isa = PBXGroup;
 			children = (
+				D8EB459D242172A400144C76 /* Fonts */,
 				D878E67F240F2172007DC2C8 /* Extension */,
 				D878E67C240F20E6007DC2C8 /* Colors */,
 				2841607B240DF52600C239CC /* UIImages */,
@@ -86,6 +89,14 @@
 				D878E680240F2185007DC2C8 /* UIColor+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		D8EB459D242172A400144C76 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D8EB459E242172BC00144C76 /* FontAssets.swift */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D878E681240F2185007DC2C8 /* UIColor+Extension.swift in Sources */,
+				D8EB459F242172BC00144C76 /* FontAssets.swift in Sources */,
 				2841607D240DF53900C239CC /* Asserts.swift in Sources */,
 				D878E67E240F2114007DC2C8 /* Colors.swift in Sources */,
 			);

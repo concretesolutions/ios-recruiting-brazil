@@ -18,6 +18,8 @@ enum Scenes {
 
 extension Scenes {
     
+    
+    
     func buildScene(appCoordinator: AppCoordinator) -> UIViewController {
         switch self {
         case .tabBarView(let scenes):
@@ -25,9 +27,6 @@ extension Scenes {
         case .listMovsFeature:
             let router = ListMovsRouter()
             let view = router.makeUI()
-            router.showSearchView = { 
-                appCoordinator.make(scene: .favoriteFeature, type: .presentation(.fullScreen))
-            }
             return view
         case .favoriteFeature:
             let view = UIViewController()
