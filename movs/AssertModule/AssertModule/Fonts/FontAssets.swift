@@ -10,4 +10,5 @@ import UIKit
 
 public struct FontAssets {
     public static let avenirTextCell = UIFont(name: "Avenir Next", size: 16)
+    public static let avenirTextTitle = UIFont(name: "Avenir Next Demi Bold", size: 22)
 }

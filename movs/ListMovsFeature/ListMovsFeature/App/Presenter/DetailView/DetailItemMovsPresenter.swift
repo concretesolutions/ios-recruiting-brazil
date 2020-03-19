@@ -6,7 +6,7 @@
 //  Copyright © 2020 Marcos Felipe Souza. All rights reserved.
 //
 
-import Foundation
+import GenresFeature
 
 class DetailItemMovsPresenter {
     deinit {
@@ -25,6 +25,18 @@ class DetailItemMovsPresenter {
 //MARK: - UI Event - Actions -
 extension DetailItemMovsPresenter {
     func loadingView() {
-        self.view?.setTitle("Movies")        
+        self.view?.setTitle("Movies")
+        
+        let service = GenresFeatureService()
+        service.fetchGenres { result in
+            
+            switch result {
+            case .success(let models):
+                print(models)
+            case .failure(let error):
+                print(error)
+            }
+            
+        }
     }
 }

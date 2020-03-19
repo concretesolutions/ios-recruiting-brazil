@@ -85,12 +85,17 @@ extension ListMovsPresenter {
     private func wrapperModels(from requestModel: MovsListRequestModel) -> MovsListViewData {
         var viewData = MovsListViewData()
         requestModel.items?.forEach { item in
-            viewData.items.append(
-                MovsItemViewData(id: item.id ?? 0,
-                                 imageMovieURL: item.posterPath ?? "/",
-                                 imageMovieURLAbsolute: self.service.absoluteUrlImage(with: item.posterPath ?? "/"),
-                                 isFavorite: false,
-                                 movieName: (item.originalName ?? item.originalTitle) ?? ""))
+            
+            let absoluteURL = self.service.absoluteUrlImage(with: item.posterPath ?? "/")
+            let movieName = (item.originalName ?? item.originalTitle) ?? ""
+            
+            let itemViewData = MovsItemViewData(id: item.id ?? 0,
+                                                imageMovieURL: item.posterPath ?? "/",
+                                                imageMovieURLAbsolute: absoluteURL,
+                                                isFavorite: false,
+                                                movieName: movieName,
+                                                overview: item.overview ?? "")
+            viewData.items.append(itemViewData)
         }
         return viewData
     }

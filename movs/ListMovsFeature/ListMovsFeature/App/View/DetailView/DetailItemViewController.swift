@@ -22,11 +22,32 @@ open class DetailItemViewController: BaseViewController {
         return img
     }()
     
-    var informationDetailView: InformationDetailView = {
-        let view = InformationDetailView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    var stackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [])
+        sv.alignment = .top
+        sv.distribution = .fill
+        sv.spacing = 20
+        sv.axis = .vertical
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        return sv
     }()
+    
+    private func createRow(text: String, isHeader: Bool) {
+        
+        var view: InformationDetailView
+        if isHeader {
+            view = InformationDetailView(detailText: text,
+                                             isHeader: true,
+                                             isFavorite: presenter.itemViewData.isFavorite)
+        } else {
+            view = InformationDetailView(detailText: text, isHeader: false)
+        }
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.stackView.addArrangedSubview(view)
+        view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        view.widthAnchor.constraint(equalTo: self.stackView.widthAnchor).isActive = true
+    }
     
     deinit {
         print("TESTE LIFECYCLE -- DetailItemViewController")
@@ -63,19 +84,27 @@ extension DetailItemViewController {
         self.navigationController?.navigationBar.tintColor = Colors.blueDark
        
         self.view.addSubview(self.imageMovieImageView)
-        self.view.addSubview(self.informationDetailView)
+        self.view.addSubview(self.stackView)
+        
         NSLayoutConstraint.activate([
             imageMovieImageView.topAnchor.constraint(equalTo: self.topAnchorSafeArea, constant: 8),
             imageMovieImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             imageMovieImageView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.442857),
-            imageMovieImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.89),//0.68
+            imageMovieImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.89),
             
-            informationDetailView.topAnchor.constraint(equalTo: self.imageMovieImageView.bottomAnchor, constant: 18),
-            informationDetailView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8),
-            informationDetailView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -8),
-            informationDetailView.bottomAnchor.constraint(equalTo: self.bottomAnchorSafeArea, constant: -16),
+            stackView.topAnchor.constraint(equalTo: self.imageMovieImageView.bottomAnchor, constant: 18),
+            stackView.leadingAnchor.constraint(equalTo: self.imageMovieImageView.leadingAnchor, constant: 3),
+            stackView.trailingAnchor.constraint(equalTo: self.imageMovieImageView.trailingAnchor, constant: -3),
+            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchorSafeArea, constant: -8),
         ])
-        
         imageMovieImageView.clipsToBounds = true
+        
+        
+        
+        
+        
+        self.createRow(text: self.presenter.itemViewData.movieName, isHeader: true)
+        self.createRow(text: self.presenter.itemViewData.movieName, isHeader: false)
+        self.createRow(text: self.presenter.itemViewData.movieName, isHeader: false)
     }
 }
