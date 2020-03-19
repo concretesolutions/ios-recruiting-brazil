@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D805FE9E24105F8000AA5A8B /* ErrorSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D805FE9D24105F8000AA5A8B /* ErrorSearchView.swift */; };
 		D805FEA02410674600AA5A8B /* BaseSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D805FE9F2410674600AA5A8B /* BaseSearchView.swift */; };
+		D8383AF02423C2E40010BDC3 /* InformationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8383AEF2423C2E40010BDC3 /* InformationDetailView.swift */; };
 		D86306A1240DBA2400961B3A /* ListMovsFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8630697240DBA2400961B3A /* ListMovsFeature.framework */; };
 		D86306A6240DBA2400961B3A /* ListMovsFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86306A5240DBA2400961B3A /* ListMovsFeatureTests.swift */; };
 		D86306A8240DBA2400961B3A /* ListMovsFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = D863069A240DBA2400961B3A /* ListMovsFeature.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,6 +64,7 @@
 /* Begin PBXFileReference section */
 		D805FE9D24105F8000AA5A8B /* ErrorSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorSearchView.swift; sourceTree = "<group>"; };
 		D805FE9F2410674600AA5A8B /* BaseSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSearchView.swift; sourceTree = "<group>"; };
+		D8383AEF2423C2E40010BDC3 /* InformationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationDetailView.swift; sourceTree = "<group>"; };
 		D8630697240DBA2400961B3A /* ListMovsFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ListMovsFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D863069A240DBA2400961B3A /* ListMovsFeature.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListMovsFeature.h; sourceTree = "<group>"; };
 		D863069B240DBA2400961B3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -120,6 +122,14 @@
 				D8EB4590242127C500144C76 /* ListView */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		D8383AEE2423C2CD0010BDC3 /* Information */ = {
+			isa = PBXGroup;
+			children = (
+				D8383AEF2423C2E40010BDC3 /* InformationDetailView.swift */,
+			);
+			path = Information;
 			sourceTree = "<group>";
 		};
 		D863068D240DBA2400961B3A = {
@@ -303,6 +313,7 @@
 		D8EB459724213F1700144C76 /* DetailView */ = {
 			isa = PBXGroup;
 			children = (
+				D8383AEE2423C2CD0010BDC3 /* Information */,
 				D8EB459524213F1400144C76 /* DetailItemViewController.swift */,
 			);
 			path = DetailView;
@@ -434,6 +445,7 @@
 				D8EB459624213F1400144C76 /* DetailItemViewController.swift in Sources */,
 				D86306C1240DBA4300961B3A /* ListMovsRouter.swift in Sources */,
 				D869EB2E2414666600BB8C2B /* ItemMovsCollectionViewCell.swift in Sources */,
+				D8383AF02423C2E40010BDC3 /* InformationDetailView.swift in Sources */,
 				D805FEA02410674600AA5A8B /* BaseSearchView.swift in Sources */,
 				D86306BF240DBA4300961B3A /* ListMovsPresenter.swift in Sources */,
 				D86306C0240DBA4300961B3A /* ListMovsViewController.swift in Sources */,

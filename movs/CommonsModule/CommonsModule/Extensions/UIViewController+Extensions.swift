@@ -14,8 +14,19 @@ public extension UIViewController {
         if #available(iOS 11.0, *) {
             topAnchor = view.safeAreaLayoutGuide.topAnchor
         } else {
+            topAnchor = topLayoutGuide.topAnchor
+        }
+        return topAnchor
+    }
+    
+    var bottomAnchorSafeArea: NSLayoutYAxisAnchor {
+        let topAnchor: NSLayoutYAxisAnchor
+        if #available(iOS 11.0, *) {
+            topAnchor = view.safeAreaLayoutGuide.bottomAnchor
+        } else {
             topAnchor = topLayoutGuide.bottomAnchor
         }
         return topAnchor
     }
+    
 }
