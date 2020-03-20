@@ -20,15 +20,10 @@ public protocol GenresFeatureServiceType: AnyObject {
 
 open class GenresFeatureService {
     private var base: BaseRequestAPI?
-    var genresCoreData: GenresCoreDataType
+    internal var genresCoreData: GenresCoreDataType
     
-    public init(genresCoreData: GenresCoreDataType? = GenresCoreData()) {
-        
-        if genresCoreData == nil {
-            self.genresCoreData = GenresCoreData()
-        } else {
-            self.genresCoreData = genresCoreData!
-        }
+    public init() {
+        self.genresCoreData = GenresCoreData()
     }
     
     enum TypeRequestGenre {

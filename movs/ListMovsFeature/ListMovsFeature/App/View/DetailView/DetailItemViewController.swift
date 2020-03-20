@@ -8,16 +8,25 @@
 
 import UIKit
 import AssertModule
+import NetworkLayerModule
 
 import CommonsModule
 
+
+enum DetailItemHandleState {
+    case loading(Bool)
+    case success(MovsItemViewData)
+}
+
+
 open class DetailItemViewController: BaseViewController {
     var presenter: DetailItemMovsPresenter!
+    let nsLoadImage = NLLoadImage()
     
     var imageMovieImageView: UIImageView = {
         let img = UIImageView(image: Assets.Images.defaultImageMovs)
-        img.contentMode = .scaleAspectFill
-        img.backgroundColor = .black
+        img.contentMode = .scaleAspectFit
+        img.backgroundColor = .clear
         img.translatesAutoresizingMaskIntoConstraints = false
         return img
     }()
@@ -32,20 +41,78 @@ open class DetailItemViewController: BaseViewController {
         return sv
     }()
     
-    private func createRow(text: String, isHeader: Bool) {
+    var stateHandleUI: DetailItemHandleState? {
+        didSet {
+            self.performStateUI()
+        }
+    }
+    
+    
+    private func performStateUI() {
+        guard let stateHandleUI = self.stateHandleUI else { return }
+        switch stateHandleUI {
+        case .loading(let isLoading):
+            print(isLoading)
+            break
+        case .success(let itemViewData):
+            
+            self.loadImage(with: itemViewData.imageMovieURLAbsolute)
+            self.createRow(text: itemViewData.movieName, isHeader: true, isFavorite: itemViewData.isFavorite)
+            self.createRow(text: itemViewData.movieName, isHeader: false)
+            self.createRow(text: itemViewData.movieName, isHeader: false)
+            self.createRow(text: itemViewData.overview, isHeader: false)
+            break
+        }
+    }
+    
+    
+    private func loadImage(with urlString: String) {
+        
+        //Load from cache
+        if let image = ImageCache.shared.getImage(in: urlString) {
+            self.setImage(with: image)
+            return
+        }
+        
+        self.nsLoadImage.loadImage(absoluteUrl: urlString) { [weak self] data in
+            DispatchQueue.main.async {
+                if let data = data,
+                    let image = UIImage(data: data) {
+                    ImageCache.shared.setImage(image, in: urlString)
+                    
+                    self?.setImage(with: image)
+                } else {
+                    self?.setImage(with: Assets.Images.defaultImageMovs!)
+                    
+                }
+            }
+        }
+    }
+    
+    private func setImage(with image: UIImage) {
+        UIView.transition(with: self.imageMovieImageView,
+                            duration: 0.75,
+                            options: .transitionCrossDissolve,
+                            animations: {
+                                self.imageMovieImageView.image = image
+                                
+        },completion: nil)
+    }
+    
+    private func createRow(text: String, isHeader: Bool, isFavorite: Bool = false) {
         
         var view: InformationDetailView
         if isHeader {
             view = InformationDetailView(detailText: text,
                                              isHeader: true,
-                                             isFavorite: presenter.itemViewData.isFavorite)
+                                             isFavorite: isFavorite)
         } else {
             view = InformationDetailView(detailText: text, isHeader: false)
         }
         
         view.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.addArrangedSubview(view)
-        view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        view.heightAnchor.constraint(greaterThanOrEqualToConstant: 30).isActive = true
         view.widthAnchor.constraint(equalTo: self.stackView.widthAnchor).isActive = true
     }
     
@@ -69,7 +136,18 @@ extension DetailItemViewController {
 
 //MARK: -input of Presenter-
 extension DetailItemViewController: DetailItemMovsView {
+    func showLoading() {
+        self.stateHandleUI = .loading(true)
+    }
     
+    func hideLoading() {
+        self.stateHandleUI = .loading(false)
+    }
+    
+    func fillUp(with viewData: MovsItemViewData) {
+        self.stateHandleUI = .success(viewData)
+    }
+        
     func setTitle(_ title: String) {
         self.title = title
     }
@@ -95,16 +173,9 @@ extension DetailItemViewController {
             stackView.topAnchor.constraint(equalTo: self.imageMovieImageView.bottomAnchor, constant: 18),
             stackView.leadingAnchor.constraint(equalTo: self.imageMovieImageView.leadingAnchor, constant: 3),
             stackView.trailingAnchor.constraint(equalTo: self.imageMovieImageView.trailingAnchor, constant: -3),
-            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchorSafeArea, constant: -8),
+//            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchorSafeArea, constant: -8),
         ])
         imageMovieImageView.clipsToBounds = true
         
-        
-        
-        
-        
-        self.createRow(text: self.presenter.itemViewData.movieName, isHeader: true)
-        self.createRow(text: self.presenter.itemViewData.movieName, isHeader: false)
-        self.createRow(text: self.presenter.itemViewData.movieName, isHeader: false)
     }
 }

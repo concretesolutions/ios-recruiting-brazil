@@ -46,6 +46,7 @@ class InformationDetailView: UIView {
     //MARK: - Creates UI
     private var detailLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         label.font = FontAssets.avenirTextTitle
         label.textColor = Colors.blueDark
         label.translatesAutoresizingMaskIntoConstraints = false

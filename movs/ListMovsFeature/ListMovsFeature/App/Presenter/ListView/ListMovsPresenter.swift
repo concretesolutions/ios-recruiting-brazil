@@ -89,12 +89,13 @@ extension ListMovsPresenter {
             let absoluteURL = self.service.absoluteUrlImage(with: item.posterPath ?? "/")
             let movieName = (item.originalName ?? item.originalTitle) ?? ""
             
-            let itemViewData = MovsItemViewData(id: item.id ?? 0,
+            var itemViewData = MovsItemViewData(id: item.id ?? 0,
                                                 imageMovieURL: item.posterPath ?? "/",
                                                 imageMovieURLAbsolute: absoluteURL,
                                                 isFavorite: false,
                                                 movieName: movieName,
                                                 overview: item.overview ?? "")
+            itemViewData.genresId = item.genreIDS ?? []
             viewData.items.append(itemViewData)
         }
         return viewData

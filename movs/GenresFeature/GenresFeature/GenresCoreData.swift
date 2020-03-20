@@ -8,7 +8,7 @@
 
 import CoreData
 
-public protocol GenresCoreDataType: AnyObject {
+protocol GenresCoreDataType: AnyObject {
     func lastDateUpdate() -> Date?
     func fetchGenres() -> [GenreEntity]
     func removeAllGenres()
@@ -16,11 +16,11 @@ public protocol GenresCoreDataType: AnyObject {
     func persist(with genreModels: [GenreModel])
 }
 
-open class GenresCoreData: GenresCoreDataType {
+class GenresCoreData: GenresCoreDataType {
     
     var managedObjectContext: NSManagedObjectContext?
     
-    public init() {
+    init() {
         do {
             let dataController = try DataController {}
             self.managedObjectContext = dataController.managedObjectContext
@@ -29,7 +29,7 @@ open class GenresCoreData: GenresCoreDataType {
         }
     }
     
-    public func lastDateUpdate() -> Date? {
+    func lastDateUpdate() -> Date? {
         var dateUpdate: Date? = nil
         guard let moc = self.managedObjectContext else {
             return dateUpdate
@@ -47,7 +47,7 @@ open class GenresCoreData: GenresCoreDataType {
         return dateUpdate
     }
     
-    public func lastDateUpdate(handle: @escaping (_ date: Date?)->() ) {
+    func lastDateUpdate(handle: @escaping (_ date: Date?)->() ) {
         DispatchQueue.main.async {
             guard let moc = self.managedObjectContext else {
                 handle(nil)
@@ -67,7 +67,7 @@ open class GenresCoreData: GenresCoreDataType {
         }
     }
 
-    public func fetchGenres() -> [GenreEntity] {
+    func fetchGenres() -> [GenreEntity] {
         let fetch: NSFetchRequest<GenreEntity> = GenreEntity.fetchRequest()
         do {
             let genres = try managedObjectContext?.fetch(fetch)
@@ -77,7 +77,7 @@ open class GenresCoreData: GenresCoreDataType {
         }
     }
     
-    public func removeAllGenres() {
+    func removeAllGenres() {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GenreEntity")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
@@ -89,7 +89,7 @@ open class GenresCoreData: GenresCoreDataType {
         }
     }
     
-    public func updateDate() {
+    func updateDate() {
         guard let context = self.managedObjectContext else { return }
         let fetch: NSFetchRequest<LastUpdateEntity> = LastUpdateEntity.fetchRequest()
         do {
@@ -107,7 +107,7 @@ open class GenresCoreData: GenresCoreDataType {
         }
     }
     
-    public func persist(with genreModels: [GenreModel]) {
+    func persist(with genreModels: [GenreModel]) {
         guard let context = self.managedObjectContext else { return }
         genreModels.forEach { model in
             let genryEntity = GenreEntity(context: context)

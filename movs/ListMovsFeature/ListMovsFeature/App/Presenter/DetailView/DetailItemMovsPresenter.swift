@@ -14,9 +14,14 @@ class DetailItemMovsPresenter {
     }
     weak var view: DetailItemMovsView?
     var itemViewData: MovsItemViewData
-    init(view: DetailItemMovsView, itemViewData: MovsItemViewData) {
+    var genreService: GenresFeatureServiceType
+    
+    init(view: DetailItemMovsView,
+         itemViewData: MovsItemViewData,
+         genreService: GenresFeatureServiceType) {
         self.view = view
         self.itemViewData = itemViewData
+        self.genreService = genreService
     }
     
 }
@@ -26,17 +31,18 @@ class DetailItemMovsPresenter {
 extension DetailItemMovsPresenter {
     func loadingView() {
         self.view?.setTitle("Movies")
+        self.view?.showLoading()
         
-        let service = GenresFeatureService()
-        service.fetchGenres { result in
+        self.genreService.fetchGenres { result in
             
             switch result {
             case .success(let models):
                 print(models)
+                self.view?.fillUp(with: self.itemViewData)
             case .failure(let error):
                 print(error)
             }
-            
+            self.view?.hideLoading()
         }
     }
 }

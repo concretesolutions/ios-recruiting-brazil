@@ -21,4 +21,6 @@ public struct MovsItemViewData {
     public var isFavorite: Bool = false
     public var movieName: String = "No name"
     public var overview: String = ""
+    public var genresId: [Int] = []
+    public var genresString: String = ""
 }

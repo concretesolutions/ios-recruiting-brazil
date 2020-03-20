@@ -10,11 +10,13 @@ import Foundation
 
 
 import UIKit
+import GenresFeature
 
 open class DetailItemMovsRouter {
     
     var view: DetailItemViewController!
     var presenter: DetailItemMovsPresenter!
+    var genreService: GenresFeatureServiceType!
     
     /// just module on open
     public init() {}
@@ -22,7 +24,10 @@ open class DetailItemMovsRouter {
     public func makeUI(itemViewData: MovsItemViewData) -> DetailItemViewController {
         
         self.view = DetailItemViewController()
-        self.presenter = DetailItemMovsPresenter(view: self.view!, itemViewData: itemViewData)
+        self.genreService = GenresFeatureService()
+        self.presenter = DetailItemMovsPresenter(view: self.view!,
+                                                 itemViewData: itemViewData,
+                                                 genreService: self.genreService)
         self.view.presenter = self.presenter
         return view
     }

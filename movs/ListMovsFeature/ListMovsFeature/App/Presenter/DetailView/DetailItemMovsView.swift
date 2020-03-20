@@ -10,4 +10,7 @@ import Foundation
 
 protocol DetailItemMovsView: AnyObject {
     func setTitle(_ title: String)
+    func showLoading()
+    func hideLoading()
+    func fillUp(with viewData: MovsItemViewData)
 }
