@@ -6,10 +6,10 @@
 //  Copyright © 2020 Marcos Felipe Souza. All rights reserved.
 //
 
-import Foundation
+
 import NetworkLayerModule
 import CoreData
-
+import CommonsModule
 
 public typealias GenreModel = GenresListResponse.Genre
 
@@ -19,14 +19,34 @@ public protocol GenresFeatureServiceType: AnyObject {
 }
 
 open class GenresFeatureService {
-    var base: BaseRequestAPI?
-    public init() {}
+    private var base: BaseRequestAPI?
+    var genresCoreData: GenresCoreDataType
+    
+    public init(genresCoreData: GenresCoreDataType? = GenresCoreData()) {
+        
+        if genresCoreData == nil {
+            self.genresCoreData = GenresCoreData()
+        } else {
+            self.genresCoreData = genresCoreData!
+        }
+    }
+    
+    enum TypeRequestGenre {
+        case coreData
+        case request
+    }    
+    deinit {
+        print("---- GenresFeatureService deinit --- ")
+    }
 }
 
 extension GenresFeatureService: GenresFeatureServiceType {
-    public func fetchGenres(handle: @escaping (Result<[GenreModel], MtdbAPIError>) -> Void) {
-        self.lastUpdateCoreData()
-        handle(.failure(.badRequest))
+    
+    public func fetchGenres(handle: @escaping (Result<[GenreModel], MtdbAPIError>) -> Void) {        
+        DispatchQueue.main.async {
+            let typeRequest = self.typeRequest()
+            self.fetchGenre(by: typeRequest, handle: handle)
+        }
     }
     
     
@@ -39,25 +59,72 @@ extension GenresFeatureService: GenresFeatureServiceType {
 
 //MARK: - Business Logic
 extension GenresFeatureService {
-    
-    
-    private func lastUpdateCoreData() {
-        let coreDataStack = CoreDataStack.shared
-        let lastUpdateRequest: NSFetchRequest<LastUpdate> = LastUpdate.fetchRequest()
-        DispatchQueue.main.async {
-            var dateUpdate: Date? = nil
-            do {
-                let lastUpdate = try coreDataStack.managedContext.fetch(lastUpdateRequest)
-                dateUpdate = lastUpdate.first?.genre
-            } catch {
-                dateUpdate = nil
+    private func fetchGenre(by type: TypeRequestGenre,
+                            handle: @escaping (Result<[GenreModel], MtdbAPIError>) -> Void) {
+        switch type {
+        case .coreData:
+            let models = self.callCoreData()
+            handle(.success(models))
+            
+        case .request:
+            self.callService { result in
+                switch result {
+                case .success(let genres):
+                    self.persist(genres)
+                    handle(.success(genres))
+                case .failure(let error):
+                    handle(.failure(error))
+                }
             }
+        }
+        
+    }
+    
+    private func typeRequest() -> TypeRequestGenre {
+        
+        guard let lastUpdate = genresCoreData.lastDateUpdate() else {
+            return .request
+        }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy hh:mm:ss"
+        //dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+
+        guard let coreData = dateFormatter.date(from: dateFormatter.string(from: lastUpdate)),
+            let today  = dateFormatter.date(from: dateFormatter.string(from: Date())) else {
+                return .request
+        }
+        
+        guard let differ = coreData.totalDistance(from: today, resultIn: .day) else {
+            return .request
+        }
+        
+        if differ > 0 {
+            return .request
+        }
+        
+        return .coreData
+    }
+    
+    private func persist(_ genres: [GenreModel]) {
+        DispatchQueue.main.async {
+            self.genresCoreData.removeAllGenres()
+            self.genresCoreData.persist(with: genres)
+            self.genresCoreData.updateDate()
         }
     }
     
+    private func callCoreData() -> [GenreModel] {
+        let genres = self.genresCoreData.fetchGenres()
+        var genresModel = [GenreModel]()
+        genres.forEach { entity in
+            let model = GenreModel(id: Int(entity.id), name: entity.value ?? "")
+            genresModel.append(model)
+        }
+        return genresModel
+    }
     
-    
-    private func callService(handle: @escaping (Result<[GenreModel], MtdbAPIError>) -> Void) {
+    private func callService(handle: @escaping (Result<[GenreModel], MtdbAPIError>) -> Void){
         let api = GenresMovsAPI.normal
         
         self.base = BaseRequestAPI(api: api, completion: {  (result: Result<GenresListResponse, MtdbAPIError>) in

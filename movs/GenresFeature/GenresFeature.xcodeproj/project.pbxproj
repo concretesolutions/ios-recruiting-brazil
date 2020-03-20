@@ -14,7 +14,8 @@
 		2821725F24241A650079D84C /* NetworkLayerModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2821725D24241A650079D84C /* NetworkLayerModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2821726324241A800079D84C /* GenresFeatureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2821726224241A800079D84C /* GenresFeatureService.swift */; };
 		2821726924241B9D0079D84C /* GenresFeature.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2821726724241B9D0079D84C /* GenresFeature.xcdatamodeld */; };
-		289DEDCC2424219300FAB187 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289DEDCB2424219300FAB187 /* CoreDataStack.swift */; };
+		28824D532424F7A900C4B483 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28824D522424F7A900C4B483 /* DataController.swift */; };
+		28824D56242511F200C4B483 /* GenresCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28824D55242511F200C4B483 /* GenresCoreData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +52,8 @@
 		2821725D24241A650079D84C /* NetworkLayerModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NetworkLayerModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2821726224241A800079D84C /* GenresFeatureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresFeatureService.swift; sourceTree = "<group>"; };
 		2821726824241B9D0079D84C /* GenresFeature.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GenresFeature.xcdatamodel; sourceTree = "<group>"; };
-		289DEDCB2424219300FAB187 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		28824D522424F7A900C4B483 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		28824D55242511F200C4B483 /* GenresCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresCoreData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,9 +135,26 @@
 		2821726424241AC20079D84C /* CoreDataStack */ = {
 			isa = PBXGroup;
 			children = (
-				289DEDCB2424219300FAB187 /* CoreDataStack.swift */,
+				28D8B62F2425619100C09A7E /* Config */,
+				28824D54242511D900C4B483 /* Models */,
 			);
 			name = CoreDataStack;
+			sourceTree = "<group>";
+		};
+		28824D54242511D900C4B483 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				28824D55242511F200C4B483 /* GenresCoreData.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		28D8B62F2425619100C09A7E /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				28824D522424F7A900C4B483 /* DataController.swift */,
+			);
+			name = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,8 +268,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				289DEDCC2424219300FAB187 /* CoreDataStack.swift in Sources */,
+				28824D532424F7A900C4B483 /* DataController.swift in Sources */,
 				2821726924241B9D0079D84C /* GenresFeature.xcdatamodeld in Sources */,
+				28824D56242511F200C4B483 /* GenresCoreData.swift in Sources */,
 				2821726324241A800079D84C /* GenresFeatureService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
