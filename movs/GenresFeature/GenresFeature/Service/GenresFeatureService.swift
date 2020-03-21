@@ -15,7 +15,7 @@ public typealias GenreModel = GenresListResponse.Genre
 
 public protocol GenresFeatureServiceType: AnyObject {
     func fetchGenres(handle: @escaping (_ result: Result<[GenreModel], MtdbAPIError>) -> Void )
-    func genre(by id: Int) -> GenreModel
+    func genre(by ids: [Int], handle: @escaping (_ result: Result<[GenreModel], MtdbAPIError>) -> Void)
 }
 
 open class GenresFeatureService {
@@ -45,10 +45,17 @@ extension GenresFeatureService: GenresFeatureServiceType {
     }
     
     
-    public func genre(by id: Int) -> GenreModel {
-        print("Buscar Genrer by ID:")
-        let genre = GenreModel(id: 1, name: "123123")
-        return genre
+    public func genre(by ids: [Int], handle: @escaping (_ result: Result<[GenreModel], MtdbAPIError>) -> Void) {
+        let typeRequest = self.typeRequest()
+        self.fetchGenre(by: typeRequest) { result in
+            switch result {
+            case .failure(let error):
+                handle(.failure(error))
+            case .success(let genres):
+                let resultGenres = genres.filter { ids.contains($0.id) }
+                handle(.success(resultGenres))
+            }
+        }
     }
 }
 

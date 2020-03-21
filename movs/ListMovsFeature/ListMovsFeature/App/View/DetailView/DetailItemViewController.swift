@@ -27,10 +27,6 @@ open class DetailItemViewController: BaseViewController {
     private var headerTopConstraint: NSLayoutConstraint!
     private var headerHeightConstraint: NSLayoutConstraint!
     
-    struct Constants {
-        static fileprivate let headerHeight: CGFloat = 410
-    }
-    
     var containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -45,20 +41,30 @@ open class DetailItemViewController: BaseViewController {
         return img
     }()
     
+    var backgroundImageView: UIImageView = {
+        let img = UIImageView(image: Assets.Images.defaultImageMovs)
+        img.contentMode = .scaleAspectFill
+        img.backgroundColor = .clear
+        img.translatesAutoresizingMaskIntoConstraints = false
+        return img
+    }()
+    
+    var blurView: UIVisualEffectView = {
+        let darkBlur = UIBlurEffect(style: .dark)
+        let blurView = UIVisualEffectView(effect: darkBlur)
+        blurView.alpha = 0.9
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        return blurView
+    }()
+    
     var scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.isScrollEnabled = true
-        
         sv.alwaysBounceVertical = true
         sv.bouncesZoom = true
-        
         sv.showsVerticalScrollIndicator = true
-//        sv.clipsToBounds = true
         sv.translatesAutoresizingMaskIntoConstraints = false
         
-        if #available(iOS 11.0, *) {
-//            sv.contentInsetAdjustmentBehavior = .never
-        }
         return sv
     }()
     
@@ -95,10 +101,8 @@ extension DetailItemViewController {
             
             self.loadImage(with: itemViewData.imageMovieURLAbsolute)
             self.createRow(text: itemViewData.movieName, isHeader: true, isFavorite: itemViewData.isFavorite)
-            self.createRow(text: itemViewData.movieName, isHeader: false)
-            self.createRow(text: itemViewData.movieName, isHeader: false)
-            self.createRow(text: itemViewData.movieName, isHeader: false)
-            self.createRow(text: itemViewData.movieName, isHeader: false)
+            self.createRow(text: itemViewData.years, isHeader: false)
+            self.createRow(text: itemViewData.genresString, isHeader: false)
             self.createRow(text: itemViewData.overview, isHeader: false)
             break
         }
@@ -129,16 +133,20 @@ extension DetailItemViewController {
     }
     
     private func setImage(with image: UIImage) {
-        UIView.transition(with: self.headerImageView,
-                            duration: 0.75,
-                            options: .transitionCrossDissolve,
-                            animations: {
-                                self.headerImageView.image = image
-                                
-        },completion: nil)
+        DispatchQueue.main.async {
+            UIView.transition(with: self.headerImageView,
+                                duration: 0.75,
+                                options: .transitionCrossDissolve,
+                                animations: {
+                                    self.headerImageView.image = image
+                                    self.backgroundImageView.image = image
+                                    
+            },completion: nil)
+        }
     }
     
     private func createRow(text: String, isHeader: Bool, isFavorite: Bool = false) {
+        guard !text.isEmpty || text != "" else { return }
         
         var view: InformationDetailView
         if isHeader {
@@ -170,9 +178,6 @@ extension DetailItemViewController {
         self.presenter.loadingView()
         self.setupView()
     }
-    open override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
 }
 
 //MARK: -input of Presenter-
@@ -203,16 +208,20 @@ extension DetailItemViewController {
         
         self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: 1000)
         self.headerImageView.clipsToBounds = true
+        self.backgroundImageView.clipsToBounds = true
         
         setupConstraints()
     }
     
     private func setupColors() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = Colors.whiteNormal
         self.navigationController?.navigationBar.tintColor = Colors.blueDark
     }
     
     private func setupArrangedUIs() {
+        
+        self.backgroundImageView.addSubview(blurView)
+        self.containerView.addSubview(backgroundImageView)
         self.containerView.addSubview(headerImageView)
         self.containerView.addSubview(stackView)
         
@@ -239,6 +248,24 @@ extension DetailItemViewController {
             containerView.heightAnchor.constraint(equalToConstant: 1000),
         ]
         
+        let blurViewConstraint: [NSLayoutConstraint] = [
+            
+            blurView.centerXAnchor.constraint(equalTo: backgroundImageView.centerXAnchor),
+            blurView.centerYAnchor.constraint(equalTo: backgroundImageView.centerYAnchor),
+            blurView.widthAnchor.constraint(equalTo: backgroundImageView.widthAnchor),
+            blurView.heightAnchor.constraint(equalTo: backgroundImageView.heightAnchor),
+        
+        ]
+        
+        //BACKGROUND IMAGE
+        let backgroundImageViewContraints: [NSLayoutConstraint] = [
+            backgroundImageView.topAnchor.constraint(equalTo: self.topAnchorSafeArea),
+            backgroundImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            backgroundImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            backgroundImageView.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -10),
+        
+        ]
+        
         //HEADER IMAGE VIEW
         let headerImageViewConstraints: [NSLayoutConstraint] = [
             headerImageView.topAnchor.constraint(equalTo: self.topAnchorSafeArea),
@@ -258,6 +285,8 @@ extension DetailItemViewController {
         NSLayoutConstraint.activate(containerViewConstraints)
         NSLayoutConstraint.activate(stackViewContraints)
         NSLayoutConstraint.activate(headerImageViewConstraints)
+        NSLayoutConstraint.activate(backgroundImageViewContraints)
+        NSLayoutConstraint.activate(blurViewConstraint)
     }
 }
 

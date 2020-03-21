@@ -31,18 +31,30 @@ class DetailItemMovsPresenter {
 extension DetailItemMovsPresenter {
     func loadingView() {
         self.view?.setTitle("Movies")
-        self.view?.showLoading()
+        self.view?.showLoading()        
         
-        self.genreService.fetchGenres { result in
-            
+        self.genreService.genre(by: self.itemViewData.genresId) { [weak self] result in
+            guard let self = self else { return }
             switch result {
-            case .success(let models):
-                print(models)
+            case .success(let genres):
+                self.fillUpGenres(with: genres)
                 self.view?.fillUp(with: self.itemViewData)
-            case .failure(let error):
-                print(error)
+                
+            case .failure(_):
+                self.view?.fillUp(with: self.itemViewData)
             }
             self.view?.hideLoading()
         }
+    }
+}
+
+//MARK: - Auxs Functions
+extension DetailItemMovsPresenter {
+    
+    private func fillUpGenres(with genreModels: [GenreModel]) {
+        self.itemViewData.genresString = genreModels.reduce("", { (result, genreModel)  in
+            return result + genreModel.name + ", "
+        })
+        self.itemViewData.genresString.removeLast(2) //remove `,` and `space`
     }
 }

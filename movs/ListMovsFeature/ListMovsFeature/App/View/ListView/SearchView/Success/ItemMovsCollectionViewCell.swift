@@ -118,14 +118,14 @@ extension ItemMovsCollectionViewCell {
             
             model.isFavorite.toggle()
             
-            UIView.animate(withDuration: 0.6,
+            UIView.animate(withDuration: 0.2,
             animations: {
                 self.model = model
                 self.favoriteButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
             },
             completion: { _ in
                 
-                UIView.animate(withDuration: 0.6, animations: {
+                UIView.animate(withDuration: 0.2, animations: {
                     self.favoriteButton.transform = CGAffineTransform.identity
                 }) { _ in
                     self.favoriteMovie?(model)

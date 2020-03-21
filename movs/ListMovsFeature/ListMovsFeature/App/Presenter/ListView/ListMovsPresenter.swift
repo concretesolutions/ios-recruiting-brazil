@@ -95,6 +95,17 @@ extension ListMovsPresenter {
                                                 movieName: movieName,
                                                 overview: item.overview ?? "")
             itemViewData.genresId = item.genreIDS ?? []
+            
+            if let firstAirDate = item.firstAirDate {
+                
+                let dateFormatterOrigin = DateFormatter()
+                dateFormatterOrigin.dateFormat = "yyyy-MM-dd"
+                if let dateOriginal = dateFormatterOrigin.date(from: firstAirDate) {
+                    let dateFormatterView = DateFormatter()
+                    dateFormatterView.dateFormat = "dd/MM/yyyy"
+                    itemViewData.years = dateFormatterView.string(from: dateOriginal)
+                }
+            }
             viewData.items.append(itemViewData)
         }
         return viewData

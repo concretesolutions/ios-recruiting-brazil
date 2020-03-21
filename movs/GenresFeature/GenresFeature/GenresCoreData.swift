@@ -78,14 +78,16 @@ class GenresCoreData: GenresCoreDataType {
     }
     
     func removeAllGenres() {
+        
+        guard let moc = managedObjectContext else { return }
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GenreEntity")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {
-            let myPersistentStoreCoordinator = managedObjectContext?.persistentStoreCoordinator
-            try myPersistentStoreCoordinator?.execute(deleteRequest, with: managedObjectContext!)
+            let result = try moc.execute(deleteRequest)
+            debugPrint(result.debugDescription)
         } catch let error as NSError {
-            print(error)
+            debugPrint(error)
         }
     }
     

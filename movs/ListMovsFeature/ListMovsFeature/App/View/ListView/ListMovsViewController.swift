@@ -57,8 +57,8 @@ open class ListMovsViewController: BaseViewController {
         
         layout.itemSize = CGSize(width: width, height: height)
 
-        layout.minimumInteritemSpacing = 2
-        layout.minimumLineSpacing = 2
+        layout.minimumInteritemSpacing = 1
+        layout.minimumLineSpacing = 1
         
         let collection = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
         collection.register(ItemMovsCollectionViewCell.self, forCellWithReuseIdentifier: cellReuse)

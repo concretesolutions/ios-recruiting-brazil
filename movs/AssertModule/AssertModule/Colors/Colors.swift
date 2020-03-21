@@ -15,7 +15,7 @@ public struct Colors {
     
     public static let yellowLight = UIColor(hexString: "#F7CE5B")
     
-    public static let whiteNormal = UIColor(hexString: "#FFFFFF")
+    public static let whiteNormal = UIColor(hexString: "#E0E0E0")
     
     public static let redDark = UIColor(hexString: "#A00E0E")
 }

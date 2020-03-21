@@ -23,4 +23,5 @@ public struct MovsItemViewData {
     public var overview: String = ""
     public var genresId: [Int] = []
     public var genresString: String = ""
+    public var years: String = ""
 }
