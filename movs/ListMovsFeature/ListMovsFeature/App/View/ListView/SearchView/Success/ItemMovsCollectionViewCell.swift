@@ -117,10 +117,10 @@ extension ItemMovsCollectionViewCell {
         if var model = self.model {
             
             model.isFavorite.toggle()
-                        
+            
             UIView.animate(withDuration: 0.6,
             animations: {
-                self.favoriteButton.setImage(Assets.Images.favoriteFullIcon, for: .normal)
+                self.model = model
                 self.favoriteButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
             },
             completion: { _ in

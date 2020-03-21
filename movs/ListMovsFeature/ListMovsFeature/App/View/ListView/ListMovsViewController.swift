@@ -152,6 +152,10 @@ extension ListMovsViewController {
 
 //MARK: -Action by Presenter-
 extension ListMovsViewController: ListMovsView {
+    func updateViewData(_ viewData: MovsListViewData) {
+        self.viewData = viewData
+    }
+    
     func reloadData(with viewData: MovsListViewData) {
         self.stateUI = .reloadData(viewData)
     }

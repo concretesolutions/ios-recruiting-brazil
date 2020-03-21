@@ -31,16 +31,15 @@ open class DetailItemViewController: BaseViewController {
         static fileprivate let headerHeight: CGFloat = 410
     }
     
-    var headerContainerView: UIView = {
+    var containerView: UIView = {
         let view = UIView()
-        view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     var headerImageView: UIImageView = {
         let img = UIImageView(image: Assets.Images.defaultImageMovs)
-        img.contentMode = .scaleAspectFill
+        img.contentMode = .scaleAspectFit
         img.backgroundColor = .clear
         img.translatesAutoresizingMaskIntoConstraints = false
         return img
@@ -48,20 +47,19 @@ open class DetailItemViewController: BaseViewController {
     
     var scrollView: UIScrollView = {
         let sv = UIScrollView()
-        sv.showsVerticalScrollIndicator = true
         sv.isScrollEnabled = true
-        sv.translatesAutoresizingMaskIntoConstraints = false
+        
         sv.alwaysBounceVertical = true
+        sv.bouncesZoom = true
+        
+        sv.showsVerticalScrollIndicator = true
+//        sv.clipsToBounds = true
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        
         if #available(iOS 11.0, *) {
-            sv.contentInsetAdjustmentBehavior = .never
+//            sv.contentInsetAdjustmentBehavior = .never
         }
         return sv
-    }()
-    
-    var stackViewContainerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
     }()
     
     var stackView: UIStackView = {
@@ -153,11 +151,13 @@ extension DetailItemViewController {
         
         view.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.addArrangedSubview(view)
-        view.heightAnchor.constraint(greaterThanOrEqualToConstant: 30).isActive = true
-//        view.widthAnchor.constraint(equalTo: self.stackView.widthAnchor).isActive = true
-        view.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor, constant: 8).isActive = true
-        view.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor, constant: -8).isActive = true
         
+        NSLayoutConstraint.activate([
+            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
+            view.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor, constant: 8),
+            view.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor, constant: -8),
+        ])
+                
         self.view.layoutIfNeeded()
     }
 }
@@ -198,23 +198,29 @@ extension DetailItemViewController: DetailItemMovsView {
 //MARK: - aux func -
 extension DetailItemViewController {
     private func setupView() {
+        setupArrangedUIs()
+        setupColors()
         
-        // COLORS
+        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: 1000)
+        self.headerImageView.clipsToBounds = true
+        
+        setupConstraints()
+    }
+    
+    private func setupColors() {
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.tintColor = Colors.blueDark
-       
-        self.scrollView.delegate = self
+    }
+    
+    private func setupArrangedUIs() {
+        self.containerView.addSubview(headerImageView)
+        self.containerView.addSubview(stackView)
         
-        //ARRANGED VIEW
-        headerContainerView.addSubview(headerImageView)
-        scrollView.addSubview(headerContainerView)
-        scrollView.addSubview(stackView)
-        view.addSubview(scrollView)
-        //stackViewContainerView
-        
-        
-        // CONSTRAINTS
-        
+        self.scrollView.addSubview(containerView)
+        self.view.addSubview(scrollView)
+    }
+    
+    private func setupConstraints(){
         //SCROLLVIEW
         let scrollViewConstraints: [NSLayoutConstraint] = [
             scrollView.topAnchor.constraint(equalTo: self.topAnchorSafeArea),
@@ -223,55 +229,35 @@ extension DetailItemViewController {
             scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchorSafeArea),
         ]
         
-        //HEADER CONTAINER VIEW
-        headerTopConstraint = headerContainerView.topAnchor.constraint(equalTo: self.topAnchorSafeArea)
-        headerHeightConstraint = headerContainerView.heightAnchor.constraint(equalToConstant: 210)
-        let headerContainerViewConstraints: [NSLayoutConstraint] = [
-            headerTopConstraint,
-            headerContainerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 1.0),
-            headerHeightConstraint
-        ]
         
+        // CONTAINER
+        let containerViewConstraints: [NSLayoutConstraint] = [
+            containerView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
+            containerView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
+            containerView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor),
+            containerView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
+            containerView.heightAnchor.constraint(equalToConstant: 1000),
+        ]
         
         //HEADER IMAGE VIEW
         let headerImageViewConstraints: [NSLayoutConstraint] = [
-           headerImageView.topAnchor.constraint(equalTo: headerContainerView.topAnchor, constant: 16),
-           headerImageView.leadingAnchor.constraint(equalTo: headerContainerView.leadingAnchor),
-           headerImageView.trailingAnchor.constraint(equalTo: headerContainerView.trailingAnchor),
-           headerImageView.bottomAnchor.constraint(equalTo: headerContainerView.bottomAnchor)
-       ]
+            headerImageView.topAnchor.constraint(equalTo: self.topAnchorSafeArea),
+            headerImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            headerImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            headerImageView.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -10),
+        ]
         
         // STACK VIEW
         let stackViewContraints: [NSLayoutConstraint] = [
-            stackView.topAnchor.constraint(equalTo: headerContainerView.bottomAnchor, constant: 16),
-//            stackView.leadingAnchor.constraint(equalTo: self.headerContainerView.leadingAnchor, constant: 8),
-//            stackView.trailingAnchor.constraint(equalTo: self.headerContainerView.trailingAnchor, constant: -8),
-            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 1),
-//            stackView.heightAnchor.constraint(equalToConstant: 800)
+            stackView.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: 350),
+            stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
         ]
         
         NSLayoutConstraint.activate(scrollViewConstraints)
-        NSLayoutConstraint.activate(headerContainerViewConstraints)
-        NSLayoutConstraint.activate(headerImageViewConstraints)
+        NSLayoutConstraint.activate(containerViewConstraints)
         NSLayoutConstraint.activate(stackViewContraints)
-                
+        NSLayoutConstraint.activate(headerImageViewConstraints)
     }
 }
 
-//MARK: - ScrollView controller Parallex
-extension DetailItemViewController: UIScrollViewDelegate {
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y < 0.0 {
-            headerHeightConstraint?.constant = Constants.headerHeight - scrollView.contentOffset.y
-        } else {
-            let parallaxFactor: CGFloat = 0.25
-            let offsetY = scrollView.contentOffset.y * parallaxFactor
-            let minOffsetY: CGFloat = 8.0
-            let availableOffset = min(offsetY, minOffsetY)
-            let contentRectOffsetY = availableOffset / Constants.headerHeight
-            headerTopConstraint?.constant = view.frame.origin.y
-            headerHeightConstraint?.constant = Constants.headerHeight - scrollView.contentOffset.y
-            headerImageView.layer.contentsRect = CGRect(x: 0, y: -contentRectOffsetY, width: 1, height: 1)
-        }
-    }
-}

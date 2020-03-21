@@ -18,4 +18,5 @@ protocol ListMovsView: AnyObject {
     func showLoading()
     func hideLoading()
     func reloadData(with viewData: MovsListViewData)
+    func updateViewData(_ viewData: MovsListViewData)
 }
