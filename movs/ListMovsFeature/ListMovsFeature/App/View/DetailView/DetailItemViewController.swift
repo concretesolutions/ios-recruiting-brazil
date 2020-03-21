@@ -25,10 +25,19 @@ open class DetailItemViewController: BaseViewController {
     
     var imageMovieImageView: UIImageView = {
         let img = UIImageView(image: Assets.Images.defaultImageMovs)
-        img.contentMode = .scaleAspectFit
+        img.contentMode = .scaleAspectFill
         img.backgroundColor = .clear
         img.translatesAutoresizingMaskIntoConstraints = false
         return img
+    }()
+    
+    var scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.showsVerticalScrollIndicator = true
+        sv.isScrollEnabled = true
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.alwaysBounceVertical = true
+        return sv
     }()
     
     var stackView: UIStackView = {
@@ -58,6 +67,8 @@ open class DetailItemViewController: BaseViewController {
             
             self.loadImage(with: itemViewData.imageMovieURLAbsolute)
             self.createRow(text: itemViewData.movieName, isHeader: true, isFavorite: itemViewData.isFavorite)
+            self.createRow(text: itemViewData.movieName, isHeader: false)
+            self.createRow(text: itemViewData.movieName, isHeader: false)
             self.createRow(text: itemViewData.movieName, isHeader: false)
             self.createRow(text: itemViewData.movieName, isHeader: false)
             self.createRow(text: itemViewData.overview, isHeader: false)
@@ -161,21 +172,39 @@ extension DetailItemViewController {
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.tintColor = Colors.blueDark
        
-        self.view.addSubview(self.imageMovieImageView)
-        self.view.addSubview(self.stackView)
+        //self.view.addSubview(self.imageMovieImageView)
+        self.view.addSubview(self.scrollView)
+        self.scrollView.addSubview(self.imageMovieImageView)
+        self.scrollView.addSubview(self.stackView)
+        
+//        self.view.addSubview(self.stackView)
         
         NSLayoutConstraint.activate([
-            imageMovieImageView.topAnchor.constraint(equalTo: self.topAnchorSafeArea, constant: 8),
-            imageMovieImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            imageMovieImageView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.442857),
-            imageMovieImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.89),
             
-            stackView.topAnchor.constraint(equalTo: self.imageMovieImageView.bottomAnchor, constant: 18),
-            stackView.leadingAnchor.constraint(equalTo: self.imageMovieImageView.leadingAnchor, constant: 3),
-            stackView.trailingAnchor.constraint(equalTo: self.imageMovieImageView.trailingAnchor, constant: -3),
-//            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchorSafeArea, constant: -8),
+            
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: self.topAnchorSafeArea),
+            scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchorSafeArea),
+            
+            imageMovieImageView.topAnchor.constraint(equalTo: self.topAnchorSafeArea, constant: 8),
+            imageMovieImageView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
+            imageMovieImageView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.442857),
+            imageMovieImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 4),
+            imageMovieImageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -4),
+            
+//            scrollView.topAnchor.constraint(equalTo: self.imageMovieImageView.bottomAnchor, constant: 18),
+//            scrollView.leadingAnchor.constraint(equalTo: self.imageMovieImageView.leadingAnchor, constant: 3),
+//            scrollView.trailingAnchor.constraint(equalTo: self.imageMovieImageView.trailingAnchor, constant: -3),
+//            scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchorSafeArea, constant: -4),
+            
+            stackView.topAnchor.constraint(equalTo: self.imageMovieImageView.bottomAnchor, constant: 16),
+            stackView.leadingAnchor.constraint(equalTo: self.imageMovieImageView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: self.imageMovieImageView.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
+            
+            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
         ])
         imageMovieImageView.clipsToBounds = true
-        
     }
 }

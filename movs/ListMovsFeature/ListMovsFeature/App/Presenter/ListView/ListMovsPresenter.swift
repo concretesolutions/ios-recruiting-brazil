@@ -50,8 +50,6 @@ extension ListMovsPresenter {
             }
             return copyItem
         }
-//        self.view.reloadData(with: self.viewDataModel)
-        self.searchingModel(self.viewDataModel.textInSearchBar)
     }
     
     func searchingModel(_ search: String) {        

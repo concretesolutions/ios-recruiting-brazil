@@ -70,7 +70,7 @@ open class ListMovsViewController: BaseViewController {
     }()
     
     
-    lazy var searchBarView: UISearchBar = {
+     var searchBarView: UISearchBar = {
         let view = UISearchBar()
         view.barTintColor = Colors.yellowLight
         
@@ -79,12 +79,7 @@ open class ListMovsViewController: BaseViewController {
         view.placeholder = "Search"
         view.image(for: .search, state: .normal)
         view.translatesAutoresizingMaskIntoConstraints = false
-        if #available(iOS 13.0, *) {
-            view.searchTextField.backgroundColor = Colors.yellowDark
-            view.searchTextField.delegate = self
-        }
         
-        view.delegate = self
         return view
     }()
     
@@ -115,10 +110,7 @@ extension ListMovsViewController {
         self.view.backgroundColor = Colors.whiteNormal
         self.navigationController?.navigationBar.barTintColor = Colors.yellowLight
         self.tabBarController?.tabBar.barTintColor = Colors.yellowLight
-    }
-    
-    open override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
         self.presenter.loading()
     }
 }
@@ -234,6 +226,12 @@ extension ListMovsViewController {
     }
     
     private func setupSearchBarView() {
+        if #available(iOS 13.0, *) {
+            self.searchBarView.searchTextField.backgroundColor = Colors.yellowDark
+            self.searchBarView.searchTextField.delegate = self
+        }
+        self.searchBarView.delegate = self
+        
         self.view.addSubview(self.searchBarView)
         NSLayoutConstraint.activate([
             self.searchBarView.topAnchor.constraint(equalTo: self.topAnchorSafeArea),
@@ -254,7 +252,7 @@ extension ListMovsViewController {
 }
 
 //MARK: - UITextFieldDelegate -
-extension ListMovsViewController: UITextFieldDelegate, UISearchBarDelegate {
+extension ListMovsViewController: UITextFieldDelegate {
     public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let search = searchBar.text else { return }
         self.stateUI = .searching(search)
@@ -272,6 +270,8 @@ extension ListMovsViewController: UITextFieldDelegate, UISearchBarDelegate {
     }
 }
 
+extension ListMovsViewController: UISearchBarDelegate {
+}
 
 
 //MARK: -Collection View DataSource -
@@ -286,8 +286,8 @@ extension ListMovsViewController: UICollectionViewDataSource {
         let successCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellReuse, for: indexPath) as! ItemMovsCollectionViewCell
         if let itemViewData = self.viewData?.items[indexPath.item] {
             successCell.model = itemViewData
-            successCell.favoriteMovie = { [weak self] itemView in
-                self?.stateUI = .favoriteMovie(itemView)
+            successCell.favoriteMovie = { itemView in                
+                self.stateUI = .favoriteMovie(itemView)
             }
         }
         
@@ -295,9 +295,28 @@ extension ListMovsViewController: UICollectionViewDataSource {
     }
 }
 
+//MARK: -Collection View Delegate-
 extension ListMovsViewController: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = self.viewData?.items[indexPath.item] else { return }
         self.stateUI = .showDetail(item)
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        UIView.animate(withDuration: 0.5) {
+            if let cell = collectionView.cellForItem(at: indexPath) as? ItemMovsCollectionViewCell {
+                cell.transform = .init(scaleX: 0.95, y: 0.95)
+                cell.contentView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            }
+        }
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        UIView.animate(withDuration: 0.5) {
+            if let cell = collectionView.cellForItem(at: indexPath) as? ItemMovsCollectionViewCell {
+                cell.transform = .identity
+                cell.contentView.backgroundColor = .clear
+            }
+        }
     }
 }

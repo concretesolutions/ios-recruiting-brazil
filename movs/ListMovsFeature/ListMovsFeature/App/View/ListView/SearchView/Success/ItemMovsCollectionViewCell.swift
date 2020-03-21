@@ -21,21 +21,14 @@ class ItemMovsCollectionViewCell: UICollectionViewCell {
     //MARK: Model
     var model: MovsItemViewData? {
         didSet {
-            self.titleMovieLabel.text = model?.movieName
-                        
-            if model?.isFavorite ?? false {
-                favoriteButton.setImage(Assets.Images.favoriteFullIcon, for: .normal)
-            } else {
-                favoriteButton.setImage(Assets.Images.favoriteGrayIcon, for: .normal)
-            }
-            
-            self.loadImage()
+            self.fillUpUI()
         }
     }
     
     //MARK: Create UI
     var posterUIImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = Assets.Images.defaultImageMovs
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = Colors.blueDark
@@ -105,8 +98,8 @@ extension ItemMovsCollectionViewCell {
         }
     }
         
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
         self.addSubview(self.posterUIImageView)
         self.addSubview(self.viewContent)
         
@@ -122,14 +115,42 @@ extension ItemMovsCollectionViewCell {
 extension ItemMovsCollectionViewCell {
     @objc func didTapFavoriteButton() {
         if var model = self.model {
+            
             model.isFavorite.toggle()
-            favoriteMovie?(model)
+                        
+            UIView.animate(withDuration: 0.6,
+            animations: {
+                self.favoriteButton.setImage(Assets.Images.favoriteFullIcon, for: .normal)
+                self.favoriteButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+            },
+            completion: { _ in
+                
+                UIView.animate(withDuration: 0.6, animations: {
+                    self.favoriteButton.transform = CGAffineTransform.identity
+                }) { _ in
+                    self.favoriteMovie?(model)
+                }
+            })
+            
         }
     }
 }
 
 //MARK: - Privates -
 extension ItemMovsCollectionViewCell {
+    
+    private func fillUpUI() {
+        self.titleMovieLabel.text = model?.movieName
+                    
+        if model?.isFavorite ?? false {
+            favoriteButton.setImage(Assets.Images.favoriteFullIcon, for: .normal)
+        } else {
+            favoriteButton.setImage(Assets.Images.favoriteGrayIcon, for: .normal)
+        }
+        
+        self.loadImage()
+    }
+    
     private func loadImage() {
         
         guard let urlString = self.model?.imageMovieURLAbsolute else { return }
