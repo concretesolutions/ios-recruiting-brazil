@@ -8,18 +8,15 @@
 
 import UIKit
 
-open class ListMovsRouter: NSObject {
+open class ListMovsRouter {
     
-    var presenter: ListMovsPresenter!
-    var view: ListMovsViewController!
-    var service: ListMovsServiceType!
-    var detailRouter: DetailItemMovsRouter?
-    var navigationController: UINavigationController? {
-        return view.navigationController
-    }
+    private var presenter: ListMovsPresenter!
+    private var view: ListMovsViewController!
+    private var service: ListMovsServiceType!
+    public var detailView: ((_ itemViewData: MovsItemViewData) -> ())?
     
     /// just module on open
-    public override init() {}
+    public init() {}
     
     public func makeUI() -> ListMovsViewController {
         self.view = ListMovsViewController()
@@ -33,26 +30,7 @@ open class ListMovsRouter: NSObject {
     }
     
     public func showDetailView(with itemView: MovsItemViewData) {
-        self.detailRouter = DetailItemMovsRouter()
-        if let ui = detailRouter?.makeUI(itemViewData: itemView) {            
-            if let navController = navigationController {
-                navController.delegate = self
-                navController.pushViewController(ui, animated: true)
-            } else {
-                view.present(ui, animated: true)
-            }
-        }
+        self.detailView?(itemView)        
     }
 }
 
-extension ListMovsRouter: UINavigationControllerDelegate {
-    public func navigationController(_ navigationController: UINavigationController,
-                                     didShow viewController: UIViewController,
-                                     animated: Bool) {
-        
-        if viewController is ListMovsViewController {
-            self.detailRouter?.pop()
-            self.detailRouter = nil
-        }
-    }
-}

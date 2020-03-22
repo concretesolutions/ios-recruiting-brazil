@@ -30,8 +30,7 @@ class ItemMovsCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.image = Assets.Images.defaultImageMovs
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = Colors.blueDark
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -46,7 +45,7 @@ class ItemMovsCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = FontAssets.avenirTextCell
-        label.numberOfLines = 1
+        label.numberOfLines = 2
         label.minimumScaleFactor = 0.3
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
@@ -65,10 +64,10 @@ class ItemMovsCollectionViewCell: UICollectionViewCell {
 extension ItemMovsCollectionViewCell {
     private func makeConstraints() {
         NSLayoutConstraint.activate([
-            self.posterUIImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 4),
-            self.posterUIImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 4),
-            self.posterUIImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -4),
-            self.posterUIImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.75),
+            self.posterUIImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 4),
+            self.posterUIImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            self.posterUIImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            self.posterUIImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.8),
             
             self.viewContent.topAnchor.constraint(equalTo: self.posterUIImageView.bottomAnchor),
             self.viewContent.leadingAnchor.constraint(equalTo: self.posterUIImageView.leadingAnchor),
@@ -106,7 +105,7 @@ extension ItemMovsCollectionViewCell {
         self.viewContent.addSubview(self.titleMovieLabel)
         self.viewContent.addSubview(self.favoriteButton)
         self.makeConstraints()
-                
+        self.posterUIImageView.clipsToBounds = true
         favoriteButton.addTarget(self, action: #selector(didTapFavoriteButton), for: .touchDown)
     }
 }

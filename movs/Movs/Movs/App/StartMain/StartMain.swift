@@ -16,8 +16,7 @@ class StartMain {
     /**
         Function that change order on app run.
      */
-    func start(appCoordinator: AppCoordinator) {
-        appCoordinator.make(scene: .tabBarView([.listMovsFeature, .favoriteFeature]),
-                            type: .root)
+    func start(appCoordinator: CoordinatorType) {
+        appCoordinator.start()
     }
 }

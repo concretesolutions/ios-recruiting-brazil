@@ -9,10 +9,14 @@
 /* Begin PBXBuildFile section */
 		289DEDCE24242A3800FAB187 /* GenresFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289DEDCD24242A3800FAB187 /* GenresFeature.framework */; };
 		289DEDCF24242A3800FAB187 /* GenresFeature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 289DEDCD24242A3800FAB187 /* GenresFeature.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		28D8B6312426DDBE00C09A7E /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8B6302426DDBE00C09A7E /* CoordinatorType.swift */; };
+		28D8B6332426E05900C09A7E /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8B6322426E05900C09A7E /* BaseCoordinator.swift */; };
+		28D8B6362426E29900C09A7E /* MyTabBarCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8B6352426E29900C09A7E /* MyTabBarCreator.swift */; };
+		28D8B63A2426E50400C09A7E /* ListMovsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8B6392426E50400C09A7E /* ListMovsCoordinator.swift */; };
+		28D8B63C2426E54300C09A7E /* FavoriteMovsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8B63B2426E54300C09A7E /* FavoriteMovsCoordinator.swift */; };
 		D86305CF240D767800961B3A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86305CE240D767800961B3A /* SceneDelegate.swift */; };
 		D86305F3240D8BA000961B3A /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86305F2240D8BA000961B3A /* AppCoordinator.swift */; };
 		D86305F9240D8D4E00961B3A /* Scenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86305F8240D8D4E00961B3A /* Scenes.swift */; };
-		D86305FC240D8ECC00961B3A /* ScenesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86305FB240D8ECC00961B3A /* ScenesType.swift */; };
 		D86305FF240DAFA300961B3A /* StartMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86305FE240DAFA300961B3A /* StartMain.swift */; };
 		D863068A240DB4FC00961B3A /* ListMovsFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8630689240DB4FC00961B3A /* ListMovsFeature.framework */; };
 		D863068B240DB4FC00961B3A /* ListMovsFeature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D8630689240DB4FC00961B3A /* ListMovsFeature.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -58,10 +62,14 @@
 
 /* Begin PBXFileReference section */
 		289DEDCD24242A3800FAB187 /* GenresFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GenresFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		28D8B6302426DDBE00C09A7E /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
+		28D8B6322426E05900C09A7E /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		28D8B6352426E29900C09A7E /* MyTabBarCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarCreator.swift; sourceTree = "<group>"; };
+		28D8B6392426E50400C09A7E /* ListMovsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMovsCoordinator.swift; sourceTree = "<group>"; };
+		28D8B63B2426E54300C09A7E /* FavoriteMovsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovsCoordinator.swift; sourceTree = "<group>"; };
 		D86305CE240D767800961B3A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D86305F2240D8BA000961B3A /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		D86305F8240D8D4E00961B3A /* Scenes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.swift; sourceTree = "<group>"; };
-		D86305FB240D8ECC00961B3A /* ScenesType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenesType.swift; sourceTree = "<group>"; };
 		D86305FE240DAFA300961B3A /* StartMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMain.swift; sourceTree = "<group>"; };
 		D8630689240DB4FC00961B3A /* ListMovsFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ListMovsFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86306C2240DBABC00961B3A /* ListMovsFeaturePlay.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = ListMovsFeaturePlay.playground; path = ../ListMovsFeaturePlay.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -109,30 +117,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D86305F0240D8B5200961B3A /* Coordinator */ = {
+		28C82DD0242729F8008BD53C /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
-				D86305F6240D8D3400961B3A /* Main */,
-				D86305F7240D8D3C00961B3A /* Scenes */,
+				28D8B6302426DDBE00C09A7E /* CoordinatorType.swift */,
+				D86305F8240D8D4E00961B3A /* Scenes.swift */,
+				28D8B6322426E05900C09A7E /* BaseCoordinator.swift */,
 			);
-			path = Coordinator;
+			path = Supporting;
 			sourceTree = "<group>";
 		};
-		D86305F6240D8D3400961B3A /* Main */ = {
+		28C82DD124272A12008BD53C /* Flow */ = {
 			isa = PBXGroup;
 			children = (
 				D86305F2240D8BA000961B3A /* AppCoordinator.swift */,
+				28D8B6392426E50400C09A7E /* ListMovsCoordinator.swift */,
+				28D8B63B2426E54300C09A7E /* FavoriteMovsCoordinator.swift */,
 			);
-			path = Main;
+			path = Flow;
 			sourceTree = "<group>";
 		};
-		D86305F7240D8D3C00961B3A /* Scenes */ = {
+		28D8B6342426E14F00C09A7E /* Creator */ = {
 			isa = PBXGroup;
 			children = (
-				D86305F8240D8D4E00961B3A /* Scenes.swift */,
-				D86305FB240D8ECC00961B3A /* ScenesType.swift */,
+				28D8B6352426E29900C09A7E /* MyTabBarCreator.swift */,
 			);
-			path = Scenes;
+			path = Creator;
+			sourceTree = "<group>";
+		};
+		D86305F0240D8B5200961B3A /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				28C82DD124272A12008BD53C /* Flow */,
+				28C82DD0242729F8008BD53C /* Supporting */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		D86305FA240D8DCB00961B3A /* StartMain */ = {
@@ -192,6 +211,7 @@
 		D87841CF240A9B2000070A5A /* MyTabBarScene */ = {
 			isa = PBXGroup;
 			children = (
+				28D8B6342426E14F00C09A7E /* Creator */,
 				D87841D0240A9B3100070A5A /* View */,
 			);
 			path = MyTabBarScene;
@@ -398,12 +418,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				D86305F9240D8D4E00961B3A /* Scenes.swift in Sources */,
+				28D8B6332426E05900C09A7E /* BaseCoordinator.swift in Sources */,
 				D86306FE240DC85F00961B3A /* MyTabBarController.swift in Sources */,
-				D86305FC240D8ECC00961B3A /* ScenesType.swift in Sources */,
+				28D8B63C2426E54300C09A7E /* FavoriteMovsCoordinator.swift in Sources */,
 				D8D6E1812409F84D00667126 /* AppDelegate.swift in Sources */,
 				D86305F3240D8BA000961B3A /* AppCoordinator.swift in Sources */,
+				28D8B6362426E29900C09A7E /* MyTabBarCreator.swift in Sources */,
 				D86305FF240DAFA300961B3A /* StartMain.swift in Sources */,
+				28D8B6312426DDBE00C09A7E /* CoordinatorType.swift in Sources */,
 				D86305CF240D767800961B3A /* SceneDelegate.swift in Sources */,
+				28D8B63A2426E50400C09A7E /* ListMovsCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
