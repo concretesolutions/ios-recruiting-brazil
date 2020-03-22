@@ -47,5 +47,9 @@ public extension Assets {
         public static let defaultImageMovs = UIImage(named: "default_image_movs",
                                                      in: Assets.bundleFramework,
                                                      compatibleWith: nil)
+        
+        public static let filterIcon = UIImage(named: "filter_icon",
+                                                     in: Assets.bundleFramework,
+                                                     compatibleWith: nil)
     }
 }

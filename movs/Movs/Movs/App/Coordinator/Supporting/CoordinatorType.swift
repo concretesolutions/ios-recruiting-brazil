@@ -13,3 +13,11 @@ protocol CoordinatorType: AnyObject {
     func pop()
     func currentViewController() -> UIViewController 
 }
+
+extension CoordinatorType {
+    func pop() {
+        /**         
+         Não tem implementação pois não é repassada para a View.
+         */
+    }
+}

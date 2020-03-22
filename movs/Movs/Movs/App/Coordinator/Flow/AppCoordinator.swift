@@ -42,10 +42,6 @@ extension AppCoordinator: CoordinatorType {
         buildCurrentView()
         setupWindow()
     }
-    
-    func pop() {
-        //Doesnt have pop implementation
-    }
 }
 
 //MARK: - Setups  -
@@ -61,8 +57,6 @@ extension AppCoordinator {
     }
     
     private func buildCurrentView() {
-        
-        
         guard let listCoordinator = self.childrensCoordinators[Scenes.listMovsFeature.rawValue],
             let favoriteCoordinator = self.childrensCoordinators[Scenes.favoriteFeature.rawValue] else {
             return
@@ -77,24 +71,5 @@ extension AppCoordinator {
         let myTabBarViewController = creator.makeUI(with: viewControllers)                
         currentViewController = myTabBarViewController
     }
-    
 }
 
-//MARK: - Sup Functions -
-extension AppCoordinator {
-    private func navigationInCurrentViewController() -> UINavigationController? {
-        if let myTabBar = self.currentViewController as? MyTabBarController {
-            if let navController = myTabBar.viewControllerSelected as? UINavigationController {
-                return navController
-            }
-        }
-        return nil
-    }
-    
-    private func lastViewControllerInCurrentViewController() -> UIViewController? {
-        if let navController = self.currentNavigationController {
-            return navController.topViewController
-        }
-        return nil
-    }
-}

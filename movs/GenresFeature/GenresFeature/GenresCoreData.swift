@@ -7,6 +7,7 @@
 //
 
 import CoreData
+import CommonsModule
 
 protocol GenresCoreDataType: AnyObject {
     func lastDateUpdate() -> Date?
@@ -22,7 +23,8 @@ class GenresCoreData: GenresCoreDataType {
     
     init() {
         do {
-            let dataController = try DataController {}
+            let bundle = Bundle(for: GenresCoreData.self) 
+            let dataController = try DataController(modelName: "GenresFeature", bundle: bundle) {}
             self.managedObjectContext = dataController.managedObjectContext
         } catch {
             self.managedObjectContext = nil

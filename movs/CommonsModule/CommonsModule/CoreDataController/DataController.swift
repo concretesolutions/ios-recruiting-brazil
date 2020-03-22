@@ -8,20 +8,22 @@
 
 import UIKit
 import CoreData
-class DataController: NSObject {
+open class DataController: NSObject {
     
-    var managedObjectContext: NSManagedObjectContext
-    
-    init(completionClosure: @escaping () -> ()) throws {
+    public var managedObjectContext: NSManagedObjectContext
+    public var modelName: String
+    public init(modelName: String,
+                bundle: Bundle,
+                completionClosure: @escaping () -> ()) throws {
         //This resource is the same name as your xcdatamodeld contained in your project
-        
-        let bundle = Bundle(for: DataController.self) //Bundle(identifier: "com.mfelipesp.GenresFeature")
-        guard let modelURL = bundle.url(forResource: "GenresFeature", withExtension:"momd") else {
+        self.modelName = modelName
+                
+        guard let modelURL = bundle.url(forResource: modelName, withExtension:"momd") else {
             throw NSError(domain: "DataController -- Error loading model from bundle", code: 1, userInfo: nil)
         }
         // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
         guard let mom = NSManagedObjectModel(contentsOf: modelURL) else {
-            throw NSError(domain: "DataController -- Error initializing mom from: \(modelURL)", code: 2, userInfo: nil)            
+            throw NSError(domain: "DataController -- Error initializing mom from: \(modelURL)", code: 2, userInfo: nil)
         }
         
         let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
@@ -34,7 +36,7 @@ class DataController: NSObject {
             guard let docURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
                 fatalError("Unable to resolve document directory")
             }
-            let storeURL = docURL.appendingPathComponent("GenresFeature.sqlite")
+            let storeURL = docURL.appendingPathComponent("\(modelName).sqlite")
             do {
                 try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
                 //The callback block is expected to complete the User Interface and therefore should be presented back on the main queue so that the user interface does not need to be concerned with which queue this call is coming from.

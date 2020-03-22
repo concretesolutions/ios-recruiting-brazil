@@ -14,6 +14,8 @@
 		28D8B6362426E29900C09A7E /* MyTabBarCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8B6352426E29900C09A7E /* MyTabBarCreator.swift */; };
 		28D8B63A2426E50400C09A7E /* ListMovsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8B6392426E50400C09A7E /* ListMovsCoordinator.swift */; };
 		28D8B63C2426E54300C09A7E /* FavoriteMovsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8B63B2426E54300C09A7E /* FavoriteMovsCoordinator.swift */; };
+		28E8C7982427EA6A008E2F32 /* FavoriteMovsFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E8C7972427EA6A008E2F32 /* FavoriteMovsFeature.framework */; };
+		28E8C7992427EA6A008E2F32 /* FavoriteMovsFeature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28E8C7972427EA6A008E2F32 /* FavoriteMovsFeature.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D86305CF240D767800961B3A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86305CE240D767800961B3A /* SceneDelegate.swift */; };
 		D86305F3240D8BA000961B3A /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86305F2240D8BA000961B3A /* AppCoordinator.swift */; };
 		D86305F9240D8D4E00961B3A /* Scenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86305F8240D8D4E00961B3A /* Scenes.swift */; };
@@ -54,6 +56,7 @@
 			files = (
 				D863068B240DB4FC00961B3A /* ListMovsFeature.framework in Embed Frameworks */,
 				289DEDCF24242A3800FAB187 /* GenresFeature.framework in Embed Frameworks */,
+				28E8C7992427EA6A008E2F32 /* FavoriteMovsFeature.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -67,6 +70,7 @@
 		28D8B6352426E29900C09A7E /* MyTabBarCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarCreator.swift; sourceTree = "<group>"; };
 		28D8B6392426E50400C09A7E /* ListMovsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMovsCoordinator.swift; sourceTree = "<group>"; };
 		28D8B63B2426E54300C09A7E /* FavoriteMovsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovsCoordinator.swift; sourceTree = "<group>"; };
+		28E8C7972427EA6A008E2F32 /* FavoriteMovsFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FavoriteMovsFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86305CE240D767800961B3A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D86305F2240D8BA000961B3A /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		D86305F8240D8D4E00961B3A /* Scenes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.swift; sourceTree = "<group>"; };
@@ -97,6 +101,7 @@
 			files = (
 				D863068A240DB4FC00961B3A /* ListMovsFeature.framework in Frameworks */,
 				289DEDCE24242A3800FAB187 /* GenresFeature.framework in Frameworks */,
+				28E8C7982427EA6A008E2F32 /* FavoriteMovsFeature.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +282,7 @@
 		D8D6E1FF2409FAF200667126 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				28E8C7972427EA6A008E2F32 /* FavoriteMovsFeature.framework */,
 				289DEDCD24242A3800FAB187 /* GenresFeature.framework */,
 				D878E672240F1661007DC2C8 /* AssertModule.framework */,
 				D86306FF240DCD9D00961B3A /* AssertModule.framework */,

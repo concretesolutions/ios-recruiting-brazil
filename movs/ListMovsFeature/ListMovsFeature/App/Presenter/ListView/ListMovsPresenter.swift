@@ -10,7 +10,7 @@ import NetworkLayerModule
 
 class ListMovsPresenter {
     weak var view: ListMovsView!
-    var router: ListMovsRouter
+    weak var router: ListMovsRouter?
     var service: ListMovsServiceType
     var viewDataModel = MovsListViewData()
     
@@ -68,7 +68,7 @@ extension ListMovsPresenter {
     }
     
     func showDetail(_ itemView: MovsItemViewData) {
-        self.router.showDetailView(with: itemView)
+        self.router?.showDetailView(with: itemView)
     }
 }
 

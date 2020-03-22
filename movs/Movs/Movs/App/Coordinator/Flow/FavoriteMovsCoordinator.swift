@@ -8,23 +8,41 @@
 
 import UIKit
 import AssertModule
+import FavoriteMovsFeature
+
 class FavoriteMovsCoordinator: BaseCoordinator {
-    
+    var homeFavoriteMovsRouter: HomeFavoriteMovsRouter?
+    var navigationController: UINavigationController!
+    override init(){
+        super.init()
+    }
 }
 
 extension FavoriteMovsCoordinator: CoordinatorType {
     func start() {
-        print("uhull start FavoriteMovsCoordinator")
-    }
-    
-    func pop() {
-        
+        self.setupCurrentView()
     }
     
     func currentViewController() -> UIViewController {
-        let view = UIViewController()
-        view.view.backgroundColor = .blue
-        view.tabBarItem = UITabBarItem(title: "Favorite", image: Assets.TabBarItems.favoriteEmpty, tag: 1)
-        return view
+        return super.currentViewController
+    }
+}
+
+
+//MARK: - Setups
+extension FavoriteMovsCoordinator {
+    
+    private func setupCurrentView() {
+        self.navigationController = UINavigationController()
+        
+        
+        // HomeViewController
+        self.homeFavoriteMovsRouter = HomeFavoriteMovsRouter()
+        let homeFavoriteMovsViewControler = self.homeFavoriteMovsRouter!.makeUI()
+        homeFavoriteMovsViewControler.tabBarItem = UITabBarItem(title: "Favorite", image: Assets.TabBarItems.favoriteEmpty, tag: 1)
+        
+        // Current View
+        self.navigationController.pushViewController(homeFavoriteMovsViewControler, animated: true)
+        super.currentViewController = self.navigationController
     }
 }

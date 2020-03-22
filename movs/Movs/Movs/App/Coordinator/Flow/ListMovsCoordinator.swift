@@ -48,10 +48,6 @@ extension ListMovsCoordinator: CoordinatorType {
     func start() {
         self.createCurrentView()
     }
-    
-    func pop() {
-        
-    }
 }
 
 //MARK: - Private funcs

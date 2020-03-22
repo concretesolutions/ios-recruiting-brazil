@@ -185,7 +185,7 @@ extension ListMovsViewController: ListMovsView {
     }
     
     func setTitle(_ text: String) {
-        self.title = text
+        self.navigationItem.title = text
     }
     
     func setItemBar(image: String) {        
