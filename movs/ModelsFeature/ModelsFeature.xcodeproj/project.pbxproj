@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28A5BE66242C320200DEDE4F /* FavoriteMovsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A5BE65242C320200DEDE4F /* FavoriteMovsModel.swift */; };
+		28A5BE68242C32A000DEDE4F /* FavoriteMovsEntity+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A5BE67242C32A000DEDE4F /* FavoriteMovsEntity+Custom.swift */; };
 		28E8C76B2427B366008E2F32 /* ModelsFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E8C7612427B366008E2F32 /* ModelsFeature.framework */; };
 		28E8C7702427B366008E2F32 /* ModelsFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8C76F2427B366008E2F32 /* ModelsFeatureTests.swift */; };
 		28E8C7722427B366008E2F32 /* ModelsFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = 28E8C7642427B366008E2F32 /* ModelsFeature.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -41,6 +43,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		28A5BE65242C320200DEDE4F /* FavoriteMovsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovsModel.swift; sourceTree = "<group>"; };
+		28A5BE67242C32A000DEDE4F /* FavoriteMovsEntity+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteMovsEntity+Custom.swift"; sourceTree = "<group>"; };
 		28E8C7612427B366008E2F32 /* ModelsFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ModelsFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28E8C7642427B366008E2F32 /* ModelsFeature.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelsFeature.h; sourceTree = "<group>"; };
 		28E8C7652427B366008E2F32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -72,6 +76,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28A5BE64242C31ED00DEDE4F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				28A5BE65242C320200DEDE4F /* FavoriteMovsModel.swift */,
+				28A5BE67242C32A000DEDE4F /* FavoriteMovsEntity+Custom.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		28E8C7572427B366008E2F32 = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +135,7 @@
 		28E8C77F2427B401008E2F32 /* FavoriteMovs */ = {
 			isa = PBXGroup;
 			children = (
+				28A5BE64242C31ED00DEDE4F /* Models */,
 				28E8C7842427B445008E2F32 /* CoreDataStack */,
 			);
 			path = FavoriteMovs;
@@ -255,6 +269,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				28E8C77D2427B37A008E2F32 /* ModelsFeature.xcdatamodeld in Sources */,
+				28A5BE66242C320200DEDE4F /* FavoriteMovsModel.swift in Sources */,
+				28A5BE68242C32A000DEDE4F /* FavoriteMovsEntity+Custom.swift in Sources */,
 				28E8C7892427B675008E2F32 /* FavoriteMovCoreData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,6 +426,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = ModelsFeature/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -436,6 +453,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = ModelsFeature/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -35,15 +35,17 @@ extension DetailItemMovsPresenter {
         
         self.genreService.genre(by: self.itemViewData.genresId) { [weak self] result in
             guard let self = self else { return }
-            switch result {
-            case .success(let genres):
-                self.fillUpGenres(with: genres)
-                self.view?.fillUp(with: self.itemViewData)
-                
-            case .failure(_):
-                self.view?.fillUp(with: self.itemViewData)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let genres):
+                    self.fillUpGenres(with: genres)
+                    self.view?.fillUp(with: self.itemViewData)
+                    
+                case .failure(_):
+                    self.view?.fillUp(with: self.itemViewData)
+                }
+                self.view?.hideLoading()
             }
-            self.view?.hideLoading()
         }
     }
 }
@@ -52,6 +54,7 @@ extension DetailItemMovsPresenter {
 extension DetailItemMovsPresenter {
     
     private func fillUpGenres(with genreModels: [GenreModel]) {
+        guard genreModels.count > 0 else { return }
         self.itemViewData.genresString = genreModels.reduce("", { (result, genreModel)  in
             return result + genreModel.name + ", "
         })

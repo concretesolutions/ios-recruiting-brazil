@@ -80,16 +80,15 @@ class GenresCoreData: GenresCoreDataType {
     }
     
     func removeAllGenres() {
-        
         guard let moc = managedObjectContext else { return }
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GenreEntity")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
-        do {
-            let result = try moc.execute(deleteRequest)
-            debugPrint(result.debugDescription)
-        } catch let error as NSError {
-            debugPrint(error)
+        DispatchQueue.main.async {
+            do {
+                try moc.execute(deleteRequest)
+            } catch let error as NSError {
+                debugPrint(error)
+            }
         }
     }
     
@@ -119,10 +118,12 @@ class GenresCoreData: GenresCoreDataType {
             genryEntity.id = idNumber.int64Value
             genryEntity.value = model.name
         }
-        do {
-            try context.save()
-        } catch {
-            debugPrint("Error ao persistir ::: \(error.localizedDescription)")
+        DispatchQueue.main.async {
+            do {
+                try context.save()
+            } catch let error as NSError {
+                debugPrint("Error ao persistir ::: \(error.localizedDescription)")
+            }
         }
     }
 }

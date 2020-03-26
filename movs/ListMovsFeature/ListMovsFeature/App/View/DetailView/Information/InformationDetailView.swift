@@ -81,21 +81,23 @@ extension InformationDetailView {
 extension InformationDetailView {
     
     private func fillUpUI() {
-        self.detailLabel.text = detailText
-        
-        if self.isHeader {
-            self.favoriteImageView.isHidden = false
-            self.favoriteImageView.image =
-                self.isFavorite ?
-                    Assets.Images.favoriteFullIcon :
-                    Assets.Images.favoriteGrayIcon
+        DispatchQueue.main.async {
+            self.detailLabel.text = self.detailText
             
-            self.detailLabel.font = FontAssets.avenirTextTitle
-        
-        } else {
-            self.favoriteImageView.isHidden = true
-            self.detailLabel.font = FontAssets.avenirTextCell
-        }        
+            if self.isHeader {
+                self.favoriteImageView.isHidden = false
+                self.favoriteImageView.image =
+                    self.isFavorite ?
+                        Assets.Images.favoriteFullIcon :
+                        Assets.Images.favoriteGrayIcon
+                
+                self.detailLabel.font = FontAssets.avenirTextTitle
+            
+            } else {
+                self.favoriteImageView.isHidden = true
+                self.detailLabel.font = FontAssets.avenirTextCell
+            }
+        }         
     }
     
     private func setupUI() {

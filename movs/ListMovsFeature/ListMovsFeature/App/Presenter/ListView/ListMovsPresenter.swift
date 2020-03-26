@@ -7,17 +7,23 @@
 //
 
 import NetworkLayerModule
+import ModelsFeature
 
 class ListMovsPresenter {
     weak var view: ListMovsView!
     weak var router: ListMovsRouter?
     var service: ListMovsServiceType
     var viewDataModel = MovsListViewData()
+    var favoriteCoreData: FavoriteMovCoreData
     
-    init(view: ListMovsView, router: ListMovsRouter, service: ListMovsServiceType) {
+    init(view: ListMovsView,
+         router: ListMovsRouter,
+         service: ListMovsServiceType,
+         favoriteCoreData: FavoriteMovCoreData = FavoriteMovCoreData()) {
         self.view = view
         self.router = router
         self.service = service
+        self.favoriteCoreData = favoriteCoreData
     }
 }
 
@@ -33,6 +39,7 @@ extension ListMovsPresenter {
                 switch result {
                 case .success(let success):
                     self.viewDataModel = self.wrapperModels(from: success)
+                    self.checkFavorite()
                     self.view.showSuccess(viewData: self.viewDataModel)
                 case .failure(_):
                     self.view.showErrorCard()
@@ -42,6 +49,7 @@ extension ListMovsPresenter {
         }
         
     }
+    
     func favoriteMovie(_ itemViewData: MovsItemViewData) {
         self.viewDataModel.items = self.viewDataModel.items.map{ item  in
             var copyItem = item
@@ -49,6 +57,12 @@ extension ListMovsPresenter {
                 copyItem.isFavorite.toggle()
             }
             return copyItem
+        }
+        
+        if itemViewData.isFavorite {
+            persistFavoriteMovie(itemViewData)
+        } else {
+            removeFavoriteMovie(itemViewData)
         }
         self.view.updateViewData(self.viewDataModel)
     }
@@ -77,10 +91,45 @@ extension ListMovsPresenter {
     private func itemsInSearching(with text: String) -> [MovsItemViewData] {
         return self.viewDataModel.items.filter { $0.movieName.contains(text) }
     }
+    
+    private func persistFavoriteMovie(_ itemViewData: MovsItemViewData) {
+        let model = wrapperModelsToFavorite(from: itemViewData)
+        favoriteCoreData.saveFavoriteMovs(model: model)
+    }
+    
+    private func removeFavoriteMovie(_ itemViewData: MovsItemViewData) {
+        let model = wrapperModelsToFavorite(from: itemViewData)
+        favoriteCoreData.deleteFavoriteMovs(model: model)
+    }
+    
+    private func checkFavorite() {
+        
+        let items = self.viewDataModel.items.map { item -> MovsItemViewData in
+            var itemCopy = item
+            let model = self.wrapperModelsToFavorite(from: item)
+            if let _ = self.favoriteCoreData.search(by: model) {
+                itemCopy.isFavorite = true
+                return itemCopy
+            }
+            return item
+        }
+        
+        self.viewDataModel.items = items
+    }
 }
 
 //MARK: -Wrapper Models-
 extension ListMovsPresenter {
+    
+    private func wrapperModelsToFavorite(from itemViewData: MovsItemViewData) -> FavoriteMovsModel {
+        var model = FavoriteMovsModel()
+        model.imageURL = itemViewData.imageMovieURLAbsolute
+        model.owerview = itemViewData.overview
+        model.title = itemViewData.movieName
+        model.year = itemViewData.years
+        return model
+    }
+    
     private func wrapperModels(from requestModel: MovsListRequestModel) -> MovsListViewData {
         var viewData = MovsListViewData()
         requestModel.items?.forEach { item in

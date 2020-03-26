@@ -38,10 +38,8 @@ open class GenresFeatureService {
 extension GenresFeatureService: GenresFeatureServiceType {
     
     public func fetchGenres(handle: @escaping (Result<[GenreModel], MtdbAPIError>) -> Void) {        
-        DispatchQueue.main.async {
-            let typeRequest = self.typeRequest()
-            self.fetchGenre(by: typeRequest, handle: handle)
-        }
+        let typeRequest = self.typeRequest()
+        self.fetchGenre(by: typeRequest, handle: handle)
     }
     
     
@@ -87,6 +85,10 @@ extension GenresFeatureService {
         guard let lastUpdate = genresCoreData.lastDateUpdate() else {
             return .request
         }
+        let genres = genresCoreData.fetchGenres()
+        guard genres.count > 0 else {
+            return .request
+        }
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy hh:mm:ss"
@@ -97,6 +99,7 @@ extension GenresFeatureService {
                 return .request
         }
         
+                
         guard let differ = coreData.totalDistance(from: today, resultIn: .day) else {
             return .request
         }
@@ -109,11 +112,27 @@ extension GenresFeatureService {
     }
     
     private func persist(_ genres: [GenreModel]) {
-        DispatchQueue.main.async {
+        
+        let queue = DispatchQueue(label: "com.gcd.myQueue", attributes: .concurrent)
+        let semaphore = DispatchSemaphore(value: 1)
+
+        queue.async {
+            semaphore.wait()
             self.genresCoreData.removeAllGenres()
-            self.genresCoreData.persist(with: genres)
+            print("Removeu geral")
+            semaphore.signal()
+            
+            semaphore.wait()
             self.genresCoreData.updateDate()
+            print("Alterou data")
+            semaphore.signal()
+            
+            semaphore.wait()
+            self.genresCoreData.persist(with: genres)
+            print("Persistiu")
+            semaphore.signal()
         }
+        
     }
     
     private func callCoreData() -> [GenreModel] {
