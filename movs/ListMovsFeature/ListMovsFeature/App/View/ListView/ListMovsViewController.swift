@@ -98,7 +98,7 @@ open class ListMovsViewController: BaseViewController {
     }()
     
     var viewData: MovsListViewData?
-
+    var firstView: Bool = true
 }
 
 //MARK: - Lifecycle-
@@ -112,6 +112,14 @@ extension ListMovsViewController {
         self.tabBarController?.tabBar.barTintColor = Colors.yellowLight
         
         self.presenter.loading()
+    }
+    
+    open override func viewWillAppear(_ animated: Bool) {
+        if !firstView {
+            self.presenter.appearView()
+        } else {
+            firstView = false
+        }
     }
 }
 

@@ -11,7 +11,7 @@ import Foundation
 public struct FavoriteMovsModel {
     public init() {}
     public var imageURL: String?
-    public var owerview: String?
+    public var overview: String?
     public var title: String?
     public var year: String?
 }
@@ -19,7 +19,7 @@ public struct FavoriteMovsModel {
 extension FavoriteMovsModel {
     mutating func fill(with entity: FavoriteMovsEntity) {
         self.imageURL = entity.imageURL
-        self.owerview = entity.owerview
+        self.overview = entity.overview
         self.title = entity.title
         self.year = entity.year
     }

@@ -91,8 +91,8 @@ extension FavoriteMovCoreData {
         if let title = model.title {
             predicates.append(NSPredicate(format: "title == %@", title))
         }
-        if let owerview = model.owerview {
-            predicates.append(NSPredicate(format: "owerview == %@", owerview))
+        if let overview = model.overview {
+            predicates.append(NSPredicate(format: "overview == %@", overview))
         }
         if let year = model.year {
             predicates.append(NSPredicate(format: "year == %@", year))

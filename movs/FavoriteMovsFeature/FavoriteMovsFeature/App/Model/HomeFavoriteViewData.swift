@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import ModelsFeature
 
 struct HomeFavoriteViewData {
-    var title: String
+    var title: String = ""
+    var favorites: [FavoriteMovsModel] = []
 }

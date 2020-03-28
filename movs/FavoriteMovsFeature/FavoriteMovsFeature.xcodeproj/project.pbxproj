@@ -16,6 +16,9 @@
 		28E8C7962427E9B2008E2F32 /* HomeFavoriteMovsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8C7952427E9B2008E2F32 /* HomeFavoriteMovsRouter.swift */; };
 		28E8C79C24280013008E2F32 /* HomeFavoriteMovsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8C79B24280013008E2F32 /* HomeFavoriteMovsPresenter.swift */; };
 		28E8C79E24280041008E2F32 /* HomeFavoriteViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8C79D24280041008E2F32 /* HomeFavoriteViewData.swift */; };
+		28E922D0242D6AA400029A7E /* HomeFavoriteItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E922CF242D6AA400029A7E /* HomeFavoriteItemCell.swift */; };
+		28E922D2242EB9AE00029A7E /* HomeFavoriteMovsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E922D1242EB9AE00029A7E /* HomeFavoriteMovsDataSource.swift */; };
+		28E922D4242EB9BE00029A7E /* HomeFavoriteMovsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E922D3242EB9BE00029A7E /* HomeFavoriteMovsDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +57,9 @@
 		28E8C7952427E9B2008E2F32 /* HomeFavoriteMovsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFavoriteMovsRouter.swift; sourceTree = "<group>"; };
 		28E8C79B24280013008E2F32 /* HomeFavoriteMovsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFavoriteMovsPresenter.swift; sourceTree = "<group>"; };
 		28E8C79D24280041008E2F32 /* HomeFavoriteViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFavoriteViewData.swift; sourceTree = "<group>"; };
+		28E922CF242D6AA400029A7E /* HomeFavoriteItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFavoriteItemCell.swift; sourceTree = "<group>"; };
+		28E922D1242EB9AE00029A7E /* HomeFavoriteMovsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFavoriteMovsDataSource.swift; sourceTree = "<group>"; };
+		28E922D3242EB9BE00029A7E /* HomeFavoriteMovsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFavoriteMovsDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,7 +158,10 @@
 		28E8C7902427E8C6008E2F32 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				28E922CE242D6A9300029A7E /* cell */,
 				28E8C7912427E8FA008E2F32 /* HomeFavoriteMovsViewController.swift */,
+				28E922D1242EB9AE00029A7E /* HomeFavoriteMovsDataSource.swift */,
+				28E922D3242EB9BE00029A7E /* HomeFavoriteMovsDelegate.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -171,6 +180,14 @@
 				28E8C79B24280013008E2F32 /* HomeFavoriteMovsPresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		28E922CE242D6A9300029A7E /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				28E922CF242D6AA400029A7E /* HomeFavoriteItemCell.swift */,
+			);
+			path = cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,8 +303,11 @@
 			files = (
 				28E8C7962427E9B2008E2F32 /* HomeFavoriteMovsRouter.swift in Sources */,
 				28E8C79C24280013008E2F32 /* HomeFavoriteMovsPresenter.swift in Sources */,
+				28E922D2242EB9AE00029A7E /* HomeFavoriteMovsDataSource.swift in Sources */,
+				28E922D4242EB9BE00029A7E /* HomeFavoriteMovsDelegate.swift in Sources */,
 				28E8C7922427E8FA008E2F32 /* HomeFavoriteMovsViewController.swift in Sources */,
 				28E8C79E24280041008E2F32 /* HomeFavoriteViewData.swift in Sources */,
+				28E922D0242D6AA400029A7E /* HomeFavoriteItemCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

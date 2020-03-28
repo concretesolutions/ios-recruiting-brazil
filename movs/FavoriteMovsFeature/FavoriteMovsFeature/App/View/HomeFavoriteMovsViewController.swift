@@ -9,10 +9,14 @@
 import UIKit
 import AssertModule
 import CommonsModule
+import ModelsFeature
 
 open class HomeFavoriteMovsViewController: BaseViewController {
     
     var presenter: HomeFavoriteMovsPresenter!
+    var dataSourceTableView = HomeFavoriteMovsDataSource()
+    var delegateTableView = HomeFavoriteMovsDelegate()
+    
     
     private var searchBarView: UISearchBar = {
         let view = UISearchBar()
@@ -27,31 +31,80 @@ open class HomeFavoriteMovsViewController: BaseViewController {
         return view
     }()
     
+    private var favoriteTableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellDefault")
+        tableView.register(HomeFavoriteItemCell.self, forCellReuseIdentifier: HomeFavoriteItemCell.reuseCell)
+        tableView.estimatedRowHeight = 80
+        tableView.separatorStyle = .none
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.backgroundColor = Colors.whiteNormal
+        return tableView
+    }()
+    
+    
+}
+
+//MARK: - Lifecycle
+extension HomeFavoriteMovsViewController{
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        self.presenter.loadingUI()
         self.setupSearchBarView()
         self.view.backgroundColor = Colors.whiteNormal
-        
-        self.navigationController?.navigationBar.barTintColor = Colors.yellowLight
-        
-        self.setupNavigationItem()
-        
-        self.tabBarController?.tabBar.barTintColor = Colors.yellowLight
+        self.setupNavigationBar()
+        self.setupTableView()
     }
+    
+    open override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.presenter.loadingUI()
+    }
+}
+
+//MARK: - setups UI
+extension HomeFavoriteMovsViewController {
     
     @objc func tapOnFilterBarButtonItem() {
         print("FILTRANDO")
     }
     
-    private func setupNavigationItem() {
+    private func setupTableView() {
+        favoriteTableView.delegate = self.delegateTableView
+        favoriteTableView.dataSource = self.dataSourceTableView
+        
+        
+        self.delegateTableView.selected = { indexPath in
+            let favoriteViewData = self.dataSourceTableView.favorites[indexPath.row]
+            self.presenter.selected(favoriteModel: favoriteViewData)
+        }
+        
+        self.dataSourceTableView.removed = { favoriteView in
+            self.presenter.remove(at: favoriteView)
+        }        
+        
+        self.view.addSubview(favoriteTableView)
+        
+        NSLayoutConstraint.activate([
+            favoriteTableView.topAnchor.constraint(equalTo: self.searchBarView.bottomAnchor, constant: 4),
+            favoriteTableView.trailingAnchor.constraint(equalTo: self.searchBarView.trailingAnchor),
+            favoriteTableView.leadingAnchor.constraint(equalTo: self.searchBarView.leadingAnchor),
+            favoriteTableView.bottomAnchor.constraint(equalTo: self.bottomAnchorSafeArea),
+        ])
+    }
+    
+    private func setupNavigationBar() {
         let button = UIButton(type: UIButton.ButtonType.custom)
         button.setImage(Assets.Images.filterIcon, for: .normal)
         button.addTarget(self, action:#selector(tapOnFilterBarButtonItem), for: .touchDown)
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        
         let barButton = UIBarButtonItem(customView: button)
+        
         self.navigationItem.rightBarButtonItem = barButton
+        self.navigationController?.navigationBar.barTintColor = Colors.yellowLight
+        self.tabBarController?.tabBar.barTintColor = Colors.yellowLight
     }
     
     private func setupSearchBarView() {
@@ -73,7 +126,9 @@ open class HomeFavoriteMovsViewController: BaseViewController {
 
 //MARK: - Binding Presenter
 extension HomeFavoriteMovsViewController: HomeFavoriteMovsView {
-    func setTitle(_ text: String) {
-        self.navigationItem.title = text
+    func loadDatas(_ favoriteMovsModel: HomeFavoriteViewData) {
+        self.navigationItem.title = favoriteMovsModel.title
+        self.dataSourceTableView.favorites = favoriteMovsModel.favorites
+        self.favoriteTableView.reloadData()
     }
 }

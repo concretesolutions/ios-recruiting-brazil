@@ -12,7 +12,7 @@ extension FavoriteMovsEntity {
     func fill(with model: FavoriteMovsModel) {
         self.imageURL = model.imageURL
         self.title = model.title
-        self.owerview = model.owerview
+        self.overview = model.overview
         self.year = model.year
     }
 }

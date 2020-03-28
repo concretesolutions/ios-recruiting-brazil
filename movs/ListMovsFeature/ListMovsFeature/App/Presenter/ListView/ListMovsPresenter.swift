@@ -84,6 +84,11 @@ extension ListMovsPresenter {
     func showDetail(_ itemView: MovsItemViewData) {
         self.router?.showDetailView(with: itemView)
     }
+    
+    func appearView() {
+        self.checkFavorite()
+        self.view.reloadData(with: self.viewDataModel)
+    }
 }
 
 //MARK: -Privates func-
@@ -109,9 +114,11 @@ extension ListMovsPresenter {
             let model = self.wrapperModelsToFavorite(from: item)
             if let _ = self.favoriteCoreData.search(by: model) {
                 itemCopy.isFavorite = true
-                return itemCopy
+                
+            } else {
+                itemCopy.isFavorite = false
             }
-            return item
+            return itemCopy
         }
         
         self.viewDataModel.items = items
@@ -124,7 +131,7 @@ extension ListMovsPresenter {
     private func wrapperModelsToFavorite(from itemViewData: MovsItemViewData) -> FavoriteMovsModel {
         var model = FavoriteMovsModel()
         model.imageURL = itemViewData.imageMovieURLAbsolute
-        model.owerview = itemViewData.overview
+        model.overview = itemViewData.overview
         model.title = itemViewData.movieName
         model.year = itemViewData.years
         return model
