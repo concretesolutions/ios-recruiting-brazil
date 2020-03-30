@@ -27,18 +27,10 @@
 		D8D6E18D2409F85100667126 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8D6E18C2409F85100667126 /* Assets.xcassets */; };
 		D8D6E1902409F85100667126 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8D6E18E2409F85100667126 /* LaunchScreen.storyboard */; };
 		D8D6E19B2409F85200667126 /* MovsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D6E19A2409F85200667126 /* MovsTests.swift */; };
-		D8D6E1A62409F85200667126 /* MovsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D6E1A52409F85200667126 /* MovsUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		D8D6E1972409F85200667126 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D8D6E1752409F84D00667126 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D8D6E17C2409F84D00667126;
-			remoteInfo = Movs;
-		};
-		D8D6E1A22409F85200667126 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D8D6E1752409F84D00667126 /* Project object */;
 			proxyType = 1;
@@ -88,9 +80,6 @@
 		D8D6E1962409F85200667126 /* MovsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D6E19A2409F85200667126 /* MovsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsTests.swift; sourceTree = "<group>"; };
 		D8D6E19C2409F85200667126 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D8D6E1A12409F85200667126 /* MovsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8D6E1A52409F85200667126 /* MovsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsUITests.swift; sourceTree = "<group>"; };
-		D8D6E1A72409F85200667126 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8D6E2002409FAF200667126 /* ListMovesFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ListMovesFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -106,13 +95,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D8D6E1932409F85200667126 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D8D6E19E2409F85200667126 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -236,7 +218,6 @@
 				D86306C2240DBABC00961B3A /* ListMovsFeaturePlay.playground */,
 				D8D6E17F2409F84D00667126 /* Movs */,
 				D8D6E1992409F85200667126 /* MovsTests */,
-				D8D6E1A42409F85200667126 /* MovsUITests */,
 				D8D6E17E2409F84D00667126 /* Products */,
 				D8D6E1FF2409FAF200667126 /* Frameworks */,
 			);
@@ -247,7 +228,6 @@
 			children = (
 				D8D6E17D2409F84D00667126 /* Movs.app */,
 				D8D6E1962409F85200667126 /* MovsTests.xctest */,
-				D8D6E1A12409F85200667126 /* MovsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -268,15 +248,6 @@
 				D8D6E19C2409F85200667126 /* Info.plist */,
 			);
 			path = MovsTests;
-			sourceTree = "<group>";
-		};
-		D8D6E1A42409F85200667126 /* MovsUITests */ = {
-			isa = PBXGroup;
-			children = (
-				D8D6E1A52409F85200667126 /* MovsUITests.swift */,
-				D8D6E1A72409F85200667126 /* Info.plist */,
-			);
-			path = MovsUITests;
 			sourceTree = "<group>";
 		};
 		D8D6E1FF2409FAF200667126 /* Frameworks */ = {
@@ -331,24 +302,6 @@
 			productReference = D8D6E1962409F85200667126 /* MovsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D8D6E1A02409F85200667126 /* MovsUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D8D6E1B02409F85200667126 /* Build configuration list for PBXNativeTarget "MovsUITests" */;
-			buildPhases = (
-				D8D6E19D2409F85200667126 /* Sources */,
-				D8D6E19E2409F85200667126 /* Frameworks */,
-				D8D6E19F2409F85200667126 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D8D6E1A32409F85200667126 /* PBXTargetDependency */,
-			);
-			name = MovsUITests;
-			productName = MovsUITests;
-			productReference = D8D6E1A12409F85200667126 /* MovsUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -363,10 +316,6 @@
 						CreatedOnToolsVersion = 11.3.1;
 					};
 					D8D6E1952409F85200667126 = {
-						CreatedOnToolsVersion = 11.3.1;
-						TestTargetID = D8D6E17C2409F84D00667126;
-					};
-					D8D6E1A02409F85200667126 = {
 						CreatedOnToolsVersion = 11.3.1;
 						TestTargetID = D8D6E17C2409F84D00667126;
 					};
@@ -387,7 +336,6 @@
 			targets = (
 				D8D6E17C2409F84D00667126 /* Movs */,
 				D8D6E1952409F85200667126 /* MovsTests */,
-				D8D6E1A02409F85200667126 /* MovsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -403,13 +351,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D8D6E1942409F85200667126 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D8D6E19F2409F85200667126 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -445,14 +386,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D8D6E19D2409F85200667126 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D8D6E1A62409F85200667126 /* MovsUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -460,11 +393,6 @@
 			isa = PBXTargetDependency;
 			target = D8D6E17C2409F84D00667126 /* Movs */;
 			targetProxy = D8D6E1972409F85200667126 /* PBXContainerItemProxy */;
-		};
-		D8D6E1A32409F85200667126 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D8D6E17C2409F84D00667126 /* Movs */;
-			targetProxy = D8D6E1A22409F85200667126 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -676,46 +604,6 @@
 			};
 			name = Release;
 		};
-		D8D6E1B12409F85200667126 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V2686JM7D9;
-				INFOPLIST_FILE = MovsUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.mfelipesp.MovsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Movs;
-			};
-			name = Debug;
-		};
-		D8D6E1B22409F85200667126 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V2686JM7D9;
-				INFOPLIST_FILE = MovsUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.mfelipesp.MovsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Movs;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -742,15 +630,6 @@
 			buildConfigurations = (
 				D8D6E1AE2409F85200667126 /* Debug */,
 				D8D6E1AF2409F85200667126 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D8D6E1B02409F85200667126 /* Build configuration list for PBXNativeTarget "MovsUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D8D6E1B12409F85200667126 /* Debug */,
-				D8D6E1B22409F85200667126 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

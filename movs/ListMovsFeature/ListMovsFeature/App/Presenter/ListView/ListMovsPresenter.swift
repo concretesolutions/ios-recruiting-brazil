@@ -8,18 +8,19 @@
 
 import NetworkLayerModule
 import ModelsFeature
+import CommonsModule
 
 class ListMovsPresenter {
     weak var view: ListMovsView!
     weak var router: ListMovsRouter?
     var service: ListMovsServiceType
     var viewDataModel = MovsListViewData()
-    var favoriteCoreData: FavoriteMovCoreData
+    weak var favoriteCoreData: FavoriteMovCoreDataType?
     
     init(view: ListMovsView,
          router: ListMovsRouter,
          service: ListMovsServiceType,
-         favoriteCoreData: FavoriteMovCoreData = FavoriteMovCoreData()) {
+         favoriteCoreData: FavoriteMovCoreDataType) {
         self.view = view
         self.router = router
         self.service = service
@@ -35,16 +36,18 @@ extension ListMovsPresenter {
         self.view.showLoading()
         self.service.fetchDatas(typeData: .cartoon) { [weak self] result in
             guard let self = self else { return }
-            DispatchQueue.main.async {
+            
+            performUIUpdate {
                 switch result {
                 case .success(let success):
                     self.viewDataModel = self.wrapperModels(from: success)
                     self.checkFavorite()
+                    self.view.hideLoading()
                     self.view.showSuccess(viewData: self.viewDataModel)
                 case .failure(_):
+                    self.view.hideLoading()
                     self.view.showErrorCard()
                 }
-                self.view.hideLoading()
             }
         }
         
@@ -99,12 +102,12 @@ extension ListMovsPresenter {
     
     private func persistFavoriteMovie(_ itemViewData: MovsItemViewData) {
         let model = wrapperModelsToFavorite(from: itemViewData)
-        favoriteCoreData.saveFavoriteMovs(model: model)
+        favoriteCoreData?.saveFavoriteMovs(model: model)
     }
     
     private func removeFavoriteMovie(_ itemViewData: MovsItemViewData) {
         let model = wrapperModelsToFavorite(from: itemViewData)
-        favoriteCoreData.deleteFavoriteMovs(model: model)
+        favoriteCoreData?.deleteFavoriteMovs(model: model)
     }
     
     private func checkFavorite() {
@@ -112,7 +115,7 @@ extension ListMovsPresenter {
         let items = self.viewDataModel.items.map { item -> MovsItemViewData in
             var itemCopy = item
             let model = self.wrapperModelsToFavorite(from: item)
-            if let _ = self.favoriteCoreData.search(by: model) {
+            if let _ = self.favoriteCoreData?.search(by: model) {
                 itemCopy.isFavorite = true
                 
             } else {

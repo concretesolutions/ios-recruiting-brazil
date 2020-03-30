@@ -23,6 +23,7 @@ open class DetailItemViewController: BaseViewController {
     
     var presenter: DetailItemMovsPresenter!
     private let nsLoadImage = NLLoadImage()
+    var itemViewData: MovsItemViewData?
     
     private var headerTopConstraint: NSLayoutConstraint!
     private var headerHeightConstraint: NSLayoutConstraint!
@@ -98,7 +99,7 @@ extension DetailItemViewController {
             print(isLoading)
             break
         case .success(let itemViewData):
-            
+            self.itemViewData = itemViewData
             self.loadImage(with: itemViewData.imageMovieURLAbsolute)
             self.createRow(text: itemViewData.movieName, isHeader: true, isFavorite: itemViewData.isFavorite)
             self.createRow(text: itemViewData.years, isHeader: false)
@@ -133,7 +134,7 @@ extension DetailItemViewController {
     }
     
     private func setImage(with image: UIImage) {
-        DispatchQueue.main.async {
+        performUIUpdate {
             UIView.transition(with: self.headerImageView,
                                 duration: 0.75,
                                 options: .transitionCrossDissolve,

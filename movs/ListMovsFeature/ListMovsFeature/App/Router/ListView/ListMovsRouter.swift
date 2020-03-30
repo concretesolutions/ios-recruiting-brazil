@@ -7,25 +7,32 @@
 //
 
 import UIKit
+import ModelsFeature
 
 open class ListMovsRouter {
     
-    private var presenter: ListMovsPresenter!
-    private var view: ListMovsViewController!
-    private var service: ListMovsServiceType!
+    var presenter: ListMovsPresenter!
+    var view: ListMovsViewController
+    var service: ListMovsServiceType!
+    var favoriteCoreData: FavoriteMovCoreDataType!
     public var detailView: ((_ itemViewData: MovsItemViewData) -> ())?
     
-    /// just module on open
-    public init() {}
     
-    public func makeUI() -> ListMovsViewController {
+    public init(isTestable: Bool = false) {
+        if !isTestable {
+            self.service = ListMovsService()
+            self.favoriteCoreData = FavoriteMovCoreData()
+        }
         self.view = ListMovsViewController()
-        self.service = ListMovsService()
+    }
+    
+    @discardableResult
+    public func makeUI() -> ListMovsViewController {
         self.presenter = ListMovsPresenter(view: self.view,
                                            router: self,
-                                           service: self.service)
+                                           service: self.service,
+                                           favoriteCoreData: self.favoriteCoreData)
         self.view.presenter = self.presenter
-        
         return view
     }
     

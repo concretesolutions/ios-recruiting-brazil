@@ -19,12 +19,14 @@ open class DetailItemMovsRouter {
     var genreService: GenresFeatureServiceType!
     
     /// just module on open
-    public init() {}
-    
-    public func makeUI(itemViewData: MovsItemViewData) -> DetailItemViewController {
-        
+    public init(isTestable: Bool = false) {
+        if !isTestable {
+            self.genreService = GenresFeatureService()
+        }
         self.view = DetailItemViewController()
-        self.genreService = GenresFeatureService()
+    }
+    
+    public func makeUI(itemViewData: MovsItemViewData) -> DetailItemViewController {        
         self.presenter = DetailItemMovsPresenter(view: self.view!,
                                                  itemViewData: itemViewData,
                                                  genreService: self.genreService)

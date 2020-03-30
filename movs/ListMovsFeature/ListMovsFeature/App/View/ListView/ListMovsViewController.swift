@@ -27,7 +27,7 @@ open class ListMovsViewController: BaseViewController {
     
     private let cellReuse = "GridCell"
     
-    private var stateUI: ListMovsHandleState? {
+    var stateUI: ListMovsHandleState? {
         didSet {
             self.stateHandleUI()
         }

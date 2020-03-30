@@ -7,6 +7,7 @@
 //
 
 import GenresFeature
+import CommonsModule
 
 class DetailItemMovsPresenter {
     deinit {
@@ -35,7 +36,7 @@ extension DetailItemMovsPresenter {
         
         self.genreService.genre(by: self.itemViewData.genresId) { [weak self] result in
             guard let self = self else { return }
-            DispatchQueue.main.async {
+            performUIUpdate {
                 switch result {
                 case .success(let genres):
                     self.fillUpGenres(with: genres)

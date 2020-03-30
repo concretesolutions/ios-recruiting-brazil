@@ -10,7 +10,7 @@ import CoreData
 import CommonsModule
 
 
-open class FavoriteMovCoreData {
+open class FavoriteMovCoreData: FavoriteMovCoreDataType {
     
     var managedObjectContext: NSManagedObjectContext?
     

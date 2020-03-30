@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		28416080240DF9B800C239CC /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2841607F240DF9B800C239CC /* UIViewController+Extensions.swift */; };
+		2843094E2432843D001342CC /* DispatcheMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2843094D2432843D001342CC /* DispatcheMain.swift */; };
 		28824D582425154800C4B483 /* Date+CompareExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28824D572425154800C4B483 /* Date+CompareExtensions.swift */; };
 		28E8C7872427B4B9008E2F32 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8C7862427B4B9008E2F32 /* DataController.swift */; };
 		D817DA3C241C0A54006CB722 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D817DA3B241C0A54006CB722 /* ImageCache.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		2841607F240DF9B800C239CC /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		2843094D2432843D001342CC /* DispatcheMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatcheMain.swift; sourceTree = "<group>"; };
 		28824D572425154800C4B483 /* Date+CompareExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+CompareExtensions.swift"; sourceTree = "<group>"; };
 		28E8C7862427B4B9008E2F32 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		D817DA3B241C0A54006CB722 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
@@ -53,6 +55,14 @@
 				28824D572425154800C4B483 /* Date+CompareExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2843094C2432842F001342CC /* Dispatches */ = {
+			isa = PBXGroup;
+			children = (
+				2843094D2432843D001342CC /* DispatcheMain.swift */,
+			);
+			path = Dispatches;
 			sourceTree = "<group>";
 		};
 		28E8C7852427B4A1008E2F32 /* CoreDataController */ = {
@@ -90,6 +100,7 @@
 		D86306EB240DBE2F00961B3A /* CommonsModule */ = {
 			isa = PBXGroup;
 			children = (
+				2843094C2432842F001342CC /* Dispatches */,
 				28E8C7852427B4A1008E2F32 /* CoreDataController */,
 				D817DA3A241C0A40006CB722 /* Cache */,
 				2841607E240DF99100C239CC /* Extensions */,
@@ -200,6 +211,7 @@
 			files = (
 				D86306F8240DBE4F00961B3A /* StateViewController.swift in Sources */,
 				28416080240DF9B800C239CC /* UIViewController+Extensions.swift in Sources */,
+				2843094E2432843D001342CC /* DispatcheMain.swift in Sources */,
 				D817DA3C241C0A54006CB722 /* ImageCache.swift in Sources */,
 				D8EB45A1242241D200144C76 /* BaseTableViewDataSource.swift in Sources */,
 				28E8C7872427B4B9008E2F32 /* DataController.swift in Sources */,
