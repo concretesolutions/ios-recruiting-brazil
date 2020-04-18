@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A212FEC6244BA0710081FE8E /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212FEC5244BA0710081FE8E /* SnapshotHelper.swift */; };
 		A29C3278244A83930094677A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29C3277244A83930094677A /* AppDelegate.swift */; };
 		A29C327A244A83940094677A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29C3279244A83940094677A /* SceneDelegate.swift */; };
 		A29C327C244A83940094677A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29C327B244A83940094677A /* ViewController.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A212FEC5244BA0710081FE8E /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		A29C3274244A83930094677A /* Movies-Browser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movies-Browser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A29C3277244A83930094677A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A29C3279244A83940094677A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +78,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A212FEC7244BA0740081FE8E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A212FEC5244BA0710081FE8E /* SnapshotHelper.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		A29C326B244A83930094677A = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +134,7 @@
 		A29C3298244A83960094677A /* Movies-BrowserUITests */ = {
 			isa = PBXGroup;
 			children = (
+				A212FEC7244BA0740081FE8E /* Resources */,
 				A29C3299244A83960094677A /* Movies_BrowserUITests.swift */,
 				A29C329B244A83960094677A /* Info.plist */,
 			);
@@ -334,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A29C329A244A83960094677A /* Movies_BrowserUITests.swift in Sources */,
+				A212FEC6244BA0710081FE8E /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

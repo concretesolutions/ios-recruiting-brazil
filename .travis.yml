@@ -2,6 +2,6 @@ language: swift
 osx_image: xcode11
 env:
   global:
-  - IOS_SDK=iphonesimulator13.0
+  - IOS_SDK=iphonesimulator13.4
 script:
-  - xcodebuild -workspace Movies\ Browser/Movies\ Browser.xcworkspace -scheme 'Movies Browser' -sdk $IOS_SDK build analyze
+  - xcodebuild -project Movies\ Browser/Movies\ Browser.xcodeproj -scheme 'Movies Browser' -sdk $IOS_SDK build analyze
