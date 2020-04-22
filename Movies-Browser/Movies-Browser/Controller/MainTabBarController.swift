@@ -9,5 +9,21 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
+    // MARK: - Variables
     var coordinator: MainTabBarCoordinator?
+}
+
+// MARK: - Events -
+extension MainTabBarController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupTabBarStyle()
+    }
+}
+
+// MARK - UI Style -
+extension MainTabBarController {
+    private func setupTabBarStyle(){
+        self.tabBar.tintColor = .systemPink
+    }
 }
