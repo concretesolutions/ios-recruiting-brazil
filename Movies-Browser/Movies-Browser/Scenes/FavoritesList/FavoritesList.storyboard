@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZkV-4D-SfR">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Favorites List View Controller-->
+        <scene sceneID="nUs-qy-rl9">
+            <objects>
+                <viewController id="ZkV-4D-SfR" customClass="FavoritesListViewController" customModule="Movies_Browser" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7pI-WK-H2X">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T9t-cw-Dns">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="epg-IF-tP2">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="ZkV-4D-SfR" id="gjE-dT-kUN"/>
+                                        </connections>
+                                    </searchBar>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sqd-nU-nbg">
+                                        <rect key="frame" x="0.0" y="56" width="414" height="762"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="ZkV-4D-SfR" id="W9K-cf-V07"/>
+                                            <outlet property="delegate" destination="ZkV-4D-SfR" id="3JL-qC-sMW"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="T9t-cw-Dns" firstAttribute="bottom" secondItem="njF-WD-ffl" secondAttribute="bottom" id="Jam-WA-3wl"/>
+                            <constraint firstItem="T9t-cw-Dns" firstAttribute="trailing" secondItem="njF-WD-ffl" secondAttribute="trailing" id="Ldj-L1-J4R"/>
+                            <constraint firstItem="T9t-cw-Dns" firstAttribute="top" secondItem="njF-WD-ffl" secondAttribute="top" id="byG-dO-qA0"/>
+                            <constraint firstItem="T9t-cw-Dns" firstAttribute="leading" secondItem="njF-WD-ffl" secondAttribute="leading" id="fhh-WK-8F2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="njF-WD-ffl"/>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="epg-IF-tP2" id="ShC-F9-eia"/>
+                        <outlet property="tableView" destination="sqd-nU-nbg" id="JYa-1F-NLl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XvL-n1-QgJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-142.02898550724638" y="-20.089285714285712"/>
+        </scene>
+    </scenes>
+    <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+</document>
