@@ -5,4 +5,4 @@ env:
   global:
     - IOS_SDK=iphonesimulator13.4
 script:
-  - xcodebuild -project Movies-Browser/Movies-Browser.xcodeproj -scheme 'Movies-Browser' -sdk $IOS_SDK build analyze
+  - xcodebuild -workspace Movies-Browser/Movies-Browser.xcworkspace -scheme 'Movies-Browser' -sdk $IOS_SDK build analyze
