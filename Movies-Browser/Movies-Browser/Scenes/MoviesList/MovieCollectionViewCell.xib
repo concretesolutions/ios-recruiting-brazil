@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCollectionViewCell" id="gTV-IL-0wX" customClass="MovieCollectionViewCell" customModule="Movies_Browser" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="140" height="187"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="140" height="187"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWe-ka-iKx">
+                        <rect key="frame" x="10" y="0.0" width="120" height="187"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w8z-OS-18U">
+                                <rect key="frame" x="0.0" y="0.0" width="120" height="187"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oOe-KS-5hs">
+                                <rect key="frame" x="0.0" y="127" width="120" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Title " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rG6-ZE-hEh">
+                                        <rect key="frame" x="8" y="8" width="104" height="44"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="rG6-ZE-hEh" secondAttribute="bottom" constant="8" id="1TW-sx-Zgb"/>
+                                    <constraint firstItem="rG6-ZE-hEh" firstAttribute="top" secondItem="oOe-KS-5hs" secondAttribute="top" constant="8" id="FxU-tN-p4b"/>
+                                    <constraint firstItem="rG6-ZE-hEh" firstAttribute="leading" secondItem="oOe-KS-5hs" secondAttribute="leading" constant="8" id="ek0-00-cng"/>
+                                    <constraint firstAttribute="height" constant="60" id="lbU-7W-M0y"/>
+                                    <constraint firstAttribute="trailing" secondItem="rG6-ZE-hEh" secondAttribute="trailing" constant="8" id="umw-Fm-T5H"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XN6-mS-xwH">
+                                <rect key="frame" x="68" y="8" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="yeK-Ir-P5Z"/>
+                                    <constraint firstAttribute="height" constant="44" id="zlz-nr-N6P"/>
+                                </constraints>
+                                <state key="normal" image="star">
+                                    <color key="titleColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="w8z-OS-18U" firstAttribute="top" secondItem="SWe-ka-iKx" secondAttribute="top" id="2FX-nK-jAU"/>
+                            <constraint firstAttribute="bottom" secondItem="w8z-OS-18U" secondAttribute="bottom" id="XB1-LT-Msu"/>
+                            <constraint firstItem="XN6-mS-xwH" firstAttribute="top" secondItem="SWe-ka-iKx" secondAttribute="top" constant="8" id="Ztn-Lo-ojo"/>
+                            <constraint firstAttribute="bottom" secondItem="oOe-KS-5hs" secondAttribute="bottom" id="drP-VD-ywj"/>
+                            <constraint firstItem="oOe-KS-5hs" firstAttribute="leading" secondItem="SWe-ka-iKx" secondAttribute="leading" id="fLV-il-LKw"/>
+                            <constraint firstAttribute="trailing" secondItem="XN6-mS-xwH" secondAttribute="trailing" constant="8" id="fME-rS-XL6"/>
+                            <constraint firstAttribute="trailing" secondItem="oOe-KS-5hs" secondAttribute="trailing" id="hBj-2I-PPC"/>
+                            <constraint firstItem="w8z-OS-18U" firstAttribute="leading" secondItem="SWe-ka-iKx" secondAttribute="leading" id="mI6-ke-N3N"/>
+                            <constraint firstAttribute="trailing" secondItem="w8z-OS-18U" secondAttribute="trailing" id="xvp-hM-hhP"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="SWe-ka-iKx" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="AiV-vi-M1T"/>
+                <constraint firstItem="SWe-ka-iKx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="CCR-HL-BTn"/>
+                <constraint firstAttribute="trailing" secondItem="SWe-ka-iKx" secondAttribute="trailing" constant="10" id="WgX-ib-no0"/>
+                <constraint firstAttribute="bottom" secondItem="SWe-ka-iKx" secondAttribute="bottom" id="WmS-ry-ufs"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="211" height="288"/>
+            <connections>
+                <outlet property="favoriteButton" destination="XN6-mS-xwH" id="jeE-hB-swj"/>
+                <outlet property="imageView" destination="w8z-OS-18U" id="lPc-je-J7z"/>
+                <outlet property="titleLabel" destination="rG6-ZE-hEh" id="bYh-lk-Wad"/>
+            </connections>
+            <point key="canvasLocation" x="254.34782608695653" y="214.28571428571428"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="star" width="25" height="25"/>
+    </resources>
+</document>
