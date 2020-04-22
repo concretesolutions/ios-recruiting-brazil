@@ -32,7 +32,6 @@ extension MainTabBarCoordinator {
     func startMoviesList(){
         let child = MoviesListCoordinator(tabBarController: tabBarController)
         childCoordinators.append(child)
-        // child.parentCoordinator = self
         child.start()
     }
 }
@@ -42,7 +41,6 @@ extension MainTabBarCoordinator {
     func startFavoritesList(){
         let child = FavoritesListCoordinator(tabBarController: tabBarController)
         childCoordinators.append(child)
-        // child.parentCoordinator = self
         child.start()
     }
 }

@@ -12,17 +12,20 @@ final class FavoritesListCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     weak var tabBarController: MainTabBarController?
+    var viewModel: FavoritesListViewModel
     
     init(tabBarController: MainTabBarController) {
-        self.navigationController = tabBarController.navigationController!
+        self.navigationController = tabBarController.navigationController ?? UINavigationController()
         self.tabBarController = tabBarController
+        self.viewModel = FavoritesListViewModel(callback: nil)
     }
     
     func start() {
         let storyboard = UIStoryboard(name: "FavoritesList", bundle: Bundle.main)
         if let viewController = storyboard.instantiateInitialViewController() as? FavoritesListViewController {
             viewController.coordinator = self
-            viewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+            viewController.viewModel = self.viewModel
+            viewController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "star-filled"), tag: 0)
             tabBarController?.viewControllers?.append(viewController)
         }
     }
@@ -30,8 +33,8 @@ final class FavoritesListCoordinator: Coordinator {
 
 // MARK: - MovieDetailCoordinator -
 extension FavoritesListCoordinator {
-    func startMovieDetail(){
-        let child = MovieDetailCoordinator(navigationController: navigationController)
+    func startMovieDetail(movie: Movie){
+        let child = MovieDetailCoordinator(navigationController: navigationController, movie: movie)
         childCoordinators.append(child)
         child.start()
     }
