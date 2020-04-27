@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="d3X-ma-Uqx">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Favoritos-->
+        <scene sceneID="mQ4-c9-aYC">
+            <objects>
+                <tableViewController id="MzF-2p-NcM" customClass="FavoritesTableViewController" customModule="ConcreteChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="JnL-xR-qbQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="TMj-aN-mX8">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TMj-aN-mX8" id="jww-vu-J8a">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="MzF-2p-NcM" id="Oqn-P3-T6s"/>
+                            <outlet property="delegate" destination="MzF-2p-NcM" id="XbA-Oj-1ky"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Favoritos" id="zrd-WS-dbU">
+                        <barButtonItem key="rightBarButtonItem" image="filter" style="plain" id="iqQ-P7-Uq6">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="filterBarButton" destination="iqQ-P7-Uq6" id="SdI-LU-0Fo"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aHz-vZ-Gma" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="772" y="3"/>
+        </scene>
+        <!--Favorites Tab Navigation Controller-->
+        <scene sceneID="bL2-Bu-hwP">
+            <objects>
+                <navigationController id="d3X-ma-Uqx" customClass="FavoritesTabNavigationController" customModule="ConcreteChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OFI-Ny-vwD">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" name="Brand"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="MzF-2p-NcM" kind="relationship" relationship="rootViewController" id="8zh-cx-tuw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="veR-Iw-wGy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-146" y="3"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="filter" width="48" height="48"/>
+        <namedColor name="Brand">
+            <color red="0.94499999284744263" green="0.78899997472763062" blue="0.34900000691413879" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
