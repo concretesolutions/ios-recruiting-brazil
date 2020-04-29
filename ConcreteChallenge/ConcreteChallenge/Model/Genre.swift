@@ -16,7 +16,7 @@ class GenreResponse: Codable {
 
 class Genre: Codable {
     let name: String
-    let id: Int
+    var id: Int
     
     static func getAll() -> Single<[Genre]> {
         let endopoint: Endpoint<GenreResponse> = Endpoint(path: "genre/movie/list")
@@ -43,11 +43,6 @@ class Genre: Codable {
     init(id: Int, name: String) {
         self.id = id
         self.name = name
-    }
-    
-    init(_ managedObject: NSManagedObject) {
-        id = managedObject.value(forKey: "id") as! Int
-        name = managedObject.value(forKey: "name") as! String
     }
 }
 

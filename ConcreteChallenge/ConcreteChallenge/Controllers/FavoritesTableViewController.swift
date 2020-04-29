@@ -8,11 +8,19 @@
 
 import UIKit
 import ReSwift
+import RxSwift
 
-class FavoritesTableViewController: UITableViewController, UISearchResultsUpdating {
+class FavoritesTableViewController: UITableViewController {
     
     @IBOutlet weak var filterBarButton: UIBarButtonItem!
+    
+    let disposeBag = DisposeBag()
+    
     var favorites: [Favorite] = []
+    var filters: FavoriteFilters!
+    var genres: [Genre]!
+    var genresOptions: [String]!
+    var yearsOptions: [String]!
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -20,19 +28,45 @@ class FavoritesTableViewController: UITableViewController, UISearchResultsUpdati
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.register(UINib(nibName: "FavoriteTableViewCell", bundle: nil), forCellReuseIdentifier: "FavoriteTableViewCell")
         tableView.rowHeight = 118
         
         self.backgroundStateView = BackgroundStateView()
+        self.backgroundStateView.retryDelegate = self
         tableView!.backgroundView = self.backgroundStateView;
         
-        navigationItem.searchController = searchController
-        
-        searchController.searchResultsUpdater = self
+        setupSearchBar()
+    }
+    
+    
+    
+    fileprivate func setupSearchBar() {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Candies"
         navigationItem.searchController = searchController
-        definesPresentationContext = true
+        
+        searchController.searchBar
+            .rx.text
+            .debounce(Constants.api.localSearchDebounceTime, scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .subscribe(onNext: { [unowned self] query in
+                let text = self.searchController.searchBar.text!
+                do {
+                    let filters = try self.filters.clone()
+                    if text.isEmpty {
+                        filters.search(with: nil)
+                    } else {
+                        filters.search(with: text)
+                    }
+
+                    filters.appyFilters()
+                } catch {
+                    print("Error cloning filter: \(error.localizedDescription)")
+                }
+            })
+            .disposed(by: disposeBag)
+        
         
         let attributes:[NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.black,
@@ -42,15 +76,23 @@ class FavoritesTableViewController: UITableViewController, UISearchResultsUpdati
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
     }
     
-    @objc func toggleEditing(sender: UIBarButtonItem) {
-        if(self.tableView.isEditing == true) {
-            self.tableView.isEditing = false
-//            self.navigationItem.rightBarButtonItem?.title = "Done"
-        } else {
-            self.tableView.isEditing = true
-//            self.navigationItem.rightBarButtonItem?.title = "Edit"
+    @IBAction func filterAction(_ sender: Any) {
+        do {
+            let vc = FilterTableViewController()
+            vc.filters = try self.filters.clone()
+            vc.genres = self.genres
+            vc.genresOptions = self.genresOptions
+            vc.yearsOptions = self.yearsOptions
+            
+            vc.modalPresentationStyle = .popover
+            let navController = UINavigationController(rootViewController: vc)
+            
+            self.navigationController?.present(navController, animated: true, completion: nil)
+        } catch (let error){
+            print("Fail cloning filters \(error.localizedDescription)")
         }
     }
+
 
     // MARK: - Table view data source
 
@@ -66,12 +108,10 @@ class FavoritesTableViewController: UITableViewController, UISearchResultsUpdati
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteTableViewCell", for: indexPath) as! FavoriteTableViewCell
-        cell.set(with: favorites[indexPath.row])
         
         cell.accessoryType = .disclosureIndicator
+        cell.set(with: favorites[indexPath.row])
         
-        cell.contentView.setNeedsLayout()
-        cell.contentView.layoutIfNeeded()
         return cell
     }
     
@@ -100,38 +140,25 @@ class FavoritesTableViewController: UITableViewController, UISearchResultsUpdati
         return "Unfavorite"
     }
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let movieDetailsVC = MovieDetailsCollectionViewController(collectionViewLayout: StretchyHeaderLayout())
+        movieDetailsVC.movieId = favorites[indexPath.row].id
+        self.navigationController?.pushViewController(movieDetailsVC, animated: true)
     }
-    */
 
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        
-    }
 }
 
+extension FavoritesTableViewController: EmptyStateRetryDelegate {
+    func executeRetryAction(_ sender: EmptyStateView) {
+        do {
+            let filters = try self.filters.clone()
+            filters.appyFilters()
+        } catch {
+            print("Error cloning filter: \(error.localizedDescription)")
+        }
+    }
+}
 extension FavoritesTableViewController: StoreSubscriber {
-
     func newState(state: FavoritesViewModel) {
         if let backgroundViewConfiguration = state.backgroundViewConfiguration {
             backgroundStateView.showEmptyState(with: backgroundViewConfiguration)
@@ -146,6 +173,14 @@ extension FavoritesTableViewController: StoreSubscriber {
         let shouldUpdate = self.favorites != state.favorites
         
         self.favorites = state.favorites
+        self.genres = state.genres
+        self.genresOptions = state.genresOptions
+        self.yearsOptions = state.yearsOptions
+        
+        if self.filters != state.filters {
+            self.filters = state.filters
+        }
+//        self.genres = state.genresNames
         
         if !self.tableView.isEditing && shouldUpdate {
             let range = NSMakeRange(0, self.tableView.numberOfSections)

@@ -26,16 +26,6 @@ class MovieTabNavigationController: UINavigationController, BaseTabViewControlle
             self.navigationBar.prefersLargeTitles = true
             self.navigationBar.backgroundColor = bgColor
         }
-        
-    }
 
-    override var preferredStatusBarStyle : UIStatusBarStyle {
-
-        if let topVC = viewControllers.last {
-            //return the status property of each VC, look at step 2
-            return topVC.preferredStatusBarStyle
-        }
-
-        return .default
     }
 }

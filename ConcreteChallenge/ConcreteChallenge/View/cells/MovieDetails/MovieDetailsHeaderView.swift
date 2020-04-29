@@ -33,76 +33,34 @@ class MovieDetailsHeaderView: UICollectionReusableView {
         setupCoverImage()
     }
     
-    func setup(with movieDetails: MovieDetails) {
-        
-        if let posterPath = movieDetails.posterPath {
-            let url = URL(string: Constants.env.imageBaseUrl)?
-                .appendingPathComponent("w500")
-                .appendingPathComponent(posterPath)
+    func setup(with sectionData: MovieDetailsHeaderSection) {
+        if let posterUrl = sectionData.posterUrl {
             backgroundImageView.sd_setImage(
-                with: url,
+                with: posterUrl,
                 placeholderImage: UIImage(named: "placeholder.png")
             )
             coverImageView.sd_setImage(
-                with: url,
+                with: posterUrl,
                 placeholderImage: UIImage(named: "placeholder.png")
             )
         }
         
-        genreLabel.text = movieDetails.genres
-            .map({ $0.name })
-            .joined(separator: ", ")
+        genreLabel.text = sectionData.genres
         
-        let director = setupGroupedHeader(
-            "Director",
-            with: movieDetails.crew,
-            nameLabel: directorNameLabel,
-            jobLabel: directorJobLabel
-        )
-        
-        _ = setupGroupedHeader(
-            "Screenplay",
-            with: movieDetails.crew,
-            nameLabel: screenplayNameLabel,
-            jobLabel: screenplayJobLabel,
-            personException: director?.id
-        )
-        
-        
-        taglineLabel.text = movieDetails.tagline!.isEmpty ? movieDetails.overview : movieDetails.tagline
-        
-    }
-    
-    fileprivate func setupGroupedHeader(_ job: String, with crew: [Crew]?, nameLabel: UILabel, jobLabel: UILabel, personException: Int? = 0) -> Crew? {
-        guard let crew = crew else { return nil }
-                
-        if let person = crew.first(where: { $0.job == job && personException != $0.id }) {
-            nameLabel.text = person.name
-            
-            jobLabel.text = crew
-                .filter({ $0.id == person.id })
-                .map({ $0.job })
-                .sorted()
-                .joined(separator: ", ")
-            
-            return person
-        }
-        return nil
-    }
-    
-    fileprivate func setupScreenplay(from crew: [Crew]?) {
-        guard let crew = crew else { return }
-                
-        if let director = crew.first(where: { $0.job == "Director" }) {
+        if let director = sectionData.director {
             directorNameLabel.text = director.name
-            
-            directorJobLabel.text = crew
-                .filter({ $0.id == director.id })
-                .map({ $0.job })
-                .joined(separator: ", ")
-            
+            directorJobLabel.text = director.jobs
         }
+        
+        if let screenplayer = sectionData.screenplayer {
+            screenplayNameLabel.text = screenplayer.name
+            screenplayJobLabel.text = screenplayer.jobs
+        }
+        
+        taglineLabel.text = sectionData.tagline
+        
     }
+    
     
     fileprivate func setupCoverImage() {
         coverImageView.clipsToBounds = true

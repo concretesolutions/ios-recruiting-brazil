@@ -10,8 +10,9 @@ import ReSwift
 
 enum MovieActions: Action {
     case set([Movie])
-    case addMovies(page: Int, movies: [Movie])
+    case addMovies([Movie], page: Int, total: Int, filters: MovieFilters)
+    case updateMovieDetails(MovieDetails)
     case movieDetails(MovieDetails)
-    case requestStated
+    case requestStated(isSearching: Bool, isPaginating: Bool)
     case requestError(message: String)
 }

@@ -18,7 +18,7 @@ protocol PersistableModelDelegate {
     var id: Int { get }
     var entityName: String { get }
     func getDictionary() throws -> [String: Any]?
-    
+    init(_ managedObject: NSManagedObject)
 }
 
 class PersistanceManager {
@@ -85,5 +85,27 @@ class PersistanceManager {
         }
 
         try context.save()
+    }
+    
+    static func get<T: PersistableModelDelegate>(
+        from entityName: String,
+        predicates: [NSPredicate] = [],
+        compoundBy compoundLogic: NSCompoundPredicate.LogicalType = .and
+    ) throws -> [T]? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            throw PersistError.appDelegateError
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+        if predicates.count > 0 {
+            let compoundPredicate = NSCompoundPredicate(type: compoundLogic, subpredicates: predicates)
+            fetchRequest.predicate = compoundPredicate
+        }
+        
+        let response = try managedContext.fetch(fetchRequest)
+        
+        return response.map({ T($0) })
     }
 }

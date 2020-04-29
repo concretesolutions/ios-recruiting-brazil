@@ -11,19 +11,18 @@ import UIKit
 class MovieDetailsTitleCollectionViewCell: UICollectionViewCell {
     var titleLabel: UILabel!
     var originalTitleDuration: UILabel!
+    var ratingLabel: UILabel!
     
     private var sizingOnlyWidthConstraint: NSLayoutConstraint? = nil
     
-    var isHeightCalculated: Bool = false
+    var calculatedHeight: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width - 40).isActive = true
         titleLabel = UILabel(frame: .zero)
         self.contentView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont(name: "Avenir-Black", size: 28)!
+        titleLabel.font = Constants.theme.sectionTitleFont
         titleLabel.text = "Summary"
         titleLabel.textAlignment = .left
         titleLabel.numberOfLines = 0
@@ -31,46 +30,70 @@ class MovieDetailsTitleCollectionViewCell: UICollectionViewCell {
         originalTitleDuration = UILabel(frame: .zero)
         self.contentView.addSubview(originalTitleDuration)
         originalTitleDuration.translatesAutoresizingMaskIntoConstraints = false
-//        let names = UIFont.fontNames(forFamilyName: "Avenir")
-        originalTitleDuration.font = UIFont(name: "Avenir", size: 14)!
+        originalTitleDuration.font = Constants.theme.sectionBodyFont
         originalTitleDuration.text = "Teste"
         originalTitleDuration.textAlignment = .left
         originalTitleDuration.numberOfLines = 0
         
+        // Rating
+        let ratingContainer = UIView(frame: .zero)
+        ratingContainer.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(ratingContainer)
+        
+        let starImageView = UIImageView(frame: .zero)
+        starImageView.translatesAutoresizingMaskIntoConstraints = false
+        starImageView.image = Constants.theme.starImage.mask(with: UIColor(asset: .brand))
+        starImageView.contentMode = .scaleAspectFit
+        ratingContainer.addSubview(starImageView)
+        
+        ratingLabel = UILabel(frame: .zero)
+        self.contentView.addSubview(ratingLabel)
+        ratingLabel.translatesAutoresizingMaskIntoConstraints = false
+        ratingLabel.font = Constants.theme.sectionTitleFont.withSize(16)
+        ratingLabel.text = "5.0"
+        ratingLabel.textAlignment = .left
+        
+        
+        let screenSize: CGRect = UIScreen.main.bounds
+        
         NSLayoutConstraint.activate([
+            // Auto resize width anchor
+            contentView.widthAnchor.constraint(equalToConstant: (screenSize.width - 2 * Constants.theme.paddingHorizontal)),
+            
+            // Orignal title constraints
             titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 0),
             titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
-        ])
-        NSLayoutConstraint.activate([
+            
+            // Orignal title constraints
             originalTitleDuration.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 6),
             originalTitleDuration.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            originalTitleDuration.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
-            originalTitleDuration.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -20)
+            originalTitleDuration.trailingAnchor.constraint(equalTo: ratingContainer.leadingAnchor, constant: -8),
+            originalTitleDuration.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -20),
+            
+            // Rating Container
+            ratingContainer.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 6),
+            ratingContainer.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            ratingContainer.widthAnchor.constraint(equalToConstant: 50),
+            ratingContainer.heightAnchor.constraint(equalToConstant: 18),
+            
+            // Rating Star
+            starImageView.topAnchor.constraint(equalTo: ratingContainer.topAnchor),
+            starImageView.leadingAnchor.constraint(equalTo: ratingContainer.leadingAnchor),
+            starImageView.widthAnchor.constraint(equalToConstant: 18),
+            starImageView.heightAnchor.constraint(equalToConstant: 18),
+            
+            ratingLabel.topAnchor.constraint(equalTo: ratingContainer.topAnchor),
+            ratingLabel.leadingAnchor.constraint(equalTo: starImageView.trailingAnchor, constant: 4),
+            ratingLabel.trailingAnchor.constraint(equalTo: ratingContainer.trailingAnchor),
         ])
-        self.contentView.addBorders(edges: [.bottom], color: UIColor.black.withAlphaComponent(0.1), inset: 0, thickness: 1)
-    }
+        
+        self.contentView.addBorders(edges: [.bottom], color: UIColor.black.withAlphaComponent(0.1), inset: -20, thickness: 1)    }
     
-    func setup(with movieDetails: MovieDetails) {
-        let year = String(movieDetails.releaseDate.prefix(4))
-        titleLabel.text = "\(movieDetails.title) (\(year))"
-        
-        var originalTitleDurationText: [String] = []
-        
-        if movieDetails.originalTitle != movieDetails.title {
-            originalTitleDurationText.append("Original title: \(movieDetails.originalTitle)")
-        }
-        
-        let runtime = Double(movieDetails.runtime!) * 60
-        
-        if runtime > 0 {
-            let formated = runtime.format(using: [.hour, .minute, .second])!
-            originalTitleDurationText.append(formated)
-        }
-        
-        originalTitleDuration.text = originalTitleDurationText.joined(separator: " | ")
-        
-        
+    func setup(with sectionData: MovieDetailTitleSection) {
+        titleLabel.text = sectionData.title
+        originalTitleDuration.text = sectionData.subtitle
+        ratingLabel.text = sectionData.rating
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -87,22 +110,30 @@ class MovieDetailsTitleCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+    
         self.titleLabel.text = nil
         self.originalTitleDuration.text = nil
+        self.calculatedHeight = false
     }
     
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        //Exhibit A - We need to cache our calculation to prevent a crash.
-        if !isHeightCalculated {
-            setNeedsLayout()
-            layoutIfNeeded()
-            let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-            var newFrame = layoutAttributes.frame
-            newFrame.size.width = CGFloat(ceilf(Float(size.width)))
-            layoutAttributes.frame = newFrame
-            isHeightCalculated = true
+    
+    override func systemLayoutSizeFitting(
+        _ targetSize: CGSize,
+        withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority,
+        verticalFittingPriority: UILayoutPriority) -> CGSize {
+        
+        var targetSize = targetSize
+                
+        if !calculatedHeight {
+            calculatedHeight = true
+            targetSize.height = 1000
+            targetSize = super.systemLayoutSizeFitting(
+                targetSize,
+                withHorizontalFittingPriority: .required,
+                verticalFittingPriority: .fittingSizeLevel
+            )
+            
         }
-        return layoutAttributes
+        return targetSize
     }
 }

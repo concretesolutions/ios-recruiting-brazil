@@ -17,7 +17,6 @@ enum Method {
     case get, post, put, patch, delete
 }
 
-
 // MARK: Endpoint
 final class Endpoint<Response> {
     let method: Method

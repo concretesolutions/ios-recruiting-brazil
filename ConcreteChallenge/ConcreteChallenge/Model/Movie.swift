@@ -11,7 +11,14 @@ import RxSwift
 
 class MovieResponse: Codable {
     let page: Int
+    let totalPages: Int
     let results: [Movie]
+    
+    enum CodingKeys: String, CodingKey {
+        case page
+        case results
+        case totalPages = "total_pages"
+    }
 }
 
 class Movie: Codable {
@@ -19,7 +26,10 @@ class Movie: Codable {
     let posterPath: String?
     let adult: Bool
     let overview: String
-    let releaseDate: String
+    // Tem que ser opcional, porque ao contrario do que o themoviedb diz,
+    // há casos em que "release_date" está indefinido
+    // Exemplo: SS Panzer Grenadier - id 427537
+    var releaseDate: String? = ""
     let genreIds: [Int]
     var genres: [String]?
     let originalTitle: String
@@ -108,34 +118,5 @@ extension Movie: Equatable {
     func clone() throws -> Movie {
         let jsonData = try JSONEncoder().encode(self)
         return try JSONDecoder().decode(Movie.self, from: jsonData)
-    }
-}
-
-
-
-extension Movie {
-    static func popular(page: Int) -> Single<[Movie]> {
-        let endopoint: Endpoint<MovieResponse> = Endpoint(path: "/movie/popular")
-        return Single<[Movie]>.create { observer in
-            Client.shared.request(endopoint)
-                .subscribe(onSuccess: { data in
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.5) {
-//                        observer(.success(data.results))
-//                    }
-                     observer(.success(data.results))
-                }, onError: { error in
-                    switch error {
-                    case ApiError.conflict:
-                        print("Conflict error")
-                    case ApiError.forbidden:
-                        print("Forbidden error")
-                    case ApiError.notFound:
-                        print("Not found error")
-                    default:
-                        print("Unknown error:", error)
-                    }
-                    observer(.error(error))
-                })
-        }
     }
 }

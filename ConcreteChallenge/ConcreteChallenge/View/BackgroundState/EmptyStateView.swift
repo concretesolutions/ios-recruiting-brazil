@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol EmptyStateRetryDelegate {
+    func executeRetryAction(_ sender: EmptyStateView)
+}
+
 class EmptyStateView: UIView {
 
     @IBOutlet weak var imageView: UIImageView!
@@ -15,6 +19,8 @@ class EmptyStateView: UIView {
     @IBOutlet weak var descriptionLabel: UILabel!
     
     @IBOutlet weak var retryButton: UIButton!
+    
+    public var retryDelegate: EmptyStateRetryDelegate?
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -24,7 +30,6 @@ class EmptyStateView: UIView {
     func set(with configuration: BackgroundStateViewModel) {
         imageView.image = UIImage(named: configuration.image.rawValue)
         titleLabel.text = configuration.title
-        
         
         if configuration.subtitle.isEmpty {
             descriptionLabel.isHidden = true
@@ -37,18 +42,12 @@ class EmptyStateView: UIView {
             retryButton.isHidden = true
         } else {
             retryButton.isHidden = false
-            retryButton.titleLabel?.text = configuration.retry
+            retryButton.setTitle(configuration.retry, for: .normal)
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func retryAction(_ sender: Any) {
+        guard let delegate = self.retryDelegate else { return }
+        delegate.executeRetryAction(self)
     }
-    */
-
 }

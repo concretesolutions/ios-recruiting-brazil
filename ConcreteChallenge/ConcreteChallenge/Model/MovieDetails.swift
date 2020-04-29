@@ -86,8 +86,8 @@ class MovieDetails: Codable {
     let posterPath: String?
     let adult: Bool
     let overview: String
-    let releaseDate: String
-    let genres: [Genre]
+    let releaseDate: String?
+    var genres: [Genre]
     let originalTitle: String
     let originalLanguage: String
     let title: String
@@ -96,6 +96,7 @@ class MovieDetails: Codable {
     let popularity: Double
     let voteCount: Int
     let voteAverage: Double
+    var favorited: Bool?
     
     let imdbId: String?
     let budget: Int
@@ -122,11 +123,8 @@ class MovieDetails: Codable {
         self.popularity = movie.popularity
         self.voteCount = movie.voteCount
         self.voteAverage = movie.voteAverage
-        
-//        self.genres = movie.genreIds.enumerated().map({ (idx, id) -> Genre in
-//            let genreName = movie.genres![idx]
-//            return Genre(id: id, name: genreName)
-//        })
+        self.favorited = movie.favorited
+            
         self.genres = []
         self.videos = []
         self.cast = []
@@ -154,12 +152,8 @@ class MovieDetails: Codable {
         self.popularity = favorite.popularity
         self.voteCount = favorite.voteCount
         self.voteAverage = favorite.voteAverage
-//
-//        self.genres = favorite.genreIds.enumerated().map({ (idx, id) -> Genre in
-//            let genreName = favorite.genres![idx]
-//            return Genre(id: id, name: genreName)
-//        })
-//
+        self.favorited = true
+
         self.genres = []
         self.videos = []
         self.cast = []
@@ -171,6 +165,17 @@ class MovieDetails: Codable {
         self.runtime = 0
         self.status = ""
         self.tagline = ""
+    }
+    
+    @objc func toggleFavorite() {
+        let favorited = self.favorited ?? false
+        
+        if favorited {
+            mainStore.dispatch(FavoriteThunk.remove(id: id))
+        } else {
+            let favorite = Favorite(with: self)
+            mainStore.dispatch(FavoriteThunk.insert(favorite))
+        }
     }
 }
 
@@ -192,6 +197,7 @@ extension MovieDetails {
         case videos
         case cast
         case crew
+        case favorited
         case imdbId = "imdb_id"
         case posterPath = "poster_path"
         case releaseDate = "release_date"
@@ -204,73 +210,6 @@ extension MovieDetails {
 }
 
 extension MovieDetails {
-    
-    
-//    static func getVideos(of movieId: Int) -> Single<[MovieDetailsVideo]> {
-//        let endopoint: Endpoint<MovieDetailsVideoResult> = Endpoint(path: "/movie/\(movieId)/videos")
-//        return Single<[MovieDetailsVideo]>.create { observer in
-//            Client.shared.request(Endpoint(path: "/movie/\(movieId)/videos"))
-//                .subscribe(onSuccess: { data in
-//                    observer(.success(data.results))
-//                }, onError: { error in
-//                    switch error {
-//                    case ApiError.conflict:
-//                        print("Conflict error")
-//                    case ApiError.forbidden:
-//                        print("Forbidden error")
-//                    case ApiError.notFound:
-//                        print("Not found error")
-//                    default:
-//                        print("Unknown error:", error)
-//                    }
-//                    observer(.error(error))
-//                })
-//        }
-//    }
-//
-//    static func getCredits(of movieId: Int) -> Single<Credits> {
-//        let endopoint: Endpoint<Credits> = Endpoint(path: "/movie/\(movieId)/credits")
-//        return Single<Credits>.create { observer in
-//            Client.shared.request(endopoint)
-//                .subscribe(onSuccess: { credits in
-//                     observer(.success(credits))
-//                }, onError: { error in
-//                    switch error {
-//                    case ApiError.conflict:
-//                        print("Conflict error")
-//                    case ApiError.forbidden:
-//                        print("Forbidden error")
-//                    case ApiError.notFound:
-//                        print("Not found error")
-//                    default:
-//                        print("Unknown error:", error)
-//                    }
-//                    observer(.error(error))
-//                })
-//        }
-//    }
-//
-//    static func getDetails(of movieId: Int) -> Single<MovieDetail> {
-//        let endopoint: Endpoint<MovieDetail> = Endpoint(path: "/movie/\(movieId)")
-//        return Single<MovieDetail>.create { observer in
-//            Client.shared.request(endopoint)
-//                .subscribe(onSuccess: { data in
-//                     observer(.success(data))
-//                }, onError: { error in
-//                    switch error {
-//                    case ApiError.conflict:
-//                        print("Conflict error")
-//                    case ApiError.forbidden:
-//                        print("Forbidden error")
-//                    case ApiError.notFound:
-//                        print("Not found error")
-//                    default:
-//                        print("Unknown error:", error)
-//                    }
-//                    observer(.error(error))
-//                })
-//        }
-//    }
     
     static func get(id movieId: Int) -> Single<MovieDetails> {
         
@@ -290,7 +229,6 @@ extension MovieDetails {
                     observer(.success(details))
             }).observeOn(MainScheduler.instance)
             .subscribe()
-//            .disposed(by: disposeBag)
         }
     }
 }
@@ -307,5 +245,11 @@ extension MovieDetails: Equatable {
             && lhs.imdbId == rhs.imdbId
             && lhs.videos == rhs.videos
             && lhs.genres == rhs.genres
+            && lhs.favorited == rhs.favorited
+    }
+    
+    func clone() throws -> MovieDetails {
+        let jsonData = try JSONEncoder().encode(self)
+        return try JSONDecoder().decode(MovieDetails.self, from: jsonData)
     }
 }

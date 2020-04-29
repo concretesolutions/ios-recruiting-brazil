@@ -30,7 +30,7 @@ class FavoriteTableViewCell: UITableViewCell {
     func set(with favorite: Favorite) {
         
         if let posterPath = favorite.posterPath {
-            let url = URL(string: Constants.env.imageBaseUrl)?
+            let url = URL(string: Constants.api.imageBaseUrl)?
                 .appendingPathComponent("w500")
                 .appendingPathComponent(posterPath)
             
@@ -38,16 +38,27 @@ class FavoriteTableViewCell: UITableViewCell {
                 with: url,
                 placeholderImage: UIImage(named: "placeholder.png")
             )
+        } else {
+            coverImage!.sd_setImage(
+                with: nil,
+                placeholderImage: UIImage(named: "placeholder.png")
+            )
         }
         
         titleLabel.text = favorite.title
         ratingLabel.text = String(format:"%.1f", favorite.voteAverage / 2)
         
-        var yearGenre = String(favorite.releaseDate.prefix(4))
-        if let genreName = favorite.genres?.first {
-            yearGenre += " - \(genreName)"
+        var yearGenre: [String] = []
+        
+        if let releaseDate = favorite.releaseDate {
+            yearGenre.append(String(releaseDate.prefix(4)))
         }
-        genresLabel.text = yearGenre
+        if let genreName = favorite.genres?.first {
+            yearGenre.append(genreName)
+        }
+        
+        genresLabel.text = yearGenre.joined(separator: " - ")
+    
         
         decriptionLabel.text = favorite.overview
         

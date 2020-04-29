@@ -7,6 +7,6 @@
 //
 
 struct Constants {
-    static let env = Environment.dev
-    static let coverRatio: Float = 720 / 500
+    static let api = ApiConstants.dev
+    static let theme = ThemeConstants.dev
 }

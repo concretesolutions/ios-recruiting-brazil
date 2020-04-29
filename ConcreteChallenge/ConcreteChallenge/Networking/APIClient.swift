@@ -11,6 +11,15 @@ import Alamofire
 import RxSwift
 import RxCocoa
 
+func convertToDictionary(data: Data) -> [String: Any]? {
+    do {
+        return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+    } catch {
+        print(error.localizedDescription)
+    }
+    return nil
+}
+
 protocol ClientProtocol {
     func request<Response>(_ endpoint: Endpoint<Response>) -> Single<Response>
 }
@@ -32,7 +41,7 @@ class Client: ClientProtocol {
     }
     
     convenience init () {
-        self.init(baseUrl: Constants.env.baseUrl, apiKey: Constants.env.apiKey)
+        self.init(baseUrl: Constants.api.baseUrl, apiKey: Constants.api.apiKey)
     }
     func mergeParameters(dict: Parameters?) -> Parameters {
         guard var newParameters = dict else {
@@ -58,21 +67,25 @@ class Client: ClientProtocol {
             request
                 .validate()
                 .responseData(queue: self.queue) { response in
-                    print(url)
-                    print(endpoint)
+//                    print(url)
+//                    print(endpoint)
                     let result = response.result.flatMap { (data) -> Result<Response, AFError> in
                         do {
                             let decoded = try endpoint.decode(data)
                             return .success(decoded)
                         } catch {
-                            print(error)
-                            return .failure(error as! AFError)
+                            print(parameters)
+                            print(endpoint)
+                            print(request)
+                            let json = String(decoding: data, as: UTF8.self)
+                            print(json)
+                            return .failure(AFError.parameterEncoderFailed(reason: .encoderFailed(error: error)))
                         }
                     }
                     switch result {
                     case let .success(val): observer(.success(val))
                     case let .failure(err): observer(.error(err))
-                }
+                    }
             }
             return Disposables.create {
                 request.cancel()

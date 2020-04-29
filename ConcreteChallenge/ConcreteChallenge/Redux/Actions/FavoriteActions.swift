@@ -10,7 +10,7 @@ import ReSwift
 
 enum FavoriteActions: Action {
     case set([Favorite])
-    case insert(Favorite)
-    case remove(id: Int)
-    case clear
+    case searchResults([Favorite], with: FavoriteFilters)
+    case setError(NSError)
+    case setFilters(FavoriteFilters)
 }

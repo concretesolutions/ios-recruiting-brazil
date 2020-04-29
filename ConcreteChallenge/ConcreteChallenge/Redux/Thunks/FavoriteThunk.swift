@@ -11,32 +11,83 @@ import ReSwift
 import ReSwiftThunk
 
 class FavoriteThunk {
+    private static let entityName = "FavoriteData"
     
+    static func refreshFromPersistance() -> Thunk<RootState> {
+        return Thunk<RootState> { dispatch, getState in
+            
+            do {
+                let favorites: [Favorite] = try PersistanceManager.get(from: FavoriteThunk.entityName) ?? []
+                dispatch(FavoriteActions.set(favorites))
+                dispatch(MovieThunk.dependencyUpdated())
+            } catch let error as NSError {
+                dispatch(FavoriteActions.setError(error))
+            }
+        }
+    }
+        
     static func remove(id: Int) -> Thunk<RootState> {
-
         return Thunk<RootState> { dispatch, getState in
             guard let _ = getState() else { return }
-            dispatch(FavoriteActions.remove(id: id))
-            dispatch(MovieThunk.dependencyUpdated())
+            do {
+                try PersistanceManager.delete(id, from: FavoriteThunk.entityName)
+                dispatch(FavoriteThunk.refreshFromPersistance())
+            } catch let error as NSError {
+                dispatch(FavoriteActions.setError(error))
+            }
         }
     }
     
     static func clear() -> Thunk<RootState> {
         return Thunk<RootState> { dispatch, getState in
-            guard let _ = getState() else { return }
-            dispatch(FavoriteActions.clear)
-            dispatch(MovieThunk.dependencyUpdated())
+            
+            do {
+                try PersistanceManager.clear(from: FavoriteThunk.entityName)
+                dispatch(FavoriteThunk.refreshFromPersistance())
+            } catch let error as NSError {
+                dispatch(FavoriteActions.setError(error))
+            }
         }
     }
     
     static func insert(_ favorite: Favorite) -> Thunk<RootState> {
         
         return Thunk<RootState> { dispatch, getState in
-            guard let _ = getState() else { return }
-            
-            dispatch(FavoriteActions.insert(favorite))
-            dispatch(MovieThunk.dependencyUpdated())
+            do {
+                try PersistanceManager.persist(favorite)
+                dispatch(FavoriteThunk.refreshFromPersistance())
+            } catch let error as NSError {
+                dispatch(FavoriteActions.setError(error))
+            }
         }
     }
+    
+    static func search(filteringBy filters: FavoriteFilters) -> Thunk<RootState> {
+        
+        return Thunk<RootState> { dispatch, getState in
+            
+            var predicates: [NSPredicate] = []
+            
+            if let keyword = filters.keyword {
+                predicates.append(NSPredicate(format: "title CONTAINS[c] %@ OR overview CONTAINS[c] %@", keyword, keyword))
+            }
+            
+            if filters.year != nil {
+                predicates.append(NSPredicate(format: "releaseDate BEGINSWITH %@", "\(filters.year!)"))
+            }
+            
+            do {
+                var favorites: [Favorite] = try PersistanceManager.get(from: FavoriteThunk.entityName, predicates: predicates) ?? []
+                
+                if let genre = filters.genre {
+                    favorites = favorites.filter({ $0.genreIds.contains(genre.id) })
+                }
+                
+                dispatch(FavoriteActions.searchResults(favorites, with: filters))
+            } catch let error as NSError {
+                dispatch(FavoriteActions.setError(error))
+            }
+       }
+   }
 }
     

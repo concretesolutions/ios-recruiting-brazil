@@ -18,7 +18,7 @@ class Favorite: PersistableModelDelegate, Codable {
     let posterPath: String?
     let adult: Bool
     let overview: String
-    let releaseDate: String
+    let releaseDate: String?
     let genreIds: [Int]
     var genres: [String]?
     let originalTitle: String
@@ -63,7 +63,7 @@ class Favorite: PersistableModelDelegate, Codable {
         self.posterPath = movie.posterPath
         self.adult = movie.adult
         self.overview = movie.overview
-        self.releaseDate = movie.releaseDate
+        self.releaseDate = movie.releaseDate ?? ""
         self.originalTitle = movie.originalTitle
         self.originalLanguage = movie.originalLanguage
         self.backdropPath = movie.backdropPath
@@ -75,13 +75,31 @@ class Favorite: PersistableModelDelegate, Codable {
         self.genres = movie.genres
     }
     
-    init(_ managedObject: NSManagedObject) {
+    init(with movie: MovieDetails) {
+        self.id = movie.id
+        self.title = movie.title
+        self.posterPath = movie.posterPath
+        self.adult = movie.adult
+        self.overview = movie.overview
+        self.releaseDate = movie.releaseDate ?? ""
+        self.originalTitle = movie.originalTitle
+        self.originalLanguage = movie.originalLanguage
+        self.backdropPath = movie.backdropPath
+        self.video = movie.video
+        self.popularity = movie.popularity
+        self.voteCount = movie.voteCount
+        self.voteAverage = movie.voteAverage
+        self.genreIds = movie.genres.map({ $0.id })
+        self.genres = movie.genres.map({ $0.name })
+    }
+    
+    required init(_ managedObject: NSManagedObject) {
         id = managedObject.value(forKey: "id") as! Int
         title = managedObject.value(forKey: "title") as! String
         posterPath = managedObject.value(forKey: "posterPath") as! String?
         adult = managedObject.value(forKey: "adult") as! Bool
         overview = managedObject.value(forKey: "overview") as! String
-        releaseDate = managedObject.value(forKey: "releaseDate") as! String
+        releaseDate = managedObject.value(forKey: "releaseDate") as? String
         genreIds = managedObject.value(forKey: "genreIds") as! [Int]
         genres = managedObject.value(forKey: "genres") as! [String]?
         originalTitle = managedObject.value(forKey: "originalTitle") as! String

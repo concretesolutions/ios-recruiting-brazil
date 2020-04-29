@@ -17,25 +17,9 @@ class Persistance {
         return Thunk<RootState> { dispatch, getState in
             if getState() == nil { return }
             
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                return
-            }
-            
-            let managedContext = appDelegate.persistentContainer.viewContext
-            
-            let fetchFavorites = NSFetchRequest<NSManagedObject>(entityName: "FavoriteData")
-            let fetchGenre = NSFetchRequest<NSManagedObject>(entityName: "GenreData")
             
             do {
-                let favorites = try managedContext.fetch(fetchFavorites)
-                let genres = try managedContext.fetch(fetchGenre)
-                
-                dispatch(GenreActions.set(
-                    genres.map({ Genre($0) })
-                ))
-                dispatch(FavoriteActions.set(
-                    favorites.map({ Favorite($0) })
-                ))
+                dispatch(FavoriteThunk.refreshFromPersistance())
             } catch let error as NSError {
                 print("Could not fetch. \(error), \(error.userInfo)")
             }

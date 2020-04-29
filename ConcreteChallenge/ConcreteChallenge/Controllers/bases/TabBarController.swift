@@ -40,8 +40,10 @@ class TabBarController: UITabBarController {
         
 //        selectedIndex = 1
     }
-    
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIApplication.shared.delegate!.window!!.bringSubviewToFront((UIApplication.shared.delegate!.window!!.subviews[0]))
+    }
     /*
     // MARK: - Navigation
 

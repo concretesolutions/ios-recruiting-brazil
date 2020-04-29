@@ -12,6 +12,11 @@ class BackgroundStateView: UIView {
     var emptyStateView: EmptyStateView!
     var activityIndicator: UIActivityIndicatorView!
     
+    var retryDelegate: EmptyStateRetryDelegate? {
+        get { return emptyStateView.retryDelegate }
+        set(newDelegate) { emptyStateView.retryDelegate = newDelegate }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.createViews()
