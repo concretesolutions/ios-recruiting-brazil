@@ -18,7 +18,7 @@ struct RootState: StateType, Equatable {
 
 func rootReducer(action: Action, state: RootState?) -> RootState {
     var state = state ?? RootState()
-    
+
     switch action {
     case is GenreActions:
         state.genre = genreReducer(
@@ -48,7 +48,7 @@ func rootReducer(action: Action, state: RootState?) -> RootState {
         break
     }
     return state
-    
+
 }
 
 let thunksMiddleware: Middleware<RootState> = createThunkMiddleware()

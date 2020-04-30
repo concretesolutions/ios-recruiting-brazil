@@ -12,46 +12,45 @@ struct FavoritesViewModel {
     let favorites: [Favorite]
     let genres: [Genre]
     let filters: FavoriteFilters
-    
+
     var genresOptions: [String] = ["Todos"]
     var yearsOptions: [String] = ["Qualquer ano"]
-    
+
     let requestError: String
     let isConnected: Bool
     let isSearching: Bool
     var backgroundViewConfiguration: BackgroundStateViewModel?
-    
+
     private func getCurrentYear() -> Int {
         let date = Date()
         let format = DateFormatter()
         format.dateFormat = "yyyy"
         return Int(format.string(from: date))!
     }
-    
-    
+
     init(state: RootState) {
         genres = state.genre.genres
         requestError = state.favorites.latestError
-        
+
         isConnected = state.infra.isConnected
-        
+
         filters = state.favorites.filters
-        
+
         self.isSearching = !filters.isEmpty
-        
+
         if self.isSearching {
             favorites = state.favorites.searchResults
         } else {
             favorites = state.favorites.favorites
         }
-        
+
         print("self.isSearching: \(self.isSearching)")
-        
+
         genresOptions += state.genre.genres.map({ $0.name})
         let currentYear = getCurrentYear()
-        
+
         yearsOptions += Array(0...200).map({ "\(currentYear - $0)" })
-        
+
         if !requestError.isEmpty {
             backgroundViewConfiguration = BackgroundStateViewModel(
                 title: "Ocoreu um erro",
@@ -85,7 +84,7 @@ struct FavoritesViewModel {
         } else {
             backgroundViewConfiguration = nil
         }
-        
+
     }
 }
 

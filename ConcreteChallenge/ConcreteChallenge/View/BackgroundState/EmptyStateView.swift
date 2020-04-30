@@ -17,27 +17,27 @@ class EmptyStateView: UIView {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    
+
     @IBOutlet weak var retryButton: UIButton!
-    
+
     public var retryDelegate: EmptyStateRetryDelegate?
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         retryButton.layer.cornerRadius = 4
     }
-    
+
     func set(with configuration: BackgroundStateViewModel) {
         imageView.image = UIImage(named: configuration.image.rawValue)
         titleLabel.text = configuration.title
-        
+
         if configuration.subtitle.isEmpty {
             descriptionLabel.isHidden = true
         } else {
             descriptionLabel.isHidden = false
             descriptionLabel.text = configuration.subtitle
         }
-        
+
         if configuration.retry.isEmpty {
             retryButton.isHidden = true
         } else {
@@ -45,7 +45,7 @@ class EmptyStateView: UIView {
             retryButton.setTitle(configuration.retry, for: .normal)
         }
     }
-    
+
     @IBAction func retryAction(_ sender: Any) {
         guard let delegate = self.retryDelegate else { return }
         delegate.executeRetryAction(self)

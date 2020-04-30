@@ -10,9 +10,9 @@ import UIKit
 
 class MovieDetailsSummaryCollectionViewCell: UICollectionViewCell {
     weak var summaryLabel: UILabel!
-    
+
     var calculatedHeight: Bool = false
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         let titleLabel = UILabel(frame: .zero)
@@ -21,7 +21,7 @@ class MovieDetailsSummaryCollectionViewCell: UICollectionViewCell {
         titleLabel.font = UIFont(name: "Avenir-Black", size: 17)!
         titleLabel.text = "Summary"
         titleLabel.textAlignment = .left
-        
+
         let summaryLabel = UILabel(frame: .zero)
         self.contentView.addSubview(summaryLabel)
         summaryLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -30,12 +30,12 @@ class MovieDetailsSummaryCollectionViewCell: UICollectionViewCell {
         summaryLabel.text = "Teste"
         summaryLabel.textAlignment = .left
         summaryLabel.numberOfLines = 0
-        
+
         self.summaryLabel = summaryLabel
-        
+
         let screenSize: CGRect = UIScreen.main.bounds
 //        contentView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
             // Auto resize width anchor
             contentView.widthAnchor.constraint(equalToConstant: (screenSize.width - 2 * Constants.theme.paddingHorizontal)),
@@ -49,19 +49,18 @@ class MovieDetailsSummaryCollectionViewCell: UICollectionViewCell {
             summaryLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
             summaryLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16)
         ])
-        
+
         self.contentView.addBorders(edges: [.bottom], color: UIColor.black.withAlphaComponent(0.1), inset: -20, thickness: 1)
     }
-    
-    
+
     func setup(with sectionData: MovieDetailsSummarySection) {
         let attributedString = NSMutableAttributedString(string: sectionData.summary)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 2
-        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
         summaryLabel.attributedText = attributedString
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
@@ -79,14 +78,14 @@ class MovieDetailsSummaryCollectionViewCell: UICollectionViewCell {
         self.summaryLabel.attributedText = nil
         self.calculatedHeight = false
     }
-    
+
     override func systemLayoutSizeFitting(
         _ targetSize: CGSize,
         withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority,
         verticalFittingPriority: UILayoutPriority) -> CGSize {
-        
+
         var targetSize = targetSize
-                
+
         if !calculatedHeight {
             calculatedHeight = true
             targetSize.height = 1000
@@ -95,7 +94,7 @@ class MovieDetailsSummaryCollectionViewCell: UICollectionViewCell {
                 withHorizontalFittingPriority: .required,
                 verticalFittingPriority: .fittingSizeLevel
             )
-            
+
         }
         return targetSize
     }

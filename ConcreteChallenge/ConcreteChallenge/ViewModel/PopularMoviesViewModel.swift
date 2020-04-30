@@ -18,34 +18,34 @@ struct PopularMoviesViewModel: Equatable {
     let requestError: String
     let isConnected: Bool
     var loadingFooterState: LoadingFooterState = .hidden
-    
+
     var backgroundViewConfiguration: BackgroundStateViewModel?
-    
+
     init(state: RootState) {
         genres = state.genre.genres
         page = state.movie.page
         totalPages = state.movie.totalPages
-        
+
         filters = state.movie.filters
-        
+
         isLastPage = totalPages == page
-        
+
         isSearching = state.movie.isSearching
-        
+
         let isLoading = state.genre.loading || state.movie.loading
-        
+
         let isRefreshing = page == 1 && state.movie.loading && !state.movie.isSearching
-        
+
         if isRefreshing {
             movies = []
         } else {
             movies = state.movie.movies
         }
-        
+
         requestError = state.movie.errorMessage
-        
+
         isConnected = state.infra.isConnected
-        
+
         // Background State
         if !requestError.isEmpty {
             backgroundViewConfiguration = BackgroundStateViewModel(
@@ -80,9 +80,9 @@ struct PopularMoviesViewModel: Equatable {
         } else {
             backgroundViewConfiguration = nil
         }
-        
+
         self.loading = isLoading
-        
+
         // Footer State
         if isLoading {
             if state.movie.isPaginating {
@@ -97,4 +97,3 @@ struct PopularMoviesViewModel: Equatable {
         }
     }
 }
-

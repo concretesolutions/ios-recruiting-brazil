@@ -18,7 +18,7 @@ struct BackgroundStateViewModel: Equatable {
     var subtitle: String = "Não conseguimos comunicar com o servidor. Tente novamente mais tarde."
     var image: BackgroundStateViewImages = .error
     var retry: String = "Tentar novamente"
-    
+
     init(title: String?, subtitle: String?, image: BackgroundStateViewImages?, retry: String?) {
         self.title = title ?? self.title
         self.subtitle = subtitle ?? self.subtitle

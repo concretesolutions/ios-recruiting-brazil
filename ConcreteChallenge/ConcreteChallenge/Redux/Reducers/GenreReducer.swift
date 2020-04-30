@@ -9,12 +9,11 @@
 import ReSwift
 import ReSwiftThunk
 
-
 struct GenreState: StateType, Equatable {
     var loading: Bool = false
     var errorMessage: String = ""
     var genres: [Genre] = []
-    
+
     static func == (lhs: GenreState, rhs: GenreState) -> Bool {
         return lhs.genres == rhs.genres
     }

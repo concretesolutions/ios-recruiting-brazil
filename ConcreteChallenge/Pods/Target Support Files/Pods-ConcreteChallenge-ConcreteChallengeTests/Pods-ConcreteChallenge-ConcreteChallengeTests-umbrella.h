@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_ConcreteChallengeTestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_ConcreteChallengeTestsVersionString[];
+FOUNDATION_EXPORT double Pods_ConcreteChallenge_ConcreteChallengeTestsVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_ConcreteChallenge_ConcreteChallengeTestsVersionString[];
 

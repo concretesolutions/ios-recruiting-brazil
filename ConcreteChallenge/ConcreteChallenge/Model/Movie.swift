@@ -13,7 +13,7 @@ class MovieResponse: Codable {
     let page: Int
     let totalPages: Int
     let results: [Movie]
-    
+
     enum CodingKeys: String, CodingKey {
         case page
         case results
@@ -40,9 +40,9 @@ class Movie: Codable {
     let popularity: Double
     let voteCount: Int
     let voteAverage: Double
-    
+
     var favorited: Bool = false
-    
+
     init(
         id: Int,
         posterPath: String?,
@@ -78,7 +78,7 @@ class Movie: Codable {
         self.voteAverage = voteAverage
         self.favorited = favorited
     }
-    
+
     func toggleFavorite() {
         if favorited {
             mainStore.dispatch(FavoriteThunk.remove(id: id))
@@ -114,7 +114,7 @@ extension Movie: Equatable {
                 && lhs.favorited == rhs.favorited
                 && lhs.genres == rhs.genres
     }
-    
+
     func clone() throws -> Movie {
         let jsonData = try JSONEncoder().encode(self)
         return try JSONDecoder().decode(Movie.self, from: jsonData)

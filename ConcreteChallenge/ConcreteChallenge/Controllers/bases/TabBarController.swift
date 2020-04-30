@@ -13,31 +13,29 @@ enum Storyboards: String {
     case favorites = "favorites"
 }
 
-
 class TabBarController: UITabBarController {
-    
+
     func setupTab(_ storyboard: Storyboards, backgroundColor: UIColor) -> UIViewController {
         let storyboard = UIStoryboard(name: storyboard.rawValue, bundle: nil)
         let controller = storyboard.instantiateInitialViewController() as! BaseTabViewController
-        
+
         controller.setupTab()
-        
+
         return controller
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let movies = setupTab(.movies, backgroundColor: .yellow)
         let favorites = setupTab(.favorites, backgroundColor: .black)
-        
 
         viewControllers = [movies, favorites]
-        
+
         tabBar.barTintColor = UIColor(asset: .brand)
         tabBar.isTranslucent = false
         tabBar.tintColor = .black
-        
+
 //        selectedIndex = 1
     }
     override func viewDidAppear(_ animated: Bool) {

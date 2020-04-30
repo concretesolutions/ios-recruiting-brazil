@@ -31,15 +31,15 @@ class Client: ClientProtocol {
     private let defaultParameters: Parameters
 
     static let shared = Client()
-    
+
     init(baseUrl: String, apiKey: String) {
         self.defaultParameters = ["api_key": apiKey, "language": "pt-BR"]
         self.baseUrl = URL(string: baseUrl)!
-        
+
         let configuration = URLSessionConfiguration.default
         self.manager = Alamofire.Session(configuration: configuration)
     }
-    
+
     convenience init () {
         self.init(baseUrl: Constants.api.baseUrl, apiKey: Constants.api.apiKey)
     }
@@ -47,9 +47,9 @@ class Client: ClientProtocol {
         guard var newParameters = dict else {
             return self.defaultParameters
         }
-        
-        for (k, v) in self.defaultParameters {
-            newParameters.updateValue(v, forKey: k)
+
+        for (key, value) in self.defaultParameters {
+            newParameters.updateValue(value, forKey: key)
         }
         return newParameters
     }
@@ -57,7 +57,7 @@ class Client: ClientProtocol {
     func request<Response>(_ endpoint: Endpoint<Response>) -> Single<Response> {
         let parameters = mergeParameters(dict: endpoint.parameters)
         let url = self.url(path: endpoint.path)
-        
+
         return Single<Response>.create { observer in
             let request = self.manager.request(
                 url,
@@ -107,4 +107,3 @@ private func httpMethod(from method: Method) -> Alamofire.HTTPMethod {
     case .delete: return .delete
     }
 }
-

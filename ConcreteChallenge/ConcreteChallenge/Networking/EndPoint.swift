@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 // MARK: Defines
 typealias Parameters = [String: Any]
 typealias Path = String
@@ -34,7 +33,6 @@ final class Endpoint<Response> {
         self.decode = decode
     }
 }
-
 
 // MARK: Convenience
 extension Endpoint where Response: Swift.Decodable {

@@ -13,14 +13,14 @@ import Reachability
 
 class InfraThunk {
     static let reachability = try! Reachability()
-    
+
     static func startReachability(then nextActions: [Action]) -> Thunk<RootState> {
-        
+
         return Thunk<RootState> { dispatch, getState in
             guard let state = getState() else { return }
-            
+
             var nextActions = nextActions
-            
+
             reachability.whenReachable = { reachability in
                 dispatch(InfraActions.reachabilityChange(reachability))
                 nextActions.forEach(dispatch)
@@ -36,7 +36,7 @@ class InfraThunk {
             } catch {
                 dispatch(InfraActions.unableToStartReachability)
             }
-            
+
         }
     }
 }

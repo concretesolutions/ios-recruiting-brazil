@@ -15,8 +15,8 @@ enum HttpHeaderField: String {
     case contentType = "Content-Type"
     case acceptType = "Accept"
     case acceptEncoding = "Accept-Encoding"
-    case qm2ApiKey = "x-application-id";
-    case requestId = "x-request-id";
+    case qm2ApiKey = "x-application-id"
+    case requestId = "x-request-id"
 }
 
 //The content type (JSON)
@@ -28,7 +28,7 @@ enum ApiConstants {
     case dev
     case staging
     case production
-    
+
     var baseUrl: String {
         switch self {
         case .dev:
@@ -39,7 +39,7 @@ enum ApiConstants {
             return "https://api.themoviedb.org/3"
         }
     }
-    
+
     var imageBaseUrl: String {
         switch self {
         case .dev:
@@ -50,8 +50,7 @@ enum ApiConstants {
             return "https://image.tmdb.org/t/p"
         }
     }
-    
-    
+
     var apiKey: String {
         switch self {
         case .dev:
@@ -62,11 +61,11 @@ enum ApiConstants {
             return "41753cb07159e6575c68421c0792962c"
         }
     }
-    
+
     var searchDebounceTime: RxTimeInterval {
         return .milliseconds(300)
     }
-    
+
     var localSearchDebounceTime: RxTimeInterval {
         return .milliseconds(200)
     }

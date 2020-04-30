@@ -19,7 +19,7 @@ struct MovieState: StateType, Equatable {
     var errorMessage: String = ""
     var movies: [Movie] = []
     var currentMovieDetails: MovieDetails?
-    
+
     static func == (lhs: MovieState, rhs: MovieState) -> Bool {
         return lhs.movies == rhs.movies
             && lhs.page == rhs.page
@@ -45,15 +45,15 @@ func movieReducer(action: MovieActions, state: MovieState?, rootState: RootState
         state.page = page
         state.totalPages = totalPages
         state.filters = filters
-        
+
         let movies: [Movie] = movies.map { movie in
             movie.genres = rootState.genre
                 .genres.filter({ movie.genreIds.contains($0.id) })
                 .map({ $0.name })
-            
+
             movie.favorited = rootState.favorites
                 .favorites.contains(where: { $0.id == movie.id })
-            
+
             return movie
         }
         if page == 1 {

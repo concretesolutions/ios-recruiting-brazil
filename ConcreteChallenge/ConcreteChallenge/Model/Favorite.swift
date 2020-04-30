@@ -12,7 +12,7 @@ import RxSwift
 
 class Favorite: PersistableModelDelegate, Codable {
     var entityName: String = "FavoriteData"
-    
+
     let title: String
     var id: Int
     let posterPath: String?
@@ -28,19 +28,19 @@ class Favorite: PersistableModelDelegate, Codable {
     let popularity: Double
     let voteCount: Int
     let voteAverage: Double
-    
+
     static func getAll() -> [Favorite] {
         return []
     }
-    
-    func getDictionary() throws -> [String : Any]? {
+
+    func getDictionary() throws -> [String: Any]? {
         return [
             "id": Int64(self.id),
             "title": self.title,
             "posterPath": self.posterPath ?? "",
             "adult": self.adult,
             "overview": self.overview,
-            "releaseDate": self.releaseDate,
+            "releaseDate": self.releaseDate ?? "",
             "originalTitle": self.originalTitle,
             "originalLanguage": self.originalLanguage,
             "backdropPath": self.backdropPath ?? "",
@@ -52,11 +52,11 @@ class Favorite: PersistableModelDelegate, Codable {
             "genres": self.genres ?? []
         ]
     }
-    
+
     func remove() {
         mainStore.dispatch(FavoriteThunk.remove(id: self.id))
     }
-    
+
     init(with movie: Movie) {
         self.id = movie.id
         self.title = movie.title
@@ -74,7 +74,7 @@ class Favorite: PersistableModelDelegate, Codable {
         self.genreIds = movie.genreIds
         self.genres = movie.genres
     }
-    
+
     init(with movie: MovieDetails) {
         self.id = movie.id
         self.title = movie.title
@@ -92,7 +92,7 @@ class Favorite: PersistableModelDelegate, Codable {
         self.genreIds = movie.genres.map({ $0.id })
         self.genres = movie.genres.map({ $0.name })
     }
-    
+
     required init(_ managedObject: NSManagedObject) {
         id = managedObject.value(forKey: "id") as! Int
         title = managedObject.value(forKey: "title") as! String

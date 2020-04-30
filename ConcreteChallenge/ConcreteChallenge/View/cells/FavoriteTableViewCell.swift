@@ -15,7 +15,7 @@ class FavoriteTableViewCell: UITableViewCell {
     @IBOutlet weak var genresLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var decriptionLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,14 +26,14 @@ class FavoriteTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     func set(with favorite: Favorite) {
-        
+
         if let posterPath = favorite.posterPath {
             let url = URL(string: Constants.api.imageBaseUrl)?
                 .appendingPathComponent("w500")
                 .appendingPathComponent(posterPath)
-            
+
             coverImage!.sd_setImage(
                 with: url,
                 placeholderImage: UIImage(named: "placeholder.png")
@@ -44,24 +44,23 @@ class FavoriteTableViewCell: UITableViewCell {
                 placeholderImage: UIImage(named: "placeholder.png")
             )
         }
-        
+
         titleLabel.text = favorite.title
-        ratingLabel.text = String(format:"%.1f", favorite.voteAverage / 2)
-        
+        ratingLabel.text = String(format: "%.1f", favorite.voteAverage / 2)
+
         var yearGenre: [String] = []
-        
+
         if let releaseDate = favorite.releaseDate {
             yearGenre.append(String(releaseDate.prefix(4)))
         }
         if let genreName = favorite.genres?.first {
             yearGenre.append(genreName)
         }
-        
+
         genresLabel.text = yearGenre.joined(separator: " - ")
-    
-        
+
         decriptionLabel.text = favorite.overview
-        
+
     }
-    
+
 }

@@ -10,8 +10,6 @@ import UIKit
 import SDWebImage
 
 class PopularMovieCollectionViewCell: UICollectionViewCell {
-    
-    var gl:CAGradientLayer!
     var movie: Movie!
 
     @IBOutlet weak var wrapperView: UIView!
@@ -19,15 +17,15 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var titleContainerView: UIView!
     @IBOutlet weak var yearGenreLabel: UILabel!
-    
+
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         wrapperView!.layer.cornerRadius = 10
         wrapperView.clipsToBounds = true
-        
+
         let colorTop =  UIColor(red: 0, green: 0, blue: 0, alpha: 0.0).cgColor
         let colorBottom = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0).cgColor
 
@@ -37,18 +35,18 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
         gradientLayer.frame = titleContainerView.bounds
         titleContainerView.backgroundColor = UIColor(white: 1, alpha: 0)
         titleContainerView.layer.insertSublayer(gradientLayer, at: 0)
-        
+
         favoriteButton.imageEdgeInsets = UIEdgeInsets(top: -10, left: 0, bottom: 0, right: -20)
     }
 
     func setup(with movie: Movie) {
         self.movie = movie
-        
+
         if let posterPath = movie.posterPath {
             let url = URL(string: Constants.api.imageBaseUrl)?
                 .appendingPathComponent("w500")
                 .appendingPathComponent(posterPath)
-            
+
             coverImageView!.sd_setImage(
                 with: url,
                 placeholderImage: UIImage(named: "placeholder.png")
@@ -59,12 +57,12 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
                 placeholderImage: UIImage(named: "placeholder.png")
             )
         }
-        
+
         titleLabel.text = movie.title
-        ratingLabel.text = String(format:"%.1f", movie.voteAverage / 2)
-        
+        ratingLabel.text = String(format: "%.1f", movie.voteAverage / 2)
+
         var yearGenre: [String] = []
-        
+
         if let releaseDate = movie.releaseDate {
             yearGenre.append(String(releaseDate.prefix(4)))
         }
@@ -72,7 +70,7 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
             yearGenre.append(genreName)
         }
         yearGenreLabel.text = yearGenre.joined(separator: " - ")
-        
+
         if movie.favorited {
             favoriteButton.setImage(Constants.theme.heartFull.mask(with: .red), for: .normal)
         } else {
@@ -88,11 +86,11 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
         yearGenreLabel.text = ""
         titleLabel.text = ""
         ratingLabel.text = ""
-        
+
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
     }
-    
+
 }

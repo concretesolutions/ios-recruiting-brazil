@@ -18,7 +18,6 @@ enum VideoType: String, Codable {
     case bloopers = "Bloopers"
 }
 
-
 class MovieDetailsVideoResult: Codable {
     let results: [MovieDetailsVideo]
 }
@@ -31,7 +30,6 @@ class MovieDetailsVideo: Codable {
     let size: Int
     let type: VideoType
 }
-
 
 class Credits: Codable {
     let id: Int
@@ -97,18 +95,18 @@ class MovieDetails: Codable {
     let voteCount: Int
     let voteAverage: Double
     var favorited: Bool?
-    
+
     let imdbId: String?
     let budget: Int
     let revenue: Int
     let runtime: Int?
     let status: String
     let tagline: String?
-    
+
     var videos: [MovieDetailsVideo]?
     var cast: [Cast]?
     var crew: [Crew]?
-    
+
     init(with movie: Movie) {
         self.id = movie.id
         self.posterPath = movie.posterPath
@@ -124,12 +122,12 @@ class MovieDetails: Codable {
         self.voteCount = movie.voteCount
         self.voteAverage = movie.voteAverage
         self.favorited = movie.favorited
-            
+
         self.genres = []
         self.videos = []
         self.cast = []
         self.crew = []
-        
+
         self.imdbId = ""
         self.budget = 0
         self.revenue = 0
@@ -137,7 +135,7 @@ class MovieDetails: Codable {
         self.status = ""
         self.tagline = ""
     }
-    
+
     init(with favorite: Favorite) {
         self.id = favorite.id
         self.posterPath = favorite.posterPath
@@ -166,10 +164,10 @@ class MovieDetails: Codable {
         self.status = ""
         self.tagline = ""
     }
-    
+
     @objc func toggleFavorite() {
         let favorited = self.favorited ?? false
-        
+
         if favorited {
             mainStore.dispatch(FavoriteThunk.remove(id: id))
         } else {
@@ -210,13 +208,13 @@ extension MovieDetails {
 }
 
 extension MovieDetails {
-    
+
     static func get(id movieId: Int) -> Single<MovieDetails> {
-        
+
         let videosEndpoint: Endpoint<MovieDetailsVideoResult> = Endpoint(path: "/movie/\(movieId)/videos")
         let creditsEndpoint: Endpoint<Credits> = Endpoint(path: "/movie/\(movieId)/credits")
         let detailsEndpoint: Endpoint<MovieDetails> = Endpoint(path: "/movie/\(movieId)")
-        
+
         return Single<MovieDetails>.create { observer in
             Observable.zip(
                 Client.shared.request(videosEndpoint).asObservable(),
@@ -247,7 +245,7 @@ extension MovieDetails: Equatable {
             && lhs.genres == rhs.genres
             && lhs.favorited == rhs.favorited
     }
-    
+
     func clone() throws -> MovieDetails {
         let jsonData = try JSONEncoder().encode(self)
         return try JSONDecoder().decode(MovieDetails.self, from: jsonData)

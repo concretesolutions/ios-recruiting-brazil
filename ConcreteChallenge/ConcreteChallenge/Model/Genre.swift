@@ -17,7 +17,7 @@ class GenreResponse: Codable {
 class Genre: Codable {
     let name: String
     var id: Int
-    
+
     static func getAll() -> Single<[Genre]> {
         let endopoint: Endpoint<GenreResponse> = Endpoint(path: "genre/movie/list")
         return Single<[Genre]>.create { observer in
@@ -39,7 +39,7 @@ class Genre: Codable {
                 })
         }
     }
-    
+
     init(id: Int, name: String) {
         self.id = id
         self.name = name

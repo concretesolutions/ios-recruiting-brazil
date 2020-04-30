@@ -10,29 +10,29 @@ import UIKit
 
 class MovieDetailsHeaderView: UICollectionReusableView {
     var bluredView: UIVisualEffectView!
-    
+
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var coverImageView: UIImageView!
-    
+
     @IBOutlet weak var directorNameLabel: UILabel!
     @IBOutlet weak var directorJobLabel: UILabel!
-    
+
     @IBOutlet weak var screenplayNameLabel: UILabel!
     @IBOutlet weak var screenplayJobLabel: UILabel!
-    
+
     @IBOutlet weak var taglineLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         clipsToBounds = true
         backgroundColor = .clear
-        
+
         setupBackgroundImage()
         setupCoverImage()
     }
-    
+
     func setup(with sectionData: MovieDetailsHeaderSection) {
         if let posterUrl = sectionData.posterUrl {
             backgroundImageView.sd_setImage(
@@ -44,24 +44,23 @@ class MovieDetailsHeaderView: UICollectionReusableView {
                 placeholderImage: UIImage(named: "placeholder.png")
             )
         }
-        
+
         genreLabel.text = sectionData.genres
-        
+
         if let director = sectionData.director {
             directorNameLabel.text = director.name
             directorJobLabel.text = director.jobs
         }
-        
+
         if let screenplayer = sectionData.screenplayer {
             screenplayNameLabel.text = screenplayer.name
             screenplayJobLabel.text = screenplayer.jobs
         }
-        
+
         taglineLabel.text = sectionData.tagline
-        
+
     }
-    
-    
+
     fileprivate func setupCoverImage() {
         coverImageView.clipsToBounds = true
         coverImageView.layer.shadowPath =
@@ -73,12 +72,12 @@ class MovieDetailsHeaderView: UICollectionReusableView {
         coverImageView.layer.masksToBounds = false
         coverImageView.layer.shadowRadius = 10.0
     }
-    
+
     fileprivate func setupBackgroundImage() {
         backgroundImageView.image = UIImage(named: "placeholder.png")
         backgroundImageView.fillSuperview()
         bluredView = backgroundImageView.blurred(style: .dark)
         bluredView.alpha = 0.9
     }
-    
+
 }

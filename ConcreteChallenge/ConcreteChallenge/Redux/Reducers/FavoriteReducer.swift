@@ -14,9 +14,9 @@ struct FavoriteState: StateType, Equatable {
     var favorites: [Favorite] = []
     var searchResults: [Favorite] = []
     var latestError: String = ""
-    
+
     var filters: FavoriteFilters = FavoriteFilters()
-    
+
     static func == (lhs: FavoriteState, rhs: FavoriteState) -> Bool {
         return lhs.favorites == rhs.favorites
             && lhs.latestError == rhs.latestError
@@ -26,7 +26,7 @@ struct FavoriteState: StateType, Equatable {
 
 func favoriteReducer(action: FavoriteActions, state: FavoriteState?, rootState: RootState?) -> FavoriteState {
     var state = state ?? FavoriteState()
-    
+
     switch action {
     case .set(let favorites):
         state.favorites = favorites
@@ -39,5 +39,5 @@ func favoriteReducer(action: FavoriteActions, state: FavoriteState?, rootState: 
         state.filters = filters
     }
     return state
-        
+
 }

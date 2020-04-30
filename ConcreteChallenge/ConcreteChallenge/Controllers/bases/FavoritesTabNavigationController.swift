@@ -12,12 +12,12 @@ class FavoritesTabNavigationController: UINavigationController, BaseTabViewContr
     var tabBarTitle = "Favorites"
     var tabBarImage = #imageLiteral(resourceName: "heart")
     var tabBarImageSelected = #imageLiteral(resourceName: "heartFull")
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let bgColor = UIColor(asset: .brand)
-        
+
         self.navigationBar.isTranslucent = false
         self.navigationBar.barTintColor = bgColor
         self.view.backgroundColor = bgColor
@@ -26,7 +26,6 @@ class FavoritesTabNavigationController: UINavigationController, BaseTabViewContr
             self.navigationBar.prefersLargeTitles = true
             self.navigationBar.backgroundColor = bgColor
         }
-        
+
     }
 }
-

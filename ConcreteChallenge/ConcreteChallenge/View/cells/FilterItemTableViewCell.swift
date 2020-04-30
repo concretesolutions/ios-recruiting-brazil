@@ -16,17 +16,16 @@ class FilterItemTableViewCell: UITableViewCell {
 
     fileprivate let pickerView = ToolbarPickerView()
     public var delegate: FilterItemDelegate?
-    
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
-    
+
     private var commitedValue = ""
-    
+
     var options: [String] = []
     var itemIdentifier: String = ""
-    
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setupPicker()
@@ -37,12 +36,12 @@ class FilterItemTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     func setup(title: String, value: String, options: [String], as itemIdentifier: String) {
         self.itemIdentifier = itemIdentifier
         self.options = options
         self.titleLabel.text = title
-        
+
         self.commitedValue = value
         self.textField.text = value
         self.valueLabel.text = value
@@ -51,7 +50,7 @@ class FilterItemTableViewCell: UITableViewCell {
 
 extension FilterItemTableViewCell: UIPickerViewDelegate, UIPickerViewDataSource {
     private func setupPicker() {
-        
+
         self.textField.inputView = self.pickerView
         self.textField.inputAccessoryView = self.pickerView.toolbar
 
@@ -61,7 +60,7 @@ extension FilterItemTableViewCell: UIPickerViewDelegate, UIPickerViewDataSource 
 
         self.pickerView.reloadAllComponents()
     }
-    
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }

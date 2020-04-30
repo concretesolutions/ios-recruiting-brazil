@@ -12,12 +12,12 @@ class MovieTabNavigationController: UINavigationController, BaseTabViewControlle
     var tabBarTitle = "Movies"
     var tabBarImage = #imageLiteral(resourceName: "movies")
     var tabBarImageSelected = #imageLiteral(resourceName: "moviesFull")
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let bgColor = UIColor(asset: .brand)
-        
+
         self.navigationBar.isTranslucent = false
         self.navigationBar.barTintColor = bgColor
         self.view.backgroundColor = bgColor
