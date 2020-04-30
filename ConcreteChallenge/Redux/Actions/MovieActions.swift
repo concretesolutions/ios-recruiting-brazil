@@ -8,7 +8,7 @@
 
 import ReSwift
 
-enum MovieActions: Action {
+enum MovieActions: Action, Equatable {
     case set([Movie])
     case addMovies([Movie], page: Int, total: Int, filters: MovieFilters)
     case updateMovieDetails(MovieDetails)

@@ -91,7 +91,7 @@ struct PopularMoviesViewModel: Equatable {
                 loadingFooterState = .hidden
             }
         } else if self.isLastPage {
-            loadingFooterState = .thatsAll
+            loadingFooterState = .thatsAllFolks
         } else {
             loadingFooterState = .hidden
         }

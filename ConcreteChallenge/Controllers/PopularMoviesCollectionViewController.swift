@@ -148,7 +148,7 @@ class PopularMoviesCollectionViewController: UICollectionViewController {
             switch self.loadingFooterState {
             case .loading:
                 loadingMoreFooter.showLoading()
-            case .thatsAll:
+            case .thatsAllFolks:
                 loadingMoreFooter.showThatsAllFolks()
             default:
                 break
@@ -233,7 +233,7 @@ extension PopularMoviesCollectionViewController: StoreSubscriber {
         switch state.loadingFooterState {
         case .loading:
             self.displayFooter = true
-        case .thatsAll:
+        case .thatsAllFolks:
             self.displayFooter = true
         default:
             self.displayFooter = false

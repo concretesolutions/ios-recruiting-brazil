@@ -6,54 +6,19 @@
 //  Copyright © 2020 Erick Martins Pinheiro. All rights reserved.
 //
 
-import ReSwift
-
 import XCTest
+import ReSwift
 
 @testable import ConcreteChallenge
 
 struct EmptyAction: Action { }
 
-func randomString(length: Int) -> String {
-  let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-  return String((0..<length).map { _ in letters.randomElement()! })
-}
-
-func movieFactory() -> Movie {
-    return Movie(
-        id: Int.random(in: 1..<100),
-        posterPath: randomString(length: 50),
-        adult: false,
-        overview: randomString(length: 200),
-        releaseDate: "2020-02-02",
-        genreIds: [2, 3],
-        genres: [randomString(length: 8), randomString(length: 8)],
-        originalTitle: randomString(length: 8),
-        originalLanguage: "pt-BR",
-        title: randomString(length: 8),
-        backdropPath: nil,
-        video: false,
-        popularity: Double.random(in: 1..<900),
-        voteCount: Int.random(in: 600..<900),
-        voteAverage: Double.random(in: 0..<10),
-        favorited: false
-    )
-}
-
 class MoviesModelTests: XCTestCase {
 
-    var movie: Movie! = movieFactory()
-
-    override class func setUp() {
-        super.setUp()
-    }
-
-    override func tearDown() {
-        super.tearDown()
-        movie = nil
-    }
+    let movieFactory = MovieFactory()
 
     func testCloneInstance() {
+        let movie = movieFactory.generateMovie()
         do {
             let clone = try movie.clone()
             XCTAssertEqual(clone.genreIds, movie.genreIds)
@@ -68,8 +33,8 @@ class MoviesModelTests: XCTestCase {
     }
 
     func testAddMovies() {
-        let movies1 = [movieFactory(), movieFactory()]
-        let movies2 = [movieFactory(), movieFactory()]
+        let movies1 = [movieFactory.generateMovie(), movieFactory.generateMovie()]
+        let movies2 = [movieFactory.generateMovie(), movieFactory.generateMovie()]
 
         let action = MovieActions.addMovies(
             movies1,
@@ -99,6 +64,8 @@ class MoviesModelTests: XCTestCase {
     }
 
     func testSetMovieDetailsModelUsingMovieModel() {
+        let movie = movieFactory.generateMovie()
+        
         let movieDetails = MovieDetails(with: movie)
         XCTAssertEqual(movieDetails.id, movie.id)
 
@@ -113,6 +80,8 @@ class MoviesModelTests: XCTestCase {
     }
 
     func testUpdateMovieDetails() {
+        let movie = movieFactory.generateMovie()
+        
         let movieDetails = MovieDetails(with: movie)
         let movieDetails2 = MovieDetails(with: movie)
         movieDetails2.favorited = !movieDetails.favorited!

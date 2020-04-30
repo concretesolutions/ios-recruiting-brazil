@@ -11,11 +11,11 @@ import UIKit
 enum LoadingFooterState {
     case hidden
     case loading
-    case thatsAll
+    case thatsAllFolks
 
     var image: UIImage? {
         switch self {
-        case .thatsAll:
+        case .thatsAllFolks:
             return UIImage(named: "NoSearchResult")
         case .loading:
             return UIImage(named: "NoMovie")
@@ -56,7 +56,7 @@ class LoadingMoreFooterCollectionReusableView: UICollectionReusableView {
         hideContent()
 
         thatsAllFolksLabel.text = text
-        setImage(for: .thatsAll)
+        setImage(for: .thatsAllFolks)
 
         thatsAllFolksLabel.isHidden = false
     }
