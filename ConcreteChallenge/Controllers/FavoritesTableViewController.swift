@@ -176,12 +176,9 @@ extension FavoritesTableViewController: StoreSubscriber {
         if self.filters != state.filters {
             self.filters = state.filters
         }
-//        self.genres = state.genresNames
 
         if !self.tableView.isEditing && shouldUpdate {
-            let range = NSRange(location: 0, length: self.tableView.numberOfSections)
-            let sections = NSIndexSet(indexesIn: range)
-            self.tableView.reloadSections(sections as IndexSet, with: .automatic)
+            self.tableView!.reloadData()
         }
 
     }

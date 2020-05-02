@@ -9,8 +9,8 @@
 import UIKit
 
 enum Storyboards: String {
-    case movies = "movies"
-    case favorites = "favorites"
+    case movies
+    case favorites
 }
 
 class TabBarController: UITabBarController {
@@ -36,12 +36,13 @@ class TabBarController: UITabBarController {
         tabBar.isTranslucent = false
         tabBar.tintColor = .black
 
-//        selectedIndex = 1
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIApplication.shared.delegate!.window!!.bringSubviewToFront((UIApplication.shared.delegate!.window!!.subviews[0]))
     }
+    
     /*
     // MARK: - Navigation
 

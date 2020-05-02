@@ -116,7 +116,8 @@ class MovieDetailsCollectionViewController: UICollectionViewController, UICollec
 
             bgImage.contentMode = .scaleAspectFill
             bgImage.fillSuperview()
-            _ = bgImage.blurred(style: .extraLight)
+            bgImage.blurred(style: .extraLight)
+
             bgImage.sd_setImage(
                 with: url,
                 placeholderImage: UIImage(named: "placeholder.png")
@@ -215,9 +216,7 @@ class MovieDetailsCollectionViewController: UICollectionViewController, UICollec
         default:
             fatalError("Error trying to render unknown section type in collectionview")
         }
-
     }
-
 }
 
 extension MovieDetailsCollectionViewController: StoreSubscriber {

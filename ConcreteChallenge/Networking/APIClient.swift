@@ -10,15 +10,7 @@ import Foundation
 import Alamofire
 import RxSwift
 import RxCocoa
-
-func convertToDictionary(data: Data) -> [String: Any]? {
-    do {
-        return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-    } catch {
-        print(error.localizedDescription)
-    }
-    return nil
-}
+import Sentry
 
 protocol ClientProtocol {
     func request<Response>(_ endpoint: Endpoint<Response>) -> Single<Response>
@@ -61,30 +53,47 @@ class Client: ClientProtocol {
         return Single<Response>.create { observer in
             let request = self.manager.request(
                 url,
-                method: httpMethod(from: endpoint.method),
+                method: endpoint.method,
                 parameters: parameters
             )
             request
                 .validate()
                 .responseData(queue: self.queue) { response in
-//                    print(url)
-//                    print(endpoint)
                     let result = response.result.flatMap { (data) -> Result<Response, AFError> in
                         do {
                             let decoded = try endpoint.decode(data)
                             return .success(decoded)
                         } catch {
-                            print(parameters)
-                            print(endpoint)
-                            print(request)
-                            let json = String(decoding: data, as: UTF8.self)
-                            print(json)
-                            return .failure(AFError.parameterEncoderFailed(reason: .encoderFailed(error: error)))
+                            return .failure(
+                                AFError.parameterEncoderFailed(
+                                    reason: .encoderFailed(error: error)
+                                )
+                            )
                         }
                     }
                     switch result {
-                    case let .success(val): observer(.success(val))
-                    case let .failure(err): observer(.error(err))
+                    case let .success(value): observer(.success(value))
+                    case let .failure(error):
+                        let scope = Scope()
+
+                        scope.setTag(value: url.absoluteString, key: "api-failure.path")
+                        scope.setTag(value: "themoviedb", key: "api-failure.service-name")
+
+                        scope.setExtras([
+                            "endpoint": endpoint.asDictionary,
+                            "parameters": parameters,
+                            "request": request.cURLDescription(),
+                            "response": response.description
+                        ])
+
+                        let notification = NotificationBannerConfig(
+                            title: "Ocorreu um erro",
+                            subtitle: "Falha ao comunicar com o servidor."
+                        )
+
+                        ErrorReporting.shared.reportError(with: error, including: scope, notifying: notification)
+
+                        observer(.error(error))
                     }
             }
             return Disposables.create {
@@ -93,17 +102,7 @@ class Client: ClientProtocol {
         }
     }
 
-    private func url(path: Path) -> URL {
+    private func url(path: String) -> URL {
         return self.baseUrl.appendingPathComponent(path)
-    }
-}
-
-private func httpMethod(from method: Method) -> Alamofire.HTTPMethod {
-    switch method {
-    case .get: return .get
-    case .post: return .post
-    case .put: return .put
-    case .patch: return .patch
-    case .delete: return .delete
     }
 }

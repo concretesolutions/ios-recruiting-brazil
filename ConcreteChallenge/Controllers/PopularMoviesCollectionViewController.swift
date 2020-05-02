@@ -47,7 +47,10 @@ class PopularMoviesCollectionViewController: UICollectionViewController {
 
     fileprivate func setupCollectionView() {
         self.collectionView!.register(UINib(nibName: "PopularMovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
-
+        
+        self.collectionView!.accessibilityIdentifier = Constants.accessibility.moviesCollectionView.identifier
+        self.collectionView!.accessibilityLabel = Constants.accessibility.moviesCollectionView.label
+        
         self.backgroundStateView = BackgroundStateView()
         self.backgroundStateView.retryDelegate = self
 

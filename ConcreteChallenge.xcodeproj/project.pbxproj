@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C05BDD8245DD4F500849BD5 /* ErrorReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C05BDD7245DD4F500849BD5 /* ErrorReporting.swift */; };
 		1C72CA842458D9C400501A7F /* FilterItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C72CA822458D9C400501A7F /* FilterItemTableViewCell.swift */; };
 		1C72CA852458D9C400501A7F /* FilterItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C72CA832458D9C400501A7F /* FilterItemTableViewCell.xib */; };
 		1C72CA872458E14500501A7F /* ToolbarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C72CA862458E14500501A7F /* ToolbarPickerView.swift */; };
@@ -90,6 +91,9 @@
 		1CF4BD0424539C84009D9B2C /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF4BD0324539C84009D9B2C /* FavoritesViewModel.swift */; };
 		1CFD2EBC245B4E1B004C8924 /* MovieFilterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFD2EBB245B4E1B004C8924 /* MovieFilterFactory.swift */; };
 		1CFD2EC1245B5A94004C8924 /* MovieViewModelStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFD2EC0245B5A94004C8924 /* MovieViewModelStateTests.swift */; };
+		1CFD2ED4245B68AD004C8924 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7BD210245764C8004FECF4 /* Theme.swift */; };
+		1CFD2ED8245B68EA004C8924 /* AccessibilityIdentifierLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFD2ED7245B68EA004C8924 /* AccessibilityIdentifierLabel.swift */; };
+		1CFD2EDF245DD07D004C8924 /* Date+CurrentYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFD2EDE245DD07D004C8924 /* Date+CurrentYear.swift */; };
 		318D73BF6A046B22015CAEBA /* Pods_ConcreteChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1D47D34ADA27B5854A46A6 /* Pods_ConcreteChallenge.framework */; };
 		6E17ADB63884CAAE6C4A57F0 /* libPods-ConcreteChallengeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 244112B357EE5BC8FC148B53 /* libPods-ConcreteChallengeTests.a */; };
 /* End PBXBuildFile section */
@@ -105,7 +109,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		106E2EC135D788BAF2894CDE /* Pods-ConcreteChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1A1D47D34ADA27B5854A46A6 /* Pods_ConcreteChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConcreteChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C05BDD7245DD4F500849BD5 /* ErrorReporting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorReporting.swift; sourceTree = "<group>"; };
 		1C72CA822458D9C400501A7F /* FilterItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterItemTableViewCell.swift; sourceTree = "<group>"; };
 		1C72CA832458D9C400501A7F /* FilterItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterItemTableViewCell.xib; sourceTree = "<group>"; };
 		1C72CA862458E14500501A7F /* ToolbarPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarPickerView.swift; sourceTree = "<group>"; };
@@ -193,12 +199,16 @@
 		1CF4BD0324539C84009D9B2C /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		1CFD2EBB245B4E1B004C8924 /* MovieFilterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFilterFactory.swift; sourceTree = "<group>"; };
 		1CFD2EC0245B5A94004C8924 /* MovieViewModelStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModelStateTests.swift; sourceTree = "<group>"; };
+		1CFD2ED7245B68EA004C8924 /* AccessibilityIdentifierLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifierLabel.swift; sourceTree = "<group>"; };
+		1CFD2EDE245DD07D004C8924 /* Date+CurrentYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+CurrentYear.swift"; sourceTree = "<group>"; };
 		244112B357EE5BC8FC148B53 /* libPods-ConcreteChallengeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ConcreteChallengeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A44F710B49DA7E953402FEE /* Pods-ConcreteChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3E7A493C2F5C6F7A5A50398A /* Pods-ConcreteChallengeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.release.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4F13CD522E1B4C04BBE79BEE /* Pods-ConcreteChallenge-ConcreteChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge-ConcreteChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge-ConcreteChallengeTests/Pods-ConcreteChallenge-ConcreteChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
 		69C226BC594F5A268B308250 /* Pods-ConcreteChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
 		83D41C1EC5989828FEC22B88 /* Pods-ConcreteChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.release.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.release.xcconfig"; sourceTree = "<group>"; };
 		BBF0D74F2954A18E9A1D1B66 /* Pods-ConcreteChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.debug.xcconfig"; sourceTree = "<group>"; };
+		CEC10FC9443A602641110FD2 /* libPods-ConcreteChallengeUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ConcreteChallengeUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F42F81A8F5A4304E64C51964 /* Pods-ConcreteChallenge-ConcreteChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge-ConcreteChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge-ConcreteChallengeTests/Pods-ConcreteChallenge-ConcreteChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -346,6 +356,7 @@
 				1C7BD1F02454EB97004FECF4 /* UIView+Layout.swift */,
 				1C7BD206245604BC004FECF4 /* CALayer+Border.swift */,
 				1C7BD20824561328004FECF4 /* TimeInterval+Formats.swift */,
+				1CFD2EDE245DD07D004C8924 /* Date+CurrentYear.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -379,6 +390,7 @@
 				1CE5603D244A63060078914E /* Constants.swift */,
 				1CE5603B244A63060078914E /* ApiConstants.swift */,
 				1C7BD210245764C8004FECF4 /* Theme.swift */,
+				1CFD2ED7245B68EA004C8924 /* AccessibilityIdentifierLabel.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -469,6 +481,7 @@
 		1CE56064244DF29F0078914E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1C05BDD7245DD4F500849BD5 /* ErrorReporting.swift */,
 				1CE55FF02448BD1B0078914E /* AppDelegate.swift */,
 				1CE55FF92448BD1B0078914E /* ConcreteChallenge.xcdatamodeld */,
 				1CE560012448BD1D0078914E /* Info.plist */,
@@ -522,6 +535,7 @@
 			children = (
 				1A1D47D34ADA27B5854A46A6 /* Pods_ConcreteChallenge.framework */,
 				244112B357EE5BC8FC148B53 /* libPods-ConcreteChallengeTests.a */,
+				CEC10FC9443A602641110FD2 /* libPods-ConcreteChallengeUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -535,6 +549,8 @@
 				69C226BC594F5A268B308250 /* Pods-ConcreteChallengeTests.release.xcconfig */,
 				F42F81A8F5A4304E64C51964 /* Pods-ConcreteChallenge-ConcreteChallengeTests.debug.xcconfig */,
 				4F13CD522E1B4C04BBE79BEE /* Pods-ConcreteChallenge-ConcreteChallengeTests.release.xcconfig */,
+				106E2EC135D788BAF2894CDE /* Pods-ConcreteChallengeUITests.debug.xcconfig */,
+				3E7A493C2F5C6F7A5A50398A /* Pods-ConcreteChallengeUITests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -552,6 +568,7 @@
 				1CE55FEB2448BD1B0078914E /* Resources */,
 				3EA0F31B31158E7D41F60A54 /* [CP] Embed Pods Frameworks */,
 				1C72CAAA245A41E300501A7F /* Swift Lint */,
+				1CFD2EDB245DBB8C004C8924 /* Sentry Upload */,
 			);
 			buildRules = (
 			);
@@ -668,6 +685,24 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		1CFD2EDB245DBB8C004C8924 /* Sentry Upload */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Sentry Upload";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which sentry-cli >/dev/null; then\n\n  export SENTRY_ORG=\"concrete-challenge\"\n  export SENTRY_PROJECT=\"concrete-challenge\"\n  export SENTRY_AUTH_TOKEN=\"05f143a9d55b4c51ba78834d228527b64dd975f29a9d4abaac5948bb6d93b54e\"\n\n  ERROR=$(sentry-cli upload-dif \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null)\n\n  ${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}\n\n\n  if [ ! $? -eq 0 ]; then\n    echo \"warning: sentry-cli - $ERROR\"\n  fi \nelse\n  echo \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"\nfi\n";
+		};
 		3EA0F31B31158E7D41F60A54 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -738,11 +773,14 @@
 			files = (
 				1C7BD1DD245484E1004FECF4 /* BackgroundStateViewModel.swift in Sources */,
 				1CE56048244B52100078914E /* Dictionary+Merge.swift in Sources */,
+				1CFD2EDF245DD07D004C8924 /* Date+CurrentYear.swift in Sources */,
 				1C72CA872458E14500501A7F /* ToolbarPickerView.swift in Sources */,
 				1CC5496D2453252200A0FB69 /* InfraReducer.swift in Sources */,
 				1CE560252449D6180078914E /* MovieTabNavigationController.swift in Sources */,
+				1C05BDD8245DD4F500849BD5 /* ErrorReporting.swift in Sources */,
 				1C7BD2022455DD7B004FECF4 /* MovieDetailsTitleCollectionViewCell.swift in Sources */,
 				1C7BD205245600E8004FECF4 /* MovieDetailsSummaryCollectionViewCell.swift in Sources */,
+				1CFD2ED8245B68EA004C8924 /* AccessibilityIdentifierLabel.swift in Sources */,
 				1CE5604D244B84030078914E /* Movie.swift in Sources */,
 				1CE56040244A63060078914E /* Constants.swift in Sources */,
 				1CC54971245326E900A0FB69 /* InfraThunk.swift in Sources */,
@@ -813,6 +851,7 @@
 				1CFD2EC1245B5A94004C8924 /* MovieViewModelStateTests.swift in Sources */,
 				1CFD2EBC245B4E1B004C8924 /* MovieFilterFactory.swift in Sources */,
 				1C72CAA4245A272700501A7F /* MoviesModelTests.swift in Sources */,
+				1CFD2ED4245B68AD004C8924 /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -958,6 +997,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = SZ4THN2W8Q;
 				INFOPLIST_FILE = "ConcreteChallenge/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
@@ -996,7 +1036,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3A44F710B49DA7E953402FEE /* Pods-ConcreteChallengeTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SZ4THN2W8Q;
@@ -1019,7 +1058,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 69C226BC594F5A268B308250 /* Pods-ConcreteChallengeTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SZ4THN2W8Q;

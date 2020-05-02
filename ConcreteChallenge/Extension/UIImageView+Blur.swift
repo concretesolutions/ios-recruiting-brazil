@@ -9,6 +9,8 @@
 import UIKit
 
 extension UIImageView {
+    
+    @discardableResult 
     func blurred(style: UIBlurEffect.Style = .light) -> UIVisualEffectView {
         let blurEffect = UIBlurEffect(style: style)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)

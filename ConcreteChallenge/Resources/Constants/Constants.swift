@@ -9,4 +9,5 @@
 struct Constants {
     static let api = ApiConstants.dev
     static let theme = ThemeConstants.dev
+    static let accessibility = Accessibility()
 }

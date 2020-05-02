@@ -21,21 +21,11 @@ struct FavoritesViewModel {
     let isSearching: Bool
     var backgroundViewConfiguration: BackgroundStateViewModel?
 
-    private func getCurrentYear() -> Int {
-        let date = Date()
-        let format = DateFormatter()
-        format.dateFormat = "yyyy"
-        return Int(format.string(from: date))!
-    }
-
     init(state: RootState) {
         genres = state.genre.genres
         requestError = state.favorites.latestError
-
         isConnected = state.infra.isConnected
-
         filters = state.favorites.filters
-
         self.isSearching = !filters.isEmpty
 
         if self.isSearching {
@@ -44,12 +34,9 @@ struct FavoritesViewModel {
             favorites = state.favorites.favorites
         }
 
-        print("self.isSearching: \(self.isSearching)")
-
         genresOptions += state.genre.genres.map({ $0.name})
-        let currentYear = getCurrentYear()
 
-        yearsOptions += Array(0...200).map({ "\(currentYear - $0)" })
+        yearsOptions += Array(0...200).map({ "\(Date.currentYear - $0)" })
 
         if !requestError.isEmpty {
             backgroundViewConfiguration = BackgroundStateViewModel(

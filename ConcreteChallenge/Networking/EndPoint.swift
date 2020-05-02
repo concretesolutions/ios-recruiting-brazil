@@ -7,24 +7,23 @@
 //
 
 import Foundation
+import Alamofire
 
-// MARK: Defines
 typealias Parameters = [String: Any]
-typealias Path = String
 
-enum Method {
-    case get, post, put, patch, delete
-}
+//enum Method {
+//    case get, post, put, patch, delete
+//}
 
 // MARK: Endpoint
 final class Endpoint<Response> {
-    let method: Method
-    let path: Path
+    let method: HTTPMethod
+    let path: String
     let parameters: Parameters?
     let decode: (Data) throws -> Response
 
-    init(method: Method = .get,
-         path: Path,
+    init(method: HTTPMethod = .get,
+         path: String,
          parameters: Parameters? = nil,
          decode: @escaping (Data) throws -> Response) {
         self.method = method
@@ -32,12 +31,20 @@ final class Endpoint<Response> {
         self.parameters = parameters
         self.decode = decode
     }
+    
+    var asDictionary: [String: Any] {
+        return [
+            "method": self.method.rawValue,
+            "path": self.path,
+            "parameters": self.parameters.debugDescription
+        ]
+    }
 }
 
 // MARK: Convenience
 extension Endpoint where Response: Swift.Decodable {
-    convenience init(method: Method = .get,
-                     path: Path,
+    convenience init(method: HTTPMethod = .get,
+                     path: String,
                      parameters: Parameters? = nil) {
         self.init(method: method, path: path, parameters: parameters) {
             try JSONDecoder().decode(Response.self, from: $0)
@@ -46,8 +53,8 @@ extension Endpoint where Response: Swift.Decodable {
 }
 
 extension Endpoint where Response == Void {
-    convenience init(method: Method = .get,
-                     path: Path,
+    convenience init(method: HTTPMethod = .get,
+                     path: String,
                      parameters: Parameters? = nil) {
         self.init(
             method: method,
