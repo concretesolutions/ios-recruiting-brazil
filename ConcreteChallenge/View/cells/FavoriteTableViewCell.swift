@@ -30,7 +30,7 @@ class FavoriteTableViewCell: UITableViewCell {
     func set(with favorite: Favorite) {
 
         if let posterPath = favorite.posterPath {
-            let url = URL(string: Constants.api.imageBaseUrl)?
+            let url = URL(string: Environment.MovieDBApi.imageBaseUrl)?
                 .appendingPathComponent("w500")
                 .appendingPathComponent(posterPath)
 

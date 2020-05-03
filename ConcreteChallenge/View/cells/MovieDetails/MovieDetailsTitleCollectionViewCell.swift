@@ -23,7 +23,7 @@ class MovieDetailsTitleCollectionViewCell: UICollectionViewCell {
         titleLabel = UILabel(frame: .zero)
         self.contentView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = Constants.theme.sectionTitleFont
+        titleLabel.font = Theme.sectionTitleFont
         titleLabel.text = "Summary"
         titleLabel.textAlignment = .left
         titleLabel.numberOfLines = 0
@@ -31,7 +31,7 @@ class MovieDetailsTitleCollectionViewCell: UICollectionViewCell {
         originalTitleDuration = UILabel(frame: .zero)
         self.contentView.addSubview(originalTitleDuration)
         originalTitleDuration.translatesAutoresizingMaskIntoConstraints = false
-        originalTitleDuration.font = Constants.theme.sectionBodyFont
+        originalTitleDuration.font = Theme.sectionBodyFont
         originalTitleDuration.text = "Teste"
         originalTitleDuration.textAlignment = .left
         originalTitleDuration.numberOfLines = 0
@@ -43,14 +43,14 @@ class MovieDetailsTitleCollectionViewCell: UICollectionViewCell {
 
         let starImageView = UIImageView(frame: .zero)
         starImageView.translatesAutoresizingMaskIntoConstraints = false
-        starImageView.image = Constants.theme.starImage.mask(with: UIColor(asset: .brand))
+        starImageView.image = Theme.starImage.mask(with: UIColor(asset: .brand))
         starImageView.contentMode = .scaleAspectFit
         ratingContainer.addSubview(starImageView)
 
         ratingLabel = UILabel(frame: .zero)
         self.contentView.addSubview(ratingLabel)
         ratingLabel.translatesAutoresizingMaskIntoConstraints = false
-        ratingLabel.font = Constants.theme.sectionTitleFont.withSize(16)
+        ratingLabel.font = Theme.sectionTitleFont.withSize(16)
         ratingLabel.text = "5.0"
         ratingLabel.textAlignment = .left
 
@@ -58,7 +58,7 @@ class MovieDetailsTitleCollectionViewCell: UICollectionViewCell {
 
         NSLayoutConstraint.activate([
             // Auto resize width anchor
-            contentView.widthAnchor.constraint(equalToConstant: (screenSize.width - 2 * Constants.theme.paddingHorizontal)),
+            contentView.widthAnchor.constraint(equalToConstant: (screenSize.width - 2 * Theme.paddingHorizontal)),
 
             // Orignal title constraints
             titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 0),

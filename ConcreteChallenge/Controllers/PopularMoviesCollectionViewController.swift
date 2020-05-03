@@ -48,8 +48,8 @@ class PopularMoviesCollectionViewController: UICollectionViewController {
     fileprivate func setupCollectionView() {
         self.collectionView!.register(UINib(nibName: "PopularMovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         
-        self.collectionView!.accessibilityIdentifier = Constants.accessibility.moviesCollectionView.identifier
-        self.collectionView!.accessibilityLabel = Constants.accessibility.moviesCollectionView.label
+        self.collectionView!.accessibilityIdentifier = Accessibility.moviesCollectionView.identifier
+        self.collectionView!.accessibilityLabel = Accessibility.moviesCollectionView.label
         
         self.backgroundStateView = BackgroundStateView()
         self.backgroundStateView.retryDelegate = self
@@ -73,7 +73,7 @@ class PopularMoviesCollectionViewController: UICollectionViewController {
         navigationItem.searchController = searchController
         searchController.searchBar
             .rx.text
-            .debounce(Constants.api.searchDebounceTime, scheduler: MainScheduler.instance)
+            .debounce(Environment.MovieDBApi.searchDebounceTime, scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .subscribe(onNext: { [unowned self] _ in
                 let text = self.searchController.searchBar.text!

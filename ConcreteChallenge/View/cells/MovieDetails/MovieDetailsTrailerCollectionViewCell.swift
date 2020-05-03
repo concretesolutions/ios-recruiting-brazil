@@ -38,7 +38,7 @@ class MovieDetailsTrailerCollectionViewCell: UICollectionViewCell {
 
         let playImageView = UIImageView(frame: .zero)
         playImageView.translatesAutoresizingMaskIntoConstraints = false
-        playImageView.image = Constants.theme.playImage.mask(with: .white)
+        playImageView.image = Theme.playImage.mask(with: .white)
         playImageView.contentMode = .scaleAspectFit
 
         self.contentView.addSubview(playImageView)
@@ -48,7 +48,7 @@ class MovieDetailsTrailerCollectionViewCell: UICollectionViewCell {
 
         NSLayoutConstraint.activate([
 
-            contentView.widthAnchor.constraint(equalToConstant: (screenSize.width - 2 * Constants.theme.paddingHorizontal)),
+            contentView.widthAnchor.constraint(equalToConstant: (screenSize.width - 2 * Theme.paddingHorizontal)),
             titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),

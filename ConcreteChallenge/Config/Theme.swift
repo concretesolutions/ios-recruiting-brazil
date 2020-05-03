@@ -7,49 +7,46 @@
 //
 import UIKit
 
-enum ThemeConstants {
-    case dev
-    case staging
-    case production
+enum Theme {
 
-    var coverRatio: Float {
+    static let coverRatio: Float = {
         return 720 / 500
-    }
+    }()
 
-    var paddingHorizontal: CGFloat {
+    static let paddingHorizontal: CGFloat = {
         return 16
-    }
+    }()
 
-    var paddingVertical: CGFloat {
+    static let paddingVertical: CGFloat = {
         return 8
-    }
+    }()
 
-    var sectionTitleFont: UIFont {
+    static let sectionTitleFont: UIFont = {
         return UIFont(name: "Avenir-Black", size: 28)!
-    }
+    }()
 
-    var sectionBodyFont: UIFont {
+    static let sectionBodyFont: UIFont = {
         return UIFont(name: "Avenir", size: 14)!
-    }
+    }()
 
-    var starImage: UIImage {
+    static let starImage: UIImage = {
         let image = UIImage(named: "star")
         return image!
-    }
+    }()
 
-    var playImage: UIImage {
+    static let playImage: UIImage = {
         let image = UIImage(named: "play")
         return image!
-    }
+    }()
 
-    var heart: UIImage {
+    static let heart: UIImage = {
         let image = UIImage(named: "heart")
         return image!
-    }
+    }()
 
-    var heartFull: UIImage {
+    static let heartFull: UIImage = {
         let image = UIImage(named: "heartFull")
         return image!
-    }
+    }()
 
 }

@@ -43,7 +43,7 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
         self.movie = movie
 
         if let posterPath = movie.posterPath {
-            let url = URL(string: Constants.api.imageBaseUrl)?
+            let url = URL(string: Environment.MovieDBApi.imageBaseUrl)?
                 .appendingPathComponent("w500")
                 .appendingPathComponent(posterPath)
 
@@ -72,16 +72,16 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
         yearGenreLabel.text = yearGenre.joined(separator: " - ")
 
         if movie.favorited {
-            favoriteButton.setImage(Constants.theme.heartFull.mask(with: .red), for: .normal)
+            favoriteButton.setImage(Theme.heartFull.mask(with: .red), for: .normal)
         } else {
-            favoriteButton.setImage(Constants.theme.heartFull.mask(with: .darkGray), for: .normal)
+            favoriteButton.setImage(Theme.heartFull.mask(with: .darkGray), for: .normal)
         }
 
     }
     @IBAction func favoriteToggle(_ sender: Any) {
         movie.toggleFavorite()
 
-        favoriteButton.setImage(Constants.theme.heartFull.mask(with: .red), for: .normal)
+        favoriteButton.setImage(Theme.heartFull.mask(with: .red), for: .normal)
         coverImageView!.sd_setImage(with: nil, placeholderImage: UIImage(named: "placeholder.png"))
         yearGenreLabel.text = ""
         titleLabel.text = ""

@@ -9,11 +9,11 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<string>$(APP_BUNDLE_ID)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>$(APP_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
@@ -41,5 +41,23 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>APP_NAME</key>
+	<string>$(APP_NAME)</string>
+	<key>APP_ENVIRONMENT</key>
+	<string>$(ENV)</string>
+	<key>MovieDBApiSettings</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>$(MOVIEDB_BASE_URL)</string>
+		<key>ImageBaseUrl</key>
+		<string>$(MOVIEDB_IMAGE_BASE_URL)</string>
+		<key>ApiKey</key>
+		<string>$(MOVIEDB_API_KEY)</string>
+	</dict>
+	<key>SentrySettings</key>
+	<dict>
+		<key>dsn</key>
+		<string>$(SENTRY_DSN)</string>
+	</dict>
 </dict>
 </plist>

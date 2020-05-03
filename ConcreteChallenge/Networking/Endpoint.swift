@@ -1,5 +1,5 @@
 //
-//  EndPoint.swift
+//  Endpoint.swift
 //  ConcreteChallenge
 //
 //  Created by Erick Pinheiro on 17/04/20.
@@ -10,10 +10,6 @@ import Foundation
 import Alamofire
 
 typealias Parameters = [String: Any]
-
-//enum Method {
-//    case get, post, put, patch, delete
-//}
 
 // MARK: Endpoint
 final class Endpoint<Response> {

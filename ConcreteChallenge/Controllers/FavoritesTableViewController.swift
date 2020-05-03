@@ -46,7 +46,7 @@ class FavoritesTableViewController: UITableViewController {
 
         searchController.searchBar
             .rx.text
-            .debounce(Constants.api.localSearchDebounceTime, scheduler: MainScheduler.instance)
+            .debounce(Environment.MovieDBApi.localSearchDebounceTime, scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .subscribe(onNext: { [unowned self] _ in
                 let text = self.searchController.searchBar.text!

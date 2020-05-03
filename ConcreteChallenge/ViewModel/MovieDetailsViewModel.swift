@@ -127,7 +127,7 @@ struct MovieDetailsHeaderSection: MovieDetailsSection {
 
     init?(with movieDetails: MovieDetails) {
         if let posterPath = movieDetails.posterPath {
-            posterUrl = URL(string: Constants.api.imageBaseUrl)?
+            posterUrl = URL(string: Environment.MovieDBApi.imageBaseUrl)?
                 .appendingPathComponent("w500")
                 .appendingPathComponent(posterPath)
         } else {
@@ -190,7 +190,7 @@ struct MovieDetailsViewModel {
         header = MovieDetailsHeaderSection(with: details)
 
         if let posterPath = details.posterPath {
-            self.posterUrl = URL(string: Constants.api.imageBaseUrl)?
+            self.posterUrl = URL(string: Environment.MovieDBApi.imageBaseUrl)?
                 .appendingPathComponent("w500")
                 .appendingPathComponent(posterPath)
         }

@@ -11,8 +11,8 @@ struct AccessibilityIdentifierLabel {
     let label: String
 }
 
-struct Accessibility {
-    let moviesCollectionView = AccessibilityIdentifierLabel(
+enum Accessibility {
+    static let moviesCollectionView = AccessibilityIdentifierLabel(
         identifier: "Movies::CollectionView",
         label: "Collection of movies"
     )

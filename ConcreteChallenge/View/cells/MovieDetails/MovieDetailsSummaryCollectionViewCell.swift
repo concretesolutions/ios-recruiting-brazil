@@ -38,7 +38,7 @@ class MovieDetailsSummaryCollectionViewCell: UICollectionViewCell {
 
         NSLayoutConstraint.activate([
             // Auto resize width anchor
-            contentView.widthAnchor.constraint(equalToConstant: (screenSize.width - 2 * Constants.theme.paddingHorizontal)),
+            contentView.widthAnchor.constraint(equalToConstant: (screenSize.width - 2 * Theme.paddingHorizontal)),
             // Title constraints
             titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),

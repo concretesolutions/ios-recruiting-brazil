@@ -52,7 +52,7 @@ class MovieDetailsCollectionViewController: UICollectionViewController, UICollec
 
     fileprivate func setupNavigationBar() {
         self.favoriteButon = UIBarButtonItem(
-            image: Constants.theme.heart,
+            image: Theme.heart,
             style: .plain,
             target: nil,
             action: nil
@@ -86,14 +86,14 @@ class MovieDetailsCollectionViewController: UICollectionViewController, UICollec
         view.backgroundColor = .black
         if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.sectionInset = .init(
-                top: Constants.theme.paddingVertical,
-                left: Constants.theme.paddingHorizontal,
-                bottom: Constants.theme.paddingVertical,
-                right: Constants.theme.paddingHorizontal
+                top: Theme.paddingVertical,
+                left: Theme.paddingHorizontal,
+                bottom: Theme.paddingVertical,
+                right: Theme.paddingHorizontal
             )
             flowLayout.minimumLineSpacing = 0
             flowLayout.estimatedItemSize = CGSize(
-                width: view.frame.width - 2 * Constants.theme.paddingHorizontal,
+                width: view.frame.width - 2 * Theme.paddingHorizontal,
                 height: 100
             )
         }
@@ -125,9 +125,9 @@ class MovieDetailsCollectionViewController: UICollectionViewController, UICollec
         }
 
         if favorited {
-            self.favoriteButon.image = Constants.theme.heartFull
+            self.favoriteButon.image = Theme.heartFull
         } else {
-            self.favoriteButon.image = Constants.theme.heart
+            self.favoriteButon.image = Theme.heart
         }
 
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {

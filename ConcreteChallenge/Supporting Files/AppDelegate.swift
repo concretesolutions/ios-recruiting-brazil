@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        ErrorReporting.start()
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
         window?.rootViewController = TabBarController()
@@ -28,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 MovieThunk.fetchPopular(at: 1)
             ])
         ]))
-
         return true
     }
 

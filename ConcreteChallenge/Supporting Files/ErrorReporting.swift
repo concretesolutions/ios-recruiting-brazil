@@ -16,19 +16,19 @@ struct NotificationBannerConfig {
     let style: BannerStyle = .info
 }
 
-class ErrorReporting {
-    
-    static let shared: ErrorReporting = ErrorReporting()
-    
-    init() {
+struct ErrorReporting {
+    static func start() {
         SentrySDK.start(options: [
-            "dsn": "https://7bc447f62aeb4bfbac50495b56bc84ff@o386780.ingest.sentry.io/5221397",
-            "debug": true // Enabled debug when first installing is always helpful
+            "dsn": Environment.Sentry.dsn,
+            "release": Environment.Sentry.release,
+            "environment": Environment.Sentry.environment,
+            "dist": Environment.Sentry.dist,
+            "debug": Environment.Sentry.debug
         ])
     }
     
     @discardableResult
-    func reportError(with error: Error, including scope: Scope?, notifying notificationConfig: NotificationBannerConfig?) -> String? {
+    static func capture(_ error: Error, including scope: Scope?, notifying notificationConfig: NotificationBannerConfig?) -> String? {
         if let notificationConfig = notificationConfig {
             DispatchQueue.main.async {
                 GrowingNotificationBanner(

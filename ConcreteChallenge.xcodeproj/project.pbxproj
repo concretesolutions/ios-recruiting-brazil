@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1C05BDD8245DD4F500849BD5 /* ErrorReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C05BDD7245DD4F500849BD5 /* ErrorReporting.swift */; };
+		1C05BDE7245E206800849BD5 /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1C05BDE6245E206800849BD5 /* Development.xcconfig */; };
 		1C72CA842458D9C400501A7F /* FilterItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C72CA822458D9C400501A7F /* FilterItemTableViewCell.swift */; };
 		1C72CA852458D9C400501A7F /* FilterItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C72CA832458D9C400501A7F /* FilterItemTableViewCell.xib */; };
 		1C72CA872458E14500501A7F /* ToolbarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C72CA862458E14500501A7F /* ToolbarPickerView.swift */; };
@@ -57,10 +58,10 @@
 		1CE560332449F5990078914E /* UIColor+Ajustments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE560322449F5990078914E /* UIColor+Ajustments.swift */; };
 		1CE560352449F5D40078914E /* UIColor+AssetColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE560342449F5D40078914E /* UIColor+AssetColor.swift */; };
 		1CE56038244A105D0078914E /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE56037244A105D0078914E /* APIClient.swift */; };
-		1CE5603A244A10D50078914E /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE56039244A10D50078914E /* EndPoint.swift */; };
+		1CE5603A244A10D50078914E /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE56039244A10D50078914E /* Endpoint.swift */; };
 		1CE5603E244A63060078914E /* ApiConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5603B244A63060078914E /* ApiConstants.swift */; };
 		1CE5603F244A63060078914E /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5603C244A63060078914E /* ApiError.swift */; };
-		1CE56040244A63060078914E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5603D244A63060078914E /* Constants.swift */; };
+		1CE56040244A63060078914E /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5603D244A63060078914E /* Environment.swift */; };
 		1CE56043244B417E0078914E /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE56042244B417D0078914E /* Genre.swift */; };
 		1CE56048244B52100078914E /* Dictionary+Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE56047244B52100078914E /* Dictionary+Merge.swift */; };
 		1CE5604B244B81B70078914E /* PopularMoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5604A244B81B70078914E /* PopularMoviesViewModel.swift */; };
@@ -91,7 +92,6 @@
 		1CF4BD0424539C84009D9B2C /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF4BD0324539C84009D9B2C /* FavoritesViewModel.swift */; };
 		1CFD2EBC245B4E1B004C8924 /* MovieFilterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFD2EBB245B4E1B004C8924 /* MovieFilterFactory.swift */; };
 		1CFD2EC1245B5A94004C8924 /* MovieViewModelStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFD2EC0245B5A94004C8924 /* MovieViewModelStateTests.swift */; };
-		1CFD2ED4245B68AD004C8924 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7BD210245764C8004FECF4 /* Theme.swift */; };
 		1CFD2ED8245B68EA004C8924 /* AccessibilityIdentifierLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFD2ED7245B68EA004C8924 /* AccessibilityIdentifierLabel.swift */; };
 		1CFD2EDF245DD07D004C8924 /* Date+CurrentYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFD2EDE245DD07D004C8924 /* Date+CurrentYear.swift */; };
 		318D73BF6A046B22015CAEBA /* Pods_ConcreteChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1D47D34ADA27B5854A46A6 /* Pods_ConcreteChallenge.framework */; };
@@ -109,9 +109,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03AC5EA9AA5BAE096BB08979 /* Pods-ConcreteChallengeTests.debug (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug (production).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug (production).xcconfig"; sourceTree = "<group>"; };
 		106E2EC135D788BAF2894CDE /* Pods-ConcreteChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1A1D47D34ADA27B5854A46A6 /* Pods_ConcreteChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConcreteChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C05BDD7245DD4F500849BD5 /* ErrorReporting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorReporting.swift; sourceTree = "<group>"; };
+		1C05BDE6245E206800849BD5 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		1C05BDE8245E22D500849BD5 /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
+		1C05BDE9245E22EB00849BD5 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 		1C72CA822458D9C400501A7F /* FilterItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterItemTableViewCell.swift; sourceTree = "<group>"; };
 		1C72CA832458D9C400501A7F /* FilterItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterItemTableViewCell.xib; sourceTree = "<group>"; };
 		1C72CA862458E14500501A7F /* ToolbarPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarPickerView.swift; sourceTree = "<group>"; };
@@ -165,10 +169,10 @@
 		1CE560322449F5990078914E /* UIColor+Ajustments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ajustments.swift"; sourceTree = "<group>"; };
 		1CE560342449F5D40078914E /* UIColor+AssetColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AssetColor.swift"; sourceTree = "<group>"; };
 		1CE56037244A105D0078914E /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		1CE56039244A10D50078914E /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		1CE56039244A10D50078914E /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		1CE5603B244A63060078914E /* ApiConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiConstants.swift; sourceTree = "<group>"; };
 		1CE5603C244A63060078914E /* ApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
-		1CE5603D244A63060078914E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		1CE5603D244A63060078914E /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		1CE56042244B417D0078914E /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		1CE56047244B52100078914E /* Dictionary+Merge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Merge.swift"; sourceTree = "<group>"; };
 		1CE5604A244B81B70078914E /* PopularMoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesViewModel.swift; sourceTree = "<group>"; };
@@ -202,14 +206,25 @@
 		1CFD2ED7245B68EA004C8924 /* AccessibilityIdentifierLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifierLabel.swift; sourceTree = "<group>"; };
 		1CFD2EDE245DD07D004C8924 /* Date+CurrentYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+CurrentYear.swift"; sourceTree = "<group>"; };
 		244112B357EE5BC8FC148B53 /* libPods-ConcreteChallengeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ConcreteChallengeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		34A413883CF8046D9BDDF4F7 /* Pods-ConcreteChallenge.release (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.release (staging).xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.release (staging).xcconfig"; sourceTree = "<group>"; };
 		3A44F710B49DA7E953402FEE /* Pods-ConcreteChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3E7A493C2F5C6F7A5A50398A /* Pods-ConcreteChallengeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.release.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.release.xcconfig"; sourceTree = "<group>"; };
+		3FEC0AA12440E33EFC25A17F /* Pods-ConcreteChallengeTests.release (development).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.release (development).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.release (development).xcconfig"; sourceTree = "<group>"; };
 		4F13CD522E1B4C04BBE79BEE /* Pods-ConcreteChallenge-ConcreteChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge-ConcreteChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge-ConcreteChallengeTests/Pods-ConcreteChallenge-ConcreteChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
+		5428544F3B4685DA7E4FFC05 /* Pods-ConcreteChallenge.release (development).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.release (development).xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.release (development).xcconfig"; sourceTree = "<group>"; };
+		6049B6F58405618AC573117A /* Pods-ConcreteChallenge.debug (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.debug (production).xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.debug (production).xcconfig"; sourceTree = "<group>"; };
 		69C226BC594F5A268B308250 /* Pods-ConcreteChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
+		6BC3B1E1680FFCE3C341608B /* Pods-ConcreteChallenge.release (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.release (production).xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.release (production).xcconfig"; sourceTree = "<group>"; };
 		83D41C1EC5989828FEC22B88 /* Pods-ConcreteChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.release.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.release.xcconfig"; sourceTree = "<group>"; };
+		9045ED239DC9448AD886853D /* Pods-ConcreteChallengeTests.debug (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug (staging).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug (staging).xcconfig"; sourceTree = "<group>"; };
+		AE66F46734820C4E246F18DB /* Pods-ConcreteChallenge.debug (develpment).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.debug (develpment).xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.debug (develpment).xcconfig"; sourceTree = "<group>"; };
+		B3DA336A935E11E5DE1E7EFD /* Pods-ConcreteChallenge.debug (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.debug (staging).xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.debug (staging).xcconfig"; sourceTree = "<group>"; };
+		B7969DED791DCCC4186F96DB /* Pods-ConcreteChallengeTests.debug (develpment).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug (develpment).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug (develpment).xcconfig"; sourceTree = "<group>"; };
 		BBF0D74F2954A18E9A1D1B66 /* Pods-ConcreteChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		CEC10FC9443A602641110FD2 /* libPods-ConcreteChallengeUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ConcreteChallengeUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E60930FB9BE381E8B4F5F51F /* Pods-ConcreteChallengeTests.release (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.release (staging).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.release (staging).xcconfig"; sourceTree = "<group>"; };
 		F42F81A8F5A4304E64C51964 /* Pods-ConcreteChallenge-ConcreteChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge-ConcreteChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge-ConcreteChallengeTests/Pods-ConcreteChallenge-ConcreteChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FF62724F0F2EA7A09A882E1B /* Pods-ConcreteChallengeTests.release (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.release (production).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.release (production).xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +247,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C05BDE5245E203B00849BD5 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				1CE5603D244A63060078914E /* Environment.swift */,
+				1C7BD210245764C8004FECF4 /* Theme.swift */,
+				1CFD2ED7245B68EA004C8924 /* AccessibilityIdentifierLabel.swift */,
+				1C05BDE6245E206800849BD5 /* Development.xcconfig */,
+				1C05BDE8245E22D500849BD5 /* Production.xcconfig */,
+				1C05BDE9245E22EB00849BD5 /* Staging.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		1C72CA8A2458F20300501A7F /* Filters */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,6 +324,7 @@
 		1CE55FEF2448BD1B0078914E /* ConcreteChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				1C05BDE5245E203B00849BD5 /* Config */,
 				1CE56041244B41530078914E /* Model */,
 				1CE56050244B8B770078914E /* View */,
 				1CE56058244DCBA20078914E /* Controllers */,
@@ -333,7 +362,6 @@
 		1CE5602A2449EE890078914E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				1CE56046244B45910078914E /* Constants */,
 				1CE55FFC2448BD1D0078914E /* Assets.xcassets */,
 				1CE56085244E5B070078914E /* EmptyStates.xcassets */,
 				1CE5602B2449EED30078914E /* Colors.xcassets */,
@@ -364,9 +392,10 @@
 		1CE56036244A103B0078914E /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				1CE5603B244A63060078914E /* ApiConstants.swift */,
 				1CE5603C244A63060078914E /* ApiError.swift */,
 				1CE56037244A105D0078914E /* APIClient.swift */,
-				1CE56039244A10D50078914E /* EndPoint.swift */,
+				1CE56039244A10D50078914E /* Endpoint.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -382,17 +411,6 @@
 				1CC5497224535B4100A0FB69 /* Persistable.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		1CE56046244B45910078914E /* Constants */ = {
-			isa = PBXGroup;
-			children = (
-				1CE5603D244A63060078914E /* Constants.swift */,
-				1CE5603B244A63060078914E /* ApiConstants.swift */,
-				1C7BD210245764C8004FECF4 /* Theme.swift */,
-				1CFD2ED7245B68EA004C8924 /* AccessibilityIdentifierLabel.swift */,
-			);
-			path = Constants;
 			sourceTree = "<group>";
 		};
 		1CE56049244B81840078914E /* ViewModel */ = {
@@ -551,6 +569,18 @@
 				4F13CD522E1B4C04BBE79BEE /* Pods-ConcreteChallenge-ConcreteChallengeTests.release.xcconfig */,
 				106E2EC135D788BAF2894CDE /* Pods-ConcreteChallengeUITests.debug.xcconfig */,
 				3E7A493C2F5C6F7A5A50398A /* Pods-ConcreteChallengeUITests.release.xcconfig */,
+				6049B6F58405618AC573117A /* Pods-ConcreteChallenge.debug (production).xcconfig */,
+				B3DA336A935E11E5DE1E7EFD /* Pods-ConcreteChallenge.debug (staging).xcconfig */,
+				AE66F46734820C4E246F18DB /* Pods-ConcreteChallenge.debug (develpment).xcconfig */,
+				5428544F3B4685DA7E4FFC05 /* Pods-ConcreteChallenge.release (development).xcconfig */,
+				34A413883CF8046D9BDDF4F7 /* Pods-ConcreteChallenge.release (staging).xcconfig */,
+				6BC3B1E1680FFCE3C341608B /* Pods-ConcreteChallenge.release (production).xcconfig */,
+				03AC5EA9AA5BAE096BB08979 /* Pods-ConcreteChallengeTests.debug (production).xcconfig */,
+				9045ED239DC9448AD886853D /* Pods-ConcreteChallengeTests.debug (staging).xcconfig */,
+				B7969DED791DCCC4186F96DB /* Pods-ConcreteChallengeTests.debug (develpment).xcconfig */,
+				3FEC0AA12440E33EFC25A17F /* Pods-ConcreteChallengeTests.release (development).xcconfig */,
+				E60930FB9BE381E8B4F5F51F /* Pods-ConcreteChallengeTests.release (staging).xcconfig */,
+				FF62724F0F2EA7A09A882E1B /* Pods-ConcreteChallengeTests.release (production).xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -604,6 +634,7 @@
 		1CE55FE52448BD1B0078914E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Erick Martins Pinheiro";
@@ -643,6 +674,7 @@
 			files = (
 				1CE5602C2449EED30078914E /* Colors.xcassets in Resources */,
 				1CE56057244B8C040078914E /* PopularMovieCollectionViewCell.xib in Resources */,
+				1C05BDE7245E206800849BD5 /* Development.xcconfig in Resources */,
 				1CE560002448BD1D0078914E /* LaunchScreen.storyboard in Resources */,
 				1C7BD1F52454F859004FECF4 /* MovieDetailsHeaderView.xib in Resources */,
 				1CE56086244E5B070078914E /* EmptyStates.xcassets in Resources */,
@@ -782,7 +814,7 @@
 				1C7BD205245600E8004FECF4 /* MovieDetailsSummaryCollectionViewCell.swift in Sources */,
 				1CFD2ED8245B68EA004C8924 /* AccessibilityIdentifierLabel.swift in Sources */,
 				1CE5604D244B84030078914E /* Movie.swift in Sources */,
-				1CE56040244A63060078914E /* Constants.swift in Sources */,
+				1CE56040244A63060078914E /* Environment.swift in Sources */,
 				1CC54971245326E900A0FB69 /* InfraThunk.swift in Sources */,
 				1CE560332449F5990078914E /* UIColor+Ajustments.swift in Sources */,
 				1CE56069244DFC220078914E /* MovieThunk.swift in Sources */,
@@ -814,7 +846,7 @@
 				1CE560292449DE060078914E /* BaseTabViewController.swift in Sources */,
 				1CE56060244DCFC30078914E /* GenreActions.swift in Sources */,
 				1C72CA8D245920F400501A7F /* ButtonsTableViewCell.swift in Sources */,
-				1CE5603A244A10D50078914E /* EndPoint.swift in Sources */,
+				1CE5603A244A10D50078914E /* Endpoint.swift in Sources */,
 				1CE560272449D62F0078914E /* FavoritesTabNavigationController.swift in Sources */,
 				1CC5497324535B4100A0FB69 /* Persistable.swift in Sources */,
 				1CE56056244B8C040078914E /* PopularMovieCollectionViewCell.swift in Sources */,
@@ -851,7 +883,6 @@
 				1CFD2EC1245B5A94004C8924 /* MovieViewModelStateTests.swift in Sources */,
 				1CFD2EBC245B4E1B004C8924 /* MovieFilterFactory.swift in Sources */,
 				1C72CAA4245A272700501A7F /* MoviesModelTests.swift in Sources */,
-				1CFD2ED4245B68AD004C8924 /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -877,8 +908,9 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		1CE5600D2448BD1D0078914E /* Debug */ = {
+		1C05BDD9245E1F1600849BD5 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C05BDE9245E22EB00849BD5 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -935,10 +967,158 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = "Debug (Staging)";
 		};
-		1CE5600E2448BD1D0078914E /* Release */ = {
+		1C05BDDA245E1F1600849BD5 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C05BDE9245E22EB00849BD5 /* Staging.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = SZ4THN2W8Q;
+				INFOPLIST_FILE = "ConcreteChallenge/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallenge;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug (Staging)";
+		};
+		1C05BDDB245E1F1600849BD5 /* Debug (Staging) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C05BDE9245E22EB00849BD5 /* Staging.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SZ4THN2W8Q;
+				INFOPLIST_FILE = ConcreteChallengeTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConcreteChallenge.app/ConcreteChallenge";
+			};
+			name = "Debug (Staging)";
+		};
+		1C05BDDC245E1F2600849BD5 /* Debug (Develpment) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C05BDE6245E206800849BD5 /* Development.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = "Debug (Develpment)";
+		};
+		1C05BDDD245E1F2600849BD5 /* Debug (Develpment) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C05BDE6245E206800849BD5 /* Development.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = SZ4THN2W8Q;
+				INFOPLIST_FILE = "ConcreteChallenge/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallenge;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug (Develpment)";
+		};
+		1C05BDDE245E1F2600849BD5 /* Debug (Develpment) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C05BDE6245E206800849BD5 /* Development.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SZ4THN2W8Q;
+				INFOPLIST_FILE = ConcreteChallengeTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConcreteChallenge.app/ConcreteChallenge";
+			};
+			name = "Debug (Develpment)";
+		};
+		1C05BDDF245E200700849BD5 /* Release (Staging) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C05BDE9245E22EB00849BD5 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -989,11 +1169,266 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = "Release (Staging)";
 		};
-		1CE560102448BD1D0078914E /* Debug */ = {
+		1C05BDE0245E200700849BD5 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BBF0D74F2954A18E9A1D1B66 /* Pods-ConcreteChallenge.debug.xcconfig */;
+			baseConfigurationReference = 1C05BDE9245E22EB00849BD5 /* Staging.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SZ4THN2W8Q;
+				INFOPLIST_FILE = "ConcreteChallenge/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallenge;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Release (Staging)";
+		};
+		1C05BDE1245E200700849BD5 /* Release (Staging) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C05BDE9245E22EB00849BD5 /* Staging.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SZ4THN2W8Q;
+				INFOPLIST_FILE = ConcreteChallengeTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConcreteChallenge.app/ConcreteChallenge";
+			};
+			name = "Release (Staging)";
+		};
+		1C05BDE2245E201300849BD5 /* Release (Production) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C05BDE8245E22D500849BD5 /* Production.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release (Production)";
+		};
+		1C05BDE3245E201300849BD5 /* Release (Production) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C05BDE8245E22D500849BD5 /* Production.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SZ4THN2W8Q;
+				INFOPLIST_FILE = "ConcreteChallenge/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallenge;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Release (Production)";
+		};
+		1C05BDE4245E201300849BD5 /* Release (Production) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C05BDE8245E22D500849BD5 /* Production.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SZ4THN2W8Q;
+				INFOPLIST_FILE = ConcreteChallengeTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConcreteChallenge.app/ConcreteChallenge";
+			};
+			name = "Release (Production)";
+		};
+		1CE5600D2448BD1D0078914E /* Debug (Production) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C05BDE8245E22D500849BD5 /* Production.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = "Debug (Production)";
+		};
+		1CE5600E2448BD1D0078914E /* Release (Development) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C05BDE6245E206800849BD5 /* Development.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release (Development)";
+		};
+		1CE560102448BD1D0078914E /* Debug (Production) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C05BDE8245E22D500849BD5 /* Production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -1010,11 +1445,11 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = "Debug (Production)";
 		};
-		1CE560112448BD1D0078914E /* Release */ = {
+		1CE560112448BD1D0078914E /* Release (Development) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 83D41C1EC5989828FEC22B88 /* Pods-ConcreteChallenge.release.xcconfig */;
+			baseConfigurationReference = 1C05BDE6245E206800849BD5 /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -1030,11 +1465,11 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Release;
+			name = "Release (Development)";
 		};
-		1CE560132448BD1D0078914E /* Debug */ = {
+		1CE560132448BD1D0078914E /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3A44F710B49DA7E953402FEE /* Pods-ConcreteChallengeTests.debug.xcconfig */;
+			baseConfigurationReference = 03AC5EA9AA5BAE096BB08979 /* Pods-ConcreteChallengeTests.debug (production).xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1052,11 +1487,11 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConcreteChallenge.app/ConcreteChallenge";
 			};
-			name = Debug;
+			name = "Debug (Production)";
 		};
-		1CE560142448BD1D0078914E /* Release */ = {
+		1CE560142448BD1D0078914E /* Release (Development) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69C226BC594F5A268B308250 /* Pods-ConcreteChallengeTests.release.xcconfig */;
+			baseConfigurationReference = 1C05BDE6245E206800849BD5 /* Development.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1074,7 +1509,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConcreteChallenge.app/ConcreteChallenge";
 			};
-			name = Release;
+			name = "Release (Development)";
 		};
 /* End XCBuildConfiguration section */
 
@@ -1082,29 +1517,41 @@
 		1CE55FE82448BD1B0078914E /* Build configuration list for PBXProject "ConcreteChallenge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1CE5600D2448BD1D0078914E /* Debug */,
-				1CE5600E2448BD1D0078914E /* Release */,
+				1CE5600D2448BD1D0078914E /* Debug (Production) */,
+				1C05BDD9245E1F1600849BD5 /* Debug (Staging) */,
+				1C05BDDC245E1F2600849BD5 /* Debug (Develpment) */,
+				1CE5600E2448BD1D0078914E /* Release (Development) */,
+				1C05BDDF245E200700849BD5 /* Release (Staging) */,
+				1C05BDE2245E201300849BD5 /* Release (Production) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Debug (Develpment)";
 		};
 		1CE5600F2448BD1D0078914E /* Build configuration list for PBXNativeTarget "ConcreteChallenge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1CE560102448BD1D0078914E /* Debug */,
-				1CE560112448BD1D0078914E /* Release */,
+				1CE560102448BD1D0078914E /* Debug (Production) */,
+				1C05BDDA245E1F1600849BD5 /* Debug (Staging) */,
+				1C05BDDD245E1F2600849BD5 /* Debug (Develpment) */,
+				1CE560112448BD1D0078914E /* Release (Development) */,
+				1C05BDE0245E200700849BD5 /* Release (Staging) */,
+				1C05BDE3245E201300849BD5 /* Release (Production) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Debug (Develpment)";
 		};
 		1CE560122448BD1D0078914E /* Build configuration list for PBXNativeTarget "ConcreteChallengeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1CE560132448BD1D0078914E /* Debug */,
-				1CE560142448BD1D0078914E /* Release */,
+				1CE560132448BD1D0078914E /* Debug (Production) */,
+				1C05BDDB245E1F1600849BD5 /* Debug (Staging) */,
+				1C05BDDE245E1F2600849BD5 /* Debug (Develpment) */,
+				1CE560142448BD1D0078914E /* Release (Development) */,
+				1C05BDE1245E200700849BD5 /* Release (Staging) */,
+				1C05BDE4245E201300849BD5 /* Release (Production) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Debug (Develpment)";
 		};
 /* End XCConfigurationList section */
 

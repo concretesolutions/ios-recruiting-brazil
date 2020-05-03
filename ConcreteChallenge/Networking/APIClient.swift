@@ -29,11 +29,12 @@ class Client: ClientProtocol {
         self.baseUrl = URL(string: baseUrl)!
 
         let configuration = URLSessionConfiguration.default
+        configuration.urlCredentialStorage = nil
         self.manager = Alamofire.Session(configuration: configuration)
     }
 
     convenience init () {
-        self.init(baseUrl: Constants.api.baseUrl, apiKey: Constants.api.apiKey)
+        self.init(baseUrl: Environment.MovieDBApi.baseUrl, apiKey: Environment.MovieDBApi.apiKey)
     }
     func mergeParameters(dict: Parameters?) -> Parameters {
         guard var newParameters = dict else {
@@ -91,7 +92,7 @@ class Client: ClientProtocol {
                             subtitle: "Falha ao comunicar com o servidor."
                         )
 
-                        ErrorReporting.shared.reportError(with: error, including: scope, notifying: notification)
+                        ErrorReporting.capture(error, including: scope, notifying: notification)
 
                         observer(.error(error))
                     }
