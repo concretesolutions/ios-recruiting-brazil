@@ -3,15 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1C05BDD8245DD4F500849BD5 /* ErrorReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C05BDD7245DD4F500849BD5 /* ErrorReporting.swift */; };
-		1C05BE03245F1E2C00849BD5 /* ConcreteChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C05BE02245F1E2C00849BD5 /* ConcreteChallengeUITests.swift */; };
-		1C05BE0F245F26C800849BD5 /* Env.development.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C05BE0E245F26C800849BD5 /* Env.development.plist */; };
-		1C05BE11245F29AB00849BD5 /* Env.staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C05BE10245F29AB00849BD5 /* Env.staging.plist */; };
-		1C05BE13245F29E200849BD5 /* Env.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C05BE12245F29E200849BD5 /* Env.plist */; };
+		1C05BE1D245F363C00849BD5 /* Env.development.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C05BE17245F363C00849BD5 /* Env.development.plist */; };
+		1C05BE1E245F363C00849BD5 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C05BE18245F363C00849BD5 /* Environment.swift */; };
+		1C05BE1F245F363C00849BD5 /* Env.staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C05BE19245F363C00849BD5 /* Env.staging.plist */; };
+		1C05BE20245F363C00849BD5 /* AccessibilityIdentifierLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C05BE1A245F363C00849BD5 /* AccessibilityIdentifierLabel.swift */; };
+		1C05BE21245F363C00849BD5 /* Env.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C05BE1B245F363C00849BD5 /* Env.plist */; };
+		1C05BE22245F363C00849BD5 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C05BE1C245F363C00849BD5 /* Theme.swift */; };
+		1C05BE24245F36F000849BD5 /* ErrorReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C05BE23245F36F000849BD5 /* ErrorReporting.swift */; };
+		1C05BE26245F37BA00849BD5 /* Date+CurrentYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C05BE25245F37BA00849BD5 /* Date+CurrentYear.swift */; };
 		1C72CA842458D9C400501A7F /* FilterItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C72CA822458D9C400501A7F /* FilterItemTableViewCell.swift */; };
 		1C72CA852458D9C400501A7F /* FilterItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C72CA832458D9C400501A7F /* FilterItemTableViewCell.xib */; };
 		1C72CA872458E14500501A7F /* ToolbarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C72CA862458E14500501A7F /* ToolbarPickerView.swift */; };
@@ -37,7 +40,6 @@
 		1C7BD207245604BC004FECF4 /* CALayer+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7BD206245604BC004FECF4 /* CALayer+Border.swift */; };
 		1C7BD20924561328004FECF4 /* TimeInterval+Formats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7BD20824561328004FECF4 /* TimeInterval+Formats.swift */; };
 		1C7BD20E24570586004FECF4 /* MovieDetailsTrailerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7BD20C24570586004FECF4 /* MovieDetailsTrailerCollectionViewCell.swift */; };
-		1C7BD211245764C8004FECF4 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7BD210245764C8004FECF4 /* Theme.swift */; };
 		1C7BD2152458C2E9004FECF4 /* FilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7BD2142458C2E9004FECF4 /* FilterTableViewController.swift */; };
 		1CC5496D2453252200A0FB69 /* InfraReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC5496C2453252200A0FB69 /* InfraReducer.swift */; };
 		1CC5496F2453259000A0FB69 /* InfraActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC5496E2453259000A0FB69 /* InfraActions.swift */; };
@@ -61,10 +63,8 @@
 		1CE560332449F5990078914E /* UIColor+Ajustments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE560322449F5990078914E /* UIColor+Ajustments.swift */; };
 		1CE560352449F5D40078914E /* UIColor+AssetColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE560342449F5D40078914E /* UIColor+AssetColor.swift */; };
 		1CE56038244A105D0078914E /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE56037244A105D0078914E /* APIClient.swift */; };
-		1CE5603A244A10D50078914E /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE56039244A10D50078914E /* Endpoint.swift */; };
-		1CE5603E244A63060078914E /* ApiConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5603B244A63060078914E /* ApiConstants.swift */; };
+		1CE5603A244A10D50078914E /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE56039244A10D50078914E /* EndPoint.swift */; };
 		1CE5603F244A63060078914E /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5603C244A63060078914E /* ApiError.swift */; };
-		1CE56040244A63060078914E /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5603D244A63060078914E /* Environment.swift */; };
 		1CE56043244B417E0078914E /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE56042244B417D0078914E /* Genre.swift */; };
 		1CE56048244B52100078914E /* Dictionary+Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE56047244B52100078914E /* Dictionary+Merge.swift */; };
 		1CE5604B244B81B70078914E /* PopularMoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5604A244B81B70078914E /* PopularMoviesViewModel.swift */; };
@@ -95,21 +95,11 @@
 		1CF4BD0424539C84009D9B2C /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF4BD0324539C84009D9B2C /* FavoritesViewModel.swift */; };
 		1CFD2EBC245B4E1B004C8924 /* MovieFilterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFD2EBB245B4E1B004C8924 /* MovieFilterFactory.swift */; };
 		1CFD2EC1245B5A94004C8924 /* MovieViewModelStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFD2EC0245B5A94004C8924 /* MovieViewModelStateTests.swift */; };
-		1CFD2ED8245B68EA004C8924 /* AccessibilityIdentifierLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFD2ED7245B68EA004C8924 /* AccessibilityIdentifierLabel.swift */; };
-		1CFD2EDF245DD07D004C8924 /* Date+CurrentYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFD2EDE245DD07D004C8924 /* Date+CurrentYear.swift */; };
 		318D73BF6A046B22015CAEBA /* Pods_ConcreteChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1D47D34ADA27B5854A46A6 /* Pods_ConcreteChallenge.framework */; };
 		6E17ADB63884CAAE6C4A57F0 /* libPods-ConcreteChallengeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 244112B357EE5BC8FC148B53 /* libPods-ConcreteChallengeTests.a */; };
-		9056068B0FCE6AAA2514891D /* libPods-ConcreteChallengeUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC10FC9443A602641110FD2 /* libPods-ConcreteChallengeUITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1C05BE05245F1E2C00849BD5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1CE55FE52448BD1B0078914E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1CE55FEC2448BD1B0078914E;
-			remoteInfo = ConcreteChallenge;
-		};
 		1CE560072448BD1D0078914E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1CE55FE52448BD1B0078914E /* Project object */;
@@ -120,15 +110,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		106E2EC135D788BAF2894CDE /* Pods-ConcreteChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1A1D47D34ADA27B5854A46A6 /* Pods_ConcreteChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConcreteChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1C05BDD7245DD4F500849BD5 /* ErrorReporting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorReporting.swift; sourceTree = "<group>"; };
-		1C05BE00245F1E2B00849BD5 /* ConcreteChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConcreteChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1C05BE02245F1E2C00849BD5 /* ConcreteChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteChallengeUITests.swift; sourceTree = "<group>"; };
-		1C05BE04245F1E2C00849BD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1C05BE0E245F26C800849BD5 /* Env.development.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Env.development.plist; sourceTree = "<group>"; };
-		1C05BE10245F29AB00849BD5 /* Env.staging.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Env.staging.plist; sourceTree = "<group>"; };
-		1C05BE12245F29E200849BD5 /* Env.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Env.plist; sourceTree = "<group>"; };
+		1C05BE17245F363C00849BD5 /* Env.development.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Env.development.plist; sourceTree = "<group>"; };
+		1C05BE18245F363C00849BD5 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		1C05BE19245F363C00849BD5 /* Env.staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Env.staging.plist; sourceTree = "<group>"; };
+		1C05BE1A245F363C00849BD5 /* AccessibilityIdentifierLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifierLabel.swift; sourceTree = "<group>"; };
+		1C05BE1B245F363C00849BD5 /* Env.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Env.plist; sourceTree = "<group>"; };
+		1C05BE1C245F363C00849BD5 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		1C05BE23245F36F000849BD5 /* ErrorReporting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorReporting.swift; sourceTree = "<group>"; };
+		1C05BE25245F37BA00849BD5 /* Date+CurrentYear.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+CurrentYear.swift"; sourceTree = "<group>"; };
 		1C72CA822458D9C400501A7F /* FilterItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterItemTableViewCell.swift; sourceTree = "<group>"; };
 		1C72CA832458D9C400501A7F /* FilterItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterItemTableViewCell.xib; sourceTree = "<group>"; };
 		1C72CA862458E14500501A7F /* ToolbarPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarPickerView.swift; sourceTree = "<group>"; };
@@ -182,10 +172,10 @@
 		1CE560322449F5990078914E /* UIColor+Ajustments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ajustments.swift"; sourceTree = "<group>"; };
 		1CE560342449F5D40078914E /* UIColor+AssetColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AssetColor.swift"; sourceTree = "<group>"; };
 		1CE56037244A105D0078914E /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		1CE56039244A10D50078914E /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		1CE56039244A10D50078914E /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		1CE5603B244A63060078914E /* ApiConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiConstants.swift; sourceTree = "<group>"; };
 		1CE5603C244A63060078914E /* ApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
-		1CE5603D244A63060078914E /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		1CE5603D244A63060078914E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1CE56042244B417D0078914E /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		1CE56047244B52100078914E /* Dictionary+Merge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Merge.swift"; sourceTree = "<group>"; };
 		1CE5604A244B81B70078914E /* PopularMoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesViewModel.swift; sourceTree = "<group>"; };
@@ -216,46 +206,16 @@
 		1CF4BD0324539C84009D9B2C /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		1CFD2EBB245B4E1B004C8924 /* MovieFilterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFilterFactory.swift; sourceTree = "<group>"; };
 		1CFD2EC0245B5A94004C8924 /* MovieViewModelStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModelStateTests.swift; sourceTree = "<group>"; };
-		1CFD2ED7245B68EA004C8924 /* AccessibilityIdentifierLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifierLabel.swift; sourceTree = "<group>"; };
-		1CFD2EDE245DD07D004C8924 /* Date+CurrentYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+CurrentYear.swift"; sourceTree = "<group>"; };
 		244112B357EE5BC8FC148B53 /* libPods-ConcreteChallengeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ConcreteChallengeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2C96C32FBCFD0451759BB755 /* Pods-ConcreteChallengeTests.debug (develpment).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug (develpment).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug (develpment).xcconfig"; sourceTree = "<group>"; };
-		34A413883CF8046D9BDDF4F7 /* Pods-ConcreteChallenge.release (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.release (staging).xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.release (staging).xcconfig"; sourceTree = "<group>"; };
-		39B9B9D315B7ACE72D030573 /* Pods-ConcreteChallengeTests.debug (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug (staging).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug (staging).xcconfig"; sourceTree = "<group>"; };
 		3A44F710B49DA7E953402FEE /* Pods-ConcreteChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
-		3C3A5C7F9EDC6F58245B7908 /* Pods-ConcreteChallengeTests.release (development).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.release (development).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.release (development).xcconfig"; sourceTree = "<group>"; };
-		3E7A493C2F5C6F7A5A50398A /* Pods-ConcreteChallengeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.release.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4F13CD522E1B4C04BBE79BEE /* Pods-ConcreteChallenge-ConcreteChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge-ConcreteChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge-ConcreteChallengeTests/Pods-ConcreteChallenge-ConcreteChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
-		50E24BE579D1F1DAC6393E9F /* Pods-ConcreteChallengeUITests.debug (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.debug (staging).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.debug (staging).xcconfig"; sourceTree = "<group>"; };
-		5428544F3B4685DA7E4FFC05 /* Pods-ConcreteChallenge.release (development).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.release (development).xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.release (development).xcconfig"; sourceTree = "<group>"; };
-		6049B6F58405618AC573117A /* Pods-ConcreteChallenge.debug (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.debug (production).xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.debug (production).xcconfig"; sourceTree = "<group>"; };
-		6886AEE51E13E73E9FF4F550 /* Pods-ConcreteChallengeTests.debug (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug (production).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug (production).xcconfig"; sourceTree = "<group>"; };
 		69C226BC594F5A268B308250 /* Pods-ConcreteChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
-		6BC3B1E1680FFCE3C341608B /* Pods-ConcreteChallenge.release (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.release (production).xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.release (production).xcconfig"; sourceTree = "<group>"; };
-		82B0FFC0C37FEB55F58948D4 /* Pods-ConcreteChallengeUITests.release (development).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.release (development).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.release (development).xcconfig"; sourceTree = "<group>"; };
 		83D41C1EC5989828FEC22B88 /* Pods-ConcreteChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.release.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.release.xcconfig"; sourceTree = "<group>"; };
-		8646F93A54EDFBB064F6B2B9 /* Pods-ConcreteChallengeUITests.debug (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.debug (production).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.debug (production).xcconfig"; sourceTree = "<group>"; };
-		99395BC811A9304976086A7B /* Pods-ConcreteChallengeUITests.debug (develpment).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.debug (develpment).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.debug (develpment).xcconfig"; sourceTree = "<group>"; };
-		AE66F46734820C4E246F18DB /* Pods-ConcreteChallenge.debug (develpment).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.debug (develpment).xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.debug (develpment).xcconfig"; sourceTree = "<group>"; };
-		B3DA336A935E11E5DE1E7EFD /* Pods-ConcreteChallenge.debug (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.debug (staging).xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.debug (staging).xcconfig"; sourceTree = "<group>"; };
-		B63F5CC2DE525B6FC02DC434 /* Pods-ConcreteChallengeUITests.release (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.release (staging).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.release (staging).xcconfig"; sourceTree = "<group>"; };
-		B923EF493F1016171143C3E8 /* Pods-ConcreteChallengeTests.release (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.release (staging).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.release (staging).xcconfig"; sourceTree = "<group>"; };
 		BBF0D74F2954A18E9A1D1B66 /* Pods-ConcreteChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.debug.xcconfig"; sourceTree = "<group>"; };
-		CBE42CE756D850FF21D3A172 /* Pods-ConcreteChallengeUITests.release (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.release (production).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.release (production).xcconfig"; sourceTree = "<group>"; };
-		CEC10FC9443A602641110FD2 /* libPods-ConcreteChallengeUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ConcreteChallengeUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F42F81A8F5A4304E64C51964 /* Pods-ConcreteChallenge-ConcreteChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge-ConcreteChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge-ConcreteChallengeTests/Pods-ConcreteChallenge-ConcreteChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
-		FF4389232013BC386748E8C5 /* Pods-ConcreteChallengeTests.release (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.release (production).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.release (production).xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1C05BDFD245F1E2B00849BD5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9056068B0FCE6AAA2514891D /* libPods-ConcreteChallengeUITests.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1CE55FEA2448BD1B0078914E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -275,26 +235,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1C05BDE5245E203B00849BD5 /* Config */ = {
+		1C05BE16245F363C00849BD5 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				1CE5603D244A63060078914E /* Environment.swift */,
-				1C7BD210245764C8004FECF4 /* Theme.swift */,
-				1CFD2ED7245B68EA004C8924 /* AccessibilityIdentifierLabel.swift */,
-				1C05BE0E245F26C800849BD5 /* Env.development.plist */,
-				1C05BE10245F29AB00849BD5 /* Env.staging.plist */,
-				1C05BE12245F29E200849BD5 /* Env.plist */,
+				1C05BE18245F363C00849BD5 /* Environment.swift */,
+				1C05BE1A245F363C00849BD5 /* AccessibilityIdentifierLabel.swift */,
+				1C05BE1C245F363C00849BD5 /* Theme.swift */,
+				1C05BE17245F363C00849BD5 /* Env.development.plist */,
+				1C05BE19245F363C00849BD5 /* Env.staging.plist */,
+				1C05BE1B245F363C00849BD5 /* Env.plist */,
 			);
 			path = Config;
-			sourceTree = "<group>";
-		};
-		1C05BE01245F1E2C00849BD5 /* ConcreteChallengeUITests */ = {
-			isa = PBXGroup;
-			children = (
-				1C05BE02245F1E2C00849BD5 /* ConcreteChallengeUITests.swift */,
-				1C05BE04245F1E2C00849BD5 /* Info.plist */,
-			);
-			path = ConcreteChallengeUITests;
 			sourceTree = "<group>";
 		};
 		1C72CA8A2458F20300501A7F /* Filters */ = {
@@ -343,7 +294,6 @@
 			children = (
 				1CE55FEF2448BD1B0078914E /* ConcreteChallenge */,
 				1CE560092448BD1D0078914E /* ConcreteChallengeTests */,
-				1C05BE01245F1E2C00849BD5 /* ConcreteChallengeUITests */,
 				1CE55FEE2448BD1B0078914E /* Products */,
 				C8067277010FB77D58417C63 /* Pods */,
 				7E1128EA51FC4917EFBB4EFA /* Frameworks */,
@@ -355,7 +305,6 @@
 			children = (
 				1CE55FED2448BD1B0078914E /* ConcreteChallenge.app */,
 				1CE560062448BD1D0078914E /* ConcreteChallengeTests.xctest */,
-				1C05BE00245F1E2B00849BD5 /* ConcreteChallengeUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -363,7 +312,7 @@
 		1CE55FEF2448BD1B0078914E /* ConcreteChallenge */ = {
 			isa = PBXGroup;
 			children = (
-				1C05BDE5245E203B00849BD5 /* Config */,
+				1C05BE16245F363C00849BD5 /* Config */,
 				1CE56041244B41530078914E /* Model */,
 				1CE56050244B8B770078914E /* View */,
 				1CE56058244DCBA20078914E /* Controllers */,
@@ -401,6 +350,7 @@
 		1CE5602A2449EE890078914E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1CE56046244B45910078914E /* Constants */,
 				1CE55FFC2448BD1D0078914E /* Assets.xcassets */,
 				1CE56085244E5B070078914E /* EmptyStates.xcassets */,
 				1CE5602B2449EED30078914E /* Colors.xcassets */,
@@ -413,6 +363,7 @@
 		1CE5602D2449F2840078914E /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				1C05BE25245F37BA00849BD5 /* Date+CurrentYear.swift */,
 				1CE5602E2449F2A00078914E /* UIImage+Color.swift */,
 				1CE560322449F5990078914E /* UIColor+Ajustments.swift */,
 				1CE560342449F5D40078914E /* UIColor+AssetColor.swift */,
@@ -423,7 +374,6 @@
 				1C7BD1F02454EB97004FECF4 /* UIView+Layout.swift */,
 				1C7BD206245604BC004FECF4 /* CALayer+Border.swift */,
 				1C7BD20824561328004FECF4 /* TimeInterval+Formats.swift */,
-				1CFD2EDE245DD07D004C8924 /* Date+CurrentYear.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -431,10 +381,9 @@
 		1CE56036244A103B0078914E /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				1CE5603B244A63060078914E /* ApiConstants.swift */,
 				1CE5603C244A63060078914E /* ApiError.swift */,
 				1CE56037244A105D0078914E /* APIClient.swift */,
-				1CE56039244A10D50078914E /* Endpoint.swift */,
+				1CE56039244A10D50078914E /* EndPoint.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -450,6 +399,16 @@
 				1CC5497224535B4100A0FB69 /* Persistable.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		1CE56046244B45910078914E /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				1CE5603D244A63060078914E /* Constants.swift */,
+				1CE5603B244A63060078914E /* ApiConstants.swift */,
+				1C7BD210245764C8004FECF4 /* Theme.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		1CE56049244B81840078914E /* ViewModel */ = {
@@ -538,7 +497,7 @@
 		1CE56064244DF29F0078914E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1C05BDD7245DD4F500849BD5 /* ErrorReporting.swift */,
+				1C05BE23245F36F000849BD5 /* ErrorReporting.swift */,
 				1CE55FF02448BD1B0078914E /* AppDelegate.swift */,
 				1CE55FF92448BD1B0078914E /* ConcreteChallenge.xcdatamodeld */,
 				1CE560012448BD1D0078914E /* Info.plist */,
@@ -592,7 +551,6 @@
 			children = (
 				1A1D47D34ADA27B5854A46A6 /* Pods_ConcreteChallenge.framework */,
 				244112B357EE5BC8FC148B53 /* libPods-ConcreteChallengeTests.a */,
-				CEC10FC9443A602641110FD2 /* libPods-ConcreteChallengeUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -606,26 +564,6 @@
 				69C226BC594F5A268B308250 /* Pods-ConcreteChallengeTests.release.xcconfig */,
 				F42F81A8F5A4304E64C51964 /* Pods-ConcreteChallenge-ConcreteChallengeTests.debug.xcconfig */,
 				4F13CD522E1B4C04BBE79BEE /* Pods-ConcreteChallenge-ConcreteChallengeTests.release.xcconfig */,
-				106E2EC135D788BAF2894CDE /* Pods-ConcreteChallengeUITests.debug.xcconfig */,
-				3E7A493C2F5C6F7A5A50398A /* Pods-ConcreteChallengeUITests.release.xcconfig */,
-				6049B6F58405618AC573117A /* Pods-ConcreteChallenge.debug (production).xcconfig */,
-				B3DA336A935E11E5DE1E7EFD /* Pods-ConcreteChallenge.debug (staging).xcconfig */,
-				AE66F46734820C4E246F18DB /* Pods-ConcreteChallenge.debug (develpment).xcconfig */,
-				5428544F3B4685DA7E4FFC05 /* Pods-ConcreteChallenge.release (development).xcconfig */,
-				34A413883CF8046D9BDDF4F7 /* Pods-ConcreteChallenge.release (staging).xcconfig */,
-				6BC3B1E1680FFCE3C341608B /* Pods-ConcreteChallenge.release (production).xcconfig */,
-				6886AEE51E13E73E9FF4F550 /* Pods-ConcreteChallengeTests.debug (production).xcconfig */,
-				39B9B9D315B7ACE72D030573 /* Pods-ConcreteChallengeTests.debug (staging).xcconfig */,
-				2C96C32FBCFD0451759BB755 /* Pods-ConcreteChallengeTests.debug (develpment).xcconfig */,
-				3C3A5C7F9EDC6F58245B7908 /* Pods-ConcreteChallengeTests.release (development).xcconfig */,
-				B923EF493F1016171143C3E8 /* Pods-ConcreteChallengeTests.release (staging).xcconfig */,
-				FF4389232013BC386748E8C5 /* Pods-ConcreteChallengeTests.release (production).xcconfig */,
-				8646F93A54EDFBB064F6B2B9 /* Pods-ConcreteChallengeUITests.debug (production).xcconfig */,
-				50E24BE579D1F1DAC6393E9F /* Pods-ConcreteChallengeUITests.debug (staging).xcconfig */,
-				99395BC811A9304976086A7B /* Pods-ConcreteChallengeUITests.debug (develpment).xcconfig */,
-				82B0FFC0C37FEB55F58948D4 /* Pods-ConcreteChallengeUITests.release (development).xcconfig */,
-				B63F5CC2DE525B6FC02DC434 /* Pods-ConcreteChallengeUITests.release (staging).xcconfig */,
-				CBE42CE756D850FF21D3A172 /* Pods-ConcreteChallengeUITests.release (production).xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -633,25 +571,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1C05BDFF245F1E2B00849BD5 /* ConcreteChallengeUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1C05BE07245F1E2C00849BD5 /* Build configuration list for PBXNativeTarget "ConcreteChallengeUITests" */;
-			buildPhases = (
-				5DDDFC9A564CFFBC9F98B2F4 /* [CP] Check Pods Manifest.lock */,
-				1C05BDFC245F1E2B00849BD5 /* Sources */,
-				1C05BDFD245F1E2B00849BD5 /* Frameworks */,
-				1C05BDFE245F1E2B00849BD5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1C05BE06245F1E2C00849BD5 /* PBXTargetDependency */,
-			);
-			name = ConcreteChallengeUITests;
-			productName = ConcreteChallengeUITests;
-			productReference = 1C05BE00245F1E2B00849BD5 /* ConcreteChallengeUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		1CE55FEC2448BD1B0078914E /* ConcreteChallenge */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1CE5600F2448BD1D0078914E /* Build configuration list for PBXNativeTarget "ConcreteChallenge" */;
@@ -661,9 +580,9 @@
 				1CE55FEA2448BD1B0078914E /* Frameworks */,
 				1CE55FEB2448BD1B0078914E /* Resources */,
 				3EA0F31B31158E7D41F60A54 /* [CP] Embed Pods Frameworks */,
-				1C05BE15245F2C5500849BD5 /* Copy Environment Config PList */,
 				1C72CAAA245A41E300501A7F /* Swift Lint */,
-				1CFD2EDB245DBB8C004C8924 /* Sentry Upload */,
+				1C05BE27245F38AA00849BD5 /* Copy Environment Based Configuration */,
+				1C05BE28245F38B100849BD5 /* Sentry Upload */,
 			);
 			buildRules = (
 			);
@@ -699,15 +618,10 @@
 		1CE55FE52448BD1B0078914E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Erick Martins Pinheiro";
 				TargetAttributes = {
-					1C05BDFF245F1E2B00849BD5 = {
-						CreatedOnToolsVersion = 11.4;
-						TestTargetID = 1CE55FEC2448BD1B0078914E;
-					};
 					1CE55FEC2448BD1B0078914E = {
 						CreatedOnToolsVersion = 11.4;
 					};
@@ -732,19 +646,11 @@
 			targets = (
 				1CE55FEC2448BD1B0078914E /* ConcreteChallenge */,
 				1CE560052448BD1D0078914E /* ConcreteChallengeTests */,
-				1C05BDFF245F1E2B00849BD5 /* ConcreteChallengeUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1C05BDFE245F1E2B00849BD5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1CE55FEB2448BD1B0078914E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -752,19 +658,19 @@
 				1CE5602C2449EED30078914E /* Colors.xcassets in Resources */,
 				1CE56057244B8C040078914E /* PopularMovieCollectionViewCell.xib in Resources */,
 				1CE560002448BD1D0078914E /* LaunchScreen.storyboard in Resources */,
-				1C05BE11245F29AB00849BD5 /* Env.staging.plist in Resources */,
 				1C7BD1F52454F859004FECF4 /* MovieDetailsHeaderView.xib in Resources */,
 				1CE56086244E5B070078914E /* EmptyStates.xcassets in Resources */,
-				1C05BE13245F29E200849BD5 /* Env.plist in Resources */,
 				1CE55FFD2448BD1D0078914E /* Assets.xcassets in Resources */,
+				1C05BE1F245F363C00849BD5 /* Env.staging.plist in Resources */,
 				1C72CA942459E64000501A7F /* LoadingMoreFooterCollectionReusableView.xib in Resources */,
 				1C72CA852458D9C400501A7F /* FilterItemTableViewCell.xib in Resources */,
 				1C72CA8E245920F400501A7F /* ButtonsTableViewCell.xib in Resources */,
 				1CF4BD02245396A0009D9B2C /* FavoriteTableViewCell.xib in Resources */,
 				1CE5607A244E3F2E0078914E /* EmptyStateView.xib in Resources */,
+				1C05BE21245F363C00849BD5 /* Env.plist in Resources */,
 				1CE5601F2449D11D0078914E /* favorites.storyboard in Resources */,
 				1CE5601B244902B40078914E /* movies.storyboard in Resources */,
-				1C05BE0F245F26C800849BD5 /* Env.development.plist in Resources */,
+				1C05BE1D245F363C00849BD5 /* Env.development.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -778,7 +684,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1C05BE15245F2C5500849BD5 /* Copy Environment Config PList */ = {
+		1C05BE27245F38AA00849BD5 /* Copy Environment Based Configuration */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -787,7 +693,7 @@
 			);
 			inputPaths = (
 			);
-			name = "Copy Environment Config PList";
+			name = "Copy Environment Based Configuration";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -795,6 +701,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "echo \"Coping environment settings\"\n\nENV_FILE_PATH=$SRCROOT/ConcreteChallenge/Config/Env${BUNDLE_SUFFIX}.plist\n\nBUILD_APP_DIR=${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}\n\ncp \"$ENV_FILE_PATH\" \"$BUILD_APP_DIR/Config.plist\"\n";
+		};
+		1C05BE28245F38B100849BD5 /* Sentry Upload */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Sentry Upload";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which sentry-cli >/dev/null; then\n\n  export SENTRY_ORG=\"concrete-challenge\"\n  export SENTRY_PROJECT=\"concrete-challenge\"\n  export SENTRY_AUTH_TOKEN=\"05f143a9d55b4c51ba78834d228527b64dd975f29a9d4abaac5948bb6d93b54e\"\n\n  ERROR=$(sentry-cli upload-dif \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null)\n\n  ${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}\n\n\n  if [ ! $? -eq 0 ]; then\n    echo \"warning: sentry-cli - $ERROR\"\n  fi \nelse\n  echo \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"\nfi\n";
 		};
 		1C72CAAA245A41E300501A7F /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -813,24 +737,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		1CFD2EDB245DBB8C004C8924 /* Sentry Upload */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Sentry Upload";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which sentry-cli >/dev/null; then\n\n  export SENTRY_ORG=\"concrete-challenge\"\n  export SENTRY_PROJECT=\"concrete-challenge\"\n  export SENTRY_AUTH_TOKEN=\"05f143a9d55b4c51ba78834d228527b64dd975f29a9d4abaac5948bb6d93b54e\"\n\n  ERROR=$(sentry-cli upload-dif \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null)\n\n  ${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}\n\n\n  if [ ! $? -eq 0 ]; then\n    echo \"warning: sentry-cli - $ERROR\"\n  fi \nelse\n  echo \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"\nfi\n";
 		};
 		3EA0F31B31158E7D41F60A54 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -871,28 +777,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5DDDFC9A564CFFBC9F98B2F4 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ConcreteChallengeUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B71D51AB667919421EE42DD2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -918,30 +802,21 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1C05BDFC245F1E2B00849BD5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1C05BE03245F1E2C00849BD5 /* ConcreteChallengeUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1CE55FE92448BD1B0078914E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				1C7BD1DD245484E1004FECF4 /* BackgroundStateViewModel.swift in Sources */,
 				1CE56048244B52100078914E /* Dictionary+Merge.swift in Sources */,
-				1CFD2EDF245DD07D004C8924 /* Date+CurrentYear.swift in Sources */,
+				1C05BE26245F37BA00849BD5 /* Date+CurrentYear.swift in Sources */,
 				1C72CA872458E14500501A7F /* ToolbarPickerView.swift in Sources */,
+				1C05BE24245F36F000849BD5 /* ErrorReporting.swift in Sources */,
+				1C05BE22245F363C00849BD5 /* Theme.swift in Sources */,
 				1CC5496D2453252200A0FB69 /* InfraReducer.swift in Sources */,
 				1CE560252449D6180078914E /* MovieTabNavigationController.swift in Sources */,
-				1C05BDD8245DD4F500849BD5 /* ErrorReporting.swift in Sources */,
 				1C7BD2022455DD7B004FECF4 /* MovieDetailsTitleCollectionViewCell.swift in Sources */,
 				1C7BD205245600E8004FECF4 /* MovieDetailsSummaryCollectionViewCell.swift in Sources */,
-				1CFD2ED8245B68EA004C8924 /* AccessibilityIdentifierLabel.swift in Sources */,
 				1CE5604D244B84030078914E /* Movie.swift in Sources */,
-				1CE56040244A63060078914E /* Environment.swift in Sources */,
 				1CC54971245326E900A0FB69 /* InfraThunk.swift in Sources */,
 				1CE560332449F5990078914E /* UIColor+Ajustments.swift in Sources */,
 				1CE56069244DFC220078914E /* MovieThunk.swift in Sources */,
@@ -961,6 +836,7 @@
 				1CE5606F244E07950078914E /* Persistance.swift in Sources */,
 				1CE56073244E30860078914E /* FavoriteReducer.swift in Sources */,
 				1CE56075244E35AC0078914E /* Favorite.swift in Sources */,
+				1C05BE20245F363C00849BD5 /* AccessibilityIdentifierLabel.swift in Sources */,
 				1CE5606D244DFCF60078914E /* MovieReducer.swift in Sources */,
 				1CE560212449D3B50078914E /* PopularMoviesCollectionViewController.swift in Sources */,
 				1CF4BCFE24538B25009D9B2C /* FavoriteThunk.swift in Sources */,
@@ -973,7 +849,7 @@
 				1CE560292449DE060078914E /* BaseTabViewController.swift in Sources */,
 				1CE56060244DCFC30078914E /* GenreActions.swift in Sources */,
 				1C72CA8D245920F400501A7F /* ButtonsTableViewCell.swift in Sources */,
-				1CE5603A244A10D50078914E /* Endpoint.swift in Sources */,
+				1CE5603A244A10D50078914E /* EndPoint.swift in Sources */,
 				1CE560272449D62F0078914E /* FavoritesTabNavigationController.swift in Sources */,
 				1CC5497324535B4100A0FB69 /* Persistable.swift in Sources */,
 				1CE56056244B8C040078914E /* PopularMovieCollectionViewCell.swift in Sources */,
@@ -985,6 +861,7 @@
 				1C7BD207245604BC004FECF4 /* CALayer+Border.swift in Sources */,
 				1C7BD20E24570586004FECF4 /* MovieDetailsTrailerCollectionViewCell.swift in Sources */,
 				1CE560232449D4060078914E /* FavoritesTableViewController.swift in Sources */,
+				1C05BE1E245F363C00849BD5 /* Environment.swift in Sources */,
 				1CF4BD0424539C84009D9B2C /* FavoritesViewModel.swift in Sources */,
 				1CE5607C244E3F7E0078914E /* Helpers.swift in Sources */,
 				1C7BD1F12454EB97004FECF4 /* UIView+Layout.swift in Sources */,
@@ -995,8 +872,6 @@
 				1CE5607F244E41B30078914E /* BackgroundStateView.swift in Sources */,
 				1CE56084244E4C100078914E /* SVGImageView.swift in Sources */,
 				1CE5606B244DFCC40078914E /* MovieActions.swift in Sources */,
-				1C7BD211245764C8004FECF4 /* Theme.swift in Sources */,
-				1CE5603E244A63060078914E /* ApiConstants.swift in Sources */,
 				1CE56043244B417E0078914E /* Genre.swift in Sources */,
 				1C72CA902459B3F700501A7F /* MovieFilters.swift in Sources */,
 			);
@@ -1016,11 +891,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1C05BE06245F1E2C00849BD5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1CE55FEC2448BD1B0078914E /* ConcreteChallenge */;
-			targetProxy = 1C05BE05245F1E2C00849BD5 /* PBXContainerItemProxy */;
-		};
 		1CE560082448BD1D0078914E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1CE55FEC2448BD1B0078914E /* ConcreteChallenge */;
@@ -1040,9 +910,8 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		1C05BDD9245E1F1600849BD5 /* Debug (Staging) */ = {
+		1C05BE29245F39D700849BD5 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3DA336A935E11E5DE1E7EFD /* Pods-ConcreteChallenge.debug (staging).xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1074,17 +943,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1092,25 +955,24 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
 			};
-			name = "Debug (Staging)";
+			name = Staging;
 		};
-		1C05BDDA245E1F1600849BD5 /* Debug (Staging) */ = {
+		1C05BE2A245F39D700849BD5 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3DA336A935E11E5DE1E7EFD /* Pods-ConcreteChallenge.debug (staging).xcconfig */;
+			baseConfigurationReference = 83D41C1EC5989828FEC22B88 /* Pods-ConcreteChallenge.release.xcconfig */;
 			buildSettings = {
-				APP_BUNDLE_ID = "com.concrete.ConcreteChallenge$(BUNDLE_SUFFIX)";
+				APP_BUNDLE_ID = "com.concrete.ConcreteChallenge$(BUNDLE_ID_SUFFIX)";
 				APP_NAME = "Movies (staging)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_SUFFIX = .staging;
+				BUNDLE_ID_SUFFIX = .staging;
 				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = SZ4THN2W8Q;
 				INFOPLIST_FILE = "ConcreteChallenge/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
@@ -1123,12 +985,13 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = "Debug (Staging)";
+			name = Staging;
 		};
-		1C05BDDB245E1F1600849BD5 /* Debug (Staging) */ = {
+		1C05BE2B245F39D700849BD5 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 39B9B9D315B7ACE72D030573 /* Pods-ConcreteChallengeTests.debug (staging).xcconfig */;
+			baseConfigurationReference = 69C226BC594F5A268B308250 /* Pods-ConcreteChallengeTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SZ4THN2W8Q;
@@ -1145,11 +1008,10 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConcreteChallenge.app/ConcreteChallenge";
 			};
-			name = "Debug (Staging)";
+			name = Staging;
 		};
-		1C05BDDC245E1F2600849BD5 /* Debug (Develpment) */ = {
+		1CE5600D2448BD1D0078914E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE66F46734820C4E246F18DB /* Pods-ConcreteChallenge.debug (develpment).xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1206,117 +1068,70 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = "Debug (Develpment)";
+			name = Debug;
 		};
-		1C05BDDD245E1F2600849BD5 /* Debug (Develpment) */ = {
+		1CE5600E2448BD1D0078914E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE66F46734820C4E246F18DB /* Pods-ConcreteChallenge.debug (develpment).xcconfig */;
 			buildSettings = {
-				APP_BUNDLE_ID = "com.concrete.ConcreteChallenge$(BUNDLE_SUFFIX)";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1CE560102448BD1D0078914E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BBF0D74F2954A18E9A1D1B66 /* Pods-ConcreteChallenge.debug.xcconfig */;
+			buildSettings = {
+				APP_BUNDLE_ID = "com.concrete.ConcreteChallenge$(BUNDLE_ID_SUFFIX)";
 				APP_NAME = "Movies (dev)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_SUFFIX = .development;
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = SZ4THN2W8Q;
-				INFOPLIST_FILE = "ConcreteChallenge/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallenge;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = "Debug (Develpment)";
-		};
-		1C05BDDE245E1F2600849BD5 /* Debug (Develpment) */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C96C32FBCFD0451759BB755 /* Pods-ConcreteChallengeTests.debug (develpment).xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SZ4THN2W8Q;
-				INFOPLIST_FILE = ConcreteChallengeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConcreteChallenge.app/ConcreteChallenge";
-			};
-			name = "Debug (Develpment)";
-		};
-		1C05BDDF245E200700849BD5 /* Release (Staging) */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 34A413883CF8046D9BDDF4F7 /* Pods-ConcreteChallenge.release (staging).xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = "Release (Staging)";
-		};
-		1C05BDE0245E200700849BD5 /* Release (Staging) */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 34A413883CF8046D9BDDF4F7 /* Pods-ConcreteChallenge.release (staging).xcconfig */;
-			buildSettings = {
-				APP_BUNDLE_ID = "com.concrete.ConcreteChallenge$(BUNDLE_SUFFIX)";
-				APP_NAME = "Movies (staging)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_SUFFIX = .staging;
+				BUNDLE_ID_SUFFIX = .development;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SZ4THN2W8Q;
 				INFOPLIST_FILE = "ConcreteChallenge/Supporting Files/Info.plist";
@@ -1330,93 +1145,16 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = "Release (Staging)";
+			name = Debug;
 		};
-		1C05BDE1245E200700849BD5 /* Release (Staging) */ = {
+		1CE560112448BD1D0078914E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B923EF493F1016171143C3E8 /* Pods-ConcreteChallengeTests.release (staging).xcconfig */;
+			baseConfigurationReference = 83D41C1EC5989828FEC22B88 /* Pods-ConcreteChallenge.release.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SZ4THN2W8Q;
-				INFOPLIST_FILE = ConcreteChallengeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConcreteChallenge.app/ConcreteChallenge";
-			};
-			name = "Release (Staging)";
-		};
-		1C05BDE2245E201300849BD5 /* Release (Production) */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6BC3B1E1680FFCE3C341608B /* Pods-ConcreteChallenge.release (production).xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = "Release (Production)";
-		};
-		1C05BDE3245E201300849BD5 /* Release (Production) */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6BC3B1E1680FFCE3C341608B /* Pods-ConcreteChallenge.release (production).xcconfig */;
-			buildSettings = {
-				APP_BUNDLE_ID = "com.concrete.ConcreteChallenge$(BUNDLE_SUFFIX)";
+				APP_BUNDLE_ID = "com.concrete.ConcreteChallenge$(BUNDLE_ID_SUFFIX)";
 				APP_NAME = Movies;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_SUFFIX = "";
+				BUNDLE_ID_SUFFIX = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SZ4THN2W8Q;
 				INFOPLIST_FILE = "ConcreteChallenge/Supporting Files/Info.plist";
@@ -1430,12 +1168,13 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = "Release (Production)";
+			name = Release;
 		};
-		1C05BDE4245E201300849BD5 /* Release (Production) */ = {
+		1CE560132448BD1D0078914E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF4389232013BC386748E8C5 /* Pods-ConcreteChallengeTests.release (production).xcconfig */;
+			baseConfigurationReference = 3A44F710B49DA7E953402FEE /* Pods-ConcreteChallengeTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SZ4THN2W8Q;
@@ -1452,601 +1191,13 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConcreteChallenge.app/ConcreteChallenge";
 			};
-			name = "Release (Production)";
+			name = Debug;
 		};
-		1C05BE08245F1E2C00849BD5 /* Debug (Production) */ = {
+		1CE560142448BD1D0078914E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8646F93A54EDFBB064F6B2B9 /* Pods-ConcreteChallengeUITests.debug (production).xcconfig */;
+			baseConfigurationReference = 69C226BC594F5A268B308250 /* Pods-ConcreteChallengeTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = SZ4THN2W8Q;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = ConcreteChallengeUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ConcreteChallenge;
-			};
-			name = "Debug (Production)";
-		};
-		1C05BE09245F1E2C00849BD5 /* Debug (Staging) */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50E24BE579D1F1DAC6393E9F /* Pods-ConcreteChallengeUITests.debug (staging).xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = SZ4THN2W8Q;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = ConcreteChallengeUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ConcreteChallenge;
-			};
-			name = "Debug (Staging)";
-		};
-		1C05BE0A245F1E2C00849BD5 /* Debug (Develpment) */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99395BC811A9304976086A7B /* Pods-ConcreteChallengeUITests.debug (develpment).xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = SZ4THN2W8Q;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = ConcreteChallengeUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ConcreteChallenge;
-			};
-			name = "Debug (Develpment)";
-		};
-		1C05BE0B245F1E2C00849BD5 /* Release (Development) */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82B0FFC0C37FEB55F58948D4 /* Pods-ConcreteChallengeUITests.release (development).xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = SZ4THN2W8Q;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = ConcreteChallengeUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ConcreteChallenge;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = "Release (Development)";
-		};
-		1C05BE0C245F1E2C00849BD5 /* Release (Staging) */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B63F5CC2DE525B6FC02DC434 /* Pods-ConcreteChallengeUITests.release (staging).xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = SZ4THN2W8Q;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = ConcreteChallengeUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ConcreteChallenge;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = "Release (Staging)";
-		};
-		1C05BE0D245F1E2C00849BD5 /* Release (Production) */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CBE42CE756D850FF21D3A172 /* Pods-ConcreteChallengeUITests.release (production).xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = SZ4THN2W8Q;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = ConcreteChallengeUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ConcreteChallenge;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = "Release (Production)";
-		};
-		1CE5600D2448BD1D0078914E /* Debug (Production) */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6049B6F58405618AC573117A /* Pods-ConcreteChallenge.debug (production).xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = "Debug (Production)";
-		};
-		1CE5600E2448BD1D0078914E /* Release (Development) */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5428544F3B4685DA7E4FFC05 /* Pods-ConcreteChallenge.release (development).xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = "Release (Development)";
-		};
-		1CE560102448BD1D0078914E /* Debug (Production) */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6049B6F58405618AC573117A /* Pods-ConcreteChallenge.debug (production).xcconfig */;
-			buildSettings = {
-				APP_BUNDLE_ID = "com.concrete.ConcreteChallenge$(BUNDLE_SUFFIX)";
-				APP_NAME = Movies;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_SUFFIX = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = SZ4THN2W8Q;
-				INFOPLIST_FILE = "ConcreteChallenge/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallenge;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = "Debug (Production)";
-		};
-		1CE560112448BD1D0078914E /* Release (Development) */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5428544F3B4685DA7E4FFC05 /* Pods-ConcreteChallenge.release (development).xcconfig */;
-			buildSettings = {
-				APP_BUNDLE_ID = "com.concrete.ConcreteChallenge$(BUNDLE_SUFFIX)";
-				APP_NAME = "Movies (dev)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_SUFFIX = .development;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SZ4THN2W8Q;
-				INFOPLIST_FILE = "ConcreteChallenge/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallenge;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = "Release (Development)";
-		};
-		1CE560132448BD1D0078914E /* Debug (Production) */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6886AEE51E13E73E9FF4F550 /* Pods-ConcreteChallengeTests.debug (production).xcconfig */;
-			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SZ4THN2W8Q;
@@ -2063,84 +1214,40 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConcreteChallenge.app/ConcreteChallenge";
 			};
-			name = "Debug (Production)";
-		};
-		1CE560142448BD1D0078914E /* Release (Development) */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3C3A5C7F9EDC6F58245B7908 /* Pods-ConcreteChallengeTests.release (development).xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SZ4THN2W8Q;
-				INFOPLIST_FILE = ConcreteChallengeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConcreteChallenge.app/ConcreteChallenge";
-			};
-			name = "Release (Development)";
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1C05BE07245F1E2C00849BD5 /* Build configuration list for PBXNativeTarget "ConcreteChallengeUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1C05BE08245F1E2C00849BD5 /* Debug (Production) */,
-				1C05BE09245F1E2C00849BD5 /* Debug (Staging) */,
-				1C05BE0A245F1E2C00849BD5 /* Debug (Develpment) */,
-				1C05BE0B245F1E2C00849BD5 /* Release (Development) */,
-				1C05BE0C245F1E2C00849BD5 /* Release (Staging) */,
-				1C05BE0D245F1E2C00849BD5 /* Release (Production) */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Debug (Develpment)";
-		};
 		1CE55FE82448BD1B0078914E /* Build configuration list for PBXProject "ConcreteChallenge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1CE5600D2448BD1D0078914E /* Debug (Production) */,
-				1C05BDD9245E1F1600849BD5 /* Debug (Staging) */,
-				1C05BDDC245E1F2600849BD5 /* Debug (Develpment) */,
-				1CE5600E2448BD1D0078914E /* Release (Development) */,
-				1C05BDDF245E200700849BD5 /* Release (Staging) */,
-				1C05BDE2245E201300849BD5 /* Release (Production) */,
+				1CE5600D2448BD1D0078914E /* Debug */,
+				1CE5600E2448BD1D0078914E /* Release */,
+				1C05BE29245F39D700849BD5 /* Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Debug (Develpment)";
+			defaultConfigurationName = Release;
 		};
 		1CE5600F2448BD1D0078914E /* Build configuration list for PBXNativeTarget "ConcreteChallenge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1CE560102448BD1D0078914E /* Debug (Production) */,
-				1C05BDDA245E1F1600849BD5 /* Debug (Staging) */,
-				1C05BDDD245E1F2600849BD5 /* Debug (Develpment) */,
-				1CE560112448BD1D0078914E /* Release (Development) */,
-				1C05BDE0245E200700849BD5 /* Release (Staging) */,
-				1C05BDE3245E201300849BD5 /* Release (Production) */,
+				1CE560102448BD1D0078914E /* Debug */,
+				1CE560112448BD1D0078914E /* Release */,
+				1C05BE2A245F39D700849BD5 /* Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Debug (Develpment)";
+			defaultConfigurationName = Release;
 		};
 		1CE560122448BD1D0078914E /* Build configuration list for PBXNativeTarget "ConcreteChallengeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1CE560132448BD1D0078914E /* Debug (Production) */,
-				1C05BDDB245E1F1600849BD5 /* Debug (Staging) */,
-				1C05BDDE245E1F2600849BD5 /* Debug (Develpment) */,
-				1CE560142448BD1D0078914E /* Release (Development) */,
-				1C05BDE1245E200700849BD5 /* Release (Staging) */,
-				1C05BDE4245E201300849BD5 /* Release (Production) */,
+				1CE560132448BD1D0078914E /* Debug */,
+				1CE560142448BD1D0078914E /* Release */,
+				1C05BE2B245F39D700849BD5 /* Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Debug (Develpment)";
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
