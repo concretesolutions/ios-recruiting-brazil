@@ -28,7 +28,10 @@ class FavoritesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        tableView.accessibilityIdentifier = Accessibility.favoritesTable.identifier
+        tableView.accessibilityLabel = Accessibility.favoritesTable.label
+        
         tableView.register(UINib(nibName: "FavoriteTableViewCell", bundle: nil), forCellReuseIdentifier: "FavoriteTableViewCell")
         tableView.rowHeight = 118
 
@@ -41,7 +44,7 @@ class FavoritesTableViewController: UITableViewController {
 
     fileprivate func setupSearchBar() {
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Candies"
+        searchController.searchBar.placeholder = "Search"
         navigationItem.searchController = searchController
 
         searchController.searchBar

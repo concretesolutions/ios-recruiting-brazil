@@ -16,4 +16,9 @@ enum Accessibility {
         identifier: "Movies::CollectionView",
         label: "Collection of movies"
     )
+    
+    static let favoritesTable = AccessibilityIdentifierLabel(
+        identifier: "Favorites::TableView",
+        label: "Lista de favoritos"
+    )
 }

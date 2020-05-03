@@ -93,7 +93,7 @@ class PopularMoviesCollectionViewController: UICollectionViewController {
             .disposed(by: disposeBag)
 
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Candies"
+        searchController.searchBar.placeholder = "Search"
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }

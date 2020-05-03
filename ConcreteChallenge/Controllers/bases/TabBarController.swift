@@ -27,6 +27,9 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.isAccessibilityElement = true
+        self.accessibilityLabel = "tabBar"
+        
         let movies = setupTab(.movies, backgroundColor: .yellow)
         let favorites = setupTab(.favorites, backgroundColor: .black)
 

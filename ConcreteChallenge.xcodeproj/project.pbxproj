@@ -15,6 +15,7 @@
 		1C05BE22245F363C00849BD5 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C05BE1C245F363C00849BD5 /* Theme.swift */; };
 		1C05BE24245F36F000849BD5 /* ErrorReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C05BE23245F36F000849BD5 /* ErrorReporting.swift */; };
 		1C05BE26245F37BA00849BD5 /* Date+CurrentYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C05BE25245F37BA00849BD5 /* Date+CurrentYear.swift */; };
+		1C05BE33245F3AC800849BD5 /* ConcreteChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C05BE32245F3AC800849BD5 /* ConcreteChallengeUITests.swift */; };
 		1C72CA842458D9C400501A7F /* FilterItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C72CA822458D9C400501A7F /* FilterItemTableViewCell.swift */; };
 		1C72CA852458D9C400501A7F /* FilterItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C72CA832458D9C400501A7F /* FilterItemTableViewCell.xib */; };
 		1C72CA872458E14500501A7F /* ToolbarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C72CA862458E14500501A7F /* ToolbarPickerView.swift */; };
@@ -100,6 +101,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1C05BE35245F3AC800849BD5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1CE55FE52448BD1B0078914E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1CE55FEC2448BD1B0078914E;
+			remoteInfo = ConcreteChallenge;
+		};
 		1CE560072448BD1D0078914E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1CE55FE52448BD1B0078914E /* Project object */;
@@ -119,6 +127,9 @@
 		1C05BE1C245F363C00849BD5 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		1C05BE23245F36F000849BD5 /* ErrorReporting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorReporting.swift; sourceTree = "<group>"; };
 		1C05BE25245F37BA00849BD5 /* Date+CurrentYear.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+CurrentYear.swift"; sourceTree = "<group>"; };
+		1C05BE30245F3AC800849BD5 /* ConcreteChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConcreteChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C05BE32245F3AC800849BD5 /* ConcreteChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteChallengeUITests.swift; sourceTree = "<group>"; };
+		1C05BE34245F3AC800849BD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C72CA822458D9C400501A7F /* FilterItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterItemTableViewCell.swift; sourceTree = "<group>"; };
 		1C72CA832458D9C400501A7F /* FilterItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterItemTableViewCell.xib; sourceTree = "<group>"; };
 		1C72CA862458E14500501A7F /* ToolbarPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarPickerView.swift; sourceTree = "<group>"; };
@@ -216,6 +227,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1C05BE2D245F3AC800849BD5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1CE55FEA2448BD1B0078914E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -246,6 +264,15 @@
 				1C05BE1B245F363C00849BD5 /* Env.plist */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		1C05BE31245F3AC800849BD5 /* ConcreteChallengeUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1C05BE32245F3AC800849BD5 /* ConcreteChallengeUITests.swift */,
+				1C05BE34245F3AC800849BD5 /* Info.plist */,
+			);
+			path = ConcreteChallengeUITests;
 			sourceTree = "<group>";
 		};
 		1C72CA8A2458F20300501A7F /* Filters */ = {
@@ -294,6 +321,7 @@
 			children = (
 				1CE55FEF2448BD1B0078914E /* ConcreteChallenge */,
 				1CE560092448BD1D0078914E /* ConcreteChallengeTests */,
+				1C05BE31245F3AC800849BD5 /* ConcreteChallengeUITests */,
 				1CE55FEE2448BD1B0078914E /* Products */,
 				C8067277010FB77D58417C63 /* Pods */,
 				7E1128EA51FC4917EFBB4EFA /* Frameworks */,
@@ -305,6 +333,7 @@
 			children = (
 				1CE55FED2448BD1B0078914E /* ConcreteChallenge.app */,
 				1CE560062448BD1D0078914E /* ConcreteChallengeTests.xctest */,
+				1C05BE30245F3AC800849BD5 /* ConcreteChallengeUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -571,6 +600,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1C05BE2F245F3AC800849BD5 /* ConcreteChallengeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1C05BE37245F3AC900849BD5 /* Build configuration list for PBXNativeTarget "ConcreteChallengeUITests" */;
+			buildPhases = (
+				1C05BE2C245F3AC800849BD5 /* Sources */,
+				1C05BE2D245F3AC800849BD5 /* Frameworks */,
+				1C05BE2E245F3AC800849BD5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1C05BE36245F3AC800849BD5 /* PBXTargetDependency */,
+			);
+			name = ConcreteChallengeUITests;
+			productName = ConcreteChallengeUITests;
+			productReference = 1C05BE30245F3AC800849BD5 /* ConcreteChallengeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		1CE55FEC2448BD1B0078914E /* ConcreteChallenge */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1CE5600F2448BD1D0078914E /* Build configuration list for PBXNativeTarget "ConcreteChallenge" */;
@@ -622,6 +669,10 @@
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Erick Martins Pinheiro";
 				TargetAttributes = {
+					1C05BE2F245F3AC800849BD5 = {
+						CreatedOnToolsVersion = 11.4;
+						TestTargetID = 1CE55FEC2448BD1B0078914E;
+					};
 					1CE55FEC2448BD1B0078914E = {
 						CreatedOnToolsVersion = 11.4;
 					};
@@ -646,11 +697,19 @@
 			targets = (
 				1CE55FEC2448BD1B0078914E /* ConcreteChallenge */,
 				1CE560052448BD1D0078914E /* ConcreteChallengeTests */,
+				1C05BE2F245F3AC800849BD5 /* ConcreteChallengeUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1C05BE2E245F3AC800849BD5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1CE55FEB2448BD1B0078914E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -802,6 +861,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1C05BE2C245F3AC800849BD5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C05BE33245F3AC800849BD5 /* ConcreteChallengeUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1CE55FE92448BD1B0078914E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -891,6 +958,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1C05BE36245F3AC800849BD5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1CE55FEC2448BD1B0078914E /* ConcreteChallenge */;
+			targetProxy = 1C05BE35245F3AC800849BD5 /* PBXContainerItemProxy */;
+		};
 		1CE560082448BD1D0078914E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1CE55FEC2448BD1B0078914E /* ConcreteChallenge */;
@@ -1007,6 +1079,63 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConcreteChallenge.app/ConcreteChallenge";
+			};
+			name = Staging;
+		};
+		1C05BE38245F3AC900849BD5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SZ4THN2W8Q;
+				INFOPLIST_FILE = ConcreteChallengeUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ConcreteChallenge;
+			};
+			name = Debug;
+		};
+		1C05BE39245F3AC900849BD5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SZ4THN2W8Q;
+				INFOPLIST_FILE = ConcreteChallengeUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ConcreteChallenge;
+			};
+			name = Release;
+		};
+		1C05BE3A245F3AC900849BD5 /* Staging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SZ4THN2W8Q;
+				INFOPLIST_FILE = ConcreteChallengeUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ConcreteChallenge;
 			};
 			name = Staging;
 		};
@@ -1219,6 +1348,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1C05BE37245F3AC900849BD5 /* Build configuration list for PBXNativeTarget "ConcreteChallengeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C05BE38245F3AC900849BD5 /* Debug */,
+				1C05BE39245F3AC900849BD5 /* Release */,
+				1C05BE3A245F3AC900849BD5 /* Staging */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1CE55FE82448BD1B0078914E /* Build configuration list for PBXProject "ConcreteChallenge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

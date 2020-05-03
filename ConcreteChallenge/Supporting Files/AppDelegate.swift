@@ -15,14 +15,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
-        ErrorReporting.start()
-
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-
-        window?.rootViewController = TabBarController()
-        window?.makeKeyAndVisible()
+    private func setupApp() {
+        
+        if isUITesting {
+            // Reseting Core Data
+            do {
+                try PersistanceManager.clear(from: "FavoriteData")
+                try PersistanceManager.clear(from: "GenreData")
+            } catch {
+                print("Unable to clear data")
+            }
+        } else {
+            ErrorReporting.start()
+        }
 
         mainStore.dispatch(Persistance.loadPesistent(then: [
             InfraThunk.startReachability(then: [
@@ -30,6 +35,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 MovieThunk.fetchPopular(at: 1)
             ])
         ]))
+        
+        
+    }
+    
+    let isUITesting: Bool = {
+        return ProcessInfo.processInfo.arguments.contains("UITesting")
+    }()
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+        setupApp()
+
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+
+        window?.rootViewController = TabBarController()
+        window?.makeKeyAndVisible()
+
         return true
     }
 
