@@ -17,7 +17,7 @@ class InfraThunk {
     static func startReachability(then nextActions: [Action]) -> Thunk<RootState> {
 
         return Thunk<RootState> { dispatch, getState in
-            guard let state = getState() else { return }
+            guard getState() != nil else { return }
 
             var nextActions = nextActions
 

@@ -17,11 +17,7 @@ class Persistance {
         return Thunk<RootState> { dispatch, getState in
             if getState() == nil { return }
 
-            do {
-                dispatch(FavoriteThunk.refreshFromPersistance())
-            } catch let error as NSError {
-                print("Could not fetch. \(error), \(error.userInfo)")
-            }
+            dispatch(FavoriteThunk.refreshFromPersistance())
 
             nextActions.forEach(dispatch)
         }
