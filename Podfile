@@ -20,3 +20,7 @@ end
 target 'ConcreteChallengeTests' do
   pod 'ReSwiftThunk/ExpectThunk'
 end
+
+target 'ConcreteChallengeUITests' do
+  pod 'ReSwiftThunk/ExpectThunk'
+end

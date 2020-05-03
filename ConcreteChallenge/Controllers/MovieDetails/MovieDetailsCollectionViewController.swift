@@ -57,6 +57,8 @@ class MovieDetailsCollectionViewController: UICollectionViewController, UICollec
             target: nil,
             action: nil
         )
+        
+        self.favoriteButon.accessibilityIdentifier = "MovieDetails::Favorites"
         self.favoriteButon.isEnabled = false
         self.navigationItem.rightBarButtonItems = [self.favoriteButon]
         navigationItem.largeTitleDisplayMode = .never

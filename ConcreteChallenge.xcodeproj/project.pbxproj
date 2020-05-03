@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1C05BDD8245DD4F500849BD5 /* ErrorReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C05BDD7245DD4F500849BD5 /* ErrorReporting.swift */; };
-		1C05BDE7245E206800849BD5 /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1C05BDE6245E206800849BD5 /* Development.xcconfig */; };
+		1C05BE03245F1E2C00849BD5 /* ConcreteChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C05BE02245F1E2C00849BD5 /* ConcreteChallengeUITests.swift */; };
+		1C05BE0F245F26C800849BD5 /* Env.development.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C05BE0E245F26C800849BD5 /* Env.development.plist */; };
+		1C05BE11245F29AB00849BD5 /* Env.staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C05BE10245F29AB00849BD5 /* Env.staging.plist */; };
+		1C05BE13245F29E200849BD5 /* Env.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C05BE12245F29E200849BD5 /* Env.plist */; };
 		1C72CA842458D9C400501A7F /* FilterItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C72CA822458D9C400501A7F /* FilterItemTableViewCell.swift */; };
 		1C72CA852458D9C400501A7F /* FilterItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C72CA832458D9C400501A7F /* FilterItemTableViewCell.xib */; };
 		1C72CA872458E14500501A7F /* ToolbarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C72CA862458E14500501A7F /* ToolbarPickerView.swift */; };
@@ -96,9 +99,17 @@
 		1CFD2EDF245DD07D004C8924 /* Date+CurrentYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFD2EDE245DD07D004C8924 /* Date+CurrentYear.swift */; };
 		318D73BF6A046B22015CAEBA /* Pods_ConcreteChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1D47D34ADA27B5854A46A6 /* Pods_ConcreteChallenge.framework */; };
 		6E17ADB63884CAAE6C4A57F0 /* libPods-ConcreteChallengeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 244112B357EE5BC8FC148B53 /* libPods-ConcreteChallengeTests.a */; };
+		9056068B0FCE6AAA2514891D /* libPods-ConcreteChallengeUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC10FC9443A602641110FD2 /* libPods-ConcreteChallengeUITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1C05BE05245F1E2C00849BD5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1CE55FE52448BD1B0078914E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1CE55FEC2448BD1B0078914E;
+			remoteInfo = ConcreteChallenge;
+		};
 		1CE560072448BD1D0078914E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1CE55FE52448BD1B0078914E /* Project object */;
@@ -109,13 +120,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		03AC5EA9AA5BAE096BB08979 /* Pods-ConcreteChallengeTests.debug (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug (production).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug (production).xcconfig"; sourceTree = "<group>"; };
 		106E2EC135D788BAF2894CDE /* Pods-ConcreteChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1A1D47D34ADA27B5854A46A6 /* Pods_ConcreteChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConcreteChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C05BDD7245DD4F500849BD5 /* ErrorReporting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorReporting.swift; sourceTree = "<group>"; };
-		1C05BDE6245E206800849BD5 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
-		1C05BDE8245E22D500849BD5 /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
-		1C05BDE9245E22EB00849BD5 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
+		1C05BE00245F1E2B00849BD5 /* ConcreteChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConcreteChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C05BE02245F1E2C00849BD5 /* ConcreteChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteChallengeUITests.swift; sourceTree = "<group>"; };
+		1C05BE04245F1E2C00849BD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C05BE0E245F26C800849BD5 /* Env.development.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Env.development.plist; sourceTree = "<group>"; };
+		1C05BE10245F29AB00849BD5 /* Env.staging.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Env.staging.plist; sourceTree = "<group>"; };
+		1C05BE12245F29E200849BD5 /* Env.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Env.plist; sourceTree = "<group>"; };
 		1C72CA822458D9C400501A7F /* FilterItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterItemTableViewCell.swift; sourceTree = "<group>"; };
 		1C72CA832458D9C400501A7F /* FilterItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterItemTableViewCell.xib; sourceTree = "<group>"; };
 		1C72CA862458E14500501A7F /* ToolbarPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarPickerView.swift; sourceTree = "<group>"; };
@@ -206,28 +219,43 @@
 		1CFD2ED7245B68EA004C8924 /* AccessibilityIdentifierLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifierLabel.swift; sourceTree = "<group>"; };
 		1CFD2EDE245DD07D004C8924 /* Date+CurrentYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+CurrentYear.swift"; sourceTree = "<group>"; };
 		244112B357EE5BC8FC148B53 /* libPods-ConcreteChallengeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ConcreteChallengeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C96C32FBCFD0451759BB755 /* Pods-ConcreteChallengeTests.debug (develpment).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug (develpment).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug (develpment).xcconfig"; sourceTree = "<group>"; };
 		34A413883CF8046D9BDDF4F7 /* Pods-ConcreteChallenge.release (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.release (staging).xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.release (staging).xcconfig"; sourceTree = "<group>"; };
+		39B9B9D315B7ACE72D030573 /* Pods-ConcreteChallengeTests.debug (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug (staging).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug (staging).xcconfig"; sourceTree = "<group>"; };
 		3A44F710B49DA7E953402FEE /* Pods-ConcreteChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3C3A5C7F9EDC6F58245B7908 /* Pods-ConcreteChallengeTests.release (development).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.release (development).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.release (development).xcconfig"; sourceTree = "<group>"; };
 		3E7A493C2F5C6F7A5A50398A /* Pods-ConcreteChallengeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.release.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.release.xcconfig"; sourceTree = "<group>"; };
-		3FEC0AA12440E33EFC25A17F /* Pods-ConcreteChallengeTests.release (development).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.release (development).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.release (development).xcconfig"; sourceTree = "<group>"; };
 		4F13CD522E1B4C04BBE79BEE /* Pods-ConcreteChallenge-ConcreteChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge-ConcreteChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge-ConcreteChallengeTests/Pods-ConcreteChallenge-ConcreteChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
+		50E24BE579D1F1DAC6393E9F /* Pods-ConcreteChallengeUITests.debug (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.debug (staging).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.debug (staging).xcconfig"; sourceTree = "<group>"; };
 		5428544F3B4685DA7E4FFC05 /* Pods-ConcreteChallenge.release (development).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.release (development).xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.release (development).xcconfig"; sourceTree = "<group>"; };
 		6049B6F58405618AC573117A /* Pods-ConcreteChallenge.debug (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.debug (production).xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.debug (production).xcconfig"; sourceTree = "<group>"; };
+		6886AEE51E13E73E9FF4F550 /* Pods-ConcreteChallengeTests.debug (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug (production).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug (production).xcconfig"; sourceTree = "<group>"; };
 		69C226BC594F5A268B308250 /* Pods-ConcreteChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
 		6BC3B1E1680FFCE3C341608B /* Pods-ConcreteChallenge.release (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.release (production).xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.release (production).xcconfig"; sourceTree = "<group>"; };
+		82B0FFC0C37FEB55F58948D4 /* Pods-ConcreteChallengeUITests.release (development).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.release (development).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.release (development).xcconfig"; sourceTree = "<group>"; };
 		83D41C1EC5989828FEC22B88 /* Pods-ConcreteChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.release.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.release.xcconfig"; sourceTree = "<group>"; };
-		9045ED239DC9448AD886853D /* Pods-ConcreteChallengeTests.debug (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug (staging).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug (staging).xcconfig"; sourceTree = "<group>"; };
+		8646F93A54EDFBB064F6B2B9 /* Pods-ConcreteChallengeUITests.debug (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.debug (production).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.debug (production).xcconfig"; sourceTree = "<group>"; };
+		99395BC811A9304976086A7B /* Pods-ConcreteChallengeUITests.debug (develpment).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.debug (develpment).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.debug (develpment).xcconfig"; sourceTree = "<group>"; };
 		AE66F46734820C4E246F18DB /* Pods-ConcreteChallenge.debug (develpment).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.debug (develpment).xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.debug (develpment).xcconfig"; sourceTree = "<group>"; };
 		B3DA336A935E11E5DE1E7EFD /* Pods-ConcreteChallenge.debug (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.debug (staging).xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.debug (staging).xcconfig"; sourceTree = "<group>"; };
-		B7969DED791DCCC4186F96DB /* Pods-ConcreteChallengeTests.debug (develpment).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug (develpment).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug (develpment).xcconfig"; sourceTree = "<group>"; };
+		B63F5CC2DE525B6FC02DC434 /* Pods-ConcreteChallengeUITests.release (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.release (staging).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.release (staging).xcconfig"; sourceTree = "<group>"; };
+		B923EF493F1016171143C3E8 /* Pods-ConcreteChallengeTests.release (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.release (staging).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.release (staging).xcconfig"; sourceTree = "<group>"; };
 		BBF0D74F2954A18E9A1D1B66 /* Pods-ConcreteChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.debug.xcconfig"; sourceTree = "<group>"; };
+		CBE42CE756D850FF21D3A172 /* Pods-ConcreteChallengeUITests.release (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.release (production).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.release (production).xcconfig"; sourceTree = "<group>"; };
 		CEC10FC9443A602641110FD2 /* libPods-ConcreteChallengeUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ConcreteChallengeUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E60930FB9BE381E8B4F5F51F /* Pods-ConcreteChallengeTests.release (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.release (staging).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.release (staging).xcconfig"; sourceTree = "<group>"; };
 		F42F81A8F5A4304E64C51964 /* Pods-ConcreteChallenge-ConcreteChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge-ConcreteChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge-ConcreteChallengeTests/Pods-ConcreteChallenge-ConcreteChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
-		FF62724F0F2EA7A09A882E1B /* Pods-ConcreteChallengeTests.release (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.release (production).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.release (production).xcconfig"; sourceTree = "<group>"; };
+		FF4389232013BC386748E8C5 /* Pods-ConcreteChallengeTests.release (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.release (production).xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.release (production).xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1C05BDFD245F1E2B00849BD5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9056068B0FCE6AAA2514891D /* libPods-ConcreteChallengeUITests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1CE55FEA2448BD1B0078914E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -253,11 +281,20 @@
 				1CE5603D244A63060078914E /* Environment.swift */,
 				1C7BD210245764C8004FECF4 /* Theme.swift */,
 				1CFD2ED7245B68EA004C8924 /* AccessibilityIdentifierLabel.swift */,
-				1C05BDE6245E206800849BD5 /* Development.xcconfig */,
-				1C05BDE8245E22D500849BD5 /* Production.xcconfig */,
-				1C05BDE9245E22EB00849BD5 /* Staging.xcconfig */,
+				1C05BE0E245F26C800849BD5 /* Env.development.plist */,
+				1C05BE10245F29AB00849BD5 /* Env.staging.plist */,
+				1C05BE12245F29E200849BD5 /* Env.plist */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		1C05BE01245F1E2C00849BD5 /* ConcreteChallengeUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1C05BE02245F1E2C00849BD5 /* ConcreteChallengeUITests.swift */,
+				1C05BE04245F1E2C00849BD5 /* Info.plist */,
+			);
+			path = ConcreteChallengeUITests;
 			sourceTree = "<group>";
 		};
 		1C72CA8A2458F20300501A7F /* Filters */ = {
@@ -306,6 +343,7 @@
 			children = (
 				1CE55FEF2448BD1B0078914E /* ConcreteChallenge */,
 				1CE560092448BD1D0078914E /* ConcreteChallengeTests */,
+				1C05BE01245F1E2C00849BD5 /* ConcreteChallengeUITests */,
 				1CE55FEE2448BD1B0078914E /* Products */,
 				C8067277010FB77D58417C63 /* Pods */,
 				7E1128EA51FC4917EFBB4EFA /* Frameworks */,
@@ -317,6 +355,7 @@
 			children = (
 				1CE55FED2448BD1B0078914E /* ConcreteChallenge.app */,
 				1CE560062448BD1D0078914E /* ConcreteChallengeTests.xctest */,
+				1C05BE00245F1E2B00849BD5 /* ConcreteChallengeUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -575,12 +614,18 @@
 				5428544F3B4685DA7E4FFC05 /* Pods-ConcreteChallenge.release (development).xcconfig */,
 				34A413883CF8046D9BDDF4F7 /* Pods-ConcreteChallenge.release (staging).xcconfig */,
 				6BC3B1E1680FFCE3C341608B /* Pods-ConcreteChallenge.release (production).xcconfig */,
-				03AC5EA9AA5BAE096BB08979 /* Pods-ConcreteChallengeTests.debug (production).xcconfig */,
-				9045ED239DC9448AD886853D /* Pods-ConcreteChallengeTests.debug (staging).xcconfig */,
-				B7969DED791DCCC4186F96DB /* Pods-ConcreteChallengeTests.debug (develpment).xcconfig */,
-				3FEC0AA12440E33EFC25A17F /* Pods-ConcreteChallengeTests.release (development).xcconfig */,
-				E60930FB9BE381E8B4F5F51F /* Pods-ConcreteChallengeTests.release (staging).xcconfig */,
-				FF62724F0F2EA7A09A882E1B /* Pods-ConcreteChallengeTests.release (production).xcconfig */,
+				6886AEE51E13E73E9FF4F550 /* Pods-ConcreteChallengeTests.debug (production).xcconfig */,
+				39B9B9D315B7ACE72D030573 /* Pods-ConcreteChallengeTests.debug (staging).xcconfig */,
+				2C96C32FBCFD0451759BB755 /* Pods-ConcreteChallengeTests.debug (develpment).xcconfig */,
+				3C3A5C7F9EDC6F58245B7908 /* Pods-ConcreteChallengeTests.release (development).xcconfig */,
+				B923EF493F1016171143C3E8 /* Pods-ConcreteChallengeTests.release (staging).xcconfig */,
+				FF4389232013BC386748E8C5 /* Pods-ConcreteChallengeTests.release (production).xcconfig */,
+				8646F93A54EDFBB064F6B2B9 /* Pods-ConcreteChallengeUITests.debug (production).xcconfig */,
+				50E24BE579D1F1DAC6393E9F /* Pods-ConcreteChallengeUITests.debug (staging).xcconfig */,
+				99395BC811A9304976086A7B /* Pods-ConcreteChallengeUITests.debug (develpment).xcconfig */,
+				82B0FFC0C37FEB55F58948D4 /* Pods-ConcreteChallengeUITests.release (development).xcconfig */,
+				B63F5CC2DE525B6FC02DC434 /* Pods-ConcreteChallengeUITests.release (staging).xcconfig */,
+				CBE42CE756D850FF21D3A172 /* Pods-ConcreteChallengeUITests.release (production).xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -588,6 +633,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1C05BDFF245F1E2B00849BD5 /* ConcreteChallengeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1C05BE07245F1E2C00849BD5 /* Build configuration list for PBXNativeTarget "ConcreteChallengeUITests" */;
+			buildPhases = (
+				5DDDFC9A564CFFBC9F98B2F4 /* [CP] Check Pods Manifest.lock */,
+				1C05BDFC245F1E2B00849BD5 /* Sources */,
+				1C05BDFD245F1E2B00849BD5 /* Frameworks */,
+				1C05BDFE245F1E2B00849BD5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1C05BE06245F1E2C00849BD5 /* PBXTargetDependency */,
+			);
+			name = ConcreteChallengeUITests;
+			productName = ConcreteChallengeUITests;
+			productReference = 1C05BE00245F1E2B00849BD5 /* ConcreteChallengeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		1CE55FEC2448BD1B0078914E /* ConcreteChallenge */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1CE5600F2448BD1D0078914E /* Build configuration list for PBXNativeTarget "ConcreteChallenge" */;
@@ -597,6 +661,7 @@
 				1CE55FEA2448BD1B0078914E /* Frameworks */,
 				1CE55FEB2448BD1B0078914E /* Resources */,
 				3EA0F31B31158E7D41F60A54 /* [CP] Embed Pods Frameworks */,
+				1C05BE15245F2C5500849BD5 /* Copy Environment Config PList */,
 				1C72CAAA245A41E300501A7F /* Swift Lint */,
 				1CFD2EDB245DBB8C004C8924 /* Sentry Upload */,
 			);
@@ -639,6 +704,10 @@
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Erick Martins Pinheiro";
 				TargetAttributes = {
+					1C05BDFF245F1E2B00849BD5 = {
+						CreatedOnToolsVersion = 11.4;
+						TestTargetID = 1CE55FEC2448BD1B0078914E;
+					};
 					1CE55FEC2448BD1B0078914E = {
 						CreatedOnToolsVersion = 11.4;
 					};
@@ -663,21 +732,30 @@
 			targets = (
 				1CE55FEC2448BD1B0078914E /* ConcreteChallenge */,
 				1CE560052448BD1D0078914E /* ConcreteChallengeTests */,
+				1C05BDFF245F1E2B00849BD5 /* ConcreteChallengeUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1C05BDFE245F1E2B00849BD5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1CE55FEB2448BD1B0078914E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				1CE5602C2449EED30078914E /* Colors.xcassets in Resources */,
 				1CE56057244B8C040078914E /* PopularMovieCollectionViewCell.xib in Resources */,
-				1C05BDE7245E206800849BD5 /* Development.xcconfig in Resources */,
 				1CE560002448BD1D0078914E /* LaunchScreen.storyboard in Resources */,
+				1C05BE11245F29AB00849BD5 /* Env.staging.plist in Resources */,
 				1C7BD1F52454F859004FECF4 /* MovieDetailsHeaderView.xib in Resources */,
 				1CE56086244E5B070078914E /* EmptyStates.xcassets in Resources */,
+				1C05BE13245F29E200849BD5 /* Env.plist in Resources */,
 				1CE55FFD2448BD1D0078914E /* Assets.xcassets in Resources */,
 				1C72CA942459E64000501A7F /* LoadingMoreFooterCollectionReusableView.xib in Resources */,
 				1C72CA852458D9C400501A7F /* FilterItemTableViewCell.xib in Resources */,
@@ -686,6 +764,7 @@
 				1CE5607A244E3F2E0078914E /* EmptyStateView.xib in Resources */,
 				1CE5601F2449D11D0078914E /* favorites.storyboard in Resources */,
 				1CE5601B244902B40078914E /* movies.storyboard in Resources */,
+				1C05BE0F245F26C800849BD5 /* Env.development.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,6 +778,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1C05BE15245F2C5500849BD5 /* Copy Environment Config PList */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Environment Config PList";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Coping environment settings\"\n\nENV_FILE_PATH=$SRCROOT/ConcreteChallenge/Config/Env${BUNDLE_SUFFIX}.plist\n\nBUILD_APP_DIR=${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}\n\ncp \"$ENV_FILE_PATH\" \"$BUILD_APP_DIR/Config.plist\"\n";
+		};
 		1C72CAAA245A41E300501A7F /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -774,6 +871,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5DDDFC9A564CFFBC9F98B2F4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ConcreteChallengeUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B71D51AB667919421EE42DD2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -799,6 +918,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1C05BDFC245F1E2B00849BD5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C05BE03245F1E2C00849BD5 /* ConcreteChallengeUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1CE55FE92448BD1B0078914E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -889,6 +1016,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1C05BE06245F1E2C00849BD5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1CE55FEC2448BD1B0078914E /* ConcreteChallenge */;
+			targetProxy = 1C05BE05245F1E2C00849BD5 /* PBXContainerItemProxy */;
+		};
 		1CE560082448BD1D0078914E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1CE55FEC2448BD1B0078914E /* ConcreteChallenge */;
@@ -910,7 +1042,7 @@
 /* Begin XCBuildConfiguration section */
 		1C05BDD9245E1F1600849BD5 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C05BDE9245E22EB00849BD5 /* Staging.xcconfig */;
+			baseConfigurationReference = B3DA336A935E11E5DE1E7EFD /* Pods-ConcreteChallenge.debug (staging).xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -971,9 +1103,12 @@
 		};
 		1C05BDDA245E1F1600849BD5 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C05BDE9245E22EB00849BD5 /* Staging.xcconfig */;
+			baseConfigurationReference = B3DA336A935E11E5DE1E7EFD /* Pods-ConcreteChallenge.debug (staging).xcconfig */;
 			buildSettings = {
+				APP_BUNDLE_ID = "com.concrete.ConcreteChallenge$(BUNDLE_SUFFIX)";
+				APP_NAME = "Movies (staging)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_SUFFIX = .staging;
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = SZ4THN2W8Q;
@@ -992,7 +1127,7 @@
 		};
 		1C05BDDB245E1F1600849BD5 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C05BDE9245E22EB00849BD5 /* Staging.xcconfig */;
+			baseConfigurationReference = 39B9B9D315B7ACE72D030573 /* Pods-ConcreteChallengeTests.debug (staging).xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1014,7 +1149,7 @@
 		};
 		1C05BDDC245E1F2600849BD5 /* Debug (Develpment) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C05BDE6245E206800849BD5 /* Development.xcconfig */;
+			baseConfigurationReference = AE66F46734820C4E246F18DB /* Pods-ConcreteChallenge.debug (develpment).xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1075,9 +1210,12 @@
 		};
 		1C05BDDD245E1F2600849BD5 /* Debug (Develpment) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C05BDE6245E206800849BD5 /* Development.xcconfig */;
+			baseConfigurationReference = AE66F46734820C4E246F18DB /* Pods-ConcreteChallenge.debug (develpment).xcconfig */;
 			buildSettings = {
+				APP_BUNDLE_ID = "com.concrete.ConcreteChallenge$(BUNDLE_SUFFIX)";
+				APP_NAME = "Movies (dev)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_SUFFIX = .development;
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = SZ4THN2W8Q;
@@ -1096,7 +1234,7 @@
 		};
 		1C05BDDE245E1F2600849BD5 /* Debug (Develpment) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C05BDE6245E206800849BD5 /* Development.xcconfig */;
+			baseConfigurationReference = 2C96C32FBCFD0451759BB755 /* Pods-ConcreteChallengeTests.debug (develpment).xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1118,7 +1256,7 @@
 		};
 		1C05BDDF245E200700849BD5 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C05BDE9245E22EB00849BD5 /* Staging.xcconfig */;
+			baseConfigurationReference = 34A413883CF8046D9BDDF4F7 /* Pods-ConcreteChallenge.release (staging).xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1173,9 +1311,12 @@
 		};
 		1C05BDE0245E200700849BD5 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C05BDE9245E22EB00849BD5 /* Staging.xcconfig */;
+			baseConfigurationReference = 34A413883CF8046D9BDDF4F7 /* Pods-ConcreteChallenge.release (staging).xcconfig */;
 			buildSettings = {
+				APP_BUNDLE_ID = "com.concrete.ConcreteChallenge$(BUNDLE_SUFFIX)";
+				APP_NAME = "Movies (staging)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_SUFFIX = .staging;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SZ4THN2W8Q;
 				INFOPLIST_FILE = "ConcreteChallenge/Supporting Files/Info.plist";
@@ -1193,7 +1334,7 @@
 		};
 		1C05BDE1245E200700849BD5 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C05BDE9245E22EB00849BD5 /* Staging.xcconfig */;
+			baseConfigurationReference = B923EF493F1016171143C3E8 /* Pods-ConcreteChallengeTests.release (staging).xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1215,7 +1356,7 @@
 		};
 		1C05BDE2245E201300849BD5 /* Release (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C05BDE8245E22D500849BD5 /* Production.xcconfig */;
+			baseConfigurationReference = 6BC3B1E1680FFCE3C341608B /* Pods-ConcreteChallenge.release (production).xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1270,9 +1411,12 @@
 		};
 		1C05BDE3245E201300849BD5 /* Release (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C05BDE8245E22D500849BD5 /* Production.xcconfig */;
+			baseConfigurationReference = 6BC3B1E1680FFCE3C341608B /* Pods-ConcreteChallenge.release (production).xcconfig */;
 			buildSettings = {
+				APP_BUNDLE_ID = "com.concrete.ConcreteChallenge$(BUNDLE_SUFFIX)";
+				APP_NAME = Movies;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_SUFFIX = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SZ4THN2W8Q;
 				INFOPLIST_FILE = "ConcreteChallenge/Supporting Files/Info.plist";
@@ -1290,7 +1434,7 @@
 		};
 		1C05BDE4245E201300849BD5 /* Release (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C05BDE8245E22D500849BD5 /* Production.xcconfig */;
+			baseConfigurationReference = FF4389232013BC386748E8C5 /* Pods-ConcreteChallengeTests.release (production).xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1310,9 +1454,435 @@
 			};
 			name = "Release (Production)";
 		};
+		1C05BE08245F1E2C00849BD5 /* Debug (Production) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8646F93A54EDFBB064F6B2B9 /* Pods-ConcreteChallengeUITests.debug (production).xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = SZ4THN2W8Q;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = ConcreteChallengeUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ConcreteChallenge;
+			};
+			name = "Debug (Production)";
+		};
+		1C05BE09245F1E2C00849BD5 /* Debug (Staging) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50E24BE579D1F1DAC6393E9F /* Pods-ConcreteChallengeUITests.debug (staging).xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = SZ4THN2W8Q;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = ConcreteChallengeUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ConcreteChallenge;
+			};
+			name = "Debug (Staging)";
+		};
+		1C05BE0A245F1E2C00849BD5 /* Debug (Develpment) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99395BC811A9304976086A7B /* Pods-ConcreteChallengeUITests.debug (develpment).xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = SZ4THN2W8Q;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = ConcreteChallengeUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ConcreteChallenge;
+			};
+			name = "Debug (Develpment)";
+		};
+		1C05BE0B245F1E2C00849BD5 /* Release (Development) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82B0FFC0C37FEB55F58948D4 /* Pods-ConcreteChallengeUITests.release (development).xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = SZ4THN2W8Q;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = ConcreteChallengeUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ConcreteChallenge;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release (Development)";
+		};
+		1C05BE0C245F1E2C00849BD5 /* Release (Staging) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B63F5CC2DE525B6FC02DC434 /* Pods-ConcreteChallengeUITests.release (staging).xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = SZ4THN2W8Q;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = ConcreteChallengeUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ConcreteChallenge;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release (Staging)";
+		};
+		1C05BE0D245F1E2C00849BD5 /* Release (Production) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CBE42CE756D850FF21D3A172 /* Pods-ConcreteChallengeUITests.release (production).xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = SZ4THN2W8Q;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = ConcreteChallengeUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.concrete.ConcreteChallengeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ConcreteChallenge;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release (Production)";
+		};
 		1CE5600D2448BD1D0078914E /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C05BDE8245E22D500849BD5 /* Production.xcconfig */;
+			baseConfigurationReference = 6049B6F58405618AC573117A /* Pods-ConcreteChallenge.debug (production).xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1373,7 +1943,7 @@
 		};
 		1CE5600E2448BD1D0078914E /* Release (Development) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C05BDE6245E206800849BD5 /* Development.xcconfig */;
+			baseConfigurationReference = 5428544F3B4685DA7E4FFC05 /* Pods-ConcreteChallenge.release (development).xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1428,9 +1998,12 @@
 		};
 		1CE560102448BD1D0078914E /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C05BDE8245E22D500849BD5 /* Production.xcconfig */;
+			baseConfigurationReference = 6049B6F58405618AC573117A /* Pods-ConcreteChallenge.debug (production).xcconfig */;
 			buildSettings = {
+				APP_BUNDLE_ID = "com.concrete.ConcreteChallenge$(BUNDLE_SUFFIX)";
+				APP_NAME = Movies;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_SUFFIX = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = SZ4THN2W8Q;
@@ -1449,9 +2022,12 @@
 		};
 		1CE560112448BD1D0078914E /* Release (Development) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C05BDE6245E206800849BD5 /* Development.xcconfig */;
+			baseConfigurationReference = 5428544F3B4685DA7E4FFC05 /* Pods-ConcreteChallenge.release (development).xcconfig */;
 			buildSettings = {
+				APP_BUNDLE_ID = "com.concrete.ConcreteChallenge$(BUNDLE_SUFFIX)";
+				APP_NAME = "Movies (dev)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_SUFFIX = .development;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SZ4THN2W8Q;
 				INFOPLIST_FILE = "ConcreteChallenge/Supporting Files/Info.plist";
@@ -1469,7 +2045,7 @@
 		};
 		1CE560132448BD1D0078914E /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03AC5EA9AA5BAE096BB08979 /* Pods-ConcreteChallengeTests.debug (production).xcconfig */;
+			baseConfigurationReference = 6886AEE51E13E73E9FF4F550 /* Pods-ConcreteChallengeTests.debug (production).xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1491,7 +2067,7 @@
 		};
 		1CE560142448BD1D0078914E /* Release (Development) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C05BDE6245E206800849BD5 /* Development.xcconfig */;
+			baseConfigurationReference = 3C3A5C7F9EDC6F58245B7908 /* Pods-ConcreteChallengeTests.release (development).xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1514,6 +2090,19 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1C05BE07245F1E2C00849BD5 /* Build configuration list for PBXNativeTarget "ConcreteChallengeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C05BE08245F1E2C00849BD5 /* Debug (Production) */,
+				1C05BE09245F1E2C00849BD5 /* Debug (Staging) */,
+				1C05BE0A245F1E2C00849BD5 /* Debug (Develpment) */,
+				1C05BE0B245F1E2C00849BD5 /* Release (Development) */,
+				1C05BE0C245F1E2C00849BD5 /* Release (Staging) */,
+				1C05BE0D245F1E2C00849BD5 /* Release (Production) */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug (Develpment)";
+		};
 		1CE55FE82448BD1B0078914E /* Build configuration list for PBXProject "ConcreteChallenge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

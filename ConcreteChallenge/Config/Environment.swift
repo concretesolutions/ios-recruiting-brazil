@@ -11,20 +11,31 @@ import RxSwift
 
 enum Environment {
     fileprivate static let infoDictionary: [String: Any] = {
-      guard let dict = Bundle.main.infoDictionary else {
-        fatalError("Plist file not found")
-      }
-      return dict
+        guard let dict = Bundle.main.infoDictionary else {
+            fatalError("Plist file not found")
+        }
+        return dict
+    }()
+    
+    fileprivate static let configDictionary: NSDictionary = {
+        guard let path = Bundle.main.path(forResource: "Config", ofType: "plist") else {
+            fatalError("Plist file not found")
+        }
+
+        guard let dict = NSDictionary(contentsOfFile: path) else {
+            fatalError("Plist file not found")
+        }
+        return dict
     }()
 
     static let name: String = {
-      return Environment.infoDictionary["APP_ENVIRONMENT"] as! String
+        return Environment.configDictionary["APP_ENVIRONMENT"] as! String
     }()
 
     // MARK: - MovieDBApi
     enum MovieDBApi {
 
-        private static let settings = Environment.infoDictionary["MovieDBApiSettings"] as! [String: Any]
+        private static let settings = Environment.configDictionary["MovieDBApiSettings"] as! [String: Any]
 
         static let baseUrl: String = {
             return MovieDBApi.settings["BaseUrl"] as! String
@@ -45,7 +56,7 @@ enum Environment {
 
     // MARK: - Sentry
     enum Sentry {
-        private static let settings = Environment.infoDictionary["SentrySettings"] as! [String: Any]
+        private static let settings = Environment.configDictionary["SentrySettings"] as! [String: Any]
 
         static let dsn: String = {
           return Sentry.settings["dsn"] as! String
