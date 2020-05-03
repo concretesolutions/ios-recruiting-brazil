@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol EmptyStateRetryDelegate {
+protocol EmptyStateRetryDelegate: class {
     func executeRetryAction(_ sender: EmptyStateView)
 }
 
@@ -20,7 +20,7 @@ class EmptyStateView: UIView {
 
     @IBOutlet weak var retryButton: UIButton!
 
-    public var retryDelegate: EmptyStateRetryDelegate?
+    public weak var retryDelegate: EmptyStateRetryDelegate?
 
     override func layoutSubviews() {
         super.layoutSubviews()

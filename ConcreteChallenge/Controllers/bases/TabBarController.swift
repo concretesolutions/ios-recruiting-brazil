@@ -37,12 +37,12 @@ class TabBarController: UITabBarController {
         tabBar.tintColor = .black
 
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIApplication.shared.delegate!.window!!.bringSubviewToFront((UIApplication.shared.delegate!.window!!.subviews[0]))
     }
-    
+
     /*
     // MARK: - Navigation
 

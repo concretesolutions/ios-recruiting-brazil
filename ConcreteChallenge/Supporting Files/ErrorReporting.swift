@@ -26,7 +26,7 @@ struct ErrorReporting {
             "debug": Environment.Sentry.debug
         ])
     }
-    
+
     @discardableResult
     static func capture(_ error: Error, including scope: Scope?, notifying notificationConfig: NotificationBannerConfig?) -> String? {
         if let notificationConfig = notificationConfig {
@@ -40,5 +40,5 @@ struct ErrorReporting {
         }
         return SentrySDK.capture(error: error, scope: scope)
     }
-    
+
 }

@@ -27,7 +27,7 @@ final class Endpoint<Response> {
         self.parameters = parameters
         self.decode = decode
     }
-    
+
     var asDictionary: [String: Any] {
         return [
             "method": self.method.rawValue,

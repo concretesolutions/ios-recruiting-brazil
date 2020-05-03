@@ -19,7 +19,7 @@ class MovieDetailsTitleCollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         titleLabel = UILabel(frame: .zero)
         self.contentView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

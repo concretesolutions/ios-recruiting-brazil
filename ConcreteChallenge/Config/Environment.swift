@@ -9,14 +9,13 @@
 import Foundation
 import RxSwift
 
-enum Environment {    
+enum Environment {
     fileprivate static let infoDictionary: [String: Any] = {
       guard let dict = Bundle.main.infoDictionary else {
         fatalError("Plist file not found")
       }
       return dict
     }()
-    
 
     static let name: String = {
       return Environment.infoDictionary["APP_ENVIRONMENT"] as! String

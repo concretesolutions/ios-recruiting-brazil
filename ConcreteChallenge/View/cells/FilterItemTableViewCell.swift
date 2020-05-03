@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol FilterItemDelegate {
+protocol FilterItemDelegate: class {
     func valueChange(for itemIdentifier: String, to value: String)
 }
 
 class FilterItemTableViewCell: UITableViewCell {
 
     fileprivate let pickerView = ToolbarPickerView()
-    public var delegate: FilterItemDelegate?
+    public weak var delegate: FilterItemDelegate?
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
