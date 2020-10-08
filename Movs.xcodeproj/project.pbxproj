@@ -24,6 +24,12 @@
 		C5094F8C252FA85A00A1018F /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094F8B252FA85A00A1018F /* ViewState.swift */; };
 		C5094F98252FA92200A1018F /* ObserverProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094F97252FA92200A1018F /* ObserverProtocol.swift */; };
 		C5094F9E252FAA0F00A1018F /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094F9D252FAA0F00A1018F /* HTTPStatusCode.swift */; };
+		C5094FA6252FAFD300A1018F /* HTTPScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094FA5252FAFD300A1018F /* HTTPScheme.swift */; };
+		C5094FAB252FAFF700A1018F /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094FAA252FAFF700A1018F /* HTTPMethod.swift */; };
+		C5094FB0252FB02900A1018F /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094FAF252FB02900A1018F /* HTTPError.swift */; };
+		C5094FB8252FB08100A1018F /* EndpointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094FB7252FB08100A1018F /* EndpointProtocol.swift */; };
+		C5094FBE252FB0D200A1018F /* HTTPClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094FBD252FB0D200A1018F /* HTTPClientProtocol.swift */; };
+		C5094FC6252FB10B00A1018F /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094FC5252FB10B00A1018F /* HTTPClient.swift */; };
 		ECC9D5DE3F88B19AC61C0CD6 /* Pods_Movs_MovsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +79,12 @@
 		C5094F8B252FA85A00A1018F /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		C5094F97252FA92200A1018F /* ObserverProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverProtocol.swift; sourceTree = "<group>"; };
 		C5094F9D252FAA0F00A1018F /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
+		C5094FA5252FAFD300A1018F /* HTTPScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPScheme.swift; sourceTree = "<group>"; };
+		C5094FAA252FAFF700A1018F /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		C5094FAF252FB02900A1018F /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
+		C5094FB7252FB08100A1018F /* EndpointProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointProtocol.swift; sourceTree = "<group>"; };
+		C5094FBD252FB0D200A1018F /* HTTPClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientProtocol.swift; sourceTree = "<group>"; };
+		C5094FC5252FB10B00A1018F /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		DCA1F1EE22955852CAB21355 /* Pods_Movs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs_MovsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -304,9 +316,39 @@
 		C5094F9C252FA9BA00A1018F /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				C5094F9D252FAA0F00A1018F /* HTTPStatusCode.swift */,
+				C5094FBC252FB0BB00A1018F /* Client */,
+				C5094FB4252FB05400A1018F /* Endpoint */,
+				C5094FB6252FB07100A1018F /* WebService */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		C5094FB4252FB05400A1018F /* Endpoint */ = {
+			isa = PBXGroup;
+			children = (
+				C5094FB7252FB08100A1018F /* EndpointProtocol.swift */,
+			);
+			path = Endpoint;
+			sourceTree = "<group>";
+		};
+		C5094FB6252FB07100A1018F /* WebService */ = {
+			isa = PBXGroup;
+			children = (
+				C5094F9D252FAA0F00A1018F /* HTTPStatusCode.swift */,
+				C5094FA5252FAFD300A1018F /* HTTPScheme.swift */,
+				C5094FAA252FAFF700A1018F /* HTTPMethod.swift */,
+				C5094FAF252FB02900A1018F /* HTTPError.swift */,
+			);
+			path = WebService;
+			sourceTree = "<group>";
+		};
+		C5094FBC252FB0BB00A1018F /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				C5094FBD252FB0D200A1018F /* HTTPClientProtocol.swift */,
+				C5094FC5252FB10B00A1018F /* HTTPClient.swift */,
+			);
+			path = Client;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -567,13 +609,19 @@
 			files = (
 				C5094F87252FA84700A1018F /* Observable.swift in Sources */,
 				C5094F6B252FA2F100A1018F /* MoviesListController.swift in Sources */,
+				C5094FC6252FB10B00A1018F /* HTTPClient.swift in Sources */,
+				C5094FB0252FB02900A1018F /* HTTPError.swift in Sources */,
 				C5094F07252EBFB900A1018F /* AppDelegate.swift in Sources */,
+				C5094FBE252FB0D200A1018F /* HTTPClientProtocol.swift in Sources */,
 				C5094F55252FA16300A1018F /* TabBarViewController.swift in Sources */,
 				C5094F81252FA79500A1018F /* ViewCode.swift in Sources */,
 				C5094F98252FA92200A1018F /* ObserverProtocol.swift in Sources */,
 				C5094F8C252FA85A00A1018F /* ViewState.swift in Sources */,
 				C5094F70252FA3A400A1018F /* MoviesListCellSize.swift in Sources */,
+				C5094FA6252FAFD300A1018F /* HTTPScheme.swift in Sources */,
 				C5094F9E252FAA0F00A1018F /* HTTPStatusCode.swift in Sources */,
+				C5094FAB252FAFF700A1018F /* HTTPMethod.swift in Sources */,
+				C5094FB8252FB08100A1018F /* EndpointProtocol.swift in Sources */,
 				C5094F09252EBFB900A1018F /* SceneDelegate.swift in Sources */,
 				C5094F78252FA46400A1018F /* FavoritesController.swift in Sources */,
 			);
