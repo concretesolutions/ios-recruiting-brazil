@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum APIError: Error {
+enum HTTPError: Error {
     case requestFailed(reason: String?)
     case jsonConversionFailure
     case invalidData

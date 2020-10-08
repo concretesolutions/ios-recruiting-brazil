@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol MoviesListProtocol {
+    func getMoviesList(completion: @escaping (Result<MoviesDTO, HTTPError>) -> Void)
+}
