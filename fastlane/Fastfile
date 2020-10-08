@@ -20,4 +20,11 @@ platform :ios do
   lane :screenshots do
     capture_screenshots(workspace: "Movs.xcworkspace", scheme: "Movs")
   end
+
+  desc "Run unit test"
+  lane :tests do
+  run_tests(workspace: "Movs.xcworkspace",
+            devices: "iPhone 8",
+            scheme: "CI")
+  end
 end
