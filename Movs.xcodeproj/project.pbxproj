@@ -20,6 +20,9 @@
 		C5094F70252FA3A400A1018F /* MoviesListCellSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094F6F252FA3A400A1018F /* MoviesListCellSize.swift */; };
 		C5094F78252FA46400A1018F /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094F77252FA46400A1018F /* FavoritesController.swift */; };
 		C5094F81252FA79500A1018F /* ViewCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094F80252FA79500A1018F /* ViewCode.swift */; };
+		C5094F87252FA84700A1018F /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094F86252FA84700A1018F /* Observable.swift */; };
+		C5094F8C252FA85A00A1018F /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094F8B252FA85A00A1018F /* ViewState.swift */; };
+		C5094F98252FA92200A1018F /* ObserverProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094F97252FA92200A1018F /* ObserverProtocol.swift */; };
 		ECC9D5DE3F88B19AC61C0CD6 /* Pods_Movs_MovsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +68,9 @@
 		C5094F6F252FA3A400A1018F /* MoviesListCellSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListCellSize.swift; sourceTree = "<group>"; };
 		C5094F77252FA46400A1018F /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
 		C5094F80252FA79500A1018F /* ViewCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCode.swift; sourceTree = "<group>"; };
+		C5094F86252FA84700A1018F /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		C5094F8B252FA85A00A1018F /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
+		C5094F97252FA92200A1018F /* ObserverProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverProtocol.swift; sourceTree = "<group>"; };
 		DCA1F1EE22955852CAB21355 /* Pods_Movs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs_MovsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -183,6 +189,7 @@
 		C5094F52252FA0B600A1018F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				C5094F85252FA80D00A1018F /* Library */,
 				C5094F7F252FA78200A1018F /* ViewCode */,
 				C5094F53252FA13A00A1018F /* TabBar */,
 			);
@@ -271,6 +278,24 @@
 				C5094F80252FA79500A1018F /* ViewCode.swift */,
 			);
 			path = ViewCode;
+			sourceTree = "<group>";
+		};
+		C5094F85252FA80D00A1018F /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				C5094F90252FA8C000A1018F /* ViewState */,
+				C5094F97252FA92200A1018F /* ObserverProtocol.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		C5094F90252FA8C000A1018F /* ViewState */ = {
+			isa = PBXGroup;
+			children = (
+				C5094F86252FA84700A1018F /* Observable.swift */,
+				C5094F8B252FA85A00A1018F /* ViewState.swift */,
+			);
+			path = ViewState;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -529,10 +554,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5094F87252FA84700A1018F /* Observable.swift in Sources */,
 				C5094F6B252FA2F100A1018F /* MoviesListController.swift in Sources */,
 				C5094F07252EBFB900A1018F /* AppDelegate.swift in Sources */,
 				C5094F55252FA16300A1018F /* TabBarViewController.swift in Sources */,
 				C5094F81252FA79500A1018F /* ViewCode.swift in Sources */,
+				C5094F98252FA92200A1018F /* ObserverProtocol.swift in Sources */,
+				C5094F8C252FA85A00A1018F /* ViewState.swift in Sources */,
 				C5094F70252FA3A400A1018F /* MoviesListCellSize.swift in Sources */,
 				C5094F09252EBFB900A1018F /* SceneDelegate.swift in Sources */,
 				C5094F78252FA46400A1018F /* FavoritesController.swift in Sources */,
