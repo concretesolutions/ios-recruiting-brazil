@@ -30,6 +30,7 @@
 		C5094FB8252FB08100A1018F /* EndpointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094FB7252FB08100A1018F /* EndpointProtocol.swift */; };
 		C5094FBE252FB0D200A1018F /* HTTPClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094FBD252FB0D200A1018F /* HTTPClientProtocol.swift */; };
 		C5094FC6252FB10B00A1018F /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094FC5252FB10B00A1018F /* HTTPClient.swift */; };
+		C5094FCC252FB1CC00A1018F /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094FCB252FB1CC00A1018F /* URL+Utils.swift */; };
 		ECC9D5DE3F88B19AC61C0CD6 /* Pods_Movs_MovsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		C5094FB7252FB08100A1018F /* EndpointProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointProtocol.swift; sourceTree = "<group>"; };
 		C5094FBD252FB0D200A1018F /* HTTPClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientProtocol.swift; sourceTree = "<group>"; };
 		C5094FC5252FB10B00A1018F /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		C5094FCB252FB1CC00A1018F /* URL+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Utils.swift"; sourceTree = "<group>"; };
 		DCA1F1EE22955852CAB21355 /* Pods_Movs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs_MovsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -316,6 +318,7 @@
 		C5094F9C252FA9BA00A1018F /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				C5094FCA252FB1B400A1018F /* Extensions */,
 				C5094FBC252FB0BB00A1018F /* Client */,
 				C5094FB4252FB05400A1018F /* Endpoint */,
 				C5094FB6252FB07100A1018F /* WebService */,
@@ -349,6 +352,14 @@
 				C5094FC5252FB10B00A1018F /* HTTPClient.swift */,
 			);
 			path = Client;
+			sourceTree = "<group>";
+		};
+		C5094FCA252FB1B400A1018F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C5094FCB252FB1CC00A1018F /* URL+Utils.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -618,6 +629,7 @@
 				C5094F98252FA92200A1018F /* ObserverProtocol.swift in Sources */,
 				C5094F8C252FA85A00A1018F /* ViewState.swift in Sources */,
 				C5094F70252FA3A400A1018F /* MoviesListCellSize.swift in Sources */,
+				C5094FCC252FB1CC00A1018F /* URL+Utils.swift in Sources */,
 				C5094FA6252FAFD300A1018F /* HTTPScheme.swift in Sources */,
 				C5094F9E252FAA0F00A1018F /* HTTPStatusCode.swift in Sources */,
 				C5094FAB252FAFF700A1018F /* HTTPMethod.swift in Sources */,
