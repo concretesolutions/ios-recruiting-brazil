@@ -18,11 +18,11 @@ final class HttpClient: HttpClientProtocol {
 
 extension HttpClient {
 
-    typealias DecodingCompletionHandler = (Decodable?, APIError?) -> Void
+    typealias DecodingCompletionHandler = (Decodable?, HTTPError?) -> Void
 
     private func decodingTask<T: Decodable>(with request: URLRequest,
                                             decodingType: T.Type,
-                                            completionHandler completion: @escaping (T?, APIError?) -> Void) -> URLSessionDataTask {
+                                            completionHandler completion: @escaping (T?, HTTPError?) -> Void) -> URLSessionDataTask {
 
         let task = self.session.dataTask(with: request) { data, response, error in
 
@@ -53,7 +53,7 @@ extension HttpClient {
         return task
     }
 
-    func request<T: Decodable>(_ request: URLRequest, decode: ((T) -> T)?, completion: @escaping (Result<T, APIError>) -> Void) {
+    func request<T: Decodable>(_ request: URLRequest, decode: ((T) -> T)?, completion: @escaping (Result<T, HTTPError>) -> Void) {
 
         let task = self.decodingTask(with: request, decodingType: T.self) { json, error in
 
