@@ -11,8 +11,6 @@
 		435198FB8CB99BBD83EFF8E1 /* Pods_MovsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 575FE6896498088B7C4AB529 /* Pods_MovsTests.framework */; };
 		C5094F07252EBFB900A1018F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094F06252EBFB900A1018F /* AppDelegate.swift */; };
 		C5094F09252EBFB900A1018F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094F08252EBFB900A1018F /* SceneDelegate.swift */; };
-		C5094F0B252EBFB900A1018F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094F0A252EBFB900A1018F /* ViewController.swift */; };
-		C5094F0E252EBFB900A1018F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5094F0C252EBFB900A1018F /* Main.storyboard */; };
 		C5094F10252EBFBF00A1018F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5094F0F252EBFBF00A1018F /* Assets.xcassets */; };
 		C5094F13252EBFBF00A1018F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5094F11252EBFBF00A1018F /* LaunchScreen.storyboard */; };
 		C5094F1E252EBFC000A1018F /* MovsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094F1D252EBFC000A1018F /* MovsTests.swift */; };
@@ -48,8 +46,6 @@
 		C5094F03252EBFB900A1018F /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5094F06252EBFB900A1018F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5094F08252EBFB900A1018F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C5094F0A252EBFB900A1018F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C5094F0D252EBFB900A1018F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C5094F0F252EBFBF00A1018F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C5094F12252EBFBF00A1018F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C5094F14252EBFBF00A1018F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -139,13 +135,8 @@
 		C5094F05252EBFB900A1018F /* Movs */ = {
 			isa = PBXGroup;
 			children = (
-				C5094F06252EBFB900A1018F /* AppDelegate.swift */,
-				C5094F08252EBFB900A1018F /* SceneDelegate.swift */,
-				C5094F0A252EBFB900A1018F /* ViewController.swift */,
-				C5094F0C252EBFB900A1018F /* Main.storyboard */,
-				C5094F0F252EBFBF00A1018F /* Assets.xcassets */,
-				C5094F11252EBFBF00A1018F /* LaunchScreen.storyboard */,
-				C5094F14252EBFBF00A1018F /* Info.plist */,
+				C5094F4E252FA05400A1018F /* Application */,
+				C5094F52252FA0B600A1018F /* Common */,
 			);
 			path = Movs;
 			sourceTree = "<group>";
@@ -166,6 +157,25 @@
 				C5094F2A252EBFC000A1018F /* Info.plist */,
 			);
 			path = MovsUITests;
+			sourceTree = "<group>";
+		};
+		C5094F4E252FA05400A1018F /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				C5094F06252EBFB900A1018F /* AppDelegate.swift */,
+				C5094F08252EBFB900A1018F /* SceneDelegate.swift */,
+				C5094F0F252EBFBF00A1018F /* Assets.xcassets */,
+				C5094F11252EBFBF00A1018F /* LaunchScreen.storyboard */,
+				C5094F14252EBFBF00A1018F /* Info.plist */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		C5094F52252FA0B600A1018F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,7 +289,6 @@
 			files = (
 				C5094F13252EBFBF00A1018F /* LaunchScreen.storyboard in Resources */,
 				C5094F10252EBFBF00A1018F /* Assets.xcassets in Resources */,
-				C5094F0E252EBFB900A1018F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,7 +434,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5094F0B252EBFB900A1018F /* ViewController.swift in Sources */,
 				C5094F07252EBFB900A1018F /* AppDelegate.swift in Sources */,
 				C5094F09252EBFB900A1018F /* SceneDelegate.swift in Sources */,
 			);
@@ -463,14 +471,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		C5094F0C252EBFB900A1018F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C5094F0D252EBFB900A1018F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C5094F11252EBFBF00A1018F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -605,7 +605,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Movs/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Movs/Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -624,7 +624,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Movs/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Movs/Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
