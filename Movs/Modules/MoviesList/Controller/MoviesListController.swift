@@ -10,11 +10,14 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 class MoviesListController: UICollectionViewController {
+    
+    private let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupCollectionView()
+        setupSearchBar()
         
         MoviesListService().getMoviesList { [weak self] result in
             switch result {
@@ -30,6 +33,14 @@ class MoviesListController: UICollectionViewController {
     private func setupCollectionView() {
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.backgroundColor = .white
+    }
+    
+    private func setupSearchBar() {
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.searchBar.placeholder = "Search a movie"
+
+        self.navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
 }
 
