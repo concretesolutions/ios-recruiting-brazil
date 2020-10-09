@@ -43,6 +43,8 @@
 		C5095059252FFBDB00A1018F /* MoviesListServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5095058252FFBDB00A1018F /* MoviesListServiceSpec.swift */; };
 		C5095062252FFC4A00A1018F /* popular-movies.json in Resources */ = {isa = PBXBuildFile; fileRef = C5095061252FFC4A00A1018F /* popular-movies.json */; };
 		C50950752530B40600A1018F /* MoviesListSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50950742530B40600A1018F /* MoviesListSpec.swift */; };
+		C562340425310B500025FF0B /* MoviesListViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C562340325310B500025FF0B /* MoviesListViewModelSpec.swift */; };
+		C562340925310BBA0025FF0B /* MoviesListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C562340825310BBA0025FF0B /* MoviesListState.swift */; };
 		ECC9D5DE3F88B19AC61C0CD6 /* Pods_Movs_MovsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +113,8 @@
 		C5095058252FFBDB00A1018F /* MoviesListServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListServiceSpec.swift; sourceTree = "<group>"; };
 		C5095061252FFC4A00A1018F /* popular-movies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "popular-movies.json"; sourceTree = "<group>"; };
 		C50950742530B40600A1018F /* MoviesListSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListSpec.swift; sourceTree = "<group>"; };
+		C562340325310B500025FF0B /* MoviesListViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewModelSpec.swift; sourceTree = "<group>"; };
+		C562340825310BBA0025FF0B /* MoviesListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListState.swift; sourceTree = "<group>"; };
 		DCA1F1EE22955852CAB21355 /* Pods_Movs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs_MovsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -203,8 +207,9 @@
 		C5094F1C252EBFC000A1018F /* MovsTests */ = {
 			isa = PBXGroup;
 			children = (
+				C56233F425310B2A0025FF0B /* ViewModel */,
 				C5095057252FFBC700A1018F /* Service */,
-				C5095044252FFAFB00A1018F /* Commons */,
+				C5095044252FFAFB00A1018F /* Common */,
 				C509503B252FF9E800A1018F /* Mock */,
 				C5094F1D252EBFC000A1018F /* MovsTests.swift */,
 				C5094F1F252EBFC000A1018F /* Info.plist */,
@@ -424,18 +429,19 @@
 		C509503B252FF9E800A1018F /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				C509503C252FF9F500A1018F /* HTTPClientMock.swift */,
+				C56233E8253108E20025FF0B /* ViewState */,
+				C56233E7253108D70025FF0B /* WebService */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
 		};
-		C5095044252FFAFB00A1018F /* Commons */ = {
+		C5095044252FFAFB00A1018F /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				C5095060252FFC2200A1018F /* Json */,
 				C5095045252FFB0D00A1018F /* JSONHelper.swift */,
 			);
-			path = Commons;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		C5095057252FFBC700A1018F /* Service */ = {
@@ -452,6 +458,30 @@
 				C5095061252FFC4A00A1018F /* popular-movies.json */,
 			);
 			path = Json;
+			sourceTree = "<group>";
+		};
+		C56233E7253108D70025FF0B /* WebService */ = {
+			isa = PBXGroup;
+			children = (
+				C509503C252FF9F500A1018F /* HTTPClientMock.swift */,
+			);
+			path = WebService;
+			sourceTree = "<group>";
+		};
+		C56233E8253108E20025FF0B /* ViewState */ = {
+			isa = PBXGroup;
+			children = (
+				C562340825310BBA0025FF0B /* MoviesListState.swift */,
+			);
+			path = ViewState;
+			sourceTree = "<group>";
+		};
+		C56233F425310B2A0025FF0B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C562340325310B500025FF0B /* MoviesListViewModelSpec.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -763,7 +793,9 @@
 			files = (
 				C5095046252FFB0D00A1018F /* JSONHelper.swift in Sources */,
 				C509503D252FF9F500A1018F /* HTTPClientMock.swift in Sources */,
+				C562340425310B500025FF0B /* MoviesListViewModelSpec.swift in Sources */,
 				C5095059252FFBDB00A1018F /* MoviesListServiceSpec.swift in Sources */,
+				C562340925310BBA0025FF0B /* MoviesListState.swift in Sources */,
 				C5094F1E252EBFC000A1018F /* MovsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
