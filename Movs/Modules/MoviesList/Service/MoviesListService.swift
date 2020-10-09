@@ -9,9 +9,9 @@ import Foundation
 
 class MoviesListService: MoviesListServiceProtocol {
     
-    private let client: HttpClientProtocol
+    private let client: HTTPClientProtocol
 
-    init(client: HttpClientProtocol = HttpClient()) {
+    init(client: HTTPClientProtocol = HTTPClient()) {
         self.client = client
     }
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class HttpClient: HttpClientProtocol {
+final class HTTPClient: HTTPClientProtocol {
 
     private let session: URLSession
 
@@ -16,7 +16,7 @@ final class HttpClient: HttpClientProtocol {
     }
 }
 
-extension HttpClient {
+extension HTTPClient {
 
     typealias DecodingCompletionHandler = (Decodable?, HTTPError?) -> Void
 

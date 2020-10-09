@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol HttpClientProtocol {
+protocol HTTPClientProtocol {
 
     func request<T: Decodable>(_ request: URLRequest, decode: ((T) -> T)?, completion: @escaping (Result<T, HTTPError>) -> Void)
 
     func cancelAllRequests()
 }
 
-extension HttpClientProtocol {
+extension HTTPClientProtocol {
 
     func request<T: Decodable>(_ request: URLRequest, decode: ((T) -> T)? = nil, completion: @escaping (Result<T, HTTPError>) -> Void) {
         self.request(request, decode: decode, completion: completion)
