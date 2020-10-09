@@ -7,11 +7,10 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
 class MoviesListController: UICollectionViewController {
-    
+
     private let searchController = UISearchController(searchResultsController: nil)
+    private var moviesList = [ResultMoviesDTO]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +30,7 @@ class MoviesListController: UICollectionViewController {
     }
     
     private func setupCollectionView() {
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(MoviesListCell.self, forCellWithReuseIdentifier: "moviesList")
         self.collectionView.backgroundColor = .white
     }
     
@@ -42,6 +41,16 @@ class MoviesListController: UICollectionViewController {
         self.navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
     }
+    
+    @objc func btnFavorite(cell: MoviesListCell) {
+        if cell.favorite.currentImage == UIImage(named: "favorite_gray_icon") {
+            cell.favorite.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+            print("Boa")
+        } else {
+            cell.favorite.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+            print("Vish")
+        }
+    }
 }
 
 extension MoviesListController: UICollectionViewDelegateFlowLayout {
@@ -50,10 +59,13 @@ extension MoviesListController: UICollectionViewDelegateFlowLayout {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "moviesList", for: indexPath) as! MoviesListCell
+        
+        //let movies = moviesList[indexPath.row]
     
         cell.backgroundColor = .systemBlue
-    
+        cell.favorite.addTarget(self, action: #selector(btnFavorite(cell:)), for: .touchUpInside)
+
         return cell
     }
 }
