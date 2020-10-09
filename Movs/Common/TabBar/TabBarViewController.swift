@@ -12,8 +12,8 @@ class TabBarViewController: UITabBarController {
     private let moviesController: MoviesListController = {
             let layout = UICollectionViewFlowLayout()
             let moviesController = MoviesListController(collectionViewLayout: layout)
-            moviesController.title = "Popular Movies"
-            moviesController.tabBarItem = UITabBarItem(title: "Popular Movies", image: UIImage(named: "list_icon"), tag: 0)
+            moviesController.title = "Movies List"
+            moviesController.tabBarItem = UITabBarItem(title: "Movies List", image: UIImage(named: "list_icon"), tag: 0)
             return moviesController
         }()
 

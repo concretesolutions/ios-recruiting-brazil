@@ -13,9 +13,8 @@ class MoviesListController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        self.collectionView.backgroundColor = .white
+        
+        setupCollectionView()
         
         MoviesListService().getMoviesList { [weak self] result in
             switch result {
@@ -26,6 +25,11 @@ class MoviesListController: UICollectionViewController {
                 print(message.localizedDescription)
             }
         }
+    }
+    
+    private func setupCollectionView() {
+        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView.backgroundColor = .white
     }
 }
 
