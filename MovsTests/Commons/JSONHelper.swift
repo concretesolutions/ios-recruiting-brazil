@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum JSONHelper {
-    
-    private class BundleTestClass {}
+private class BundleTestClass {}
 
-    public static func loadJSON<Element: Decodable>(withFile fileName: String) -> Element? {
+enum JSONHelper {
+
+    static func load<Element: Decodable>(withFile fileName: String) -> Element? {
         var jsonData: Element?
         if let url = Bundle(for: BundleTestClass.self).url(forResource: fileName, withExtension: "json") {
             do {
@@ -25,7 +25,7 @@ enum JSONHelper {
         return jsonData
     }
 
-    public static func loadJSONData(withFile fileName: String) -> Data? {
+    static func loadData(withFile fileName: String) -> Data? {
         var data: Data?
         if let url = Bundle(for: BundleTestClass.self).url(forResource: fileName, withExtension: "json") {
             do {

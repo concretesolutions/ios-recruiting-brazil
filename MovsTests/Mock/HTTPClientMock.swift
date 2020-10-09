@@ -8,19 +8,19 @@
 import Foundation
 @testable import Movs
 
-final class HTTPClientMock: HTTPClientProtocol {
+class HTTPClientMock: HTTPClientProtocol {
 
     var fileName = String()
-    var error: Bool = false
+    var failure: Bool = false
     var isCancelled = false
 
     func request<T>(_ request: URLRequest, decode: ((T) -> T)?, completion: @escaping (Result<T, HTTPError>) -> Void) where T: Decodable {
 
-        guard !error else {
+        guard !failure else {
             return completion(.failure(.jsonParsingFailure))
         }
 
-        let decodable: T = JSONHelper.loadJSON(withFile: fileName)!
+        let decodable: T = JSONHelper.load(withFile: fileName)!
         if let value = decode?(decodable) {
             return completion(.success(value))
         }
