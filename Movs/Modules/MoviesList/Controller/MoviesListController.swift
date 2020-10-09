@@ -11,12 +11,16 @@ class MoviesListController: UICollectionViewController {
 
     private let searchController = UISearchController(searchResultsController: nil)
     private var moviesList = [ResultMoviesDTO]()
+    
+    private var viewModel: MoviesListViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupCollectionView()
         setupSearchBar()
+        setupViewModel()
+        setupFetchMovies()
     }
     
     private func setupCollectionView() {
@@ -43,18 +47,46 @@ class MoviesListController: UICollectionViewController {
     }
 }
 
+extension MoviesListController {
+    private func setupViewModel() {
+        viewModel = MoviesListViewModelFactory().create()
+    }
+    
+    private func setupFetchMovies() {
+        viewModel.fetchMoviesList()
+            .successObserver(onSuccess)
+            .loadingObserver(onLoading)
+            .errorObserver(onError)
+    }
+    
+    private func onSuccess(movies: MoviesDTO) {
+        moviesList = movies.results
+        collectionView.reloadData()
+    }
+    
+    private func onLoading() {
+        print("carregando")
+    }
+    
+    private func onError(message: HTTPError) {
+        print(message.localizedDescription)
+    }
+}
+
 extension MoviesListController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return moviesList.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "moviesList", for: indexPath) as! MoviesListCell
         
-        //let movies = moviesList[indexPath.row]
+        let movies = moviesList[indexPath.row]
     
         cell.backgroundColor = .systemBlue
         cell.favorite.addTarget(self, action: #selector(btnFavorite(cell:)), for: .touchUpInside)
+        
+        cell.title.text = movies.title
 
         return cell
     }
