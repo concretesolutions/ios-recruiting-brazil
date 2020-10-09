@@ -86,6 +86,7 @@ extension MoviesListController: UICollectionViewDelegateFlowLayout {
         cell.backgroundColor = .systemBlue
         cell.favorite.addTarget(self, action: #selector(btnFavorite(cell:)), for: .touchUpInside)
         
+        cell.photo.downloadImage(from: (Constants.pathPhoto + movies.poster_path))
         cell.title.text = movies.title
 
         return cell
