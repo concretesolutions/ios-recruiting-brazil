@@ -36,6 +36,8 @@
 		C5094FE0252FDB8200A1018F /* MoviesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094FDF252FDB8200A1018F /* MoviesDTO.swift */; };
 		C5094FEB252FDD7C00A1018F /* MoviesListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094FEA252FDD7C00A1018F /* MoviesListService.swift */; };
 		C5094FF0252FE27700A1018F /* MoviesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094FEF252FE27700A1018F /* MoviesListCell.swift */; };
+		C5094FF6252FEA5200A1018F /* MoviesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094FF5252FEA5200A1018F /* MoviesListViewModel.swift */; };
+		C5094FFB252FED0500A1018F /* MoviesListViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5094FFA252FED0500A1018F /* MoviesListViewModelFactory.swift */; };
 		ECC9D5DE3F88B19AC61C0CD6 /* Pods_Movs_MovsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +99,8 @@
 		C5094FDF252FDB8200A1018F /* MoviesDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesDTO.swift; sourceTree = "<group>"; };
 		C5094FEA252FDD7C00A1018F /* MoviesListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListService.swift; sourceTree = "<group>"; };
 		C5094FEF252FE27700A1018F /* MoviesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListCell.swift; sourceTree = "<group>"; };
+		C5094FF5252FEA5200A1018F /* MoviesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewModel.swift; sourceTree = "<group>"; };
+		C5094FFA252FED0500A1018F /* MoviesListViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewModelFactory.swift; sourceTree = "<group>"; };
 		DCA1F1EE22955852CAB21355 /* Pods_Movs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs_MovsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -234,6 +238,7 @@
 		C5094F5C252FA18200A1018F /* MoviesList */ = {
 			isa = PBXGroup;
 			children = (
+				C5094FF4252FEA1600A1018F /* ViewModel */,
 				C5094FDE252FDB7000A1018F /* DTO */,
 				C5094FD8252FD9DF00A1018F /* Service */,
 				C5094F68252FA2AE00A1018F /* Controller */,
@@ -391,6 +396,15 @@
 				C5094FDF252FDB8200A1018F /* MoviesDTO.swift */,
 			);
 			path = DTO;
+			sourceTree = "<group>";
+		};
+		C5094FF4252FEA1600A1018F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C5094FF5252FEA5200A1018F /* MoviesListViewModel.swift */,
+				C5094FFA252FED0500A1018F /* MoviesListViewModelFactory.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -655,6 +669,7 @@
 				C5094FB0252FB02900A1018F /* HTTPError.swift in Sources */,
 				C5094F07252EBFB900A1018F /* AppDelegate.swift in Sources */,
 				C5094FBE252FB0D200A1018F /* HTTPClientProtocol.swift in Sources */,
+				C5094FFB252FED0500A1018F /* MoviesListViewModelFactory.swift in Sources */,
 				C5094F55252FA16300A1018F /* TabBarViewController.swift in Sources */,
 				C5094F81252FA79500A1018F /* ViewCode.swift in Sources */,
 				C5094FDA252FDA0800A1018F /* MoviesListServiceProtocol.swift in Sources */,
@@ -664,6 +679,7 @@
 				C5094FCC252FB1CC00A1018F /* URL+Utils.swift in Sources */,
 				C5094FF0252FE27700A1018F /* MoviesListCell.swift in Sources */,
 				C5094FA6252FAFD300A1018F /* HTTPScheme.swift in Sources */,
+				C5094FF6252FEA5200A1018F /* MoviesListViewModel.swift in Sources */,
 				C5094FEB252FDD7C00A1018F /* MoviesListService.swift in Sources */,
 				C5094F9E252FAA0F00A1018F /* HTTPStatusCode.swift in Sources */,
 				C5094FD4252FB26F00A1018F /* MovsEndpoint.swift in Sources */,

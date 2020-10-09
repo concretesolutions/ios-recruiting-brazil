@@ -17,16 +17,6 @@ class MoviesListController: UICollectionViewController {
         
         setupCollectionView()
         setupSearchBar()
-        
-        MoviesListService().getMoviesList { [weak self] result in
-            switch result {
-            case .success(let movies):
-                print(movies)
-                
-            case .failure(let message):
-                print(message.localizedDescription)
-            }
-        }
     }
     
     private func setupCollectionView() {
