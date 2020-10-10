@@ -35,7 +35,7 @@ class MoviesListController: UICollectionViewController {
     private func setupSearchBar() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showSearchBar))
                     
-        navigationItem.rightBarButtonItem?.tintColor = .black
+        navigationItem.rightBarButtonItem?.tintColor = .systemBlue
     }
     
     @objc func showSearchBar() {
@@ -93,18 +93,33 @@ extension MoviesListController {
 }
 
 extension MoviesListController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        navigationItem.titleView = nil
+        setupSearchBar()
+        inSearchMode = false
+        collectionView.reloadData()
+    }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text {
+            if !text.isEmpty {
+                inSearchMode = true
+                filteredMovies = moviesList.filter({ $0.title.range(of: text) != nil })
+                collectionView.reloadData()
+            }
+        }
+    }
 }
 
 extension MoviesListController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return moviesList.count
+        return inSearchMode ? filteredMovies.count : moviesList.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "moviesList", for: indexPath) as! MoviesListCell
         
-        let movies = moviesList[indexPath.row]
+        let movies = inSearchMode ? filteredMovies[indexPath.row] : moviesList[indexPath.row]
     
         cell.backgroundColor = .systemBlue
         cell.favorite.addTarget(self, action: #selector(btnFavorite(cell:)), for: .touchUpInside)

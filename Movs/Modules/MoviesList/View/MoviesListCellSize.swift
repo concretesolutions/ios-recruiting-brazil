@@ -20,6 +20,6 @@ extension MoviesListController {
         let numberOfCells = floor(collectionView.frame.size.width / cellWidth)
         let edgeInsets = (collectionView.frame.size.width - (numberOfCells * cellWidth)) / (numberOfCells + 1)
 
-        return UIEdgeInsets(top: 0, left: edgeInsets, bottom: 16, right: edgeInsets)
+        return UIEdgeInsets(top: 16, left: edgeInsets, bottom: 16, right: edgeInsets)
     }
 }
