@@ -99,14 +99,19 @@ extension MoviesListController: UISearchBarDelegate {
         inSearchMode = false
         collectionView.reloadData()
     }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let text = searchBar.text {
-            if !text.isEmpty {
-                inSearchMode = true
-                filteredMovies = moviesList.filter({ $0.title.range(of: text) != nil })
-                collectionView.reloadData()
-            }
+        
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" || searchBar.text == nil {
+            inSearchMode = false
+            collectionView.reloadData()
+            view.endEditing(true)
+        } else if self.filteredMovies.isEmpty && self.inSearchMode {
+            let errorView = ErrorView()
+            self.view = errorView
+        } else {
+            inSearchMode = true
+            filteredMovies = moviesList.filter({ $0.title.range(of: searchText) != nil })
+            collectionView.reloadData()
         }
     }
 }
