@@ -13,6 +13,10 @@ class MoviesListController: UICollectionViewController {
     private var moviesList = [ResultMoviesDTO]()
     
     private var viewModel: MoviesListViewModel!
+    
+    private var filteredMovies = [ResultMoviesDTO]()
+    private var inSearchMode = false
+    private var searchBar: UISearchBar!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +33,25 @@ class MoviesListController: UICollectionViewController {
     }
     
     private func setupSearchBar() {
-        self.searchController.obscuresBackgroundDuringPresentation = false
-        self.searchController.searchBar.placeholder = "Search a movie"
-
-        self.navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showSearchBar))
+                    
+        navigationItem.rightBarButtonItem?.tintColor = .black
+    }
+    
+    @objc func showSearchBar() {
+        configureSearchBar()
+    }
+        
+    private func configureSearchBar() {
+        searchBar = UISearchBar()
+        searchBar.delegate = self
+        searchBar.sizeToFit()
+        searchBar.showsCancelButton = true
+        searchBar.becomeFirstResponder()
+        searchBar.tintColor = .black
+                
+        navigationItem.rightBarButtonItem = nil
+        navigationItem.titleView = searchBar
     }
     
     @objc func btnFavorite(cell: MoviesListCell) {
@@ -72,6 +90,10 @@ extension MoviesListController {
         let errorView = ErrorView()
         self.view = errorView
     }
+}
+
+extension MoviesListController: UISearchBarDelegate {
+    
 }
 
 extension MoviesListController: UICollectionViewDelegateFlowLayout {
