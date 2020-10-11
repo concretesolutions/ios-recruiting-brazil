@@ -121,8 +121,7 @@ extension MoviesListController: MoviesListDelegate {
             addToFavorite(movie: movies)
         } else {
             cell.favorite.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
-            print("Vish")
-            print(movies.title)
+            removeFavorite(movie: movies)
         }
     }
     
@@ -138,6 +137,17 @@ extension MoviesListController: MoviesListDelegate {
         try! realm.commitWrite()
         
         print("Adicionado com sucesso aos favoritos")
+    }
+    
+    func removeFavorite(movie: ResultMoviesDTO) {
+        if let userObject = realm.objects(FavoriteEntity.self).filter("id == \(movie.id)").first {
+            try! realm.write {
+                realm.delete(userObject)
+            }
+            print("Filme removido com sucesso")
+        } else {
+            print("Erro ao remover filme")
+        }
     }
 }
 
