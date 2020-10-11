@@ -7,6 +7,7 @@
 
 import Quick
 import Nimble
+import RealmSwift
 @testable import Movs
 
 class MoviesListViewModelSpec: QuickSpec {
@@ -16,14 +17,18 @@ class MoviesListViewModelSpec: QuickSpec {
             var client: HTTPClientMock!
             var service: MoviesListService!
             var viewState: ViewState<MoviesDTO, HTTPError>!
+            var useCase: MoviesListUseCaseMock!
             var viewModel: MoviesListViewModel!
             var state: MoviesListState!
+            
+            let realm = try! Realm()
             
             beforeEach {
                 client = HTTPClientMock()
                 service = MoviesListService(client: client)
                 viewState = ViewState<MoviesDTO, HTTPError>()
-                viewModel = MoviesListViewModel(service: service, viewState: viewState)
+                useCase = MoviesListUseCaseMock()
+                viewModel = MoviesListViewModel(service: service, viewState: viewState, useCase: useCase)
                 state = MoviesListState()
             }
             
@@ -34,6 +39,32 @@ class MoviesListViewModelSpec: QuickSpec {
                     .errorObserver(state.onError)
                 
                 expect(state.success).to(beTrue())
+            }
+            
+            it("Verify load add to favorite") {
+                var successAdding = false
+                let movies = ResultMoviesDTO(id: 1, title: "Title", poster_path: "www.google.com")
+                
+                viewModel.successAdding.observer(viewModel) { _ in
+                    successAdding = true
+                }
+                
+                viewModel.loadAddToFavorite(realm: realm, movie: movies)
+                
+                expect(successAdding).to(beTrue())
+            }
+            
+            it("Verify load remove favorite") {
+                var successRemoving = false
+                let movies = ResultMoviesDTO(id: 1, title: "Title", poster_path: "www.google.com")
+                
+                viewModel.successRemoving.observer(viewModel) { _ in
+                    successRemoving = true
+                }
+                
+                viewModel.loadRemoveFavorite(realm: realm, movie: movies)
+                
+                expect(successRemoving).to(beTrue())
             }
         }
     }

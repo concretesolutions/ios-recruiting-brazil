@@ -12,7 +12,8 @@ class MoviesListViewModelFactory {
     func create() -> MoviesListViewModel {
         return MoviesListViewModel(
             service: MoviesListService(),
-            viewState: ViewState<MoviesDTO, HTTPError>()
+            viewState: ViewState<MoviesDTO, HTTPError>(),
+            useCase: MoviesListUseCase()
         )
     }
 }

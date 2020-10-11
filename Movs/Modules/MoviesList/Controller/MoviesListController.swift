@@ -30,6 +30,7 @@ class MoviesListController: UICollectionViewController {
         setupSearchBar()
         setupViewModel()
         setupFetchMovies()
+        setupStates()
     }
     
     private func setupCollectionView() {
@@ -125,28 +126,21 @@ extension MoviesListController: MoviesListDelegate {
         }
     }
     
-    func addToFavorite(movie: ResultMoviesDTO) {
-        realm.beginWrite()
-                
-        let newFavorite = FavoriteEntity()
-        newFavorite.id = movie.id
-        newFavorite.title = movie.title
-        newFavorite.photo = movie.poster_path
-        realm.add(newFavorite)
-                
-        try! realm.commitWrite()
-        
-        print("Adicionado com sucesso aos favoritos")
+    private func addToFavorite(movie: ResultMoviesDTO) {
+        viewModel.loadAddToFavorite(realm: realm, movie: movie)
     }
     
-    func removeFavorite(movie: ResultMoviesDTO) {
-        if let userObject = realm.objects(FavoriteEntity.self).filter("id == \(movie.id)").first {
-            try! realm.write {
-                realm.delete(userObject)
-            }
-            print("Filme removido com sucesso")
-        } else {
-            print("Erro ao remover filme")
+    private func removeFavorite(movie: ResultMoviesDTO) {
+        viewModel.loadRemoveFavorite(realm: realm, movie: movie)
+    }
+    
+    private func setupStates() {
+        viewModel.successAdding.observer(viewModel) { message in
+            print(message)
+        }
+        
+        viewModel.successRemoving.observer(viewModel) { message in
+            print(message)
         }
     }
 }
