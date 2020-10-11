@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MoviesListController: UICollectionViewController {
 
@@ -54,15 +55,14 @@ class MoviesListController: UICollectionViewController {
         navigationItem.titleView = searchBar
     }
     
-    @objc func btnFavorite(cell: MoviesListCell) {
-        if cell.favorite.currentImage == UIImage(named: "favorite_gray_icon") {
-            cell.favorite.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
-            print("Boa")
-        } else {
-            cell.favorite.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
-            print("Vish")
-        }
-    }
+//    @objc func btnFavorite(cell: MoviesListCell) {
+//        if cell.favorite.currentImage == UIImage(named: "favorite_gray_icon") {
+//            cell.favorite.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+//        } else {
+//            cell.favorite.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+//            print("Vish")
+//        }
+//    }
 }
 
 extension MoviesListController {
@@ -113,6 +113,20 @@ extension MoviesListController: UISearchBarDelegate {
     }
 }
 
+extension MoviesListController: MoviesListDelegate {
+    func buttonFavorite(movies: ResultMoviesDTO, cell: MoviesListCell) {
+        if cell.favorite.currentImage == UIImage(named: "favorite_gray_icon") {
+            cell.favorite.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+            print("Boa")
+            print(movies.title)
+        } else {
+            cell.favorite.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+            print("Vish")
+            print(movies.title)
+        }
+    }
+}
+
 extension MoviesListController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if inSearchMode {
@@ -134,11 +148,9 @@ extension MoviesListController: UICollectionViewDelegateFlowLayout {
         let movies = inSearchMode ? filteredMovies[indexPath.row] : moviesList[indexPath.row]
     
         cell.backgroundColor = .systemBlue
-        cell.favorite.addTarget(self, action: #selector(btnFavorite(cell:)), for: .touchUpInside)
+        cell.delegate = self
+        cell.addComponents(with: movies)
         
-        cell.photo.downloadImage(from: (Constants.pathPhoto + movies.poster_path))
-        cell.title.text = movies.title
-
         return cell
     }
     

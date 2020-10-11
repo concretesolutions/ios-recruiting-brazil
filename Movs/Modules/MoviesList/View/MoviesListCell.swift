@@ -7,7 +7,15 @@
 
 import UIKit
 
+protocol MoviesListDelegate: class {
+    func buttonFavorite(movies: ResultMoviesDTO, cell: MoviesListCell)
+}
+
 class MoviesListCell: UICollectionViewCell {
+    
+    weak var delegate: MoviesListDelegate!
+    
+    var movie: ResultMoviesDTO!
     
     let photo: UIImageView = {
         let image = UIImageView()
@@ -23,9 +31,10 @@ class MoviesListCell: UICollectionViewCell {
         return label
     }()
     
-    let favorite: UIButton = {
+    lazy var favorite: UIButton = {
         let button = UIButton(frame: .zero)
         button.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+        button.addTarget(self, action: #selector(btnFavorite(sender:)), for: .touchUpInside)
         return button
     }()
     
@@ -36,6 +45,10 @@ class MoviesListCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func btnFavorite(sender: Any) {
+        delegate.buttonFavorite(movies: movie, cell: self)
     }
 }
 
@@ -65,5 +78,13 @@ extension MoviesListCell: ViewCode {
             view.trailingAnchor(equalTo: trailingAnchor, constant: -8)
             view.bottomAnchor(equalTo: bottomAnchor)
         }
+    }
+}
+
+extension MoviesListCell {
+    func addComponents(with movie: ResultMoviesDTO) {
+        self.movie = movie
+        photo.downloadImage(from: (Constants.pathPhoto + movie.poster_path))
+        title.text = movie.title
     }
 }

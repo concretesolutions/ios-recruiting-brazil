@@ -8,6 +8,7 @@ target 'Movs' do
   # Pods for Movs
   pod 'SwiftLint'
   pod 'SketchKit'
+  pod 'RealmSwift'
 
   target 'MovsTests' do
     inherit! :search_paths
