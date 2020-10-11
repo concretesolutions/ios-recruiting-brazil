@@ -105,9 +105,6 @@ extension MoviesListController: UISearchBarDelegate {
             inSearchMode = false
             collectionView.reloadData()
             view.endEditing(true)
-        } else if self.filteredMovies.isEmpty && self.inSearchMode {
-            let errorView = ErrorView()
-            self.view = errorView
         } else {
             inSearchMode = true
             filteredMovies = moviesList.filter({ $0.title.range(of: searchText) != nil })
@@ -118,7 +115,17 @@ extension MoviesListController: UISearchBarDelegate {
 
 extension MoviesListController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return inSearchMode ? filteredMovies.count : moviesList.count
+        if inSearchMode {
+            if self.filteredMovies.isEmpty {
+                let errorView = ErrorView()
+                collectionView.backgroundView = errorView
+            } else {
+                collectionView.backgroundView = nil
+            }
+            return self.filteredMovies.count
+        }
+        
+        return moviesList.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
