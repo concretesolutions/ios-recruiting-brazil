@@ -48,6 +48,7 @@
 		C56234182531109A0025FF0B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56234172531109A0025FF0B /* Constants.swift */; };
 		C562343B253143510025FF0B /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C562343A253143510025FF0B /* ErrorView.swift */; };
 		C594578F25329C64000DAAB7 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C594578E25329C64000DAAB7 /* EmptyView.swift */; };
+		C594579625329E1E000DAAB7 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C594579525329E1E000DAAB7 /* DetailsViewController.swift */; };
 		ECC9D5DE3F88B19AC61C0CD6 /* Pods_Movs_MovsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -121,6 +122,7 @@
 		C56234172531109A0025FF0B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C562343A253143510025FF0B /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		C594578E25329C64000DAAB7 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		C594579525329E1E000DAAB7 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		DCA1F1EE22955852CAB21355 /* Pods_Movs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs_MovsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -287,6 +289,7 @@
 		C5094F67252FA29500A1018F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				C594579325329E04000DAAB7 /* Details */,
 				C5094F74252FA3E800A1018F /* Favorites */,
 				C5094F5C252FA18200A1018F /* MoviesList */,
 			);
@@ -515,6 +518,22 @@
 				C594578E25329C64000DAAB7 /* EmptyView.swift */,
 			);
 			path = ViewsState;
+			sourceTree = "<group>";
+		};
+		C594579325329E04000DAAB7 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				C594579425329E09000DAAB7 /* Controller */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		C594579425329E09000DAAB7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C594579525329E1E000DAAB7 /* DetailsViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -821,6 +840,7 @@
 				C5094F78252FA46400A1018F /* FavoritesController.swift in Sources */,
 				C5094FE0252FDB8200A1018F /* MoviesDTO.swift in Sources */,
 				C56234182531109A0025FF0B /* Constants.swift in Sources */,
+				C594579625329E1E000DAAB7 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

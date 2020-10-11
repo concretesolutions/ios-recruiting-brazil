@@ -141,4 +141,10 @@ extension MoviesListController: UICollectionViewDelegateFlowLayout {
 
         return cell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let controller = DetailsViewController()
+        controller.movies = inSearchMode ? filteredMovies[indexPath.row] : moviesList[indexPath.row]
+        navigationController?.pushViewController(controller, animated: true)
+    }
 }
