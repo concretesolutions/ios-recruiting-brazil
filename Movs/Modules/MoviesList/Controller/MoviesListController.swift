@@ -18,6 +18,10 @@ class MoviesListController: UICollectionViewController {
     private var filteredMovies = [ResultMoviesDTO]()
     private var inSearchMode = false
     private var searchBar: UISearchBar!
+    
+    private let realm = try! Realm()
+        
+    private var itemsFavorites = [FavoriteEntity]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,16 +58,9 @@ class MoviesListController: UICollectionViewController {
         navigationItem.rightBarButtonItem = nil
         navigationItem.titleView = searchBar
     }
-    
-//    @objc func btnFavorite(cell: MoviesListCell) {
-//        if cell.favorite.currentImage == UIImage(named: "favorite_gray_icon") {
-//            cell.favorite.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
-//        } else {
-//            cell.favorite.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
-//            print("Vish")
-//        }
-//    }
 }
+
+// - MARK: View State popular movies
 
 extension MoviesListController {
     private func setupViewModel() {
@@ -92,6 +89,8 @@ extension MoviesListController {
     }
 }
 
+// - MARK: Setup search bar
+
 extension MoviesListController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         navigationItem.titleView = nil
@@ -113,19 +112,36 @@ extension MoviesListController: UISearchBarDelegate {
     }
 }
 
+// - MARK: Button favorite
+
 extension MoviesListController: MoviesListDelegate {
     func buttonFavorite(movies: ResultMoviesDTO, cell: MoviesListCell) {
         if cell.favorite.currentImage == UIImage(named: "favorite_gray_icon") {
             cell.favorite.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
-            print("Boa")
-            print(movies.title)
+            addToFavorite(movie: movies)
         } else {
             cell.favorite.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
             print("Vish")
             print(movies.title)
         }
     }
+    
+    func addToFavorite(movie: ResultMoviesDTO) {
+        realm.beginWrite()
+                
+        let newFavorite = FavoriteEntity()
+        newFavorite.id = movie.id
+        newFavorite.title = movie.title
+        newFavorite.photo = movie.poster_path
+        realm.add(newFavorite)
+                
+        try! realm.commitWrite()
+        
+        print("Adicionado com sucesso aos favoritos")
+    }
 }
+
+// Collection View delegate
 
 extension MoviesListController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -150,6 +166,14 @@ extension MoviesListController: UICollectionViewDelegateFlowLayout {
         cell.backgroundColor = .systemBlue
         cell.delegate = self
         cell.addComponents(with: movies)
+        
+        itemsFavorites = realm.objects(FavoriteEntity.self).map({ $0 })
+                
+        if itemsFavorites.contains(where: {$0.id == movies.id}) {
+            cell.favorite.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+        } else {
+            cell.favorite.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+        }
         
         return cell
     }
