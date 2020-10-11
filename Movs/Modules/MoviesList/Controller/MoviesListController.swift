@@ -117,8 +117,8 @@ extension MoviesListController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if inSearchMode {
             if self.filteredMovies.isEmpty {
-                let errorView = ErrorView()
-                collectionView.backgroundView = errorView
+                let emptyView = EmptyView()
+                collectionView.backgroundView = emptyView
             } else {
                 collectionView.backgroundView = nil
             }
