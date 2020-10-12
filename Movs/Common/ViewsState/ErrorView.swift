@@ -23,7 +23,7 @@ class ErrorView: UIView {
     
     private var titleError: UILabel = {
         let label = UILabel()
-        label.text = "Erro de conexão"
+        label.text = "Connection error"
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 20)
         return label

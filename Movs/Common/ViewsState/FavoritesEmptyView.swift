@@ -1,14 +1,14 @@
 //
-//  EmptyView.swift
+//  FavoritesEmptyView.swift
 //  Movs
 //
-//  Created by Joao Lucas on 10/10/20.
+//  Created by Joao Lucas on 12/10/20.
 //
 
 import UIKit
 
-class EmptyView: UIView {
-    
+class FavoritesEmptyView: UIView {
+
     private lazy var containerView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
         view.backgroundColor = .white
@@ -17,13 +17,13 @@ class EmptyView: UIView {
     
     private var logo: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "search_icon")
+        image.image = UIImage(named: "icon_sad")
         return image
     }()
     
     private var titleError: UILabel = {
         let label = UILabel()
-        label.text = "This film does not exist"
+        label.text = "Your favorites list is empty"
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
@@ -39,7 +39,7 @@ class EmptyView: UIView {
     }
 }
 
-extension EmptyView: ViewCode {
+extension FavoritesEmptyView: ViewCode {
     func buildViewHierarchy() {
         addSubview(containerView)
         containerView.addSubview(logo)
@@ -66,4 +66,5 @@ extension EmptyView: ViewCode {
             view.centerXAnchor(equalTo: centerXAnchor)
         }
     }
+
 }

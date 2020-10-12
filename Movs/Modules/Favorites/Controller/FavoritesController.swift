@@ -99,8 +99,8 @@ extension FavoritesController {
         }
         
         if itemsFavorites.isEmpty {
-            let error = ErrorView()
-            tableView.backgroundView = error
+            let empty = FavoritesEmptyView()
+            tableView.backgroundView = empty
         } else {
             tableView.backgroundView = nil
         }
