@@ -17,6 +17,7 @@ class MoviesListViewModelSpec: QuickSpec {
             var client: HTTPClientMock!
             var service: MoviesListService!
             var viewState: ViewState<MoviesDTO, HTTPError>!
+            var viewStateGenre: ViewState<GenresDTO, HTTPError>!
             var useCase: MoviesListUseCaseMock!
             var viewModel: MoviesListViewModel!
             var state: MoviesListState!
@@ -27,8 +28,9 @@ class MoviesListViewModelSpec: QuickSpec {
                 client = HTTPClientMock()
                 service = MoviesListService(client: client)
                 viewState = ViewState<MoviesDTO, HTTPError>()
+                viewStateGenre = ViewState<GenresDTO, HTTPError>()
                 useCase = MoviesListUseCaseMock()
-                viewModel = MoviesListViewModel(service: service, viewState: viewState, useCase: useCase)
+                viewModel = MoviesListViewModel(service: service, viewState: viewState, viewStateGenre: viewStateGenre, useCase: useCase)
                 state = MoviesListState()
             }
             

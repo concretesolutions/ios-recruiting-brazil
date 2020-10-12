@@ -35,6 +35,21 @@ class MoviesListServiceSpec: QuickSpec {
                     }
                 }
             }
+            
+            it("Verify get genres with success") {
+                client.fileName = "genres"
+                
+                service.getGenres { result in
+                    switch result {
+                    case .success(let genres):
+                        let values = genres.genres
+                        expect(values[0].name).to(equal("Action"))
+                        
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+            }
         }
     }
 }
