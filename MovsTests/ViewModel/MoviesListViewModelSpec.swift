@@ -35,6 +35,8 @@ class MoviesListViewModelSpec: QuickSpec {
             }
             
             it("Verify fetch movies list with success") {
+                client.fileName = "popular-movies"
+                
                 viewModel.fetchMoviesList()
                     .successObserver(state.onSuccess)
                     .loadingObserver(state.onLoading)

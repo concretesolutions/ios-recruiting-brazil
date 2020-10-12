@@ -20,7 +20,7 @@ class HTTPClientMock: HTTPClientProtocol {
             return completion(.failure(.jsonParsingFailure))
         }
 
-        let decodable: T = JSONHelper.load(withFile: fileName)!
+        guard let decodable: T = JSONHelper.load(withFile: fileName) else { return }
         if let value = decode?(decodable) {
             return completion(.success(value))
         }
