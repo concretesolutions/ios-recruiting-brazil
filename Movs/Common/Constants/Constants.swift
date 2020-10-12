@@ -28,4 +28,12 @@ class Constants {
         
         return genres
     }
+    
+    static func getYear(movies: ResultMoviesDTO) -> String{
+        if let year = movies.release_date.split(separator: "-").first{
+            return String(year)
+        }
+        
+        return ""
+    }
 }

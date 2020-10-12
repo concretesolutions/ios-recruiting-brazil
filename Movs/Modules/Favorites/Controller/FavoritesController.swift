@@ -38,6 +38,13 @@ class FavoritesController: UITableViewController {
 
 extension FavoritesController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if itemsFavorites.isEmpty {
+            let error = ErrorView()
+            tableView.backgroundView = error
+        } else {
+            tableView.backgroundView = nil
+        }
+        
         return itemsFavorites.count
     }
 
