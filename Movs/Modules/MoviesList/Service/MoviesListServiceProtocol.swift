@@ -9,4 +9,6 @@ import Foundation
 
 protocol MoviesListServiceProtocol {
     func getMoviesList(completion: @escaping (Result<MoviesDTO, HTTPError>) -> Void)
+    
+    func getGenres(completion: @escaping (Result<GenresDTO, HTTPError>) -> Void)
 }

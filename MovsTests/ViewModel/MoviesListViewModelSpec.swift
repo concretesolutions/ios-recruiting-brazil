@@ -43,7 +43,7 @@ class MoviesListViewModelSpec: QuickSpec {
             
             it("Verify load add to favorite") {
                 var successAdding = false
-                let movies = ResultMoviesDTO(id: 1, title: "Title", poster_path: "www.google.com")
+                let movies = ResultMoviesDTO(id: 1, title: "Title", poster_path: "www.google.com", genre_ids: [1, 2, 3])
                 
                 viewModel.successAdding.observer(viewModel) { _ in
                     successAdding = true
@@ -56,7 +56,7 @@ class MoviesListViewModelSpec: QuickSpec {
             
             it("Verify load remove favorite") {
                 var successRemoving = false
-                let movies = ResultMoviesDTO(id: 1, title: "Title", poster_path: "www.google.com")
+                let movies = ResultMoviesDTO(id: 1, title: "Title", poster_path: "www.google.com", genre_ids: [1, 2, 3])
                 
                 viewModel.successRemoving.observer(viewModel) { _ in
                     successRemoving = true

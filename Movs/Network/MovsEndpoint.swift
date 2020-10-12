@@ -9,6 +9,7 @@ import Foundation
 
 enum MovsEndpoint {
     case moviesList
+    case getGenres
 }
 
 extension MovsEndpoint: EndpointProtocol {
@@ -24,6 +25,9 @@ extension MovsEndpoint: EndpointProtocol {
         switch self {
         case .moviesList:
             return "/3/movie/popular"
+            
+        case .getGenres:
+            return "/3/genre/movie/list"
         }
     }
     
@@ -38,6 +42,9 @@ extension MovsEndpoint: EndpointProtocol {
     var method: HTTPMethod {
         switch self {
         case .moviesList:
+            return .get
+            
+        case .getGenres:
             return .get
         }
     }

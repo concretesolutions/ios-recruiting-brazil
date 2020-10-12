@@ -19,6 +19,7 @@ class MoviesListUseCase {
         newFavorite.id = movie.id
         newFavorite.title = movie.title
         newFavorite.photo = movie.poster_path
+        newFavorite.genre = Constants.getGenresString(movies: movie)!
         realm.add(newFavorite)
                 
         try! realm.commitWrite()

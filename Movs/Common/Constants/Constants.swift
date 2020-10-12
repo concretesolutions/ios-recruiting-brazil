@@ -11,4 +11,21 @@ class Constants {
     static var pathPhoto: String {
         return "https://image.tmdb.org/t/p/w500/"
     }
+    
+    static func getGenresString(movies: ResultMoviesDTO) -> String? {
+        let genres = GenresDTO.shared?.genres
+            .filter({ genre in movies.genre_ids.contains(genre.id) })
+            .map({ genre in genre.name })
+            .joined(separator: ", ")
+    
+            return genres
+    }
+    
+    static func getGenresInt(movies: ResultMoviesDTO) -> [Int]? {
+        let genres = GenresDTO.shared?.genres
+            .filter({ genre in movies.genre_ids.contains(genre.id) })
+            .map({ $0.id })
+        
+        return genres
+    }
 }

@@ -31,6 +31,19 @@ class MoviesListController: UICollectionViewController {
         setupViewModel()
         setupFetchMovies()
         setupStates()
+        
+        MoviesListService().getGenres { result in
+            switch result {
+            case .success(let genres):
+                let genres = genres
+                GenresDTO.shared = genres
+                
+                print(genres)
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     private func setupCollectionView() {
@@ -87,6 +100,8 @@ extension MoviesListController {
     private func onError(message: HTTPError) {
         let errorView = ErrorView()
         self.view = errorView
+        
+        print(message.localizedDescription)
     }
 }
 
@@ -178,7 +193,7 @@ extension MoviesListController: UICollectionViewDelegateFlowLayout {
         } else {
             cell.favorite.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
         }
-        
+    
         return cell
     }
     

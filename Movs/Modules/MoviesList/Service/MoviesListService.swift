@@ -21,4 +21,11 @@ class MoviesListService: MoviesListServiceProtocol {
         
         client.request(request, completion: completion)
     }
+    
+    func getGenres(completion: @escaping (Result<GenresDTO, HTTPError>) -> Void) {
+        let endpoint: MovsEndpoint = .getGenres
+        let request = endpoint.request
+        
+        client.request(request, completion: completion)
+    }
 }
