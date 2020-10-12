@@ -14,6 +14,7 @@ class MoviesListController: UICollectionViewController {
     private var moviesList = [ResultMoviesDTO]()
     
     private var viewModel: MoviesListViewModel!
+    private var activityView: UIActivityIndicatorView?
     
     private var filteredMovies = [ResultMoviesDTO]()
     private var inSearchMode = false
@@ -79,10 +80,14 @@ extension MoviesListController {
     private func onSuccess(movies: MoviesDTO) {
         moviesList = movies.results
         collectionView.reloadData()
+        activityView?.stopAnimating()
     }
     
     private func onLoading() {
-        print("carregando")
+        activityView = UIActivityIndicatorView(style: .large)
+        activityView?.center = self.view.center
+        self.view.addSubview(activityView!)
+        activityView?.startAnimating()
     }
     
     private func onError(message: HTTPError) {
