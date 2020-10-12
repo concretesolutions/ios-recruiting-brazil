@@ -13,6 +13,7 @@ class MoviesListViewModelFactory {
         return MoviesListViewModel(
             service: MoviesListService(),
             viewState: ViewState<MoviesDTO, HTTPError>(),
+            viewStateGenre: ViewState<GenresDTO, HTTPError>(),
             useCase: MoviesListUseCase()
         )
     }

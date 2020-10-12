@@ -31,19 +31,7 @@ class MoviesListController: UICollectionViewController {
         setupViewModel()
         setupFetchMovies()
         setupStates()
-        
-        MoviesListService().getGenres { result in
-            switch result {
-            case .success(let genres):
-                let genres = genres
-                GenresDTO.shared = genres
-                
-                print(genres)
-                
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+        setupFetchGenres()
     }
     
     private func setupCollectionView() {
@@ -101,6 +89,25 @@ extension MoviesListController {
         let errorView = ErrorView()
         self.view = errorView
         
+        print(message.localizedDescription)
+    }
+}
+
+// - MARK: View State genres
+
+extension MoviesListController {
+    private func setupFetchGenres() {
+        viewModel.fetchGenres()
+            .successObserver(onSuccessGenres)
+            .errorObserver(onErrorGenres)
+    }
+    
+    private func onSuccessGenres(genres: GenresDTO) {
+        let genres = genres
+        GenresDTO.shared = genres
+    }
+    
+    private func onErrorGenres(message: HTTPError) {
         print(message.localizedDescription)
     }
 }

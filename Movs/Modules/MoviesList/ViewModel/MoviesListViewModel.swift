@@ -14,15 +14,18 @@ class MoviesListViewModel: DataLifeViewModel {
     
     var viewState: ViewState<MoviesDTO, HTTPError>
     
+    var viewStateGenre: ViewState<GenresDTO, HTTPError>
+    
     var useCase: MoviesListUseCase
     
     var successAdding = DataLife<String>()
     
     var successRemoving = DataLife<String>()
     
-    init(service: MoviesListService, viewState: ViewState<MoviesDTO, HTTPError>, useCase: MoviesListUseCase) {
+    init(service: MoviesListService, viewState: ViewState<MoviesDTO, HTTPError>, viewStateGenre: ViewState<GenresDTO, HTTPError>, useCase: MoviesListUseCase) {
         self.service = service
         self.viewState = viewState
+        self.viewStateGenre = viewStateGenre
         self.useCase = useCase
     }
     
@@ -39,6 +42,19 @@ class MoviesListViewModel: DataLifeViewModel {
         }
         
         return viewState
+    }
+    
+    func fetchGenres() -> ViewState<GenresDTO, HTTPError> {
+        MoviesListService().getGenres { result in
+            switch result {
+            case .success(let genres):
+                self.viewStateGenre.success(data: genres)
+            case .failure(let error):
+                self.viewStateGenre.error(error: error)
+            }
+        }
+        
+        return viewStateGenre
     }
     
     func loadAddToFavorite(realm: Realm, movie: ResultMoviesDTO) {
