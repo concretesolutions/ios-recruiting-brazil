@@ -12,10 +12,15 @@ class FavoritesController: UITableViewController {
     
     private let realm = try! Realm()
     private var itemsFavorites = [FavoriteEntity]()
+    
+    private var searchBar: UISearchBar!
+    private var filteredFavorites = [FavoriteEntity]()
+    private var inSearchMode = false
    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupSearchBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -34,24 +39,79 @@ class FavoritesController: UITableViewController {
         itemsFavorites = realm.objects(FavoriteEntity.self).map({ $0 })
         tableView.reloadData()
     }
+    
+    private func setupSearchBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showSearchBar))
+                    
+        navigationItem.rightBarButtonItem?.tintColor = .systemBlue
+    }
+}
+
+// - MARK: Setup search bar
+
+extension FavoritesController: UISearchBarDelegate {
+    @objc func showSearchBar() {
+        configureSearchBar()
+    }
+        
+    private func configureSearchBar() {
+        searchBar = UISearchBar()
+        searchBar.delegate = self
+        searchBar.sizeToFit()
+        searchBar.showsCancelButton = true
+        searchBar.becomeFirstResponder()
+        searchBar.tintColor = .black
+                
+        navigationItem.rightBarButtonItem = nil
+        navigationItem.titleView = searchBar
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        navigationItem.titleView = nil
+        setupSearchBar()
+        inSearchMode = false
+        tableView.reloadData()
+    }
+        
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" || searchBar.text == nil {
+            inSearchMode = false
+            tableView.reloadData()
+            view.endEditing(true)
+        } else {
+            inSearchMode = true
+            filteredFavorites = itemsFavorites.filter({ $0.title.range(of: searchText) != nil })
+            tableView.reloadData()
+        }
+    }
 }
 
 extension FavoritesController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if inSearchMode {
+            if self.filteredFavorites.isEmpty {
+                let emptyView = EmptyView()
+                tableView.backgroundView = emptyView
+            } else {
+                tableView.backgroundView = nil
+            }
+            return self.filteredFavorites.count
+        }
+        
         if itemsFavorites.isEmpty {
             let error = ErrorView()
             tableView.backgroundView = error
         } else {
             tableView.backgroundView = nil
         }
-        
+
         return itemsFavorites.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseListFavorites", for: indexPath)
         
-        let item = itemsFavorites[indexPath.row]
+        let item = inSearchMode ? filteredFavorites[indexPath.row] : itemsFavorites[indexPath.row]
         
         cell.textLabel?.text = item.title
 
