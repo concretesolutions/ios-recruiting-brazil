@@ -29,7 +29,7 @@ class FavoritesController: UITableViewController {
     
     private func setupTableView() {
         itemsFavorites = realm.objects(FavoriteEntity.self).map({ $0 })
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseListFavorites")
+        tableView.register(FavoritesViewCell.self, forCellReuseIdentifier: "reuseListFavorites")
         tableView.tableFooterView = UIView.init(frame: .zero)
         
         refresh()
@@ -109,11 +109,14 @@ extension FavoritesController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseListFavorites", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseListFavorites", for: indexPath) as! FavoritesViewCell
         
         let item = inSearchMode ? filteredFavorites[indexPath.row] : itemsFavorites[indexPath.row]
         
-        cell.textLabel?.text = item.title
+        cell.photo.downloadImage(from: (Constants.pathPhoto + item.photo))
+        cell.title.text = item.title
+        cell.overview.text = item.overview
+        cell.year.text = item.year
 
         return cell
     }

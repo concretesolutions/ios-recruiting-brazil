@@ -14,6 +14,7 @@ class FavoriteEntity: Object {
     @objc dynamic var photo: String = ""
     @objc dynamic var genre: String = ""
     @objc dynamic var year: String = ""
+    @objc dynamic var overview: String = ""
     
     override class func primaryKey() -> String {
         return "id"

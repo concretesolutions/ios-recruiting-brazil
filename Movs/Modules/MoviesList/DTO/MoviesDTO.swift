@@ -17,4 +17,5 @@ struct ResultMoviesDTO: Decodable {
     let poster_path: String
     let genre_ids: [Int]
     let release_date: String
+    let overview: String
 }
