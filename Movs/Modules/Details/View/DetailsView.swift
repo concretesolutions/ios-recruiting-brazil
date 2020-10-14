@@ -35,7 +35,8 @@ class DetailsView: UIView {
     
     let title: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.textColor = .systemBlue
         label.numberOfLines = 0
         return label
     }()

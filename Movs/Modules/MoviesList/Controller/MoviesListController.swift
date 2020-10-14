@@ -35,6 +35,10 @@ class MoviesListController: UICollectionViewController {
         setupFetchGenres()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        collectionView.reloadData()
+    }
+    
     private func setupCollectionView() {
         self.collectionView!.register(MoviesListCell.self, forCellWithReuseIdentifier: "moviesList")
         self.collectionView.backgroundColor = .white

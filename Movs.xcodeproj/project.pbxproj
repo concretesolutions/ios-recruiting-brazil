@@ -60,6 +60,8 @@
 		C594581D2534F021000DAAB7 /* FavoritesEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C594581C2534F021000DAAB7 /* FavoritesEmptyView.swift */; };
 		C59458232534FB38000DAAB7 /* FavoritesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59458222534FB38000DAAB7 /* FavoritesViewCell.swift */; };
 		C594583425369ADE000DAAB7 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C594583325369ADE000DAAB7 /* DetailsView.swift */; };
+		C594583D25376C78000DAAB7 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C594583C25376C78000DAAB7 /* DetailsViewModel.swift */; };
+		C594584525376DAB000DAAB7 /* DetailsViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C594584425376DAB000DAAB7 /* DetailsViewModelFactory.swift */; };
 		ECC9D5DE3F88B19AC61C0CD6 /* Pods_Movs_MovsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -145,6 +147,8 @@
 		C594581C2534F021000DAAB7 /* FavoritesEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesEmptyView.swift; sourceTree = "<group>"; };
 		C59458222534FB38000DAAB7 /* FavoritesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewCell.swift; sourceTree = "<group>"; };
 		C594583325369ADE000DAAB7 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		C594583C25376C78000DAAB7 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		C594584425376DAB000DAAB7 /* DetailsViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModelFactory.swift; sourceTree = "<group>"; };
 		DCA1F1EE22955852CAB21355 /* Pods_Movs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs_MovsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -545,6 +549,7 @@
 		C594579325329E04000DAAB7 /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				C594583B25376C08000DAAB7 /* ViewModel */,
 				C594583225369A14000DAAB7 /* View */,
 				C594579425329E09000DAAB7 /* Controller */,
 			);
@@ -607,6 +612,15 @@
 				C594583325369ADE000DAAB7 /* DetailsView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		C594583B25376C08000DAAB7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C594583C25376C78000DAAB7 /* DetailsViewModel.swift */,
+				C594584425376DAB000DAAB7 /* DetailsViewModelFactory.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -890,6 +904,7 @@
 				C5094F6B252FA2F100A1018F /* MoviesListController.swift in Sources */,
 				C59457D925336BD3000DAAB7 /* DataLifeViewModel.swift in Sources */,
 				C5094FC6252FB10B00A1018F /* HTTPClient.swift in Sources */,
+				C594584525376DAB000DAAB7 /* DetailsViewModelFactory.swift in Sources */,
 				C5094FB0252FB02900A1018F /* HTTPError.swift in Sources */,
 				C5094F07252EBFB900A1018F /* AppDelegate.swift in Sources */,
 				C5094FBE252FB0D200A1018F /* HTTPClientProtocol.swift in Sources */,
@@ -912,6 +927,7 @@
 				C5094FEB252FDD7C00A1018F /* MoviesListService.swift in Sources */,
 				C5094F9E252FAA0F00A1018F /* HTTPStatusCode.swift in Sources */,
 				C562340F25310F100025FF0B /* Image.swift in Sources */,
+				C594583D25376C78000DAAB7 /* DetailsViewModel.swift in Sources */,
 				C5094FD4252FB26F00A1018F /* MovsEndpoint.swift in Sources */,
 				C5094FAB252FAFF700A1018F /* HTTPMethod.swift in Sources */,
 				C5094FB8252FB08100A1018F /* EndpointProtocol.swift in Sources */,

@@ -11,8 +11,11 @@ import RealmSwift
 class DetailsViewController: UIViewController {
     
     private let detailsView = DetailsView()
-    
     var movies: ResultMoviesDTO!
+    private var viewModel: DetailsViewModel!
+    
+    private let realm = try! Realm()
+    private var itemsFavorites = [FavoriteEntity]()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -32,12 +35,25 @@ class DetailsViewController: UIViewController {
         detailsView.delegate = self
 
         setupNavigationBar()
+        setupVerifyFavorites()
         setupValuesMovie()
+        setupViewModel()
+        setupStates()
     }
-    
+
     private func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Movs details"
+    }
+    
+    private func setupVerifyFavorites() {
+        itemsFavorites = realm.objects(FavoriteEntity.self).map({ $0 })
+                
+        if itemsFavorites.contains(where: {$0.id == movies.id}) {
+            detailsView.favorite.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+        } else {
+            detailsView.favorite.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+        }
     }
     
     private func setupValuesMovie() {
@@ -47,14 +63,38 @@ class DetailsViewController: UIViewController {
         detailsView.genre.text = Constants.getGenresString(movies: movies)
         detailsView.overview.text = movies.overview
     }
+    
+    private func setupViewModel() {
+        viewModel = DetailsViewModelFactory().create()
+    }
 }
 
 extension DetailsViewController: DetailsDelegate {
     func btnFavorite() {
         if detailsView.favorite.currentImage == UIImage(named: "favorite_gray_icon") {
             detailsView.favorite.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+            addToFavorite(movie: movies)
         } else {
             detailsView.favorite.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+            removeFavorite(movie: movies)
+        }
+    }
+    
+    private func addToFavorite(movie: ResultMoviesDTO) {
+        viewModel.loadAddToFavorite(realm: realm, movie: movie)
+    }
+    
+    private func removeFavorite(movie: ResultMoviesDTO) {
+        viewModel.loadRemoveFavorite(realm: realm, movie: movie)
+    }
+    
+    private func setupStates() {
+        viewModel.successAdding.observer(viewModel) { message in
+            print(message)
+        }
+        
+        viewModel.successRemoving.observer(viewModel) { message in
+            print(message)
         }
     }
 }
