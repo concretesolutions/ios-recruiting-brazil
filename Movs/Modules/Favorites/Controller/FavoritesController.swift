@@ -45,6 +45,10 @@ class FavoritesController: UITableViewController {
                     
         navigationItem.rightBarButtonItem?.tintColor = .systemBlue
     }
+    
+    @objc func btnRemoveFilter() {
+        print("Remove filter")
+    }
 }
 
 // - MARK: Setup search bar
@@ -123,5 +127,16 @@ extension FavoritesController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 140
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .systemBlue
+        button.setTitle("Remove Filter", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        button.addTarget(self, action: #selector(btnRemoveFilter), for: .touchUpInside)
+        button.heightAnchor(equalTo: 50)
+        return button
     }
 }
