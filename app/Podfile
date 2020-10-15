@@ -9,6 +9,14 @@ target 'app' do
   pod 'SwiftLint'
   pod 'SnapKit'
 
+  
   # Pods for app
 
+  target 'appUITests' do
+    pod 'Quick'
+    pod 'Nimble'
+    pod 'Nimble-Snapshots'
+  end
+
 end
+
