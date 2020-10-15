@@ -39,12 +39,17 @@ class FilterYearController: UITableViewController {
     private func setupFetchYears() {
         viewModel.fetchYearsList()
             .successObserver(onSuccess)
+            .loadingObserver(onLoading)
             .errorObserver(onError)
     }
     
     private func onSuccess(years: MoviesDTO) {
         yearList = years.results
         tableView.reloadData()
+    }
+    
+    private func onLoading() {
+        print("Carregar")
     }
     
     private func onError(message: HTTPError) {
@@ -68,6 +73,7 @@ class FilterYearController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let year = yearList[indexPath.row]
+        self.tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         delegate.getYearSelected(year: Constants.getYear(movies: year))
         navigationController?.popViewController(animated: true)
     }

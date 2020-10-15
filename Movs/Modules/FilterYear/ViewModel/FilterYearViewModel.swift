@@ -19,12 +19,14 @@ class FilterYearViewModel {
     }
     
     func fetchYearsList() -> ViewState<MoviesDTO, HTTPError> {
-        self.service.getMoviesList { [weak self] result in
-            switch result {
-            case .success(let movies):
-                self?.viewState.success(data: movies)
-            case .failure(let message):
-                self?.viewState.error(error: message)
+        viewState.fetchSource {
+            self.service.getMoviesList { [weak self] result in
+                switch result {
+                case .success(let movies):
+                    self?.viewState.success(data: movies)
+                case .failure(let message):
+                    self?.viewState.error(error: message)
+                }
             }
         }
         
