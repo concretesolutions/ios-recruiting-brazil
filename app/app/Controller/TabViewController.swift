@@ -17,18 +17,28 @@ class TabViewController: UITabBarController {
         let favsController = FavsViewController()
 
         // Set tabBar items
-        gridController.tabBarItem = UITabBarItem(title: "Grid",
+        gridController.tabBarItem = UITabBarItem(title: nil,
                                                  image: UIImage(systemName: "square.grid.2x2"),
                                                  tag: 0)
         gridController.tabBarItem.selectedImage = UIImage(systemName: "square.grid.2x2.fill")
 
-        favsController.tabBarItem = UITabBarItem(title: "Favs",
+        favsController.tabBarItem = UITabBarItem(title: nil,
                                                  image: UIImage(systemName: "heart"),
                                                  tag: 1)
         favsController.tabBarItem.selectedImage = UIImage(systemName: "heart.fill")
 
         // Add items to tabBar
         self.viewControllers = [gridController, favsController]
+
+        self.setupLayout()
+
+    }
+
+    func setupLayout() {
+
+        self.tabBar.barTintColor = UIColor(named: "Orange")
+        self.tabBar.tintColor = .white
+        self.tabBar.unselectedItemTintColor = .white
 
     }
     
