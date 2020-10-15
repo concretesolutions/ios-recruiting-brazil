@@ -3,28 +3,32 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2D355DA96A21AE57CA08ABCC /* Pods_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2552C61E808B9CE8027C028 /* Pods_app.framework */; };
+		782C82FA253819D7002D2868 /* FavsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782C82F9253819D7002D2868 /* FavsViewController.swift */; };
 		783F4DCE2538130900BB880D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783F4DCD2538130900BB880D /* AppDelegate.swift */; };
 		783F4DD02538130900BB880D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783F4DCF2538130900BB880D /* SceneDelegate.swift */; };
-		783F4DD22538130900BB880D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783F4DD12538130900BB880D /* ViewController.swift */; };
 		783F4DD72538130D00BB880D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 783F4DD62538130D00BB880D /* Assets.xcassets */; };
 		783F4DDA2538130D00BB880D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 783F4DD82538130D00BB880D /* LaunchScreen.storyboard */; };
+		784EEC7A25381910001709F6 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784EEC7925381910001709F6 /* TabViewController.swift */; };
+		784EEC7C25381935001709F6 /* GridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784EEC7B25381935001709F6 /* GridViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		416D93CBC48EE70C1B08340F /* Pods-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.debug.xcconfig"; path = "Target Support Files/Pods-app/Pods-app.debug.xcconfig"; sourceTree = "<group>"; };
 		6FE41065AE50A52ED2B5869D /* Pods-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.release.xcconfig"; path = "Target Support Files/Pods-app/Pods-app.release.xcconfig"; sourceTree = "<group>"; };
+		782C82F9253819D7002D2868 /* FavsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavsViewController.swift; sourceTree = "<group>"; };
 		783F4DCA2538130900BB880D /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		783F4DCD2538130900BB880D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		783F4DCF2538130900BB880D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		783F4DD12538130900BB880D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		783F4DD62538130D00BB880D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		783F4DD92538130D00BB880D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		783F4DDB2538130D00BB880D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		784EEC7925381910001709F6 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
+		784EEC7B25381935001709F6 /* GridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewController.swift; sourceTree = "<group>"; };
 		D2552C61E808B9CE8027C028 /* Pods_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -46,7 +50,6 @@
 				416D93CBC48EE70C1B08340F /* Pods-app.debug.xcconfig */,
 				6FE41065AE50A52ED2B5869D /* Pods-app.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -79,14 +82,40 @@
 		783F4DCC2538130900BB880D /* app */ = {
 			isa = PBXGroup;
 			children = (
+				784EEC7F25381949001709F6 /* Controller */,
+				784EEC7E25381946001709F6 /* View */,
+				784EEC7D2538193B001709F6 /* Model */,
 				783F4DCD2538130900BB880D /* AppDelegate.swift */,
 				783F4DCF2538130900BB880D /* SceneDelegate.swift */,
-				783F4DD12538130900BB880D /* ViewController.swift */,
 				783F4DD62538130D00BB880D /* Assets.xcassets */,
 				783F4DD82538130D00BB880D /* LaunchScreen.storyboard */,
 				783F4DDB2538130D00BB880D /* Info.plist */,
 			);
 			path = app;
+			sourceTree = "<group>";
+		};
+		784EEC7D2538193B001709F6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		784EEC7E25381946001709F6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		784EEC7F25381949001709F6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				784EEC7925381910001709F6 /* TabViewController.swift */,
+				784EEC7B25381935001709F6 /* GridViewController.swift */,
+				782C82F9253819D7002D2868 /* FavsViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,7 +232,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				783F4DD22538130900BB880D /* ViewController.swift in Sources */,
+				784EEC7C25381935001709F6 /* GridViewController.swift in Sources */,
+				784EEC7A25381910001709F6 /* TabViewController.swift in Sources */,
+				782C82FA253819D7002D2868 /* FavsViewController.swift in Sources */,
 				783F4DCE2538130900BB880D /* AppDelegate.swift in Sources */,
 				783F4DD02538130900BB880D /* SceneDelegate.swift in Sources */,
 			);
