@@ -63,6 +63,7 @@
 		C594583D25376C78000DAAB7 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C594583C25376C78000DAAB7 /* DetailsViewModel.swift */; };
 		C594584525376DAB000DAAB7 /* DetailsViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C594584425376DAB000DAAB7 /* DetailsViewModelFactory.swift */; };
 		C594584A25377E31000DAAB7 /* DetailsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C594584925377E31000DAAB7 /* DetailsViewModelSpec.swift */; };
+		C59458612538D2AF000DAAB7 /* FilterOptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59458602538D2AF000DAAB7 /* FilterOptionController.swift */; };
 		ECC9D5DE3F88B19AC61C0CD6 /* Pods_Movs_MovsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -151,6 +152,7 @@
 		C594583C25376C78000DAAB7 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 		C594584425376DAB000DAAB7 /* DetailsViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModelFactory.swift; sourceTree = "<group>"; };
 		C594584925377E31000DAAB7 /* DetailsViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModelSpec.swift; sourceTree = "<group>"; };
+		C59458602538D2AF000DAAB7 /* FilterOptionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOptionController.swift; sourceTree = "<group>"; };
 		DCA1F1EE22955852CAB21355 /* Pods_Movs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs_MovsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -318,6 +320,7 @@
 		C5094F67252FA29500A1018F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				C594585C2538CC40000DAAB7 /* FilterOption */,
 				C594579325329E04000DAAB7 /* Details */,
 				C5094F74252FA3E800A1018F /* Favorites */,
 				C5094F5C252FA18200A1018F /* MoviesList */,
@@ -626,6 +629,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		C594585C2538CC40000DAAB7 /* FilterOption */ = {
+			isa = PBXGroup;
+			children = (
+				C59458602538D2AF000DAAB7 /* FilterOptionController.swift */,
+			);
+			path = FilterOption;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -932,6 +943,7 @@
 				C562340F25310F100025FF0B /* Image.swift in Sources */,
 				C594583D25376C78000DAAB7 /* DetailsViewModel.swift in Sources */,
 				C5094FD4252FB26F00A1018F /* MovsEndpoint.swift in Sources */,
+				C59458612538D2AF000DAAB7 /* FilterOptionController.swift in Sources */,
 				C5094FAB252FAFF700A1018F /* HTTPMethod.swift in Sources */,
 				C5094FB8252FB08100A1018F /* EndpointProtocol.swift in Sources */,
 				C59457F32533DAB8000DAAB7 /* GenresDTO.swift in Sources */,

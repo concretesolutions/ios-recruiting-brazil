@@ -43,7 +43,14 @@ class FavoritesController: UITableViewController {
     private func setupSearchBar() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showSearchBar))
                     
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "FilterIcon"), style: .plain, target: self, action: #selector(showFilterOption))
+        
         navigationItem.rightBarButtonItem?.tintColor = .systemBlue
+    }
+    
+    @objc func showFilterOption() {
+        let controller = FilterOptionController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc func btnRemoveFilter() {
