@@ -45,8 +45,10 @@ extension FilterOptionController {
         switch indexPath.row {
         case 0:
             cell.textLabel?.text = "Year"
+            cell.accessoryType = .disclosureIndicator
         case 1:
             cell.textLabel?.text = "Genre"
+            cell.accessoryType = .disclosureIndicator
         default:
             fatalError()
         }
