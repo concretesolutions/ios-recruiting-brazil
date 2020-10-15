@@ -10,6 +10,7 @@ import UIKit
 class FilterOptionController: UITableViewController {
     
     private var yearSelected = ""
+    private var genreSelected = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +56,12 @@ extension FilterOptionController {
             
             cell.accessoryType = .disclosureIndicator
         case 1:
-            cell.textLabel?.text = "Genre"
+            if genreSelected.isEmpty {
+                cell.textLabel?.text = "Genre"
+            } else {
+                cell.textLabel?.text = "Genre: \(genreSelected)"
+            }
+            
             cell.accessoryType = .disclosureIndicator
         default:
             fatalError()
@@ -68,6 +74,11 @@ extension FilterOptionController {
         switch indexPath.row {
         case 0:
             let controller = FilterYearController()
+            controller.delegate = self
+            self.navigationController?.pushViewController(controller, animated: true)
+            
+        case 1:
+            let controller = FilterGenreController()
             controller.delegate = self
             self.navigationController?.pushViewController(controller, animated: true)
         default:
@@ -88,7 +99,12 @@ extension FilterOptionController {
     }
 }
 
-extension FilterOptionController: FilterByYearDelegate {
+extension FilterOptionController: FilterByYearDelegate, FilterByGenreDelegate {
+    func getGenreSelected(genre: String) {
+        self.genreSelected = genre
+        tableView.reloadData()
+    }
+    
     func getYearSelected(year: String) {
         self.yearSelected = year
         tableView.reloadData()

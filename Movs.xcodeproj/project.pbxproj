@@ -68,6 +68,7 @@
 		C594587C2538F180000DAAB7 /* FilterYearViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C594587B2538F180000DAAB7 /* FilterYearViewModel.swift */; };
 		C59458812538F336000DAAB7 /* FilterYearViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59458802538F336000DAAB7 /* FilterYearViewModelFactory.swift */; };
 		C594588E253912C9000DAAB7 /* FilterYearViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C594588D253912C9000DAAB7 /* FilterYearViewModelSpec.swift */; };
+		C594589625391592000DAAB7 /* FilterGenreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C594589525391592000DAAB7 /* FilterGenreController.swift */; };
 		ECC9D5DE3F88B19AC61C0CD6 /* Pods_Movs_MovsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -161,6 +162,7 @@
 		C594587B2538F180000DAAB7 /* FilterYearViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterYearViewModel.swift; sourceTree = "<group>"; };
 		C59458802538F336000DAAB7 /* FilterYearViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterYearViewModelFactory.swift; sourceTree = "<group>"; };
 		C594588D253912C9000DAAB7 /* FilterYearViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterYearViewModelSpec.swift; sourceTree = "<group>"; };
+		C594589525391592000DAAB7 /* FilterGenreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterGenreController.swift; sourceTree = "<group>"; };
 		DCA1F1EE22955852CAB21355 /* Pods_Movs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs_MovsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -328,6 +330,7 @@
 		C5094F67252FA29500A1018F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				C59458922539153B000DAAB7 /* FilterGenre */,
 				C59458652538EF76000DAAB7 /* FilterYear */,
 				C594585C2538CC40000DAAB7 /* FilterOption */,
 				C594579325329E04000DAAB7 /* Details */,
@@ -673,6 +676,30 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		C59458922539153B000DAAB7 /* FilterGenre */ = {
+			isa = PBXGroup;
+			children = (
+				C59458942539154D000DAAB7 /* ViewModel */,
+				C594589325391548000DAAB7 /* Controller */,
+			);
+			path = FilterGenre;
+			sourceTree = "<group>";
+		};
+		C594589325391548000DAAB7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C594589525391592000DAAB7 /* FilterGenreController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C59458942539154D000DAAB7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -988,6 +1015,7 @@
 				C59457F32533DAB8000DAAB7 /* GenresDTO.swift in Sources */,
 				C5094F09252EBFB900A1018F /* SceneDelegate.swift in Sources */,
 				C594583425369ADE000DAAB7 /* DetailsView.swift in Sources */,
+				C594589625391592000DAAB7 /* FilterGenreController.swift in Sources */,
 				C5094F78252FA46400A1018F /* FavoritesController.swift in Sources */,
 				C5094FE0252FDB8200A1018F /* MoviesDTO.swift in Sources */,
 				C59457AB2532A2DA000DAAB7 /* FavoriteEntity.swift in Sources */,
