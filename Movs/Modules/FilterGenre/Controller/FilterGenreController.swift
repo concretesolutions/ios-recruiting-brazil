@@ -15,6 +15,7 @@ class FilterGenreController: UITableViewController {
     
     private var genresList = [Genre]()
     private var viewModel: FilterGenreViewModel!
+    private var activityView: UIActivityIndicatorView?
     
     weak var delegate: FilterByGenreDelegate!
 
@@ -43,16 +44,20 @@ class FilterGenreController: UITableViewController {
     
     private func onSuccess(genres: GenresDTO) {
         self.genresList = genres.genres
-        
         tableView.reloadData()
+        activityView?.stopAnimating()
     }
     
     private func onLoading() {
-        print("Carregando")
+        activityView = UIActivityIndicatorView(style: .large)
+        activityView?.center = self.view.center
+        self.view.addSubview(activityView!)
+        activityView?.startAnimating()
     }
     
     private func onError(message: HTTPError) {
-        print(message.localizedDescription)
+        let errorView = ErrorView()
+        self.view = errorView
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

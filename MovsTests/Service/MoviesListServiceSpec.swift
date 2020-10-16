@@ -37,7 +37,7 @@ class MoviesListServiceSpec: QuickSpec {
             }
             
             it("Verify get genres with success") {
-                client.fileName = "genres"
+                client.fileName = "genres-movies"
                 
                 service.getGenres { result in
                     switch result {
