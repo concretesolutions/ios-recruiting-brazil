@@ -16,6 +16,9 @@ class FavoritesController: UITableViewController {
     private var searchBar: UISearchBar!
     private var filteredFavorites = [FavoriteEntity]()
     private var inSearchMode = false
+    
+    private var year = ""
+    private var genre = ""
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +29,7 @@ class FavoritesController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         setupTableView()
     }
-    
+
     private func setupTableView() {
         itemsFavorites = realm.objects(FavoriteEntity.self).map({ $0 })
         tableView.register(FavoritesViewCell.self, forCellReuseIdentifier: "reuseListFavorites")
@@ -50,11 +53,29 @@ class FavoritesController: UITableViewController {
     
     @objc func showFilterOption() {
         let controller = FilterOptionController()
+        controller.delegate = self
         navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc func btnRemoveFilter() {
-        print("Remove filter")
+        inSearchMode = false
+        tableView.reloadData()
+    }
+}
+
+extension FavoritesController: FilterOptionDelegate {
+    func getItemsSelected(items: FilterOptionEntity) {
+        
+        if !items.genre.isEmpty {
+            inSearchMode = true
+            filteredFavorites = itemsFavorites.filter({ $0.genre.range(of: items.genre) != nil})
+            tableView.reloadData()
+        } else if !items.year.isEmpty {
+            filteredFavorites = itemsFavorites.filter({ $0.year.range(of: items.year) != nil})
+        } else {
+            let empty = FavoritesEmptyView()
+            tableView.backgroundView = empty
+        }
     }
 }
 

@@ -7,17 +7,22 @@
 
 import UIKit
 
+protocol FilterOptionDelegate: class {
+    func getItemsSelected(items: FilterOptionEntity)
+}
+
 class FilterOptionController: UITableViewController {
     
     private var yearSelected = ""
     private var genreSelected = ""
+    
+    weak var delegate: FilterOptionDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupTableView()
         setupNavigationBar()
-
     }
     
     private func setupTableView() {
@@ -30,7 +35,9 @@ class FilterOptionController: UITableViewController {
     }
     
     @objc func btnApply() {
-        print("Apply")
+        let items = FilterOptionEntity(year: yearSelected, genre: genreSelected)
+        delegate.getItemsSelected(items: items)
+        navigationController?.popViewController(animated: true)
     }
 }
 
