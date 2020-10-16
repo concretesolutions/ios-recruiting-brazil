@@ -17,6 +17,7 @@ class FilterYearController: UITableViewController {
     private var viewModel: FilterYearViewModel!
     
     private var yearSelected = [ResultMoviesDTO]()
+    private var activityView: UIActivityIndicatorView?
     
     weak var delegate: FilterByYearDelegate!
 
@@ -46,10 +47,14 @@ class FilterYearController: UITableViewController {
     private func onSuccess(years: MoviesDTO) {
         yearList = years.results
         tableView.reloadData()
+        activityView?.stopAnimating()
     }
     
     private func onLoading() {
-        print("Carregar")
+        activityView = UIActivityIndicatorView(style: .large)
+        activityView?.center = self.view.center
+        self.view.addSubview(activityView!)
+        activityView?.startAnimating()
     }
     
     private func onError(message: HTTPError) {
