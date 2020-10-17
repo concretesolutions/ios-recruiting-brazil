@@ -17,13 +17,14 @@ class FavoritesController: UITableViewController {
     private var filteredFavorites = [FavoriteEntity]()
     private var inSearchMode = false
     
-    private var year = ""
-    private var genre = ""
+    private var viewModel: FavoritesViewModel!
    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupSearchBar()
+        setupViewModel()
+        setupState()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -65,7 +66,6 @@ class FavoritesController: UITableViewController {
 
 extension FavoritesController: FilterOptionDelegate {
     func getItemsSelected(items: FilterOptionEntity) {
-        
         if !items.genre.isEmpty {
             inSearchMode = true
             filteredFavorites = itemsFavorites.filter({ $0.genre.range(of: items.genre) != nil})
@@ -166,5 +166,33 @@ extension FavoritesController {
         button.addTarget(self, action: #selector(btnRemoveFilter), for: .touchUpInside)
         button.heightAnchor(equalTo: 50)
         return button
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let index = indexPath.row
+        let item = inSearchMode ? filteredFavorites[index] : itemsFavorites[index]
+        
+        viewModel.fetchRemove(realm: realm, item: item, index: indexPath)
+        
+        self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        
+        refresh()
+    }
+}
+
+extension FavoritesController {
+    
+    func setupViewModel() {
+        viewModel = FavoriteViewModelFactory().create()
+    }
+    
+    func setupState() {
+        viewModel.successRemove.observer(viewModel) { index in
+            if !self.filteredFavorites.isEmpty {
+                self.filteredFavorites.remove(at: index)
+            } else {
+                self.itemsFavorites.remove(at: index)
+            }
+        }
     }
 }

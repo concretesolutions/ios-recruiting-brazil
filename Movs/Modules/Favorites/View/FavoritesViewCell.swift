@@ -67,6 +67,7 @@ extension FavoritesViewCell: ViewCode {
         title.layout.applyConstraint { view in
             view.topAnchor(equalTo: topAnchor, constant: 16)
             view.leadingAnchor(equalTo: photo.trailingAnchor, constant: 8)
+            view.trailingAnchor(equalTo: trailingAnchor, constant: -8)
         }
         
         overview.layout.applyConstraint { view in
