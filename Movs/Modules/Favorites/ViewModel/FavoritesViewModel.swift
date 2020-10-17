@@ -12,7 +12,7 @@ class FavoritesViewModel: DataLifeViewModel {
     
     var useCase: FavoritesUseCase!
     
-    var successRemove = DataLife<Int>()
+    var successRemove = DataLife<IndexPath>()
     
     init(useCase: FavoritesUseCase) {
         self.useCase = useCase
@@ -20,7 +20,7 @@ class FavoritesViewModel: DataLifeViewModel {
     
     func fetchRemove(realm: Realm, item: FavoriteEntity, index: IndexPath) {
         useCase.removeFavoriteList(realm: realm, item: item) {
-            self.successRemove.value = index.row
+            self.successRemove.value = index
         }
     }
 }

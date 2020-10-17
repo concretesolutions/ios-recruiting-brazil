@@ -21,8 +21,7 @@ class MoviesListViewModelSpec: QuickSpec {
             var useCase: MoviesListUseCaseMock!
             var viewModel: MoviesListViewModel!
             var state: MoviesListState!
-            
-            let realm = try! Realm()
+            var realm: Realm!
             
             beforeEach {
                 client = HTTPClientMock()
@@ -31,6 +30,7 @@ class MoviesListViewModelSpec: QuickSpec {
                 viewStateGenre = ViewState<GenresDTO, HTTPError>()
                 useCase = MoviesListUseCaseMock()
                 viewModel = MoviesListViewModel(service: service, viewState: viewState, viewStateGenre: viewStateGenre, useCase: useCase)
+                realm = try! Realm()
                 state = MoviesListState()
             }
             

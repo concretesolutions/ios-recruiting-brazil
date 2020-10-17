@@ -189,9 +189,9 @@ extension FavoritesController {
     func setupState() {
         viewModel.successRemove.observer(viewModel) { index in
             if !self.filteredFavorites.isEmpty {
-                self.filteredFavorites.remove(at: index)
+                self.filteredFavorites.remove(at: index.row)
             } else {
-                self.itemsFavorites.remove(at: index)
+                self.itemsFavorites.remove(at: index.row)
             }
         }
     }
