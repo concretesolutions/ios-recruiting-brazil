@@ -35,7 +35,7 @@ class DetailsView: UIView {
     
     let title: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.font = UIFont.boldSystemFont(ofSize: 25)
         label.textColor = .systemBlue
         label.numberOfLines = 0
         return label
@@ -44,6 +44,7 @@ class DetailsView: UIView {
     let year: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17)
+        label.textColor = .gray
         return label
     }()
     
@@ -51,6 +52,9 @@ class DetailsView: UIView {
         let button = UIButton(frame: .zero)
         button.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
         button.addTarget(self, action: #selector(buttonFavorite), for: .touchUpInside)
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.imageEdgeInsets = UIEdgeInsets(top: 23, left: 23, bottom: 23, right: 23)
         return button
     }()
     

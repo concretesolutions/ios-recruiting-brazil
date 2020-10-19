@@ -46,6 +46,10 @@ class DetailsViewController: UIViewController {
         navigationItem.title = "Movs details"
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        setupVerifyFavorites()
+    }
+    
     private func setupVerifyFavorites() {
         itemsFavorites = realm.objects(FavoriteEntity.self).map({ $0 })
                 
