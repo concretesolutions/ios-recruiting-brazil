@@ -64,15 +64,30 @@ class DetailsView: UIView {
         return label
     }()
     
+    private let storyline: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .gray
+        label.text = "Storyline"
+        return label
+    }()
+    
     let overview: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.numberOfLines = 0
         label.textAlignment = .justified
         return label
     }()
     
-    private lazy var stackHorizontal: UIStackView = {
+    let divider: UIView = {
+        let divider = UIView()
+        divider.backgroundColor = .lightGray
+        divider.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        return divider
+    }()
+    
+    private lazy var stackYearAndBtn: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [year, favorite])
         stack.axis = .horizontal
         stack.spacing = 10
@@ -80,10 +95,10 @@ class DetailsView: UIView {
         return stack
     }()
     
-    private lazy var stackVertical: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [photo, title, stackHorizontal, genre, overview])
+    private lazy var stackContentView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [photo, title, stackYearAndBtn, genre, divider, storyline, overview])
         stack.axis = .vertical
-        stack.spacing = 5
+        stack.spacing = 10
         return stack
     }()
 
@@ -105,7 +120,7 @@ extension DetailsView: ViewCode {
     func buildViewHierarchy() {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubview(stackVertical)
+        contentView.addSubview(stackContentView)
     }
     
     func setupConstraints() {
@@ -125,7 +140,7 @@ extension DetailsView: ViewCode {
             view.widthAnchor(equalTo: scrollView.widthAnchor)
         }
         
-        stackVertical.layout.applyConstraint { view in
+        stackContentView.layout.applyConstraint { view in
             view.topAnchor(equalTo: contentView.topAnchor)
             view.leadingAnchor(equalTo: contentView.leadingAnchor, constant: 16)
             view.trailingAnchor(equalTo: contentView.trailingAnchor, constant: -16)
