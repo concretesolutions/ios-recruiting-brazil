@@ -92,7 +92,7 @@ class DetailsView: UIView {
         flowLayout.scrollDirection = .horizontal
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collection.backgroundColor = .gray
+        collection.backgroundColor = .lightGray
         collection.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         return collection
@@ -147,7 +147,7 @@ extension DetailsView: ViewCode {
             view.topAnchor(equalTo: scrollView.topAnchor)
             view.leadingAnchor(equalTo: scrollView.leadingAnchor)
             view.trailingAnchor(equalTo: scrollView.trailingAnchor)
-            view.bottomAnchor(equalTo: scrollView.bottomAnchor)
+            view.bottomAnchor(equalTo: scrollView.bottomAnchor, constant: -16)
             view.widthAnchor(equalTo: scrollView.widthAnchor)
         }
         
