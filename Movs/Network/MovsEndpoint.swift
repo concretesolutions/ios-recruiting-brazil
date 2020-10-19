@@ -10,7 +10,7 @@ import Foundation
 enum MovsEndpoint {
     case moviesList
     case getGenres
-    case getCast(id: Int)
+    case getImages(id: Int)
 }
 
 extension MovsEndpoint: EndpointProtocol {
@@ -30,7 +30,7 @@ extension MovsEndpoint: EndpointProtocol {
         case .getGenres:
             return "/3/genre/movie/list"
             
-        case .getCast(let idMovie):
+        case .getImages(let idMovie):
             return "/3/movie/\(idMovie)/images"
         }
     }
@@ -45,7 +45,7 @@ extension MovsEndpoint: EndpointProtocol {
     
     var method: HTTPMethod {
         switch self {
-        case .moviesList, .getGenres, .getCast:
+        case .moviesList, .getGenres, .getImages:
             return .get
         }
     }
