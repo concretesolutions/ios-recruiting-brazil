@@ -97,7 +97,6 @@ extension MoviesListController {
     private func onError(message: HTTPError) {
         let errorView = ErrorView()
         self.view = errorView
-        
         print(message.localizedDescription)
     }
 }

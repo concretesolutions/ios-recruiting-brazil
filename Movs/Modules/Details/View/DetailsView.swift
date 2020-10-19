@@ -86,6 +86,17 @@ class DetailsView: UIView {
         divider.heightAnchor.constraint(equalToConstant: 2).isActive = true
         return divider
     }()
+
+    var collectionCast: UICollectionView = {
+        var flowLayout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collection.backgroundColor = .gray
+        collection.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        return collection
+    }()
     
     private lazy var stackYearAndBtn: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [year, favorite])
@@ -96,7 +107,7 @@ class DetailsView: UIView {
     }()
     
     private lazy var stackContentView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [photo, title, stackYearAndBtn, genre, divider, storyline, overview])
+        let stack = UIStackView(arrangedSubviews: [photo, title, stackYearAndBtn, genre, collectionCast, divider, storyline, overview])
         stack.axis = .vertical
         stack.spacing = 10
         return stack
