@@ -19,6 +19,11 @@
 		78CE73E0253855AC004B51FB /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CE73DF253855AC004B51FB /* SearchBarView.swift */; };
 		78CE73E125385643004B51FB /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CE73DF253855AC004B51FB /* SearchBarView.swift */; };
 		78CE73E2253856E0004B51FB /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782C82FB25381F48002D2868 /* CodeView.swift */; };
+		78D6C4EE253DA6D3001A057C /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D6C4ED253DA6D3001A057C /* Movie.swift */; };
+		78D6C4F1253DA6EA001A057C /* app.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 78D6C4EF253DA6EA001A057C /* app.xcdatamodeld */; };
+		78D6C4F6253DB228001A057C /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D6C4F5253DB228001A057C /* APIService.swift */; };
+		78D6C4F8253DB865001A057C /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D6C4F7253DB865001A057C /* APIResponse.swift */; };
+		78D6C4FA253F504D001A057C /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D6C4F9253F504D001A057C /* CoreDataService.swift */; };
 		D0C668779B4242A37F754DED /* Pods_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B58B8BBD118B1A4A7C1F3D4 /* Pods_app.framework */; };
 		DBD73E8AEFAE73C189083D73 /* Pods_app_appUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97D9E26ECD43B7D309BA997F /* Pods_app_appUITests.framework */; };
 /* End PBXBuildFile section */
@@ -51,6 +56,11 @@
 		784EEC7B25381935001709F6 /* GridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewController.swift; sourceTree = "<group>"; };
 		78CE73DD25385579004B51FB /* SearchBarViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarViewSpec.swift; sourceTree = "<group>"; };
 		78CE73DF253855AC004B51FB /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		78D6C4ED253DA6D3001A057C /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		78D6C4F0253DA6EA001A057C /* app.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = app.xcdatamodel; sourceTree = "<group>"; };
+		78D6C4F5253DB228001A057C /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		78D6C4F7253DB865001A057C /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		78D6C4F9253F504D001A057C /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		97D9E26ECD43B7D309BA997F /* Pods_app_appUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_app_appUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B61AE7F9F59728C9733C6B28 /* Pods-app-appUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app-appUITests.debug.xcconfig"; path = "Target Support Files/Pods-app-appUITests/Pods-app-appUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C84BBDD7093F0C47BE3A6688 /* Pods-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.release.xcconfig"; path = "Target Support Files/Pods-app/Pods-app.release.xcconfig"; sourceTree = "<group>"; };
@@ -119,6 +129,7 @@
 		783F4DCC2538130900BB880D /* app */ = {
 			isa = PBXGroup;
 			children = (
+				78D6C4F4253DB217001A057C /* Service */,
 				784EEC7F25381949001709F6 /* Controller */,
 				784EEC7E25381946001709F6 /* View */,
 				784EEC7D2538193B001709F6 /* Model */,
@@ -134,6 +145,9 @@
 		784EEC7D2538193B001709F6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				78D6C4ED253DA6D3001A057C /* Movie.swift */,
+				78D6C4EF253DA6EA001A057C /* app.xcdatamodeld */,
+				78D6C4F7253DB865001A057C /* APIResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -155,6 +169,15 @@
 				782C82F9253819D7002D2868 /* FavsViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		78D6C4F4253DB217001A057C /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				78D6C4F5253DB228001A057C /* APIService.swift */,
+				78D6C4F9253F504D001A057C /* CoreDataService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		C7BBAD6038FFC56F47DC972E /* Frameworks */ = {
@@ -363,10 +386,15 @@
 			files = (
 				784EEC7C25381935001709F6 /* GridViewController.swift in Sources */,
 				784EEC7A25381910001709F6 /* TabViewController.swift in Sources */,
+				78D6C4F1253DA6EA001A057C /* app.xcdatamodeld in Sources */,
 				782C82FA253819D7002D2868 /* FavsViewController.swift in Sources */,
+				78D6C4FA253F504D001A057C /* CoreDataService.swift in Sources */,
 				78CE73E0253855AC004B51FB /* SearchBarView.swift in Sources */,
+				78D6C4F8253DB865001A057C /* APIResponse.swift in Sources */,
 				782C82FC25381F48002D2868 /* CodeView.swift in Sources */,
+				78D6C4F6253DB228001A057C /* APIService.swift in Sources */,
 				783F4DCE2538130900BB880D /* AppDelegate.swift in Sources */,
+				78D6C4EE253DA6D3001A057C /* Movie.swift in Sources */,
 				783F4DD02538130900BB880D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -616,6 +644,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		78D6C4EF253DA6EA001A057C /* app.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				78D6C4F0253DA6EA001A057C /* app.xcdatamodel */,
+			);
+			currentVersion = 78D6C4F0253DA6EA001A057C /* app.xcdatamodel */;
+			path = app.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 783F4DC22538130900BB880D /* Project object */;
 }

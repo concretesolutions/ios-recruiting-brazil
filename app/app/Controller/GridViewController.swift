@@ -10,4 +10,8 @@ import UIKit
 
 class GridViewController: UIViewController {
 
+    override func loadView() {
+        
+    }
+
 }
