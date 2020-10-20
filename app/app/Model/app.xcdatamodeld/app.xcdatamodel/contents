@@ -14,7 +14,7 @@
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="movies" inverseEntity="User"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
-        <relationship name="movies" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MovieCD" inverseName="user" inverseEntity="MovieCD"/>
+        <relationship name="movies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MovieCD" inverseName="user" inverseEntity="MovieCD"/>
     </entity>
     <elements>
         <element name="MovieCD" positionX="-63" positionY="-18" width="128" height="163"/>

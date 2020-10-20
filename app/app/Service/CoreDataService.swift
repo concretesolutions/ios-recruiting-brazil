@@ -11,7 +11,7 @@ import CoreData
 class CoreDataService {
 
     public static var shared = CoreDataService()
-//    var user: User!
+    var user: User?
 
     private var context: NSManagedObjectContext {
         return persistentContainer.viewContext
@@ -52,8 +52,8 @@ class CoreDataService {
         }()
 
         self.persistentContainer = container
-//
-//        self.user = self.fetchAll()
+
+        self.user = self.fetchUser()
     }
 
     // MARK: - Core Data Saving support
@@ -70,49 +70,60 @@ class CoreDataService {
         }
     }
 
-//    func fetchUser() -> User {
-//        let fetchRequest = NSFetchRequest<User>(entit)
-//    }
+    func fetchUser() -> User {
+        let fetchRequest = NSFetchRequest<User>(entityName: "User")
 
-//    func fetchAll() -> User {
-//        let fetchRequest = NSFetchRequest<User>(entityName: "User")
-//
-//        do {
-//            let user = try context.fetch(fetchRequest)
-//            if let first = user.first {
-//                return first
-//            } else {
-//                let newUser = User(context: self.context)
-//                newUser.favoriteNewsURL = []
-//                return newUser
-//            }
-//        } catch {
-//            let newUser = User(context: self.context)
-//            newUser.favoriteNewsURL = []
-//            return newUser
-//        }
-//    }
-//
-//    func insertUrl(_ url: String) {
-//        self.user.favoriteNewsURL?.append(url)
-//
-//        do {
-//            try self.saveContext()
-//        } catch {
-//        }
-//
-//    }
-//
-//    func deleteUrl(_ url: String) {
-//        self.user.favoriteNewsURL = self.user.favoriteNewsURL?.filter({ $0 != url })
-//        do {
-//            try self.saveContext()
-//        } catch {
-//        }
-//    }
-//
-//    func isFav(_ url: String) -> Bool {
-//        return self.user.favoriteNewsURL?.contains(url) ?? false
-//    }
-//
+        do {
+            let user = try context.fetch(fetchRequest)
+            if let first = user.first {
+                return first
+            } else {
+                let user = User(context: self.context)
+                try? self.saveContext()
+                return user
+            }
+        } catch {
+            print(error)
+            let user = User(context: self.context)
+            try? self.saveContext()
+            return user
+        }
+    }
+
+    func favoriteMovie(_ movie: Movie) {
+        self.user?.addToMovies(self.translateMovie(movie))
+        
+        try? self.saveContext()
+    }
+
+    func translateMovie(_ movie: Movie) -> MovieCD {
+        let movieCD = MovieCD(context: self.context)
+
+        movieCD.backdropPath = movie.backdropPath
+        movieCD.genreIds = movie.genreIds
+        movieCD.overview = movie.overview
+        movieCD.posterPath = movie.posterPath
+        movieCD.releaseDate = movie.releaseDate
+        movieCD.title = movie.title
+
+        if let id = movie.id {
+            movieCD.id = Int64(id)
+        }
+
+        return movieCD
+
+    }
+
+    func unfavoriteMovie(_ movie: Movie) {
+        let movieCD = self.translateMovie(movie)
+        self.user?.removeFromMovies(movieCD)
+        self.context.delete(movieCD)
+
+        try? self.saveContext()
+    }
+
+    func isFavorite(_ movie: Movie) -> Bool {
+        return self.user?.movies?.contains(movie) ?? false
+    }
+
 }
