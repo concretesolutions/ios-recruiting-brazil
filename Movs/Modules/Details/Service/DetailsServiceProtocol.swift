@@ -8,5 +8,5 @@
 import Foundation
 
 protocol DetailsServiceProtocol {
-    func getCast(idMovie: Int, completion: @escaping (Result<ImagesDTO, HTTPError>) -> Void)
+    func getImages(idMovie: Int, completion: @escaping (Result<ImagesDTO, HTTPError>) -> Void)
 }

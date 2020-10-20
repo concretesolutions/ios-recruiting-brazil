@@ -28,7 +28,7 @@ class DetailsViewModel: DataLifeViewModel {
     
     func fetchCast(idMovie: Int) -> ViewState<ImagesDTO, HTTPError> {
         viewState.fetchSource {
-            self.service.getCast(idMovie: idMovie) { result in
+            self.service.getImages(idMovie: idMovie) { result in
                 switch result {
                 case .success(let cast):
                     self.viewState.success(data: cast)

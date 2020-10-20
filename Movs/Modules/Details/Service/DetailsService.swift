@@ -15,7 +15,7 @@ class DetailsService: DetailsServiceProtocol {
         self.client = client
     }
     
-    func getCast(idMovie: Int, completion: @escaping (Result<ImagesDTO, HTTPError>) -> Void) {
+    func getImages(idMovie: Int, completion: @escaping (Result<ImagesDTO, HTTPError>) -> Void) {
         let endpoint: MovsEndpoint = .getImages(id: idMovie)
         let request = endpoint.request
         
