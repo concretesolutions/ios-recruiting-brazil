@@ -16,8 +16,29 @@ class DetailsViewModel: DataLifeViewModel {
     
     var successRemoving = DataLife<String>()
     
-    init(useCase: MoviesListUseCase) {
+    var service: DetailsService
+    
+    var viewState: ViewState<ImagesDTO, HTTPError>
+    
+    init(useCase: MoviesListUseCase, service: DetailsService, viewState: ViewState<ImagesDTO, HTTPError>) {
         self.useCase = useCase
+        self.service = service
+        self.viewState = viewState
+    }
+    
+    func fetchCast(idMovie: Int) -> ViewState<ImagesDTO, HTTPError> {
+        viewState.fetchSource {
+            self.service.getImages(idMovie: idMovie) { result in
+                switch result {
+                case .success(let cast):
+                    self.viewState.success(data: cast)
+                case .failure(let message):
+                    self.viewState.error(error: message)
+                }
+            }
+        }
+        
+        return viewState
     }
     
     func loadAddToFavorite(realm: Realm, movie: ResultMoviesDTO) {

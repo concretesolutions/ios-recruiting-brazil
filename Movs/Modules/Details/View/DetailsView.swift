@@ -35,7 +35,7 @@ class DetailsView: UIView {
     
     let title: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.font = UIFont.boldSystemFont(ofSize: 25)
         label.textColor = .systemBlue
         label.numberOfLines = 0
         return label
@@ -44,6 +44,7 @@ class DetailsView: UIView {
     let year: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17)
+        label.textColor = .gray
         return label
     }()
     
@@ -51,6 +52,9 @@ class DetailsView: UIView {
         let button = UIButton(frame: .zero)
         button.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
         button.addTarget(self, action: #selector(buttonFavorite), for: .touchUpInside)
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.imageEdgeInsets = UIEdgeInsets(top: 23, left: 23, bottom: 23, right: 23)
         return button
     }()
     
@@ -60,15 +64,41 @@ class DetailsView: UIView {
         return label
     }()
     
+    private let storyline: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .gray
+        label.text = "Storyline"
+        return label
+    }()
+    
     let overview: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.numberOfLines = 0
         label.textAlignment = .justified
         return label
     }()
     
-    private lazy var stackHorizontal: UIStackView = {
+    let divider: UIView = {
+        let divider = UIView()
+        divider.backgroundColor = .lightGray
+        divider.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        return divider
+    }()
+
+    var collectionCast: UICollectionView = {
+        var flowLayout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collection.backgroundColor = .lightGray
+        collection.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        return collection
+    }()
+    
+    private lazy var stackYearAndBtn: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [year, favorite])
         stack.axis = .horizontal
         stack.spacing = 10
@@ -76,10 +106,10 @@ class DetailsView: UIView {
         return stack
     }()
     
-    private lazy var stackVertical: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [photo, title, stackHorizontal, genre, overview])
+    private lazy var stackContentView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [photo, title, stackYearAndBtn, genre, collectionCast, divider, storyline, overview])
         stack.axis = .vertical
-        stack.spacing = 5
+        stack.spacing = 10
         return stack
     }()
 
@@ -101,7 +131,7 @@ extension DetailsView: ViewCode {
     func buildViewHierarchy() {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubview(stackVertical)
+        contentView.addSubview(stackContentView)
     }
     
     func setupConstraints() {
@@ -117,11 +147,11 @@ extension DetailsView: ViewCode {
             view.topAnchor(equalTo: scrollView.topAnchor)
             view.leadingAnchor(equalTo: scrollView.leadingAnchor)
             view.trailingAnchor(equalTo: scrollView.trailingAnchor)
-            view.bottomAnchor(equalTo: scrollView.bottomAnchor)
+            view.bottomAnchor(equalTo: scrollView.bottomAnchor, constant: -16)
             view.widthAnchor(equalTo: scrollView.widthAnchor)
         }
         
-        stackVertical.layout.applyConstraint { view in
+        stackContentView.layout.applyConstraint { view in
             view.topAnchor(equalTo: contentView.topAnchor)
             view.leadingAnchor(equalTo: contentView.leadingAnchor, constant: 16)
             view.trailingAnchor(equalTo: contentView.trailingAnchor, constant: -16)

@@ -10,6 +10,10 @@ import Foundation
 class DetailsViewModelFactory {
     
     func create() -> DetailsViewModel {
-        return DetailsViewModel(useCase: MoviesListUseCase())
+        return DetailsViewModel(
+            useCase: MoviesListUseCase(),
+            service: DetailsService(),
+            viewState: ViewState<ImagesDTO, HTTPError>()
+        )
     }
 }
