@@ -14,14 +14,22 @@ class DetailsViewModelSpec: QuickSpec {
     override func spec() {
         describe("DetailsViewModel Spec") {
             
+            var client: HTTPClientMock!
             var useCase: MoviesListUseCaseMock!
+            var service: DetailsService!
+            var viewState: ViewState<ImagesDTO, HTTPError>!
             var viewModel: DetailsViewModel!
+            var state: ImagesListState!
             
             let realm = try! Realm()
             
             beforeEach {
+                client = HTTPClientMock()
+                service = DetailsService(client: client)
                 useCase = MoviesListUseCaseMock()
-                viewModel = DetailsViewModel(useCase: useCase)
+                viewState = ViewState<ImagesDTO, HTTPError>()
+                viewModel = DetailsViewModel(useCase: useCase, service: service, viewState: viewState)
+                state = ImagesListState()
             }
             
             it("Verify load add to favorite") {
@@ -48,6 +56,17 @@ class DetailsViewModelSpec: QuickSpec {
                 viewModel.loadRemoveFavorite(realm: realm, movie: movies)
                 
                 expect(successRemoving).to(beTrue())
+            }
+            
+            it("Verify fetch images list with success") {
+                client.fileName = "images-movies"
+                
+                viewModel.fetchCast(idMovie: 497582)
+                    .successObserver(state.onSuccess)
+                    .loadingObserver(state.onLoading)
+                    .errorObserver(state.onError)
+                
+                expect(state.success).to(beTrue())
             }
         }
     }
