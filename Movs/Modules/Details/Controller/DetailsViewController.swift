@@ -18,6 +18,7 @@ class DetailsViewController: UIViewController, UICollectionViewDataSource, UICol
     private var itemsFavorites = [FavoriteEntity]()
     
     private var castList = [ResultImageDTO]()
+    private var activityView: UIActivityIndicatorView?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -125,10 +126,14 @@ extension DetailsViewController {
     private func onSuccess(cast: ImagesDTO) {
         self.castList = cast.posters
         detailsView.collectionCast.reloadData()
+        activityView?.stopAnimating()
     }
     
     private func onLoading() {
-        print("Carregando")
+        activityView = UIActivityIndicatorView(style: .large)
+        activityView?.center = self.view.center
+        self.view.addSubview(activityView!)
+        activityView?.startAnimating()
     }
     
     private func onError(message: HTTPError) {
