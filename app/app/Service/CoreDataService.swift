@@ -65,6 +65,7 @@ class CoreDataService {
             } catch let error as NSError {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                print(error)
                 throw error
             }
         }
@@ -114,16 +115,44 @@ class CoreDataService {
 
     }
 
+    func translateMovieCD(_ movieCD: MovieCD) -> Movie {
+        var movie = Movie()
+
+        movie.backdropPath = movieCD.backdropPath
+        movie.genreIds = movieCD.genreIds
+        movie.overview = movieCD.overview
+        movie.posterPath = movieCD.posterPath
+        movie.releaseDate = movieCD.releaseDate
+        movie.title = movieCD.title
+        movie.id = Int(movieCD.id)
+
+        return movie
+    }
+
     func unfavoriteMovie(_ movie: Movie) {
-        let movieCD = self.translateMovie(movie)
+        guard let id = movie.id else { return }
+        let movieCD = self.user?.movies?.filter{
+            ($0 as! MovieCD).id == id
+        }.first as! MovieCD
         self.user?.removeFromMovies(movieCD)
-        self.context.delete(movieCD)
 
         try? self.saveContext()
     }
 
     func isFavorite(_ movie: Movie) -> Bool {
-        return self.user?.movies?.contains(movie) ?? false
+        guard let id = movie.id else { return false }
+        return self.user?.movies?.contains{
+            ($0 as! MovieCD).id == Int64(id)
+            } ?? false
+    }
+
+    func fetchFavorites() -> [Movie]? {
+        guard let user = self.user,
+            let moviesCD = user.movies
+            else { return nil }
+
+        return moviesCD.map { self.translateMovieCD($0 as! MovieCD) }
+
     }
 
 }
