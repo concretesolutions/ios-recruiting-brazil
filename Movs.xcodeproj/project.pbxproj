@@ -84,6 +84,8 @@
 		C59458E9253B79B0000DAAB7 /* FavoriteViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59458E8253B79B0000DAAB7 /* FavoriteViewModelFactory.swift */; };
 		C59458EE253B838A000DAAB7 /* FavoritesUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59458ED253B838A000DAAB7 /* FavoritesUseCaseMock.swift */; };
 		C59458F3253B8423000DAAB7 /* FavoritesViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59458F2253B8423000DAAB7 /* FavoritesViewModelSpec.swift */; };
+		C5EBAC682540B46200760242 /* 34590-movie-theatre.json in Resources */ = {isa = PBXBuildFile; fileRef = C5EBAC672540B46200760242 /* 34590-movie-theatre.json */; };
+		C5EBAC7B2540B5D800760242 /* LauchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EBAC7A2540B5D800760242 /* LauchViewController.swift */; };
 		ECC9D5DE3F88B19AC61C0CD6 /* Pods_Movs_MovsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -193,6 +195,8 @@
 		C59458E8253B79B0000DAAB7 /* FavoriteViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModelFactory.swift; sourceTree = "<group>"; };
 		C59458ED253B838A000DAAB7 /* FavoritesUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesUseCaseMock.swift; sourceTree = "<group>"; };
 		C59458F2253B8423000DAAB7 /* FavoritesViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModelSpec.swift; sourceTree = "<group>"; };
+		C5EBAC672540B46200760242 /* 34590-movie-theatre.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "34590-movie-theatre.json"; sourceTree = "<group>"; };
+		C5EBAC7A2540B5D800760242 /* LauchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauchViewController.swift; sourceTree = "<group>"; };
 		DCA1F1EE22955852CAB21355 /* Pods_Movs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F89E3C29E88E2673AB227653 /* Pods_Movs_MovsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs_MovsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -273,6 +277,7 @@
 		C5094F05252EBFB900A1018F /* Movs */ = {
 			isa = PBXGroup;
 			children = (
+				C5EBAC672540B46200760242 /* 34590-movie-theatre.json */,
 				C5094F4E252FA05400A1018F /* Application */,
 				C5094F52252FA0B600A1018F /* Common */,
 				C5094F67252FA29500A1018F /* Modules */,
@@ -360,6 +365,7 @@
 		C5094F67252FA29500A1018F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				C5EBAC792540B5B600760242 /* LaunchScreen */,
 				C59458922539153B000DAAB7 /* FilterGenre */,
 				C59458652538EF76000DAAB7 /* FilterYear */,
 				C594585C2538CC40000DAAB7 /* FilterOption */,
@@ -777,6 +783,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		C5EBAC792540B5B600760242 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				C5EBAC7A2540B5D800760242 /* LauchViewController.swift */,
+			);
+			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -887,6 +901,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5EBAC682540B46200760242 /* 34590-movie-theatre.json in Resources */,
 				C5094F13252EBFBF00A1018F /* LaunchScreen.storyboard in Resources */,
 				C5094F10252EBFBF00A1018F /* Assets.xcassets in Resources */,
 			);
@@ -1072,6 +1087,7 @@
 				C5094F55252FA16300A1018F /* TabBarViewController.swift in Sources */,
 				C59457D425336B8F000DAAB7 /* DataLife.swift in Sources */,
 				C5094F81252FA79500A1018F /* ViewCode.swift in Sources */,
+				C5EBAC7B2540B5D800760242 /* LauchViewController.swift in Sources */,
 				C59457CF25336B6E000DAAB7 /* DataLifeProtocol.swift in Sources */,
 				C59457C32533690B000DAAB7 /* MoviesListUseCase.swift in Sources */,
 				C5094FDA252FDA0800A1018F /* MoviesListServiceProtocol.swift in Sources */,

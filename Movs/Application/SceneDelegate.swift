@@ -17,8 +17,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
                 
         let controller = TabBarViewController()
-        window?.rootViewController = controller
+        let launch = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
+        window?.rootViewController = launch
         window?.makeKeyAndVisible()
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
+            self.window?.rootViewController = controller
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
