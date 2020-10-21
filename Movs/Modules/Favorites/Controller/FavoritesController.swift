@@ -71,6 +71,7 @@ extension FavoritesController: FilterOptionDelegate {
             filteredFavorites = itemsFavorites.filter({ $0.genre.range(of: items.genre) != nil})
             tableView.reloadData()
         } else if !items.year.isEmpty {
+            inSearchMode = true
             filteredFavorites = itemsFavorites.filter({ $0.year.range(of: items.year) != nil})
         } else {
             let empty = FavoritesEmptyView()
