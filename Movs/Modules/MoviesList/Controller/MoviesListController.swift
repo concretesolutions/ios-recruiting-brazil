@@ -176,7 +176,6 @@ extension MoviesListController: MoviesListDelegate {
 }
 
 // Collection View delegate
-
 extension MoviesListController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if inSearchMode {
