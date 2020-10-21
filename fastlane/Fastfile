@@ -25,6 +25,19 @@ platform :ios do
   lane :tests do
   run_tests(workspace: "Movs.xcworkspace",
             devices: "iPhone 8",
-            scheme: "CI")
+            scheme: "CI",
+	    code_coverage: true)
+            
+  slather(
+      output_directory: "fastlane/html",
+      workspace: "Movs.xcworkspace",
+      html: true,
+      use_bundle_exec: true,
+      scheme: "Movs",
+      output_directory: "CoverageReport",
+      proj: "Movs.xcodeproj",
+      ignore: [ "R.generated.swift", "Pods/*"],
+      verbose: true,
+      show: true)
   end
 end
