@@ -15,6 +15,9 @@ jobs:
 
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_12.app
+      
+    - name: Update Bundle
+      run: bundle update
 
     - name: run test
       run: bundle exec fastlane tests
