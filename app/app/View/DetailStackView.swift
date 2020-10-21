@@ -64,13 +64,11 @@ extension DetailStackView: CodeView {
         self.title.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(self.poster.snp.bottom).offset(20)
-            make.top.bottom.right.left.equalTo(0)
         }
 
         self.genres.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(self.title.snp.bottom).offset(20)
-            make.top.bottom.right.left.equalTo(0)
         }
 
         self.overview.snp.makeConstraints { make in

@@ -51,7 +51,7 @@ class FavsViewControllerView: UIView {
 
     @objc
     func filterPressed(_ sender: UIButton) {
-        print("dale")
+
     }
 
 }
@@ -95,6 +95,9 @@ extension FavsViewControllerView: CodeView {
 
     func setupAdditionalConfiguration() {
         self.backgroundColor = .white
+        self.searchBar.placeholder = "Not working :("
+        self.searchBar.isUserInteractionEnabled = false
+        self.filterButton.isEnabled = false
     }
 
 

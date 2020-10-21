@@ -58,6 +58,8 @@ extension GridViewControllerView: CodeView {
 
     func setupAdditionalConfiguration() {
         self.backgroundColor = .white
+        self.searchBar.placeholder = "Not working :("
+        self.searchBar.isUserInteractionEnabled = false
     }
 
     

@@ -12,13 +12,44 @@ import Alamofire
 class APIService {
 
     public static var shared = APIService()
+    var genres: [Int: String] = [:]
 
     let apiKey = "62f7df73c60e2b4119f17e8514cb0ba6"
-    let url = "https://api.themoviedb.org/3/movie/popular"
+    let url = "https://api.themoviedb.org/3"
     let movieURL = "https://image.tmdb.org/t/p/w500"
 
     var totalPages = -1
     var page = -1
+
+    init() {
+
+        let parameters: [String: Any] = ["api_key": self.apiKey]
+        let headers: HTTPHeaders = ["Content-Type": "application/json"]
+
+        AF.request("\(self.url)/genre/movie/list",
+            method: .get,
+            parameters: parameters,
+            encoding: URLEncoding.default,
+            headers: headers).responseJSON { response in
+
+                switch response.response?.statusCode {
+                    case 200:
+                        guard let data = response.data,
+                            let genres = try? JSONDecoder().decode(GenreAPIResponse.self, from: data)
+                            else { return }
+
+                        genres.genres.forEach {
+                            self.genres[$0.id] = $0.name
+                        }
+
+                        break
+                    default:
+                        break
+                }
+
+        }
+
+    }
 
     func requestPopular(completion: @escaping (([Movie]?) -> Void)) {
 
@@ -29,7 +60,7 @@ class APIService {
 
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
 
-        AF.request(self.url,
+        AF.request("\(self.url)/movie/popular",
                    method: .get,
                    parameters: parameters,
                    encoding: URLEncoding.default,
@@ -54,10 +85,10 @@ class APIService {
                             }
 
                             completion(movies.results)
-                        break
+                            break
                         default:
                             completion(nil)
-                        break
+                            break
                     }
         }
 

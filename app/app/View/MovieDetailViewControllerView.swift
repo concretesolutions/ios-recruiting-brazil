@@ -21,8 +21,14 @@ class MovieDetailViewControllerView: UIView {
             }
 
             self.stackView.title.text = movie.title
-            //            self.genres =
             self.stackView.overview.text = movie.overview
+            var genres: [String] = []
+            movie.genreIds?.forEach {
+                guard let genre = APIService.shared.genres[$0] else { return }
+                genres.append(genre)
+            }
+            self.stackView.genres.text = genres.joined(separator: ", ")
+
         }
 
     }
