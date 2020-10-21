@@ -38,6 +38,14 @@ class MoviesListCell: UICollectionViewCell {
         return button
     }()
     
+    private lazy var stackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [title, favorite])
+        stack.axis = .horizontal
+        stack.spacing = 0
+        stack.distribution = .fillEqually
+        return stack
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupBaseView()
@@ -55,8 +63,7 @@ class MoviesListCell: UICollectionViewCell {
 extension MoviesListCell: ViewCode {
     func buildViewHierarchy() {
         addSubview(photo)
-        addSubview(title)
-        addSubview(favorite)
+        addSubview(stackView)
     }
     
     func setupConstraints() {
@@ -67,15 +74,11 @@ extension MoviesListCell: ViewCode {
             view.heightAnchor(equalTo: 250)
         }
         
-        title.layout.applyConstraint { view in
+        stackView.layout.applyConstraint { view in
             view.topAnchor(equalTo: photo.bottomAnchor)
-            view.leadingAnchor(equalTo: leadingAnchor, constant: 8)
-            view.bottomAnchor(equalTo: bottomAnchor)
-        }
-        
-        favorite.layout.applyConstraint { view in
-            view.topAnchor(equalTo: photo.bottomAnchor)
+            view.leadingAnchor(equalTo: leadingAnchor, constant: 16)
             view.trailingAnchor(equalTo: trailingAnchor, constant: -8)
+            view.centerXAnchor(equalTo: centerXAnchor)
             view.bottomAnchor(equalTo: bottomAnchor)
         }
     }
