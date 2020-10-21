@@ -77,6 +77,9 @@ class GridCollectionViewCell: UICollectionViewCell {
         } else {
             CoreDataService.shared.unfavoriteMovie(movie)
         }
+
+        NotificationCenter.default.post(name: NSNotification.Name("FavoritesUploaded"), object: nil)
+        
     }
 
 }

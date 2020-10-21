@@ -27,6 +27,16 @@ class FavsViewController: UIViewController {
 
         self.movies = CoreDataService.shared.fetchFavorites() ?? []
 
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateFavorites(_:)), name: NSNotification.Name("FavoritesUploaded"), object: nil)
+
+        DispatchQueue.main.async {
+            self.screen.collectionView.reloadData()
+        }
+    }
+
+    @objc
+    func updateFavorites(_ notification: NSNotification) {
+        self.movies = CoreDataService.shared.fetchFavorites() ?? self.movies
         DispatchQueue.main.async {
             self.screen.collectionView.reloadData()
         }
