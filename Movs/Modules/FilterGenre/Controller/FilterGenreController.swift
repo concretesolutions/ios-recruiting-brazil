@@ -68,7 +68,6 @@ class FilterGenreController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         
         let genre = genresList[indexPath.row]
-        
         cell.textLabel?.text = genre.name
 
         return cell
