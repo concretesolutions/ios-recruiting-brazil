@@ -10,6 +10,23 @@ import UIKit
 
 class MovieDetailViewControllerView: UIView {
 
+    // Variables
+    var movie: Movie? {
+        didSet {
+            guard let movie = self.movie else { return }
+
+            if let urlExtension = movie.backdropPath,
+                let url = URL(string: "https://image.tmdb.org/t/p/w500\(urlExtension)")  {
+                self.stackView.poster.af.setImage(withURL: url)
+            }
+
+            self.stackView.title.text = movie.title
+            //            self.genres =
+            self.stackView.overview.text = movie.overview
+        }
+
+    }
+
     // Components
     var stackView = DetailStackView()
 
@@ -32,7 +49,7 @@ extension MovieDetailViewControllerView: CodeView {
     func setupConstraints() {
         self.stackView.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.8)
-            make.height.equalToSuperview().multipliedBy(0.6)
+            make.height.equalToSuperview().multipliedBy(0.7)
             make.center.equalTo(self.snp.center)
         }
     }

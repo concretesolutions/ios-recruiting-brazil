@@ -9,9 +9,15 @@
 import UIKit
 
 class MovieDetailViewController: UIViewController {
+
     let screen = MovieDetailViewControllerView()
+    var movie: Movie? {
+        didSet {
+            self.screen.movie = self.movie
+        }
+    }
 
     override func loadView() {
-        self.view = screen
+        self.view = self.screen
     }
 }

@@ -8,30 +8,13 @@
 
 import UIKit
 
-class DetailStackView: UIStackView {
-
-    // Variables
-    var movie: Movie? {
-        didSet {
-            guard let movie = self.movie else { return }
-
-            if let urlExtension = movie.backdropPath,
-                let url = URL(string: "https://image.tmdb.org/t/p/w500\(urlExtension)")  {
-                self.poster.af.setImage(withURL: url)
-            }
-
-            self.title.text = movie.title
-//            self.genres =
-            self.overview.text = movie.overview
-        }
-
-    }
+class DetailStackView: UIView {
 
     // Components
     var poster: UIImageView = {
         let view = UIImageView(frame: .zero)
         view.contentMode = .scaleAspectFill
-//        view.image = UIImage(named: "posterPlaceholder")
+        view.image = UIImage(named: "backdropPlaceholder")
         return view
     }()
 
@@ -66,37 +49,38 @@ class DetailStackView: UIStackView {
 
 extension DetailStackView: CodeView {
     func buildViewHierarchy() {
-        self.addArrangedSubview(self.poster)
-        self.addArrangedSubview(self.title)
-        self.addArrangedSubview(self.genres)
-        self.addArrangedSubview(self.overview)
+        self.addSubview(self.poster)
+        self.addSubview(self.title)
+        self.addSubview(self.genres)
+        self.addSubview(self.overview)
     }
 
     func setupConstraints() {
         self.poster.snp.makeConstraints { make in
-            make.top.left.right.equalTo(0)
-            make.height.equalTo(self.poster.snp.height).multipliedBy(281/500)
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(200)
         }
 
         self.title.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(self.poster.snp.bottom).offset(20)
             make.top.bottom.right.left.equalTo(0)
         }
 
         self.genres.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(self.title.snp.bottom).offset(20)
             make.top.bottom.right.left.equalTo(0)
         }
 
         self.overview.snp.makeConstraints { make in
-            make.top.right.left.equalTo(0)
+            make.right.left.equalToSuperview()
+            make.top.equalTo(self.genres.snp.bottom).offset(20)
             make.height.equalTo(100)
         }
     }
 
     func setupAdditionalConfiguration() {
-        self.axis = .vertical
-        self.alignment = .leading
-        self.distribution = .equalCentering
     }
-
 
 }

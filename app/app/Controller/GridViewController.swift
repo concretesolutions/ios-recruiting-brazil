@@ -49,7 +49,6 @@ extension GridViewController: UICollectionViewDataSource {
         return cell
     }
 
-
 }
 
 extension GridViewController: UICollectionViewDelegate {
@@ -63,5 +62,11 @@ extension GridViewController: UICollectionViewDelegate {
                 }
             }
         }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = MovieDetailViewController()
+        vc.movie = self.movies[indexPath.row]
+        self.present(vc, animated: true, completion: nil)
     }
 }
