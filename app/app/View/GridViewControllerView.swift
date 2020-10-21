@@ -1,14 +1,18 @@
 //
-//  SearchBarView.swift
+//  GridViewControllerView.swift
 //  app
 //
-//  Created by rfl3 on 15/10/20.
+//  Created by rfl3 on 20/10/20.
 //  Copyright © 2020 renacio. All rights reserved.
 //
 
 import UIKit
 
-class SearchBarView: UISearchBar {
+class GridViewControllerView: UIView {
+
+    // Components
+    let searchBar = SearchBarView()
+
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         self.setupLayout()
@@ -19,7 +23,7 @@ class SearchBarView: UISearchBar {
     }
 }
 
-extension SearchBarView: CodeView {
+extension GridViewControllerView: CodeView {
     func buildViewHierarchy() {
 
     }
@@ -29,11 +33,8 @@ extension SearchBarView: CodeView {
     }
 
     func setupAdditionalConfiguration() {
-        self.backgroundColor = UIColor(named: "orange")
-        self.searchTextField.backgroundColor = .white
-        self.placeholder = "Search by title"
-        self.backgroundColor = .orange
+        self.backgroundColor = .white
     }
 
-
+    
 }

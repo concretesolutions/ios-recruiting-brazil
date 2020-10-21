@@ -10,8 +10,10 @@ import UIKit
 
 class GridViewController: UIViewController {
 
+    let screen = GridViewControllerView()
+
     override func loadView() {
-        
+        self.view = self.screen
     }
 
 }
