@@ -36,7 +36,7 @@ class TabViewController: UITabBarController {
 
     func setupLayout() {
 
-        self.tabBar.barTintColor = UIColor(named: "Orange")
+        self.tabBar.barTintColor = UIColor(named: "orange")
         self.tabBar.tintColor = .white
         self.tabBar.unselectedItemTintColor = .white
 

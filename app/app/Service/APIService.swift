@@ -49,6 +49,8 @@ class APIService {
                             if self.page == -1 {
                                 self.page = movies.page
                                 self.totalPages = movies.totalPages
+                            } else {
+                                self.page += 1
                             }
 
                             completion(movies.results)

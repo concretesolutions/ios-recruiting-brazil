@@ -31,7 +31,7 @@ extension GridCollectionView: CodeView {
     }
 
     func setupAdditionalConfiguration() {
-
+        self.backgroundColor = .white
     }
 
 }

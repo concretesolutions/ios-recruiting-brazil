@@ -52,7 +52,7 @@ class GridCollectionViewCell: UICollectionViewCell {
 
     let poster: UIImageView = {
         let view = UIImageView(frame: .zero)
-        view.clipsToBounds = true
+//        view.clipsToBounds = true
         view.contentMode = .scaleAspectFill
         view.image = UIImage(named: "posterPlaceholder")
         return view
@@ -90,11 +90,11 @@ extension GridCollectionViewCell: CodeView {
     func setupConstraints() {
         self.favButton.snp.makeConstraints { make in
             make.width.height.equalTo(30)
-            make.left.top.equalTo(15)
+            make.left.top.equalTo(10)
         }
 
         self.poster.snp.makeConstraints { make in
-            make.left.bottom.right.top.equalTo(0)
+            make.left.bottom.right.top.equalToSuperview()
         }
     }
 
@@ -102,10 +102,9 @@ extension GridCollectionViewCell: CodeView {
         self.favButton.addTarget(self, action: #selector(self.pressed(_:)), for: .touchUpInside)
 
         self.layer.cornerRadius = 10
-        self.layer.shadowColor = UIColor.white.cgColor
+        self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOpacity = 0.3
         self.layer.shadowRadius = 10
-//        self.layer.shadowOffset = CGSize(width: <#T##CGFloat#>, height: <#T##CGFloat#>)
         self.layer.shouldRasterize = true
     }
 
