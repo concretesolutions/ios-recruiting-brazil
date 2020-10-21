@@ -70,7 +70,6 @@ class FilterYearController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "filterYear", for: indexPath)
         
         let years = yearList[indexPath.row]
-        
         cell.textLabel?.text = Constants.getYear(movies: years)
 
         return cell
