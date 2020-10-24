@@ -1,0 +1,19 @@
+platform :ios, '10.0'
+use_frameworks!
+inhibit_all_warnings!
+
+def common_pods
+
+end
+
+target 'ConcreteChallenge' do
+  common_pods
+end
+
+target 'ConcreteChallengeTests' do
+  common_pods
+end
+
+target 'ConcreteChallengeUITests' do
+  common_pods
+end
