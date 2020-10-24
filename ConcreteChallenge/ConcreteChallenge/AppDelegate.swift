@@ -11,6 +11,8 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        let splashScreenTime = 3.0
+        Thread.sleep(forTimeInterval: splashScreenTime)
         // Override point for customization after application launch.
         return true
     }
