@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MovieViewController.swift
 //  ConcreteChallenge
 //
 //  Created by Adrian Almeida on 23/10/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MovieViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
