@@ -20,8 +20,8 @@ final class AppCoordinator: Coordinator {
     // MARK: - Functions
 
     func start() {
-        let movieViewController = MovieScreenFactory.makeMovie()
-        let navigationController = UINavigationController(rootViewController: movieViewController)
+        let tabBarViewController = TabBarScreenFactory.makeTabBar()
+        let navigationController = UINavigationController(rootViewController: tabBarViewController)
 
         rootController?.rootViewController = navigationController
     }

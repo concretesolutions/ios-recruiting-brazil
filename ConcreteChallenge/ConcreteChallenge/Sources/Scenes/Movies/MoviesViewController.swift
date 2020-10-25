@@ -8,11 +8,11 @@
 
 import UIKit
 
-final class MovieViewController: UIViewController {
+final class MoviesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
         let provider = MovieDBNetworkService()
         provider.getMovies()
     }
