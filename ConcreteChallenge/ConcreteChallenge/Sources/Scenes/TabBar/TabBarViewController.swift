@@ -14,7 +14,6 @@ final class TabBarViewController: UITabBarController, ViewCode {
 
         let searchBar = searchController.searchBar
         searchBar.placeholder = Strings.search.localizable
-        searchBar.searchBarStyle = .prominent
         searchBar.tintColor = .black
 
         return searchController
