@@ -19,8 +19,8 @@ final class MoviesInteractor: MoviesBusinessLogic {
 
     // MARK: - MoviesInteractor conforms
 
-    func loadMovies(request: MoviesModels.MoviesItems.Request) {
-        worker.loadMovies()
+    func getMovies(request: MoviesModels.MoviesItems.Request) {
+        worker.getMovies()
 
         let response = MoviesModels.MoviesItems.Response()
         presenter.presentMoviesItems(response: response)

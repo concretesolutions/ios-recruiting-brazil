@@ -7,5 +7,5 @@
 //
 
 protocol MoviesWorkerProtocol: AnyObject {
-    func loadMovies()
+    func getMovies()
 }

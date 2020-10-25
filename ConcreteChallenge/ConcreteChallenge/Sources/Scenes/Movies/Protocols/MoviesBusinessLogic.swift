@@ -7,5 +7,5 @@
 //
 
 protocol MoviesBusinessLogic: AnyObject {
-    func loadMovies(request: MoviesModels.MoviesItems.Request)
+    func getMovies(request: MoviesModels.MoviesItems.Request)
 }

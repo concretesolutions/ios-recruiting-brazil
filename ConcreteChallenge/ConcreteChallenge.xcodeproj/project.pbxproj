@@ -10,7 +10,6 @@
 		006CD7B760B2B2AAA3DCD900 /* Pods_ConcreteChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1427E0B0AFFF20F8B8219F0B /* Pods_ConcreteChallenge.framework */; };
 		465A260E156B846E0EF51625 /* Pods_ConcreteChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C829975887955B9EC4C4E5D /* Pods_ConcreteChallengeTests.framework */; };
 		5AB6B0EC1ECC989DD3C05ECC /* Pods_ConcreteChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA02A6E4377D003257EFE74A /* Pods_ConcreteChallengeUITests.framework */; };
-		A8660E47254507EF00D74934 /* MovieDBNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8660E46254507EF00D74934 /* MovieDBNetworkService.swift */; };
 		A8660E4C254542A400D74934 /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8660E4B254542A300D74934 /* MovieRepository.swift */; };
 		A8660E4F2545450400D74934 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A8660E512545450400D74934 /* Localizable.strings */; };
 		A8660E54254545E900D74934 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8660E53254545E900D74934 /* Constants.swift */; };
@@ -73,7 +72,6 @@
 		1D77BE5B1C1C49C5E531D4AE /* Pods-ConcreteChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4F24E1A27B81781384581F5F /* Pods-ConcreteChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6C829975887955B9EC4C4E5D /* Pods_ConcreteChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConcreteChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A8660E46254507EF00D74934 /* MovieDBNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBNetworkService.swift; sourceTree = "<group>"; };
 		A8660E4B254542A300D74934 /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
 		A8660E502545450400D74934 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A8660E53254545E900D74934 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -174,14 +172,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A8660E452545079100D74934 /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-				A8660E46254507EF00D74934 /* MovieDBNetworkService.swift */,
-			);
-			path = Networking;
-			sourceTree = "<group>";
-		};
 		A8660E52254545AA00D74934 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,12 +181,12 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		A8660E5B25454BF300D74934 /* Model */ = {
+		A8660E5B25454BF300D74934 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				A8660E5C25454C1500D74934 /* RepositoryError.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		A8660EAB25455C5600D74934 /* TabBar */ = {
@@ -362,8 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				A8B129C62544FC4C0074654A /* API */,
-				A8660E452545079100D74934 /* Networking */,
-				A8660E5B25454BF300D74934 /* Model */,
+				A8660E5B25454BF300D74934 /* Models */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -612,7 +601,6 @@
 				A8B1298525439DC70074654A /* SceneDelegate.swift in Sources */,
 				A8660EC52545C5F900D74934 /* MoviesWorker.swift in Sources */,
 				A8B129C82544FEF40074654A /* MovieDBAPI.swift in Sources */,
-				A8660E47254507EF00D74934 /* MovieDBNetworkService.swift in Sources */,
 				A8B129BF2543BEC10074654A /* MoviesScreenFactory.swift in Sources */,
 				A8660E54254545E900D74934 /* Constants.swift in Sources */,
 				A8660E4C254542A400D74934 /* MovieRepository.swift in Sources */,

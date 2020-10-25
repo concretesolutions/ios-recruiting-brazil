@@ -24,13 +24,18 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
         view.backgroundColor = .white
 
-//        let provider = MovieDBNetworkService()
-//        provider.getMovies()
+        interactor.getMovies(request: MoviesModels.MoviesItems.Request())
     }
 
     // MARK: - MoviesDisplayLogic conforms
 
     func displayMoviesItems(viewModel: MoviesModels.MoviesItems.ViewModel) {
         // TODO - load collection view
+    }
+
+    // MARK: - Private functions
+
+    private func loadMovies() {
+        interactor.getMovies(request: MoviesModels.MoviesItems.Request())
     }
 }
