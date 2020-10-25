@@ -8,22 +8,48 @@
 
 import UIKit
 
-final class TabBarViewController: UITabBarController {
+final class TabBarViewController: UITabBarController, ViewCode {
+    private lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+
+        let searchBar = searchController.searchBar
+        searchBar.placeholder = Strings.search.localizable
+        searchBar.searchBarStyle = .prominent
+        searchBar.tintColor = .black
+
+        return searchController
+    }()
+
+    // MARK: - Override functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
+        setupView()
     }
 
-    // MARK: - Private functions
+    // MARK: - ViewCode conforms
 
-    private func setup() {
+    func setupHierarchy() {
+    }
+
+    func setupConstraints() {
+    }
+
+    func setupConfigurations() {
         setupNavigationBar()
         setupTabBar()
     }
 
+    // MARK: - Private functions
+
     private func setupNavigationBar() {
         title = Strings.movies.localizable
+
+        let navigationAppearance = UINavigationBarAppearance()
+        navigationAppearance.backgroundColor = .appYellowLight
+        navigationItem.standardAppearance = navigationAppearance
+        navigationItem.scrollEdgeAppearance = navigationAppearance
+        navigationItem.searchController = searchController
     }
 
     private func setupTabBar() {
@@ -41,5 +67,6 @@ final class TabBarViewController: UITabBarController {
         selectedViewController = moviesViewController
 
         UITabBar.appearance().tintColor = .black
+        UITabBar.appearance().barTintColor = .appYellowLight
     }
 }

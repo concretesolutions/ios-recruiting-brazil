@@ -10,10 +10,9 @@ import UIKit
 
 extension UIColor {
 
-    static let white = UIColor(hex: "FFFFFF")
-    static let yellowLight = UIColor(hex: "F7CE5B")
-    static let blackLight = UIColor(hex: "2D3047")
-    static let orange = UIColor(hex: "D9971E")
+    static let appYellowLight = UIColor(hex: "F7CE5B")
+    static let appBlackLight = UIColor(hex: "2D3047")
+    static let appOrange = UIColor(hex: "D9971E")
 
     // MARK: - Initializers
 
