@@ -22,7 +22,7 @@ final class MoviesWorker: MoviesWorkerProtocol {
         provider.request(.getMovies) { result in
             switch result {
             case let .success(response):
-                print(response.data)
+                print(response.data.string)
             case let .failure(error):
                 print(error)
             }
