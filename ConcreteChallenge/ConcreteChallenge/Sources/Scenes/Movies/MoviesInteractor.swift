@@ -20,7 +20,14 @@ final class MoviesInteractor: MoviesBusinessLogic {
     // MARK: - MoviesInteractor conforms
 
     func getMovies(request: MoviesModels.MoviesItems.Request) {
-        worker.getMovies()
+        worker.getMovies() { result in
+            switch result {
+            case let .success(response):
+                print(response)
+            case let .failure(error):
+                print(error)
+            }
+        }
 
         let response = MoviesModels.MoviesItems.Response()
         presenter.presentMoviesItems(response: response)

@@ -12,10 +12,16 @@ enum Constants {
         static let apiVersion = "3"
 
         // MARK: - Paths
+
         static let moviePopular = "/movie/popular"
 
         // MARK: - Parameters
+
         static let apiKey = "api_key"
         static let apiKeyValue = "9b9f207b503e03a4e0b1267156c23dd2"
+
+        // MARK: - Headers
+
+        static let headersContentTypeApplicationJSON = ["Content-Type": "application/json"]
     }
 }

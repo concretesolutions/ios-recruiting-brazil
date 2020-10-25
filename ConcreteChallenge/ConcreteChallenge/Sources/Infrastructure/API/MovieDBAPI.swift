@@ -44,6 +44,6 @@ enum MovieDBAPI: TargetType {
    }
 
     var headers: [String : String]? {
-        return nil
+        return Constants.MovieNetwork.headersContentTypeApplicationJSON
     }
 }

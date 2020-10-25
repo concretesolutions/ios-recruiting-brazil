@@ -18,7 +18,7 @@ final class MoviesWorker: MoviesWorkerProtocol {
         provider = MoyaProvider<MovieDBAPI>(stubClosure: providerStubClosure, plugins: [NetworkLoggerPlugin()])
     }
 
-    func getMovies() {
+    func getMovies(completion: (Result<Void, NetworkError>) -> Void) {
         provider.request(.getMovies) { result in
             switch result {
             case let .success(response):
