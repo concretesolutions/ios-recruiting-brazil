@@ -12,8 +12,8 @@ enum MovieDBAPI: TargetType {
     case getMovies
 
     var baseURL: URL {
-        guard let url = URL(string: "\(MovieNetworkConstants.baseURL)/\(MovieNetworkConstants.apiVersion)") else {
-            fatalError("baseURL could not be found.")
+        guard let url = URL(string: "\(Constants.MovieNetwork.baseURL)/\(Constants.MovieNetwork.apiVersion)") else {
+            fatalError(Strings.convertUrlFailure.localizable)
         }
 
         return url
@@ -21,7 +21,7 @@ enum MovieDBAPI: TargetType {
 
     var path: String {
         switch self {
-        case .getMovies: return MovieNetworkConstants.moviePopular
+        case .getMovies: return Constants.MovieNetwork.moviePopular
         }
     }
 
@@ -38,7 +38,7 @@ enum MovieDBAPI: TargetType {
     var task: Task {
         switch self {
         case .getMovies:
-            return .requestParameters(parameters: [MovieNetworkConstants.apiKey: MovieNetworkConstants.apiKeyValue],
+            return .requestParameters(parameters: [Constants.MovieNetwork.apiKey: Constants.MovieNetwork.apiKeyValue],
                                       encoding: URLEncoding.queryString)
         }
    }

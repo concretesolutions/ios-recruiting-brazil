@@ -6,6 +6,6 @@
 //  Copyright © 2020 Adrian Almeida. All rights reserved.
 //
 
-protocol Coordinator {
+protocol Coordinator: AnyObject {
     func start()
 }
