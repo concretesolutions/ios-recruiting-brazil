@@ -1,4 +1,4 @@
-platform :ios, '13.0'
+platform :ios, '13.0’
 use_frameworks!
 inhibit_all_warnings!
 
@@ -8,6 +8,8 @@ end
 
 target 'ConcreteChallenge' do
   common_pods
+
+  pod 'Moya', '~> 14.0'
 end
 
 target 'ConcreteChallengeTests' do
