@@ -19,7 +19,7 @@ final class NetworkEngine<Target: TargetType> {
 
     // MARK: - Functions
 
-    func request<T: Codable>(target: Target, completion: @escaping(Result<T, NetworkError>) -> Void) {
+    func request<T: Codable>(_ target: Target, completion: @escaping(Result<T, NetworkError>) -> Void) {
         provider.request(target) { result in
             switch result {
             case .success(let response):
@@ -34,7 +34,7 @@ final class NetworkEngine<Target: TargetType> {
         }
     }
 
-    func requestVoid(target: Target, completion: @escaping(Result<Void, NetworkError>) -> Void) {
+    func requestVoid(_ target: Target, completion: @escaping(Result<Void, NetworkError>) -> Void) {
         provider.request(target) { result in
             switch result {
             case .success:

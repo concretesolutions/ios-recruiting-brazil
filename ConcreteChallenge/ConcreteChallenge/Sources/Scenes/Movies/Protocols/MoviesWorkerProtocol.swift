@@ -7,5 +7,5 @@
 //
 
 protocol MoviesWorkerProtocol: AnyObject {
-    func getMovies(completion: (Result<Void, NetworkError>) -> Void)
+    func getMovies(completion: @escaping(Result<MoviesPopulariesResponse, NetworkError>) -> Void)
 }

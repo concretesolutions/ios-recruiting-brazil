@@ -9,23 +9,22 @@
 import Moya
 
 final class MoviesWorker: MoviesWorkerProtocol {
-    private let provider: MoyaProvider<MovieDBAPI>
+    private lazy var engine: NetworkEngine<MovieDBAPI> = {
+        let providerStubClosure = MoyaProvider<MovieDBAPI>.neverStub
+        let provider = MoyaProvider<MovieDBAPI>(stubClosure: providerStubClosure, plugins: [NetworkLoggerPlugin()])
+
+        return NetworkEngine<MovieDBAPI>(provider: provider)
+    }()
 
     // MARK: - Initializers
 
+    // TODO - DIP engine/provider
     init() {
-        let providerStubClosure = MoyaProvider<MovieDBAPI>.neverStub
-        provider = MoyaProvider<MovieDBAPI>(stubClosure: providerStubClosure, plugins: [NetworkLoggerPlugin()])
     }
 
-    func getMovies(completion: (Result<Void, NetworkError>) -> Void) {
-        provider.request(.getMovies) { result in
-            switch result {
-            case let .success(response):
-                print(response.data.string)
-            case let .failure(error):
-                print(error)
-            }
-        }
+    // MARK: - Conforms MoviesWorkerProtocol
+
+    func getMovies(completion: @escaping(Result<MoviesPopulariesResponse, NetworkError>) -> Void) {
+        engine.request(.getMovies, completion: completion)
     }
 }
