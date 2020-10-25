@@ -8,7 +8,16 @@
 
 import UIKit
 
-final class MoviesViewController: UIViewController {
+final class MoviesViewController: UIViewController, MoviesDisplayLogic {
+    private lazy var worker: MoviesWorker = MoviesWorker()
+
+    private lazy var presenter: MoviesPresenter = MoviesPresenter(moviesDisplayLogic: self)
+
+    private lazy var interactor: MoviesBusinessLogic = {
+        return MoviesInteractor(worker: worker, presenter: presenter)
+    }()
+
+    // MARK: - Override functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,5 +26,11 @@ final class MoviesViewController: UIViewController {
 
 //        let provider = MovieDBNetworkService()
 //        provider.getMovies()
+    }
+
+    // MARK: - MoviesDisplayLogic conforms
+
+    func displayMoviesItems(viewModel: MoviesModels.MoviesItems.ViewModel) {
+        // TODO - load collection view
     }
 }

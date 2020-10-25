@@ -28,11 +28,9 @@ final class TabBarViewController: UITabBarController, ViewCode {
 
     // MARK: - ViewCode conforms
 
-    func setupHierarchy() {
-    }
+    func setupHierarchy() { }
 
-    func setupConstraints() {
-    }
+    func setupConstraints() { }
 
     func setupConfigurations() {
         setupNavigationBar()
