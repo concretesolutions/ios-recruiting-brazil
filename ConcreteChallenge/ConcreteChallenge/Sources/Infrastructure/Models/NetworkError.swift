@@ -12,7 +12,9 @@ enum NetworkError: Error {
     case dataNotFound
     case invalidJSON
 
-    var errorDescription: String? {
+    // MARK: - Computed variables
+
+    var errorDescription: String {
         switch self {
         case .unknown:
             return localizedDescription

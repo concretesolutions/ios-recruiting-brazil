@@ -24,18 +24,20 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
         view.backgroundColor = .white
 
-        interactor.getMovies(request: MoviesModels.MoviesItems.Request())
+        loadMovies()
     }
 
     // MARK: - MoviesDisplayLogic conforms
 
     func displayMoviesItems(viewModel: MoviesModels.MoviesItems.ViewModel) {
-        // TODO - load collection view
+        print(viewModel.moviesResponse)
     }
+
+    func displayMoviesError() { }
 
     // MARK: - Private functions
 
-    private func loadMovies() {
-        interactor.getMovies(request: MoviesModels.MoviesItems.Request())
+    private func loadMovies(language: String = Constants.MovieDefaultParameters.language, page: Int = Constants.MovieDefaultParameters.page) {
+        interactor.getMovies(request: MoviesModels.MoviesItems.Request(language: language, page: page))
     }
 }

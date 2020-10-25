@@ -10,4 +10,5 @@ import Foundation
 
 protocol MoviesDisplayLogic: AnyObject {
     func displayMoviesItems(viewModel: MoviesModels.MoviesItems.ViewModel)
+    func displayMoviesError()
 }

@@ -8,8 +8,17 @@
 
 enum MoviesModels {
     enum MoviesItems {
-        struct Request { }
-        struct Response { }
-        struct ViewModel { }
+        struct Request {
+            let language: String
+            let page: Int
+        }
+
+        struct Response {
+            let moviesResponse: MoviesPopulariesResponse
+        }
+
+        struct ViewModel {
+            let moviesResponse: MoviesPopulariesResponse
+        }
     }
 }

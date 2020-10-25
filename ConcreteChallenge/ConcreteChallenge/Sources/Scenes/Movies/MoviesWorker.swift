@@ -24,7 +24,7 @@ final class MoviesWorker: MoviesWorkerProtocol {
 
     // MARK: - Conforms MoviesWorkerProtocol
 
-    func getMovies(completion: @escaping(Result<MoviesPopulariesResponse, NetworkError>) -> Void) {
-        engine.request(.getMovies, completion: completion)
+    func getMovies(language: String, page: Int, completion: @escaping(Result<MoviesPopulariesResponse, NetworkError>) -> Void) {
+        engine.request(.getMovies(language: language, page: page), completion: completion)
     }
 }

@@ -18,7 +18,11 @@ final class MoviesPresenter: MoviesPresentationLogic {
     // MARK: - MoviesPresentationLogic conforms
 
     func presentMoviesItems(response: MoviesModels.MoviesItems.Response) {
-        let viewModel = MoviesModels.MoviesItems.ViewModel()
+        let viewModel = MoviesModels.MoviesItems.ViewModel(moviesResponse: response.moviesResponse)
         moviesDisplayLogic.displayMoviesItems(viewModel: viewModel)
+    }
+
+    func presentLoadMoviesFailure() {
+        moviesDisplayLogic.displayMoviesError()
     }
 }
