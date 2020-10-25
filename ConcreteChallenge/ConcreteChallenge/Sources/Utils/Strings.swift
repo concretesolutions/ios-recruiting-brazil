@@ -9,6 +9,7 @@
 import Foundation
 
 enum Strings: String, Localizable {
+    case movies
     case convertUrlFailure = "convert_url_failure"
     case repositryErrorDataNotFound = "repositry_error_data_not_found"
     case repositryErrorParseJSON = "repositry_error_parse_json"

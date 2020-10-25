@@ -13,7 +13,9 @@ final class MoviesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let provider = MovieDBNetworkService()
-        provider.getMovies()
+        view.backgroundColor = .white
+
+//        let provider = MovieDBNetworkService()
+//        provider.getMovies()
     }
 }
