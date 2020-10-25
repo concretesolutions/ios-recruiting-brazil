@@ -8,7 +8,7 @@
 
 import UIKit
 
-public extension UIColor {
+extension UIColor {
 
     static let white = UIColor(hex: "FFFFFF")
     static let yellowLight = UIColor(hex: "F7CE5B")
