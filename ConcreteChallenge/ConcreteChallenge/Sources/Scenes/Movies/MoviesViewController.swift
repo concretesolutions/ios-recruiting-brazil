@@ -21,9 +21,7 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .white
-
+        setup()
         loadMovies()
     }
 
@@ -36,6 +34,10 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     func displayMoviesError() { }
 
     // MARK: - Private functions
+
+    private func setup() {
+        view.backgroundColor = .white
+    }
 
     private func loadMovies(language: String = Constants.MovieDefaultParameters.language, page: Int = Constants.MovieDefaultParameters.page) {
         interactor.getMovies(request: MoviesModels.MoviesItems.Request(language: language, page: page))
