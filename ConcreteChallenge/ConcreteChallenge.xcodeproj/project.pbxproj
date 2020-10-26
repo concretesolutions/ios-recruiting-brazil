@@ -10,6 +10,9 @@
 		006CD7B760B2B2AAA3DCD900 /* Pods_ConcreteChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1427E0B0AFFF20F8B8219F0B /* Pods_ConcreteChallenge.framework */; };
 		465A260E156B846E0EF51625 /* Pods_ConcreteChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C829975887955B9EC4C4E5D /* Pods_ConcreteChallengeTests.framework */; };
 		5AB6B0EC1ECC989DD3C05ECC /* Pods_ConcreteChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA02A6E4377D003257EFE74A /* Pods_ConcreteChallengeUITests.framework */; };
+		A864B85625477BC500B5BC29 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B85525477BC500B5BC29 /* DataSource.swift */; };
+		A864B85825477DB300B5BC29 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B85725477DB300B5BC29 /* CollectionViewDataSource.swift */; };
+		A864B85A25477FA200B5BC29 /* NSObjectProtocol+ClassName.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B85925477FA200B5BC29 /* NSObjectProtocol+ClassName.swift */; };
 		A8660E4F2545450400D74934 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A8660E512545450400D74934 /* Localizable.strings */; };
 		A8660E54254545E900D74934 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8660E53254545E900D74934 /* Constants.swift */; };
 		A8660E56254545F700D74934 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8660E55254545F700D74934 /* Strings.swift */; };
@@ -76,6 +79,9 @@
 		1D77BE5B1C1C49C5E531D4AE /* Pods-ConcreteChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeUITests.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeUITests/Pods-ConcreteChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4F24E1A27B81781384581F5F /* Pods-ConcreteChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6C829975887955B9EC4C4E5D /* Pods_ConcreteChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConcreteChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A864B85525477BC500B5BC29 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		A864B85725477DB300B5BC29 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
+		A864B85925477FA200B5BC29 /* NSObjectProtocol+ClassName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObjectProtocol+ClassName.swift"; sourceTree = "<group>"; };
 		A8660E502545450400D74934 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A8660E53254545E900D74934 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A8660E55254545F700D74934 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -183,7 +189,9 @@
 		A8660E52254545AA00D74934 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A864B85725477DB300B5BC29 /* CollectionViewDataSource.swift */,
 				A8660E53254545E900D74934 /* Constants.swift */,
+				A864B85525477BC500B5BC29 /* DataSource.swift */,
 				A8660E55254545F700D74934 /* Strings.swift */,
 			);
 			path = Utils;
@@ -306,6 +314,7 @@
 			children = (
 				A8660ECA25460AA100D74934 /* Data+Extension.swift */,
 				A8660E57254547FD00D74934 /* String+Extension.swift */,
+				A864B85925477FA200B5BC29 /* NSObjectProtocol+ClassName.swift */,
 				A8B129B42543ADAA0074654A /* UIColor+Extension.swift */,
 				A8660EB32545626600D74934 /* UIImage+Assets.swift */,
 				A8B129C22543C2350074654A /* UIWindow+AppRootController.swift */,
@@ -615,6 +624,7 @@
 				A8B129BA2543BBE30074654A /* Coordinator.swift in Sources */,
 				A8660EB625456FD300D74934 /* ViewCode.swift in Sources */,
 				A8660EB42545626600D74934 /* UIImage+Assets.swift in Sources */,
+				A864B85A25477FA200B5BC29 /* NSObjectProtocol+ClassName.swift in Sources */,
 				A8B129C32543C2350074654A /* UIWindow+AppRootController.swift in Sources */,
 				A8660ECD2546186700D74934 /* NetworkEngine.swift in Sources */,
 				A8660E56254545F700D74934 /* Strings.swift in Sources */,
@@ -634,8 +644,10 @@
 				A8660EC32545C4CB00D74934 /* MoviesPresentationLogic.swift in Sources */,
 				A8660E5A254548A000D74934 /* Localizable.swift in Sources */,
 				A8660E5D25454C1500D74934 /* NetworkError.swift in Sources */,
+				A864B85625477BC500B5BC29 /* DataSource.swift in Sources */,
 				A8660EAD25455C7C00D74934 /* TabBarScreenFactory.swift in Sources */,
 				A8660EBF2545C28800D74934 /* MoviesInteractor.swift in Sources */,
+				A864B85825477DB300B5BC29 /* CollectionViewDataSource.swift in Sources */,
 				A8660EC92545C84600D74934 /* MoviesBusinessLogic.swift in Sources */,
 				A8B129B52543ADAB0074654A /* UIColor+Extension.swift in Sources */,
 				A8660EBD2545C02F00D74934 /* MoviesModels.swift in Sources */,
