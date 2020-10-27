@@ -9,10 +9,22 @@
 import UIKit
 
 final class GalleryItemView: UIView {
+    private lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .red
+
+        return imageView
+    }()
+
+    // MARK: - Private constants
+
+    private let itemSize: CGSize
 
     // MARK: - Initializers
 
-    public init() {
+    public init(itemSize: CGSize) {
+        self.itemSize = itemSize
+
         super.init(frame: .zero)
 
         setupLayout()
@@ -26,6 +38,11 @@ final class GalleryItemView: UIView {
     // MARK: - Private functions
 
     private func setupLayout() {
-        backgroundColor = .red
+        addSubview(imageView, constraints: [
+            imageView.topAnchor.constraint(equalTo: topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            imageView.heightAnchor.constraint(equalToConstant: itemSize.height)
+        ])
     }
 }
