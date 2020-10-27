@@ -7,22 +7,16 @@
 //
 
 final class MoviesPresenter: MoviesPresentationLogic {
-    private let moviesDisplayLogic: MoviesDisplayLogic
-
-    // MARK: - Initializers
-
-    init(moviesDisplayLogic: MoviesDisplayLogic) {
-        self.moviesDisplayLogic = moviesDisplayLogic
-    }
+    weak var viewController: MoviesDisplayLogic?
 
     // MARK: - MoviesPresentationLogic conforms
 
     func presentMoviesItems(response: MoviesModels.MoviesItems.Response) {
         let viewModel = MoviesModels.MoviesItems.ViewModel(moviesResponse: response.moviesResponse)
-        moviesDisplayLogic.displayMoviesItems(viewModel: viewModel)
+        viewController?.displayMoviesItems(viewModel: viewModel)
     }
 
     func presentLoadMoviesFailure() {
-        moviesDisplayLogic.displayMoviesError()
+        viewController?.displayMoviesError()
     }
 }

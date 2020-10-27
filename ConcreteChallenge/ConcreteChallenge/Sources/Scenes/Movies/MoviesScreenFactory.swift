@@ -7,10 +7,17 @@
 //
 
 import UIKit
+import Moya
 
 enum MoviesScreenFactory {
     static func makeMovies() -> UIViewController {
-        let moviesViewController = MoviesViewController()
+        let providerStubClosure = MoyaProvider<MovieDBAPI>.neverStub
+        let provider = MoyaProvider<MovieDBAPI>(stubClosure: providerStubClosure, plugins: [NetworkLoggerPlugin()])
+        let worker = MoviesWorker(provider: provider)
+        let presenter = MoviesPresenter()
+        let interactor = MoviesInteractor(worker: worker, presenter: presenter)
+        let moviesViewController = MoviesViewController(interactor: interactor)
+        presenter.viewController = moviesViewController
 
         return moviesViewController
     }

@@ -16,6 +16,7 @@
 		A864B85C254783F900B5BC29 /* GalleryItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B85B254783F900B5BC29 /* GalleryItemCollectionViewCell.swift */; };
 		A864B85E2547859E00B5BC29 /* GalleryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B85D2547859E00B5BC29 /* GalleryItemView.swift */; };
 		A864B8602547881900B5BC29 /* UIView+ViewCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B85F2547881900B5BC29 /* UIView+ViewCode.swift */; };
+		A864B870254863E100B5BC29 /* MoyaProvider+Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B86F254863E100B5BC29 /* MoyaProvider+Decoder.swift */; };
 		A8660E4F2545450400D74934 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A8660E512545450400D74934 /* Localizable.strings */; };
 		A8660E54254545E900D74934 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8660E53254545E900D74934 /* Constants.swift */; };
 		A8660E56254545F700D74934 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8660E55254545F700D74934 /* Strings.swift */; };
@@ -37,7 +38,6 @@
 		A8660EC72545C72200D74934 /* MoviesWorkerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8660EC62545C72200D74934 /* MoviesWorkerProtocol.swift */; };
 		A8660EC92545C84600D74934 /* MoviesBusinessLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8660EC82545C84600D74934 /* MoviesBusinessLogic.swift */; };
 		A8660ECB25460AA100D74934 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8660ECA25460AA100D74934 /* Data+Extension.swift */; };
-		A8660ECD2546186700D74934 /* NetworkEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8660ECC2546186700D74934 /* NetworkEngine.swift */; };
 		A8660ECF254627EB00D74934 /* MoviesPopulariesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8660ECE254627EB00D74934 /* MoviesPopulariesResponse.swift */; };
 		A8660ED125462BCA00D74934 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8660ED025462BCA00D74934 /* Movie.swift */; };
 		A8660ED425463F7B00D74934 /* GalleryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8660ED325463F7B00D74934 /* GalleryCollectionView.swift */; };
@@ -88,6 +88,7 @@
 		A864B85B254783F900B5BC29 /* GalleryItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		A864B85D2547859E00B5BC29 /* GalleryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryItemView.swift; sourceTree = "<group>"; };
 		A864B85F2547881900B5BC29 /* UIView+ViewCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ViewCode.swift"; sourceTree = "<group>"; };
+		A864B86F254863E100B5BC29 /* MoyaProvider+Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoyaProvider+Decoder.swift"; sourceTree = "<group>"; };
 		A8660E502545450400D74934 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A8660E53254545E900D74934 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A8660E55254545F700D74934 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -109,7 +110,6 @@
 		A8660EC62545C72200D74934 /* MoviesWorkerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesWorkerProtocol.swift; sourceTree = "<group>"; };
 		A8660EC82545C84600D74934 /* MoviesBusinessLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesBusinessLogic.swift; sourceTree = "<group>"; };
 		A8660ECA25460AA100D74934 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
-		A8660ECC2546186700D74934 /* NetworkEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEngine.swift; sourceTree = "<group>"; };
 		A8660ECE254627EB00D74934 /* MoviesPopulariesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesPopulariesResponse.swift; sourceTree = "<group>"; };
 		A8660ED025462BCA00D74934 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		A8660ED325463F7B00D74934 /* GalleryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionView.swift; sourceTree = "<group>"; };
@@ -323,6 +323,7 @@
 				A8660ECA25460AA100D74934 /* Data+Extension.swift */,
 				A8660E57254547FD00D74934 /* String+Extension.swift */,
 				A864B85925477FA200B5BC29 /* NSObjectProtocol+ClassName.swift */,
+				A864B86F254863E100B5BC29 /* MoyaProvider+Decoder.swift */,
 				A8B129B42543ADAA0074654A /* UIColor+Extension.swift */,
 				A8660EB32545626600D74934 /* UIImage+Assets.swift */,
 				A864B85F2547881900B5BC29 /* UIView+ViewCode.swift */,
@@ -398,7 +399,6 @@
 			isa = PBXGroup;
 			children = (
 				A8B129C72544FEF40074654A /* MovieDBAPI.swift */,
-				A8660ECC2546186700D74934 /* NetworkEngine.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -636,7 +636,6 @@
 				A864B85E2547859E00B5BC29 /* GalleryItemView.swift in Sources */,
 				A864B85A25477FA200B5BC29 /* NSObjectProtocol+ClassName.swift in Sources */,
 				A8B129C32543C2350074654A /* UIWindow+AppRootController.swift in Sources */,
-				A8660ECD2546186700D74934 /* NetworkEngine.swift in Sources */,
 				A8660E56254545F700D74934 /* Strings.swift in Sources */,
 				A8660EC72545C72200D74934 /* MoviesWorkerProtocol.swift in Sources */,
 				A8660EBB2545BE6300D74934 /* MoviesDisplayLogic.swift in Sources */,
@@ -651,6 +650,7 @@
 				A8660E58254547FD00D74934 /* String+Extension.swift in Sources */,
 				A8660EB225455FEA00D74934 /* FavoritesViewController.swift in Sources */,
 				A8660EC12545C38C00D74934 /* MoviesPresenter.swift in Sources */,
+				A864B870254863E100B5BC29 /* MoyaProvider+Decoder.swift in Sources */,
 				A8660ED125462BCA00D74934 /* Movie.swift in Sources */,
 				A8660EC32545C4CB00D74934 /* MoviesPresentationLogic.swift in Sources */,
 				A8660E5A254548A000D74934 /* Localizable.swift in Sources */,

@@ -1,41 +1,31 @@
 //
-//  NetworkEngine.swift
+//  MoyaProvider+Decoder.swift
 //  ConcreteChallenge
 //
-//  Created by Adrian Almeida on 25/10/20.
+//  Created by Adrian Almeida on 27/10/20.
 //  Copyright © 2020 Adrian Almeida. All rights reserved.
 //
 
 import Moya
 
-final class NetworkEngine<Target: TargetType> {
-    private let provider: MoyaProvider<Target>
-
-    // MARK: - Initializers
-
-    init(provider: MoyaProvider<Target>) {
-        self.provider = provider
-    }
-
-    // MARK: - Functions
-
+extension MoyaProvider {
     func request<T: Codable>(_ target: Target, completion: @escaping(Result<T, NetworkError>) -> Void) {
-        provider.request(target) { result in
+        request(target) { (result: Result<Response, MoyaError>) in
             switch result {
             case .success(let response):
                 do {
-                    return completion(.success(try JSONDecoder().decode(T.self, from: response.data)))
+                    completion(.success(try response.map(T.self)))
                 } catch {
-                    return completion(.failure(NetworkError.invalidJSON))
+                    completion(.failure(NetworkError.taskError(error: error)))
                 }
             case .failure(let error):
-                return completion(.failure(NetworkError.taskError(error: error)))
+                completion(.failure(NetworkError.taskError(error: error)))
             }
         }
     }
 
     func requestVoid(_ target: Target, completion: @escaping(Result<Void, NetworkError>) -> Void) {
-        provider.request(target) { result in
+        request(target) { result in
             switch result {
             case .success:
                 return completion(.success(()))

@@ -9,7 +9,7 @@
 import Moya
 
 enum MovieDBAPI: TargetType {
-    case getMovies(language: String, page: Int)
+    case fetchMovies(language: String, page: Int)
 
     var baseURL: URL {
         guard let url = URL(string: "\(Constants.MovieNetwork.baseURL)/\(Constants.MovieNetwork.apiVersion)") else {
@@ -21,13 +21,13 @@ enum MovieDBAPI: TargetType {
 
     var path: String {
         switch self {
-        case .getMovies: return Constants.MovieNetwork.moviePopular
+        case .fetchMovies: return Constants.MovieNetwork.moviePopular
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case .getMovies: return .get
+        case .fetchMovies: return .get
         }
     }
 
@@ -37,7 +37,7 @@ enum MovieDBAPI: TargetType {
 
     var task: Task {
         switch self {
-        case .getMovies(let language, let page):
+        case .fetchMovies(let language, let page):
             return .requestParameters(parameters: [Constants.MovieNetwork.apiKey: Constants.MovieNetwork.apiKeyValue,
                                                    Constants.MovieNetwork.language: language,
                                                    Constants.MovieNetwork.page: page],

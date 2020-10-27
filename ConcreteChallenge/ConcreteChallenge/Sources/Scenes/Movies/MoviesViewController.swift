@@ -9,22 +9,28 @@
 import UIKit
 
 final class MoviesViewController: UIViewController, ViewCode, MoviesDisplayLogic {
-    private lazy var worker: MoviesWorker = MoviesWorker()
-
-    private lazy var presenter: MoviesPresenter = MoviesPresenter(moviesDisplayLogic: self)
-
-    private lazy var interactor: MoviesBusinessLogic = {
-        return MoviesInteractor(worker: worker, presenter: presenter)
-    }()
+    private let interactor: MoviesBusinessLogic
 
     private let galleryItemView = GalleryItemView()
+
+    // MARK: - Initializers
+
+    init(interactor: MoviesBusinessLogic) {
+        self.interactor = interactor
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
 
     // MARK: - Override functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-//        loadMovies()
+//        fetchMovies()
     }
 
     override func viewDidLayoutSubviews() {
@@ -35,9 +41,10 @@ final class MoviesViewController: UIViewController, ViewCode, MoviesDisplayLogic
 
     func setupHierarchy() {
         let anchorConstraint = CGFloat(16)
-        let horizontalItemsCount = CGFloat(2)
-        let heightCell = (view.safeAreaLayoutGuide.layoutFrame.size.height - anchorConstraint) / 2.5
-        let widthCell = (view.safeAreaLayoutGuide.layoutFrame.size.width - anchorConstraint * (horizontalItemsCount + 1)) / horizontalItemsCount
+        let verticalItemsToShow = CGFloat(2.5)
+        let horizontalItemsToShow = CGFloat(2)
+        let heightCell = (view.safeAreaLayoutGuide.layoutFrame.size.height - anchorConstraint) / verticalItemsToShow
+        let widthCell = (view.safeAreaLayoutGuide.layoutFrame.size.width - anchorConstraint * (horizontalItemsToShow + 1)) / horizontalItemsToShow
 
         view.addSubview(galleryItemView, constraints: [
             galleryItemView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: anchorConstraint),
@@ -63,7 +70,7 @@ final class MoviesViewController: UIViewController, ViewCode, MoviesDisplayLogic
 
     // MARK: - Private functions
 
-    private func loadMovies(language: String = Constants.MovieDefaultParameters.language, page: Int = Constants.MovieDefaultParameters.page) {
-        interactor.getMovies(request: MoviesModels.MoviesItems.Request(language: language, page: page))
+    private func fetchMovies(language: String = Constants.MovieDefaultParameters.language, page: Int = Constants.MovieDefaultParameters.page) {
+        interactor.fetchMovies(request: MoviesModels.MoviesItems.Request(language: language, page: page))
     }
 }

@@ -19,8 +19,8 @@ final class MoviesInteractor: MoviesBusinessLogic {
 
     // MARK: - MoviesInteractor conforms
 
-    func getMovies(request: MoviesModels.MoviesItems.Request) {
-        worker.getMovies(language: request.language, page: request.page) { result in
+    func fetchMovies(request: MoviesModels.MoviesItems.Request) {
+        worker.fetchMovies(language: request.language, page: request.page) { result in
             switch result {
             case let .success(response):
                 let responseModel = MoviesModels.MoviesItems.Response(moviesResponse: response)

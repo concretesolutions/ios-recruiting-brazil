@@ -10,7 +10,17 @@ import UIKit
 
 enum TabBarScreenFactory {
     static func makeTabBar() -> UIViewController {
-        let tabBarViewController = TabBarViewController()
+        let moviesViewController = MoviesScreenFactory.makeMovies()
+        let moviesTabBarIcon = UITabBarItem()
+        moviesTabBarIcon.image = UIImage(assets: .listIcon)
+        moviesViewController.tabBarItem = moviesTabBarIcon
+
+        let favoritesViwController = FavoritesScreenFactory.makeFavorites()
+        let favoritesTabBarIcon = UITabBarItem()
+        favoritesTabBarIcon.image = UIImage(assets: .favoriteEmptyIcon)
+        favoritesViwController.tabBarItem = favoritesTabBarIcon
+
+        let tabBarViewController = TabBarViewController(tabBarViewControllers: [moviesViewController, favoritesViwController])
 
         return tabBarViewController
     }

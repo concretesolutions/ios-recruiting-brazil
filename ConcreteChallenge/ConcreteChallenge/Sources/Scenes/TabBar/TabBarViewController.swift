@@ -19,6 +19,22 @@ final class TabBarViewController: UITabBarController, ViewCode {
         return searchController
     }()
 
+    // MARK: - Private constants
+
+    private let tabBarViewControllers: [UIViewController]
+
+    // MARK: - Initializers
+
+    init(tabBarViewControllers: [UIViewController]) {
+        self.tabBarViewControllers = tabBarViewControllers
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+
     // MARK: - Override functions
 
     override func viewDidLoad() {
@@ -50,18 +66,8 @@ final class TabBarViewController: UITabBarController, ViewCode {
     }
 
     private func setupTabBar() {
-        let moviesViewController = MoviesScreenFactory.makeMovies()
-        let moviesTabBarIcon = UITabBarItem()
-        moviesTabBarIcon.image = UIImage(assets: .listIcon)
-        moviesViewController.tabBarItem = moviesTabBarIcon
-
-        let favoritesViwController = FavoritesScreenFactory.makeFavorites()
-        let favoritesTabBarIcon = UITabBarItem()
-        favoritesTabBarIcon.image = UIImage(assets: .favoriteEmptyIcon)
-        favoritesViwController.tabBarItem = favoritesTabBarIcon
-
-        viewControllers = [moviesViewController, favoritesViwController]
-        selectedViewController = moviesViewController
+        viewControllers = tabBarViewControllers
+        selectedIndex = 0
 
         UITabBar.appearance().tintColor = .black
         UITabBar.appearance().barTintColor = .appYellowLight
