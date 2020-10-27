@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MoviesViewController: UIViewController, ViewCode, MoviesDisplayLogic {
+final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     private let interactor: MoviesBusinessLogic
 
     private let galleryItemView = GalleryItemView()
@@ -29,17 +29,21 @@ final class MoviesViewController: UIViewController, ViewCode, MoviesDisplayLogic
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        setupLayout()
 //        fetchMovies()
     }
 
-    override func viewDidLayoutSubviews() {
-        galleryItemView.backgroundColor = .red
+    // MARK: - MoviesDisplayLogic conforms
+
+    func displayMoviesItems(viewModel: MoviesModels.MoviesItems.ViewModel) {
+        print(viewModel.moviesResponse)
     }
 
-    // MARK: - ViewCode conforms
+    func displayMoviesError() { }
 
-    func setupHierarchy() {
+    // MARK: - Private functions
+
+    private func setupLayout() {
         let anchorConstraint = CGFloat(16)
         let verticalItemsToShow = CGFloat(2.5)
         let horizontalItemsToShow = CGFloat(2)
@@ -52,23 +56,9 @@ final class MoviesViewController: UIViewController, ViewCode, MoviesDisplayLogic
             galleryItemView.heightAnchor.constraint(equalToConstant: heightCell),
             galleryItemView.widthAnchor.constraint(equalToConstant: widthCell),
         ])
-    }
 
-    func setupConstraints() { }
-
-    func setupConfigurations() {
         view.backgroundColor = .white
     }
-
-    // MARK: - MoviesDisplayLogic conforms
-
-    func displayMoviesItems(viewModel: MoviesModels.MoviesItems.ViewModel) {
-        print(viewModel.moviesResponse)
-    }
-
-    func displayMoviesError() { }
-
-    // MARK: - Private functions
 
     private func fetchMovies(language: String = Constants.MovieDefaultParameters.language, page: Int = Constants.MovieDefaultParameters.page) {
         interactor.fetchMovies(request: MoviesModels.MoviesItems.Request(language: language, page: page))

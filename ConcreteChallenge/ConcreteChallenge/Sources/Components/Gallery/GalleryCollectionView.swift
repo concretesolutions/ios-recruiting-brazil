@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class GalleryCollectionView: UIView, ViewCode {
+final class GalleryCollectionView: UIView {
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
 
@@ -37,14 +37,6 @@ final class GalleryCollectionView: UIView, ViewCode {
     required init?(coder: NSCoder) {
         fatalError()
     }
-
-    // MARK: - ViewCode conforms
-
-    func setupHierarchy() { }
-
-    func setupConstraints() { }
-
-    func setupConfigurations() { }
 
     // MARK: - Private functions
 

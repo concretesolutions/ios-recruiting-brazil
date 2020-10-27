@@ -8,14 +8,14 @@
 
 import UIKit
 
-final class GalleryItemView: UIView, ViewCode {
+final class GalleryItemView: UIView {
 
     // MARK: - Initializers
 
     public init() {
         super.init(frame: .zero)
 
-        setupView()
+        setupLayout()
     }
 
     @available(*, unavailable)
@@ -23,13 +23,9 @@ final class GalleryItemView: UIView, ViewCode {
         fatalError()
     }
 
-    // MARK: - ViewCode conforms
+    // MARK: - Private functions
 
-    func setupHierarchy() { }
-
-    func setupConstraints() { }
-
-    func setupConfigurations() {
+    private func setupLayout() {
         backgroundColor = .red
     }
 }

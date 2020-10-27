@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class TabBarViewController: UITabBarController, ViewCode {
+final class TabBarViewController: UITabBarController {
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
 
@@ -39,21 +39,15 @@ final class TabBarViewController: UITabBarController, ViewCode {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-    }
-
-    // MARK: - ViewCode conforms
-
-    func setupHierarchy() { }
-
-    func setupConstraints() { }
-
-    func setupConfigurations() {
-        setupNavigationBar()
-        setupTabBar()
+        setupLayout()
     }
 
     // MARK: - Private functions
+
+    private func setupLayout() {
+        setupNavigationBar()
+        setupTabBar()
+    }
 
     private func setupNavigationBar() {
         title = Strings.movies.localizable
