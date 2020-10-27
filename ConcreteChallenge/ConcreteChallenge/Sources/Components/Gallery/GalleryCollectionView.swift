@@ -19,12 +19,18 @@ final class GalleryCollectionView: UIView, ViewCode {
 
     private let collectionViewFlowLayout: UICollectionViewFlowLayout
 
+//    private let dataSource: UICollectionViewDataSource & DataSource = {
+//        CollectionViewDataSource<Movie, >
+//    }()
+
     // MARK: - Initializers
 
-    init(flowLayout: UICollectionViewFlowLayout) {
+    init(flowLayout: UICollectionViewFlowLayout, items: [Movie]) {
         collectionViewFlowLayout = flowLayout
 
         super.init(frame: .zero)
+
+        setupDataSource(items: items)
     }
 
     @available(*, unavailable)
@@ -39,4 +45,9 @@ final class GalleryCollectionView: UIView, ViewCode {
     func setupConstraints() { }
 
     func setupConfigurations() { }
+
+    // MARK: - Private functions
+
+    private func setupDataSource(items: [Movie]) {
+    }
 }
