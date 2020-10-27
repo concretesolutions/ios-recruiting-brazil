@@ -47,7 +47,7 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         let anchorConstraint = CGFloat(16)
         let verticalItemsToShow = CGFloat(2.5)
         let horizontalItemsToShow = CGFloat(2)
-        let heightCell = (view.safeAreaLayoutGuide.layoutFrame.size.height - anchorConstraint) / verticalItemsToShow
+        let heightCell = (view.safeAreaLayoutGuide.layoutFrame.size.height - anchorConstraint * (verticalItemsToShow + 1)) / verticalItemsToShow
         let widthCell = (view.safeAreaLayoutGuide.layoutFrame.size.width - anchorConstraint * (horizontalItemsToShow + 1)) / horizontalItemsToShow
 
         view.addSubview(galleryItemView, constraints: [
