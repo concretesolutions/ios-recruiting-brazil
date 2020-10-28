@@ -1,5 +1,5 @@
 //
-//  UIImage+Assets.swift
+//  UIImage+Extension.swift
 //  ConcreteChallenge
 //
 //  Created by Adrian Almeida on 25/10/20.
@@ -19,7 +19,20 @@ extension UIImage {
         case searchIcon = "search_icon"
     }
 
+    // MARK: - Initializers
+
     convenience init?(assets identifier: Assets) {
         self.init(named: identifier.rawValue, in: Bundle.main, compatibleWith: nil)
+    }
+
+    // MARK: - Functions
+
+    func withInsets(insets: UIEdgeInsets) -> UIImage? {
+        let cgSize = CGSize(width: self.size.width + insets.left + insets.right, height: self.size.height + insets.top + insets.bottom)
+        UIGraphicsBeginImageContextWithOptions(cgSize, false, self.scale)
+        let origin = CGPoint(x: insets.left, y: insets.top)
+        self.draw(at: origin)
+        let imageWithInsets = UIGraphicsGetImageFromCurrentImageContext()
+        return imageWithInsets
     }
 }

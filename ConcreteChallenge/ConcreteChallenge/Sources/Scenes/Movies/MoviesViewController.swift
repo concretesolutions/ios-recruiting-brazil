@@ -12,17 +12,19 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     private let interactor: MoviesBusinessLogic
 
     private lazy var galleryItemView: GalleryItemView = {
-        return GalleryItemView(itemSize: itemSize)
+        return GalleryItemView(viewModel: viewModel)
     }()
 
     // MARK: - Private variables
 
-    private var itemSize: CGSize = CGSize(width: 0, height: 0)
+    private var viewModel: GalleryItemViewModel
 
     // MARK: - Initializers
 
     init(interactor: MoviesBusinessLogic) {
         self.interactor = interactor
+        self.viewModel = GalleryItemViewModel(movie: Movie(id: 1, title: "Thor", image: "http://teste"), itemSize: CGSize(width: 0, height: 0))
+
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -51,7 +53,8 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
     private func setupLayout() {
         let anchorConstraint = CGFloat(16)
-        self.itemSize = getItemSize(horizontalConstraint: anchorConstraint, verticalConstraint: anchorConstraint)
+        let itemSize = getItemSize(horizontalConstraint: anchorConstraint, verticalConstraint: anchorConstraint)
+        viewModel.itemSize = itemSize
 
         view.addSubview(galleryItemView, constraints: [
             galleryItemView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: anchorConstraint),
