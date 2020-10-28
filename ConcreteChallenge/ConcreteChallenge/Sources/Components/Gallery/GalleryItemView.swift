@@ -88,4 +88,12 @@ final class GalleryItemView: UIView {
             favoriteImageView.centerYAnchor.constraint(equalTo: titleFavoriteImageView.centerYAnchor)
         ])
     }
+
+    // MARK: - Functions
+
+    func update(viewModel new: GalleryItemViewModel) {
+        viewModel = new
+
+        title.text = viewModel.movie.title
+    }
 }
