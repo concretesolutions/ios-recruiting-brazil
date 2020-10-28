@@ -51,7 +51,12 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     // MARK: - Private functions
 
     private func setupLayout() {
-        view.addSubviewEqual(equalConstraintFor: galleryCollectionView)
+        view.addSubview(galleryCollectionView, constraints: [
+            galleryCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            galleryCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            galleryCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            galleryCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
 
         view.backgroundColor = .white
     }
@@ -63,7 +68,10 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         let amountItemVertical = CGFloat(Constants.GalleryCollectionView.amountItemVertical)
         let amountItemHorizontal = CGFloat(Constants.GalleryCollectionView.amountItemHorizontal)
 
-        let heightCell = (view.safeAreaLayoutGuide.layoutFrame.size.height - verticalMargin * (amountItemVertical + 1)) / amountItemVertical
+        let searchViewHeight = CGFloat(52)
+        let tabBarHeight = CGFloat(48)
+
+        let heightCell = (view.safeAreaLayoutGuide.layoutFrame.size.height - searchViewHeight - tabBarHeight - verticalMargin * (amountItemVertical + 1)) / amountItemVertical
         let widthCell = (view.safeAreaLayoutGuide.layoutFrame.size.width - horizontalMargin * (amountItemHorizontal + 1)) / amountItemHorizontal
 
         return CGSize(width: widthCell, height: heightCell)

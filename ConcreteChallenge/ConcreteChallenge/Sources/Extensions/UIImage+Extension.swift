@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIImage {
+public extension UIImage {
     enum Assets: String {
         case checkIcon = "check_icon"
         case favoriteEmptyIcon = "favorite_empty_icon"
@@ -16,6 +16,7 @@ extension UIImage {
         case favoriteGrayIcon = "favorite_gray_icon"
         case filterIcon = "filter_icon"
         case listIcon = "list_icon"
+        case placeholder = "placeholder"
         case searchIcon = "search_icon"
     }
 

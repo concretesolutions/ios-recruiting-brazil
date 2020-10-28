@@ -10,6 +10,7 @@ enum Constants {
     struct MovieNetwork {
         static let baseURL = "https://api.themoviedb.org"
         static let apiVersion = "3"
+        static let baseImageURL = "https://image.tmdb.org/t/p/w500"
 
         // MARK: - Paths
 

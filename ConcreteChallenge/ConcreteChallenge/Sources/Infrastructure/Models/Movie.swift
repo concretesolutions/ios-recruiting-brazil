@@ -9,13 +9,13 @@
 struct Movie: Codable {
     let id: Int
     let title: String
-    let image: String
+    let imageURL: String
 
     // MARK: - Codable conforms
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case title = "title"
-        case image = "backdrop_path"
+        case imageURL = "backdrop_path"
     }
 }

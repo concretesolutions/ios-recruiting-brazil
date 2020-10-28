@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class GalleryItemView: UIView {
     private lazy var movieImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .red
+        imageView.kf.setImage(with: URL(string: viewModel.movie.imageURL))
 
         return imageView
     }()
@@ -21,6 +22,7 @@ final class GalleryItemView: UIView {
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .appYellowLight
         label.text = viewModel.movie.title
+        label.textAlignment = .center
 
         return label
     }()
@@ -76,17 +78,18 @@ final class GalleryItemView: UIView {
 
         titleFavoriteImageView.addSubview(title, constraints: [
             title.topAnchor.constraint(equalTo: titleFavoriteImageView.topAnchor, constant: 12),
-            title.bottomAnchor.constraint(equalTo: titleFavoriteImageView.bottomAnchor, constant: -12),
-            title.centerXAnchor.constraint(equalTo: titleFavoriteImageView.centerXAnchor),
-            title.centerYAnchor.constraint(equalTo: titleFavoriteImageView.centerYAnchor)
+            title.leadingAnchor.constraint(equalTo: titleFavoriteImageView.leadingAnchor, constant: 12),
+            title.bottomAnchor.constraint(equalTo: titleFavoriteImageView.bottomAnchor, constant: -12)
         ])
 
         titleFavoriteImageView.addSubview(favoriteImageView, constraints: [
             favoriteImageView.topAnchor.constraint(equalTo: titleFavoriteImageView.topAnchor),
+            favoriteImageView.leadingAnchor.constraint(equalTo: title.trailingAnchor, constant: 4),
             favoriteImageView.trailingAnchor.constraint(equalTo: titleFavoriteImageView.trailingAnchor),
-            favoriteImageView.bottomAnchor.constraint(equalTo: titleFavoriteImageView.bottomAnchor),
-            favoriteImageView.centerYAnchor.constraint(equalTo: titleFavoriteImageView.centerYAnchor)
+            favoriteImageView.bottomAnchor.constraint(equalTo: titleFavoriteImageView.bottomAnchor)
         ])
+
+        favoriteImageView.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
 
     // MARK: - Functions
