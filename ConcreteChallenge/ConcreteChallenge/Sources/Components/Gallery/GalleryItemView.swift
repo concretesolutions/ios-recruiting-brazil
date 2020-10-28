@@ -22,7 +22,6 @@ final class GalleryItemView: UIView {
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .appYellowLight
         label.text = viewModel.movie.title
-        label.textAlignment = .center
 
         return label
     }()
@@ -84,7 +83,7 @@ final class GalleryItemView: UIView {
 
         titleFavoriteImageView.addSubview(favoriteImageView, constraints: [
             favoriteImageView.topAnchor.constraint(equalTo: titleFavoriteImageView.topAnchor),
-            favoriteImageView.leadingAnchor.constraint(equalTo: title.trailingAnchor, constant: 4),
+            favoriteImageView.leadingAnchor.constraint(greaterThanOrEqualTo: title.trailingAnchor, constant: 4),
             favoriteImageView.trailingAnchor.constraint(equalTo: titleFavoriteImageView.trailingAnchor),
             favoriteImageView.bottomAnchor.constraint(equalTo: titleFavoriteImageView.bottomAnchor)
         ])
