@@ -10,12 +10,10 @@ import UIKit
 
 struct GalleryItemViewModel {
     var movie: Movie
-    var itemSize: CGSize
 
     // MARK: - Initializers
 
-    init(movie: Movie, itemSize: CGSize) {
+    init(movie: Movie) {
         self.movie = movie
-        self.itemSize = itemSize
     }
 }

@@ -11,19 +11,14 @@ import UIKit
 final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     private let interactor: MoviesBusinessLogic
 
-    private lazy var galleryItemView: GalleryItemView = {
-        return GalleryItemView(viewModel: viewModel)
+    private lazy var galleryCollectionView: GalleryCollectionView = {
+        return GalleryCollectionView(itemSize: getItemSize(), items: [])
     }()
-
-    // MARK: - Private variables
-
-    private var viewModel: GalleryItemViewModel
 
     // MARK: - Initializers
 
     init(interactor: MoviesBusinessLogic) {
         self.interactor = interactor
-        self.viewModel = GalleryItemViewModel(movie: Movie(id: 1, title: "Thor", image: "http://teste"), itemSize: CGSize(width: 0, height: 0))
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,13 +33,17 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
-//        fetchMovies()
+        fetchMovies()
     }
 
     // MARK: - MoviesDisplayLogic conforms
 
     func displayMoviesItems(viewModel: MoviesModels.MoviesItems.ViewModel) {
-        print(viewModel.moviesResponse)
+        let itemsViewModel = viewModel.moviesResponse.movies.map { item -> GalleryItemViewModel in
+            GalleryItemViewModel(movie: item)
+        }
+
+        galleryCollectionView.setupDataSource(items: itemsViewModel)
     }
 
     func displayMoviesError() { }
@@ -52,25 +51,20 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     // MARK: - Private functions
 
     private func setupLayout() {
-        let anchorConstraint = CGFloat(16)
-        let itemSize = getItemSize(horizontalConstraint: anchorConstraint, verticalConstraint: anchorConstraint)
-        viewModel.itemSize = itemSize
-
-        view.addSubview(galleryItemView, constraints: [
-            galleryItemView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: anchorConstraint),
-            galleryItemView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: anchorConstraint),
-            galleryItemView.heightAnchor.constraint(equalToConstant: itemSize.height),
-            galleryItemView.widthAnchor.constraint(equalToConstant: itemSize.width),
-        ])
+        view.addSubviewEqual(equalConstraintFor: galleryCollectionView)
 
         view.backgroundColor = .white
     }
 
-    private func getItemSize(horizontalConstraint: CGFloat, verticalConstraint: CGFloat) -> CGSize {
-        let verticalItemsToShow = CGFloat(2.5)
-        let horizontalItemsToShow = CGFloat(2)
-        let heightCell = (view.safeAreaLayoutGuide.layoutFrame.size.height - verticalConstraint * (verticalItemsToShow + 1)) / verticalItemsToShow
-        let widthCell = (view.safeAreaLayoutGuide.layoutFrame.size.width - horizontalConstraint * (horizontalItemsToShow + 1)) / horizontalItemsToShow
+    private func getItemSize() -> CGSize {
+        let verticalMargin = CGFloat(Constants.GalleryCollectionView.verticalMargin)
+        let horizontalMargin = CGFloat(Constants.GalleryCollectionView.horizontalMargin)
+
+        let amountItemVertical = CGFloat(Constants.GalleryCollectionView.amountItemVertical)
+        let amountItemHorizontal = CGFloat(Constants.GalleryCollectionView.amountItemHorizontal)
+
+        let heightCell = (view.safeAreaLayoutGuide.layoutFrame.size.height - verticalMargin * (amountItemVertical + 1)) / amountItemVertical
+        let widthCell = (view.safeAreaLayoutGuide.layoutFrame.size.width - horizontalMargin * (amountItemHorizontal + 1)) / amountItemHorizontal
 
         return CGSize(width: widthCell, height: heightCell)
     }

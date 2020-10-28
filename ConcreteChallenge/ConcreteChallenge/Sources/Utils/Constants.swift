@@ -31,4 +31,12 @@ enum Constants {
         static let language = "en-US"
         static let page = 1
     }
+
+    struct GalleryCollectionView {
+        static let amountItemVertical = 2.5
+        static let amountItemHorizontal = 2
+        static let verticalMargin = 16
+        static let horizontalMargin = 16
+        static let minimumLineSpacing = 16
+    }
 }

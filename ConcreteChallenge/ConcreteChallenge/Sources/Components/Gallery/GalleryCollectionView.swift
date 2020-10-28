@@ -11,6 +11,8 @@ import UIKit
 final class GalleryCollectionView: UIView {
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
+        collectionView.dataSource = dataSource
+        collectionView.register(GalleryItemCollectionViewCell.self)
 
         return collectionView
     }()
@@ -19,18 +21,25 @@ final class GalleryCollectionView: UIView {
 
     private let collectionViewFlowLayout: UICollectionViewFlowLayout
 
-//    private let dataSource: UICollectionViewDataSource & DataSource = {
-//        CollectionViewDataSource<Movie, >
-//    }()
+    private let dataSource: UICollectionViewDataSource & DataSource = {
+        CollectionViewDataSource<GalleryItemViewModel, GalleryItemCollectionViewCell>() { viewModel, cell in
+            cell.set(viewModel: viewModel)
+        }
+    }()
 
     // MARK: - Initializers
 
-    init(flowLayout: UICollectionViewFlowLayout, items: [Movie]) {
+    convenience init(itemSize: CGSize, items: [GalleryItemViewModel]) {
+        self.init(itemSize: itemSize, items: items, flowLayout: GalleryCollectionViewFactory.makeFlowLayout(itemSize: itemSize))
+    }
+
+    init(itemSize: CGSize, items: [GalleryItemViewModel], flowLayout: UICollectionViewFlowLayout) {
         collectionViewFlowLayout = flowLayout
 
         super.init(frame: .zero)
 
         setupDataSource(items: items)
+        setupLayout()
     }
 
     @available(*, unavailable)
@@ -38,8 +47,19 @@ final class GalleryCollectionView: UIView {
         fatalError()
     }
 
+    // MARK: - Public functions
+
+    func setupDataSource(items: [GalleryItemViewModel]) {
+        dataSource.set(models: items)
+        collectionView.reloadData()
+    }
+
     // MARK: - Private functions
 
-    private func setupDataSource(items: [Movie]) {
+    private func setupLayout() {
+        addSubviewEqual(equalConstraintFor: collectionView)
+
+        collectionView.backgroundColor = .clear
+        backgroundColor = .clear
     }
 }
