@@ -7,6 +7,6 @@
 //
 
 protocol MoviesPresentationLogic: AnyObject {
-    func presentMoviesItems(response: MoviesModels.MoviesItems.Response)
+    func presentMoviesItems(response: Movies.FetchMovies.Response)
     func presentLoadMoviesFailure()
 }

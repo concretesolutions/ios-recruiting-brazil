@@ -6,8 +6,8 @@
 //  Copyright © 2020 Adrian Almeida. All rights reserved.
 //
 
-enum MoviesModels {
-    enum MoviesItems {
+enum Movies {
+    enum FetchMovies {
         struct Request {
             let language: String
             let page: Int

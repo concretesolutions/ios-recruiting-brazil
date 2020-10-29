@@ -11,8 +11,8 @@ final class MoviesPresenter: MoviesPresentationLogic {
 
     // MARK: - MoviesPresentationLogic conforms
 
-    func presentMoviesItems(response: MoviesModels.MoviesItems.Response) {
-        let viewModel = MoviesModels.MoviesItems.ViewModel(moviesResponse: response.moviesResponse)
+    func presentMoviesItems(response: Movies.FetchMovies.Response) {
+        let viewModel = Movies.FetchMovies.ViewModel(moviesResponse: response.moviesResponse)
         viewController?.displayMoviesItems(viewModel: viewModel)
     }
 

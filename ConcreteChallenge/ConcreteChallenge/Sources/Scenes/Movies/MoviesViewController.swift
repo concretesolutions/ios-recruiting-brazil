@@ -57,7 +57,7 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
     // MARK: - MoviesDisplayLogic conforms
 
-    func displayMoviesItems(viewModel: MoviesModels.MoviesItems.ViewModel) {
+    func displayMoviesItems(viewModel: Movies.FetchMovies.ViewModel) {
         view.stopLoading()
         errorView.isHidden = true
 
@@ -104,7 +104,7 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     }
 
     private func fetchMovies(language: String = Constants.MovieDefaultParameters.language, page: Int = Constants.MovieDefaultParameters.page) {
-        interactor.fetchMovies(request: MoviesModels.MoviesItems.Request(language: language, page: page))
+        interactor.fetchMovies(request: Movies.FetchMovies.Request(language: language, page: page))
     }
 
     private func setErrorView(configuration: ErrorConfiguration = ErrorConfiguration()) {

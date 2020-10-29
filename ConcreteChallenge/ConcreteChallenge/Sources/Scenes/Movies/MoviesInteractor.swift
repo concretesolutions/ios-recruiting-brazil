@@ -19,7 +19,7 @@ final class MoviesInteractor: MoviesBusinessLogic {
 
     // MARK: - MoviesInteractor conforms
 
-    func fetchMovies(request: MoviesModels.MoviesItems.Request) {
+    func fetchMovies(request: Movies.FetchMovies.Request) {
         worker.fetchMovies(language: request.language, page: request.page) { result in
             switch result {
             case let .success(response):
@@ -27,7 +27,7 @@ final class MoviesInteractor: MoviesBusinessLogic {
                     Movie(id: movie.id, title: movie.title, imageURL: Constants.MovieNetwork.baseImageURL.appending(movie.imageURL))
                 }
 
-                let responseModel = MoviesModels.MoviesItems.Response(moviesResponse: MoviesPopulariesResponse(page: response.page, totalPages: response.totalPages, movies: movies))
+                let responseModel = Movies.FetchMovies.Response(moviesResponse: MoviesPopulariesResponse(page: response.page, totalPages: response.totalPages, movies: movies))
 
                 self.presenter.presentMoviesItems(response: responseModel)
             case let .failure(error):
