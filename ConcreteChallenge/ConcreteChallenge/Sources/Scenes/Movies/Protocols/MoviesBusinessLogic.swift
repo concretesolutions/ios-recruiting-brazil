@@ -8,5 +8,5 @@
 
 protocol MoviesBusinessLogic: AnyObject {
     func fetchMovies(request: Movies.FetchMovies.Request)
-    func saveMovie(request: Movies)
+    func saveMovie(request: Movies.SaveMovie.Request)
 }

@@ -8,12 +8,14 @@
 
 final class MoviesInteractor: MoviesBusinessLogic {
     private let moyaWorker: MoviesMoyaWorkerProtocol
+    private let realmWorker: MoviesRealmWorkerProtocol
     private let presenter: MoviesPresentationLogic
 
     // MARK: - Initializers
 
-    init(moyaWorker: MoviesMoyaWorkerProtocol, presenter: MoviesPresentationLogic) {
+    init(moyaWorker: MoviesMoyaWorkerProtocol, realmWorker: MoviesRealmWorkerProtocol, presenter: MoviesPresentationLogic) {
         self.moyaWorker = moyaWorker
+        self.realmWorker = realmWorker
         self.presenter = presenter
     }
 
@@ -37,5 +39,7 @@ final class MoviesInteractor: MoviesBusinessLogic {
         }
     }
 
-    func saveMovie(request: Movies) { }
+    func saveMovie(request: Movies.SaveMovie.Request) {
+        realmWorker.saveMovie(movie: request.movie)
+    }
 }

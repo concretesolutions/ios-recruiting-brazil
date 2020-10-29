@@ -14,8 +14,13 @@ enum MoviesScreenFactory {
         let moyaProviderStubClosure = MoyaProvider<MovieDBAPI>.neverStub
         let moyaProvider = MoyaProvider<MovieDBAPI>(stubClosure: moyaProviderStubClosure, plugins: [NetworkLoggerPlugin()])
         let moyaWorker = MoviesMoyaWorker(moyaProvider: moyaProvider)
+
+        let realmWorker = MoviesRealmWorker()
+
         let presenter = MoviesPresenter()
-        let interactor = MoviesInteractor(moyaWorker: moyaWorker, presenter: presenter)
+
+        let interactor = MoviesInteractor(moyaWorker: moyaWorker, realmWorker: realmWorker, presenter: presenter)
+
         let moviesViewController = MoviesViewController(interactor: interactor)
         presenter.viewController = moviesViewController
 
