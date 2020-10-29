@@ -8,13 +8,13 @@
 
 import Moya
 
-final class MoviesWorker: MoviesWorkerProtocol {
+final class MoviesMoyaWorker: MoviesMoyaWorkerProtocol {
     private let provider: MoyaProvider<MovieDBAPI>
 
     // MARK: - Initializers
 
-    init(provider: MoyaProvider<MovieDBAPI>) {
-        self.provider = provider
+    init(moyaProvider: MoyaProvider<MovieDBAPI>) {
+        self.provider = moyaProvider
     }
 
     // MARK: - Conforms MoviesWorkerProtocol

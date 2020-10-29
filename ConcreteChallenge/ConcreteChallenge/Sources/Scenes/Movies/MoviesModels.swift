@@ -21,4 +21,10 @@ enum Movies {
             let moviesResponse: MoviesPopulariesResponse
         }
     }
+
+    enum SaveMovie {
+        struct Request {
+            let movie: Movie
+        }
+    }
 }
