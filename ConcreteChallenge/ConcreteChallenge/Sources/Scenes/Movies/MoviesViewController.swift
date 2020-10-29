@@ -9,19 +9,19 @@
 import UIKit
 
 final class MoviesViewController: UIViewController, MoviesDisplayLogic {
-    private let interactor: MoviesBusinessLogic
-
     private lazy var galleryCollectionView: GalleryCollectionView = {
         return GalleryCollectionView(itemSize: getItemSize(), items: [])
-    }()
-
-    private lazy var errorView: ErrorView = {
-        return ErrorView()
     }()
 
     private lazy var stackView: UIStackView = {
         return UIStackView(arrangedSubviews: [galleryCollectionView, errorView])
     }()
+
+    // MARK: - Private constants
+
+    private let interactor: MoviesBusinessLogic
+
+    private let errorView: ErrorView = ErrorViewFactory.make()
 
     // MARK: - Initializers
 
@@ -57,14 +57,12 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     }
 
     func displayMoviesError() {
-        galleryCollectionView.isHidden = true
+        setErrorView()
     }
 
     func displaySearchError(searchText: String) {
-        galleryCollectionView.isHidden = true
-
         let configurationError = ErrorConfiguration(image: UIImage(assets: .searchIcon), text: String(format: Strings.errorSearch.localizable, searchText))
-        errorView.configuration = configurationError
+        setErrorView(configuration: configurationError)
     }
 
     // MARK: - Private functions
@@ -78,6 +76,16 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         ])
 
         view.backgroundColor = .white
+    }
+
+    private func fetchMovies(language: String = Constants.MovieDefaultParameters.language, page: Int = Constants.MovieDefaultParameters.page) {
+        interactor.fetchMovies(request: MoviesModels.MoviesItems.Request(language: language, page: page))
+    }
+
+    private func setErrorView(configuration: ErrorConfiguration = ErrorConfiguration()) {
+        galleryCollectionView.isHidden = true
+
+        errorView.configuration = configuration
     }
 
     private func getItemSize() -> CGSize {
@@ -94,9 +102,5 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         let widthCell = (view.safeAreaLayoutGuide.layoutFrame.size.width - horizontalMargin * (amountItemHorizontal + 1)) / amountItemHorizontal
 
         return CGSize(width: widthCell, height: heightCell)
-    }
-
-    private func fetchMovies(language: String = Constants.MovieDefaultParameters.language, page: Int = Constants.MovieDefaultParameters.page) {
-        interactor.fetchMovies(request: MoviesModels.MoviesItems.Request(language: language, page: page))
     }
 }
