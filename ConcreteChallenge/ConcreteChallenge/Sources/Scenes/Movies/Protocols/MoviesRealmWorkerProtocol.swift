@@ -6,6 +6,8 @@
 //  Copyright © 2020 Adrian Almeida. All rights reserved.
 //
 
+import Foundation
+
 protocol MoviesRealmWorkerProtocol: AnyObject {
-    func saveMovie(movie: Movie)
+    func saveMovie(movie: Movie, indexPath: IndexPath)
 }

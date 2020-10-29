@@ -16,7 +16,12 @@ final class MoviesPresenter: MoviesPresentationLogic {
         viewController?.displayMoviesItems(viewModel: viewModel)
     }
 
-    func presentLoadMoviesFailure() {
+    func presentFetchMoviesFailure() {
         viewController?.displayMoviesError()
+    }
+
+    func onSaveFavoriteSuccess(response: Movies.SaveMovie.Response) {
+        let viewModel = Movies.SaveMovie.ViewModel(indexPath: response.indexPath)
+        viewController?.onSaveFavoriteSuccess(viewModel: viewModel)
     }
 }

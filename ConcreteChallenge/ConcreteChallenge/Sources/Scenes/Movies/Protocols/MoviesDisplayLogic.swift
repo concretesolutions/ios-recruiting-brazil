@@ -11,5 +11,6 @@ import Foundation
 protocol MoviesDisplayLogic: AnyObject {
     func displayMoviesItems(viewModel: Movies.FetchMovies.ViewModel)
     func displayMoviesError()
+    func onSaveFavoriteSuccess(viewModel: Movies.SaveMovie.ViewModel)
     func displaySearchError(searchText: String)
 }

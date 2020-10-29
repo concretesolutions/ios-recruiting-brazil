@@ -30,16 +30,16 @@ final class MoviesInteractor: MoviesBusinessLogic {
                 }
 
                 let responseModel = Movies.FetchMovies.Response(moviesResponse: MoviesPopulariesResponse(page: response.page, totalPages: response.totalPages, movies: movies))
-
                 self.presenter.presentMoviesItems(response: responseModel)
             case let .failure(error):
                 print(error.errorDescription)
-                self.presenter.presentLoadMoviesFailure()
+                self.presenter.presentFetchMoviesFailure()
             }
         }
     }
 
     func saveMovie(request: Movies.SaveMovie.Request) {
-        realmWorker.saveMovie(movie: request.movie)
+        realmWorker.saveMovie(movie: request.movie, indexPath: request.indexPath)
+        presenter.onSaveFavoriteSuccess(response: Movies.SaveMovie.Response(indexPath: request.indexPath))
     }
 }

@@ -21,6 +21,10 @@ final class GalleryItemCollectionViewCell: UICollectionViewCell {
         view.update(viewModel: viewModel)
     }
 
+    func toggleFavorite() {
+        containedView?.toggleFavorite()
+    }
+
     // MARK: - Private functions
 
     private func create(viewModel: GalleryItemViewModel) -> GalleryItemView {

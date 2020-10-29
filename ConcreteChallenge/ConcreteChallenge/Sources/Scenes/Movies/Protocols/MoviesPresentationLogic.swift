@@ -8,5 +8,6 @@
 
 protocol MoviesPresentationLogic: AnyObject {
     func presentMoviesItems(response: Movies.FetchMovies.Response)
-    func presentLoadMoviesFailure()
+    func presentFetchMoviesFailure()
+    func onSaveFavoriteSuccess(response: Movies.SaveMovie.Response)
 }

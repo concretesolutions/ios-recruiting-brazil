@@ -6,6 +6,8 @@
 //  Copyright © 2020 Adrian Almeida. All rights reserved.
 //
 
+import Foundation
+
 enum Movies {
     enum FetchMovies {
         struct Request {
@@ -25,6 +27,15 @@ enum Movies {
     enum SaveMovie {
         struct Request {
             let movie: Movie
+            let indexPath: IndexPath
+        }
+
+        struct Response {
+            let indexPath: IndexPath
+        }
+
+        struct ViewModel {
+            let indexPath: IndexPath
         }
     }
 }

@@ -10,6 +10,7 @@ struct Movie: Codable {
     let id: Int
     let title: String
     let imageURL: String
+    var isFavorite: Bool = false
 
     // MARK: - Codable conforms
 

@@ -26,12 +26,7 @@ final class GalleryItemView: UIView {
         return label
     }()
 
-    private lazy var favoriteImageView: UIImageView = {
-        let image = UIImage(assets: .favoriteGrayIcon)?.withInsets(insets: UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12))
-        let imageView = UIImageView(image: image)
-
-        return imageView
-    }()
+    private lazy var favoriteImageView = UIImageView()
 
     private lazy var titleFavoriteImageView: UIView = {
         let view = UIView()
@@ -43,6 +38,14 @@ final class GalleryItemView: UIView {
     // MARK: - Private constants
 
     private var viewModel: GalleryItemViewModel
+
+    private var isFavorite: Bool = false {
+        didSet {
+            let imageAssets: UIImage.Assets = isFavorite ? .favoriteFullIcon : .favoriteGrayIcon
+            let image = UIImage(assets: imageAssets)?.withInsets(insets: UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12))
+            favoriteImageView.image = image
+        }
+    }
 
     // MARK: - Initializers
 
@@ -89,6 +92,7 @@ final class GalleryItemView: UIView {
         ])
 
         favoriteImageView.setContentCompressionResistancePriority(.required, for: .horizontal)
+        isFavorite = viewModel.movie.isFavorite
     }
 
     // MARK: - Functions
@@ -97,5 +101,9 @@ final class GalleryItemView: UIView {
         viewModel = new
 
         title.text = viewModel.movie.title
+    }
+
+    func toggleFavorite() {
+        isFavorite.toggle()
     }
 }

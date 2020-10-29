@@ -12,5 +12,5 @@ final class MoviesRealmWorker: MoviesRealmWorkerProtocol {
 
     // MARK: - Conforms MoviesRealmWorkerProtocol
 
-    func saveMovie(movie: Movie) { }
+    func saveMovie(movie: Movie, indexPath: IndexPath) { }
 }
