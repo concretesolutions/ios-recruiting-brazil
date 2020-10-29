@@ -11,6 +11,7 @@ import UIKit
 public extension UIImage {
     enum Assets: String {
         case checkIcon = "check_icon"
+        case error = "error"
         case favoriteEmptyIcon = "favorite_empty_icon"
         case favoriteFullIcon = "favorite_full_icon"
         case favoriteGrayIcon = "favorite_gray_icon"

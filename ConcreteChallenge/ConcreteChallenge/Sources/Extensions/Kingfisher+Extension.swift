@@ -1,5 +1,5 @@
 //
-//  Kingfisher+Placeholder.swift
+//  Kingfisher+Extension.swift
 //  ConcreteChallenge
 //
 //  Created by Adrian Almeida on 28/10/20.

@@ -15,6 +15,14 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         return GalleryCollectionView(itemSize: getItemSize(), items: [])
     }()
 
+    private lazy var errorView: ErrorView = {
+        return ErrorView()
+    }()
+
+    private lazy var stackView: UIStackView = {
+        return UIStackView(arrangedSubviews: [galleryCollectionView, errorView])
+    }()
+
     // MARK: - Initializers
 
     init(interactor: MoviesBusinessLogic) {
@@ -39,6 +47,8 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     // MARK: - MoviesDisplayLogic conforms
 
     func displayMoviesItems(viewModel: MoviesModels.MoviesItems.ViewModel) {
+        errorView.isHidden = true
+
         let itemsViewModel = viewModel.moviesResponse.movies.map { item -> GalleryItemViewModel in
             GalleryItemViewModel(movie: item)
         }
@@ -46,16 +56,25 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         galleryCollectionView.setupDataSource(items: itemsViewModel)
     }
 
-    func displayMoviesError() { }
+    func displayMoviesError() {
+        galleryCollectionView.isHidden = true
+    }
+
+    func displaySearchError(searchText: String) {
+        galleryCollectionView.isHidden = true
+
+        let configurationError = ErrorConfiguration(image: UIImage(assets: .searchIcon), text: String(format: Strings.errorSearch.localizable, searchText))
+        errorView.configuration = configurationError
+    }
 
     // MARK: - Private functions
 
     private func setupLayout() {
-        view.addSubview(galleryCollectionView, constraints: [
-            galleryCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            galleryCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            galleryCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            galleryCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        view.addSubview(stackView, constraints: [
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
 
         view.backgroundColor = .white

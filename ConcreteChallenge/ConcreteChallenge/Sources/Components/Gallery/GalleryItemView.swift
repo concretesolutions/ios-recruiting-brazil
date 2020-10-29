@@ -20,8 +20,8 @@ final class GalleryItemView: UIView {
     private lazy var title: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textColor = .appYellowLight
         label.text = viewModel.movie.title
+        label.textColor = .appYellowLight
 
         return label
     }()
