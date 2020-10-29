@@ -19,7 +19,7 @@ final class MoviesWorker: MoviesWorkerProtocol {
 
     // MARK: - Conforms MoviesWorkerProtocol
 
-    func fetchMovies(language: String, page: Int, completion: @escaping(Result<MoviesPopulariesResponse, NetworkError>) -> Void) {
+    func fetchMovies(language: String, page: Int, completion: @escaping (Result<MoviesPopulariesResponse, NetworkError>) -> Void) {
         provider.request(.fetchMovies(language: language, page: page), completion: completion)
     }
 }

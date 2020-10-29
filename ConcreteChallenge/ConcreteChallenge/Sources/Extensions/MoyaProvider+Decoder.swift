@@ -9,7 +9,7 @@
 import Moya
 
 extension MoyaProvider {
-    func request<T: Codable>(_ target: Target, completion: @escaping(Result<T, NetworkError>) -> Void) {
+    func request<T: Codable>(_ target: Target, completion: @escaping (Result<T, NetworkError>) -> Void) {
         request(target) { (result: Result<Response, MoyaError>) in
             switch result {
             case .success(let response):
@@ -24,7 +24,7 @@ extension MoyaProvider {
         }
     }
 
-    func requestVoid(_ target: Target, completion: @escaping(Result<Void, NetworkError>) -> Void) {
+    func requestVoid(_ target: Target, completion: @escaping (Result<Void, NetworkError>) -> Void) {
         request(target) { result in
             switch result {
             case .success:

@@ -20,6 +20,10 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         return stackView
     }()
 
+    // MARK: - Variables
+
+    private var movies: [Movie] = []
+
     // MARK: - Private constants
 
     private let interactor: MoviesBusinessLogic
@@ -43,7 +47,7 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLayout()
+        setup()
 
         view.showLoading()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [weak self] in
@@ -57,7 +61,9 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         view.stopLoading()
         errorView.isHidden = true
 
-        let itemsViewModel = viewModel.moviesResponse.movies.map { item -> GalleryItemViewModel in
+        movies = viewModel.moviesResponse.movies
+
+        let itemsViewModel = movies.map { item -> GalleryItemViewModel in
             GalleryItemViewModel(movie: item)
         }
 
@@ -75,6 +81,11 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
     // MARK: - Private functions
 
+    private func setup() {
+        setupLayout()
+        setupAction()
+    }
+
     private func setupLayout() {
         view.addSubview(stackView, constraints: [
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -84,6 +95,12 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         ])
 
         view.backgroundColor = .white
+    }
+
+    private func setupAction() {
+        galleryCollectionView.bind { index in
+            print(index)
+        }
     }
 
     private func fetchMovies(language: String = Constants.MovieDefaultParameters.language, page: Int = Constants.MovieDefaultParameters.page) {

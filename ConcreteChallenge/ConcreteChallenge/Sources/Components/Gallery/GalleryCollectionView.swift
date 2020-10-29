@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class GalleryCollectionView: UIView {
+final class GalleryCollectionView: UIView, UICollectionViewDelegate {
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.dataSource = dataSource
@@ -16,6 +16,10 @@ final class GalleryCollectionView: UIView {
 
         return collectionView
     }()
+
+    // MARK: - Constants
+
+    private var onItemPress: ((_ index: Int) -> Void)?
 
     // MARK: - Private constants
 
@@ -47,11 +51,22 @@ final class GalleryCollectionView: UIView {
         fatalError()
     }
 
-    // MARK: - Public functions
+    // MARK: - Functions
 
     func setupDataSource(items: [GalleryItemViewModel]) {
         dataSource.set(models: items)
         collectionView.reloadData()
+    }
+
+    func bind(onItemPress handler: @escaping (_ index: Int) -> Void) {
+        collectionView.delegate = self
+        onItemPress = handler
+    }
+
+    // MARK: - UICollectionViewDelegate conforms
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        onItemPress?(indexPath.row)
     }
 
     // MARK: - Private functions
