@@ -14,6 +14,8 @@
 		A845871E254A3D0E00829BBE /* ErrorConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A845871D254A3D0E00829BBE /* ErrorConfiguration.swift */; };
 		A8458720254A48CC00829BBE /* ErrorViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A845871F254A48CC00829BBE /* ErrorViewFactory.swift */; };
 		A8458729254A7AC800829BBE /* MoviesModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8458728254A7AC800829BBE /* MoviesModels.swift */; };
+		A8458730254B2D4700829BBE /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A845872F254B2D4700829BBE /* MovieDetailsViewController.swift */; };
+		A8458732254B2DFA00829BBE /* MovieDetailsScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8458731254B2DFA00829BBE /* MovieDetailsScreenFactory.swift */; };
 		A864B85625477BC500B5BC29 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B85525477BC500B5BC29 /* DataSource.swift */; };
 		A864B85825477DB300B5BC29 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B85725477DB300B5BC29 /* CollectionViewDataSource.swift */; };
 		A864B85A25477FA200B5BC29 /* NSObjectProtocol+ClassName.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B85925477FA200B5BC29 /* NSObjectProtocol+ClassName.swift */; };
@@ -93,6 +95,8 @@
 		A845871D254A3D0E00829BBE /* ErrorConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorConfiguration.swift; sourceTree = "<group>"; };
 		A845871F254A48CC00829BBE /* ErrorViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewFactory.swift; sourceTree = "<group>"; };
 		A8458728254A7AC800829BBE /* MoviesModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesModels.swift; sourceTree = "<group>"; };
+		A845872F254B2D4700829BBE /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
+		A8458731254B2DFA00829BBE /* MovieDetailsScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsScreenFactory.swift; sourceTree = "<group>"; };
 		A864B85525477BC500B5BC29 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		A864B85725477DB300B5BC29 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		A864B85925477FA200B5BC29 /* NSObjectProtocol+ClassName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObjectProtocol+ClassName.swift"; sourceTree = "<group>"; };
@@ -208,6 +212,15 @@
 				A845871D254A3D0E00829BBE /* ErrorConfiguration.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		A845872E254B2D1400829BBE /* MoviesDetails */ = {
+			isa = PBXGroup;
+			children = (
+				A8458731254B2DFA00829BBE /* MovieDetailsScreenFactory.swift */,
+				A845872F254B2D4700829BBE /* MovieDetailsViewController.swift */,
+			);
+			path = MoviesDetails;
 			sourceTree = "<group>";
 		};
 		A8660E52254545AA00D74934 /* Utils */ = {
@@ -370,6 +383,7 @@
 				A8B129BB2543BC300074654A /* AppCoordinator.swift */,
 				A8660EAE25455F5300D74934 /* Favorites */,
 				A8B129BD2543BE810074654A /* Movies */,
+				A845872E254B2D1400829BBE /* MoviesDetails */,
 				A8660EAB25455C5600D74934 /* TabBar */,
 			);
 			path = Scenes;
@@ -722,9 +736,11 @@
 				A8660EBF2545C28800D74934 /* MoviesInteractor.swift in Sources */,
 				A864B8602547881900B5BC29 /* UIView+Extension.swift in Sources */,
 				A864B85825477DB300B5BC29 /* CollectionViewDataSource.swift in Sources */,
+				A8458732254B2DFA00829BBE /* MovieDetailsScreenFactory.swift in Sources */,
 				A8458729254A7AC800829BBE /* MoviesModels.swift in Sources */,
 				A8660EC92545C84600D74934 /* MoviesBusinessLogic.swift in Sources */,
 				A8705E6A2549290600E16B01 /* GalleryCollectionViewFactory.swift in Sources */,
+				A8458730254B2D4700829BBE /* MovieDetailsViewController.swift in Sources */,
 				A8B129B52543ADAB0074654A /* UIColor+Extension.swift in Sources */,
 				A8660ECF254627EB00D74934 /* MoviesPopulariesResponse.swift in Sources */,
 				A845871C254A3B6700829BBE /* ErrorView.swift in Sources */,

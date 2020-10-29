@@ -10,6 +10,7 @@ import Foundation
 
 enum Strings: String, Localizable {
     case search
+    case movie
     case movies
     case errorFetch = "error_fetch"
     case errorParseDataToString = "error_parse_data_to_string"
