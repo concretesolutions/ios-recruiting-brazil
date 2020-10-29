@@ -7,22 +7,20 @@
 //
 
 final class MoviesInteractor: MoviesBusinessLogic {
-    private let moyaWorker: MoviesMoyaWorkerProtocol
-    private let realmWorker: MoviesRealmWorkerProtocol
+    private let worker: MoviesWorkerProtocol
     private let presenter: MoviesPresentationLogic
 
     // MARK: - Initializers
 
-    init(moyaWorker: MoviesMoyaWorkerProtocol, realmWorker: MoviesRealmWorkerProtocol, presenter: MoviesPresentationLogic) {
-        self.moyaWorker = moyaWorker
-        self.realmWorker = realmWorker
+    init(worker: MoviesWorkerProtocol, presenter: MoviesPresentationLogic) {
+        self.worker = worker
         self.presenter = presenter
     }
 
     // MARK: - MoviesInteractor conforms
 
     func fetchMovies(request: Movies.FetchMovies.Request) {
-        moyaWorker.fetchMovies(language: request.language, page: request.page) { result in
+        worker.fetchMovies(language: request.language, page: request.page) { result in
             switch result {
             case let .success(response):
                 let movies = response.movies.map { movie -> Movie in
