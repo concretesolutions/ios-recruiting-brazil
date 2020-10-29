@@ -13,7 +13,12 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         return GalleryCollectionView(itemSize: getItemSize(), items: [])
     }()
 
-    private lazy var stackView: UIStackView = UIStackView(arrangedSubviews: [galleryCollectionView, errorView])
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [galleryCollectionView, errorView])
+        stackView.axis = .vertical
+
+        return stackView
+    }()
 
     // MARK: - Private constants
 
