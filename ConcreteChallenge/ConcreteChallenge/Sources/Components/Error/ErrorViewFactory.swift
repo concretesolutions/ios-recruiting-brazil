@@ -10,6 +10,9 @@ import UIKit
 
 enum ErrorViewFactory {
     static func make() -> ErrorView {
-        return ErrorView()
+        let errorView = ErrorView()
+        errorView.isHidden = true
+
+        return errorView
     }
 }

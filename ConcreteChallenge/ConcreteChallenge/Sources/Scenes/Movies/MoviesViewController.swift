@@ -13,9 +13,7 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         return GalleryCollectionView(itemSize: getItemSize(), items: [])
     }()
 
-    private lazy var stackView: UIStackView = {
-        return UIStackView(arrangedSubviews: [galleryCollectionView, errorView])
-    }()
+    private lazy var stackView: UIStackView = UIStackView(arrangedSubviews: [galleryCollectionView, errorView])
 
     // MARK: - Private constants
 
@@ -41,12 +39,17 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
-        fetchMovies()
+
+        view.showLoading()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [weak self] in
+            self?.fetchMovies()
+        })
     }
 
     // MARK: - MoviesDisplayLogic conforms
 
     func displayMoviesItems(viewModel: MoviesModels.MoviesItems.ViewModel) {
+        view.stopLoading()
         errorView.isHidden = true
 
         let itemsViewModel = viewModel.moviesResponse.movies.map { item -> GalleryItemViewModel in
@@ -83,7 +86,10 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     }
 
     private func setErrorView(configuration: ErrorConfiguration = ErrorConfiguration()) {
+        view.stopLoading()
+
         galleryCollectionView.isHidden = true
+        errorView.isHidden = false
 
         errorView.configuration = configuration
     }
