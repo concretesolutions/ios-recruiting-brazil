@@ -23,19 +23,4 @@ enum Movies {
             let moviesResponse: MoviesPopulariesResponse
         }
     }
-
-    enum SaveMovie {
-        struct Request {
-            let movie: Movie
-            let indexPath: IndexPath
-        }
-
-        struct Response {
-            let indexPath: IndexPath
-        }
-
-        struct ViewModel {
-            let indexPath: IndexPath
-        }
-    }
 }

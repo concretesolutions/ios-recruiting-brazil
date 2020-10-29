@@ -79,10 +79,6 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         setErrorView(configuration: configurationError)
     }
 
-    func onSaveFavoriteSuccess(viewModel: Movies.SaveMovie.ViewModel) {
-        galleryCollectionView.toggleFavorite(viewModel.indexPath)
-    }
-
     // MARK: - Private functions
 
     private func setup() {
@@ -102,13 +98,10 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     }
 
     private func setupAction() {
-        galleryCollectionView.bind { [weak self] indexPath in
-            self?.saveMovie(indexPath)
+        galleryCollectionView.bind { [weak self] index in
+            // TODO - Open movie details
+            print(index)
         }
-    }
-
-    private func saveMovie(_ indexPath: IndexPath) {
-        interactor.saveMovie(request: Movies.SaveMovie.Request(movie: movies[indexPath.row], indexPath: indexPath))
     }
 
     private func fetchMovies(language: String = Constants.MovieDefaultParameters.language, page: Int = Constants.MovieDefaultParameters.page) {

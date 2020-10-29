@@ -19,7 +19,7 @@ final class GalleryCollectionView: UIView, UICollectionViewDelegate {
 
     // MARK: - Constants
 
-    private var onItemPress: ((_ indexPath: IndexPath) -> Void)?
+    private var onItemPress: ((_ index: Int) -> Void)?
 
     // MARK: - Private constants
 
@@ -58,21 +58,15 @@ final class GalleryCollectionView: UIView, UICollectionViewDelegate {
         collectionView.reloadData()
     }
 
-    func bind(onItemPress handler: @escaping (_ indexPath: IndexPath) -> Void) {
+    func bind(onItemPress handler: @escaping (_ index: Int) -> Void) {
         collectionView.delegate = self
         onItemPress = handler
-    }
-
-    func toggleFavorite(_ indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? GalleryItemCollectionViewCell {
-            cell.toggleFavorite()
-        }
     }
 
     // MARK: - UICollectionViewDelegate conforms
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        onItemPress?(indexPath)
+        onItemPress?(indexPath.row)
     }
 
     // MARK: - Private functions

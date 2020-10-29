@@ -37,9 +37,4 @@ final class MoviesInteractor: MoviesBusinessLogic {
             }
         }
     }
-
-    func saveMovie(request: Movies.SaveMovie.Request) {
-        realmWorker.saveMovie(movie: request.movie, indexPath: request.indexPath)
-        presenter.onSaveFavoriteSuccess(response: Movies.SaveMovie.Response(indexPath: request.indexPath))
-    }
 }

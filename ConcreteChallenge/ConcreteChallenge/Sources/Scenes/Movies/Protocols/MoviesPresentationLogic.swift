@@ -9,5 +9,4 @@
 protocol MoviesPresentationLogic: AnyObject {
     func presentMoviesItems(response: Movies.FetchMovies.Response)
     func presentFetchMoviesFailure()
-    func onSaveFavoriteSuccess(response: Movies.SaveMovie.Response)
 }

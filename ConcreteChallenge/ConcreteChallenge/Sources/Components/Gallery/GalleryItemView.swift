@@ -10,12 +10,7 @@ import UIKit
 import Kingfisher
 
 final class GalleryItemView: UIView {
-    private lazy var movieImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.kf.setImage(with: URL(string: viewModel.movie.imageURL))
-
-        return imageView
-    }()
+    private lazy var movieImageView = UIImageView()
 
     private lazy var title: UILabel = {
         let label = UILabel()
@@ -38,6 +33,12 @@ final class GalleryItemView: UIView {
     // MARK: - Private constants
 
     private var viewModel: GalleryItemViewModel
+
+    private var imageURL: String = .empty {
+        didSet {
+            movieImageView.kf.setImage(with: URL(string: viewModel.movie.imageURL))
+        }
+    }
 
     private var isFavorite: Bool = false {
         didSet {
@@ -92,6 +93,8 @@ final class GalleryItemView: UIView {
         ])
 
         favoriteImageView.setContentCompressionResistancePriority(.required, for: .horizontal)
+
+        imageURL = viewModel.movie.imageURL
         isFavorite = viewModel.movie.isFavorite
     }
 
@@ -100,10 +103,8 @@ final class GalleryItemView: UIView {
     func update(viewModel new: GalleryItemViewModel) {
         viewModel = new
 
+        imageURL = viewModel.movie.imageURL
         title.text = viewModel.movie.title
-    }
-
-    func toggleFavorite() {
-        isFavorite.toggle()
+        isFavorite = viewModel.movie.isFavorite
     }
 }
