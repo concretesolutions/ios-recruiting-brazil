@@ -10,6 +10,9 @@ struct Movie: Codable {
     let id: Int
     let title: String
     let imageURL: String
+    let genreIds: [Int]
+    let overview: String
+    let releaseDate: String
     var isFavorite: Bool = false
 
     // MARK: - Codable conforms
@@ -18,5 +21,8 @@ struct Movie: Codable {
         case id = "id"
         case title = "title"
         case imageURL = "backdrop_path"
+        case genreIds = "genre_ids"
+        case overview = "overview"
+        case releaseDate = "release_date"
     }
 }
