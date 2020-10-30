@@ -9,6 +9,7 @@
 import Moya
 
 enum MovieDBAPI: TargetType {
+    case fetchGenres(language: String)
     case fetchMovies(language: String, page: Int)
 
     var baseURL: URL {
@@ -21,13 +22,14 @@ enum MovieDBAPI: TargetType {
 
     var path: String {
         switch self {
+        case .fetchGenres: return Constants.MovieNetwork.genres
         case .fetchMovies: return Constants.MovieNetwork.moviePopular
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case .fetchMovies: return .get
+        case .fetchGenres, .fetchMovies: return .get
         }
     }
 
@@ -37,6 +39,11 @@ enum MovieDBAPI: TargetType {
 
     var task: Task {
         switch self {
+        case .fetchGenres(let language):
+            return .requestParameters(parameters: [Constants.MovieNetwork.apiKey: Constants.MovieNetwork.apiKeyValue,
+                                                   Constants.MovieNetwork.language: language],
+                                      encoding: URLEncoding.queryString)
+
         case .fetchMovies(let language, let page):
             return .requestParameters(parameters: [Constants.MovieNetwork.apiKey: Constants.MovieNetwork.apiKeyValue,
                                                    Constants.MovieNetwork.language: language,

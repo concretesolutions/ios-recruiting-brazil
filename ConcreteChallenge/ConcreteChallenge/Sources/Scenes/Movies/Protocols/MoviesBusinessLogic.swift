@@ -7,5 +7,6 @@
 //
 
 protocol MoviesBusinessLogic: AnyObject {
+    func fetchGenres(request: Movies.FetchGenres.Request)
     func fetchMovies(request: Movies.FetchMovies.Request)
 }

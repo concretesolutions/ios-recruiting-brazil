@@ -9,12 +9,6 @@
 import Foundation
 
 enum MovieDetails {
-    enum FetchGenre {
-        struct Request { }
-        struct Response { }
-        struct ViewModel { }
-    }
-
     enum SaveFavorite {
         struct Request { }
         struct Response { }

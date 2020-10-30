@@ -13,14 +13,33 @@ enum Movies {
         struct Request {
             let language: String
             let page: Int
+            let genres: [Genre]
         }
 
         struct Response {
-            let moviesResponse: MoviesPopulariesResponse
+            let page: Int
+            let totalPages: Int
+            let movies: [Movie]
         }
 
         struct ViewModel {
-            let moviesResponse: MoviesPopulariesResponse
+            let page: Int
+            let totalPages: Int
+            let movies: [Movie]
+        }
+    }
+
+    enum FetchGenres {
+        struct Request {
+            let language: String
+        }
+
+        struct Response {
+            let genres: [Genre]
+        }
+
+        struct ViewModel {
+            let genres: [Genre]
         }
     }
 }

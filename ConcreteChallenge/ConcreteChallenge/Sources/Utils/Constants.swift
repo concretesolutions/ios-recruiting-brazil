@@ -14,6 +14,7 @@ enum Constants {
 
         // MARK: - Paths
 
+        static let genres = "/genre/movie/list"
         static let moviePopular = "/movie/popular"
 
         // MARK: - Parameters

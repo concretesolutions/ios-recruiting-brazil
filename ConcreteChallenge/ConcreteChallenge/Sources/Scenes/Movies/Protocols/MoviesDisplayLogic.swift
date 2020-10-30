@@ -9,6 +9,7 @@
 import Foundation
 
 protocol MoviesDisplayLogic: AnyObject {
+    func onFetchGenresSuccess(viewModel: Movies.FetchGenres.ViewModel)
     func displayMoviesItems(viewModel: Movies.FetchMovies.ViewModel)
     func displayMoviesError()
     func displaySearchError(searchText: String)

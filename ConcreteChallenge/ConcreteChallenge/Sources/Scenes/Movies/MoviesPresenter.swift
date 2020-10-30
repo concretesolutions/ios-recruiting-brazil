@@ -11,8 +11,13 @@ final class MoviesPresenter: MoviesPresentationLogic {
 
     // MARK: - MoviesPresentationLogic conforms
 
+    func presentGenresItems(response: Movies.FetchGenres.Response) {
+        let viewModel = Movies.FetchGenres.ViewModel(genres: response.genres)
+        viewController?.onFetchGenresSuccess(viewModel: viewModel)
+    }
+
     func presentMoviesItems(response: Movies.FetchMovies.Response) {
-        let viewModel = Movies.FetchMovies.ViewModel(moviesResponse: response.moviesResponse)
+        let viewModel = Movies.FetchMovies.ViewModel(page: response.page, totalPages: response.totalPages, movies: response.movies)
         viewController?.displayMoviesItems(viewModel: viewModel)
     }
 

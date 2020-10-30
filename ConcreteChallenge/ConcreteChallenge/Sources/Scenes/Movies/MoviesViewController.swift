@@ -24,6 +24,8 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
     private var movies: [Movie] = []
 
+    private var genres: [Genre] = []
+
     // MARK: - Variables
 
     weak var delegate: MoviesViewControllerDelegate?
@@ -55,17 +57,23 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
         view.showLoading()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [weak self] in
-            self?.fetchMovies()
+            self?.fetchGenres()
         })
     }
 
     // MARK: - MoviesDisplayLogic conforms
 
+    func onFetchGenresSuccess(viewModel: Movies.FetchGenres.ViewModel) {
+        genres = viewModel.genres
+
+        fetchMovies()
+    }
+
     func displayMoviesItems(viewModel: Movies.FetchMovies.ViewModel) {
         view.stopLoading()
         errorView.isHidden = true
 
-        movies = viewModel.moviesResponse.movies
+        movies = viewModel.movies
 
         let itemsViewModel = movies.map { item -> GalleryItemViewModel in
             GalleryItemViewModel(movie: item)
@@ -109,8 +117,12 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         }
     }
 
+    private func fetchGenres(language: String = Constants.MovieDefaultParameters.language) {
+        interactor.fetchGenres(request: Movies.FetchGenres.Request(language: language))
+    }
+
     private func fetchMovies(language: String = Constants.MovieDefaultParameters.language, page: Int = Constants.MovieDefaultParameters.page) {
-        interactor.fetchMovies(request: Movies.FetchMovies.Request(language: language, page: page))
+        interactor.fetchMovies(request: Movies.FetchMovies.Request(language: language, page: page, genres: genres))
     }
 
     private func setErrorView(configuration: ErrorConfiguration = ErrorConfiguration()) {

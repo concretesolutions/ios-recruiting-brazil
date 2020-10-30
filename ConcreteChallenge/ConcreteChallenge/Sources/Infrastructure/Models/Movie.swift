@@ -14,6 +14,7 @@ struct Movie: Codable {
     let overview: String
     let releaseDate: String
     var isFavorite: Bool = false
+    var genreLabels: [String] = []
 
     // MARK: - Codable conforms
 
