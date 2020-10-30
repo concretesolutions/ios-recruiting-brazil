@@ -42,21 +42,18 @@ final class TabBarViewController: UITabBarController {
         setupLayout()
     }
 
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        title = Strings.movies.localizable
+
+        navigationItem.searchController = searchController
+    }
+
     // MARK: - Private functions
 
     private func setupLayout() {
         setupNavigationBar()
         setupTabBar()
-    }
-
-    private func setupNavigationBar() {
-        title = Strings.movies.localizable
-
-        let navigationAppearance = UINavigationBarAppearance()
-        navigationAppearance.backgroundColor = .appYellowLight
-        navigationItem.standardAppearance = navigationAppearance
-        navigationItem.scrollEdgeAppearance = navigationAppearance
-        navigationItem.searchController = searchController
     }
 
     private func setupTabBar() {

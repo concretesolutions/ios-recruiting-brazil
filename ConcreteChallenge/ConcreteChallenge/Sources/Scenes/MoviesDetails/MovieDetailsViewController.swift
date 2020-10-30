@@ -9,6 +9,15 @@
 import UIKit
 
 final class MovieDetailsViewController: UIViewController {
+    private lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.kf.setImage(with: URL(string: movie.imageURL))
+
+        return imageView
+    }()
+
+    // MARK: - Private constants
+
     private let movie: Movie
 
     // MARK: - Initializers
@@ -30,15 +39,23 @@ final class MovieDetailsViewController: UIViewController {
         setupLayout()
     }
 
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        title = Strings.movie.localizable
+    }
+
     // MARK: - Private functions
 
     private func setupLayout() {
         setupNavigationBar()
-        view.backgroundColor = .white
-    }
 
-    private func setupNavigationBar() {
-        title = Strings.movie.localizable
-        print(movie)
+        view.addSubview(imageView, constraints: [
+            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
+            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+            imageView.heightAnchor.constraint(equalToConstant: 300)
+        ])
+
+        view.backgroundColor = .white
     }
 }
