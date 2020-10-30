@@ -9,8 +9,8 @@
 import UIKit
 
 enum MovieDetailsScreenFactory {
-    static func makeMoviesDetails() -> UIViewController {
-        let movieDetailsViewController = MovieDetailsViewController()
+    static func makeMoviesDetails(movie: Movie) -> UIViewController {
+        let movieDetailsViewController = MovieDetailsViewController(movie: movie)
 
         return movieDetailsViewController
     }

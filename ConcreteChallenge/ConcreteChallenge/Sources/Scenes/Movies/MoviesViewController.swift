@@ -20,9 +20,13 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         return stackView
     }()
 
-    // MARK: - Variables
+    // MARK: - Private variables
 
     private var movies: [Movie] = []
+
+    // MARK: - Variables
+
+    weak var delegate: MoviesViewControllerDelegate?
 
     // MARK: - Private constants
 
@@ -99,8 +103,9 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
     private func setupAction() {
         galleryCollectionView.bind { [weak self] index in
-            // TODO - Open movie details
-            print(index)
+            if let self = self {
+                self.delegate?.movieItemTapped(movie: self.movies[index], self)
+            }
         }
     }
 

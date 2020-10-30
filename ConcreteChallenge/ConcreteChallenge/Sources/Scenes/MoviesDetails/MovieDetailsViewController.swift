@@ -9,10 +9,12 @@
 import UIKit
 
 final class MovieDetailsViewController: UIViewController {
+    private let movie: Movie
 
     // MARK: - Initializers
 
-    init() {
+    init(movie: Movie) {
+        self.movie = movie
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -37,5 +39,6 @@ final class MovieDetailsViewController: UIViewController {
 
     private func setupNavigationBar() {
         title = Strings.movie.localizable
+        print(movie)
     }
 }

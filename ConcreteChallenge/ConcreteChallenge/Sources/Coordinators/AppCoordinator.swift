@@ -11,19 +11,21 @@ import UIKit
 final class AppCoordinator: Coordinator {
     private weak var rootController: AppRootController?
 
+    // MARK: - Private variables
+
+    private var childCoordinator: [Coordinator] = []
+
     // MARK: - Initializer
 
     public init(rootController: AppRootController?) {
         self.rootController = rootController
     }
 
-    // MARK: - Functions
+    // MARK: - Coodinator conforms
 
     func start() {
-//        let tabBarViewController = TabBarScreenFactory.makeTabBar()
-        let moviesDetailsViewController = MovieDetailsScreenFactory.makeMoviesDetails()
-        let navigationController = UINavigationController(rootViewController: moviesDetailsViewController)
-
-        rootController?.rootViewController = navigationController
+        let moviesCoordinator = MoviesCoordinator(rootController: rootController)
+        childCoordinator.append(moviesCoordinator)
+        moviesCoordinator.start()
     }
 }
