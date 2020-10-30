@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MovieDetailsViewController: UIViewController {
+final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.kf.setImage(with: URL(string: movie.imageURL))
@@ -20,10 +20,14 @@ final class MovieDetailsViewController: UIViewController {
 
     private let movie: Movie
 
+    private let interactor: MovieDetailsBusinessLogic
+
     // MARK: - Initializers
 
-    init(movie: Movie) {
+    init(movie: Movie, interactor: MovieDetailsBusinessLogic) {
         self.movie = movie
+        self.interactor = interactor
+
         super.init(nibName: nil, bundle: nil)
     }
 

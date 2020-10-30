@@ -24,7 +24,7 @@ final class MoviesInteractor: MoviesBusinessLogic {
             switch result {
             case let .success(response):
                 let movies = response.movies.map { movie -> Movie in
-                    Movie(id: movie.id, title: movie.title, imageURL: Constants.MovieNetwork.baseImageURL.appending(movie.imageURL))
+                    Movie(id: movie.id, title: movie.title, imageURL: Constants.MovieNetwork.baseImageURL.appending(movie.imageURL), genreIds: movie.genreIds, overview: movie.overview, releaseDate: movie.releaseDate)
                 }
 
                 let responseModel = Movies.FetchMovies.Response(moviesResponse: MoviesPopulariesResponse(page: response.page, totalPages: response.totalPages, movies: movies))
