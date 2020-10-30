@@ -7,15 +7,13 @@
 //
 
 final class MovieDetailsInteractor: MovieDetailsBusinessLogic {
-    private let moyaWorker: MovieDetailsMoyaWorkerProtocol
-    private let realmWorker: MovieDetailsRealmWorkerProtocol
+    private let worker: MovieDetailsWorkerProtocol
     private let presenter: MovieDetailsPresenter
 
     // MARK: - Initializers
 
-    init(moyaWorker: MovieDetailsMoyaWorkerProtocol, realmWorker: MovieDetailsRealmWorkerProtocol, presenter: MovieDetailsPresenter) {
-        self.moyaWorker = moyaWorker
-        self.realmWorker = realmWorker
+    init(worker: MovieDetailsWorkerProtocol, presenter: MovieDetailsPresenter) {
+        self.worker = worker
         self.presenter = presenter
     }
 }
