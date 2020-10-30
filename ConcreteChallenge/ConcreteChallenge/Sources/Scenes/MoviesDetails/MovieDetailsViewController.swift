@@ -16,6 +16,14 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
         return imageView
     }()
 
+    private lazy var infoListItemView: InfoListItemView = {
+        let icon: UIImage.Assets = movie.isFavorite ? .favoriteFullIcon : .favoriteEmptyIcon
+        let viewModel = InfoListItemViewModel(title: movie.title, icon: icon, descriptionText: movie.overview)
+        let itemView = InfoListItemView(viewModel: viewModel)
+
+        return itemView
+    }()
+
     // MARK: - Private constants
 
     private let movie: Movie
@@ -56,8 +64,14 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
         view.addSubview(imageView, constraints: [
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
-            imageView.heightAnchor.constraint(equalToConstant: 300)
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
+        ])
+
+        view.addSubview(infoListItemView, constraints: [
+            infoListItemView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
+            infoListItemView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+            infoListItemView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+            infoListItemView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
         ])
 
         view.backgroundColor = .white

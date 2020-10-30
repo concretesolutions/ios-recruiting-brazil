@@ -9,11 +9,15 @@
 import UIKit
 
 struct GridGalleryItemViewModel {
-    var movie: Movie
+    var imageURL: String
+    var title: String
+    var isFavorite: Bool
 
     // MARK: - Initializers
 
-    init(movie: Movie) {
-        self.movie = movie
+    init(imageURL: String, title: String, isFavorite: Bool) {
+        self.imageURL = imageURL
+        self.title = title
+        self.isFavorite = isFavorite
     }
 }

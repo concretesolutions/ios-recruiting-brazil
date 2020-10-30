@@ -1,0 +1,23 @@
+//
+//  InfoListItemViewModel.swift
+//  ConcreteChallenge
+//
+//  Created by Adrian Almeida on 30/10/20.
+//  Copyright © 2020 Adrian Almeida. All rights reserved.
+//
+
+import UIKit
+
+struct InfoListItemViewModel {
+    var title: String?
+    var icon: UIImage.Assets?
+    var descriptionText: String?
+
+    // MARK: - Initializers
+
+    init(title: String?, icon: UIImage.Assets?, descriptionText: String?) {
+        self.title = title
+        self.icon = icon
+        self.descriptionText = descriptionText
+    }
+}

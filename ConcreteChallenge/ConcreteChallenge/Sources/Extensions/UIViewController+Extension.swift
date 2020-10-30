@@ -14,5 +14,7 @@ extension UIViewController {
         navigationAppearance.backgroundColor = .appYellowLight
         navigationItem.standardAppearance = navigationAppearance
         navigationItem.scrollEdgeAppearance = navigationAppearance
+
+        UINavigationBar.appearance().tintColor = .black
     }
 }

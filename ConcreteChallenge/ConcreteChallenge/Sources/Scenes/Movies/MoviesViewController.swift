@@ -75,8 +75,8 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
         movies = viewModel.movies
 
-        let itemsViewModel = movies.map { item -> GridGalleryItemViewModel in
-            GridGalleryItemViewModel(movie: item)
+        let itemsViewModel = movies.map { movie -> GridGalleryItemViewModel in
+            GridGalleryItemViewModel(imageURL: movie.imageURL, title: movie.title, isFavorite: movie.isFavorite)
         }
 
         galleryCollectionView.setupDataSource(items: itemsViewModel)

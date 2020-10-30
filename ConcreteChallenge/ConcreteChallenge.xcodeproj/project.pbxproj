@@ -29,6 +29,8 @@
 		A845875C254BB83600829BBE /* MovieDetailsWorkerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A845875B254BB83600829BBE /* MovieDetailsWorkerProtocol.swift */; };
 		A845875E254BBDC300829BBE /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = A845875D254BBDC300829BBE /* Genre.swift */; };
 		A8458760254BBE2400829BBE /* GenresResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A845875F254BBE2400829BBE /* GenresResponse.swift */; };
+		A8458763254BCB2A00829BBE /* InfoListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8458762254BCB2A00829BBE /* InfoListItemView.swift */; };
+		A8458765254BD06500829BBE /* InfoListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8458764254BD06500829BBE /* InfoListItemViewModel.swift */; };
 		A864B85625477BC500B5BC29 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B85525477BC500B5BC29 /* DataSource.swift */; };
 		A864B85825477DB300B5BC29 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B85725477DB300B5BC29 /* CollectionViewDataSource.swift */; };
 		A864B85A25477FA200B5BC29 /* NSObjectProtocol+ClassName.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B85925477FA200B5BC29 /* NSObjectProtocol+ClassName.swift */; };
@@ -123,6 +125,8 @@
 		A845875B254BB83600829BBE /* MovieDetailsWorkerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsWorkerProtocol.swift; sourceTree = "<group>"; };
 		A845875D254BBDC300829BBE /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		A845875F254BBE2400829BBE /* GenresResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresResponse.swift; sourceTree = "<group>"; };
+		A8458762254BCB2A00829BBE /* InfoListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoListItemView.swift; sourceTree = "<group>"; };
+		A8458764254BD06500829BBE /* InfoListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoListItemViewModel.swift; sourceTree = "<group>"; };
 		A864B85525477BC500B5BC29 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		A864B85725477DB300B5BC29 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		A864B85925477FA200B5BC29 /* NSObjectProtocol+ClassName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObjectProtocol+ClassName.swift"; sourceTree = "<group>"; };
@@ -272,6 +276,15 @@
 				A845875B254BB83600829BBE /* MovieDetailsWorkerProtocol.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		A8458761254BCA1700829BBE /* InfoList */ = {
+			isa = PBXGroup;
+			children = (
+				A8458762254BCB2A00829BBE /* InfoListItemView.swift */,
+				A8458764254BD06500829BBE /* InfoListItemViewModel.swift */,
+			);
+			path = InfoList;
 			sourceTree = "<group>";
 		};
 		A8660E52254545AA00D74934 /* Utils */ = {
@@ -473,6 +486,7 @@
 			children = (
 				A845871A254A3B3D00829BBE /* Error */,
 				A8660ED225463E5F00D74934 /* GridGallery */,
+				A8458761254BCA1700829BBE /* InfoList */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -754,6 +768,7 @@
 				A8B129BC2543BC300074654A /* AppCoordinator.swift in Sources */,
 				A8B1298725439DC70074654A /* MoviesViewController.swift in Sources */,
 				A8B1298325439DC70074654A /* AppDelegate.swift in Sources */,
+				A8458765254BD06500829BBE /* InfoListItemViewModel.swift in Sources */,
 				A8B129C12543C1910074654A /* AppRootController.swift in Sources */,
 				A8660EAA25455C0900D74934 /* TabBarViewController.swift in Sources */,
 				A8660ECB25460AA100D74934 /* Data+Extension.swift in Sources */,
@@ -784,6 +799,7 @@
 				A8458747254BB4CB00829BBE /* MovieDetailsInteractor.swift in Sources */,
 				A845874F254BB56700829BBE /* MovieDetailsWorker.swift in Sources */,
 				A8705E682549262700E16B01 /* UICollectionView+Register.swift in Sources */,
+				A8458763254BCB2A00829BBE /* InfoListItemView.swift in Sources */,
 				A8660E58254547FD00D74934 /* String+Extension.swift in Sources */,
 				A8660EB225455FEA00D74934 /* FavoritesViewController.swift in Sources */,
 				A845873C254B981F00829BBE /* MoviesCoordinator.swift in Sources */,

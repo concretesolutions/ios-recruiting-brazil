@@ -15,7 +15,6 @@ final class GridGalleryItemView: UIView {
     private lazy var title: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.text = viewModel.movie.title
         label.textColor = .appYellowLight
 
         return label
@@ -36,7 +35,13 @@ final class GridGalleryItemView: UIView {
 
     private var imageURL: String = .empty {
         didSet {
-            movieImageView.kf.setImage(with: URL(string: viewModel.movie.imageURL))
+            movieImageView.kf.setImage(with: URL(string: viewModel.imageURL))
+        }
+    }
+
+    private var titleText: String = .empty {
+        didSet {
+            title.text = titleText
         }
     }
 
@@ -94,8 +99,9 @@ final class GridGalleryItemView: UIView {
 
         favoriteImageView.setContentCompressionResistancePriority(.required, for: .horizontal)
 
-        imageURL = viewModel.movie.imageURL
-        isFavorite = viewModel.movie.isFavorite
+        imageURL = viewModel.imageURL
+        titleText = viewModel.title
+        isFavorite = viewModel.isFavorite
     }
 
     // MARK: - Functions
@@ -103,8 +109,8 @@ final class GridGalleryItemView: UIView {
     func update(viewModel new: GridGalleryItemViewModel) {
         viewModel = new
 
-        imageURL = viewModel.movie.imageURL
-        title.text = viewModel.movie.title
-        isFavorite = viewModel.movie.isFavorite
+        imageURL = viewModel.imageURL
+        titleText = viewModel.title
+        isFavorite = viewModel.isFavorite
     }
 }
