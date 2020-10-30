@@ -1,5 +1,5 @@
 //
-//  GalleryItemViewModel.swift
+//  GridGalleryItemViewModel.swift
 //  ConcreteChallenge
 //
 //  Created by Adrian Almeida on 27/10/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct GalleryItemViewModel {
+struct GridGalleryItemViewModel {
     var movie: Movie
 
     // MARK: - Initializers

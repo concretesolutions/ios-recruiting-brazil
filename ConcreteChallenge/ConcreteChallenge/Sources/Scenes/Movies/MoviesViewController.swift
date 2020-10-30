@@ -9,8 +9,8 @@
 import UIKit
 
 final class MoviesViewController: UIViewController, MoviesDisplayLogic {
-    private lazy var galleryCollectionView: GalleryCollectionView = {
-        return GalleryCollectionView(itemSize: getItemSize(), items: [])
+    private lazy var galleryCollectionView: GridGalleryCollectionView = {
+        return GridGalleryCollectionView(itemSize: getItemSize(), items: [])
     }()
 
     private lazy var stackView: UIStackView = {
@@ -75,8 +75,8 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
         movies = viewModel.movies
 
-        let itemsViewModel = movies.map { item -> GalleryItemViewModel in
-            GalleryItemViewModel(movie: item)
+        let itemsViewModel = movies.map { item -> GridGalleryItemViewModel in
+            GridGalleryItemViewModel(movie: item)
         }
 
         galleryCollectionView.setupDataSource(items: itemsViewModel)
@@ -135,11 +135,11 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     }
 
     private func getItemSize() -> CGSize {
-        let verticalMargin = CGFloat(Constants.GalleryCollectionView.verticalMargin)
-        let horizontalMargin = CGFloat(Constants.GalleryCollectionView.horizontalMargin)
+        let verticalMargin = CGFloat(Constants.GridGalleryCollectionView.verticalMargin)
+        let horizontalMargin = CGFloat(Constants.GridGalleryCollectionView.horizontalMargin)
 
-        let amountItemVertical = CGFloat(Constants.GalleryCollectionView.amountItemVertical)
-        let amountItemHorizontal = CGFloat(Constants.GalleryCollectionView.amountItemHorizontal)
+        let amountItemVertical = CGFloat(Constants.GridGalleryCollectionView.amountItemVertical)
+        let amountItemHorizontal = CGFloat(Constants.GridGalleryCollectionView.amountItemHorizontal)
 
         let searchViewHeight = CGFloat(52)
         let tabBarHeight = CGFloat(48)

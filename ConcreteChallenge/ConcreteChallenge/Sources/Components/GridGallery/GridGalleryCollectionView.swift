@@ -1,5 +1,5 @@
 //
-//  GalleryCollectionView.swift
+//  GridGalleryCollectionView.swift
 //  ConcreteChallenge
 //
 //  Created by Adrian Almeida on 25/10/20.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-final class GalleryCollectionView: UIView, UICollectionViewDelegate {
+final class GridGalleryCollectionView: UIView, UICollectionViewDelegate {
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.dataSource = dataSource
-        collectionView.register(GalleryItemCollectionViewCell.self)
+        collectionView.register(GridGalleryItemCollectionViewCell.self)
 
         return collectionView
     }()
@@ -26,18 +26,18 @@ final class GalleryCollectionView: UIView, UICollectionViewDelegate {
     private let collectionViewFlowLayout: UICollectionViewFlowLayout
 
     private let dataSource: UICollectionViewDataSource & DataSource = {
-        CollectionViewDataSource<GalleryItemViewModel, GalleryItemCollectionViewCell>() { viewModel, cell in
+        CollectionViewDataSource<GridGalleryItemViewModel, GridGalleryItemCollectionViewCell>() { viewModel, cell in
             cell.set(viewModel: viewModel)
         }
     }()
 
     // MARK: - Initializers
 
-    convenience init(itemSize: CGSize, items: [GalleryItemViewModel]) {
-        self.init(itemSize: itemSize, items: items, flowLayout: GalleryCollectionViewFactory.makeFlowLayout(itemSize: itemSize))
+    convenience init(itemSize: CGSize, items: [GridGalleryItemViewModel]) {
+        self.init(itemSize: itemSize, items: items, flowLayout: GridGalleryCollectionViewFactory.makeFlowLayout(itemSize: itemSize))
     }
 
-    init(itemSize: CGSize, items: [GalleryItemViewModel], flowLayout: UICollectionViewFlowLayout) {
+    init(itemSize: CGSize, items: [GridGalleryItemViewModel], flowLayout: UICollectionViewFlowLayout) {
         collectionViewFlowLayout = flowLayout
 
         super.init(frame: .zero)
@@ -53,7 +53,7 @@ final class GalleryCollectionView: UIView, UICollectionViewDelegate {
 
     // MARK: - Functions
 
-    func setupDataSource(items: [GalleryItemViewModel]) {
+    func setupDataSource(items: [GridGalleryItemViewModel]) {
         dataSource.set(models: items)
         collectionView.reloadData()
     }

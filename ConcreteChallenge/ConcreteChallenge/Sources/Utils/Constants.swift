@@ -34,7 +34,7 @@ enum Constants {
         static let page = 1
     }
 
-    struct GalleryCollectionView {
+    struct GridGalleryCollectionView {
         static let amountItemVertical = 4.5
         static let amountItemHorizontal = 2
         static let verticalMargin = 16

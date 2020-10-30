@@ -41,7 +41,6 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
-        print(movie)
     }
 
     override func setupNavigationBar() {

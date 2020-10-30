@@ -1,5 +1,5 @@
 //
-//  GalleryItemView.swift
+//  GridGalleryItemView.swift
 //  ConcreteChallenge
 //
 //  Created by Adrian Almeida on 26/10/20.
@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-final class GalleryItemView: UIView {
+final class GridGalleryItemView: UIView {
     private lazy var movieImageView = UIImageView()
 
     private lazy var title: UILabel = {
@@ -32,7 +32,7 @@ final class GalleryItemView: UIView {
 
     // MARK: - Private constants
 
-    private var viewModel: GalleryItemViewModel
+    private var viewModel: GridGalleryItemViewModel
 
     private var imageURL: String = .empty {
         didSet {
@@ -50,7 +50,7 @@ final class GalleryItemView: UIView {
 
     // MARK: - Initializers
 
-    public init(viewModel: GalleryItemViewModel) {
+    public init(viewModel: GridGalleryItemViewModel) {
         self.viewModel = viewModel
 
         super.init(frame: .zero)
@@ -100,7 +100,7 @@ final class GalleryItemView: UIView {
 
     // MARK: - Functions
 
-    func update(viewModel new: GalleryItemViewModel) {
+    func update(viewModel new: GridGalleryItemViewModel) {
         viewModel = new
 
         imageURL = viewModel.movie.imageURL

@@ -1,5 +1,5 @@
 //
-//  GalleryItemCollectionViewCell.swift
+//  GridGalleryItemCollectionViewCell.swift
 //  ConcreteChallenge
 //
 //  Created by Adrian Almeida on 26/10/20.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-final class GalleryItemCollectionViewCell: UICollectionViewCell {
-    private var containedView: GalleryItemView?
+final class GridGalleryItemCollectionViewCell: UICollectionViewCell {
+    private var containedView: GridGalleryItemView?
 
     // MARK: - Functions
 
-    func set(viewModel: GalleryItemViewModel) {
+    func set(viewModel: GridGalleryItemViewModel) {
         guard let view = containedView else {
             return setup(viewModel: viewModel)
         }
@@ -23,11 +23,11 @@ final class GalleryItemCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Private functions
 
-    private func create(viewModel: GalleryItemViewModel) -> GalleryItemView {
-        return GalleryItemView(viewModel: viewModel)
+    private func create(viewModel: GridGalleryItemViewModel) -> GridGalleryItemView {
+        return GridGalleryItemView(viewModel: viewModel)
     }
 
-    private func setup(viewModel: GalleryItemViewModel) {
+    private func setup(viewModel: GridGalleryItemViewModel) {
         let newView = create(viewModel: viewModel)
 
         containedView = newView
