@@ -90,33 +90,28 @@ final class InfoListItemView: UIView {
             stackDescriptionStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             stackDescriptionStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
         ])
-
-        NSLayoutConstraint.activate([
-            iconButton.heightAnchor.constraint(equalToConstant: 36),
-            iconButton.widthAnchor.constraint(equalToConstant: 36)
-        ])
     }
 
     private func setupView() {
-        if let titleText = viewModel.title {
-            title.isHidden = false
-            title.text = titleText
-        } else {
-            title.isHidden = true
-        }
-
-        if let icon = viewModel.icon {
-            let image = UIImage(assets: icon)?.withInsets(insets: UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12))
-            iconButton.isHidden = false
-            iconButton.setImage(image, for: .normal)
-        } else {
-            iconButton.isHidden = true
-        }
-
         if viewModel.title == nil, viewModel.icon == nil {
             titleButtonStackView.isHidden = true
         } else {
             titleButtonStackView.isHidden = false
+
+            if let titleText = viewModel.title {
+                title.isHidden = false
+                title.text = titleText
+            } else {
+                title.isHidden = true
+            }
+
+            if let icon = viewModel.icon {
+                let image = UIImage(assets: icon)?.withInsets(insets: UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12))
+                iconButton.isHidden = false
+                iconButton.setImage(image, for: .normal)
+            } else {
+                iconButton.isHidden = true
+            }
         }
 
         if let descriptionText = viewModel.descriptionText {
