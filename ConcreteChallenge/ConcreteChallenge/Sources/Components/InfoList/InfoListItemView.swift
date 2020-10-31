@@ -88,7 +88,10 @@ final class InfoListItemView: UIView {
             stackDescriptionStackView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             stackDescriptionStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             stackDescriptionStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            stackDescriptionStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            stackDescriptionStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+        ])
+
+        NSLayoutConstraint.activate([
             iconButton.heightAnchor.constraint(equalToConstant: 36),
             iconButton.widthAnchor.constraint(equalToConstant: 36)
         ])

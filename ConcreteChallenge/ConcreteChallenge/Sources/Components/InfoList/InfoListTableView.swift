@@ -24,6 +24,7 @@ final class InfoListTableView: UIView {
 
     private let dataSource: UITableViewDataSource & DataSource = {
         TableViewDataSource<InfoListItemViewModel, InfoListItemTableViewCell> { viewModel, cell in
+            cell.selectionStyle = .none
             cell.set(viewModel: viewModel)
         }
     }()
