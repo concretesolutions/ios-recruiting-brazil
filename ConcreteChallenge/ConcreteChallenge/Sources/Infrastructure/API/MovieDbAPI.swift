@@ -1,5 +1,5 @@
 //
-//  MovieDBAPI.swift
+//  MovieDbAPI.swift
 //  ConcreteChallenge
 //
 //  Created by Adrian Almeida on 24/10/20.
@@ -8,7 +8,7 @@
 
 import Moya
 
-enum MovieDBAPI: TargetType {
+enum MovieDbAPI: TargetType {
     case fetchGenres(language: String)
     case fetchMovies(language: String, page: Int)
 

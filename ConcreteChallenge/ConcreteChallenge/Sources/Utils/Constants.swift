@@ -42,6 +42,12 @@ enum Constants {
         static let page = 1
     }
 
+    // MARK: - Database
+
+    struct MovieDatabase {
+        static let moviePrimaryKey = "id"
+    }
+
     // MARK: - Screen configuration
 
     struct GridGalleryCollectionView {

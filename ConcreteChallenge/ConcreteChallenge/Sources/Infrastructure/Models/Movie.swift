@@ -6,24 +6,35 @@
 //  Copyright © 2020 Adrian Almeida. All rights reserved.
 //
 
-final class Movie {
-    let id: Int
-    let title: String
-    let imageURL: String
-    let genres: String?
-    let releaseDate: String
-    let overview: String
-    var isFavorite: Bool = false
+import RealmSwift
+
+@objcMembers final class Movie: Object, RealmModelProtocol {
+    dynamic var id: Int = 0
+    dynamic var idFromApi: Int = 0
+    dynamic var title: String = ""
+    dynamic var imageURL: String = ""
+    dynamic var genres: String? = nil
+    dynamic var releaseDate: String = ""
+    dynamic var overview: String = ""
+    dynamic var isFavorite: Bool = false
 
     // MARK: - Initializers
 
-    init(id: Int, title: String, imageURL: String, genres: String?, releaseDate: String, overview: String, isFavorite: Bool) {
-        self.id = id
+    convenience init(idFromApi: Int, title: String, imageURL: String, genres: String?, releaseDate: String, overview: String, isFavorite: Bool = false) {
+        self.init()
+
+        self.idFromApi = idFromApi
         self.title = title
         self.imageURL = imageURL
         self.genres = genres
         self.releaseDate = releaseDate
         self.overview = overview
         self.isFavorite = isFavorite
+    }
+
+    // MARK: - Override functions
+
+    override static func primaryKey() -> String? {
+        return Constants.MovieDatabase.moviePrimaryKey
     }
 }

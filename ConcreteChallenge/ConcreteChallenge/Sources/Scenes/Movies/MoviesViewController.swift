@@ -22,6 +22,8 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
     // MARK: - Private variables
 
+    private var localMovies: [Movie] = []
+
     private var movies: [Movie] = []
 
     private var genres: [GenreResponse] = []
@@ -59,7 +61,7 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
         view.showLoading()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [weak self] in
-            self?.fetchGenres()
+            self?.fetchLocalMovies()
         })
     }
 
@@ -123,6 +125,20 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         }
     }
 
+    private func fetchLocalMovies() {
+        let worker = MovieDetailsWorker(provider: MovieRealmDbService())
+        worker.fetchMovies() { result in
+            switch result {
+            case let .success(movies):
+                self.localMovies = movies
+                print(movies)
+                self.fetchGenres()
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
+
     private func fetchGenres(language: String = Constants.MovieDefaultParameters.language) {
         interactor.fetchGenres(request: Movies.FetchGenres.Request(language: language))
     }
@@ -144,7 +160,14 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         firstTimeLoadMovies = false
 
         let itemsViewModel = movies.map { movie -> GridGalleryItemViewModel in
-            GridGalleryItemViewModel(imageURL: movie.imageURL, title: movie.title, isFavorite: movie.isFavorite)
+            let movieFound = localMovies.first { localMovie -> Bool in
+                localMovie.idFromApi == movie.idFromApi
+            }
+
+            movie.id = movieFound?.id ?? 0
+            movie.isFavorite = movieFound?.isFavorite ?? false
+
+            return GridGalleryItemViewModel(imageURL: movie.imageURL, title: movie.title, isFavorite: movie.isFavorite)
         }
 
         galleryCollectionView.setupDataSource(items: itemsViewModel)

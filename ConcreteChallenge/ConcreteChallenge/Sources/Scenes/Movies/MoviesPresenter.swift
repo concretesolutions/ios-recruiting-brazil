@@ -28,7 +28,7 @@ final class MoviesPresenter: MoviesPresentationLogic {
 
             let genres = genreLabels.count > 0 ? genreLabels.joined(separator: Constants.MoviesDetails.genresSeparator) : nil
 
-            return Movie(id: movieResponse.id, title: movieResponse.title, imageURL: Constants.MovieNetwork.baseImageURL.appending(movieResponse.imageURL), genres: genres, releaseDate: movieResponse.releaseDate.year, overview: movieResponse.overview, isFavorite: false)
+            return Movie(idFromApi: movieResponse.id, title: movieResponse.title, imageURL: Constants.MovieNetwork.baseImageURL.appending(movieResponse.imageURL), genres: genres, releaseDate: movieResponse.releaseDate.year, overview: movieResponse.overview, isFavorite: false)
         }
 
         let viewModel = Movies.FetchMovies.ViewModel(page: response.page, totalPages: response.totalPages, movies: movies)

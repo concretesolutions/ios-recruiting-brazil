@@ -20,20 +20,36 @@ final class MovieDetailsInteractor: MovieDetailsBusinessLogic {
     // MARK: - MovieDetailsBusinessLogic conforms
 
     func saveMovie(request: MovieDetails.SaveMovie.Request) {
-        worker.saveMovie(movie: request.movie)
+        worker.saveMovie(movie: request.movie) { result in
+            switch result {
+            case .success():
+                let response = request.movie
+                response.isFavorite = true
 
-        var response = request.movie
-        response.isFavorite = true
-
-        presenter.onSuccessSaveMovie(response: MovieDetails.SaveMovie.Response(movie: response))
+                self.presenter.onSuccessSaveMovie(response: MovieDetails.SaveMovie.Response(movie: response))
+            case let .failure(error):
+                self.presentFailure(error: error)
+            }
+        }
     }
 
     func deleteMovie(request: MovieDetails.DeleteMovie.Request) {
-        worker.deleteMovie(movie: request.movie)
+        worker.deleteMovie(movie: request.movie) { result in
+            switch result {
+            case .success():
+                let response = request.movie
+                response.isFavorite = false
 
-        var response = request.movie
-        response.isFavorite = false
+                self.presenter.onSuccessDeleteMovie(response: MovieDetails.DeleteMovie.Response(movie: response))
+            case let .failure(error):
+                self.presentFailure(error: error)
+            }
+        }
+    }
 
-        presenter.onSuccessDeleteMovie(response: MovieDetails.DeleteMovie.Response(movie: response))
+    // MARK: - Private functions
+
+    private func presentFailure(error: DatabaseError) {
+        print(error.errorDescription)
     }
 }

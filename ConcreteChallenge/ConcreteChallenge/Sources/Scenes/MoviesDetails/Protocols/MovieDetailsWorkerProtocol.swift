@@ -7,6 +7,7 @@
 //
 
 protocol MovieDetailsWorkerProtocol: AnyObject {
-    func saveMovie(movie: Movie)
-    func deleteMovie(movie: Movie)
+    func fetchMovies(completion: @escaping (Result<[Movie], DatabaseError>) -> Void)
+    func saveMovie(movie: Movie, completion: @escaping (Result<Void, DatabaseError>) -> Void)
+    func deleteMovie(movie: Movie, completion: @escaping (Result<Void, DatabaseError>) -> Void)
 }
