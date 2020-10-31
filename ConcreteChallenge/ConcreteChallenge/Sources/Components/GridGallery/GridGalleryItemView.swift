@@ -102,6 +102,8 @@ final class GridGalleryItemView: UIView {
         imageURL = viewModel.imageURL
         titleText = viewModel.title
         isFavorite = viewModel.isFavorite
+
+        backgroundColor = .clear
     }
 
     // MARK: - Functions

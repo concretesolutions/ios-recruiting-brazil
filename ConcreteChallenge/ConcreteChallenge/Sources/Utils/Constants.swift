@@ -7,6 +7,12 @@
 //
 
 enum Constants {
+    struct Utils {
+        static let dateFormat = "yyyy-MM-dd"
+    }
+
+    // MARK: - Newtwork
+
     struct MovieNetwork {
         static let baseURL = "https://api.themoviedb.org"
         static let apiVersion = "3"
@@ -29,10 +35,14 @@ enum Constants {
         static let headersContentTypeApplicationJSON = ["Content-Type": "application/json"]
     }
 
+    // MARK: - Default parameters
+
     struct MovieDefaultParameters {
         static let language = "en-US"
         static let page = 1
     }
+
+    // MARK: - Screen configuration
 
     struct GridGalleryCollectionView {
         static let amountItemVertical = 4.5
@@ -40,5 +50,9 @@ enum Constants {
         static let verticalMargin = 16
         static let horizontalMargin = 16
         static let minimumLineSpacing = 16
+    }
+
+    struct MoviesDetails {
+        static let genresSeparator = ", "
     }
 }

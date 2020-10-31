@@ -15,7 +15,7 @@ struct InfoListItemViewModel {
 
     // MARK: - Initializers
 
-    init(title: String?, icon: UIImage.Assets?, descriptionText: String?) {
+    init(title: String? = nil, icon: UIImage.Assets? = nil, descriptionText: String? = nil) {
         self.title = title
         self.icon = icon
         self.descriptionText = descriptionText

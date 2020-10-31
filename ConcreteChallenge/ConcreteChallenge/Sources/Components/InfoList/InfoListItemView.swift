@@ -11,7 +11,7 @@ import UIKit
 final class InfoListItemView: UIView {
     private lazy var title: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont.systemFont(ofSize: 20)
 
         return label
     }()
@@ -30,7 +30,7 @@ final class InfoListItemView: UIView {
 
     private lazy var descriptionText: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 18)
         label.numberOfLines = 0
 
         return label
@@ -76,11 +76,13 @@ final class InfoListItemView: UIView {
     // MARK: - Private functions
 
     private func setupLayout() {
-        addSubviewEqual(equalConstraintFor: stackDescriptionStackView)
-
-        NSLayoutConstraint.activate([
-            iconButton.heightAnchor.constraint(equalToConstant: 40),
-            iconButton.widthAnchor.constraint(equalToConstant: 40),
+        addSubview(stackDescriptionStackView, constraints: [
+            stackDescriptionStackView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            stackDescriptionStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            stackDescriptionStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            stackDescriptionStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            iconButton.heightAnchor.constraint(equalToConstant: 36),
+            iconButton.widthAnchor.constraint(equalToConstant: 36)
         ])
 
         updateView()
