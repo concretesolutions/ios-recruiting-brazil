@@ -13,13 +13,14 @@ enum Movies {
         struct Request {
             let language: String
             let page: Int
-            let genres: [Genre]
+            let genres: [GenreResponse]
         }
 
         struct Response {
             let page: Int
             let totalPages: Int
-            let movies: [Movie]
+            let genres: [GenreResponse]
+            let moviesResponse: [MovieResponse]
         }
 
         struct ViewModel {
@@ -35,11 +36,11 @@ enum Movies {
         }
 
         struct Response {
-            let genres: [Genre]
+            let genres: [GenreResponse]
         }
 
         struct ViewModel {
-            let genres: [Genre]
+            let genres: [GenreResponse]
         }
     }
 }

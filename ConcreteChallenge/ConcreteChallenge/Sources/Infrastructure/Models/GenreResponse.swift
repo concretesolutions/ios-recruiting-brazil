@@ -6,7 +6,7 @@
 //  Copyright © 2020 Adrian Almeida. All rights reserved.
 //
 
-struct Genre: Codable {
+struct GenreResponse: Codable {
     let id: Int
     let name: String
 

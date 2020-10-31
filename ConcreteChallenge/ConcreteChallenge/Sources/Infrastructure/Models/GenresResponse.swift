@@ -7,7 +7,7 @@
 //
 
 struct GenresResponse: Codable {
-    let genres: [Genre]
+    let genres: [GenreResponse]
 
     // MARK: - Codable conforms
 

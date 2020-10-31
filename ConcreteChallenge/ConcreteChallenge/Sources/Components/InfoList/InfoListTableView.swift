@@ -30,10 +30,9 @@ final class InfoListTableView: UIView {
 
     // MARK: - Initializers
 
-    init(infos: [InfoListItemViewModel]) {
+    init() {
         super.init(frame: .zero)
 
-        setupDataSource(items: infos)
         setupLayout()
     }
 
@@ -43,6 +42,10 @@ final class InfoListTableView: UIView {
     }
 
     // MARK: - Functions
+
+    func setInfos(infos: [InfoListItemViewModel]) {
+        setupDataSource(items: infos)
+    }
 
     func setupDataSource(items: [InfoListItemViewModel]) {
         dataSource.set(models: items)

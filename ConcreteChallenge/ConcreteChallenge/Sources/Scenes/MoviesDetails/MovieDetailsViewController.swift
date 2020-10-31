@@ -42,7 +42,9 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setupLayout()
+        setupMoviesInfo()
     }
 
     override func setupNavigationBar() {
@@ -69,5 +71,20 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
         ])
 
         view.backgroundColor = .white
+    }
+
+    private func setupMoviesInfo() {
+        let icon: UIImage.Assets = movie.isFavorite ? .favoriteFullIcon : .favoriteEmptyIcon
+
+        let infoListItemsViewModel = [
+            InfoListItemViewModel(title: movie.title, icon: icon),
+            InfoListItemViewModel(title: movie.releaseDate),
+            InfoListItemViewModel(title: movie.genres),
+            InfoListItemViewModel(descriptionText: movie.overview)
+        ].filter { infoListItemViewModel in
+            !infoListItemViewModel.isEmpty
+        }
+
+        moviesDetailsInfoListView.setInfos(infos: infoListItemsViewModel)
     }
 }

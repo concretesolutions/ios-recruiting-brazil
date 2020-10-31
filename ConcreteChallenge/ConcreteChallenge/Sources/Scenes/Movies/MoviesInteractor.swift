@@ -35,19 +35,7 @@ final class MoviesInteractor: MoviesBusinessLogic {
         worker.fetchMovies(language: request.language, page: request.page) { result in
             switch result {
             case let .success(response):
-                let movies = response.movies.map { movie -> Movie in
-                    let genreLabels = movie.genreIds.map { id -> String in
-                        let genre = request.genres.first { genre -> Bool in
-                            genre.id == id
-                        }
-
-                        return genre?.name ?? .empty
-                    }
-
-                    return Movie(id: movie.id, title: movie.title, imageURL: Constants.MovieNetwork.baseImageURL.appending(movie.imageURL), genreIds: movie.genreIds, overview: movie.overview, releaseDate: movie.releaseDate, genreLabels: genreLabels)
-                }
-
-                let responseModel = Movies.FetchMovies.Response(page: response.page, totalPages: response.totalPages, movies: movies)
+                let responseModel = Movies.FetchMovies.Response(page: response.page, totalPages: response.totalPages, genres: request.genres, moviesResponse: response.moviesResponse)
                 self.presenter.presentMoviesItems(response: responseModel)
             case let .failure(error):
                 self.presentFailure(error: error)

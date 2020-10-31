@@ -24,7 +24,7 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
     private var movies: [Movie] = []
 
-    private var genres: [Genre] = []
+    private var genres: [GenreResponse] = []
 
     // MARK: - Variables
 

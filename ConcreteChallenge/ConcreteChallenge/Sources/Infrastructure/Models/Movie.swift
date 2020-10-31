@@ -10,20 +10,8 @@ struct Movie: Codable {
     let id: Int
     let title: String
     let imageURL: String
-    let genreIds: [Int]
-    let overview: String
+    let genres: String?
     let releaseDate: String
+    let overview: String
     var isFavorite: Bool = false
-    var genreLabels: [String] = []
-
-    // MARK: - Codable conforms
-
-    enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case title = "title"
-        case imageURL = "backdrop_path"
-        case genreIds = "genre_ids"
-        case overview = "overview"
-        case releaseDate = "release_date"
-    }
 }

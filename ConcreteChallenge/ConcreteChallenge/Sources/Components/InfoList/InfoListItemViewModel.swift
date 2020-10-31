@@ -20,4 +20,10 @@ struct InfoListItemViewModel {
         self.icon = icon
         self.descriptionText = descriptionText
     }
+
+    // MARK: - Computed variables
+
+    var isEmpty: Bool {
+        return title == nil && icon == nil && descriptionText == nil
+    }
 }

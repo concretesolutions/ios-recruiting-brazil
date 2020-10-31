@@ -9,13 +9,13 @@
 struct MoviesPopulariesResponse: Codable {
     let page: Int
     let totalPages: Int
-    let movies: [Movie]
+    let moviesResponse: [MovieResponse]
 
     // MARK: - Codable conforms
 
     enum CodingKeys: String, CodingKey {
         case page = "page"
         case totalPages = "total_pages"
-        case movies = "results"
+        case moviesResponse = "results"
     }
 }

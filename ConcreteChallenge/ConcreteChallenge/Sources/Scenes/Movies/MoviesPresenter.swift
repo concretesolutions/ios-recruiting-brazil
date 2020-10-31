@@ -17,7 +17,21 @@ final class MoviesPresenter: MoviesPresentationLogic {
     }
 
     func presentMoviesItems(response: Movies.FetchMovies.Response) {
-        let viewModel = Movies.FetchMovies.ViewModel(page: response.page, totalPages: response.totalPages, movies: response.movies)
+        let movies = response.moviesResponse.map { movieResponse -> Movie in
+            let genreLabels = movieResponse.genreIds.map { id -> String in
+                let genre = response.genres.first { genre -> Bool in
+                    genre.id == id
+                }
+
+                return genre?.name ?? .empty
+            }
+
+            let genres = genreLabels.count > 0 ? genreLabels.joined(separator: Constants.MoviesDetails.genresSeparator) : nil
+
+            return Movie(id: movieResponse.id, title: movieResponse.title, imageURL: Constants.MovieNetwork.baseImageURL.appending(movieResponse.imageURL), genres: genres, releaseDate: movieResponse.releaseDate.year, overview: movieResponse.overview, isFavorite: false)
+        }
+
+        let viewModel = Movies.FetchMovies.ViewModel(page: response.page, totalPages: response.totalPages, movies: movies)
         viewController?.displayMoviesItems(viewModel: viewModel)
     }
 

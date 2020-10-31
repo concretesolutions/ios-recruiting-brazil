@@ -17,7 +17,7 @@ final class GridGalleryCollectionView: UIView, UICollectionViewDelegate {
         return collectionView
     }()
 
-    // MARK: - Constants
+    // MARK: - Private variables
 
     private var onItemPress: ((_ index: Int) -> Void)?
 
