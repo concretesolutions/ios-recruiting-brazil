@@ -7,5 +7,5 @@
 //
 
 protocol MoviesViewControllerDelegate: AnyObject {
-    func movieItemTapped(movie: Movie, _ viewController: MoviesViewController)
+    func galleryItemTapped(movie: Movie, _ viewController: MoviesViewController)
 }

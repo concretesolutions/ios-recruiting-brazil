@@ -121,18 +121,30 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
     private func setupAction() {
         galleryCollectionView.bind { [weak self] index in
-            if let self = self {
-                self.delegate?.movieItemTapped(movie: self.movies[index], self)
-            }
+            self?.galleryItemTapped(index)
         }
     }
 
+    private func galleryItemTapped(_ index: Int) {
+        let movieFound = localMovies.first { localMovie -> Bool in
+            localMovie.id == movies[index].id
+        }
+
+        let movieDetails = movieFound ?? movies[index]
+
+        self.delegate?.galleryItemTapped(movie: movieDetails, self)
+    }
+
+    //TODO - Move worker
     private func fetchLocalMovies() {
         let worker = MovieDetailsWorker(provider: MovieRealmDbService())
         worker.fetchMovies() { result in
             switch result {
             case let .success(movies):
-                self.localMovies = movies
+                self.localMovies = movies.map { movie -> Movie in
+                    movie.isFavorite = true
+                    return movie
+                }
                 print(movies)
                 self.fetchGenres()
             case let .failure(error):

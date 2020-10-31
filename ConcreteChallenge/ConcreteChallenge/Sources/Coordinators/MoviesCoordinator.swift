@@ -28,7 +28,7 @@ final class MoviesCoordinator: Coordinator, MoviesViewControllerDelegate {
 
     // MARK: - MoviesViewControllerDelegate conforms
 
-    func movieItemTapped(movie: Movie, _ viewController: MoviesViewController) {
+    func galleryItemTapped(movie: Movie, _ viewController: MoviesViewController) {
         let moviesDetailsViewController = MovieDetailsScreenFactory.makeMoviesDetails(movie: movie)
 
         if let rootController = rootController,
