@@ -36,4 +36,10 @@ import RealmSwift
     override static func primaryKey() -> String? {
         return Constants.MovieDatabase.moviePrimaryKey
     }
+
+    // MARK: - Functions
+
+    func clone() -> Movie {
+        return Movie(id: id, title: title, imageURL: imageURL, genres: genres, releaseDate: releaseDate, overview: overview, isFavorite: isFavorite)
+    }
 }

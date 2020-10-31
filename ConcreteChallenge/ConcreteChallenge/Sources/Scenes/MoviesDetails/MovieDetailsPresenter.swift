@@ -12,12 +12,12 @@ final class MovieDetailsPresenter: MovieDetailsPresentationLogic {
     // MARK: - MovieDetailsPresentationLogic conforms
 
     func onSuccessSaveMovie(response: MovieDetails.SaveMovie.Response) {
-        let viewModel = MovieDetails.SaveMovie.ViewModel(movie: response.movie)
+        let viewModel = MovieDetails.SaveMovie.ViewModel(isFavorite: response.isFavorite)
         viewController?.onSuccessSaveMovie(viewModel: viewModel)
     }
 
     func onSuccessDeleteMovie(response: MovieDetails.DeleteMovie.Response) {
-        let viewModel = MovieDetails.DeleteMovie.ViewModel(movie: response.movie)
+        let viewModel = MovieDetails.DeleteMovie.ViewModel(isFavorite: response.isFavorite)
         viewController?.onSuccessDeleteMovie(viewModel: viewModel)
     }
 }

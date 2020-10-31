@@ -23,10 +23,7 @@ final class MovieDetailsInteractor: MovieDetailsBusinessLogic {
         worker.saveMovie(movie: request.movie) { result in
             switch result {
             case .success():
-                let response = request.movie
-                response.isFavorite = true
-
-                self.presenter.onSuccessSaveMovie(response: MovieDetails.SaveMovie.Response(movie: response))
+                self.presenter.onSuccessSaveMovie(response: MovieDetails.SaveMovie.Response(isFavorite: true))
             case let .failure(error):
                 self.presentFailure(error: error)
             }
@@ -37,10 +34,7 @@ final class MovieDetailsInteractor: MovieDetailsBusinessLogic {
         worker.deleteMovie(movie: request.movie) { result in
             switch result {
             case .success():
-                let response = request.movie
-                response.isFavorite = false
-
-                self.presenter.onSuccessDeleteMovie(response: MovieDetails.DeleteMovie.Response(movie: response))
+                self.presenter.onSuccessDeleteMovie(response: MovieDetails.DeleteMovie.Response(isFavorite: false))
             case let .failure(error):
                 self.presentFailure(error: error)
             }

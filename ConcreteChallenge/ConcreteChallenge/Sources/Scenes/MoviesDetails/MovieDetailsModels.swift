@@ -15,11 +15,11 @@ enum MovieDetails {
         }
 
         struct Response {
-            let movie: Movie
+            let isFavorite: Bool
         }
 
         struct ViewModel {
-            let movie: Movie
+            let isFavorite: Bool
         }
     }
 
@@ -29,11 +29,11 @@ enum MovieDetails {
         }
 
         struct Response {
-            let movie: Movie
+            let isFavorite: Bool
         }
 
         struct ViewModel {
-            let movie: Movie
+            let isFavorite: Bool
         }
     }
 }

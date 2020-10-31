@@ -20,6 +20,8 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
 
     // MARK: - Private constants
 
+    private var movieData: Movie
+
     private var movie: Movie {
         didSet {
             setupMoviesInfo()
@@ -31,7 +33,8 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
     // MARK: - Initializers
 
     init(movie: Movie, interactor: MovieDetailsBusinessLogic) {
-        self.movie = movie
+        movieData = movie
+        self.movie = movie.clone()
         self.interactor = interactor
 
         super.init(nibName: nil, bundle: nil)
@@ -59,11 +62,14 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
     // MARK: - MovieDetailsDisplayLogic Conforms
 
     func onSuccessSaveMovie(viewModel: MovieDetails.SaveMovie.ViewModel) {
-        movie = viewModel.movie
+        movie.isFavorite = viewModel.isFavorite
+        setupMoviesInfo()
     }
 
     func onSuccessDeleteMovie(viewModel: MovieDetails.DeleteMovie.ViewModel) {
-        movie = viewModel.movie
+        movieData = movie.clone()
+        movie.isFavorite = viewModel.isFavorite
+        setupMoviesInfo()
     }
 
     // MARK: - Private functions
@@ -108,9 +114,9 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
 
     private func actionButtonTapped() {
         if !movie.isFavorite {
-            interactor.saveMovie(request: MovieDetails.SaveMovie.Request(movie: movie))
+            interactor.saveMovie(request: MovieDetails.SaveMovie.Request(movie: movieData))
         } else {
-            interactor.deleteMovie(request: MovieDetails.DeleteMovie.Request(movie: movie))
+            interactor.deleteMovie(request: MovieDetails.DeleteMovie.Request(movie: movieData))
         }
     }
 }
