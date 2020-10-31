@@ -10,20 +10,19 @@ import RealmSwift
 
 @objcMembers final class Movie: Object, RealmModelProtocol {
     dynamic var id: Int = 0
-    dynamic var idFromApi: Int = 0
     dynamic var title: String = ""
     dynamic var imageURL: String = ""
     dynamic var genres: String? = nil
     dynamic var releaseDate: String = ""
     dynamic var overview: String = ""
-    dynamic var isFavorite: Bool = false
+    var isFavorite: Bool = false
 
     // MARK: - Initializers
 
-    convenience init(idFromApi: Int, title: String, imageURL: String, genres: String?, releaseDate: String, overview: String, isFavorite: Bool = false) {
+    convenience init(id: Int, title: String, imageURL: String, genres: String?, releaseDate: String, overview: String, isFavorite: Bool = false) {
         self.init()
 
-        self.idFromApi = idFromApi
+        self.id = id
         self.title = title
         self.imageURL = imageURL
         self.genres = genres

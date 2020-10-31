@@ -13,34 +13,31 @@ final class MovieRealmDbService {
         DispatchQueue.main.async {
             do {
                 let realm = try RealmManager.realmInstance()
-//                let id = try self.incrementId(model.self)
-//                var model = model
-//                model.id = id
                 try realm.write {
                     realm.add(model)
+                    completion(.success(()))
                 }
-                completion(.success(()))
             } catch {
                 completion(.failure(DatabaseError.taskError(error: error)))
             }
         }
     }
 
-    func delete<T: Object>(model: T, completion: @escaping (Result<Void, DatabaseError>) -> Void) {
+    func delete<T: Object>(model: T, completion: @escaping (Result<Void, DatabaseError>) -> Void) where T: RealmModelProtocol {
         DispatchQueue.main.async {
             do {
                 let realm = try RealmManager.realmInstance()
                 try realm.write {
                     realm.delete(model)
+                    completion(.success(()))
                 }
-                completion(.success(()))
             } catch {
                 completion(.failure(DatabaseError.taskError(error: error)))
             }
         }
     }
 
-    func fetch<T: Object>(_ type: T.Type, completion: @escaping (Result<[T], DatabaseError>) -> Void) {
+    func fetch<T: Object>(_ type: T.Type, completion: @escaping (Result<[T], DatabaseError>) -> Void) where T: RealmModelProtocol {
         DispatchQueue.main.async {
             do {
                 let realm = try RealmManager.realmInstance()

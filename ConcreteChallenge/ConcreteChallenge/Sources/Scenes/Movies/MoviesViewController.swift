@@ -59,6 +59,7 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         super.viewDidLoad()
         setup()
 
+        // First time has delay only to show loading view
         view.showLoading()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [weak self] in
             self?.fetchLocalMovies()
@@ -69,7 +70,8 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         super.viewWillAppear(true)
 
         if !firstTimeLoadMovies {
-            loadGridGalleryLayout()
+            view.showLoading()
+            fetchLocalMovies()
         }
     }
 
@@ -161,11 +163,10 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
         let itemsViewModel = movies.map { movie -> GridGalleryItemViewModel in
             let movieFound = localMovies.first { localMovie -> Bool in
-                localMovie.idFromApi == movie.idFromApi
+                localMovie.id == movie.id
             }
 
-            movie.id = movieFound?.id ?? 0
-            movie.isFavorite = movieFound?.isFavorite ?? false
+            movie.isFavorite = movieFound?.isFavorite != nil
 
             return GridGalleryItemViewModel(imageURL: movie.imageURL, title: movie.title, isFavorite: movie.isFavorite)
         }
