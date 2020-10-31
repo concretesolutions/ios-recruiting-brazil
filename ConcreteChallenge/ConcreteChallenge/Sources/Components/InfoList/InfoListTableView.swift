@@ -43,10 +43,6 @@ final class InfoListTableView: UIView {
 
     // MARK: - Functions
 
-    func setInfos(infos: [InfoListItemViewModel]) {
-        setupDataSource(items: infos)
-    }
-
     func setupDataSource(items: [InfoListItemViewModel]) {
         dataSource.set(models: items)
         tableView.reloadData()

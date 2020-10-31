@@ -12,13 +12,15 @@ struct InfoListItemViewModel {
     var title: String?
     var icon: UIImage.Assets?
     var descriptionText: String?
+    var action: (() -> Void)?
 
     // MARK: - Initializers
 
-    init(title: String? = nil, icon: UIImage.Assets? = nil, descriptionText: String? = nil) {
+    init(title: String? = nil, icon: UIImage.Assets? = nil, descriptionText: String? = nil, action: (() -> Void)? = nil) {
         self.title = title
         self.icon = icon
         self.descriptionText = descriptionText
+        self.action = action
     }
 
     // MARK: - Computed variables

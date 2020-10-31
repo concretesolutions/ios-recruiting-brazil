@@ -76,8 +76,12 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
     private func setupMoviesInfo() {
         let icon: UIImage.Assets = movie.isFavorite ? .favoriteFullIcon : .favoriteEmptyIcon
 
+        let action: (() -> Void) = {
+            print("button click")
+        }
+
         let infoListItemsViewModel = [
-            InfoListItemViewModel(title: movie.title, icon: icon),
+            InfoListItemViewModel(title: movie.title, icon: icon, action: action),
             InfoListItemViewModel(title: movie.releaseDate),
             InfoListItemViewModel(title: movie.genres),
             InfoListItemViewModel(descriptionText: movie.overview)
@@ -85,6 +89,6 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
             !infoListItemViewModel.isEmpty
         }
 
-        moviesDetailsInfoListView.setInfos(infos: infoListItemsViewModel)
+        moviesDetailsInfoListView.setupDataSource(items: infoListItemsViewModel)
     }
 }

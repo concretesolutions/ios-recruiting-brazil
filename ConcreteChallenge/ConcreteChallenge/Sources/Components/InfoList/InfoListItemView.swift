@@ -48,9 +48,11 @@ final class InfoListItemView: UIView {
 
     private var viewModel: InfoListItemViewModel {
         didSet {
-            updateView()
+            setupView()
         }
     }
+
+    private var buttonTapped: (() -> Void)?
 
     // MARK: - Initializers
 
@@ -60,6 +62,8 @@ final class InfoListItemView: UIView {
         super.init(frame: .zero)
 
         setupLayout()
+        setupView()
+        setupActions()
     }
 
     @available(*, unavailable)
@@ -73,6 +77,10 @@ final class InfoListItemView: UIView {
         viewModel = new
     }
 
+    func bind(_ handler: @escaping () -> Void) {
+        buttonTapped = handler
+    }
+
     // MARK: - Private functions
 
     private func setupLayout() {
@@ -84,11 +92,9 @@ final class InfoListItemView: UIView {
             iconButton.heightAnchor.constraint(equalToConstant: 36),
             iconButton.widthAnchor.constraint(equalToConstant: 36)
         ])
-
-        updateView()
     }
 
-    private func updateView() {
+    private func setupView() {
         if let titleText = viewModel.title {
             title.isHidden = false
             title.text = titleText
@@ -116,5 +122,21 @@ final class InfoListItemView: UIView {
         } else {
             descriptionText.isHidden = true
         }
+
+        buttonTapped = viewModel.action
     }
+
+    private func setupActions() {
+        iconButton.addTarget(self, action: #selector(didButtonTapped), for: .touchUpInside)
+    }
+
+    // MARK: - Fileprivate functions
+
+    @objc fileprivate func didButtonTapped() {
+        buttonTapped?()
+    }
+}
+
+private extension Selector {
+    static let didButtonTapped = #selector(InfoListItemView.didButtonTapped)
 }
