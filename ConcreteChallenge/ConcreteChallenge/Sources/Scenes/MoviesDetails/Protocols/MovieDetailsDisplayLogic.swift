@@ -6,4 +6,7 @@
 //  Copyright © 2020 Adrian Almeida. All rights reserved.
 //
 
-protocol MovieDetailsDisplayLogic: AnyObject { }
+protocol MovieDetailsDisplayLogic: AnyObject {
+    func onSuccessSaveMovie(viewModel: MovieDetails.SaveMovie.ViewModel)
+    func onSuccessDeleteMovie(viewModel: MovieDetails.DeleteMovie.ViewModel)
+}

@@ -6,4 +6,7 @@
 //  Copyright © 2020 Adrian Almeida. All rights reserved.
 //
 
-protocol MovieDetailsWorkerProtocol: AnyObject {}
+protocol MovieDetailsWorkerProtocol: AnyObject {
+    func saveMovie(movie: Movie)
+    func deleteMovie(movie: Movie)
+}

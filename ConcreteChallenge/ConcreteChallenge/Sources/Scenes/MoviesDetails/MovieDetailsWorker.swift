@@ -6,4 +6,11 @@
 //  Copyright © 2020 Adrian Almeida. All rights reserved.
 //
 
-final class MovieDetailsWorker: MovieDetailsWorkerProtocol { }
+final class MovieDetailsWorker: MovieDetailsWorkerProtocol {
+
+    // MARK: - MovieDetailsWorkerProtocol conforms
+
+    func saveMovie(movie: Movie) { }
+
+    func deleteMovie(movie: Movie) { }
+}

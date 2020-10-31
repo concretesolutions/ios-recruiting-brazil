@@ -20,7 +20,11 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
 
     // MARK: - Private constants
 
-    private let movie: Movie
+    private var movie: Movie {
+        didSet {
+            setupMoviesInfo()
+        }
+    }
 
     private let interactor: MovieDetailsBusinessLogic
 
@@ -52,6 +56,16 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
         title = Strings.movie.localizable
     }
 
+    // MARK: - MovieDetailsDisplayLogic Conforms
+
+    func onSuccessSaveMovie(viewModel: MovieDetails.SaveMovie.ViewModel) {
+        movie = viewModel.movie
+    }
+
+    func onSuccessDeleteMovie(viewModel: MovieDetails.DeleteMovie.ViewModel) {
+        movie = viewModel.movie
+    }
+
     // MARK: - Private functions
 
     private func setupLayout() {
@@ -76,8 +90,8 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
     private func setupMoviesInfo() {
         let icon: UIImage.Assets = movie.isFavorite ? .favoriteFullIcon : .favoriteEmptyIcon
 
-        let action: (() -> Void) = {
-            print("button click")
+        let action: (() -> Void) = { [weak self] in
+            self?.actionButtonTapped()
         }
 
         let infoListItemsViewModel = [
@@ -90,5 +104,13 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
         }
 
         moviesDetailsInfoListView.setupDataSource(items: infoListItemsViewModel)
+    }
+
+    private func actionButtonTapped() {
+        if !movie.isFavorite {
+            interactor.saveMovie(request: MovieDetails.SaveMovie.Request(movie: movie))
+        } else {
+            interactor.deleteMovie(request: MovieDetails.DeleteMovie.Request(movie: movie))
+        }
     }
 }

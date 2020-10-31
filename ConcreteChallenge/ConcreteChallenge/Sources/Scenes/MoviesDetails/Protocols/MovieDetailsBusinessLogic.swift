@@ -6,4 +6,7 @@
 //  Copyright © 2020 Adrian Almeida. All rights reserved.
 //
 
-protocol MovieDetailsBusinessLogic: AnyObject { }
+protocol MovieDetailsBusinessLogic: AnyObject {
+    func saveMovie(request: MovieDetails.SaveMovie.Request)
+    func deleteMovie(request: MovieDetails.DeleteMovie.Request)
+}

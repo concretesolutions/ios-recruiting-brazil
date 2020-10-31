@@ -9,15 +9,31 @@
 import Foundation
 
 enum MovieDetails {
-    enum SaveFavorite {
-        struct Request { }
-        struct Response { }
-        struct ViewModel { }
+    enum SaveMovie {
+        struct Request {
+            let movie: Movie
+        }
+
+        struct Response {
+            let movie: Movie
+        }
+
+        struct ViewModel {
+            let movie: Movie
+        }
     }
 
-    enum DeleteFavorite {
-        struct Request { }
-        struct Response { }
-        struct ViewModel { }
+    enum DeleteMovie {
+        struct Request {
+            let movie: Movie
+        }
+
+        struct Response {
+            let movie: Movie
+        }
+
+        struct ViewModel {
+            let movie: Movie
+        }
     }
 }
