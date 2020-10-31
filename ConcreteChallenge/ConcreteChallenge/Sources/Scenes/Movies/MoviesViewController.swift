@@ -26,6 +26,8 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
     private var genres: [GenreResponse] = []
 
+    private var firstTimeLoadMovies = true
+
     // MARK: - Variables
 
     weak var delegate: MoviesViewControllerDelegate?
@@ -61,6 +63,14 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         })
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+
+        if !firstTimeLoadMovies {
+            loadGridGalleryLayout()
+        }
+    }
+
     // MARK: - MoviesDisplayLogic conforms
 
     func onFetchGenresSuccess(viewModel: Movies.FetchGenres.ViewModel) {
@@ -73,13 +83,9 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         view.stopLoading()
         errorView.isHidden = true
 
-        movies = viewModel.movies
+        self.movies = viewModel.movies
 
-        let itemsViewModel = movies.map { movie -> GridGalleryItemViewModel in
-            GridGalleryItemViewModel(imageURL: movie.imageURL, title: movie.title, isFavorite: movie.isFavorite)
-        }
-
-        galleryCollectionView.setupDataSource(items: itemsViewModel)
+        loadGridGalleryLayout()
     }
 
     func displayMoviesError() {
@@ -132,6 +138,16 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         errorView.isHidden = false
 
         errorView.configuration = configuration
+    }
+
+    private func loadGridGalleryLayout() {
+        firstTimeLoadMovies = false
+
+        let itemsViewModel = movies.map { movie -> GridGalleryItemViewModel in
+            GridGalleryItemViewModel(imageURL: movie.imageURL, title: movie.title, isFavorite: movie.isFavorite)
+        }
+
+        galleryCollectionView.setupDataSource(items: itemsViewModel)
     }
 
     private func getItemSize() -> CGSize {

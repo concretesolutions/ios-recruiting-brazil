@@ -6,7 +6,7 @@
 //  Copyright © 2020 Adrian Almeida. All rights reserved.
 //
 
-struct Movie: Codable {
+final class Movie {
     let id: Int
     let title: String
     let imageURL: String
@@ -14,4 +14,16 @@ struct Movie: Codable {
     let releaseDate: String
     let overview: String
     var isFavorite: Bool = false
+
+    // MARK: - Initializers
+
+    init(id: Int, title: String, imageURL: String, genres: String?, releaseDate: String, overview: String, isFavorite: Bool) {
+        self.id = id
+        self.title = title
+        self.imageURL = imageURL
+        self.genres = genres
+        self.releaseDate = releaseDate
+        self.overview = overview
+        self.isFavorite = isFavorite
+    }
 }
