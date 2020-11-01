@@ -37,6 +37,9 @@
 		A845877D254DE85100829BBE /* MovieRealmDbService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A845877C254DE85100829BBE /* MovieRealmDbService.swift */; };
 		A845877F254DEBC200829BBE /* DatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A845877E254DEBC200829BBE /* DatabaseError.swift */; };
 		A8458781254DF4AC00829BBE /* RealmProvider+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8458780254DF4AC00829BBE /* RealmProvider+Extension.swift */; };
+		A8458786254E4B2100829BBE /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8458785254E4B2100829BBE /* FavoritesPresenter.swift */; };
+		A8458788254E4B7A00829BBE /* FavoritesModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8458787254E4B7A00829BBE /* FavoritesModels.swift */; };
+		A845878A254E4BC500829BBE /* FavoritesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8458789254E4BC500829BBE /* FavoritesInteractor.swift */; };
 		A864B85625477BC500B5BC29 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B85525477BC500B5BC29 /* DataSource.swift */; };
 		A864B85825477DB300B5BC29 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B85725477DB300B5BC29 /* CollectionViewDataSource.swift */; };
 		A864B85A25477FA200B5BC29 /* NSObjectProtocol+ClassName.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B85925477FA200B5BC29 /* NSObjectProtocol+ClassName.swift */; };
@@ -135,6 +138,9 @@
 		A845877C254DE85100829BBE /* MovieRealmDbService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRealmDbService.swift; sourceTree = "<group>"; };
 		A845877E254DEBC200829BBE /* DatabaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseError.swift; sourceTree = "<group>"; };
 		A8458780254DF4AC00829BBE /* RealmProvider+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RealmProvider+Extension.swift"; sourceTree = "<group>"; };
+		A8458785254E4B2100829BBE /* FavoritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
+		A8458787254E4B7A00829BBE /* FavoritesModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesModels.swift; sourceTree = "<group>"; };
+		A8458789254E4BC500829BBE /* FavoritesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesInteractor.swift; sourceTree = "<group>"; };
 		A864B85525477BC500B5BC29 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		A864B85725477DB300B5BC29 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		A864B85925477FA200B5BC29 /* NSObjectProtocol+ClassName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObjectProtocol+ClassName.swift"; sourceTree = "<group>"; };
@@ -337,6 +343,9 @@
 		A8660EAE25455F5300D74934 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
+				A8458789254E4BC500829BBE /* FavoritesInteractor.swift */,
+				A8458787254E4B7A00829BBE /* FavoritesModels.swift */,
+				A8458785254E4B2100829BBE /* FavoritesPresenter.swift */,
 				A8660EAF25455FB700D74934 /* FavoritesScreenFactory.swift */,
 				A8660EB125455FEA00D74934 /* FavoritesViewController.swift */,
 			);
@@ -785,6 +794,8 @@
 				A864B85E2547859E00B5BC29 /* GridGalleryItemView.swift in Sources */,
 				A864B85A25477FA200B5BC29 /* NSObjectProtocol+ClassName.swift in Sources */,
 				A8B129C32543C2350074654A /* UIWindow+AppRootController.swift in Sources */,
+				A8458786254E4B2100829BBE /* FavoritesPresenter.swift in Sources */,
+				A8458788254E4B7A00829BBE /* FavoritesModels.swift in Sources */,
 				A8660E56254545F700D74934 /* Strings.swift in Sources */,
 				A8458771254D1B6700829BBE /* MovieResponse.swift in Sources */,
 				A845875E254BBDC300829BBE /* GenreResponse.swift in Sources */,
@@ -803,6 +814,7 @@
 				A8458747254BB4CB00829BBE /* MovieDetailsInteractor.swift in Sources */,
 				A845874F254BB56700829BBE /* MoviesRealmWorker.swift in Sources */,
 				A8705E682549262700E16B01 /* UICollectionView+Register.swift in Sources */,
+				A845878A254E4BC500829BBE /* FavoritesInteractor.swift in Sources */,
 				A8458763254BCB2A00829BBE /* InfoListItemView.swift in Sources */,
 				A8458769254CC6C200829BBE /* TableViewDataSource.swift in Sources */,
 				A8660E58254547FD00D74934 /* String+Extension.swift in Sources */,

@@ -8,7 +8,9 @@
 
 import UIKit
 
-final class FavoritesViewController: UIViewController {
+protocol FavoritesDisplayLogic: AnyObject { }
+
+final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
