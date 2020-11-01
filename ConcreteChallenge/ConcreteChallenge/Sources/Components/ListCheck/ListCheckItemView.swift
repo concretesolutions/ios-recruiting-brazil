@@ -76,11 +76,13 @@ final class ListCheckItemView: UIView {
 
     private func setupLayout() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        title.translatesAutoresizingMaskIntoConstraints = false
 
         addSubview(stackView, constraints: [
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor)
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            stackView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
 
         NSLayoutConstraint.activate([
@@ -88,7 +90,7 @@ final class ListCheckItemView: UIView {
             imageView.widthAnchor.constraint(equalToConstant: 24)
         ])
 
-        value.setContentCompressionResistancePriority(.required, for: .horizontal)
+        title.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
 
     private func setupViewModel() {

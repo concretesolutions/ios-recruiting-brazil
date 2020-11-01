@@ -9,6 +9,7 @@
 import Foundation
 
 enum Strings: String, Localizable {
+    case apply
     case date
     case favorites
     case filter

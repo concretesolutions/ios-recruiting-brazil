@@ -9,9 +9,8 @@
 import UIKit
 
 enum ListCheckTableViewFactory {
-    static func makeTableView() -> ListCheckItemView {
-        let viewModel = ListCheckItemViewModel(title: "Date", value: "2008", icon: .arrowForward)
-        let listCheckItem = ListCheckItemView(viewModel: viewModel)
+    static func makeTableView() -> ListCheckTableView {
+        let listCheckItem = ListCheckTableView()
 
         return listCheckItem
     }

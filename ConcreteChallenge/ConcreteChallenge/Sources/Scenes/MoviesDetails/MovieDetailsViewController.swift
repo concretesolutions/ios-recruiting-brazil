@@ -21,9 +21,9 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
         return imageView
     }()
 
-    private lazy var moviesDetailsInfoListView = InfoListTableViewFactory.makeTableView(movie: movieDisplay)
+    private lazy var moviesDetailsInfoListView = InfoListTableViewFactory.makeTableView()
 
-    // MARK: - Private constants
+    // MARK: - Private variables
 
     private var movieData: Movie
 
@@ -32,6 +32,8 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
             setupMoviesInfo()
         }
     }
+
+    // MARK: - Private constants
 
     private let interactor: MovieDetailsBusinessLogic
 
