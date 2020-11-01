@@ -49,6 +49,8 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
 
     private var filterIndexType = FilterIndexType.genres
 
+    private let allDates = ["2020", "2015"]
+
     private var date: [String] = []
 
     private var genres: [String] = []
@@ -195,8 +197,9 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
 
         showDataPickerListCheckTableView()
 
-        let listCheckItemsViewModel = allDates.map { date -> ListCheckItemViewModel in
-            ListCheckItemViewModel(title: date)
+        let listCheckItemsViewModel = allDates.map { allDatesItem -> ListCheckItemViewModel in
+            let dateStored = date.first { $0 == allDatesItem }
+            return ListCheckItemViewModel(title: allDatesItem, icon: dateStored != nil ? .checkIcon : nil)
         }
         dataPickerListCheckTableView.setupDataSource(items: listCheckItemsViewModel)
     }
@@ -206,13 +209,12 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
 
         showDataPickerListCheckTableView()
 
-        let listCheckItemsViewModel = allGenres.map { date -> ListCheckItemViewModel in
-            ListCheckItemViewModel(title: date)
+        let listCheckItemsViewModel = allGenres.map { allGenresItem -> ListCheckItemViewModel in
+            let genreStored = genres.first { $0 == allGenresItem }
+            return ListCheckItemViewModel(title: allGenresItem, icon: genreStored != nil ? .checkIcon : nil)
         }
         dataPickerListCheckTableView.setupDataSource(items: listCheckItemsViewModel)
     }
-
-    private let allDates = ["2020", "2019", "2018", "2017", "2016", "2015", "2020", "2019", "2018", "2017", "2016", "2015", "2020", "2019", "2018", "2017", "2016", "2015"]
 
     private let allGenres = ["Action", "Ação", "Comédia", "Velozes", "Romantico", "Terror", "Aventura", "Kids", "Adulto", "Sexy hot"]
 }

@@ -109,7 +109,7 @@ final class ListCheckItemView: UIView {
 
         if let icon = viewModel.icon {
             imageView.isHidden = false
-            imageView.image = UIImage(assets: icon)?.withInsets(insets: UIEdgeInsets(top: 48, left: 48, bottom: 48, right: 48))
+            imageView.image = UIImage(assets: icon)?.withInsets(insets: UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12))
         } else {
             imageView.isHidden = true
         }
