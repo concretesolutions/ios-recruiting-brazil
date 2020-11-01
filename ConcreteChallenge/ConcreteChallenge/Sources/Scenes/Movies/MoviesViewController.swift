@@ -149,7 +149,6 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         self.delegate?.galleryItemTapped(movie: movieDetails, self)
     }
 
-    //TODO - Move worker
     private func fetchLocalMovies() {
         interactor.fetchLocalMovies()
     }
