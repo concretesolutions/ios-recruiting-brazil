@@ -6,6 +6,11 @@
 //  Copyright © 2020 Adrian Almeida. All rights reserved.
 //
 
+protocol MovieDetailsPresentationLogic: AnyObject {
+    func onSuccessSaveMovie(response: MovieDetails.SaveMovie.Response)
+    func onSuccessDeleteMovie(response: MovieDetails.DeleteMovie.Response)
+}
+
 final class MovieDetailsPresenter: MovieDetailsPresentationLogic {
     weak var viewController: MovieDetailsDisplayLogic?
 

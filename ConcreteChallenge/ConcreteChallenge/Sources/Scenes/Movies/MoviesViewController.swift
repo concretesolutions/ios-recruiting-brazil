@@ -8,6 +8,14 @@
 
 import UIKit
 
+protocol MoviesDisplayLogic: AnyObject {
+    func onFetchLocalMoviesSuccess(viewModel: Movies.FetchLocalMovies.ViewModel)
+    func onFetchGenresSuccess(viewModel: Movies.FetchGenres.ViewModel)
+    func displayMoviesItems(viewModel: Movies.FetchMovies.ViewModel)
+    func displayMoviesError()
+    func displaySearchError(searchText: String)
+}
+
 final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     private lazy var galleryCollectionView: GridGalleryCollectionView = {
         return GridGalleryCollectionView(itemSize: getItemSize(), items: [])
@@ -77,6 +85,12 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
     // MARK: - MoviesDisplayLogic conforms
 
+    func onFetchLocalMoviesSuccess(viewModel: Movies.FetchLocalMovies.ViewModel) {
+        localMovies = viewModel.movies
+
+        fetchGenres()
+    }
+
     func onFetchGenresSuccess(viewModel: Movies.FetchGenres.ViewModel) {
         genres = viewModel.genres
 
@@ -137,20 +151,7 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
     //TODO - Move worker
     private func fetchLocalMovies() {
-        let worker = MovieDetailsWorker(provider: MovieRealmDbService())
-        worker.fetchMovies() { result in
-            switch result {
-            case let .success(movies):
-                self.localMovies = movies.map { movie -> Movie in
-                    movie.isFavorite = true
-                    return movie
-                }
-                print(movies)
-                self.fetchGenres()
-            case let .failure(error):
-                print(error)
-            }
-        }
+        interactor.fetchLocalMovies()
     }
 
     private func fetchGenres(language: String = Constants.MovieDefaultParameters.language) {

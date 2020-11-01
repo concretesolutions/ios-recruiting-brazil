@@ -6,13 +6,18 @@
 //  Copyright © 2020 Adrian Almeida. All rights reserved.
 //
 
+protocol MovieDetailsBusinessLogic: AnyObject {
+    func saveMovie(request: MovieDetails.SaveMovie.Request)
+    func deleteMovie(request: MovieDetails.DeleteMovie.Request)
+}
+
 final class MovieDetailsInteractor: MovieDetailsBusinessLogic {
-    private let worker: MovieDetailsWorkerProtocol
+    private let worker: MovieRealmWorkerProtocol
     private let presenter: MovieDetailsPresentationLogic
 
     // MARK: - Initializers
 
-    init(worker: MovieDetailsWorkerProtocol, presenter: MovieDetailsPresenter) {
+    init(worker: MovieRealmWorkerProtocol, presenter: MovieDetailsPresenter) {
         self.worker = worker
         self.presenter = presenter
     }

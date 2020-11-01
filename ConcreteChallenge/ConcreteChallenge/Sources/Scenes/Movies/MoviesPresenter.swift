@@ -6,10 +6,22 @@
 //  Copyright © 2020 Adrian Almeida. All rights reserved.
 //
 
+protocol MoviesPresentationLogic: AnyObject {
+    func presentLocalMoviesItems(response: Movies.FetchLocalMovies.Response)
+    func presentGenresItems(response: Movies.FetchGenres.Response)
+    func presentMoviesItems(response: Movies.FetchMovies.Response)
+    func presentFetchMoviesFailure()
+}
+
 final class MoviesPresenter: MoviesPresentationLogic {
     weak var viewController: MoviesDisplayLogic?
 
     // MARK: - MoviesPresentationLogic conforms
+
+    func presentLocalMoviesItems(response: Movies.FetchLocalMovies.Response) {
+        let viewModel = Movies.FetchLocalMovies.ViewModel(movies: response.movies)
+        viewController?.onFetchLocalMoviesSuccess(viewModel: viewModel)
+    }
 
     func presentGenresItems(response: Movies.FetchGenres.Response) {
         let viewModel = Movies.FetchGenres.ViewModel(genres: response.genres)

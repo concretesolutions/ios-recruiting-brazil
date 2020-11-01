@@ -9,6 +9,16 @@
 import Foundation
 
 enum Movies {
+    enum FetchLocalMovies {
+        struct Response {
+            let movies: [Movie]
+        }
+
+        struct ViewModel {
+            let movies: [Movie]
+        }
+    }
+
     enum FetchMovies {
         struct Request {
             let language: String

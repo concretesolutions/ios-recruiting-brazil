@@ -8,21 +8,26 @@
 
 import UIKit
 
+protocol MovieDetailsDisplayLogic: AnyObject {
+    func onSuccessSaveMovie(viewModel: MovieDetails.SaveMovie.ViewModel)
+    func onSuccessDeleteMovie(viewModel: MovieDetails.DeleteMovie.ViewModel)
+}
+
 final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.kf.setImage(with: URL(string: movie.imageURL))
+        imageView.kf.setImage(with: URL(string: movieDisplay.imageURL))
 
         return imageView
     }()
 
-    private lazy var moviesDetailsInfoListView = InfoListTableViewFactory.makeTableView(movie: movie)
+    private lazy var moviesDetailsInfoListView = InfoListTableViewFactory.makeTableView(movie: movieDisplay)
 
     // MARK: - Private constants
 
     private var movieData: Movie
 
-    private var movie: Movie {
+    private var movieDisplay: Movie {
         didSet {
             setupMoviesInfo()
         }
@@ -34,7 +39,7 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
 
     init(movie: Movie, interactor: MovieDetailsBusinessLogic) {
         movieData = movie
-        self.movie = movie.clone()
+        movieDisplay = movie.clone()
         self.interactor = interactor
 
         super.init(nibName: nil, bundle: nil)
@@ -62,13 +67,13 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
     // MARK: - MovieDetailsDisplayLogic Conforms
 
     func onSuccessSaveMovie(viewModel: MovieDetails.SaveMovie.ViewModel) {
-        movie.isFavorite = viewModel.isFavorite
+        movieDisplay.isFavorite = viewModel.isFavorite
         setupMoviesInfo()
     }
 
     func onSuccessDeleteMovie(viewModel: MovieDetails.DeleteMovie.ViewModel) {
-        movieData = movie.clone()
-        movie.isFavorite = viewModel.isFavorite
+        movieData = movieDisplay.clone()
+        movieDisplay.isFavorite = viewModel.isFavorite
         setupMoviesInfo()
     }
 
@@ -94,17 +99,17 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
     }
 
     private func setupMoviesInfo() {
-        let icon: UIImage.Assets = movie.isFavorite ? .favoriteFullIcon : .favoriteEmptyIcon
+        let icon: UIImage.Assets = movieDisplay.isFavorite ? .favoriteFullIcon : .favoriteEmptyIcon
 
         let action: (() -> Void) = { [weak self] in
             self?.actionButtonTapped()
         }
 
         let infoListItemsViewModel = [
-            InfoListItemViewModel(title: movie.title, icon: icon, action: action),
-            InfoListItemViewModel(title: movie.releaseDate),
-            InfoListItemViewModel(title: movie.genres),
-            InfoListItemViewModel(descriptionText: movie.overview)
+            InfoListItemViewModel(title: movieDisplay.title, icon: icon, action: action),
+            InfoListItemViewModel(title: movieDisplay.releaseDate),
+            InfoListItemViewModel(title: movieDisplay.genres),
+            InfoListItemViewModel(descriptionText: movieDisplay.overview)
         ].filter { infoListItemViewModel in
             !infoListItemViewModel.isEmpty
         }
@@ -113,7 +118,7 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
     }
 
     private func actionButtonTapped() {
-        if !movie.isFavorite {
+        if !movieDisplay.isFavorite {
             interactor.saveMovie(request: MovieDetails.SaveMovie.Request(movie: movieData))
         } else {
             interactor.deleteMovie(request: MovieDetails.DeleteMovie.Request(movie: movieData))
