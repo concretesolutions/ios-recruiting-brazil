@@ -61,9 +61,7 @@ final class InfoListItemView: UIView {
 
         super.init(frame: .zero)
 
-        setupLayout()
-        setupViewModel()
-        setupActions()
+        setup()
     }
 
     @available(*, unavailable)
@@ -82,6 +80,12 @@ final class InfoListItemView: UIView {
     }
 
     // MARK: - Private functions
+
+    private func setup() {
+        setupLayout()
+        setupViewModel()
+        setupActions()
+    }
 
     private func setupLayout() {
         addSubview(stackDescriptionStackView, constraints: [

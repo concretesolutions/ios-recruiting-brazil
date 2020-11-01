@@ -10,6 +10,7 @@ import UIKit
 
 public extension UIImage {
     enum Assets: String {
+        case arrowForward = "arrow_forward"
         case checkIcon = "check_icon"
         case error = "error"
         case favoriteEmptyIcon = "favorite_empty_icon"

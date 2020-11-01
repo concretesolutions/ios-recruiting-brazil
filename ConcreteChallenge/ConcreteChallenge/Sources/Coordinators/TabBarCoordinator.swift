@@ -29,19 +29,25 @@ final class TabBarCoordinator: Coordinator, TabBarViewControllerDelegate, Movies
     // MARK: - TabBarViewControllerDelegate conforms
 
     func barButtonItemTapped(_ viewController: TabBarViewController) {
-        print("filter item tapped")
+        let filterTypeViewController = FilterTypeFactory.makeFilterType()
+        pushViewController(viewController: filterTypeViewController)
     }
 
     // MARK: - MoviesViewControllerDelegate conforms
 
     func galleryItemTapped(movie: Movie, _ viewController: MoviesViewController) {
         let moviesDetailsViewController = MovieDetailsScreenFactory.makeMoviesDetails(movie: movie)
+        pushViewController(viewController: moviesDetailsViewController)
+    }
 
+    // MARK: - Private functions
+
+    private func pushViewController(viewController: UIViewController) {
         if let rootController = rootController,
             let rootViewController = rootController.rootViewController,
             let navigationController = rootViewController as? UINavigationController {
 
-            navigationController.pushViewController(moviesDetailsViewController, animated: true)
+            navigationController.pushViewController(viewController, animated: true)
         }
     }
 }
