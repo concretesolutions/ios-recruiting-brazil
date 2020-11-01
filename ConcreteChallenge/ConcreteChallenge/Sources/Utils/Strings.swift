@@ -13,6 +13,7 @@ enum Strings: String, Localizable {
     case movie
     case movies
     case search
+    case unfavorite
     case convertUrlFailure = "convert_url_failure"
     case errorDelete = "error_delete"
     case errorFetch = "error_fetch"

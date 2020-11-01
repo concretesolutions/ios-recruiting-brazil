@@ -9,10 +9,9 @@
 import UIKit
 
 enum HorizontalInfoListFactory {
-    static func makeItem() -> HorizontalInfoListItemView {
-        let viewModel = HorizontalInfoListViewModel(imageURL: "https://ingresso-a.akamaihd.net/img/cinema/cartaz/22968-cartaz.jpg", title: "Sonic", subtitle: "2019", descriptionText: "Sonic é bacana")
-        let item = HorizontalInfoListItemView(viewModel: viewModel)
+    static func makeTableView() -> HorizontalInfoListTableView {
+        let tableView = HorizontalInfoListTableView()
 
-        return item
+        return tableView
     }
 }

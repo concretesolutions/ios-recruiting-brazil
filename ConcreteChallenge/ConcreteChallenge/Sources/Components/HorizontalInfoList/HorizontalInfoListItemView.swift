@@ -98,11 +98,8 @@ final class HorizontalInfoListItemView: UIView {
 
     private func setupViewModel() {
         imageView.kf.setImage(with: URL(string: viewModel.imageURL))
-
         title.text = viewModel.title
-
         subtitle.text = viewModel.subtitle
-
         descriptionText.text = viewModel.descriptionText
     }
 }

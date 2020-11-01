@@ -9,6 +9,7 @@
 protocol FavoritesPresentationLogic: AnyObject {
     func presentLocalMoviesItems(response: Favorites.FetchLocalMovies.Response)
     func presentFetchMoviesFailure()
+    func onSuccessDeleteMovie()
 }
 
 final class FavoritesPresenter: FavoritesPresentationLogic {
@@ -23,5 +24,9 @@ final class FavoritesPresenter: FavoritesPresentationLogic {
 
     func presentFetchMoviesFailure() {
         viewController?.displayMoviesError()
+    }
+
+    func onSuccessDeleteMovie() {
+        viewController?.onSuccessDeleteMovie()
     }
 }

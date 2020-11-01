@@ -48,7 +48,7 @@ final class InfoListItemView: UIView {
 
     private var viewModel: InfoListItemViewModel {
         didSet {
-            setupView()
+            setupViewModel()
         }
     }
 
@@ -62,7 +62,7 @@ final class InfoListItemView: UIView {
         super.init(frame: .zero)
 
         setupLayout()
-        setupView()
+        setupViewModel()
         setupActions()
     }
 
@@ -92,7 +92,7 @@ final class InfoListItemView: UIView {
         ])
     }
 
-    private func setupView() {
+    private func setupViewModel() {
         if viewModel.title == nil, viewModel.icon == nil {
             titleButtonStackView.isHidden = true
         } else {

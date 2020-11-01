@@ -8,6 +8,7 @@
 
 protocol FavoritesBusinessLogic: AnyObject {
     func fetchLocalMovies()
+    func deleteMovie(request: MovieDetails.DeleteMovie.Request)
 }
 
 final class FavoritesInteractor: FavoritesBusinessLogic {
@@ -33,6 +34,17 @@ final class FavoritesInteractor: FavoritesBusinessLogic {
                 }
                 let responseModel = Favorites.FetchLocalMovies.Response(movies: localMovies)
                 self.presenter.presentLocalMoviesItems(response: responseModel)
+            case let .failure(error):
+                self.presentFailure(error: error)
+            }
+        }
+    }
+
+    func deleteMovie(request: MovieDetails.DeleteMovie.Request) {
+        worker.deleteMovie(movie: request.movie) { result in
+            switch result {
+            case .success():
+                self.presenter.onSuccessDeleteMovie()
             case let .failure(error):
                 self.presentFailure(error: error)
             }

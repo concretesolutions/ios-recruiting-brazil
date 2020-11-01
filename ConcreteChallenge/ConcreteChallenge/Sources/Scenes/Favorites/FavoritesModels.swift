@@ -20,10 +20,8 @@ enum Favorites {
     }
 
     enum DeleteMovie {
-        struct Request { }
-
-        struct Response { }
-
-        struct ViewModel { }
+        struct Request {
+            let movie: Movie
+        }
     }
 }
