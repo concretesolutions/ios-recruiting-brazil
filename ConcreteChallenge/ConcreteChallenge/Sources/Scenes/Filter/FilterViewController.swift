@@ -49,7 +49,9 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
 
     private var filterIndexType = FilterIndexType.genres
 
-    private let allDates = ["2020", "2015"]
+    private let allDates: [String] = []
+
+    private let allGenres: [String] = []
 
     private var date: [String] = []
 
@@ -79,6 +81,7 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        fetchDatas()
         setup()
     }
 
@@ -90,6 +93,10 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
         navigationItem.leftBarButtonItem = barButtonItem
     }
     // MARK: - Private functions
+
+    private func fetchDatas() {
+//        interactor.
+    }
 
     private func setup() {
         setupNavigation()
@@ -144,16 +151,15 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
             } else {
                 date.append(allDates[index])
             }
+            setupDateList()
         default:
             if let removeIndex = genres.firstIndex(of: allGenres[index]) {
                 genres.remove(at: removeIndex)
             } else {
                 genres.append(allGenres[index])
             }
+            setupGenresList()
         }
-
-        print(date)
-        print(genres)
     }
 
     private func setupFilterType() {
@@ -215,8 +221,6 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
         }
         dataPickerListCheckTableView.setupDataSource(items: listCheckItemsViewModel)
     }
-
-    private let allGenres = ["Action", "Ação", "Comédia", "Velozes", "Romantico", "Terror", "Aventura", "Kids", "Adulto", "Sexy hot"]
 }
 
 private extension Selector {
