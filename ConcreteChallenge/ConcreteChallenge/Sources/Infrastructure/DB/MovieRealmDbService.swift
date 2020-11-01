@@ -24,7 +24,6 @@ final class MovieRealmDbService {
     func save<T: Object>(model: T, completion: @escaping (Result<Void, DatabaseError>) -> Void) {
         DispatchQueue.main.async {
             do {
-                print(model)
                 let realm = try RealmManager.realmInstance()
                 try realm.write {
                     realm.add(model)
@@ -39,7 +38,6 @@ final class MovieRealmDbService {
     func delete<T: Object>(model: T, completion: @escaping (Result<Void, DatabaseError>) -> Void) {
         DispatchQueue.main.async {
             do {
-                print(model)
                 let realm = try RealmManager.realmInstance()
                 try realm.write {
                     realm.delete(model)

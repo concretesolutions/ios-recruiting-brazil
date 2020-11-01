@@ -6,8 +6,22 @@
 //  Copyright © 2020 Adrian Almeida. All rights reserved.
 //
 
-protocol FavoritesPresentationLogic: AnyObject { }
+protocol FavoritesPresentationLogic: AnyObject {
+    func presentLocalMoviesItems(response: Favorites.FetchLocalMovies.Response)
+    func presentFetchMoviesFailure()
+}
 
-final class FavoritesPresenter {
+final class FavoritesPresenter: FavoritesPresentationLogic {
+    weak var viewController: FavoritesDisplayLogic?
 
+    // MARK: - FavoritesPresentationLogic conforms
+
+    func presentLocalMoviesItems(response: Favorites.FetchLocalMovies.Response) {
+        let viewModel = Favorites.FetchLocalMovies.ViewModel(movies: response.movies)
+        viewController?.onFetchLocalMoviesSuccess(viewModel: viewModel)
+    }
+
+    func presentFetchMoviesFailure() {
+        viewController?.displayMoviesError()
+    }
 }

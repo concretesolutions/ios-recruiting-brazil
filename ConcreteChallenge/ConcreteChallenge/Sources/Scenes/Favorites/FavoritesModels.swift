@@ -9,6 +9,16 @@
 import Foundation
 
 enum Favorites {
+    enum FetchLocalMovies {
+        struct Response {
+            let movies: [Movie]
+        }
+
+        struct ViewModel {
+            let movies: [Movie]
+        }
+    }
+
     enum DeleteMovie {
         struct Request { }
 

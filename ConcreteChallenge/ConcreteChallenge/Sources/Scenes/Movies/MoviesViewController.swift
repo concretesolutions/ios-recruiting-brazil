@@ -67,7 +67,7 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         super.viewDidLoad()
         setup()
 
-        // First time has delay only to show loading view
+        // First time has delay only to show loading view - Should remove lines 71...74
         view.showLoading()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [weak self] in
             self?.fetchLocalMovies()
@@ -75,7 +75,7 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
 
         if !firstTimeLoadMovies {
             view.showLoading()
