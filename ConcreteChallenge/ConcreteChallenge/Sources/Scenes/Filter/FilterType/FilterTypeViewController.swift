@@ -9,7 +9,7 @@
 import UIKit
 
 final class FilterTypeViewController: UIViewController {
-    private lazy var listCheckTableView: ListCheckTableView = {
+    private lazy var typeListCheckTableView: ListCheckTableView = {
         let tableView = ListCheckTableViewFactory.makeTableView()
 
         return tableView
@@ -28,7 +28,7 @@ final class FilterTypeViewController: UIViewController {
     }()
 
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [listCheckTableView, applyButton])
+        let stackView = UIStackView(arrangedSubviews: [typeListCheckTableView, applyButton])
         stackView.axis = .vertical
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
@@ -39,6 +39,10 @@ final class FilterTypeViewController: UIViewController {
     // MARK: - Private constants
 
     private let filterType = [Strings.date.localizable, Strings.genres.localizable]
+
+    private let date: [String] = []
+
+    private let genres: [String] = []
 
     // MARK: - Initializers
 
@@ -91,7 +95,7 @@ final class FilterTypeViewController: UIViewController {
     }
 
     private func setupActions() {
-        listCheckTableView.bind { [weak self] index in
+        typeListCheckTableView.bind { [weak self] index in
             self?.listCheckItemTapped(index)
         }
     }
@@ -109,6 +113,6 @@ final class FilterTypeViewController: UIViewController {
         let listCheckItemsViewModel = filterType.map { filterType -> ListCheckItemViewModel in
             ListCheckItemViewModel(title: filterType, icon: .arrowForward)
         }
-        listCheckTableView.setupDataSource(items: listCheckItemsViewModel)
+        typeListCheckTableView.setupDataSource(items: listCheckItemsViewModel)
     }
 }
