@@ -86,8 +86,7 @@ final class ListCheckItemView: UIView {
         ])
 
         NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: 24),
-            imageView.widthAnchor.constraint(equalToConstant: 24)
+            imageView.widthAnchor.constraint(equalToConstant: 48)
         ])
 
         title.setContentCompressionResistancePriority(.required, for: .horizontal)
@@ -110,7 +109,7 @@ final class ListCheckItemView: UIView {
 
         if let icon = viewModel.icon {
             imageView.isHidden = false
-            imageView.image = UIImage(assets: icon)
+            imageView.image = UIImage(assets: icon)?.withInsets(insets: UIEdgeInsets(top: 48, left: 48, bottom: 48, right: 48))
         } else {
             imageView.isHidden = true
         }

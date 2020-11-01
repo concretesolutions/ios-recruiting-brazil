@@ -13,7 +13,6 @@ final class HorizontalInfoListTableView: UIView, UITableViewDelegate {
         let tableView = UITableView()
         tableView.dataSource = dataSource
         tableView.register(HorizontalInfoListViewCell.self)
-        tableView.delegate = self
         tableView.rowHeight = 120
 
         let tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
@@ -56,6 +55,7 @@ final class HorizontalInfoListTableView: UIView, UITableViewDelegate {
     }
 
     func bind (onUnfavoritePress handler: @escaping (_ index: Int) -> Void) {
+        tableView.delegate = self
         onItemUnfavoritePress = handler
     }
 
