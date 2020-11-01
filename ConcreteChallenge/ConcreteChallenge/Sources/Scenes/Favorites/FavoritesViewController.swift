@@ -15,6 +15,15 @@ protocol FavoritesDisplayLogic: AnyObject {
 }
 
 final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
+    private lazy var horizontalItemView: HorizontalInfoListItemView = HorizontalInfoListFactory.makeItem()
+
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [horizontalItemView, errorView])
+        stackView.axis = .vertical
+
+        return stackView
+    }()
+
     // MARK: - Private variables
 
     private var localMovies: [Movie] = []
@@ -22,6 +31,8 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
     // MARK: - Private constants
 
     private let interactor: FavoritesBusinessLogic
+
+    private let errorView: ErrorView = ErrorViewFactory.make()
 
     // MARK: - Initializers
 
@@ -64,6 +75,14 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
     // MARK: - Private functions
 
     private func setupLayout() {
+        view.addSubview(stackView, constraints: [
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+//            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            stackView.heightAnchor.constraint(equalToConstant: 180)
+        ])
+
         view.backgroundColor = .white
     }
 

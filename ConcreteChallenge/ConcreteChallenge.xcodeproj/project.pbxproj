@@ -40,6 +40,11 @@
 		A8458786254E4B2100829BBE /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8458785254E4B2100829BBE /* FavoritesPresenter.swift */; };
 		A8458788254E4B7A00829BBE /* FavoritesModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8458787254E4B7A00829BBE /* FavoritesModels.swift */; };
 		A845878A254E4BC500829BBE /* FavoritesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8458789254E4BC500829BBE /* FavoritesInteractor.swift */; };
+		A845878D254E5A2D00829BBE /* HorizontalInfoListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A845878C254E5A2D00829BBE /* HorizontalInfoListItemView.swift */; };
+		A845878F254E5A3900829BBE /* HorizontalInfoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A845878E254E5A3900829BBE /* HorizontalInfoListViewModel.swift */; };
+		A8458791254E5A4500829BBE /* HorizontalInfoListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8458790254E5A4500829BBE /* HorizontalInfoListViewCell.swift */; };
+		A8458793254E5A5500829BBE /* HorizontalInfoListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8458792254E5A5500829BBE /* HorizontalInfoListTableView.swift */; };
+		A8458795254E5A6800829BBE /* HorizontalInfoListFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8458794254E5A6800829BBE /* HorizontalInfoListFactory.swift */; };
 		A864B85625477BC500B5BC29 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B85525477BC500B5BC29 /* DataSource.swift */; };
 		A864B85825477DB300B5BC29 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B85725477DB300B5BC29 /* CollectionViewDataSource.swift */; };
 		A864B85A25477FA200B5BC29 /* NSObjectProtocol+ClassName.swift in Sources */ = {isa = PBXBuildFile; fileRef = A864B85925477FA200B5BC29 /* NSObjectProtocol+ClassName.swift */; };
@@ -141,6 +146,11 @@
 		A8458785254E4B2100829BBE /* FavoritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
 		A8458787254E4B7A00829BBE /* FavoritesModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesModels.swift; sourceTree = "<group>"; };
 		A8458789254E4BC500829BBE /* FavoritesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesInteractor.swift; sourceTree = "<group>"; };
+		A845878C254E5A2D00829BBE /* HorizontalInfoListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalInfoListItemView.swift; sourceTree = "<group>"; };
+		A845878E254E5A3900829BBE /* HorizontalInfoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalInfoListViewModel.swift; sourceTree = "<group>"; };
+		A8458790254E5A4500829BBE /* HorizontalInfoListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalInfoListViewCell.swift; sourceTree = "<group>"; };
+		A8458792254E5A5500829BBE /* HorizontalInfoListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalInfoListTableView.swift; sourceTree = "<group>"; };
+		A8458794254E5A6800829BBE /* HorizontalInfoListFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalInfoListFactory.swift; sourceTree = "<group>"; };
 		A864B85525477BC500B5BC29 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		A864B85725477DB300B5BC29 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		A864B85925477FA200B5BC29 /* NSObjectProtocol+ClassName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObjectProtocol+ClassName.swift"; sourceTree = "<group>"; };
@@ -303,6 +313,18 @@
 				A8660EC42545C5F900D74934 /* MoyaWorker.swift */,
 			);
 			path = Workers;
+			sourceTree = "<group>";
+		};
+		A845878B254E59AA00829BBE /* HorizontalInfoList */ = {
+			isa = PBXGroup;
+			children = (
+				A845878C254E5A2D00829BBE /* HorizontalInfoListItemView.swift */,
+				A845878E254E5A3900829BBE /* HorizontalInfoListViewModel.swift */,
+				A8458790254E5A4500829BBE /* HorizontalInfoListViewCell.swift */,
+				A8458792254E5A5500829BBE /* HorizontalInfoListTableView.swift */,
+				A8458794254E5A6800829BBE /* HorizontalInfoListFactory.swift */,
+			);
+			path = HorizontalInfoList;
 			sourceTree = "<group>";
 		};
 		A8660E52254545AA00D74934 /* Utils */ = {
@@ -500,6 +522,7 @@
 			children = (
 				A845871A254A3B3D00829BBE /* Error */,
 				A8660ED225463E5F00D74934 /* GridGallery */,
+				A845878B254E59AA00829BBE /* HorizontalInfoList */,
 				A8458761254BCA1700829BBE /* InfoList */,
 			);
 			path = Components;
@@ -795,6 +818,7 @@
 				A864B85A25477FA200B5BC29 /* NSObjectProtocol+ClassName.swift in Sources */,
 				A8B129C32543C2350074654A /* UIWindow+AppRootController.swift in Sources */,
 				A8458786254E4B2100829BBE /* FavoritesPresenter.swift in Sources */,
+				A845878F254E5A3900829BBE /* HorizontalInfoListViewModel.swift in Sources */,
 				A8458788254E4B7A00829BBE /* FavoritesModels.swift in Sources */,
 				A8660E56254545F700D74934 /* Strings.swift in Sources */,
 				A8458771254D1B6700829BBE /* MovieResponse.swift in Sources */,
@@ -834,9 +858,11 @@
 				A864B8722548911B00B5BC29 /* GridGalleryItemViewModel.swift in Sources */,
 				A845877D254DE85100829BBE /* MovieRealmDbService.swift in Sources */,
 				A845871E254A3D0E00829BBE /* ErrorConfiguration.swift in Sources */,
+				A845878D254E5A2D00829BBE /* HorizontalInfoListItemView.swift in Sources */,
 				A8458749254BB51B00829BBE /* MovieDetailsModels.swift in Sources */,
 				A8660EBF2545C28800D74934 /* MoviesInteractor.swift in Sources */,
 				A864B8602547881900B5BC29 /* UIView+Extension.swift in Sources */,
+				A8458793254E5A5500829BBE /* HorizontalInfoListTableView.swift in Sources */,
 				A845873F254B9AE800829BBE /* MoviesViewControllerDelegate.swift in Sources */,
 				A845874B254BB52C00829BBE /* MovieDetailsPresenter.swift in Sources */,
 				A864B85825477DB300B5BC29 /* CollectionViewDataSource.swift in Sources */,
@@ -844,10 +870,12 @@
 				A8458729254A7AC800829BBE /* MoviesModels.swift in Sources */,
 				A8705E6A2549290600E16B01 /* GridGalleryCollectionViewFactory.swift in Sources */,
 				A8458730254B2D4700829BBE /* MovieDetailsViewController.swift in Sources */,
+				A8458795254E5A6800829BBE /* HorizontalInfoListFactory.swift in Sources */,
 				A8B129B52543ADAB0074654A /* UIColor+Extension.swift in Sources */,
 				A8660ECF254627EB00D74934 /* MoviesPopulariesResponse.swift in Sources */,
 				A845876D254CD3ED00829BBE /* UITableView+Register.swift in Sources */,
 				A845871C254A3B6700829BBE /* ErrorView.swift in Sources */,
+				A8458791254E5A4500829BBE /* HorizontalInfoListViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
