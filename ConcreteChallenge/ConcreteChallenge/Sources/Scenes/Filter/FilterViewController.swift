@@ -14,7 +14,8 @@ enum FilterIndexType: Int {
 }
 
 protocol FilterDisplayLogic: AnyObject {
-
+    func onFetchGenresSuccessful(genres: [String])
+    func onFetchGenresFailure()
 }
 
 final class FilterViewController: UIViewController, FilterDisplayLogic {
@@ -49,9 +50,9 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
 
     private var filterIndexType = FilterIndexType.genres
 
-    private let allDates: [String] = []
+    private var allDates: [String] = []
 
-    private let allGenres: [String] = []
+    private var allGenres: [String] = []
 
     private var date: [String] = []
 
@@ -92,10 +93,21 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
         let barButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: .didBackButtonTapped)
         navigationItem.leftBarButtonItem = barButtonItem
     }
+
+    // MARK: - FilterDisplayLogic
+
+    func onFetchGenresSuccessful(genres: [String]) {
+        allGenres = genres
+    }
+
+    func onFetchGenresFailure() {
+        // Show some error messasge
+    }
+
     // MARK: - Private functions
 
     private func fetchDatas() {
-//        interactor.
+        interactor.fetchGenres(request: Filter.FetchGenres.Request(language: Constants.MovieDefaultParameters.language))
     }
 
     private func setup() {

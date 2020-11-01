@@ -20,6 +20,7 @@ enum FilterScreenFactory {
         let interactor = FilterInteractor(worker: worker, presenter: presenter)
 
         let filterViewController = FilterViewController(interactor: interactor)
+        presenter.viewController = filterViewController
 
         return filterViewController
     }

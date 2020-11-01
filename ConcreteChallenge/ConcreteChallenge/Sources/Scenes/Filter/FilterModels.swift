@@ -15,11 +15,11 @@ enum Filter {
         }
 
         struct Response {
-            let genres: [GenreResponse]
+            let genres: [String]
         }
 
         struct ViewModel {
-            let genres: [GenreResponse]
+            let genres: [String]
         }
     }
 }
