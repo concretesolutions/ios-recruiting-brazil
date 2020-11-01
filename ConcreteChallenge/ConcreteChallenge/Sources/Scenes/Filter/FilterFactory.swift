@@ -8,9 +8,9 @@
 
 import UIKit
 
-enum FilterTypeFactory {
+enum FilterFactory {
     static func makeFilterType() -> UIViewController {
-        let filterTypeViewController = FilterTypeViewController()
+        let filterTypeViewController = FilterViewController()
 
         return filterTypeViewController
     }

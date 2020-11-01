@@ -13,7 +13,7 @@ enum FilterIndexType: Int {
     case genres = 1
 }
 
-final class FilterTypeViewController: UIViewController {
+final class FilterViewController: UIViewController {
     private lazy var typeListCheckTableView: ListCheckTableView = ListCheckTableViewFactory.makeTableView()
 
     private lazy var dataPickerListCheckTableView: ListCheckTableView = ListCheckTableViewFactory.makeTableView()
@@ -75,8 +75,8 @@ final class FilterTypeViewController: UIViewController {
     override func setupNavigation() {
         super.setupNavigation()
 
-        let backImage = UIImage(assets: .arrowBack)?.resize(size: CGSize(width: 20, height: 20))
-        let barButtonItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: .didBackButtonTapped)
+        let backButtonImage = UIImage(assets: .arrowBack)?.resize(size: CGSize(width: 20, height: 20))
+        let barButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: .didBackButtonTapped)
         navigationItem.leftBarButtonItem = barButtonItem
     }
     // MARK: - Private functions
@@ -149,9 +149,7 @@ final class FilterTypeViewController: UIViewController {
     private func setupFilterType() {
         title = Strings.filter.localizable
 
-        dataPickerListCheckTableView.isHidden = true
-        typeListCheckTableView.isHidden = false
-        applyButton.isHidden = false
+        showTypeListCheckTableView()
 
         let listCheckItemsViewModel = filterType.map { filterType -> ListCheckItemViewModel in
             ListCheckItemViewModel(title: filterType, icon: .arrowForward)
@@ -164,6 +162,12 @@ final class FilterTypeViewController: UIViewController {
         typeListCheckTableView.isHidden = false
 
         applyButton.isHidden = !(date.count > 0 || genres.count > 0)
+    }
+
+    private func showDataPickerListCheckTableView() {
+        dataPickerListCheckTableView.isHidden = false
+        typeListCheckTableView.isHidden = true
+        applyButton.isHidden = true
     }
 
     // MARK: - Fileprivate functions
@@ -181,9 +185,7 @@ final class FilterTypeViewController: UIViewController {
     private func setupDateList() {
         title = Strings.date.localizable
 
-        dataPickerListCheckTableView.isHidden = false
-        typeListCheckTableView.isHidden = true
-        applyButton.isHidden = true
+        showDataPickerListCheckTableView()
 
         let listCheckItemsViewModel = allDates.map { date -> ListCheckItemViewModel in
             ListCheckItemViewModel(title: date)
@@ -194,9 +196,7 @@ final class FilterTypeViewController: UIViewController {
     private func setupGenresList() {
         title = Strings.genres.localizable
 
-        dataPickerListCheckTableView.isHidden = false
-        typeListCheckTableView.isHidden = true
-        applyButton.isHidden = true
+        showDataPickerListCheckTableView()
 
         let listCheckItemsViewModel = allGenres.map { date -> ListCheckItemViewModel in
             ListCheckItemViewModel(title: date)
@@ -210,5 +210,5 @@ final class FilterTypeViewController: UIViewController {
 }
 
 private extension Selector {
-    static let didBackButtonTapped = #selector(FilterTypeViewController.didBackButtonTapped)
+    static let didBackButtonTapped = #selector(FilterViewController.didBackButtonTapped)
 }

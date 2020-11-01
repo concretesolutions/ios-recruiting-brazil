@@ -74,8 +74,8 @@
 		A8705E682549262700E16B01 /* UICollectionView+Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8705E672549262700E16B01 /* UICollectionView+Register.swift */; };
 		A8705E6A2549290600E16B01 /* GridGalleryCollectionViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8705E692549290600E16B01 /* GridGalleryCollectionViewFactory.swift */; };
 		A89723DB254F03390022FB06 /* TabBarViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89723DA254F03390022FB06 /* TabBarViewControllerDelegate.swift */; };
-		A89723E7254F282C0022FB06 /* FilterTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89723E6254F282C0022FB06 /* FilterTypeViewController.swift */; };
-		A89723E9254F283C0022FB06 /* FilterTypeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89723E8254F283C0022FB06 /* FilterTypeFactory.swift */; };
+		A89723E7254F282C0022FB06 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89723E6254F282C0022FB06 /* FilterViewController.swift */; };
+		A89723E9254F283C0022FB06 /* FilterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89723E8254F283C0022FB06 /* FilterFactory.swift */; };
 		A89723EC254F2D8A0022FB06 /* ListCheckItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89723EB254F2D8A0022FB06 /* ListCheckItemView.swift */; };
 		A89723EE254F2D9C0022FB06 /* ListCheckTableViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89723ED254F2D9C0022FB06 /* ListCheckTableViewFactory.swift */; };
 		A89723F0254F30E20022FB06 /* ListCheckItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89723EF254F30E20022FB06 /* ListCheckItemViewModel.swift */; };
@@ -188,8 +188,8 @@
 		A8705E672549262700E16B01 /* UICollectionView+Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Register.swift"; sourceTree = "<group>"; };
 		A8705E692549290600E16B01 /* GridGalleryCollectionViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridGalleryCollectionViewFactory.swift; sourceTree = "<group>"; };
 		A89723DA254F03390022FB06 /* TabBarViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewControllerDelegate.swift; sourceTree = "<group>"; };
-		A89723E6254F282C0022FB06 /* FilterTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTypeViewController.swift; sourceTree = "<group>"; };
-		A89723E8254F283C0022FB06 /* FilterTypeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTypeFactory.swift; sourceTree = "<group>"; };
+		A89723E6254F282C0022FB06 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		A89723E8254F283C0022FB06 /* FilterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterFactory.swift; sourceTree = "<group>"; };
 		A89723EB254F2D8A0022FB06 /* ListCheckItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCheckItemView.swift; sourceTree = "<group>"; };
 		A89723ED254F2D9C0022FB06 /* ListCheckTableViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCheckTableViewFactory.swift; sourceTree = "<group>"; };
 		A89723EF254F30E20022FB06 /* ListCheckItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCheckItemViewModel.swift; sourceTree = "<group>"; };
@@ -406,26 +406,10 @@
 		A89723E3254F239E0022FB06 /* Filter */ = {
 			isa = PBXGroup;
 			children = (
-				A89723E5254F27F00022FB06 /* FilterDataPicker */,
-				A89723E4254F27D70022FB06 /* FilterType */,
+				A89723E6254F282C0022FB06 /* FilterViewController.swift */,
+				A89723E8254F283C0022FB06 /* FilterFactory.swift */,
 			);
 			path = Filter;
-			sourceTree = "<group>";
-		};
-		A89723E4254F27D70022FB06 /* FilterType */ = {
-			isa = PBXGroup;
-			children = (
-				A89723E6254F282C0022FB06 /* FilterTypeViewController.swift */,
-				A89723E8254F283C0022FB06 /* FilterTypeFactory.swift */,
-			);
-			path = FilterType;
-			sourceTree = "<group>";
-		};
-		A89723E5254F27F00022FB06 /* FilterDataPicker */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FilterDataPicker;
 			sourceTree = "<group>";
 		};
 		A89723EA254F2D310022FB06 /* ListCheck */ = {
@@ -895,7 +879,7 @@
 				A89723F4254F390B0022FB06 /* ListCheckTableView.swift in Sources */,
 				A8458747254BB4CB00829BBE /* MovieDetailsInteractor.swift in Sources */,
 				A845874F254BB56700829BBE /* RealmWorker.swift in Sources */,
-				A89723E9254F283C0022FB06 /* FilterTypeFactory.swift in Sources */,
+				A89723E9254F283C0022FB06 /* FilterFactory.swift in Sources */,
 				A8705E682549262700E16B01 /* UICollectionView+Register.swift in Sources */,
 				A845878A254E4BC500829BBE /* FavoritesInteractor.swift in Sources */,
 				A8458763254BCB2A00829BBE /* InfoListItemView.swift in Sources */,
@@ -904,7 +888,7 @@
 				A8660E58254547FD00D74934 /* String+Extension.swift in Sources */,
 				A845876B254CCEF500829BBE /* InfoListItemTableViewCell.swift in Sources */,
 				A8660EB225455FEA00D74934 /* FavoritesViewController.swift in Sources */,
-				A89723E7254F282C0022FB06 /* FilterTypeViewController.swift in Sources */,
+				A89723E7254F282C0022FB06 /* FilterViewController.swift in Sources */,
 				A845873C254B981F00829BBE /* TabBarCoordinator.swift in Sources */,
 				A8660EC12545C38C00D74934 /* MoviesPresenter.swift in Sources */,
 				A864B870254863E100B5BC29 /* MoyaProvider+Decoder.swift in Sources */,

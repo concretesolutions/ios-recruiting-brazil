@@ -29,7 +29,7 @@ final class TabBarCoordinator: Coordinator, TabBarViewControllerDelegate, Movies
     // MARK: - TabBarViewControllerDelegate conforms
 
     func barButtonItemTapped(_ viewController: TabBarViewController) {
-        let filterTypeViewController = FilterTypeFactory.makeFilterType()
+        let filterTypeViewController = FilterFactory.makeFilterType()
         pushViewController(viewController: filterTypeViewController)
     }
 
