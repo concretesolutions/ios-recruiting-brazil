@@ -10,6 +10,7 @@ import UIKit
 
 public extension UIImage {
     enum Assets: String {
+        case arrowBack = "arrow_back"
         case arrowForward = "arrow_forward"
         case checkIcon = "check_icon"
         case error = "error"
@@ -37,5 +38,16 @@ public extension UIImage {
         self.draw(at: origin)
         let imageWithInsets = UIGraphicsGetImageFromCurrentImageContext()
         return imageWithInsets
+    }
+
+    func resize(size: CGSize) -> UIImage? {
+        let hasAlpha = true
+        let scale: CGFloat = 0.0
+        UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale)
+        self.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: size))
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return scaledImage
     }
 }
