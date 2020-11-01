@@ -28,6 +28,4 @@ final class MovieDetailsWorker: MovieDetailsWorkerProtocol {
     func deleteMovie(movie: Movie, completion: @escaping (Result<Void, DatabaseError>) -> Void) {
         provider.delete(model: movie, completion: completion)
     }
-
-    func updateMovie(movie: Movie, completion: @escaping (Result<Void, DatabaseError>) -> Void) { }
 }

@@ -8,7 +8,7 @@
 
 import RealmSwift
 
-@objcMembers final class Movie: Object, RealmModelProtocol {
+@objcMembers final class Movie: Object {
     dynamic var id: Int = 0
     dynamic var title: String = ""
     dynamic var imageURL: String = ""
