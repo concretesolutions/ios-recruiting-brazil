@@ -8,12 +8,12 @@
 
 import Moya
 
-protocol MoviesMoyaWorkerProtocol: AnyObject {
+protocol MoyaWorkerProtocol: AnyObject {
     func fetchGenres(language: String, completion: @escaping (Result<GenresResponse, NetworkError>) -> Void)
     func fetchMovies(language: String, page: Int, completion: @escaping (Result<MoviesPopulariesResponse, NetworkError>) -> Void)
 }
 
-final class MoviesMoyaWorker: MoviesMoyaWorkerProtocol {
+final class MoyaWorker: MoyaWorkerProtocol {
     private let provider: MoyaProvider<MovieDbAPI>
 
     // MARK: - Initializers

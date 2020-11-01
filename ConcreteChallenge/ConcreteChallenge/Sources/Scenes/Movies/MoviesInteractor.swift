@@ -13,13 +13,13 @@ protocol MoviesBusinessLogic: AnyObject {
 }
 
 final class MoviesInteractor: MoviesBusinessLogic {
-    private let realmWorker: MovieRealmWorkerProtocol
-    private let moyaWorker: MoviesMoyaWorkerProtocol
+    private let realmWorker: RealmWorkerProtocol
+    private let moyaWorker: MoyaWorkerProtocol
     private let presenter: MoviesPresentationLogic
 
     // MARK: - Initializers
 
-    init(realmWorker: MovieRealmWorkerProtocol, moyaWorker: MoviesMoyaWorkerProtocol, presenter: MoviesPresentationLogic) {
+    init(realmWorker: RealmWorkerProtocol, moyaWorker: MoyaWorkerProtocol, presenter: MoviesPresentationLogic) {
         self.moyaWorker = moyaWorker
         self.realmWorker = realmWorker
         self.presenter = presenter

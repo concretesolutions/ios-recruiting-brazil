@@ -6,13 +6,13 @@
 //  Copyright © 2020 Adrian Almeida. All rights reserved.
 //
 
-protocol MovieRealmWorkerProtocol: AnyObject {
+protocol RealmWorkerProtocol: AnyObject {
     func fetchMovies(completion: @escaping (Result<[Movie], DatabaseError>) -> Void)
     func saveMovie(movie: Movie, completion: @escaping (Result<Void, DatabaseError>) -> Void)
     func deleteMovie(movie: Movie, completion: @escaping (Result<Void, DatabaseError>) -> Void)
 }
 
-final class MoviesRealmWorker: MovieRealmWorkerProtocol {
+final class RealmWorker: RealmWorkerProtocol {
     private let provider: MovieRealmDbService
 
     // MARK: - Initializers

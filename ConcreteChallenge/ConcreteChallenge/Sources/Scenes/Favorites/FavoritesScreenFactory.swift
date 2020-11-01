@@ -11,7 +11,7 @@ import UIKit
 enum FavoritesScreenFactory {
     static func makeFavorites() -> UIViewController {
         let provider = MovieRealmDbService()
-        let worker = MoviesRealmWorker(provider: provider)
+        let worker = RealmWorker(provider: provider)
 
         let presenter = FavoritesPresenter()
 

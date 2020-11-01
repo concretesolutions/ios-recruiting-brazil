@@ -11,12 +11,12 @@ protocol FavoritesBusinessLogic: AnyObject {
 }
 
 final class FavoritesInteractor: FavoritesBusinessLogic {
-    private let worker: MovieRealmWorkerProtocol
+    private let worker: RealmWorkerProtocol
     private let presenter: FavoritesPresentationLogic
 
     // MARK: - Initializers
 
-    init(worker: MovieRealmWorkerProtocol, presenter: FavoritesPresentationLogic) {
+    init(worker: RealmWorkerProtocol, presenter: FavoritesPresentationLogic) {
         self.worker = worker
         self.presenter = presenter
     }

@@ -12,12 +12,12 @@ protocol MovieDetailsBusinessLogic: AnyObject {
 }
 
 final class MovieDetailsInteractor: MovieDetailsBusinessLogic {
-    private let worker: MovieRealmWorkerProtocol
+    private let worker: RealmWorkerProtocol
     private let presenter: MovieDetailsPresentationLogic
 
     // MARK: - Initializers
 
-    init(worker: MovieRealmWorkerProtocol, presenter: MovieDetailsPresenter) {
+    init(worker: RealmWorkerProtocol, presenter: MovieDetailsPresenter) {
         self.worker = worker
         self.presenter = presenter
     }

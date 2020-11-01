@@ -12,11 +12,11 @@ import Moya
 enum MoviesScreenFactory {
     static func makeMovies(delegate: MoviesViewControllerDelegate) -> UIViewController {
         let realmProvider = MovieRealmDbService()
-        let realmWorker = MoviesRealmWorker(provider: realmProvider)
+        let realmWorker = RealmWorker(provider: realmProvider)
 
         let moyaProviderStubClosure = MoyaProvider<MovieDbAPI>.neverStub
         let moyaProvider = MoyaProvider<MovieDbAPI>(stubClosure: moyaProviderStubClosure, plugins: [NetworkLoggerPlugin()])
-        let moyaWorker = MoviesMoyaWorker(provider: moyaProvider)
+        let moyaWorker = MoyaWorker(provider: moyaProvider)
 
         let presenter = MoviesPresenter()
 
