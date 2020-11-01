@@ -9,6 +9,7 @@
 import Foundation
 
 enum Strings: String, Localizable {
+    case favorites = "favorites"
     case movie
     case movies
     case search
