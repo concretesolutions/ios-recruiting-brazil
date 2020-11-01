@@ -13,7 +13,9 @@ enum MovieDetailsScreenFactory {
     static func makeMoviesDetails(movie: Movie) -> UIViewController {
         let provider = MovieRealmDbService()
         let worker = RealmWorker(provider: provider)
+
         let presenter = MovieDetailsPresenter()
+
         let interactor = MovieDetailsInteractor(worker: worker, presenter: presenter)
 
         let movieDetailsViewController = MovieDetailsViewController(movie: movie, interactor: interactor)

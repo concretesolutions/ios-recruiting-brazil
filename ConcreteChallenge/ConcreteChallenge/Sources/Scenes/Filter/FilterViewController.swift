@@ -13,7 +13,11 @@ enum FilterIndexType: Int {
     case genres = 1
 }
 
-final class FilterViewController: UIViewController {
+protocol FilterDisplayLogic: AnyObject {
+
+}
+
+final class FilterViewController: UIViewController, FilterDisplayLogic {
     private lazy var typeListCheckTableView: ListCheckTableView = ListCheckTableViewFactory.makeTableView()
 
     private lazy var dataPickerListCheckTableView: ListCheckTableView = ListCheckTableViewFactory.makeTableView()
@@ -51,11 +55,15 @@ final class FilterViewController: UIViewController {
 
     // MARK: - Private constants
 
+    private let interactor: FilterBusinessLogic
+
     private let filterType = [Strings.date.localizable, Strings.genres.localizable]
 
     // MARK: - Initializers
 
-    init() {
+    init(interactor: FilterBusinessLogic) {
+        self.interactor = interactor
+
         super.init(nibName: nil, bundle: nil)
     }
 
