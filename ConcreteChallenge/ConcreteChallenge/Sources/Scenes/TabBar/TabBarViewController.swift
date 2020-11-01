@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class TabBarViewController: UITabBarController {
+final class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
 
@@ -23,10 +23,15 @@ final class TabBarViewController: UITabBarController {
 
     private let tabBarViewControllers: [UIViewController]
 
+    // MARK: - Variables
+
+    weak var tabBarDelegate: TabBarViewControllerDelegate?
+
     // MARK: - Initializers
 
-    init(tabBarViewControllers: [UIViewController]) {
+    init(tabBarViewControllers: [UIViewController], delegate: TabBarViewControllerDelegate) {
         self.tabBarViewControllers = tabBarViewControllers
+        self.tabBarDelegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -40,19 +45,39 @@ final class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
+        delegate = self
     }
 
-    override func setupNavigationBar() {
-        super.setupNavigationBar()
+    override func setupNavigation() {
+        super.setupNavigation()
         title = Strings.movies.localizable
 
         navigationItem.searchController = searchController
     }
 
+    // MARK: - UITabBarControllerDelegate conforms
+
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        switch tabBarController.selectedViewController {
+        case is MoviesViewController:
+            setupRightNavigationButton(shouldHide: true)
+        case is FavoritesViewController:
+            setupRightNavigationButton(shouldHide: false)
+        default:
+            print("ViewController didnt found")
+        }
+    }
+
     // MARK: - Private functions
 
+    private func setupRightNavigationButton(shouldHide: Bool) {
+        let barButtonItem = shouldHide ? nil : UIBarButtonItem(image: UIImage(assets: .filterIcon), style: .plain, target: self, action: #selector(didBarButtonItemTapped))
+        barButtonItem?.tintColor = .appBlackLight
+        navigationItem.rightBarButtonItem = barButtonItem
+    }
+
     private func setupLayout() {
-        setupNavigationBar()
+        setupNavigation()
         setupTabBar()
     }
 
@@ -63,4 +88,14 @@ final class TabBarViewController: UITabBarController {
         UITabBar.appearance().tintColor = .black
         UITabBar.appearance().barTintColor = .appYellowLight
     }
+
+    // MARK: - Fileprivate functions
+
+    @objc fileprivate func didBarButtonItemTapped() {
+        tabBarDelegate?.barButtonItemTapped(self)
+    }
+}
+
+private extension Selector {
+    static let didBarButtonItemTapped = #selector(TabBarViewController.didBarButtonItemTapped)
 }

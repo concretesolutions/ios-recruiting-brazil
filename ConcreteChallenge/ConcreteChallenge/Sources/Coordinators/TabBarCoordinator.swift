@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MoviesCoordinator: Coordinator, MoviesViewControllerDelegate {
+final class TabBarCoordinator: Coordinator, TabBarViewControllerDelegate, MoviesViewControllerDelegate {
     private weak var rootController: AppRootController?
 
     // MARK: - Initializer
@@ -20,10 +20,16 @@ final class MoviesCoordinator: Coordinator, MoviesViewControllerDelegate {
     // MARK: - Coordinator conforms
 
     func start() {
-        let tabBarViewController = TabBarScreenFactory.makeTabBar(delegate: self)
+        let tabBarViewController = TabBarScreenFactory.makeTabBar(tabBarDelegate: self, moviesDelegate: self)
         let navigationController = UINavigationController(rootViewController: tabBarViewController)
 
         rootController?.rootViewController = navigationController
+    }
+
+    // MARK: - TabBarViewControllerDelegate conforms
+
+    func barButtonItemTapped(_ viewController: TabBarViewController) {
+        print("filter item tapped")
     }
 
     // MARK: - MoviesViewControllerDelegate conforms

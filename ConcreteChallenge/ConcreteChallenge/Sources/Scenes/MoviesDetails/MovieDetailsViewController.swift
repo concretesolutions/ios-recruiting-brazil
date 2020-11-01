@@ -55,12 +55,11 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupLayout()
-        setupMoviesInfo()
+        setup()
     }
 
-    override func setupNavigationBar() {
-        super.setupNavigationBar()
+    override func setupNavigation() {
+        super.setupNavigation()
         title = Strings.movie.localizable
     }
 
@@ -79,9 +78,13 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
 
     // MARK: - Private functions
 
-    private func setupLayout() {
-        setupNavigationBar()
+    private func setup() {
+        setupNavigation()
+        setupLayout()
+        setupMoviesInfo()
+    }
 
+    private func setupLayout() {
         view.addSubview(imageView, constraints: [
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),

@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIViewController {
-    @objc func setupNavigationBar() {
+    @objc func setupNavigation() {
         let navigationAppearance = UINavigationBarAppearance()
         navigationAppearance.backgroundColor = .appYellowLight
         navigationItem.standardAppearance = navigationAppearance

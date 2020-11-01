@@ -9,8 +9,8 @@
 import UIKit
 
 enum TabBarScreenFactory {
-    static func makeTabBar(delegate: MoviesViewControllerDelegate) -> UIViewController {
-        let moviesViewController = MoviesScreenFactory.makeMovies(delegate: delegate)
+    static func makeTabBar(tabBarDelegate: TabBarViewControllerDelegate, moviesDelegate: MoviesViewControllerDelegate) -> UIViewController {
+        let moviesViewController = MoviesScreenFactory.makeMovies(delegate: moviesDelegate)
         let moviesTabBarIcon = UITabBarItem()
         moviesTabBarIcon.image = UIImage(assets: .listIcon)
         moviesTabBarIcon.title = Strings.movies.localizable
@@ -22,7 +22,7 @@ enum TabBarScreenFactory {
         favoritesTabBarIcon.title = Strings.favorites.localizable
         favoritesViwController.tabBarItem = favoritesTabBarIcon
 
-        let tabBarViewController = TabBarViewController(tabBarViewControllers: [moviesViewController, favoritesViwController])
+        let tabBarViewController = TabBarViewController(tabBarViewControllers: [moviesViewController, favoritesViwController], delegate: tabBarDelegate)
 
         return tabBarViewController
     }

@@ -75,13 +75,15 @@ final class HorizontalInfoListItemView: UIView {
 
         addSubview(title, constraints: [
             title.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            title.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 12)
+            title.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 12),
+            title.heightAnchor.constraint(equalToConstant: 24)
         ])
 
         addSubview(subtitle, constraints: [
             subtitle.topAnchor.constraint(equalTo: topAnchor, constant: 12),
             subtitle.leadingAnchor.constraint(greaterThanOrEqualTo: title.trailingAnchor, constant: 4),
-            subtitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12)
+            subtitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            subtitle.heightAnchor.constraint(equalToConstant: 24)
         ])
 
         addSubview(descriptionText, constraints: [
