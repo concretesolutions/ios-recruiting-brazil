@@ -83,6 +83,7 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
         if !firstTimeLoadMovies {
             view.showLoading()
+            showGallery()
             fetchLocalMovies()
         }
     }
@@ -179,7 +180,14 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
             movies = []
         }
 
-        interactor.fetchMovies(request: Movies.FetchMovies.Request(language: language, page: page, genres: genres))
+        if errorView.isHidden {
+            interactor.fetchMovies(request: Movies.FetchMovies.Request(language: language, page: page, genres: genres))
+        }
+    }
+
+    private func showGallery() {
+        errorView.isHidden = true
+        galleryCollectionView.isHidden = false
     }
 
     private func setErrorView(configuration: ErrorConfiguration = ErrorConfiguration()) {
@@ -188,6 +196,8 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         galleryCollectionView.isHidden = true
         errorView.isHidden = false
 
+
+        currentPage = 1
         errorView.configuration = configuration
     }
 
