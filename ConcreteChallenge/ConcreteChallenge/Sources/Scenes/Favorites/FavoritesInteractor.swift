@@ -44,42 +44,42 @@ final class FavoritesInteractor: FavoritesBusinessLogic {
     func fetchLocalMoviesBySearch(request: Favorites.FetchLocalMoviesBySearch.Request) {
         let movies = request.movies
         let filter = request.filter
+        let allDates = filter.date?.joined(separator: Constants.Utils.genresSeparator)
 
         var moviesFiltered: [Movie] = []
 
-        if let date = filter.date {
-            let date = date.joined(separator: Constants.Utils.genresSeparator)
-
-            moviesFiltered.append(contentsOf:
-                movies.filter { date.contains($0.releaseDate) }
-            )
-        }
-
-        if let genres = filter.genres {
-            genres.forEach({ genre in
-                moviesFiltered.append(contentsOf:
-                    movies.filter({ movie -> Bool in
-                        if moviesFiltered.contains(movie) {
-                            return false
-                        }
-
-                        return movie.genres?.contains(genre) ?? false
-                    })
-                )
-            })
-        }
-
-        if let search = filter.search {
-            moviesFiltered.append(contentsOf:
-                movies.filter {
-                    if moviesFiltered.contains($0) {
+        moviesFiltered.append(contentsOf:
+            movies.filter({ movie -> Bool in
+                if let allDates = allDates {
+                    if !allDates.contains(movie.releaseDate) {
                         return false
                     }
-
-                    return $0.title.contains(search)
                 }
-            )
-        }
+
+                var moviesHasAllgenres = true
+                if let genres = filter.genres {
+                    genres.forEach({ genre in
+                        if let movieGenres = movie.genres, !movieGenres.contains(genre) {
+                            moviesHasAllgenres = false
+                            return
+                        } else {
+                            moviesHasAllgenres = false
+                            return
+                        }
+                    })
+                }
+
+                if !moviesHasAllgenres {
+                    return false
+                }
+
+                if let search = filter.search, !search.isEmpty {
+                    return movie.title.contains(search)
+                }
+
+                return true
+            })
+        )
 
         if moviesFiltered.count > 0 {
             presenter.presentLocalMoviesBySearch(response: Favorites.FetchLocalMoviesBySearch.Response(movies: moviesFiltered, search: filter))
