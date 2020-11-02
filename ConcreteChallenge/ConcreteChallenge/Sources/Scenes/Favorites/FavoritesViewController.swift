@@ -18,7 +18,7 @@ protocol FavoritesDisplayLogic: AnyObject {
 }
 
 final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
-    private lazy var horizontalTableView = HorizontalInfoListFactory.makeTableView()
+    private lazy var horizontalTableView = HorizontalInfoListFactory.make()
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [horizontalTableView, errorView])

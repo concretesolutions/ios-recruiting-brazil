@@ -16,17 +16,9 @@ final class InfoListItemView: UIView {
         return label
     }()
 
-    private lazy var iconButton: UIButton = {
-        let button = UIButton()
+    private lazy var iconButton = UIButton()
 
-        return button
-    }()
-
-    private lazy var titleButtonStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [title, iconButton])
-
-        return stackView
-    }()
+    private lazy var titleButtonStackView: UIStackView = UIStackView(arrangedSubviews: [title, iconButton])
 
     private lazy var descriptionText: UILabel = {
         let label = UILabel()

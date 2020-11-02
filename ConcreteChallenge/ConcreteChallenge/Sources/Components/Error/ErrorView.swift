@@ -9,9 +9,7 @@
 import UIKit
 
 final class ErrorView: UIView {
-    private lazy var imageView: UIImageView = {
-        return UIImageView()
-    }()
+    private lazy var imageView: UIImageView = UIImageView()
 
     private lazy var title: UILabel = {
         let label = UILabel()

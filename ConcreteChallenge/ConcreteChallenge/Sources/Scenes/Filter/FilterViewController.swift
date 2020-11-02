@@ -20,9 +20,9 @@ protocol FilterDisplayLogic: AnyObject {
 }
 
 final class FilterViewController: UIViewController, FilterDisplayLogic {
-    private lazy var typeListCheckTableView: ListCheckTableView = ListCheckTableViewFactory.makeTableView()
+    private lazy var typeListCheckTableView: ListCheckTableView = ListCheckTableViewFactory.make()
 
-    private lazy var dataPickerListCheckTableView: ListCheckTableView = ListCheckTableViewFactory.makeTableView()
+    private lazy var dataPickerListCheckTableView: ListCheckTableView = ListCheckTableViewFactory.make()
 
     private lazy var listStackView = UIStackView(arrangedSubviews: [typeListCheckTableView, dataPickerListCheckTableView])
 

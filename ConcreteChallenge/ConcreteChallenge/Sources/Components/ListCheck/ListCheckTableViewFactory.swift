@@ -9,7 +9,7 @@
 import UIKit
 
 enum ListCheckTableViewFactory {
-    static func makeTableView() -> ListCheckTableView {
+    static func make() -> ListCheckTableView {
         let listCheckItem = ListCheckTableView()
 
         return listCheckItem

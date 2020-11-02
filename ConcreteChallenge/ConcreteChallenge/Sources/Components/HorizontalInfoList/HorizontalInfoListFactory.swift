@@ -9,7 +9,7 @@
 import UIKit
 
 enum HorizontalInfoListFactory {
-    static func makeTableView() -> HorizontalInfoListTableView {
+    static func make() -> HorizontalInfoListTableView {
         let tableView = HorizontalInfoListTableView()
 
         return tableView

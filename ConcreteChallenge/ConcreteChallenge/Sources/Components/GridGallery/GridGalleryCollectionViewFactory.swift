@@ -9,7 +9,7 @@
 import UIKit
 
 enum GridGalleryCollectionViewFactory {
-    static func makeCollectionView(itemSize: CGSize, items: [GridGalleryItemViewModel]) -> GridGalleryCollectionView {
+    static func make(itemSize: CGSize, items: [GridGalleryItemViewModel]) -> GridGalleryCollectionView {
         let collectionView = GridGalleryCollectionView(itemSize: itemSize, items: items)
 
         return collectionView
