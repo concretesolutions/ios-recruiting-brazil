@@ -37,7 +37,7 @@ final class TabBarCoordinator: Coordinator, TabBarViewControllerDelegate, Movies
         if let viewController = viewController.selectedViewController as? MoviesViewController {
             viewController.filter(filter: filter)
         } else if let viewController = viewController.selectedViewController as? FavoritesViewController {
-            viewController.filter(filter: filter)
+            viewController.filter(newFilter: filter)
         } else {
             print(Strings.viewControllerNotFound.localizable)
         }

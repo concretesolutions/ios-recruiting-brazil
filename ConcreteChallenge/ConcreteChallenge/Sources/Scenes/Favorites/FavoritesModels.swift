@@ -38,6 +38,7 @@ enum Favorites {
 
         struct ViewModel {
             let movies: [Movie]
+            let search: FilterSearch
         }
     }
 }

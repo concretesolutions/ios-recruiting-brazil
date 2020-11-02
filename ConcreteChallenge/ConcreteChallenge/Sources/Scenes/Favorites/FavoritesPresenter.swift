@@ -25,7 +25,7 @@ final class FavoritesPresenter: FavoritesPresentationLogic {
     }
 
     func presentLocalMoviesBySearch(response: Favorites.FetchLocalMoviesBySearch.Response) {
-        let viewModel = Favorites.FetchLocalMoviesBySearch.ViewModel(movies: response.movies)
+        let viewModel = Favorites.FetchLocalMoviesBySearch.ViewModel(movies: response.movies, search: response.search)
         viewController?.onFetchLocalMoviesBySearchSuccess(viewModel: viewModel)
     }
 
@@ -34,7 +34,7 @@ final class FavoritesPresenter: FavoritesPresentationLogic {
     }
 
     func presentLocalMoviesBySearchFailure(response: Favorites.FetchLocalMoviesBySearch.Response) {
-        viewController?.displaySearchError(searchText: response.search.search ?? .empty)
+        viewController?.displaySearchError(viewModel: Favorites.FetchLocalMoviesBySearch.ViewModel(movies: response.movies, search: response.search))
     }
 
     func onSuccessDeleteMovie() {

@@ -12,7 +12,7 @@ protocol FavoritesDisplayLogic: AnyObject {
     func onFetchLocalMoviesSuccess(viewModel: Favorites.FetchLocalMovies.ViewModel)
     func onFetchLocalMoviesBySearchSuccess(viewModel: Favorites.FetchLocalMoviesBySearch.ViewModel)
     func displayMoviesError()
-    func displaySearchError(searchText: String)
+    func displaySearchError(viewModel: Favorites.FetchLocalMoviesBySearch.ViewModel)
     func onSuccessDeleteMovie()
 }
 
@@ -31,6 +31,8 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
     private var localMovies: [Movie] = []
 
     private var localMoviesFiltered: [Movie] = []
+
+    private var filter: FilterSearch = FilterSearch()
 
     // MARK: - Private constants
 
@@ -62,8 +64,16 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
 
     // MARK: - Functions
 
-    func filter(filter: FilterSearch) {
-        interactor.fetchLocalMoviesBySearch(request: Favorites.FetchLocalMoviesBySearch.Request(movies: localMovies, filter: filter))
+    func filter(newFilter: FilterSearch) {
+        filter = FilterSearch(search: newFilter.search ?? filter.search,
+                                   date: newFilter.date ?? filter.date,
+                                   genres: newFilter.genres ?? filter.genres)
+
+        if !filter.isEmpty {
+            interactor.fetchLocalMoviesBySearch(request: Favorites.FetchLocalMoviesBySearch.Request(movies: localMovies, filter: filter))
+        } else {
+            fetchLocalMovies()
+        }
     }
 
     // MARK: - FavoritesDisplayLogic conforms
@@ -85,7 +95,9 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
 
     func displayMoviesError() { }
 
-    func displaySearchError(searchText: String) { }
+    func displaySearchError(viewModel: Favorites.FetchLocalMoviesBySearch.ViewModel) {
+        // show error view
+    }
 
     func onSuccessDeleteMovie() {
         print(Strings.movieUnfavoriteSuccess.localizable)

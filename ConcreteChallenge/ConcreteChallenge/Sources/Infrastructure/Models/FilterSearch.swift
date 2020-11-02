@@ -18,4 +18,18 @@ struct FilterSearch {
         self.date = date
         self.genres = genres
     }
+
+    // MARK: - Computed variable
+
+    var isEmpty: Bool {
+        if let search = search, !search.isEmpty {
+            return false
+        } else if let date = date, date.count > 0 {
+            return false
+        } else if let genres = genres, genres.count > 0 {
+            return false
+        }
+
+        return true
+    }
 }
