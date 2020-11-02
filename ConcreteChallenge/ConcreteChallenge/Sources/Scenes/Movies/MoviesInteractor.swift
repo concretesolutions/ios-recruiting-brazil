@@ -45,9 +45,16 @@ final class MoviesInteractor: MoviesBusinessLogic {
     }
 
     func fetchLocalMoviesBySearch(request: Movies.FetchLocalMoviesBySearch.Request) {
-        if let search = request.filter.search, !search.isEmpty {
-            let movies = request.movies.filter { $0.title.contains(search) }
-            presenter.presentLocalMoviesBySearch(response: Movies.FetchLocalMoviesBySearch.Response(movies: movies, search: request.filter))
+        guard !request.filter.isEmpty else {
+            return
+        }
+
+        let movies = request.movies.filter { $0.title.contains(request.filter) }
+
+        if movies.count > 0 {
+            presenter.presentLocalMoviesBySearch(response: Movies.FetchLocalMoviesBySearch.Response(movies: movies, filter: request.filter))
+        } else {
+//            presenter.presentLocalMoviesBySearch(response: <#T##Movies.FetchLocalMoviesBySearch.Response#>)
         }
     }
 

@@ -61,7 +61,7 @@ final class GridGalleryCollectionView: UIView, UICollectionViewDelegate {
         collectionView.reloadData()
     }
 
-    func bind(onItemPress handler: @escaping (_ index: Int) -> Void) {
+    func bindOnItemPress(onItemPress handler: @escaping (_ index: Int) -> Void) {
         onItemPress = handler
     }
 

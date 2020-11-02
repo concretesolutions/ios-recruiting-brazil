@@ -21,22 +21,22 @@ final class MoviesPresenter: MoviesPresentationLogic {
 
     func presentLocalMoviesItems(response: Movies.FetchLocalMovies.Response) {
         let viewModel = Movies.FetchLocalMovies.ViewModel(movies: response.movies)
-        viewController?.onFetchLocalMoviesSuccess(viewModel: viewModel)
+        viewController?.onFetchLocalMoviesSuccessful(viewModel: viewModel)
     }
 
     func presentLocalMoviesBySearch(response: Movies.FetchLocalMoviesBySearch.Response) {
-        let viewModel = Movies.FetchLocalMoviesBySearch.ViewModel(movies: response.movies, search: response.search)
+        let viewModel = Movies.FetchLocalMoviesBySearch.ViewModel(movies: response.movies)
 
         if viewModel.movies.count > 0 {
-            viewController?.onFetchLocalMoviesBySearchSuccess(viewModel: viewModel)
+            viewController?.displayMoviesBySearch(viewModel: viewModel)
         } else {
-            viewController?.displaySearchError(searchText: viewModel.search.search ?? .empty)
+            viewController?.displaySearchError(textSearched: "")
         }
     }
 
     func presentGenresItems(response: Movies.FetchGenres.Response) {
         let viewModel = Movies.FetchGenres.ViewModel(genres: response.genres)
-        viewController?.onFetchGenresSuccess(viewModel: viewModel)
+        viewController?.onFetchGenresSuccessful(viewModel: viewModel)
     }
 
     func presentMoviesItems(response: Movies.FetchMovies.Response) {
@@ -55,10 +55,10 @@ final class MoviesPresenter: MoviesPresentationLogic {
         }
 
         let viewModel = Movies.FetchMovies.ViewModel(page: response.page, totalPages: response.totalPages, movies: movies)
-        viewController?.displayMoviesItems(viewModel: viewModel)
+        viewController?.displayMovies(viewModel: viewModel)
     }
 
     func presentFetchMoviesFailure() {
-        viewController?.displayMoviesError()
+        viewController?.displayGenericError()
     }
 }

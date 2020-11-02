@@ -57,17 +57,16 @@ enum Movies {
     enum FetchLocalMoviesBySearch {
         struct Request {
             let movies: [Movie]
-            let filter: FilterSearch
+            let filter: String
         }
 
         struct Response {
             let movies: [Movie]
-            let search: FilterSearch
+            let filter: String
         }
 
         struct ViewModel {
             let movies: [Movie]
-            let search: FilterSearch
         }
     }
 }
