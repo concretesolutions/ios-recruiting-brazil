@@ -244,7 +244,9 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
     }
 
     @objc fileprivate func didApplyButtonTapped() {
-        let filter = FilterSearch(date: date, genres: genres)
+        let dateFilter = date.count > 0 ? date : nil
+        let genresFilter = genres.count > 0 ? genres : nil
+        let filter = FilterSearch(date: dateFilter, genres: genresFilter)
         delegate?.filterApplyButtonTapped(filter: filter, self)
     }
 }

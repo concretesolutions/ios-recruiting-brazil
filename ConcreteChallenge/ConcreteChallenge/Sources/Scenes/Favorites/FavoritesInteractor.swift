@@ -56,7 +56,7 @@ final class FavoritesInteractor: FavoritesBusinessLogic {
         moviesFiltered.append(contentsOf:
             movies.filter({ movie -> Bool in
                 if let allDates = allDates {
-                    if !allDates.contains(movie.releaseDate) {
+                    if !allDates.localizedCaseInsensitiveContains(movie.releaseDate) {
                         return false
                     }
                 }
@@ -64,10 +64,10 @@ final class FavoritesInteractor: FavoritesBusinessLogic {
                 var moviesHasAllgenres = true
                 if let genres = filter.genres {
                     genres.forEach({ genre in
-                        if let movieGenres = movie.genres, !movieGenres.contains(genre) {
+                        if movie.genres == nil {
                             moviesHasAllgenres = false
                             return
-                        } else {
+                        } else if let movieGenres = movie.genres, !movieGenres.localizedCaseInsensitiveContains(genre) {
                             moviesHasAllgenres = false
                             return
                         }
@@ -79,7 +79,7 @@ final class FavoritesInteractor: FavoritesBusinessLogic {
                 }
 
                 if let search = filter.search, !search.isEmpty {
-                    return movie.title.contains(search)
+                    return movie.title.localizedCaseInsensitiveContains(search)
                 }
 
                 return true
