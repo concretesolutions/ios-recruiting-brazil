@@ -152,6 +152,8 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
     }
 
     private func setupActions() {
+        removeFilterButton.addTarget(self, action: #selector(didRemoveFilterButtonTapped), for: .touchUpInside)
+
         horizontalTableView.bind { [weak self] index in
             self?.horizontalItemTapped(index)
         }
@@ -211,4 +213,15 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
 
         errorView.configuration = configuration
     }
+
+    // MARK: - Fileprivate functions
+
+    @objc fileprivate func didRemoveFilterButtonTapped() {
+        filter = FilterSearch(search: filter.search)
+        filter(newFilter: filter)
+    }
+}
+
+extension Selector {
+    static let didRemoveFilterButtonTapped = #selector(FavoritesViewController.didRemoveFilterButtonTapped)
 }
