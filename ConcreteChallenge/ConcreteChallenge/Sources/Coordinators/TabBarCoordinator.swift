@@ -20,7 +20,7 @@ final class TabBarCoordinator: Coordinator, TabBarViewControllerDelegate, Movies
     // MARK: - Coordinator conforms
 
     func start() {
-        let tabBarViewController = TabBarScreenFactory.makeTabBar(tabBarDelegate: self, moviesDelegate: self)
+        let tabBarViewController = TabBarScreenFactory.make(tabBarDelegate: self, moviesDelegate: self)
         let navigationController = UINavigationController(rootViewController: tabBarViewController)
 
         rootController?.rootViewController = navigationController
@@ -28,7 +28,7 @@ final class TabBarCoordinator: Coordinator, TabBarViewControllerDelegate, Movies
 
     // MARK: - TabBarViewControllerDelegate conforms
 
-    func barButtonItemTapped(_ viewController: TabBarViewController) {
+    func filterIconTapped(_ viewController: TabBarViewController) {
         let filterTypeViewController = FilterScreenFactory.make(delegate: self)
         pushViewController(viewController: filterTypeViewController, true)
     }

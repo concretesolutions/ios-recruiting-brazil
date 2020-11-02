@@ -34,6 +34,7 @@ final class TabBarViewController: UITabBarController, UITabBarControllerDelegate
     init(tabBarViewControllers: [UIViewController], delegate: TabBarViewControllerDelegate) {
         self.tabBarViewControllers = tabBarViewControllers
         self.tabBarDelegate = delegate
+
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -46,12 +47,14 @@ final class TabBarViewController: UITabBarController, UITabBarControllerDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLayout()
         delegate = self
+
+        setupLayout()
     }
 
     override func setupNavigation() {
         super.setupNavigation()
+
         title = Strings.movies.localizable
 
         navigationItem.searchController = searchController
@@ -89,7 +92,8 @@ final class TabBarViewController: UITabBarController, UITabBarControllerDelegate
     // MARK: - Private functions
 
     private func setupRightNavigationButton(shouldHide: Bool) {
-        let barButtonItem = shouldHide ? nil : UIBarButtonItem(image: UIImage(assets: .filterIcon), style: .plain, target: self, action: #selector(didBarButtonItemTapped))
+        let filterIcon = UIImage(assets: .filterIcon)
+        let barButtonItem = shouldHide ? nil : UIBarButtonItem(image: filterIcon, style: .plain, target: self, action: #selector(didBarButtonItemTapped))
         barButtonItem?.tintColor = .appBlackLight
         navigationItem.rightBarButtonItem = barButtonItem
     }
@@ -110,7 +114,7 @@ final class TabBarViewController: UITabBarController, UITabBarControllerDelegate
     // MARK: - Fileprivate functions
 
     @objc fileprivate func didBarButtonItemTapped() {
-        tabBarDelegate?.barButtonItemTapped(self)
+        tabBarDelegate?.filterIconTapped(self)
     }
 }
 

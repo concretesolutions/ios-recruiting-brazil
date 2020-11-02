@@ -9,7 +9,7 @@
 import UIKit
 
 enum TabBarScreenFactory {
-    static func makeTabBar(tabBarDelegate: TabBarViewControllerDelegate, moviesDelegate: MoviesViewControllerDelegate) -> UIViewController {
+    static func make(tabBarDelegate: TabBarViewControllerDelegate, moviesDelegate: MoviesViewControllerDelegate) -> UIViewController {
         let moviesViewController = MoviesScreenFactory.make(delegate: moviesDelegate)
         let moviesTabBarIcon = UITabBarItem()
         moviesTabBarIcon.image = UIImage(assets: .listIcon)
