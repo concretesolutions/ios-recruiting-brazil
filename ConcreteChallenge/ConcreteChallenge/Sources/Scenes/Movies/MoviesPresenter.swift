@@ -7,11 +7,12 @@
 //
 
 protocol MoviesPresentationLogic: AnyObject {
-    func presentLocalMoviesItems(response: Movies.FetchLocalMovies.Response)
-    func presentLocalMoviesBySearch(response: Movies.FetchLocalMoviesBySearch.Response)
-    func presentGenresItems(response: Movies.FetchGenres.Response)
+    func presentFetchedLocalMovies(response: Movies.FetchLocalMovies.Response)
+    func presentFetchedGenres(response: Movies.FetchGenres.Response)
     func presentMoviesItems(response: Movies.FetchMovies.Response)
     func presentFetchMoviesFailure()
+    func presentLocalMoviesBySearch(response: Movies.FetchLocalMoviesBySearch.Response)
+    func presentSearchMoviesFailure(textSearched: String)
 }
 
 final class MoviesPresenter: MoviesPresentationLogic {
@@ -19,7 +20,7 @@ final class MoviesPresenter: MoviesPresentationLogic {
 
     // MARK: - MoviesPresentationLogic conforms
 
-    func presentLocalMoviesItems(response: Movies.FetchLocalMovies.Response) {
+    func presentFetchedLocalMovies(response: Movies.FetchLocalMovies.Response) {
         let viewModel = Movies.FetchLocalMovies.ViewModel(movies: response.movies)
         viewController?.onFetchLocalMoviesSuccessful(viewModel: viewModel)
     }
@@ -34,31 +35,21 @@ final class MoviesPresenter: MoviesPresentationLogic {
         }
     }
 
-    func presentGenresItems(response: Movies.FetchGenres.Response) {
+    func presentFetchedGenres(response: Movies.FetchGenres.Response) {
         let viewModel = Movies.FetchGenres.ViewModel(genres: response.genres)
         viewController?.onFetchGenresSuccessful(viewModel: viewModel)
     }
 
     func presentMoviesItems(response: Movies.FetchMovies.Response) {
-        let movies = response.moviesResponse.map { movieResponse -> Movie in
-            let genreLabels = movieResponse.genreIds.map { id -> String in
-                let genre = response.genres.first { genre -> Bool in
-                    genre.id == id
-                }
-
-                return genre?.name ?? .empty
-            }
-
-            let genres = genreLabels.count > 0 ? genreLabels.joined(separator: Constants.Utils.genresSeparator) : nil
-
-            return Movie(id: movieResponse.id, title: movieResponse.title, imageURL: Constants.MovieNetwork.baseImageURL.appending(movieResponse.imageURL), genres: genres, releaseDate: movieResponse.releaseDate.year, overview: movieResponse.overview, isFavorite: false)
-        }
-
-        let viewModel = Movies.FetchMovies.ViewModel(page: response.page, totalPages: response.totalPages, movies: movies)
+        let viewModel = Movies.FetchMovies.ViewModel(page: response.page, totalPages: response.totalPages, movies: response.movies)
         viewController?.displayMovies(viewModel: viewModel)
     }
 
     func presentFetchMoviesFailure() {
         viewController?.displayGenericError()
+    }
+
+    func presentSearchMoviesFailure(textSearched: String) {
+        
     }
 }

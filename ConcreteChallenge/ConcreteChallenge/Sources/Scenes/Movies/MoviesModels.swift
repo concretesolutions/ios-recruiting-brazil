@@ -29,8 +29,7 @@ enum Movies {
         struct Response {
             let page: Int
             let totalPages: Int
-            let genres: [GenreResponse]
-            let moviesResponse: [MovieResponse]
+            let movies: [Movie]
         }
 
         struct ViewModel {

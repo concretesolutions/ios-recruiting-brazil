@@ -8,9 +8,9 @@
 
 protocol MoviesBusinessLogic: AnyObject {
     func fetchLocalMovies()
-    func fetchLocalMoviesBySearch(request: Movies.FetchLocalMoviesBySearch.Request)
     func fetchGenres(request: Movies.FetchGenres.Request)
     func fetchMovies(request: Movies.FetchMovies.Request)
+    func fetchLocalMoviesBySearch(request: Movies.FetchLocalMoviesBySearch.Request)
 }
 
 final class MoviesInteractor: MoviesBusinessLogic {
@@ -37,7 +37,45 @@ final class MoviesInteractor: MoviesBusinessLogic {
                     return movie
                 }
                 let responseModel = Movies.FetchLocalMovies.Response(movies: localMovies)
-                self.presenter.presentLocalMoviesItems(response: responseModel)
+                self.presenter.presentFetchedLocalMovies(response: responseModel)
+            case let .failure(error):
+                self.presentFailure(error: error)
+            }
+        }
+    }
+
+    func fetchGenres(request: Movies.FetchGenres.Request) {
+        moyaWorker.fetchGenres(language: request.language) { result in
+            switch result {
+            case let .success(response):
+                let responseModel = Movies.FetchGenres.Response(genres: response.genres)
+                self.presenter.presentFetchedGenres(response: responseModel)
+            case let .failure(error):
+                self.presentFailure(error: error)
+            }
+        }
+    }
+
+    func fetchMovies(request: Movies.FetchMovies.Request) {
+        moyaWorker.fetchMovies(language: request.language, page: request.page) { result in
+            switch result {
+            case let .success(response):
+                let movies = response.moviesResponse.map { movieResponse -> Movie in
+                    let genreLabels = movieResponse.genreIds.map { id -> String in
+                        let genre = request.genres.first { genre -> Bool in
+                            genre.id == id
+                        }
+
+                        return genre?.name ?? .empty
+                    }
+
+                    let genres = genreLabels.count > 0 ? genreLabels.joined(separator: Constants.Utils.genresSeparator) : nil
+
+                    return Movie(id: movieResponse.id, title: movieResponse.title, imageURL: Constants.MovieNetwork.baseImageURL.appending(movieResponse.imageURL), genres: genres, releaseDate: movieResponse.releaseDate.year, overview: movieResponse.overview, isFavorite: false)
+                }
+
+                let responseModel = Movies.FetchMovies.Response(page: response.page, totalPages: response.totalPages, movies: movies)
+                self.presenter.presentMoviesItems(response: responseModel)
             case let .failure(error):
                 self.presentFailure(error: error)
             }
@@ -54,31 +92,7 @@ final class MoviesInteractor: MoviesBusinessLogic {
         if movies.count > 0 {
             presenter.presentLocalMoviesBySearch(response: Movies.FetchLocalMoviesBySearch.Response(movies: movies, filter: request.filter))
         } else {
-//            presenter.presentLocalMoviesBySearch(response: <#T##Movies.FetchLocalMoviesBySearch.Response#>)
-        }
-    }
-
-    func fetchGenres(request: Movies.FetchGenres.Request) {
-        moyaWorker.fetchGenres(language: request.language) { result in
-            switch result {
-            case let .success(response):
-                let responseModel = Movies.FetchGenres.Response(genres: response.genres)
-                self.presenter.presentGenresItems(response: responseModel)
-            case let .failure(error):
-                self.presentFailure(error: error)
-            }
-        }
-    }
-
-    func fetchMovies(request: Movies.FetchMovies.Request) {
-        moyaWorker.fetchMovies(language: request.language, page: request.page) { result in
-            switch result {
-            case let .success(response):
-                let responseModel = Movies.FetchMovies.Response(page: response.page, totalPages: response.totalPages, genres: request.genres, moviesResponse: response.moviesResponse)
-                self.presenter.presentMoviesItems(response: responseModel)
-            case let .failure(error):
-                self.presentFailure(error: error)
-            }
+            presenter.presentSearchMoviesFailure(textSearched: request.filter)
         }
     }
 
