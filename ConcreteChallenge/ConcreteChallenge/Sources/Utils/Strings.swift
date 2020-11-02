@@ -16,8 +16,9 @@ enum Strings: String, Localizable {
     case genres
     case movie
     case movies
-    case movieUnfavoriteSuccess = "movie_unfavorite_success"
+    case movieUnfavoriteSuccessful = "movie_unfavorite_successful"
     case search
+    case thereIsNotFavoriteMovie = "there_is_not_favorite_movie"
     case unfavorite
     case convertUrlFailure = "convert_url_failure"
     case errorDelete = "error_delete"

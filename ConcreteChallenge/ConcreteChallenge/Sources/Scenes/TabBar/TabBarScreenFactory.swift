@@ -16,7 +16,7 @@ enum TabBarScreenFactory {
         moviesTabBarIcon.title = Strings.movies.localizable
         moviesViewController.tabBarItem = moviesTabBarIcon
 
-        let favoritesViwController = FavoritesScreenFactory.makeFavorites()
+        let favoritesViwController = FavoritesScreenFactory.make()
         let favoritesTabBarIcon = UITabBarItem()
         favoritesTabBarIcon.image = UIImage(assets: .favoriteEmptyIcon)
         favoritesTabBarIcon.title = Strings.favorites.localizable

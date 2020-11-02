@@ -9,11 +9,12 @@
 import UIKit
 
 protocol FavoritesDisplayLogic: AnyObject {
-    func onFetchLocalMoviesSuccess(viewModel: Favorites.FetchLocalMovies.ViewModel)
-    func onFetchLocalMoviesBySearchSuccess(viewModel: Favorites.FetchLocalMoviesBySearch.ViewModel)
-    func displayMoviesError()
-    func displaySearchError(viewModel: Favorites.FetchLocalMoviesBySearch.ViewModel)
-    func onSuccessDeleteMovie()
+    func displayLocalMovies(viewModel: Favorites.FetchLocalMovies.ViewModel)
+    func displayFetchedLocalMoviesEmpty()
+    func displayMovieUnfavorite()
+    func displayGenericError()
+    func displayMoviesBySearch(viewModel: Favorites.FetchLocalMoviesBySearch.ViewModel)
+    func displaySearchError(searchedText: String)
 }
 
 final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
@@ -59,7 +60,12 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
         super.viewDidLoad()
 
         setup()
-        fetchLocalMovies()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        filter(newFilter: FilterSearch())
     }
 
     // MARK: - Functions
@@ -69,38 +75,50 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
                                    date: newFilter.date ?? filter.date,
                                    genres: newFilter.genres ?? filter.genres)
 
-        if !filter.isEmpty {
-            interactor.fetchLocalMoviesBySearch(request: Favorites.FetchLocalMoviesBySearch.Request(movies: localMovies, filter: filter))
-        } else {
+        guard !filter.isEmpty else {
             fetchLocalMovies()
+            return
         }
+
+        interactor.fetchLocalMoviesBySearch(request: Favorites.FetchLocalMoviesBySearch.Request(movies: localMovies, filter: filter))
     }
 
     // MARK: - FavoritesDisplayLogic conforms
 
-    func onFetchLocalMoviesSuccess(viewModel: Favorites.FetchLocalMovies.ViewModel) {
+    func displayLocalMovies(viewModel: Favorites.FetchLocalMovies.ViewModel) {
         localMovies = viewModel.movies
         localMoviesFiltered = []
 
         setupViewModel()
     }
 
-    func onFetchLocalMoviesBySearchSuccess(viewModel: Favorites.FetchLocalMoviesBySearch.ViewModel) {
+    func displayFetchedLocalMoviesEmpty() {
+        displayEmptyMovie()
+    }
 
+    func displayMovieUnfavorite() {
+        print(Strings.movieUnfavoriteSuccessful.localizable)
+
+        if localMovies.count <= 0 {
+            displayEmptyMovie()
+        }
+    }
+
+    func displayGenericError() {
+        displayErrorView()
+    }
+
+    func displayMoviesBySearch(viewModel: Favorites.FetchLocalMoviesBySearch.ViewModel) {
         localMoviesFiltered = viewModel.movies
 
         setupViewModel()
     }
 
-    func displayMoviesError() { }
-
-    func displaySearchError(viewModel: Favorites.FetchLocalMoviesBySearch.ViewModel) {
-        let configurationError = ErrorConfiguration(image: UIImage(assets: .searchIcon), text: String(format: Strings.errorSearch.localizable, viewModel.search.search ?? .empty))
-        showErrorView(configuration: configurationError)
-    }
-
-    func onSuccessDeleteMovie() {
-        print(Strings.movieUnfavoriteSuccess.localizable)
+    func displaySearchError(searchedText: String) {
+        let searchIcon = UIImage(assets: .searchIcon)
+        let errorFormatted = String(format: Strings.errorSearch.localizable, searchedText)
+        let configurationError = ErrorConfiguration(image: searchIcon, text: errorFormatted)
+        displayErrorView(configuration: configurationError)
     }
 
     // MARK: - Private functions
@@ -160,13 +178,21 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
     private func showHorizontalList() {
         errorView.isHidden = true
         horizontalTableView.isHidden = false
+        clearFilter()
+    }
 
+    private func clearFilter() {
         localMoviesFiltered = []
         filter = FilterSearch()
     }
 
-    private func showErrorView(configuration: ErrorConfiguration = ErrorConfiguration()) {
+    private func displayEmptyMovie() {
+        let searchIcon = UIImage(assets: .searchIcon)
+        let configurationError = ErrorConfiguration(image: searchIcon, text: Strings.thereIsNotFavoriteMovie.localizable)
+        displayErrorView(configuration: configurationError)
+    }
 
+    private func displayErrorView(configuration: ErrorConfiguration = ErrorConfiguration()) {
         horizontalTableView.isHidden = true
         errorView.isHidden = false
 

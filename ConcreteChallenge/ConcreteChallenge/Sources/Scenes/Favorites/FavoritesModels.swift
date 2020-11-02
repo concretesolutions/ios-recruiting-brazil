@@ -33,12 +33,10 @@ enum Favorites {
 
         struct Response {
             let movies: [Movie]
-            let search: FilterSearch
         }
 
         struct ViewModel {
             let movies: [Movie]
-            let search: FilterSearch
         }
     }
 }

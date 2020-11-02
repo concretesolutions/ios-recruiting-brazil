@@ -9,12 +9,12 @@
 import UIKit
 
 protocol MoviesDisplayLogic: AnyObject {
-    func onFetchLocalMoviesSuccessful(viewModel: Movies.FetchLocalMovies.ViewModel)
-    func onFetchGenresSuccessful(viewModel: Movies.FetchGenres.ViewModel)
+    func onFetchedLocalMovies(viewModel: Movies.FetchLocalMovies.ViewModel)
+    func onFetchedGenres(viewModel: Movies.FetchGenres.ViewModel)
     func displayMovies(viewModel: Movies.FetchMovies.ViewModel)
     func displayGenericError()
     func displayMoviesBySearch(viewModel: Movies.FetchLocalMoviesBySearch.ViewModel)
-    func displaySearchError(textSearched: String)
+    func displaySearchError(searchedText: String)
 }
 
 final class MoviesViewController: UIViewController, MoviesDisplayLogic {
@@ -109,13 +109,13 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
     // MARK: - MoviesDisplayLogic conforms
 
-    func onFetchLocalMoviesSuccessful(viewModel: Movies.FetchLocalMovies.ViewModel) {
+    func onFetchedLocalMovies(viewModel: Movies.FetchLocalMovies.ViewModel) {
         localMovies = viewModel.movies
 
         fetchGenres()
     }
 
-    func onFetchGenresSuccessful(viewModel: Movies.FetchGenres.ViewModel) {
+    func onFetchedGenres(viewModel: Movies.FetchGenres.ViewModel) {
         genres = viewModel.genres
 
         fetchMovies()
@@ -141,9 +141,9 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         reloadMovies()
     }
 
-    func displaySearchError(textSearched: String) {
+    func displaySearchError(searchedText: String) {
         let searchIcon = UIImage(assets: .searchIcon)
-        let errorFormatted = String(format: Strings.errorSearch.localizable, textSearched)
+        let errorFormatted = String(format: Strings.errorSearch.localizable, searchedText)
         let configurationError = ErrorConfiguration(image: searchIcon, text: errorFormatted)
         displayErrorView(configuration: configurationError)
     }

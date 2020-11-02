@@ -7,11 +7,12 @@
 //
 
 protocol FavoritesPresentationLogic: AnyObject {
-    func presentLocalMoviesItems(response: Favorites.FetchLocalMovies.Response)
-    func presentLocalMoviesBySearch(response: Favorites.FetchLocalMoviesBySearch.Response)
-    func presentFetchMoviesFailure()
-    func presentLocalMoviesBySearchFailure(response: Favorites.FetchLocalMoviesBySearch.Response)
-    func onSuccessDeleteMovie()
+    func presentFetchedLocalMovies(response: Favorites.FetchLocalMovies.Response)
+    func presentFetchedLocalMoviesEmpty()
+    func presenterMovieUnfavorite()
+    func presentGenericFailure()
+    func presentFetchedMoviesBySearch(response: Favorites.FetchLocalMoviesBySearch.Response)
+    func presentSearchedMoviesFailure(filter: FilterSearch)
 }
 
 final class FavoritesPresenter: FavoritesPresentationLogic {
@@ -19,25 +20,29 @@ final class FavoritesPresenter: FavoritesPresentationLogic {
 
     // MARK: - FavoritesPresentationLogic conforms
 
-    func presentLocalMoviesItems(response: Favorites.FetchLocalMovies.Response) {
+    func presentFetchedLocalMovies(response: Favorites.FetchLocalMovies.Response) {
         let viewModel = Favorites.FetchLocalMovies.ViewModel(movies: response.movies)
-        viewController?.onFetchLocalMoviesSuccess(viewModel: viewModel)
+        viewController?.displayLocalMovies(viewModel: viewModel)
     }
 
-    func presentLocalMoviesBySearch(response: Favorites.FetchLocalMoviesBySearch.Response) {
-        let viewModel = Favorites.FetchLocalMoviesBySearch.ViewModel(movies: response.movies, search: response.search)
-        viewController?.onFetchLocalMoviesBySearchSuccess(viewModel: viewModel)
+    func presentFetchedLocalMoviesEmpty() {
+        viewController?.displayFetchedLocalMoviesEmpty()
     }
 
-    func presentFetchMoviesFailure() {
-        viewController?.displayMoviesError()
+    func presenterMovieUnfavorite() {
+        viewController?.displayMovieUnfavorite()
     }
 
-    func presentLocalMoviesBySearchFailure(response: Favorites.FetchLocalMoviesBySearch.Response) {
-        viewController?.displaySearchError(viewModel: Favorites.FetchLocalMoviesBySearch.ViewModel(movies: response.movies, search: response.search))
+    func presentGenericFailure() {
+        viewController?.displayGenericError()
     }
 
-    func onSuccessDeleteMovie() {
-        viewController?.onSuccessDeleteMovie()
+    func presentFetchedMoviesBySearch(response: Favorites.FetchLocalMoviesBySearch.Response) {
+        let viewModel = Favorites.FetchLocalMoviesBySearch.ViewModel(movies: response.movies)
+        viewController?.displayMoviesBySearch(viewModel: viewModel)
+    }
+
+    func presentSearchedMoviesFailure(filter: FilterSearch) {
+        viewController?.displaySearchError(searchedText: "")
     }
 }

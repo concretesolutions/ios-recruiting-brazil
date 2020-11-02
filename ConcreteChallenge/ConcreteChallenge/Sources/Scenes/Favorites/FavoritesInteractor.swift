@@ -33,10 +33,15 @@ final class FavoritesInteractor: FavoritesBusinessLogic {
                     movie.isFavorite = true
                     return movie
                 }
-                let responseModel = Favorites.FetchLocalMovies.Response(movies: localMovies)
-                self.presenter.presentLocalMoviesItems(response: responseModel)
+
+                if localMovies.count > 0 {
+                    let responseModel = Favorites.FetchLocalMovies.Response(movies: localMovies)
+                    self.presenter.presentFetchedLocalMovies(response: responseModel)
+                } else {
+                    self.presenter.presentFetchedLocalMoviesEmpty()
+                }
             case let .failure(error):
-                self.presentFailure(error: error)
+                self.presentGenericFailure(error: error)
             }
         }
     }
@@ -82,9 +87,9 @@ final class FavoritesInteractor: FavoritesBusinessLogic {
         )
 
         if moviesFiltered.count > 0 {
-            presenter.presentLocalMoviesBySearch(response: Favorites.FetchLocalMoviesBySearch.Response(movies: moviesFiltered, search: filter))
+            presenter.presentFetchedMoviesBySearch(response: Favorites.FetchLocalMoviesBySearch.Response(movies: moviesFiltered))
         } else {
-            presenter.presentLocalMoviesBySearchFailure(response: Favorites.FetchLocalMoviesBySearch.Response(movies: moviesFiltered, search: filter))
+            presenter.presentSearchedMoviesFailure(filter: filter)
         }
     }
 
@@ -92,17 +97,17 @@ final class FavoritesInteractor: FavoritesBusinessLogic {
         worker.deleteMovie(movie: request.movie) { result in
             switch result {
             case .success():
-                self.presenter.onSuccessDeleteMovie()
+                self.presenter.presenterMovieUnfavorite()
             case let .failure(error):
-                self.presentFailure(error: error)
+                self.presentGenericFailure(error: error)
             }
         }
     }
 
     // MARK: - Private functions
 
-    private func presentFailure(error: DatabaseError) {
+    private func presentGenericFailure(error: DatabaseError) {
         print(error.errorDescription)
-        self.presenter.presentFetchMoviesFailure()
+        self.presenter.presentGenericFailure()
     }
 }

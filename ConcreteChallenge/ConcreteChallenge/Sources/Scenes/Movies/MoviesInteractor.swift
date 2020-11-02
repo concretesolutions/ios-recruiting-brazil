@@ -39,7 +39,7 @@ final class MoviesInteractor: MoviesBusinessLogic {
                 let responseModel = Movies.FetchLocalMovies.Response(movies: localMovies)
                 self.presenter.presentFetchedLocalMovies(response: responseModel)
             case let .failure(error):
-                self.presentFailure(error: error)
+                self.presentGenericFailure(error: error)
             }
         }
     }
@@ -51,7 +51,7 @@ final class MoviesInteractor: MoviesBusinessLogic {
                 let responseModel = Movies.FetchGenres.Response(genres: response.genres)
                 self.presenter.presentFetchedGenres(response: responseModel)
             case let .failure(error):
-                self.presentFailure(error: error)
+                self.presentGenericFailure(error: error)
             }
         }
     }
@@ -77,7 +77,7 @@ final class MoviesInteractor: MoviesBusinessLogic {
                 let responseModel = Movies.FetchMovies.Response(page: response.page, totalPages: response.totalPages, movies: movies)
                 self.presenter.presentFetchedMovies(response: responseModel)
             case let .failure(error):
-                self.presentFailure(error: error)
+                self.presentGenericFailure(error: error)
             }
         }
     }
@@ -90,21 +90,21 @@ final class MoviesInteractor: MoviesBusinessLogic {
         let movies = request.movies.filter { $0.title.localizedCaseInsensitiveContains(request.filter) }
 
         if movies.count > 0 {
-            presenter.presentLocalMoviesBySearch(response: Movies.FetchLocalMoviesBySearch.Response(movies: movies))
+            presenter.presentFetchedMoviesBySearch(response: Movies.FetchLocalMoviesBySearch.Response(movies: movies))
         } else {
-            presenter.presentSearchMoviesFailure(textSearched: request.filter)
+            presenter.presentSearchedMoviesFailure(textSearched: request.filter)
         }
     }
 
     // MARK: - Private functions
 
-    private func presentFailure(error: NetworkError) {
+    private func presentGenericFailure(error: NetworkError) {
         print(error.errorDescription)
-        self.presenter.presentFetchFailure()
+        self.presenter.presentFetchedFailure()
     }
 
-    private func presentFailure(error: DatabaseError) {
+    private func presentGenericFailure(error: DatabaseError) {
         print(error.errorDescription)
-        self.presenter.presentFetchFailure()
+        self.presenter.presentFetchedFailure()
     }
 }
