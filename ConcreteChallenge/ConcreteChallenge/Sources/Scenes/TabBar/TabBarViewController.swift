@@ -63,7 +63,7 @@ final class TabBarViewController: UITabBarController, UITabBarControllerDelegate
     // MARK: - Functions
 
     func filter(filter: FilterSearch) {
-        tabBarDelegate?.filterApplyButtonTapped(filter: filter, self)
+        tabBarDelegate?.filterSearchTapped(filter: filter, self)
     }
 
     // MARK: - UITabBarControllerDelegate conforms

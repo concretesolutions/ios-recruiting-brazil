@@ -33,7 +33,7 @@ final class TabBarCoordinator: Coordinator, TabBarViewControllerDelegate, Movies
         pushViewController(viewController: filterTypeViewController, true)
     }
 
-    func filterApplyButtonTapped(filter: FilterSearch, _ viewController: TabBarViewController) {
+    func filterSearchTapped(filter: FilterSearch, _ viewController: TabBarViewController) {
         if let viewController = viewController.selectedViewController as? MoviesViewController {
             viewController.filter(search: filter.search ?? .empty)
         } else if let viewController = viewController.selectedViewController as? FavoritesViewController {
@@ -53,42 +53,46 @@ final class TabBarCoordinator: Coordinator, TabBarViewControllerDelegate, Movies
     // MARK: - FilterViewControllerDelegate conforms
 
     func filterApplyButtonTapped(filter: FilterSearch, _ viewController: FilterViewController) {
-        let viewController = fetchViewController(TabBarViewController.self)
-        if let viewController = viewController {
-            popToViewController(viewController: viewController, true)
-            viewController.filter(filter: filter)
+        guard let viewController = fetchViewController(TabBarViewController.self) else {
+            return
         }
+
+        popToViewController(viewController: viewController, true)
+        viewController.filter(filter: filter)
     }
 
     // MARK: - Private functions
 
     private func pushViewController(viewController: UIViewController, _ animated: Bool) {
-        if let rootController = rootController,
-            let rootViewController = rootController.rootViewController,
-            let navigationController = rootViewController as? UINavigationController {
-
-            navigationController.pushViewController(viewController, animated: animated)
+        guard let rootController = rootController,
+              let rootViewController = rootController.rootViewController,
+              let navigationController = rootViewController as? UINavigationController else {
+                return
         }
+
+        navigationController.pushViewController(viewController, animated: animated)
     }
 
     private func popToViewController(viewController: UIViewController, _ animated: Bool) {
-        if let rootController = rootController,
-            let rootViewController = rootController.rootViewController,
-            let navigationController = rootViewController as? UINavigationController {
-
-            navigationController.popToViewController(viewController, animated: animated)
+        guard let rootController = rootController,
+              let rootViewController = rootController.rootViewController,
+              let navigationController = rootViewController as? UINavigationController else {
+                return
         }
+
+        navigationController.popToViewController(viewController, animated: animated)
     }
 
     private func fetchViewController<T: UIViewController>(_ type: T.Type)  -> T? {
-        if let rootController = rootController,
+        guard let rootController = rootController,
             let rootViewController = rootController.rootViewController,
-            let navigationController = rootViewController as? UINavigationController {
+            let navigationController = rootViewController as? UINavigationController else {
+                return nil
+        }
 
-            let viewController = navigationController.viewControllers.first { $0 is T }
-            if let viewController = viewController as? T {
-                return viewController
-            }
+        let viewController = navigationController.viewControllers.first { $0 is T }
+        if let viewController = viewController as? T {
+            return viewController
         }
 
         return nil

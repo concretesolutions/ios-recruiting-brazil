@@ -8,5 +8,5 @@
 
 protocol TabBarViewControllerDelegate: AnyObject {
     func filterIconTapped(_ viewController: TabBarViewController)
-    func filterApplyButtonTapped(filter: FilterSearch, _ viewController: TabBarViewController)
+    func filterSearchTapped(filter: FilterSearch, _ viewController: TabBarViewController)
 }
