@@ -79,8 +79,6 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
     // MARK: - FavoritesDisplayLogic conforms
 
     func onFetchLocalMoviesSuccess(viewModel: Favorites.FetchLocalMovies.ViewModel) {
-        view.stopLoading()
-
         localMovies = viewModel.movies
         localMoviesFiltered = []
 
@@ -88,6 +86,7 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
     }
 
     func onFetchLocalMoviesBySearchSuccess(viewModel: Favorites.FetchLocalMoviesBySearch.ViewModel) {
+
         localMoviesFiltered = viewModel.movies
 
         setupViewModel()
@@ -96,7 +95,8 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
     func displayMoviesError() { }
 
     func displaySearchError(viewModel: Favorites.FetchLocalMoviesBySearch.ViewModel) {
-        // show error view
+        let configurationError = ErrorConfiguration(image: UIImage(assets: .searchIcon), text: String(format: Strings.errorSearch.localizable, viewModel.search.search ?? .empty))
+        showErrorView(configuration: configurationError)
     }
 
     func onSuccessDeleteMovie() {
@@ -153,7 +153,23 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
     }
 
     private func fetchLocalMovies() {
-        view.showLoading()
+        showHorizontalList()
         interactor.fetchLocalMovies()
+    }
+
+    private func showHorizontalList() {
+        errorView.isHidden = true
+        horizontalTableView.isHidden = false
+
+        localMoviesFiltered = []
+        filter = FilterSearch()
+    }
+
+    private func showErrorView(configuration: ErrorConfiguration = ErrorConfiguration()) {
+
+        horizontalTableView.isHidden = true
+        errorView.isHidden = false
+
+        errorView.configuration = configuration
     }
 }
