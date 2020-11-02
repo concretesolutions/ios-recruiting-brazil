@@ -8,9 +8,11 @@
 
 import UIKit
 
-final class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
+final class TabBarViewController: UITabBarController, UITabBarControllerDelegate, UISearchResultsUpdating {
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
 
         let searchBar = searchController.searchBar
         searchBar.placeholder = Strings.search.localizable
@@ -72,6 +74,16 @@ final class TabBarViewController: UITabBarController, UITabBarControllerDelegate
         default:
             print(Strings.viewControllerNotFound.localizable)
         }
+    }
+
+    // MARK: - UISearchResultsUpdating conforms
+
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else {
+            return
+        }
+
+        filter(filter: FilterSearch(search: text))
     }
 
     // MARK: - Private functions

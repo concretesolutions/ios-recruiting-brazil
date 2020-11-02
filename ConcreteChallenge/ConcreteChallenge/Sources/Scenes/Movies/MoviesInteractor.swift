@@ -8,6 +8,7 @@
 
 protocol MoviesBusinessLogic: AnyObject {
     func fetchLocalMovies()
+    func fetchLocalMoviesBySearch(request: Movies.FetchLocalMoviesBySearch.Request)
     func fetchGenres(request: Movies.FetchGenres.Request)
     func fetchMovies(request: Movies.FetchMovies.Request)
 }
@@ -40,6 +41,13 @@ final class MoviesInteractor: MoviesBusinessLogic {
             case let .failure(error):
                 self.presentFailure(error: error)
             }
+        }
+    }
+
+    func fetchLocalMoviesBySearch(request: Movies.FetchLocalMoviesBySearch.Request) {
+        if let search = request.filter.search, !search.isEmpty {
+            let movies = request.movies.filter { $0.title.contains(search) }
+            presenter.presentLocalMoviesBySearch(response: Movies.FetchLocalMoviesBySearch.Response(movies: movies, search: request.filter))
         }
     }
 

@@ -10,6 +10,7 @@ import UIKit
 
 protocol MoviesDisplayLogic: AnyObject {
     func onFetchLocalMoviesSuccess(viewModel: Movies.FetchLocalMovies.ViewModel)
+    func onFetchLocalMoviesBySearchSuccess(viewModel: Movies.FetchLocalMoviesBySearch.ViewModel)
     func onFetchGenresSuccess(viewModel: Movies.FetchGenres.ViewModel)
     func displayMoviesItems(viewModel: Movies.FetchMovies.ViewModel)
     func displayMoviesError()
@@ -34,6 +35,8 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
     private var movies: [Movie] = []
 
+    private var moviesToDisplay: [Movie] = []
+
     private var genres: [GenreResponse] = []
 
     private var firstTimeLoadMovies = true
@@ -41,6 +44,8 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     private var currentPage: Int = 0
 
     private var lastPage: Int?
+
+    private var filter: FilterSearch?
 
     // MARK: - Variables
 
@@ -88,12 +93,30 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         }
     }
 
+    // MARK: - Functions
+
+    func filter(filter: FilterSearch) {
+        if let search = filter.search, !search.isEmpty {
+            interactor.fetchLocalMoviesBySearch(request: Movies.FetchLocalMoviesBySearch.Request(movies: movies, filter: filter))
+        } else {
+            showGallery()
+            fetchMovies()
+        }
+    }
+
     // MARK: - MoviesDisplayLogic conforms
 
     func onFetchLocalMoviesSuccess(viewModel: Movies.FetchLocalMovies.ViewModel) {
         localMovies = viewModel.movies
 
         fetchGenres()
+    }
+
+    func onFetchLocalMoviesBySearchSuccess(viewModel: Movies.FetchLocalMoviesBySearch.ViewModel) {
+        moviesToDisplay = viewModel.movies
+        filter = viewModel.search
+
+        loadGridGalleryLayout()
     }
 
     func onFetchGenresSuccess(viewModel: Movies.FetchGenres.ViewModel) {
@@ -161,6 +184,10 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     }
 
     private func fetchNewMoviesPage() {
+        guard filter == nil else {
+            return
+        }
+
         currentPage += 1
         if let lastPage = lastPage, currentPage < lastPage {
             fetchMovies(page: currentPage)
@@ -188,6 +215,9 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     private func showGallery() {
         errorView.isHidden = true
         galleryCollectionView.isHidden = false
+
+        moviesToDisplay = []
+        filter = nil
     }
 
     private func setErrorView(configuration: ErrorConfiguration = ErrorConfiguration()) {
@@ -204,7 +234,9 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     private func loadGridGalleryLayout() {
         firstTimeLoadMovies = false
 
-        let itemsViewModel = movies.map { movie -> GridGalleryItemViewModel in
+        let displayMovies = moviesToDisplay.count > 0 ? moviesToDisplay : movies
+
+        let itemsViewModel = displayMovies.map { movie -> GridGalleryItemViewModel in
             let movieFound = localMovies.first { localMovie -> Bool in
                 localMovie.id == movie.id
             }

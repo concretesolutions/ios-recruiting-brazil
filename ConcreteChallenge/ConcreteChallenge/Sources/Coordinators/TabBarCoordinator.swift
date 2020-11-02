@@ -35,7 +35,7 @@ final class TabBarCoordinator: Coordinator, TabBarViewControllerDelegate, Movies
 
     func filterApplyButtonTapped(filter: FilterSearch, _ viewController: TabBarViewController) {
         if let viewController = viewController.selectedViewController as? MoviesViewController {
-            print("filter in moviesviewcontroller")
+            viewController.filter(filter: filter)
         } else if let viewController = viewController.selectedViewController as? FavoritesViewController {
             viewController.filter(filter: filter)
         } else {

@@ -8,6 +8,7 @@
 
 protocol MoviesPresentationLogic: AnyObject {
     func presentLocalMoviesItems(response: Movies.FetchLocalMovies.Response)
+    func presentLocalMoviesBySearch(response: Movies.FetchLocalMoviesBySearch.Response)
     func presentGenresItems(response: Movies.FetchGenres.Response)
     func presentMoviesItems(response: Movies.FetchMovies.Response)
     func presentFetchMoviesFailure()
@@ -21,6 +22,16 @@ final class MoviesPresenter: MoviesPresentationLogic {
     func presentLocalMoviesItems(response: Movies.FetchLocalMovies.Response) {
         let viewModel = Movies.FetchLocalMovies.ViewModel(movies: response.movies)
         viewController?.onFetchLocalMoviesSuccess(viewModel: viewModel)
+    }
+
+    func presentLocalMoviesBySearch(response: Movies.FetchLocalMoviesBySearch.Response) {
+        let viewModel = Movies.FetchLocalMoviesBySearch.ViewModel(movies: response.movies, search: response.search)
+
+        if viewModel.movies.count > 0 {
+            viewController?.onFetchLocalMoviesBySearchSuccess(viewModel: viewModel)
+        } else {
+            viewController?.displaySearchError(searchText: viewModel.search.search ?? .empty)
+        }
     }
 
     func presentGenresItems(response: Movies.FetchGenres.Response) {

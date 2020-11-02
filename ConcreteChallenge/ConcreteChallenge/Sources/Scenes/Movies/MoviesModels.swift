@@ -53,4 +53,21 @@ enum Movies {
             let genres: [GenreResponse]
         }
     }
+
+    enum FetchLocalMoviesBySearch {
+        struct Request {
+            let movies: [Movie]
+            let filter: FilterSearch
+        }
+
+        struct Response {
+            let movies: [Movie]
+            let search: FilterSearch
+        }
+
+        struct ViewModel {
+            let movies: [Movie]
+            let search: FilterSearch
+        }
+    }
 }
