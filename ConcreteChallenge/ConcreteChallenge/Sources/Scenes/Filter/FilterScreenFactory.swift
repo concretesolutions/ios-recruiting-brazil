@@ -10,7 +10,7 @@ import UIKit
 import Moya
 
 enum FilterScreenFactory {
-    static func makeFilterType() -> UIViewController {
+    static func makeFilterType(delegate: FilterViewControllerDelegate) -> UIViewController {
         let providerStubClosure = MoyaProvider<MovieDbAPI>.neverStub
         let provider = MoyaProvider<MovieDbAPI>(stubClosure: providerStubClosure, plugins: [NetworkLoggerPlugin()])
         let worker = MoyaWorker(provider: provider)
@@ -20,6 +20,7 @@ enum FilterScreenFactory {
         let interactor = FilterInteractor(worker: worker, presenter: presenter)
 
         let filterViewController = FilterViewController(interactor: interactor)
+        filterViewController.delegate = delegate
         presenter.viewController = filterViewController
 
         return filterViewController

@@ -10,6 +10,7 @@ import UIKit
 
 protocol FavoritesDisplayLogic: AnyObject {
     func onFetchLocalMoviesSuccess(viewModel: Favorites.FetchLocalMovies.ViewModel)
+    func onFetchLocalMoviesBySearchSuccess(viewModel: Favorites.FetchLocalMoviesBySearch.ViewModel)
     func displayMoviesError()
     func displaySearchError(searchText: String)
     func onSuccessDeleteMovie()
@@ -28,6 +29,8 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
     // MARK: - Private variables
 
     private var localMovies: [Movie] = []
+
+    private var localMoviesFiltered: [Movie] = []
 
     // MARK: - Private constants
 
@@ -54,18 +57,26 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
         super.viewDidLoad()
 
         setup()
+        fetchLocalMovies()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    // MARK: - Functions
 
-        fetchLocalMovies()
+    func filter(filter: FilterSearch) {
+        interactor.fetchLocalMoviesBySearch(request: Favorites.FetchLocalMoviesBySearch.Request(movies: localMovies, filter: filter))
     }
 
     // MARK: - FavoritesDisplayLogic conforms
 
     func onFetchLocalMoviesSuccess(viewModel: Favorites.FetchLocalMovies.ViewModel) {
         localMovies = viewModel.movies
+        localMoviesFiltered = []
+
+        setupViewModel()
+    }
+
+    func onFetchLocalMoviesBySearchSuccess(viewModel: Favorites.FetchLocalMoviesBySearch.ViewModel) {
+        localMoviesFiltered = viewModel.movies
 
         setupViewModel()
     }
@@ -103,16 +114,24 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
     }
 
     private func horizontalItemTapped(_ index: Int) {
-        let movieToRemove = localMovies[index]
-        localMovies.remove(at: index)
+        let movieToRemove = localMoviesFiltered.count > 0 ? localMoviesFiltered[index] : localMovies[index]
+
+        if let indexToRemove = localMovies.firstIndex(of: movieToRemove) {
+            localMovies.remove(at: indexToRemove)
+        }
+
+        if let indexToRemove = localMoviesFiltered.firstIndex(of: movieToRemove) {
+            localMoviesFiltered.remove(at: indexToRemove)
+        }
 
         setupViewModel()
 
-        interactor.deleteMovie(request: MovieDetails.DeleteMovie.Request(movie: movieToRemove))
+        interactor.deleteMovie(request: Favorites.DeleteMovie.Request(movie: movieToRemove))
     }
 
     private func setupViewModel() {
-        let horizontalItemsViewModel = localMovies.map { movie -> HorizontalInfoListViewModel in
+        let moviesDisplay = localMoviesFiltered.count > 0 ? localMoviesFiltered : localMovies
+        let horizontalItemsViewModel = moviesDisplay.map { movie -> HorizontalInfoListViewModel in
             HorizontalInfoListViewModel(imageURL: movie.imageURL, title: movie.title, subtitle: movie.releaseDate, descriptionText: movie.overview)
         }
 

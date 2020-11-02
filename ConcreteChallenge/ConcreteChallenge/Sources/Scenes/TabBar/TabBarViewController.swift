@@ -55,6 +55,12 @@ final class TabBarViewController: UITabBarController, UITabBarControllerDelegate
         navigationItem.searchController = searchController
     }
 
+    // MARK: - Functions
+
+    func filter(filter: FilterSearch) {
+        tabBarDelegate?.filterApplyButtonTapped(filter: filter, self)
+    }
+
     // MARK: - UITabBarControllerDelegate conforms
 
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
@@ -64,7 +70,7 @@ final class TabBarViewController: UITabBarController, UITabBarControllerDelegate
         case is FavoritesViewController:
             setupRightNavigationButton(shouldHide: false)
         default:
-            print("ViewController didnt found")
+            print(Strings.viewControllerNotFound.localizable)
         }
     }
 

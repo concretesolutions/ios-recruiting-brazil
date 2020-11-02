@@ -8,7 +8,9 @@
 
 protocol FavoritesPresentationLogic: AnyObject {
     func presentLocalMoviesItems(response: Favorites.FetchLocalMovies.Response)
+    func presentLocalMoviesBySearch(response: Favorites.FetchLocalMoviesBySearch.Response)
     func presentFetchMoviesFailure()
+    func presentLocalMoviesBySearchFailure(response: Favorites.FetchLocalMoviesBySearch.Response)
     func onSuccessDeleteMovie()
 }
 
@@ -22,8 +24,17 @@ final class FavoritesPresenter: FavoritesPresentationLogic {
         viewController?.onFetchLocalMoviesSuccess(viewModel: viewModel)
     }
 
+    func presentLocalMoviesBySearch(response: Favorites.FetchLocalMoviesBySearch.Response) {
+        let viewModel = Favorites.FetchLocalMoviesBySearch.ViewModel(movies: response.movies)
+        viewController?.onFetchLocalMoviesBySearchSuccess(viewModel: viewModel)
+    }
+
     func presentFetchMoviesFailure() {
         viewController?.displayMoviesError()
+    }
+
+    func presentLocalMoviesBySearchFailure(response: Favorites.FetchLocalMoviesBySearch.Response) {
+        viewController?.displaySearchError(searchText: response.search.search ?? .empty)
     }
 
     func onSuccessDeleteMovie() {

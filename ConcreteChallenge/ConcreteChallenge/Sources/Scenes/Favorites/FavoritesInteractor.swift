@@ -8,7 +8,8 @@
 
 protocol FavoritesBusinessLogic: AnyObject {
     func fetchLocalMovies()
-    func deleteMovie(request: MovieDetails.DeleteMovie.Request)
+    func fetchLocalMoviesBySearch(request: Favorites.FetchLocalMoviesBySearch.Request)
+    func deleteMovie(request: Favorites.DeleteMovie.Request)
 }
 
 final class FavoritesInteractor: FavoritesBusinessLogic {
@@ -40,7 +41,54 @@ final class FavoritesInteractor: FavoritesBusinessLogic {
         }
     }
 
-    func deleteMovie(request: MovieDetails.DeleteMovie.Request) {
+    func fetchLocalMoviesBySearch(request: Favorites.FetchLocalMoviesBySearch.Request) {
+        let movies = request.movies
+        let filter = request.filter
+
+        var moviesFiltered: [Movie] = []
+
+        if let date = filter.date {
+            let date = date.joined(separator: Constants.Utils.genresSeparator)
+
+            moviesFiltered.append(contentsOf:
+                movies.filter { date.contains($0.releaseDate) }
+            )
+        }
+
+        if let genres = filter.genres {
+            genres.forEach({ genre in
+                moviesFiltered.append(contentsOf:
+                    movies.filter({ movie -> Bool in
+                        if moviesFiltered.contains(movie) {
+                            return false
+                        }
+
+                        return movie.genres?.contains(genre) ?? false
+                    })
+                )
+            })
+        }
+
+        if let search = filter.search {
+            moviesFiltered.append(contentsOf:
+                movies.filter {
+                    if moviesFiltered.contains($0) {
+                        return false
+                    }
+
+                    return $0.title.contains(search)
+                }
+            )
+        }
+
+        if moviesFiltered.count > 0 {
+            presenter.presentLocalMoviesBySearch(response: Favorites.FetchLocalMoviesBySearch.Response(movies: moviesFiltered, search: filter))
+        } else {
+            presenter.presentLocalMoviesBySearchFailure(response: Favorites.FetchLocalMoviesBySearch.Response(movies: moviesFiltered, search: filter))
+        }
+    }
+
+    func deleteMovie(request: Favorites.DeleteMovie.Request) {
         worker.deleteMovie(movie: request.movie) { result in
             switch result {
             case .success():

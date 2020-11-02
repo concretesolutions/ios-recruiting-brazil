@@ -47,6 +47,10 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
         return stackView
     }()
 
+    // MARK: - Variables
+
+    weak var delegate: FilterViewControllerDelegate?
+
     // MARK: - Private variables
 
     private var filterIndexType = FilterIndexType.genres
@@ -148,6 +152,8 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
         dataPickerListCheckTableView.bind { [weak self] index in
             self?.pickDataItemTapped(index)
         }
+
+        applyButton.addTarget(self, action: .didApplyButtonTapped, for: .touchUpInside)
     }
 
     private func listCheckItemTapped(_ index: Int) {
@@ -238,8 +244,14 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
             navigationController?.popViewController(animated: true)
         }
     }
+
+    @objc fileprivate func didApplyButtonTapped() {
+        let filter = FilterSearch(date: date, genres: genres)
+        delegate?.filterApplyButtonTapped(filter: filter, self)
+    }
 }
 
 private extension Selector {
     static let didBackButtonTapped = #selector(FilterViewController.didBackButtonTapped)
+    static let didApplyButtonTapped = #selector(FilterViewController.didApplyButtonTapped)
 }

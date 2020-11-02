@@ -26,4 +26,5 @@ enum Strings: String, Localizable {
     case errorSearch = "error_search"
     case repositryErrorDataNotFound = "repositry_error_data_not_found"
     case repositryErrorParseJSON = "repositry_error_parse_json"
+    case viewControllerNotFound = "view_controller_not_found"
 }
