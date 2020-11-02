@@ -69,6 +69,8 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
     // MARK: - FavoritesDisplayLogic conforms
 
     func onFetchLocalMoviesSuccess(viewModel: Favorites.FetchLocalMovies.ViewModel) {
+        view.stopLoading()
+
         localMovies = viewModel.movies
         localMoviesFiltered = []
 
@@ -139,6 +141,7 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
     }
 
     private func fetchLocalMovies() {
+        view.showLoading()
         interactor.fetchLocalMovies()
     }
 }
