@@ -13,27 +13,11 @@ enum MovieDetails {
         struct Request {
             let movie: Movie
         }
-
-        struct Response {
-            let isFavorite: Bool
-        }
-
-        struct ViewModel {
-            let isFavorite: Bool
-        }
     }
 
     enum DeleteMovie {
         struct Request {
             let movie: Movie
-        }
-
-        struct Response {
-            let isFavorite: Bool
-        }
-
-        struct ViewModel {
-            let isFavorite: Bool
         }
     }
 }

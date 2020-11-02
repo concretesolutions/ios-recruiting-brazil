@@ -28,9 +28,10 @@ final class MovieDetailsInteractor: MovieDetailsBusinessLogic {
         worker.saveMovie(movie: request.movie) { result in
             switch result {
             case .success():
-                self.presenter.onSuccessSaveMovie(response: MovieDetails.SaveMovie.Response(isFavorite: true))
+                self.presenter.onSaveMovieSuccessful()
             case let .failure(error):
-                self.presentFailure(error: error)
+                print(error.errorDescription)
+                self.presenter.onSaveMovieFailure()
             }
         }
     }
@@ -39,16 +40,11 @@ final class MovieDetailsInteractor: MovieDetailsBusinessLogic {
         worker.deleteMovie(movie: request.movie) { result in
             switch result {
             case .success():
-                self.presenter.onSuccessDeleteMovie(response: MovieDetails.DeleteMovie.Response(isFavorite: false))
+                self.presenter.onDeleteMovieSuccessful()
             case let .failure(error):
-                self.presentFailure(error: error)
+                print(error.errorDescription)
+                self.presenter.onDeleteMovieFailure()
             }
         }
-    }
-
-    // MARK: - Private functions
-
-    private func presentFailure(error: DatabaseError) {
-        print(error.errorDescription)
     }
 }

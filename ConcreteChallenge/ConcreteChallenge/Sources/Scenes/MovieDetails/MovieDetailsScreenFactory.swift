@@ -10,7 +10,7 @@ import UIKit
 import Moya
 
 enum MovieDetailsScreenFactory {
-    static func makeMoviesDetails(movie: Movie) -> UIViewController {
+    static func make(movie: Movie) -> UIViewController {
         let provider = MovieRealmDbService()
         let worker = RealmWorker(provider: provider)
 

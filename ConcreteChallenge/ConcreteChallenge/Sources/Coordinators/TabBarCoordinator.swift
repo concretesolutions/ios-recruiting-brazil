@@ -46,7 +46,7 @@ final class TabBarCoordinator: Coordinator, TabBarViewControllerDelegate, Movies
     // MARK: - MoviesViewControllerDelegate conforms
 
     func galleryItemTapped(movie: Movie, _ viewController: MoviesViewController) {
-        let moviesDetailsViewController = MovieDetailsScreenFactory.makeMoviesDetails(movie: movie)
+        let moviesDetailsViewController = MovieDetailsScreenFactory.make(movie: movie)
         pushViewController(viewController: moviesDetailsViewController, true)
     }
 

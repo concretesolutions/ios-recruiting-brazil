@@ -9,8 +9,8 @@
 import UIKit
 
 protocol MovieDetailsDisplayLogic: AnyObject {
-    func onSuccessSaveMovie(viewModel: MovieDetails.SaveMovie.ViewModel)
-    func onSuccessDeleteMovie(viewModel: MovieDetails.DeleteMovie.ViewModel)
+    func displayFavoriteIcon()
+    func displayUnfavoriteIcon()
 }
 
 final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic {
@@ -21,17 +21,13 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
         return imageView
     }()
 
-    private lazy var moviesDetailsInfoListView = InfoListTableViewFactory.makeTableView()
+    private lazy var movieDetailsInfoListView = InfoListTableViewFactory.make()
 
     // MARK: - Private variables
 
     private var movieData: Movie
 
-    private var movieDisplay: Movie {
-        didSet {
-            setupMoviesInfo()
-        }
-    }
+    private var movieDisplay: Movie
 
     // MARK: - Private constants
 
@@ -67,14 +63,14 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
 
     // MARK: - MovieDetailsDisplayLogic Conforms
 
-    func onSuccessSaveMovie(viewModel: MovieDetails.SaveMovie.ViewModel) {
-        movieDisplay.isFavorite = viewModel.isFavorite
+    func displayFavoriteIcon() {
+        movieDisplay.isFavorite = true
         setupMoviesInfo()
     }
 
-    func onSuccessDeleteMovie(viewModel: MovieDetails.DeleteMovie.ViewModel) {
+    func displayUnfavoriteIcon() {
         movieData = movieDisplay.clone()
-        movieDisplay.isFavorite = viewModel.isFavorite
+        movieDisplay.isFavorite = false
         setupMoviesInfo()
     }
 
@@ -93,11 +89,11 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
         ])
 
-        view.addSubview(moviesDetailsInfoListView, constraints: [
-            moviesDetailsInfoListView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
-            moviesDetailsInfoListView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-            moviesDetailsInfoListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
-            moviesDetailsInfoListView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
+        view.addSubview(movieDetailsInfoListView, constraints: [
+            movieDetailsInfoListView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
+            movieDetailsInfoListView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+            movieDetailsInfoListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+            movieDetailsInfoListView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
         ])
 
         view.backgroundColor = .white
@@ -119,7 +115,7 @@ final class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLog
             !infoListItemViewModel.isEmpty
         }
 
-        moviesDetailsInfoListView.setupDataSource(items: infoListItemsViewModel)
+        movieDetailsInfoListView.setupDataSource(items: infoListItemsViewModel)
     }
 
     private func actionButtonTapped() {

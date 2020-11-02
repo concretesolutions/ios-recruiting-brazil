@@ -9,7 +9,7 @@
 import UIKit
 
 enum InfoListTableViewFactory {
-    static func makeTableView() -> InfoListTableView {
+    static func make() -> InfoListTableView {
         let tableView = InfoListTableView()
 
         return tableView

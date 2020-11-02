@@ -18,9 +18,7 @@ protocol MoviesDisplayLogic: AnyObject {
 }
 
 final class MoviesViewController: UIViewController, MoviesDisplayLogic {
-    private lazy var galleryCollectionView: GridGalleryCollectionView = {
-        return GridGalleryCollectionView(itemSize: getItemSize(), items: [])
-    }()
+    private lazy var galleryCollectionView = GridGalleryCollectionView(itemSize: getItemSize(), items: [])
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [galleryCollectionView, errorView])
