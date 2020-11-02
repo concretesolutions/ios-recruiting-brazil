@@ -86,7 +86,7 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
     func displaySearchError(searchText: String) { }
 
     func onSuccessDeleteMovie() {
-        print("movie unfavorite success")
+        print(Strings.movieUnfavoriteSuccess.localizable)
     }
 
     // MARK: - Private functions

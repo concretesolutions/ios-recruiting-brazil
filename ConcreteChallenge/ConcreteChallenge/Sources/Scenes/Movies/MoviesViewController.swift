@@ -38,6 +38,10 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
     private var firstTimeLoadMovies = true
 
+    private var currentPage: Int = 0
+
+    private var lastPage: Int?
+
     // MARK: - Variables
 
     weak var delegate: MoviesViewControllerDelegate?
@@ -101,7 +105,9 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         view.stopLoading()
         errorView.isHidden = true
 
-        self.movies = viewModel.movies
+        currentPage = viewModel.page
+        lastPage = viewModel.totalPages
+        movies.append(contentsOf: viewModel.movies)
 
         loadGridGalleryLayout()
     }
@@ -137,6 +143,10 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         galleryCollectionView.bind { [weak self] index in
             self?.galleryItemTapped(index)
         }
+
+        galleryCollectionView.bindOnDisplayLastItem { [weak self] in
+            self?.fetchNewMoviesPage()
+        }
     }
 
     private func galleryItemTapped(_ index: Int) {
@@ -149,6 +159,13 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         self.delegate?.galleryItemTapped(movie: movieDetails, self)
     }
 
+    private func fetchNewMoviesPage() {
+        currentPage += 1
+        if let lastPage = lastPage, currentPage < lastPage {
+            fetchMovies(page: currentPage)
+        }
+    }
+
     private func fetchLocalMovies() {
         interactor.fetchLocalMovies()
     }
@@ -158,6 +175,10 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     }
 
     private func fetchMovies(language: String = Constants.MovieDefaultParameters.language, page: Int = Constants.MovieDefaultParameters.page) {
+        if page == Constants.MovieDefaultParameters.page {
+            movies = []
+        }
+
         interactor.fetchMovies(request: Movies.FetchMovies.Request(language: language, page: page, genres: genres))
     }
 

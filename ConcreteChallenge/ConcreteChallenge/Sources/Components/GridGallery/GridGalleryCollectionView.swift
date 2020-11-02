@@ -13,6 +13,7 @@ final class GridGalleryCollectionView: UIView, UICollectionViewDelegate {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.dataSource = dataSource
         collectionView.register(GridGalleryItemCollectionViewCell.self)
+        collectionView.delegate = self
 
         return collectionView
     }()
@@ -20,6 +21,8 @@ final class GridGalleryCollectionView: UIView, UICollectionViewDelegate {
     // MARK: - Private variables
 
     private var onItemPress: ((_ index: Int) -> Void)?
+
+    private var onDisplayLastItem: (() -> Void)?
 
     // MARK: - Private constants
 
@@ -59,14 +62,23 @@ final class GridGalleryCollectionView: UIView, UICollectionViewDelegate {
     }
 
     func bind(onItemPress handler: @escaping (_ index: Int) -> Void) {
-        collectionView.delegate = self
         onItemPress = handler
+    }
+
+    func bindOnDisplayLastItem(onLastItem handler: @escaping () -> Void) {
+        onDisplayLastItem = handler
     }
 
     // MARK: - UICollectionViewDelegate conforms
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         onItemPress?(indexPath.row)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == dataSource.count - 1 {
+            onDisplayLastItem?()
+        }
     }
 
     // MARK: - Private functions
