@@ -6,8 +6,11 @@
 //  Copyright © 2020 Adrian Almeida. All rights reserved.
 //
 
+import Foundation
+
 protocol FilterBusinessLogic: AnyObject {
     func fetchGenres(request: Filter.FetchGenres.Request)
+    func fetchDates()
 }
 
 final class FilterInteractor: FilterBusinessLogic {
@@ -33,6 +36,20 @@ final class FilterInteractor: FilterBusinessLogic {
                 self.onFailure(error: error)
             }
         }
+    }
+
+    func fetchDates() {
+        let calendar = Calendar.current
+        var dates: [String] = []
+
+        for i in 0...220 {
+            let currentDate = Date()
+            if let yearsBefore = Calendar.current.date(byAdding: .year, value: -i, to: currentDate) {
+                dates.append(String(calendar.component(.year, from: yearsBefore)))
+            }
+        }
+
+        presenter.onFetchDatesSuccessful(dates: dates)
     }
 
     // MARK: - Private functions

@@ -9,6 +9,7 @@
 protocol FilterPresentationLogic: AnyObject {
     func onFetchGenresSuccess(response: Filter.FetchGenres.Response)
     func onFetchGenresFailure()
+    func onFetchDatesSuccessful(dates: [String])
 }
 
 final class FilterPresenter: FilterPresentationLogic {
@@ -22,5 +23,9 @@ final class FilterPresenter: FilterPresentationLogic {
 
     func onFetchGenresFailure() {
         viewController?.onFetchGenresFailure()
+    }
+
+    func onFetchDatesSuccessful(dates: [String]) {
+        viewController?.onFetchDatesSuccessful(dates: dates)
     }
 }

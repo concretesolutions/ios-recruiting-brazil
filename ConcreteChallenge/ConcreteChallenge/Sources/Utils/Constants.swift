@@ -9,6 +9,7 @@
 enum Constants {
     struct Utils {
         static let dateFormat = "yyyy-MM-dd"
+        static let genresSeparator = ", "
     }
 
     // MARK: - Newtwork
@@ -56,9 +57,5 @@ enum Constants {
         static let verticalMargin = 16
         static let horizontalMargin = 16
         static let minimumLineSpacing = 16
-    }
-
-    struct MoviesDetails {
-        static let genresSeparator = ", "
     }
 }

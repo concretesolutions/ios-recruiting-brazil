@@ -38,7 +38,7 @@ final class MoviesPresenter: MoviesPresentationLogic {
                 return genre?.name ?? .empty
             }
 
-            let genres = genreLabels.count > 0 ? genreLabels.joined(separator: Constants.MoviesDetails.genresSeparator) : nil
+            let genres = genreLabels.count > 0 ? genreLabels.joined(separator: Constants.Utils.genresSeparator) : nil
 
             return Movie(id: movieResponse.id, title: movieResponse.title, imageURL: Constants.MovieNetwork.baseImageURL.appending(movieResponse.imageURL), genres: genres, releaseDate: movieResponse.releaseDate.year, overview: movieResponse.overview, isFavorite: false)
         }

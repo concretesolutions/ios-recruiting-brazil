@@ -16,6 +16,7 @@ enum FilterIndexType: Int {
 protocol FilterDisplayLogic: AnyObject {
     func onFetchGenresSuccessful(genres: [String])
     func onFetchGenresFailure()
+    func onFetchDatesSuccessful(dates: [String])
 }
 
 final class FilterViewController: UIViewController, FilterDisplayLogic {
@@ -104,10 +105,15 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
         // Show some error messasge
     }
 
+    func onFetchDatesSuccessful(dates: [String]) {
+        allDates = dates
+    }
+
     // MARK: - Private functions
 
     private func fetchDatas() {
         interactor.fetchGenres(request: Filter.FetchGenres.Request(language: Constants.MovieDefaultParameters.language))
+        interactor.fetchDates()
     }
 
     private func setup() {
@@ -148,11 +154,11 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
         switch index {
         case FilterIndexType.date.rawValue:
             filterIndexType = FilterIndexType.date
-            setupDateList()
         default:
             filterIndexType = FilterIndexType.genres
-            setupGenresList()
         }
+
+        setupList()
     }
 
     private func pickDataItemTapped(_ index: Int) {
@@ -163,15 +169,15 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
             } else {
                 date.append(allDates[index])
             }
-            setupDateList()
         default:
             if let removeIndex = genres.firstIndex(of: allGenres[index]) {
                 genres.remove(at: removeIndex)
             } else {
                 genres.append(allGenres[index])
             }
-            setupGenresList()
         }
+        setupFilterType()
+        setupList()
     }
 
     private func setupFilterType() {
@@ -180,9 +186,34 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
         showTypeListCheckTableView()
 
         let listCheckItemsViewModel = filterType.map { filterType -> ListCheckItemViewModel in
-            ListCheckItemViewModel(title: filterType, icon: .arrowForward)
+            let value = filterType == Strings.date.localizable ? date.joined(separator: Constants.Utils.genresSeparator) : genres.joined(separator: Constants.Utils.genresSeparator)
+            return ListCheckItemViewModel(title: filterType, value: value, icon: .arrowForward)
         }
         typeListCheckTableView.setupDataSource(items: listCheckItemsViewModel)
+    }
+
+    private func setupList() {
+        var listCheckItemsViewModel: [ListCheckItemViewModel] = []
+        showDataPickerListCheckTableView()
+
+        switch filterIndexType {
+        case FilterIndexType.date:
+            title = Strings.date.localizable
+
+            listCheckItemsViewModel = allDates.map { allDatesItem -> ListCheckItemViewModel in
+                let dateStored = date.first { $0 == allDatesItem }
+                return ListCheckItemViewModel(title: allDatesItem, icon: dateStored != nil ? .checkIcon : nil)
+            }
+        default:
+            title = Strings.genres.localizable
+
+            listCheckItemsViewModel = allGenres.map { allGenresItem -> ListCheckItemViewModel in
+                let genreStored = genres.first { $0 == allGenresItem }
+                return ListCheckItemViewModel(title: allGenresItem, icon: genreStored != nil ? .checkIcon : nil)
+            }
+        }
+
+        dataPickerListCheckTableView.setupDataSource(items: listCheckItemsViewModel)
     }
 
     private func showTypeListCheckTableView() {
@@ -206,32 +237,6 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
         } else {
             navigationController?.popViewController(animated: true)
         }
-    }
-
-    // MARK: - Move to interactor
-
-    private func setupDateList() {
-        title = Strings.date.localizable
-
-        showDataPickerListCheckTableView()
-
-        let listCheckItemsViewModel = allDates.map { allDatesItem -> ListCheckItemViewModel in
-            let dateStored = date.first { $0 == allDatesItem }
-            return ListCheckItemViewModel(title: allDatesItem, icon: dateStored != nil ? .checkIcon : nil)
-        }
-        dataPickerListCheckTableView.setupDataSource(items: listCheckItemsViewModel)
-    }
-
-    private func setupGenresList() {
-        title = Strings.genres.localizable
-
-        showDataPickerListCheckTableView()
-
-        let listCheckItemsViewModel = allGenres.map { allGenresItem -> ListCheckItemViewModel in
-            let genreStored = genres.first { $0 == allGenresItem }
-            return ListCheckItemViewModel(title: allGenresItem, icon: genreStored != nil ? .checkIcon : nil)
-        }
-        dataPickerListCheckTableView.setupDataSource(items: listCheckItemsViewModel)
     }
 }
 
