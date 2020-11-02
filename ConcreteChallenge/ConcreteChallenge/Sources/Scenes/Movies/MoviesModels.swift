@@ -61,7 +61,6 @@ enum Movies {
 
         struct Response {
             let movies: [Movie]
-            let filter: String
         }
 
         struct ViewModel {

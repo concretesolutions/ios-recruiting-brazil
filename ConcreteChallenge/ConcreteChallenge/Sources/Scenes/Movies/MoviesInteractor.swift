@@ -75,7 +75,7 @@ final class MoviesInteractor: MoviesBusinessLogic {
                 }
 
                 let responseModel = Movies.FetchMovies.Response(page: response.page, totalPages: response.totalPages, movies: movies)
-                self.presenter.presentMoviesItems(response: responseModel)
+                self.presenter.presentFetchedMovies(response: responseModel)
             case let .failure(error):
                 self.presentFailure(error: error)
             }
@@ -90,7 +90,7 @@ final class MoviesInteractor: MoviesBusinessLogic {
         let movies = request.movies.filter { $0.title.contains(request.filter) }
 
         if movies.count > 0 {
-            presenter.presentLocalMoviesBySearch(response: Movies.FetchLocalMoviesBySearch.Response(movies: movies, filter: request.filter))
+            presenter.presentLocalMoviesBySearch(response: Movies.FetchLocalMoviesBySearch.Response(movies: movies))
         } else {
             presenter.presentSearchMoviesFailure(textSearched: request.filter)
         }
@@ -100,11 +100,11 @@ final class MoviesInteractor: MoviesBusinessLogic {
 
     private func presentFailure(error: NetworkError) {
         print(error.errorDescription)
-        self.presenter.presentFetchMoviesFailure()
+        self.presenter.presentFetchFailure()
     }
 
     private func presentFailure(error: DatabaseError) {
         print(error.errorDescription)
-        self.presenter.presentFetchMoviesFailure()
+        self.presenter.presentFetchFailure()
     }
 }
