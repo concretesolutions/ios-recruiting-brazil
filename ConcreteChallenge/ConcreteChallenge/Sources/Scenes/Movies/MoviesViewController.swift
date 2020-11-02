@@ -79,6 +79,7 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
         // First time has delay only to simulate loading
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [weak self] in
+            self?.view.showLoading()
             self?.fetchLocalMovies()
         })
     }
@@ -95,9 +96,14 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
     func filter(search: String) {
         guard !search.isEmpty else {
+            clearSearch()
             fetchLocalMovies()
             return
         }
+
+        showGallery()
+
+        filter = search
 
         let request = Movies.FetchLocalMoviesBySearch.Request(movies: movies, filter: search)
         interactor.fetchLocalMoviesBySearch(request: request)
@@ -197,7 +203,6 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
 
     private func fetchLocalMovies() {
         showGallery()
-        view.showLoading()
         interactor.fetchLocalMovies()
     }
 
@@ -239,7 +244,6 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     private func showGallery() {
         errorView.isHidden = true
         galleryCollectionView.isHidden = false
-        clearSearch()
     }
 
     private func clearSearch() {

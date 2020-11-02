@@ -87,7 +87,7 @@ final class MoviesInteractor: MoviesBusinessLogic {
             return
         }
 
-        let movies = request.movies.filter { $0.title.contains(request.filter) }
+        let movies = request.movies.filter { $0.title.localizedCaseInsensitiveContains(request.filter) }
 
         if movies.count > 0 {
             presenter.presentLocalMoviesBySearch(response: Movies.FetchLocalMoviesBySearch.Response(movies: movies))
