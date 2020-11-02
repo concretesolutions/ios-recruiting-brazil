@@ -9,8 +9,8 @@
 import Foundation
 
 protocol FilterBusinessLogic: AnyObject {
-    func fetchGenres(request: Filter.FetchGenres.Request)
     func fetchDates()
+    func fetchGenres(request: Filter.FetchGenres.Request)
 }
 
 final class FilterInteractor: FilterBusinessLogic {
@@ -26,36 +26,37 @@ final class FilterInteractor: FilterBusinessLogic {
 
     // MARK: - FilterBusinessLogic conforms
 
-    func fetchGenres(request: Filter.FetchGenres.Request) {
-        worker.fetchGenres(language: request.language) { result in
-            switch result {
-            case let .success(response):
-                let genres = response.genres.map { $0.name }
-                self.presenter.onFetchGenresSuccess(response: Filter.FetchGenres.Response(genres: genres))
-            case let .failure(error):
-                self.onFailure(error: error)
-            }
-        }
-    }
-
     func fetchDates() {
         let calendar = Calendar.current
         var dates: [String] = []
 
-        for i in 0...220 {
+        for i in 0...200 {
             let currentDate = Date()
             if let yearsBefore = Calendar.current.date(byAdding: .year, value: -i, to: currentDate) {
                 dates.append(String(calendar.component(.year, from: yearsBefore)))
             }
         }
 
-        presenter.onFetchDatesSuccessful(dates: dates)
+        let response = Filter.FetchDates.Response(dates: dates)
+        presenter.onFetchedDates(response: response)
+    }
+
+    func fetchGenres(request: Filter.FetchGenres.Request) {
+        worker.fetchGenres(language: request.language) { result in
+            switch result {
+            case let .success(response):
+                let genres = response.genres.map { $0.name }
+                self.presenter.onFetchedGenres(response: Filter.FetchGenres.Response(genres: genres))
+            case let .failure(error):
+                self.onFetchedGenericFailure(error: error)
+            }
+        }
     }
 
     // MARK: - Private functions
 
-    private func onFailure(error: NetworkError) {
+    private func onFetchedGenericFailure(error: NetworkError) {
         print(error.errorDescription)
-        self.presenter.onFetchGenresFailure()
+        self.presenter.onFetchedGenresFailure()
     }
 }

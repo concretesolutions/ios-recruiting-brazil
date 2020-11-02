@@ -9,6 +9,16 @@
 import Foundation
 
 enum Filter {
+    enum FetchDates {
+        struct ViewModel {
+            let dates: [String]
+        }
+
+        struct Response {
+            let dates: [String]
+        }
+    }
+
     enum FetchGenres {
         struct Request {
             let language: String

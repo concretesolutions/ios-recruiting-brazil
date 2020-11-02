@@ -7,9 +7,9 @@
 //
 
 protocol FilterPresentationLogic: AnyObject {
-    func onFetchGenresSuccess(response: Filter.FetchGenres.Response)
-    func onFetchGenresFailure()
-    func onFetchDatesSuccessful(dates: [String])
+    func onFetchedDates(response: Filter.FetchDates.Response)
+    func onFetchedGenres(response: Filter.FetchGenres.Response)
+    func onFetchedGenresFailure()
 }
 
 final class FilterPresenter: FilterPresentationLogic {
@@ -17,15 +17,17 @@ final class FilterPresenter: FilterPresentationLogic {
 
     // MARK: - FilterPresentationLogic conforms
 
-    func onFetchGenresSuccess(response: Filter.FetchGenres.Response) {
-        viewController?.onFetchGenresSuccessful(genres: response.genres)
+    func onFetchedDates(response: Filter.FetchDates.Response) {
+        let viewModel = Filter.FetchDates.ViewModel(dates: response.dates)
+        viewController?.onFetchedDates(viewModel: viewModel)
     }
 
-    func onFetchGenresFailure() {
-        viewController?.onFetchGenresFailure()
+    func onFetchedGenres(response: Filter.FetchGenres.Response) {
+        let viewModel = Filter.FetchGenres.ViewModel(genres: response.genres)
+        viewController?.onFetchedGenres(viewModel: viewModel)
     }
 
-    func onFetchDatesSuccessful(dates: [String]) {
-        viewController?.onFetchDatesSuccessful(dates: dates)
+    func onFetchedGenresFailure() {
+        viewController?.displayGenericError()
     }
 }

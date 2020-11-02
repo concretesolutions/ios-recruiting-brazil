@@ -17,6 +17,7 @@ enum Strings: String, Localizable {
     case movie
     case movies
     case movieUnfavoriteSuccessful = "movie_unfavorite_successful"
+    case removeFilter = "remove_filter"
     case search
     case thereIsNotFavoriteMovie = "there_is_not_favorite_movie"
     case unfavorite

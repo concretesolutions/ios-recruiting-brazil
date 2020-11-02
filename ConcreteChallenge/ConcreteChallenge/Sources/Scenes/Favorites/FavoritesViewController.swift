@@ -18,10 +18,21 @@ protocol FavoritesDisplayLogic: AnyObject {
 }
 
 final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
+    private lazy var removeFilterButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(Strings.removeFilter.localizable, for: .normal)
+        button.setTitleColor(.appYellowLight, for: .normal)
+        button.backgroundColor = .appBlackLight
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.isHidden = true
+
+        return button
+    }()
+
     private lazy var horizontalTableView = HorizontalInfoListFactory.make()
 
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [horizontalTableView, errorView])
+        let stackView = UIStackView(arrangedSubviews: [removeFilterButton, horizontalTableView, errorView])
         stackView.axis = .vertical
 
         return stackView
@@ -80,6 +91,7 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
             return
         }
 
+        removeFilterButton.isHidden = false
         interactor.fetchLocalMoviesBySearch(request: Favorites.FetchLocalMoviesBySearch.Request(movies: localMovies, filter: filter))
     }
 
@@ -184,6 +196,7 @@ final class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
     private func clearFilter() {
         localMoviesFiltered = []
         filter = FilterSearch()
+        removeFilterButton.isHidden = true
     }
 
     private func displayEmptyMovie() {

@@ -14,9 +14,9 @@ enum FilterIndexType: Int {
 }
 
 protocol FilterDisplayLogic: AnyObject {
-    func onFetchGenresSuccessful(genres: [String])
-    func onFetchGenresFailure()
-    func onFetchDatesSuccessful(dates: [String])
+    func onFetchedDates(viewModel: Filter.FetchDates.ViewModel)
+    func onFetchedGenres(viewModel: Filter.FetchGenres.ViewModel)
+    func displayGenericError()
 }
 
 final class FilterViewController: UIViewController, FilterDisplayLogic {
@@ -28,11 +28,9 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
 
     private lazy var applyButton: UIButton = {
         let button = UIButton()
-
         button.setTitle(Strings.apply.localizable, for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-
         button.backgroundColor = .appYellowLight
 
         return button
@@ -53,7 +51,7 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
 
     // MARK: - Private variables
 
-    private var filterIndexType = FilterIndexType.genres
+    private var filterIndexType = FilterIndexType.date
 
     private var allDates: [String] = []
 
@@ -101,16 +99,16 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
 
     // MARK: - FilterDisplayLogic
 
-    func onFetchGenresSuccessful(genres: [String]) {
-        allGenres = genres
+    func onFetchedDates(viewModel: Filter.FetchDates.ViewModel) {
+        allDates = viewModel.dates
     }
 
-    func onFetchGenresFailure() {
+    func onFetchedGenres(viewModel: Filter.FetchGenres.ViewModel) {
+        allGenres = viewModel.genres
+    }
+
+    func displayGenericError() {
         // Show some error messasge
-    }
-
-    func onFetchDatesSuccessful(dates: [String]) {
-        allDates = dates
     }
 
     // MARK: - Private functions
@@ -182,6 +180,7 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
                 genres.append(allGenres[index])
             }
         }
+
         setupFilterType()
         setupList()
     }
@@ -225,7 +224,6 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
     private func showTypeListCheckTableView() {
         dataPickerListCheckTableView.isHidden = true
         typeListCheckTableView.isHidden = false
-
         applyButton.isHidden = !(date.count > 0 || genres.count > 0)
     }
 
