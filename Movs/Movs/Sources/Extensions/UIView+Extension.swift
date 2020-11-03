@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIView {
+public extension UIView {
     static let loadingViewTag = 1964851847
 
     // MARK: - Functions
@@ -48,6 +48,8 @@ extension UIView {
     func hasLoading() -> Bool {
         return viewWithTag(UIView.loadingViewTag) is UIActivityIndicatorView
     }
+
+    // MARK: - ViewCode functions
 
     func addSubview<T: UIView>(_ view: T, affectedViews: [T] = [], constraints: [NSLayoutConstraint]) {
         addSubview(view, affectedViews: affectedViews)
