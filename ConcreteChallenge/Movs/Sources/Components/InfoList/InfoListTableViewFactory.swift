@@ -1,0 +1,17 @@
+//
+//  InfoListTableViewFactory.swift
+//  Movs
+//
+//  Created by Adrian Almeida on 30/10/20.
+//  Copyright © 2020 Adrian Almeida. All rights reserved.
+//
+
+import UIKit
+
+enum InfoListTableViewFactory {
+    static func make() -> InfoListTableView {
+        let tableView = InfoListTableView()
+
+        return tableView
+    }
+}

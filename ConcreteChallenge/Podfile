@@ -8,16 +8,16 @@ def common_pods
   pod 'RealmSwift'
 end
 
-target 'ConcreteChallenge' do
+target 'Movs' do
   common_pods
 end
 
-target 'ConcreteChallengeTests' do
+target 'MovsTests' do
   common_pods
 
   pod 'SnapshotTesting', '~> 1.8.1'
 end
 
-target 'ConcreteChallengeUITests' do
+target 'MovsUITests' do
   common_pods
 end
