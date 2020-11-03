@@ -1,0 +1,23 @@
+platform :ios, '13.0’
+use_frameworks!
+inhibit_all_warnings!
+
+def common_pods
+  pod 'Moya', '~> 14.0'
+  pod 'Kingfisher', '~> 5.0'
+  pod 'RealmSwift'
+end
+
+target 'Movs' do
+  common_pods
+end
+
+target 'MovsTests' do
+  common_pods
+
+  pod 'SnapshotTesting', '~> 1.8.1'
+end
+
+target 'MovsUITests' do
+  common_pods
+end
