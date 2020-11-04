@@ -22,6 +22,8 @@
 - Ao Aplicar o filtro, retornar a tela de favoritos e fazer um filtro local usando as informações selecionadas referentes a data de lançamento e gênero;
 - Testes unitários;
 
+Obs: Testes unitários foram feito em um componente, e começado em uma view controller.
+
 ### Arquitetura
 
 Arquitetura utilizada no projeto foi a [clean-swift](https://clean-swift.com/) do Uncle Bob:
