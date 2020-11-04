@@ -38,9 +38,9 @@ Gerenciador de dependencias utilizada no projeto foi o [Cocoapods](https://cocoa
 
 Camada de abstração de rede utilizada no projeto foi o [Moya](https://github.com/Moya/Moya) e para download de imagem o [Kingfisher](https://github.com/onevcat/Kingfisher).
 
-### Database
+### Data Persistence
 
-Camada de banco de dados utilizada no projeto foi o [Realm](https://realm.io/).
+Persistencia de dados utilizada no projeto foi o [Realm](https://realm.io/).
 
 ### Unit tests
 
