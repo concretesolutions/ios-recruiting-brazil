@@ -1,47 +1,10 @@
-# Concrete iOS Recruit Challenge
+# Movs iOS Application
+
+## Projeto
 
 ---
 
-![Gif](assets/Logo-animado-1.gif)
-
-## Bem vindo
-
----
-
-Obrigado por participar do desafio iOS da Concrete! Estamos muito contentes pelo seu primeiro passo para fazer parte de um time excepcional.
-
-## Afinal, o que é esse desafio?
-
----
-
-Você deverá criar uma app sobre filmes, usando a [API](https://developers.themoviedb.org/3/getting-started/introduction) do [TheMovieDB](https://www.themoviedb.org/?language=en). Legal, certo? Para dar uma padronizada e ter um layout minimamente definido anexamos alguns assets que vão te ajudar a desenvolver esse app:
-
-- [Ícones do app](assets/appIcons)
-- [ScreenShots](assets/screenshots)
-- [Ícones](assets/icons)
-
-Pense no desafio como uma oportunidade de mostrar todo o seu conhecimento. E faça com calma, você tem uma semana para entregar!
-Vamos avaliar como você lida com casos de:
-
-- Consumo de APIs
-- Persistência de dados (Favoritos)
-- Lógicas de filtros e buscas.
-- Estruturação de layout e fluxo de aplicação.
-
-O único pré-requisito é que o código seja feito em Swift, de preferência na versão mais atual. Sinta-se a vontade para:
-
-- Usar ou não usar bibliotecas
-- Estruturar seu layout com storyboards, xibs ou ViewCode
-- Adotar a arquitetura que você quiser.
-
-Somos especialmente preocupados com qualidade e acreditamos bastante em testes automatizados. Entretanto, sabemos que não é um tópico dominado por todos, por isso aceitamos desafios com todos os perfis e diferentes momentos de experiência e conhecimento técnico.
-Para posições mais Seniors, porém, damos muito importância para a qualidade do código.
-
-# Features ..
-
----
-
-### Precisa ter:
+### Features:
 
 - Tela de Splash;
 - Layout em abas, contendo na primeira aba a tela de grid de filmes e na segunda aba a tela de lista de filmes favoritados no app;
@@ -52,51 +15,39 @@ Para posições mais Seniors, porém, damos muito importância para a qualidade 
 - Tela de Detalhe do filme deve conter gênero do filme por extenso (ex: Action, Horror, etc); Use esse [request](https://developers.themoviedb.org/3/genres/get-movie-list) da API para trazer a lista.
 - Tela de lista de favoritos persistido no app entre sessões;
 - Tela de favoritos deve permitir desfavoritar um filme.
-
-### Ganha mais pontos se tiver:
-
 - Tela de grid com busca local;
 - Scroll Infinito para fazer paginação da API de filmes populares;
 - Célula do Grid de filmes com informação se o filme foi favoritado no app ou não;
 - Tela de filtro com seleção de data de lançamento e gênero. A tela de filtro só é acessível a partir da tela de favoritos;
 - Ao Aplicar o filtro, retornar a tela de favoritos e fazer um filtro local usando as informações selecionadas referentes a data de lançamento e gênero;
-- Testes unitários no projeto;
-- Testes funcionais.
-- Pipeline Automatizado
+- Testes unitários;
 
-# Exemplos e sugestões
+### Arquitetura
 
----
+Arquitetura utilizada no projeto foi a [clean-swift](https://clean-swift.com/) do Uncle Bob:
 
-Abaixo podemos ver algumas telas de exemplo de alguns desses fluxos. São apenas sugestões, fique à vontade para modificar como você quiser.
-Para facilitar o processo, existem assets, app icons, ícones e paleta de cores no repositório. Mas se o seu lado designer falar mais alto, pode nos surpreender!
+![Image of VIP](assets/clean-swift.png)
 
-### Fluxo de grid de filmes
+### Dependency Manager
 
-![Image of Yaktocat](assets/flow/lista.png)
+Gerenciador de dependencias utilizada no projeto foi o [Cocoapods](https://cocoapods.org/). Link para instalação e execução do cocoapods só seguir o [tutorial](https://cocoapods.org/).
 
-### Fluxo com Splash, Tela de Detalhes e tela de lista da favoritos
+### Network
 
-![Image of Yaktocat](assets/flow/splash_detalhes.png)
+Camada de abstração de rede utilizada no projeto foi o [Moya](https://github.com/Moya/Moya) e para download de imagem o [Kingfisher](https://github.com/onevcat/Kingfisher).
 
-### Fluxo Opcional de filtro
+### Database
 
-![Image of Yaktocat](assets/flow/filtro.png)
+Camada de banco de dados utilizada no projeto foi o [Realm](https://realm.io/).
 
-## **Processo de submissão**
+### Unit tests
 
----
+Para testar os componentes seria utilizado os testes de [snapshot](https://github.com/pointfreeco/swift-snapshot-testing) e para os demais testes o [XCTest](https://developer.apple.com/documentation/xctest), utilizando Spies auto gerado pelo [Mock Generator](https://github.com/seanhenry/SwiftMockGeneratorForXcode) e para gerar dados de teste o [Fakery](https://github.com/vadymmarkov/Fakery).
 
-Depois de implementar a solução, envie um pull request para este repositório.
-O processo de Pull Request funciona da seguinte maneira:
+### Instruments tests
 
-1. Faça um fork deste repositório (não clonar direto!);
-2. Faça seu projeto neste fork;
-3. Commit e suba as alterações para o **SEU** fork;
-4. Pela interface do Github, envie um Pull Request.
+Para testes instrumentados seria utilizado o [XCTest](https://developer.apple.com/documentation/xctest) na arquitetura de Page Object.
 
-Deixe o fork público para facilitar a inspeção do código.
+### Page Object Pattern
 
-### **ATENÇÃO**
-
-Não tente fazer o PUSH diretamente para ESTE repositório!
+![Image of PO](page_object_scheme_xctest.jpeg)
