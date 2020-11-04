@@ -10,6 +10,33 @@ import Movs
 import XCTest
 
 extension XCTestCase {
+    func setRootViewController(_ viewController: UIViewController) {
+        let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+
+        keyWindow?.rootViewController = viewController
+        keyWindow?.makeKeyAndVisible()
+
+        viewController.beginAppearanceTransition(true, animated: true)
+        viewController.endAppearanceTransition()
+    }
+
+    func popRootViewController() {
+        let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+
+        keyWindow?.rootViewController?.navigationController?.popToRootViewController(animated: false)
+        keyWindow?.rootViewController?.dismiss(animated: false, completion: nil)
+    }
+
+    func clearRootViewController() {
+        let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+
+        keyWindow?.rootViewController = UINavigationController(
+            rootViewController: UIViewController()
+        )
+    }
+
+    // MARK: - ViewCode functions
+
     @discardableResult
     func addSubviewForTest<T: UIView>(_ view: T) -> UIViewController {
         addSubviewForTest(view, constraints: { viewController in [
