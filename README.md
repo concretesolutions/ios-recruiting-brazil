@@ -50,4 +50,4 @@ Para testes instrumentados seria utilizado o [XCTest](https://developer.apple.co
 
 ### Page Object Pattern
 
-![Image of PO](page_object_scheme_xctest.jpeg)
+![Image of PO](page_object_scheme_xctest.jpg)
