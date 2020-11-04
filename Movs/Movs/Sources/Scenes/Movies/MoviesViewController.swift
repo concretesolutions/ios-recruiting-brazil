@@ -74,20 +74,12 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
         super.viewDidLoad()
 
         setup()
-
-        // First time has delay only to simulate loading
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [weak self] in
-            self?.view.showLoading()
-            self?.fetchLocalMovies()
-        })
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if !firstTimeFetchMovies {
-            fetchLocalMovies()
-        }
+        fetchLocalMovies()
     }
 
     // MARK: - Functions
@@ -122,8 +114,6 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     }
 
     func displayMovies(viewModel: Movies.FetchMovies.ViewModel) {
-        view.stopLoading()
-
         currentPage = viewModel.page
         lastPage = viewModel.totalPages
         movies.append(contentsOf: viewModel.movies)
@@ -250,7 +240,6 @@ final class MoviesViewController: UIViewController, MoviesDisplayLogic {
     }
 
     private func displayErrorView(configuration: ErrorConfiguration = ErrorConfiguration()) {
-        view.stopLoading()
 
         galleryCollectionView.isHidden = true
         errorView.isHidden = false

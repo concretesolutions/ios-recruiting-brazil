@@ -46,14 +46,17 @@ final class MoviesViewControllerTests: XCTestCase {
         XCTAssertFalse(interactorSpy.invokedFetchGenres)
         XCTAssertFalse(interactorSpy.invokedFetchMovies)
         XCTAssertFalse(interactorSpy.invokedFetchLocalMoviesBySearch)
+        XCTAssertFalse(delegateSpy.invokedGalleryItemTapped)
     }
 
-    func test() {
+    func testViewDidLoadShouldCallFetchLocalMovies() {
         sut.viewDidLoad()
 
-        XCTAssertFalse(interactorSpy.invokedFetchLocalMovies)
+        XCTAssertTrue(interactorSpy.invokedFetchLocalMovies)
+        XCTAssertEqual(interactorSpy.invokedFetchLocalMoviesCount, 1)
         XCTAssertFalse(interactorSpy.invokedFetchGenres)
         XCTAssertFalse(interactorSpy.invokedFetchMovies)
         XCTAssertFalse(interactorSpy.invokedFetchLocalMoviesBySearch)
+        XCTAssertFalse(delegateSpy.invokedGalleryItemTapped)
     }
 }
