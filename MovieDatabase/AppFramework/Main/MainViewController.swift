@@ -1,23 +1,22 @@
 import UIKit
 
 public final class MainViewController: UITabBarController {
-
   public init() {
     super.init(nibName: nil, bundle: nil)
   }
 
-  required init?(coder: NSCoder) {
+  @available(*, unavailable)
+  required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
-  public override func viewDidLoad() {
+  override public func viewDidLoad() {
     super.viewDidLoad()
 
     setViewControllers([
       makeMoviesViewController(),
-      makeFavoritesViewController()
+      makeFavoritesViewController(),
     ], animated: false)
-
   }
 
   private func makeMoviesViewController() -> UIViewController {
@@ -31,5 +30,4 @@ public final class MainViewController: UITabBarController {
     viewController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart"), selectedImage: nil)
     return viewController
   }
-
 }

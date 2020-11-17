@@ -1,6 +1,7 @@
 import UIKit
 
 // MARK: Constraints
+
 public extension UIView {
   func makeConstraintsToEdges(
     of superView: UIView,
@@ -26,6 +27,7 @@ public extension UIView {
 }
 
 // MARK: Padding
+
 public extension UIView {
   func withPadding(left: CGFloat = 0, top: CGFloat = 0, right: CGFloat = 0, bottom: CGFloat = 0) -> UIView {
     let view = UIView()
