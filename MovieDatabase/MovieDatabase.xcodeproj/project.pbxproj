@@ -10,8 +10,8 @@
 		27A734E62564650D0041FCB9 /* AppFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 27A734E42564650D0041FCB9 /* AppFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		27A734E92564650D0041FCB9 /* AppFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A734E22564650D0041FCB9 /* AppFramework.framework */; };
 		27A734EA2564650D0041FCB9 /* AppFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27A734E22564650D0041FCB9 /* AppFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		27A734F1256465330041FCB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A734F0256465330041FCB9 /* ViewController.swift */; };
 		27F4E81C25645A2E00080104 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F4E81B25645A2E00080104 /* AppDelegate.swift */; };
-		27F4E82025645A2E00080104 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F4E81F25645A2E00080104 /* ViewController.swift */; };
 		27F4E82525645A2F00080104 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27F4E82425645A2F00080104 /* Assets.xcassets */; };
 		27F4E82825645A2F00080104 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27F4E82625645A2F00080104 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -44,9 +44,9 @@
 		27A734E22564650D0041FCB9 /* AppFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A734E42564650D0041FCB9 /* AppFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppFramework.h; sourceTree = "<group>"; };
 		27A734E52564650D0041FCB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27A734F0256465330041FCB9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		27F4E81825645A2E00080104 /* MovieDatabase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDatabase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27F4E81B25645A2E00080104 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		27F4E81F25645A2E00080104 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		27F4E82425645A2F00080104 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27F4E82725645A2F00080104 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		27F4E82925645A2F00080104 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,6 +76,7 @@
 			children = (
 				27A734E42564650D0041FCB9 /* AppFramework.h */,
 				27A734E52564650D0041FCB9 /* Info.plist */,
+				27A734F0256465330041FCB9 /* ViewController.swift */,
 			);
 			path = AppFramework;
 			sourceTree = "<group>";
@@ -102,7 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				27F4E81B25645A2E00080104 /* AppDelegate.swift */,
-				27F4E81F25645A2E00080104 /* ViewController.swift */,
 				27F4E82425645A2F00080104 /* Assets.xcassets */,
 				27F4E82625645A2F00080104 /* LaunchScreen.storyboard */,
 				27F4E82925645A2F00080104 /* Info.plist */,
@@ -172,6 +172,7 @@
 				TargetAttributes = {
 					27A734E12564650D0041FCB9 = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 					};
 					27F4E81725645A2E00080104 = {
 						CreatedOnToolsVersion = 12.2;
@@ -221,6 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27A734F1256465330041FCB9 /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,7 +230,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27F4E82025645A2E00080104 /* ViewController.swift in Sources */,
 				27F4E81C25645A2E00080104 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,6 +259,7 @@
 		27A734EC2564650D0041FCB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -275,6 +277,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.alephao.AppFramework;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -285,6 +288,7 @@
 		27A734ED2564650D0041FCB9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -428,6 +432,7 @@
 		27F4E82D25645A2F00080104 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -447,6 +452,7 @@
 		27F4E82E25645A2F00080104 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
