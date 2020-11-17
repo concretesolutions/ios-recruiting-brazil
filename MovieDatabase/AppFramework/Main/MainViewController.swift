@@ -15,6 +15,7 @@ public final class MainViewController: UITabBarController {
 
     setViewControllers([
       makeMoviesViewController(),
+      makeFavoritesViewController()
     ], animated: false)
 
   }
@@ -22,6 +23,12 @@ public final class MainViewController: UITabBarController {
   private func makeMoviesViewController() -> UIViewController {
     let viewController = MoviesViewController()
     viewController.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(systemName: "list.bullet"), selectedImage: nil)
+    return viewController
+  }
+
+  private func makeFavoritesViewController() -> UIViewController {
+    let viewController = FavoritesViewController()
+    viewController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart"), selectedImage: nil)
     return viewController
   }
 

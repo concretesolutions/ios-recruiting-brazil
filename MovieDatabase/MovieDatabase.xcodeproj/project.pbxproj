@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2720752825648CA800B3C7C5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720752725648CA800B3C7C5 /* MainViewController.swift */; };
 		2720752E25648DFE00B3C7C5 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720752D25648DFE00B3C7C5 /* MoviesViewController.swift */; };
+		2720753325648F6400B3C7C5 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720753225648F6400B3C7C5 /* FavoritesViewController.swift */; };
 		27A734E62564650D0041FCB9 /* AppFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 27A734E42564650D0041FCB9 /* AppFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		27A734E92564650D0041FCB9 /* AppFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A734E22564650D0041FCB9 /* AppFramework.framework */; };
 		27A734EA2564650D0041FCB9 /* AppFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27A734E22564650D0041FCB9 /* AppFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		2720752725648CA800B3C7C5 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2720752D25648DFE00B3C7C5 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
+		2720753225648F6400B3C7C5 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		27A734E22564650D0041FCB9 /* AppFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A734E42564650D0041FCB9 /* AppFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppFramework.h; sourceTree = "<group>"; };
 		27A734E52564650D0041FCB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				2720752725648CA800B3C7C5 /* MainViewController.swift */,
+				2720753125648F4C00B3C7C5 /* Favorites */,
 				2720752C25648DF400B3C7C5 /* Movies */,
 			);
 			path = Main;
@@ -88,6 +91,14 @@
 				2720752D25648DFE00B3C7C5 /* MoviesViewController.swift */,
 			);
 			path = Movies;
+			sourceTree = "<group>";
+		};
+		2720753125648F4C00B3C7C5 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				2720753225648F6400B3C7C5 /* FavoritesViewController.swift */,
+			);
+			path = Favorites;
 			sourceTree = "<group>";
 		};
 		27A734E32564650D0041FCB9 /* AppFramework */ = {
@@ -242,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2720752825648CA800B3C7C5 /* MainViewController.swift in Sources */,
+				2720753325648F6400B3C7C5 /* FavoritesViewController.swift in Sources */,
 				2720752E25648DFE00B3C7C5 /* MoviesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
