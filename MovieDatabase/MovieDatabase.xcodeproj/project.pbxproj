@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2720752825648CA800B3C7C5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720752725648CA800B3C7C5 /* MainViewController.swift */; };
 		27A734E62564650D0041FCB9 /* AppFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 27A734E42564650D0041FCB9 /* AppFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		27A734E92564650D0041FCB9 /* AppFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A734E22564650D0041FCB9 /* AppFramework.framework */; };
 		27A734EA2564650D0041FCB9 /* AppFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27A734E22564650D0041FCB9 /* AppFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		27A734F1256465330041FCB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A734F0256465330041FCB9 /* ViewController.swift */; };
 		27F4E81C25645A2E00080104 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F4E81B25645A2E00080104 /* AppDelegate.swift */; };
 		27F4E82525645A2F00080104 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27F4E82425645A2F00080104 /* Assets.xcassets */; };
 		27F4E82825645A2F00080104 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27F4E82625645A2F00080104 /* LaunchScreen.storyboard */; };
@@ -41,10 +41,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2720752725648CA800B3C7C5 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		27A734E22564650D0041FCB9 /* AppFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A734E42564650D0041FCB9 /* AppFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppFramework.h; sourceTree = "<group>"; };
 		27A734E52564650D0041FCB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		27A734F0256465330041FCB9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		27F4E81825645A2E00080104 /* MovieDatabase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDatabase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27F4E81B25645A2E00080104 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27F4E82425645A2F00080104 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -71,12 +71,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2720752625648C9700B3C7C5 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				2720752725648CA800B3C7C5 /* MainViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		27A734E32564650D0041FCB9 /* AppFramework */ = {
 			isa = PBXGroup;
 			children = (
 				27A734E42564650D0041FCB9 /* AppFramework.h */,
 				27A734E52564650D0041FCB9 /* Info.plist */,
-				27A734F0256465330041FCB9 /* ViewController.swift */,
+				2720752625648C9700B3C7C5 /* Main */,
 			);
 			path = AppFramework;
 			sourceTree = "<group>";
@@ -222,7 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27A734F1256465330041FCB9 /* ViewController.swift in Sources */,
+				2720752825648CA800B3C7C5 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
