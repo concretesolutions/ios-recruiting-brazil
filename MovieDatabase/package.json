@@ -1,0 +1,15 @@
+{
+  "name": "MovieDatabase",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {},
+  "devDependencies": {
+    "husky": "^4.3.0",
+    "git-format-staged": "^2.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "git-format-staged --formatter \"mint run swiftformat stdin --stdinpath '{}'\" \"*.swift\""
+    }
+  }
+}
