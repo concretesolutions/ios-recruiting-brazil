@@ -5,11 +5,14 @@
   "dependencies": {},
   "devDependencies": {
     "husky": "^4.3.0",
-    "git-format-staged": "^2.1.0"
+    "lint-staged": "^10.5.1"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "git-format-staged --formatter \"mint run swiftformat stdin --stdinpath '{}'\" \"*.swift\""
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.swift": "mint run swiftformat ."
   }
 }
