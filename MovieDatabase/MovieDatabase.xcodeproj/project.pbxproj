@@ -17,6 +17,8 @@
 		272075492564A0E100B3C7C5 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272075482564A0E100B3C7C5 /* MovieCell.swift */; };
 		272075B52564BAF600B3C7C5 /* AppFrameworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272075B42564BAF600B3C7C5 /* AppFrameworkTests.swift */; };
 		272075B72564BAF600B3C7C5 /* AppFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A734E22564650D0041FCB9 /* AppFramework.framework */; };
+		272075C02564BBBC00B3C7C5 /* PaginationSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272075BF2564BBBC00B3C7C5 /* PaginationSink.swift */; };
+		272075C52564BC0300B3C7C5 /* PaginationSinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272075C42564BC0300B3C7C5 /* PaginationSinkTests.swift */; };
 		27A734E62564650D0041FCB9 /* AppFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 27A734E42564650D0041FCB9 /* AppFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		27A734E92564650D0041FCB9 /* AppFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A734E22564650D0041FCB9 /* AppFramework.framework */; };
 		27A734EA2564650D0041FCB9 /* AppFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27A734E22564650D0041FCB9 /* AppFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -68,6 +70,8 @@
 		272075B22564BAF600B3C7C5 /* AppFrameworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppFrameworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		272075B42564BAF600B3C7C5 /* AppFrameworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFrameworkTests.swift; sourceTree = "<group>"; };
 		272075B62564BAF600B3C7C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		272075BF2564BBBC00B3C7C5 /* PaginationSink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationSink.swift; sourceTree = "<group>"; };
+		272075C42564BC0300B3C7C5 /* PaginationSinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationSinkTests.swift; sourceTree = "<group>"; };
 		27A734E22564650D0041FCB9 /* AppFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A734E42564650D0041FCB9 /* AppFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppFramework.h; sourceTree = "<group>"; };
 		27A734E52564650D0041FCB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -139,6 +143,7 @@
 			children = (
 				272075372564905000B3C7C5 /* UIView+LayoutHelpers.swift */,
 				2720753E2564913500B3C7C5 /* UICollectionView+Helpers.swift */,
+				272075BF2564BBBC00B3C7C5 /* PaginationSink.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -147,9 +152,18 @@
 			isa = PBXGroup;
 			children = (
 				272075B42564BAF600B3C7C5 /* AppFrameworkTests.swift */,
+				272075C32564BBF800B3C7C5 /* Library */,
 				272075B62564BAF600B3C7C5 /* Info.plist */,
 			);
 			path = AppFrameworkTests;
+			sourceTree = "<group>";
+		};
+		272075C32564BBF800B3C7C5 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				272075C42564BC0300B3C7C5 /* PaginationSinkTests.swift */,
+			);
+			path = Library;
 			sourceTree = "<group>";
 		};
 		27A734E32564650D0041FCB9 /* AppFramework */ = {
@@ -335,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				272075C52564BC0300B3C7C5 /* PaginationSinkTests.swift in Sources */,
 				272075B52564BAF600B3C7C5 /* AppFrameworkTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,6 +363,7 @@
 				272075492564A0E100B3C7C5 /* MovieCell.swift in Sources */,
 				2720753325648F6400B3C7C5 /* FavoritesViewController.swift in Sources */,
 				2720753F2564913500B3C7C5 /* UICollectionView+Helpers.swift in Sources */,
+				272075C02564BBBC00B3C7C5 /* PaginationSink.swift in Sources */,
 				272075382564905000B3C7C5 /* UIView+LayoutHelpers.swift in Sources */,
 				2720754625649C3100B3C7C5 /* MovieViewModel.swift in Sources */,
 				2720752E25648DFE00B3C7C5 /* MoviesViewController.swift in Sources */,
