@@ -20,7 +20,7 @@ public final class MainViewController: UITabBarController {
   }
 
   private func makeMoviesViewController() -> UIViewController {
-    let viewController = MoviesViewController()
+    let viewController = MoviesViewController(viewModel: MoviesViewModel())
     viewController.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(systemName: "list.bullet"), selectedImage: nil)
     return viewController
   }

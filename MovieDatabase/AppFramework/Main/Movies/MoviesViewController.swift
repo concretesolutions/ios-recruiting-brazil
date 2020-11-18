@@ -2,10 +2,11 @@ import Combine
 import UIKit
 
 public final class MoviesViewController: UICollectionViewController {
-  typealias DataSource = UICollectionViewDiffableDataSource<Int, Int>
-  typealias Snapshot = NSDiffableDataSourceSnapshot<Int, Int>
+  typealias DataSource = UICollectionViewDiffableDataSource<MoviesViewModel.Section, MovieViewModel>
+  typealias Snapshot = NSDiffableDataSourceSnapshot<MoviesViewModel.Section, MovieViewModel>
 
   private var cancellables = Set<AnyCancellable>()
+  private let viewModel: MoviesViewModel
 
   private lazy var dataSource: DataSource = {
     DataSource(collectionView: collectionView) { collectionView, indexPath, _ -> UICollectionViewCell? in
@@ -43,7 +44,8 @@ public final class MoviesViewController: UICollectionViewController {
     return layout
   }
 
-  init() {
+  init(viewModel: MoviesViewModel) {
+    self.viewModel = viewModel
     let layout = Self.makeCollectionViewLayout()
     super.init(collectionViewLayout: layout)
   }
@@ -56,9 +58,15 @@ public final class MoviesViewController: UICollectionViewController {
   override public func viewDidLoad() {
     super.viewDidLoad()
     collectionView.register(UICollectionViewCell.self)
-    var snapshot = Snapshot()
-    snapshot.appendSections([0])
-    snapshot.appendItems(Array(0 ... 10))
-    dataSource.apply(snapshot)
+    viewModel
+      .setupBindings(refresh: Just(()).eraseToAnyPublisher())
+      .subscribe(on: DispatchQueue.main)
+      .sink(receiveValue: { [weak self] movies in
+        var snapshot = Snapshot()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(movies)
+        self?.dataSource.apply(snapshot)
+      })
+      .store(in: &cancellables)
   }
 }
