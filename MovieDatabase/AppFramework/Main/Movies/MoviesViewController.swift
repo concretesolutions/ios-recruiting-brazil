@@ -9,9 +9,9 @@ public final class MoviesViewController: UICollectionViewController {
   private let viewModel: MoviesViewModel
 
   private lazy var dataSource: DataSource = {
-    DataSource(collectionView: collectionView) { collectionView, indexPath, _ -> UICollectionViewCell? in
-      let cell: UICollectionViewCell = collectionView.dequeue(for: indexPath)
-      cell.backgroundColor = .yellow
+    DataSource(collectionView: collectionView) { collectionView, indexPath, movieViewModel -> UICollectionViewCell? in
+      let cell: MovieCell = collectionView.dequeue(for: indexPath)
+      cell.setup(viewModel: movieViewModel)
       return cell
     }
   }()
@@ -57,7 +57,7 @@ public final class MoviesViewController: UICollectionViewController {
 
   override public func viewDidLoad() {
     super.viewDidLoad()
-    collectionView.register(UICollectionViewCell.self)
+    collectionView.register(MovieCell.self)
     viewModel
       .setupBindings(refresh: Just(()).eraseToAnyPublisher())
       .subscribe(on: DispatchQueue.main)
