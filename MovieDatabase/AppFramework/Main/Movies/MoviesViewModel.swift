@@ -49,6 +49,8 @@ public struct MoviesViewModel {
     case main
   }
 
+  public init() {}
+
   public func setupBindings(
     refresh: AnyPublisher<Void, Never>
   ) -> AnyPublisher<[MovieViewModel], Never> {
