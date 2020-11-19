@@ -2,6 +2,10 @@ import Foundation
 
 public struct DiscoverMovieRequestParams {
   public let page: Int
+
+  public init(page: Int) {
+    self.page = page
+  }
 }
 
 public struct DiscoverMovieResponse: Decodable {
