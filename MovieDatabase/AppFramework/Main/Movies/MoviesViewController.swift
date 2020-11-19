@@ -7,6 +7,8 @@ public final class MoviesViewController: UICollectionViewController {
 
   private var cancellables = Set<AnyCancellable>()
   private let viewModel: MoviesViewModel
+  private let refreshControl = UIRefreshControl()
+  private let _refresh = PassthroughSubject<Void, Never>()
 
   private lazy var dataSource: DataSource = {
     DataSource(collectionView: collectionView) { collectionView, indexPath, movieViewModel -> UICollectionViewCell? in
@@ -57,13 +59,17 @@ public final class MoviesViewController: UICollectionViewController {
 
   override public func viewDidLoad() {
     super.viewDidLoad()
-    collectionView.register(MovieCell.self)
+    refreshControl.addTarget(self, action: #selector(refresh), for: .primaryActionTriggered)
 
-    let refresh = PassthroughSubject<Void, Never>()
+    collectionView.register(MovieCell.self)
+    collectionView.refreshControl = refreshControl
+
     let nextPage = PassthroughSubject<Void, Never>()
 
-    let (values, error) = viewModel.setupBindings(
-      refresh: refresh.eraseToAnyPublisher(),
+    let (values, error, isRefreshing) = viewModel.setupBindings(
+      refresh: _refresh
+        .throttle(for: .milliseconds(1500), scheduler: DispatchQueue.main, latest: true)
+        .eraseToAnyPublisher(),
       nextPage: nextPage.eraseToAnyPublisher()
     )
 
@@ -84,18 +90,32 @@ public final class MoviesViewController: UICollectionViewController {
       })
       .store(in: &cancellables)
 
-    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-      refresh.send(())
-    }
+    isRefreshing
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { [weak self] isRefreshing in
+        if !isRefreshing {
+          self?.refreshControl.endRefreshing()
+        }
+      })
+      .store(in: &cancellables)
   }
 
+  var viewAlredyAppeared = false
   override public func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     tabBarController?.title = "Movies"
+    if !viewAlredyAppeared {
+      _refresh.send(())
+    }
+    viewAlredyAppeared = true
   }
 
   override public func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     tabBarController?.title = nil
+  }
+
+  @objc private func refresh() {
+    _refresh.send(())
   }
 }

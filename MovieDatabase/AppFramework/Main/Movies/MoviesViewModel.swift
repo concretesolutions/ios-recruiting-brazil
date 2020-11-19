@@ -15,7 +15,8 @@ public struct MoviesViewModel {
     nextPage: AnyPublisher<Void, Never>
   ) -> (
     values: AnyPublisher<[MovieViewModel], Never>,
-    error: AnyPublisher<ErrorResponse, Never>
+    error: AnyPublisher<ErrorResponse, Never>,
+    isRefreshing: AnyPublisher<Bool, Never>
   ) {
     let paginationSink = PaginationSink<DiscoverMovieResponse.Movie, ErrorResponse>.make(
       refreshTrigger: refresh,
@@ -40,7 +41,8 @@ public struct MoviesViewModel {
 
     return (
       value.eraseToAnyPublisher(),
-      paginationSink.error
+      paginationSink.error,
+      paginationSink.isRefreshing
     )
   }
 }
