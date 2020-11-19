@@ -28,10 +28,11 @@ public struct MoviesViewModel {
     let value = paginationSink.values
       .map { movies in
         movies.map { movie in
+          // TODO: Get baseUrl from config
           MovieViewModel(
             id: movie.id,
             title: movie.title,
-            imageUrl: mockImageUrl,
+            imageUrl: URL(string: "https://image.tmdb.org/t/p/w300\(movie.posterPath)")!,
             liked: false
           )
         }
