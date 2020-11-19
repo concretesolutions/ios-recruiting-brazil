@@ -27,12 +27,15 @@ class Provider {
     execute(request: request)
       .tryMap { element -> Data in
         guard let httpResponse = element.response as? HTTPURLResponse else {
+          os_log("[%s] %s %s - Invalid HTTTP Response", log: generalLog, type: .debug, request.uuidShort, request.httpMethod.rawValue, request.path)
           throw URLError(.badServerResponse)
         }
 
         guard httpResponse.statusCode == 200 else {
           throw try JSONDecoder.default.decode(ErrorResponse.self, from: element.data)
         }
+
+        os_log("[%s] %s %s - Status Code: %i", log: generalLog, type: .debug, request.uuidShort, request.httpMethod.rawValue, request.path, httpResponse.statusCode)
 
         return element.data
       }
@@ -51,7 +54,7 @@ class Provider {
     var urlRequest = request.makeUrlRequest(baseUrl: baseUrl)
     middlewares.apply(to: &urlRequest)
 
-    os_log("Executing request %s %s", log: generalLog, type: .debug, request.httpMethod.rawValue, request.path)
+    os_log("[%s] %s %s - Executing Request", log: generalLog, type: .debug, request.uuidShort, request.httpMethod.rawValue, request.path)
     return session
       .customDataTaskPublisher(for: urlRequest)
   }

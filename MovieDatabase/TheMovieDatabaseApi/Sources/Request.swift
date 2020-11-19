@@ -1,11 +1,15 @@
 import Combine
 import Foundation
-import os.log
 
 struct Request {
+  let uuid = UUID()
   let path: String
   let httpMethod: HTTPMethod
   let queryItems: [URLQueryItem]?
+
+  var uuidShort: String {
+    String(uuid.uuidString.prefix(8))
+  }
 
   func makeUrlRequest(baseUrl: URL) -> URLRequest {
     let url = makeUrl(baseUrl: baseUrl)
