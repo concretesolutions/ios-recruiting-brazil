@@ -8,8 +8,8 @@ public struct DiscoverMovieRequestParams {
   }
 }
 
-public struct DiscoverMovieResponse: Decodable {
-  public struct Movie: Decodable {
+public struct DiscoverMovieResponse: Decodable, Equatable {
+  public struct Movie: Decodable, Equatable {
     public let id: Int
     public let title: String
     public let overview: String
