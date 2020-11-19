@@ -12,6 +12,17 @@ class Provider {
     self.middlewares = middlewares
   }
 
+  func executeWithResult<T: Decodable>(request: Request) -> AnyPublisher<Result<T, ErrorResponse>, Never> {
+    execute(request: request)
+      .flatMap { t in
+        Just<Result<T, ErrorResponse>>(.success(t))
+      }
+      .catch { errorResponse in
+        Just<Result<T, ErrorResponse>>(.failure(errorResponse))
+      }
+      .eraseToAnyPublisher()
+  }
+
   func execute<T: Decodable>(request: Request) -> AnyPublisher<T, ErrorResponse> {
     execute(request: request)
       .tryMap { element -> Data in
