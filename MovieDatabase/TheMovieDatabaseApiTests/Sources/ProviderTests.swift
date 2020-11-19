@@ -30,19 +30,18 @@ final class ProviderTests: XCTestCase {
     )
   }
 
-  func testExecute_WithSuccessfulResponse_ShouldDecodeValue() {
-    let responseData = "[1, 2, 3]".data(using: .utf8)!
-    let urlResponse = HTTPURLResponse(url: baseUrl, statusCode: 200, httpVersion: nil, headerFields: nil)!
-    let session = SessionMock(result: .success((data: responseData, response: urlResponse)))
-    let provider = makeProvider(session: session)
-    let publisher: AnyPublisher<[Int], ErrorResponse> = provider.execute(request: .init(path: "/path/to/somewhere", httpMethod: .get, queryItems: nil))
+  private func assertExecute(
+    sessionMock: SessionMock,
+    assertions: @escaping (Result<[Int], ErrorResponse>) -> Void
+  ) {
+    let provider = makeProvider(session: sessionMock)
+    let publisher: AnyPublisher<Result<[Int], ErrorResponse>, Never> = provider.executeWithResult(request: .init(path: "/path/to/somewhere", httpMethod: .get, queryItems: nil))
 
     let valueExpectation = expectation(description: "value")
 
     publisher.sink(
-      receiveCompletion: { _ in },
-      receiveValue: { values in
-        XCTAssertEqual([1, 2, 3], values)
+      receiveValue: { result in
+        assertions(result)
         valueExpectation.fulfill()
       }
     )
@@ -51,61 +50,55 @@ final class ProviderTests: XCTestCase {
     waitForExpectations(timeout: 1.0, handler: nil)
   }
 
+  func testExecute_WithSuccessfulResponse_ShouldDecodeValue() {
+    let responseData = "[1, 2, 3]".data(using: .utf8)!
+    let urlResponse = HTTPURLResponse(url: baseUrl, statusCode: 200, httpVersion: nil, headerFields: nil)!
+    let session = SessionMock(result: .success((data: responseData, response: urlResponse)))
+    assertExecute(
+      sessionMock: session,
+      assertions: { result in
+        switch result {
+        case .failure: XCTFail()
+        case let .success(values):
+          XCTAssertEqual([1, 2, 3], values)
+        }
+      }
+    )
+  }
+
   func testExecute_WithCorrectErrorResponse_ShouldDecodeError() {
     let responseData = "{\"status_message\": \"foo\",\"status_code\": 1}".data(using: .utf8)!
     let urlResponse = HTTPURLResponse(url: baseUrl, statusCode: 401, httpVersion: nil, headerFields: nil)!
     let session = SessionMock(result: .success((data: responseData, response: urlResponse)))
-    let provider = makeProvider(session: session)
-    let publisher: AnyPublisher<[Int], ErrorResponse> = provider.execute(request: .init(path: "/path/to/somewhere", httpMethod: .get, queryItems: nil))
-
-    let compeltionExpectation = expectation(description: "completion")
-
-    publisher.sink(
-      receiveCompletion: { completion in
-        switch completion {
+    assertExecute(
+      sessionMock: session,
+      assertions: { result in
+        switch result {
         case let .failure(errorResponse):
           XCTAssertEqual(errorResponse.statusMessage, "foo")
           XCTAssertEqual(errorResponse.statusCode, 1)
-        case .finished:
+        case .success:
           XCTFail()
         }
-        compeltionExpectation.fulfill()
-      },
-      receiveValue: { _ in
-        XCTFail()
       }
     )
-    .store(in: &cancellables)
-
-    waitForExpectations(timeout: 1.0, handler: nil)
   }
 
   func testExecute_WithUnknownErrorResponse_ShouldDecodeError() {
     let responseData = "{}".data(using: .utf8)!
     let urlResponse = HTTPURLResponse(url: baseUrl, statusCode: 401, httpVersion: nil, headerFields: nil)!
     let session = SessionMock(result: .success((data: responseData, response: urlResponse)))
-    let provider = makeProvider(session: session)
-    let publisher: AnyPublisher<[Int], ErrorResponse> = provider.execute(request: .init(path: "/path/to/somewhere", httpMethod: .get, queryItems: nil))
-
-    let compeltionExpectation = expectation(description: "completion")
-
-    publisher.sink(
-      receiveCompletion: { completion in
-        switch completion {
+    assertExecute(
+      sessionMock: session,
+      assertions: { result in
+        switch result {
         case let .failure(errorResponse):
           XCTAssertEqual(errorResponse.statusMessage, "The data couldn’t be read because it is missing.")
           XCTAssertEqual(errorResponse.statusCode, -999)
-        case .finished:
+        case .success:
           XCTFail()
         }
-        compeltionExpectation.fulfill()
-      },
-      receiveValue: { _ in
-        XCTFail()
       }
     )
-    .store(in: &cancellables)
-
-    waitForExpectations(timeout: 1.0, handler: nil)
   }
 }
