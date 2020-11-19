@@ -23,6 +23,8 @@
 		273D0B4F2566E25800DB247D /* KingfisherDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 273D0B4E2566E25800DB247D /* KingfisherDynamic */; };
 		273D0B502566E25800DB247D /* KingfisherDynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 273D0B4E2566E25800DB247D /* KingfisherDynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		273D0B652566F86F00DB247D /* withEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273D0B642566F86F00DB247D /* withEnvironment.swift */; };
+		273D0B862567053400DB247D /* SessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273D0B852567053400DB247D /* SessionMock.swift */; };
+		273D0B8B2567057100DB247D /* TestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273D0B8A2567057100DB247D /* TestConstants.swift */; };
 		274B3F752565C376002D9B4C /* Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274B3F742565C376002D9B4C /* Middleware.swift */; };
 		274B3F7C2565C94C002D9B4C /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274B3F7B2565C94C002D9B4C /* RequestTests.swift */; };
 		274B3F8E2565CD7E002D9B4C /* MiddlewareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274B3F8D2565CD7E002D9B4C /* MiddlewareTests.swift */; };
@@ -140,6 +142,8 @@
 		272075BF2564BBBC00B3C7C5 /* PaginationSink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationSink.swift; sourceTree = "<group>"; };
 		272075C42564BC0300B3C7C5 /* PaginationSinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationSinkTests.swift; sourceTree = "<group>"; };
 		273D0B642566F86F00DB247D /* withEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = withEnvironment.swift; sourceTree = "<group>"; };
+		273D0B852567053400DB247D /* SessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionMock.swift; sourceTree = "<group>"; };
+		273D0B8A2567057100DB247D /* TestConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConstants.swift; sourceTree = "<group>"; };
 		274B3F742565C376002D9B4C /* Middleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Middleware.swift; sourceTree = "<group>"; };
 		274B3F7B2565C94C002D9B4C /* RequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTests.swift; sourceTree = "<group>"; };
 		274B3F8D2565CD7E002D9B4C /* MiddlewareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddlewareTests.swift; sourceTree = "<group>"; };
@@ -280,6 +284,8 @@
 			isa = PBXGroup;
 			children = (
 				273D0B642566F86F00DB247D /* withEnvironment.swift */,
+				273D0B8A2567057100DB247D /* TestConstants.swift */,
+				273D0B852567053400DB247D /* SessionMock.swift */,
 			);
 			path = TestHelpers;
 			sourceTree = "<group>";
@@ -615,6 +621,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				272075C52564BC0300B3C7C5 /* PaginationSinkTests.swift in Sources */,
+				273D0B8B2567057100DB247D /* TestConstants.swift in Sources */,
+				273D0B862567053400DB247D /* SessionMock.swift in Sources */,
 				273D0B652566F86F00DB247D /* withEnvironment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
