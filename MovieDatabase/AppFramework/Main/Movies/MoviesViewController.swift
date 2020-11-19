@@ -88,4 +88,14 @@ public final class MoviesViewController: UICollectionViewController {
       refresh.send(())
     }
   }
+
+  override public func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    tabBarController?.title = "Movies"
+  }
+
+  override public func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    tabBarController?.title = nil
+  }
 }
