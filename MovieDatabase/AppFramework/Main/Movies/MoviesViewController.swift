@@ -58,9 +58,17 @@ public final class MoviesViewController: UICollectionViewController {
   override public func viewDidLoad() {
     super.viewDidLoad()
     collectionView.register(MovieCell.self)
-    viewModel
-      .setupBindings(refresh: Just(()).eraseToAnyPublisher())
-      .subscribe(on: DispatchQueue.main)
+
+    let refresh = PassthroughSubject<Void, Never>()
+    let nextPage = PassthroughSubject<Void, Never>()
+
+    let (values, error) = viewModel.setupBindings(
+      refresh: refresh.eraseToAnyPublisher(),
+      nextPage: nextPage.eraseToAnyPublisher()
+    )
+
+    values
+      .receive(on: DispatchQueue.main)
       .sink(receiveValue: { [weak self] movies in
         var snapshot = Snapshot()
         snapshot.appendSections([.main])
@@ -68,5 +76,16 @@ public final class MoviesViewController: UICollectionViewController {
         self?.dataSource.apply(snapshot)
       })
       .store(in: &cancellables)
+
+    error
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { error in
+        print("Error:", error.statusCode, error.statusMessage)
+      })
+      .store(in: &cancellables)
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+      refresh.send(())
+    }
   }
 }
