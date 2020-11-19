@@ -4,8 +4,10 @@
 
 **TheMovieDatabase API Key (required)**
 
-1. Run `cp _ApiKey.swift ApiKey.swift`
-2. Open `ApiKey.swift` and add your api key
+1. [Creat an account at themoviedb](https://www.themoviedb.org/login)
+2. Get your **API Read Access Token (v4 auth)** from [themoviedb](https://www.themoviedb.org/settings/api)
+3. Run `cp _ApiKey.swift ApiKey.swift`
+4. Open `ApiKey.swift` and add your api key
 
 **Node (optional)**
 
