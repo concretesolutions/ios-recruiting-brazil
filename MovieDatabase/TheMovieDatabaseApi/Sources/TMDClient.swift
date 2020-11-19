@@ -5,8 +5,7 @@ public final class TMDClient {
 
   private let provider: Provider
 
-  public init(baseUrl: URL, middlewares: [Middleware]) {
-    let session = URLSession(configuration: .default)
+  public init(session: Session, baseUrl: URL, middlewares: [Middleware]) {
     provider = Provider(session: session, baseUrl: baseUrl, middlewares: middlewares)
   }
 
