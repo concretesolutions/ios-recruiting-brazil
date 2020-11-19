@@ -2,6 +2,11 @@
 
 ### Environment
 
+**TheMovieDatabase API Key (required)**
+
+1. Run `cp _ApiKey.swift ApiKey.swift`
+2. Open `ApiKey.swift` and add your api key
+
 **Node (optional)**
 
 We use husky to setup git hooks. To use husky you'll need to have a node environment setup. 
