@@ -62,6 +62,8 @@ public final class MoviesViewController: UICollectionViewController {
     super.viewDidLoad()
     refreshControl.addTarget(self, action: #selector(refresh), for: .primaryActionTriggered)
 
+    collectionView.backgroundColor = .systemBackground
+
     collectionView.register(MovieCell.self)
     collectionView.refreshControl = refreshControl
 
@@ -94,11 +96,11 @@ public final class MoviesViewController: UICollectionViewController {
       .store(in: &cancellables)
 
     isRefreshing
+      .filter { !$0 }
+      .delay(for: .milliseconds(500), scheduler: DispatchQueue.main)
       .receive(on: DispatchQueue.main)
-      .sink(receiveValue: { [weak self] isRefreshing in
-        if !isRefreshing {
-          self?.refreshControl.endRefreshing()
-        }
+      .sink(receiveValue: { [weak self] _ in
+        self?.refreshControl.endRefreshing()
       })
       .store(in: &cancellables)
   }
@@ -119,6 +121,7 @@ public final class MoviesViewController: UICollectionViewController {
   }
 
   @objc private func refresh() {
+    guard refreshControl.isRefreshing else { return }
     _refresh.send(())
   }
 
