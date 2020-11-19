@@ -9,6 +9,7 @@ public final class MoviesViewController: UICollectionViewController {
   private let viewModel: MoviesViewModel
   private let refreshControl = UIRefreshControl()
   private let _refresh = PassthroughSubject<Void, Never>()
+  private let _nextPage = PassthroughSubject<Int, Never>()
 
   private lazy var dataSource: DataSource = {
     DataSource(collectionView: collectionView) { collectionView, indexPath, movieViewModel -> UICollectionViewCell? in
@@ -64,13 +65,15 @@ public final class MoviesViewController: UICollectionViewController {
     collectionView.register(MovieCell.self)
     collectionView.refreshControl = refreshControl
 
-    let nextPage = PassthroughSubject<Void, Never>()
-
     let (values, error, isRefreshing) = viewModel.setupBindings(
       refresh: _refresh
         .throttle(for: .milliseconds(1500), scheduler: DispatchQueue.main, latest: true)
         .eraseToAnyPublisher(),
-      nextPage: nextPage.eraseToAnyPublisher()
+      nextPage: _nextPage
+        .removeDuplicates()
+        .map { _ in () }
+        .throttle(for: .milliseconds(1500), scheduler: DispatchQueue.main, latest: true)
+        .eraseToAnyPublisher()
     )
 
     values
@@ -117,5 +120,12 @@ public final class MoviesViewController: UICollectionViewController {
 
   @objc private func refresh() {
     _refresh.send(())
+  }
+
+  override public func collectionView(_ collectionView: UICollectionView, willDisplay _: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    let numberOfItems = collectionView.numberOfItems(inSection: 0)
+    if indexPath.item == numberOfItems - 1 {
+      _nextPage.send(numberOfItems)
+    }
   }
 }
