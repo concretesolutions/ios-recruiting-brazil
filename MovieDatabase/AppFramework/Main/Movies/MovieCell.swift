@@ -1,9 +1,12 @@
+import Kingfisher
 import UIKit
 
 public final class MovieCell: UICollectionViewCell {
   private let backgroundImageView: UIImageView = {
     let imageView = UIImageView()
+    imageView.layer.masksToBounds = true
     imageView.contentMode = .scaleAspectFill
+    imageView.kf.indicatorType = .activity
     return imageView
   }()
 
@@ -56,7 +59,7 @@ public final class MovieCell: UICollectionViewCell {
   public func setup(viewModel: MovieViewModel) {
     titleLabel.text = viewModel.title
 
-    // TODO: Load image
+    backgroundImageView.kf.setImage(with: viewModel.imageUrl)
 
     let likeImage = viewModel.liked
       ? UIImage(systemName: "heart.fill")?.withRenderingMode(.alwaysTemplate)
