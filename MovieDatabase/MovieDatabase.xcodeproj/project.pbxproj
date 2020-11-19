@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,10 @@
 		272075B72564BAF600B3C7C5 /* AppFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A734E22564650D0041FCB9 /* AppFramework.framework */; };
 		272075C02564BBBC00B3C7C5 /* PaginationSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272075BF2564BBBC00B3C7C5 /* PaginationSink.swift */; };
 		272075C52564BC0300B3C7C5 /* PaginationSinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272075C42564BC0300B3C7C5 /* PaginationSinkTests.swift */; };
+		273D0B492566E24C00DB247D /* KingfisherDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 273D0B482566E24C00DB247D /* KingfisherDynamic */; };
+		273D0B4A2566E24C00DB247D /* KingfisherDynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 273D0B482566E24C00DB247D /* KingfisherDynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		273D0B4F2566E25800DB247D /* KingfisherDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 273D0B4E2566E25800DB247D /* KingfisherDynamic */; };
+		273D0B502566E25800DB247D /* KingfisherDynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 273D0B4E2566E25800DB247D /* KingfisherDynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		274B3F752565C376002D9B4C /* Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274B3F742565C376002D9B4C /* Middleware.swift */; };
 		274B3F7C2565C94C002D9B4C /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274B3F7B2565C94C002D9B4C /* RequestTests.swift */; };
 		274B3F8E2565CD7E002D9B4C /* MiddlewareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274B3F8D2565CD7E002D9B4C /* MiddlewareTests.swift */; };
@@ -101,6 +105,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				273D0B502566E25800DB247D /* KingfisherDynamic in Embed Frameworks */,
 				274B3FBF2565EE9B002D9B4C /* TheMovieDatabaseApi.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -113,6 +118,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				27A734EA2564650D0041FCB9 /* AppFramework.framework in Embed Frameworks */,
+				273D0B4A2566E24C00DB247D /* KingfisherDynamic in Embed Frameworks */,
 				275335DB2565B97C00CC7225 /* TheMovieDatabaseApi.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -193,6 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				273D0B4F2566E25800DB247D /* KingfisherDynamic in Frameworks */,
 				274B3FBE2565EE9B002D9B4C /* TheMovieDatabaseApi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27A734E92564650D0041FCB9 /* AppFramework.framework in Frameworks */,
+				273D0B492566E24C00DB247D /* KingfisherDynamic in Frameworks */,
 				275335DA2565B97C00CC7225 /* TheMovieDatabaseApi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,6 +478,9 @@
 				274B3FC12565EE9B002D9B4C /* PBXTargetDependency */,
 			);
 			name = AppFramework;
+			packageProductDependencies = (
+				273D0B4E2566E25800DB247D /* KingfisherDynamic */,
+			);
 			productName = AppFramework;
 			productReference = 27A734E22564650D0041FCB9 /* AppFramework.framework */;
 			productType = "com.apple.product-type.framework";
@@ -490,6 +501,9 @@
 				275335D92565B97C00CC7225 /* PBXTargetDependency */,
 			);
 			name = MovieDatabase;
+			packageProductDependencies = (
+				273D0B482566E24C00DB247D /* KingfisherDynamic */,
+			);
 			productName = MovieDatabase;
 			productReference = 27F4E81825645A2E00080104 /* MovieDatabase.app */;
 			productType = "com.apple.product-type.application";
@@ -531,6 +545,9 @@
 				Base,
 			);
 			mainGroup = 27F4E80F25645A2E00080104;
+			packageReferences = (
+				273D0B472566E24C00DB247D /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 27F4E81925645A2E00080104 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1097,6 +1114,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		273D0B472566E24C00DB247D /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.15.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		273D0B482566E24C00DB247D /* KingfisherDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 273D0B472566E24C00DB247D /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = KingfisherDynamic;
+		};
+		273D0B4E2566E25800DB247D /* KingfisherDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 273D0B472566E24C00DB247D /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = KingfisherDynamic;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 27F4E81025645A2E00080104 /* Project object */;
 }
