@@ -57,7 +57,6 @@ public struct MovieViewModel: Identifiable, Hashable {
       // TODO: This logic can be improved. We probably don't need to
       // delete and save the context right after a click
       let like = input.like
-        .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
         .scan(currentLike) { liked, _ in !liked }
         .prepend(currentLike)
         .handleEvents(receiveOutput: { liked in
@@ -70,8 +69,9 @@ public struct MovieViewModel: Identifiable, Hashable {
               }
             }
           } else {
-            if let movie = movie {
-              _ = repo.delete(movie)
+            if let movieUnwrapped = movie {
+              _ = repo.delete(movieUnwrapped)
+              movie = nil
             }
           }
           currentLike = liked

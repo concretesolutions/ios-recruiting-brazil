@@ -77,7 +77,9 @@ public final class MovieCell: UICollectionViewCell {
 
     let output = viewModel.transform(
       .init(
-        like: _like.eraseToAnyPublisher()
+        like: _like
+          .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
+          .eraseToAnyPublisher()
       )
     )
 
