@@ -13,8 +13,12 @@ public func withEnvironment(
 
 public func withEnvironment(
   client: TMDClient = Env.client,
+  database: Database = Env.database,
   body: @escaping () -> Void
 ) {
-  let env = Environment(client: client)
+  let env = Environment(
+    client: client,
+    database: database
+  )
   withEnvironment(env, body: body)
 }

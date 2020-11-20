@@ -43,6 +43,9 @@
 		275335F82565C0C400CC7225 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275335F72565C0C400CC7225 /* Provider.swift */; };
 		275335FE2565C0D600CC7225 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275335FD2565C0D600CC7225 /* RequestError.swift */; };
 		275336052565C15500CC7225 /* DiscoverMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275336042565C15500CC7225 /* DiscoverMovie.swift */; };
+		2772400A25681E4C00D713A5 /* Movies.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2772400825681E4C00D713A5 /* Movies.xcdatamodeld */; };
+		2772401325681F1400D713A5 /* MOMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2772401225681F1400D713A5 /* MOMovie.swift */; };
+		2772401825681FAB00D713A5 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2772401725681FAB00D713A5 /* Database.swift */; };
 		277B25F32567F42900715A84 /* TestSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 277B25F12567F42900715A84 /* TestSupport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		277B25FB2567F47000715A84 /* AppFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A734E22564650D0041FCB9 /* AppFramework.framework */; };
 		277B25FC2567F47000715A84 /* AppFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27A734E22564650D0041FCB9 /* AppFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -200,6 +203,9 @@
 		275335F72565C0C400CC7225 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		275335FD2565C0D600CC7225 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		275336042565C15500CC7225 /* DiscoverMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverMovie.swift; sourceTree = "<group>"; };
+		2772400925681E4C00D713A5 /* Movies.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Movies.xcdatamodel; sourceTree = "<group>"; };
+		2772401225681F1400D713A5 /* MOMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MOMovie.swift; sourceTree = "<group>"; };
+		2772401725681FAB00D713A5 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		277B25EF2567F42900715A84 /* TestSupport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TestSupport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		277B25F12567F42900715A84 /* TestSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestSupport.h; sourceTree = "<group>"; };
 		277B25F22567F42900715A84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -401,6 +407,16 @@
 			path = Endpoints;
 			sourceTree = "<group>";
 		};
+		2772401125681F0900D713A5 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				2772400825681E4C00D713A5 /* Movies.xcdatamodeld */,
+				2772401225681F1400D713A5 /* MOMovie.swift */,
+				2772401725681FAB00D713A5 /* Database.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		277B25F02567F42900715A84 /* TestSupport */ = {
 			isa = PBXGroup;
 			children = (
@@ -418,6 +434,7 @@
 			children = (
 				27A734E42564650D0041FCB9 /* AppFramework.h */,
 				27A734E52564650D0041FCB9 /* Info.plist */,
+				2772401125681F0900D713A5 /* CoreData */,
 				272075362564902D00B3C7C5 /* Library */,
 				2720752625648C9700B3C7C5 /* Main */,
 			);
@@ -780,10 +797,13 @@
 				2720753F2564913500B3C7C5 /* UICollectionView+Helpers.swift in Sources */,
 				272075C02564BBBC00B3C7C5 /* PaginationSink.swift in Sources */,
 				272075382564905000B3C7C5 /* UIView+LayoutHelpers.swift in Sources */,
+				2772401825681FAB00D713A5 /* Database.swift in Sources */,
 				2720754625649C3100B3C7C5 /* MovieViewModel.swift in Sources */,
 				2720752E25648DFE00B3C7C5 /* MoviesViewController.swift in Sources */,
+				2772401325681F1400D713A5 /* MOMovie.swift in Sources */,
 				27F491592566CDEE00C8F501 /* ApiKey.swift in Sources */,
 				274B3FC72565EF21002D9B4C /* Environment.swift in Sources */,
+				2772400A25681E4C00D713A5 /* Movies.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1349,6 +1369,19 @@
 			productName = KingfisherDynamic;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		2772400825681E4C00D713A5 /* Movies.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2772400925681E4C00D713A5 /* Movies.xcdatamodel */,
+			);
+			currentVersion = 2772400925681E4C00D713A5 /* Movies.xcdatamodel */;
+			path = Movies.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 27F4E81025645A2E00080104 /* Project object */;
 }

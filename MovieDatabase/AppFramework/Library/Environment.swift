@@ -2,6 +2,7 @@ import TheMovieDatabaseApi
 
 public struct Environment {
   public var client: TMDClient
+  public var database: Database
 
   init() {
     client = TMDClient(
@@ -12,10 +13,15 @@ public struct Environment {
         .authenticationMiddleware(apiKey: Constants.apiKey),
       ]
     )
+    database = Database()
   }
 
-  public init(client: TMDClient) {
+  public init(
+    client: TMDClient,
+    database: Database
+  ) {
     self.client = client
+    self.database = database
   }
 }
 
