@@ -1,3 +1,4 @@
+import Combine
 import Kingfisher
 import UIKit
 
@@ -26,6 +27,10 @@ public final class MovieCell: UICollectionViewCell {
     return button
   }()
 
+  private let _like = PassthroughSubject<Void, Never>()
+
+  private var cancellables = Set<AnyCancellable>()
+
   override public init(frame: CGRect) {
     super.init(frame: frame)
     let titleLabelContainer = titleLabel.withPadding(inset: 4)
@@ -48,6 +53,8 @@ public final class MovieCell: UICollectionViewCell {
       likeButton.widthAnchor.constraint(equalToConstant: 44),
     ])
     NSLayoutConstraint.activate(constraints)
+
+    likeButton.addTarget(self, action: #selector(didTapLike), for: .primaryActionTriggered)
   }
 
   @available(*, unavailable)
@@ -60,6 +67,7 @@ public final class MovieCell: UICollectionViewCell {
     likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
     backgroundImageView.image = nil
     titleLabel.text = ""
+    cancellables.removeAll()
   }
 
   public func setup(viewModel: MovieViewModel) {
@@ -67,10 +75,21 @@ public final class MovieCell: UICollectionViewCell {
 
     backgroundImageView.kf.setImage(with: viewModel.imageUrl)
 
-    let likeImage = viewModel.liked
-      ? UIImage(systemName: "heart.fill")?.withRenderingMode(.alwaysTemplate)
-      : UIImage(systemName: "heart")?.withRenderingMode(.alwaysTemplate)
+    _like
+      .scan(viewModel.liked) { liked, _ in !liked }
+      .map { liked in
+        liked
+          ? UIImage(systemName: "heart.fill")?.withRenderingMode(.alwaysTemplate)
+          : UIImage(systemName: "heart")?.withRenderingMode(.alwaysTemplate)
+      }
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { [weak self] likeImage in
+        self?.likeButton.setImage(likeImage, for: .normal)
+      })
+      .store(in: &cancellables)
+  }
 
-    likeButton.setImage(likeImage, for: .normal)
+  @objc private func didTapLike() {
+    _like.send(())
   }
 }
