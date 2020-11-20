@@ -5,25 +5,9 @@ import TestSupport
 import TheMovieDatabaseApi
 import XCTest
 
-private extension MOMovieRepo {
-  static func mock(
-    get: @escaping (Int) -> MOMovie? = { _ in nil },
-    getAll: @escaping () -> [MOMovie] = { [] },
-    create: @escaping ((inout MOMovie) -> Void) -> MOMovie? = { _ in nil },
-    delete: @escaping (MOMovie) -> Bool = { _ in false }
-  ) -> MOMovieRepo {
-    MOMovieRepo(
-      get: get,
-      getAll: getAll,
-      create: create,
-      delete: delete
-    )
-  }
-}
-
 private class MOMovieRepoSpy {
   lazy var movieRepo: MOMovieRepo = {
-    .mock(
+    MOMovieRepo.mock(
       get: { [weak self] id in
         self?.get.append(id)
         return self?.movie
@@ -52,7 +36,6 @@ private class MOMovieRepoSpy {
 
   public init(database: Database) {
     get = []
-    getAll = 0
     create = 0
     delete = 0
     movie = nil
