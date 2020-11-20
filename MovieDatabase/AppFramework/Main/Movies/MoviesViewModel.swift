@@ -1,8 +1,6 @@
 import Combine
 import TheMovieDatabaseApi
 
-private let mockImageUrl = URL(string: "https://m.media-amazon.com/images/M/MV5BMjAzYjhkN2UtM2U2Ny00MDE3LWE0OGItNDc5NGZkNjE2NWI5XkEyXkFqcGdeQXVyNzY1ODU1OTk@._V1_QL40_UX256_CR0,0,256,379_.jpg")!
-
 public enum MoviesSection: Hashable {
   case main
 }
