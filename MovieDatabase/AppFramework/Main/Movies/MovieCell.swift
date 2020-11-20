@@ -14,20 +14,21 @@ public final class MovieCell: UICollectionViewCell {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.textAlignment = .center
+    label.numberOfLines = 2
+    label.adjustsFontSizeToFitWidth = true
     return label
   }()
 
   private let likeButton: UIButton = {
-    let button = UIButton()
+    let button = UIButton(type: .system)
+    button.translatesAutoresizingMaskIntoConstraints = false
     button.setImage(UIImage(systemName: "heart"), for: .normal)
     return button
   }()
 
   override public init(frame: CGRect) {
     super.init(frame: frame)
-    backgroundColor = .yellow
-
-    let titleLabelContainer = titleLabel.withPadding(inset: 16)
+    let titleLabelContainer = titleLabel.withPadding(inset: 4)
     titleLabelContainer.backgroundColor = .systemGray
     let stackView = UIStackView(arrangedSubviews: [
       backgroundImageView,
@@ -36,12 +37,17 @@ public final class MovieCell: UICollectionViewCell {
     stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.axis = .vertical
     stackView.distribution = .fill
-    stackView.backgroundColor = .red
 
     contentView.addSubview(stackView)
-    NSLayoutConstraint.activate(
-      stackView.makeConstraintsToEdges(of: contentView)
-    )
+    contentView.addSubview(likeButton)
+    var constraints = stackView.makeConstraintsToEdges(of: contentView)
+    constraints.append(contentsOf: [
+      likeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+      likeButton.bottomAnchor.constraint(equalTo: titleLabelContainer.topAnchor),
+      likeButton.heightAnchor.constraint(equalToConstant: 44),
+      likeButton.widthAnchor.constraint(equalToConstant: 44),
+    ])
+    NSLayoutConstraint.activate(constraints)
   }
 
   @available(*, unavailable)
