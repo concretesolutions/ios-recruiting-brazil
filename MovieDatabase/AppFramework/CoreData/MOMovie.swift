@@ -1,4 +1,6 @@
 import CoreData
+import os.log
+
 public final class MOMovie: NSManagedObject {
   @NSManaged public var id: Int64
   @NSManaged public var title: String
@@ -19,8 +21,7 @@ public class MOMovieRepo {
       let results = try moc.fetch(fetchRequest)
       return results.first
     } catch {
-      // TODO: Use os log
-      print(error.localizedDescription)
+      os_log("Failed to get MOMovie with id %i, reason: %s", log: generalLog, type: .error, id, error.localizedDescription)
       return nil
     }
   }
@@ -32,8 +33,7 @@ public class MOMovieRepo {
       try moc.save()
       return movie
     } catch {
-      // TODO: Use os log
-      print(error.localizedDescription)
+      os_log("Failed to create MOMovie, reason: %s", log: generalLog, type: .error, error.localizedDescription)
       return nil
     }
   }
@@ -44,8 +44,7 @@ public class MOMovieRepo {
       try moc.save()
       return true
     } catch {
-      // TODO: Use os log
-      print(error.localizedDescription)
+      os_log("Failed to delete MOMovie with id %i, reason: %s", log: generalLog, type: .error, movie.id, error.localizedDescription)
       return false
     }
   }
