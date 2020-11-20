@@ -9,28 +9,56 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "NO"
+            buildForProfiling = "YES"
             buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
+            buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "272075B12564BAF600B3C7C5"
-               BuildableName = "AppFrameworkTests.xctest"
-               BlueprintName = "AppFrameworkTests"
+               BlueprintIdentifier = "27F4E81725645A2E00080104"
+               BuildableName = "MovieDatabase.app"
+               BlueprintName = "MovieDatabase"
                ReferencedContainer = "container:MovieDatabase.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
-            buildForTesting = "NO"
+            buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "NO"
+            buildForProfiling = "YES"
             buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "27A734E12564650D0041FCB9"
+               BuildableName = "AppFramework.framework"
+               BlueprintName = "AppFramework"
+               ReferencedContainer = "container:MovieDatabase.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "277B25EE2567F42900715A84"
                BuildableName = "TestSupport.framework"
                BlueprintName = "TestSupport"
+               ReferencedContainer = "container:MovieDatabase.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "275335C42565B97C00CC7225"
+               BuildableName = "TheMovieDatabaseApi.framework"
+               BlueprintName = "TheMovieDatabaseApi"
                ReferencedContainer = "container:MovieDatabase.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -52,6 +80,16 @@
                ReferencedContainer = "container:MovieDatabase.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "275335CC2565B97C00CC7225"
+               BuildableName = "TheMovieDatabaseApiTests.xctest"
+               BlueprintName = "TheMovieDatabaseApiTests"
+               ReferencedContainer = "container:MovieDatabase.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -64,6 +102,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "27F4E81725645A2E00080104"
+            BuildableName = "MovieDatabase.app"
+            BlueprintName = "MovieDatabase"
+            ReferencedContainer = "container:MovieDatabase.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -71,15 +119,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "272075B12564BAF600B3C7C5"
-            BuildableName = "AppFrameworkTests.xctest"
-            BlueprintName = "AppFrameworkTests"
+            BlueprintIdentifier = "27F4E81725645A2E00080104"
+            BuildableName = "MovieDatabase.app"
+            BlueprintName = "MovieDatabase"
             ReferencedContainer = "container:MovieDatabase.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
