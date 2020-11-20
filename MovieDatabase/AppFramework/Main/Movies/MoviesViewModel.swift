@@ -41,7 +41,7 @@ public struct MoviesViewModel {
     self.transform = transform
   }
 
-  public static func `default`() -> MoviesViewModel {
+  public static func `default`(movieRepo: MOMovieRepo = MOMovieRepo(moc: Env.database.moc)) -> MoviesViewModel {
     MoviesViewModel { input in
       let paginationSink = PaginationSink<DiscoverMovieResponse.Movie, ErrorResponse>.make(
         refreshTrigger: input.refresh,
@@ -55,11 +55,11 @@ public struct MoviesViewModel {
         .map { movies in
           movies.map { movie in
             // TODO: Get baseUrl from config
-            MovieViewModel(
+            MovieViewModel.default(
               id: movie.id,
               title: movie.title,
               imageUrl: URL(string: "https://image.tmdb.org/t/p/w300\(movie.posterPath)")!,
-              liked: false
+              repo: movieRepo
             )
           }
         }

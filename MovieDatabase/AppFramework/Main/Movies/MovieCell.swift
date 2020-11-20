@@ -75,8 +75,13 @@ public final class MovieCell: UICollectionViewCell {
 
     backgroundImageView.kf.setImage(with: viewModel.imageUrl)
 
-    _like
-      .scan(viewModel.liked) { liked, _ in !liked }
+    let output = viewModel.transform(
+      .init(
+        like: _like.eraseToAnyPublisher()
+      )
+    )
+
+    output.like
       .map { liked in
         liked
           ? UIImage(systemName: "heart.fill")?.withRenderingMode(.alwaysTemplate)
