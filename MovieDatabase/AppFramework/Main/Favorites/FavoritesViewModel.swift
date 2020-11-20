@@ -1,5 +1,9 @@
 import Combine
 
+public enum FavoritesSection: Hashable {
+  case main
+}
+
 public struct FavoriteViewModel: Hashable {
   let uuid = UUID()
 }
