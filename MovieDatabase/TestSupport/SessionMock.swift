@@ -1,10 +1,15 @@
+import AppFramework
 import Combine
 import TheMovieDatabaseApi
 
-struct SessionMock: Session {
-  let result: Result<(data: Data, response: URLResponse), URLError>
+public struct SessionMock: Session {
+  public let result: Result<(data: Data, response: URLResponse), URLError>
 
-  func customDataTaskPublisher(for _: URLRequest) -> AnyPublisher<(data: Data, response: URLResponse), URLError> {
+  public init(result: Result<(data: Data, response: URLResponse), URLError>) {
+    self.result = result
+  }
+
+  public func customDataTaskPublisher(for _: URLRequest) -> AnyPublisher<(data: Data, response: URLResponse), URLError> {
     Deferred {
       Future<(data: Data, response: URLResponse), URLError> { promise in
         promise(result)
@@ -14,7 +19,7 @@ struct SessionMock: Session {
   }
 }
 
-extension TMDClient {
+public extension TMDClient {
   static func mock(with error: URLError) -> TMDClient {
     TMDClient(
       session: SessionMock(result: .failure(error)),

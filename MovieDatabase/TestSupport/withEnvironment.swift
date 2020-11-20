@@ -1,7 +1,7 @@
 import AppFramework
 import TheMovieDatabaseApi
 
-func withEnvironment(
+public func withEnvironment(
   _ env: Environment,
   body: @escaping () -> Void
 ) {
@@ -11,7 +11,7 @@ func withEnvironment(
   Env = oldEnv
 }
 
-func withEnvironment(
+public func withEnvironment(
   client: TMDClient = Env.client,
   body: @escaping () -> Void
 ) {
