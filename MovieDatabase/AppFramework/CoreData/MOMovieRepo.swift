@@ -3,15 +3,18 @@ import os.log
 
 public struct MOMovieRepo {
   public let get: (Int) -> MOMovie?
+  public let getAll: () -> [MOMovie]
   public let create: ((inout MOMovie) -> Void) -> MOMovie?
   public let delete: (MOMovie) -> Bool
 
   public init(
     get: @escaping (Int) -> MOMovie?,
+    getAll: @escaping () -> [MOMovie],
     create: @escaping ((inout MOMovie) -> Void) -> MOMovie?,
     delete: @escaping (MOMovie) -> Bool
   ) {
     self.get = get
+    self.getAll = getAll
     self.create = create
     self.delete = delete
   }
@@ -34,6 +37,17 @@ public struct MOMovieRepo {
           return nil
         }
       },
+      getAll: {
+        let fetchRequest = MOMovie.fetchRequest() as! NSFetchRequest<MOMovie>
+        do {
+          let results = try moc.fetch(fetchRequest)
+          os_log("Got all all MOMovie, count: %i", log: generalLog, type: .debug, results.count)
+          return results
+        } catch {
+          os_log("Failed to get all MOMovie, reason: %s", log: generalLog, type: .error)
+          return []
+        }
+      },
       create: { applyChanges in
         var movie = MOMovie(context: moc)
         applyChanges(&movie)
@@ -47,10 +61,11 @@ public struct MOMovieRepo {
         }
       },
       delete: { movie in
+        let id = movie.id
         do {
           moc.delete(movie)
           try moc.save()
-          os_log("Deleted MOMovie with id %i", log: generalLog, type: .debug, movie.id)
+          os_log("Deleted MOMovie with id %i", log: generalLog, type: .debug, id)
           return true
         } catch {
           os_log("Failed to delete MOMovie with id %i, reason: %s", log: generalLog, type: .error, movie.id, error.localizedDescription)
