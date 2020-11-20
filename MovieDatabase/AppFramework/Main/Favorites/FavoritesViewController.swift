@@ -8,9 +8,9 @@ public final class FavoritesViewController: UITableViewController {
   private let viewModel: FavoritesViewModel
   private var cancellables = Set<AnyCancellable>()
   private lazy var dataSource: DataSource = {
-    DataSource(tableView: tableView, cellProvider: { tableView, _, item in
-      let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseIdentifier)
-      cell?.textLabel?.text = item.uuid.uuidString
+    DataSource(tableView: tableView, cellProvider: { tableView, indexPath, item in
+      let cell: UITableViewCell = tableView.dequeue(for: indexPath)
+      cell.textLabel?.text = item.uuid.uuidString
       return cell
     })
   }()
