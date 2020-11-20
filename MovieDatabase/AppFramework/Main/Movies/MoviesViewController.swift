@@ -2,8 +2,8 @@ import Combine
 import UIKit
 
 public final class MoviesViewController: UICollectionViewController {
-  typealias DataSource = UICollectionViewDiffableDataSource<MoviesViewModel.Section, MovieViewModel>
-  typealias Snapshot = NSDiffableDataSourceSnapshot<MoviesViewModel.Section, MovieViewModel>
+  typealias DataSource = UICollectionViewDiffableDataSource<MoviesSection, MovieViewModel>
+  typealias Snapshot = NSDiffableDataSourceSnapshot<MoviesSection, MovieViewModel>
 
   private var cancellables = Set<AnyCancellable>()
   private let viewModel: MoviesViewModel
@@ -47,7 +47,7 @@ public final class MoviesViewController: UICollectionViewController {
     return layout
   }
 
-  public init(viewModel: MoviesViewModel) {
+  public init(viewModel: MoviesViewModel = .default()) {
     self.viewModel = viewModel
     let layout = Self.makeCollectionViewLayout()
     super.init(collectionViewLayout: layout)
@@ -67,18 +67,20 @@ public final class MoviesViewController: UICollectionViewController {
     collectionView.register(MovieCell.self)
     collectionView.refreshControl = refreshControl
 
-    let (values, error, isRefreshing) = viewModel.setupBindings(
-      refresh: _refresh
-        .throttle(for: .milliseconds(1500), scheduler: DispatchQueue.main, latest: true)
-        .eraseToAnyPublisher(),
-      nextPage: _nextPage
-        .removeDuplicates()
-        .map { _ in () }
-        .throttle(for: .milliseconds(1500), scheduler: DispatchQueue.main, latest: true)
-        .eraseToAnyPublisher()
+    let output = viewModel.transform(
+      .init(
+        refresh: _refresh
+          .throttle(for: .milliseconds(1500), scheduler: DispatchQueue.main, latest: true)
+          .eraseToAnyPublisher(),
+        nextPage: _nextPage
+          .removeDuplicates()
+          .map { _ in () }
+          .throttle(for: .milliseconds(1500), scheduler: DispatchQueue.main, latest: true)
+          .eraseToAnyPublisher()
+      )
     )
 
-    values
+    output.values
       .receive(on: DispatchQueue.main)
       .sink(receiveValue: { [weak self] movies in
         var snapshot = Snapshot()
@@ -88,14 +90,14 @@ public final class MoviesViewController: UICollectionViewController {
       })
       .store(in: &cancellables)
 
-    error
+    output.error
       .receive(on: DispatchQueue.main)
       .sink(receiveValue: { error in
         print("Error:", error.statusCode, error.statusMessage)
       })
       .store(in: &cancellables)
 
-    isRefreshing
+    output.isRefreshing
       .filter { !$0 }
       .delay(for: .milliseconds(500), scheduler: DispatchQueue.main)
       .receive(on: DispatchQueue.main)

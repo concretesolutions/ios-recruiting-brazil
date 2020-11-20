@@ -9,7 +9,7 @@ final class MoviesViewModelTests: XCTestCase {
   var cancellables: Set<AnyCancellable>!
 
   override func setUpWithError() throws {
-    viewModel = .init()
+    viewModel = .default()
     cancellables = .init()
   }
 
@@ -35,9 +35,11 @@ final class MoviesViewModelTests: XCTestCase {
     withEnvironment(client: client) {
       let refresh = PassthroughSubject<Void, Never>()
       let nextPage = PassthroughSubject<Void, Never>()
-      let bindings = self.viewModel.setupBindings(
-        refresh: refresh.eraseToAnyPublisher(),
-        nextPage: nextPage.eraseToAnyPublisher()
+      let bindings = self.viewModel.transform(
+        .init(
+          refresh: refresh.eraseToAnyPublisher(),
+          nextPage: nextPage.eraseToAnyPublisher()
+        )
       )
 
       let valuesExpectation = self.expectation(description: "values")
