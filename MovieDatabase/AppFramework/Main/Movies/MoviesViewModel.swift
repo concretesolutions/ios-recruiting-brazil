@@ -41,7 +41,7 @@ public struct MoviesViewModel {
     self.transform = transform
   }
 
-  public static func `default`(movieRepo: MOMovieRepo = MOMovieRepo(moc: Env.database.moc)) -> MoviesViewModel {
+  public static func `default`(movieRepo: MOMovieRepo = MOMovieRepo.default(moc: Env.database.moc)) -> MoviesViewModel {
     MoviesViewModel { input in
       let paginationSink = PaginationSink<DiscoverMovieResponse.Movie, ErrorResponse>.make(
         refreshTrigger: input.refresh,

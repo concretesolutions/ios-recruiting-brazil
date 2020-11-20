@@ -71,7 +71,7 @@ public struct MovieViewModel: Identifiable, Hashable {
             }
           } else {
             if let movie = movie {
-              repo.delete(movie)
+              _ = repo.delete(movie)
             }
           }
           currentLike = liked
