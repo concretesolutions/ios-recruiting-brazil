@@ -3,17 +3,13 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-  var window: UIWindow?
+  let window = UIWindow()
+
+  private lazy var coordinator = AppCoordinator(window: window)
 
   func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     Env.database.loadStore()
-
-    let window = UIWindow(frame: UIScreen.main.bounds)
-    let rootViewController = UINavigationController(rootViewController: MainViewController())
-    window.rootViewController = rootViewController
-    window.makeKeyAndVisible()
-    self.window = window
-
+    coordinator.start()
     return true
   }
 }
