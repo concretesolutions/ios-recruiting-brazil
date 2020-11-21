@@ -83,6 +83,18 @@ public final class FavoritesViewController: UITableViewController {
 
   override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
+    guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+    // TODO: Other attributes
+    let movieDetailsViewModel = MovieDetailsViewModel(
+      id: item.id,
+      poster: "POSTER",
+      title: item.title,
+      year: "YEAR",
+      genres: ["GENRE 1", "GENRE 2"],
+      overview: item.overview
+    )
+    let detailsViewController = MovieDetailsViewController(viewModel: movieDetailsViewModel)
+    navigationController?.pushViewController(detailsViewController, animated: true)
   }
 
   override public func tableView(_: UITableView, titleForDeleteConfirmationButtonForRowAt _: IndexPath) -> String? {
