@@ -20,6 +20,9 @@ public final class FavoritesViewController: UITableViewController {
 
   typealias Snapshot = NSDiffableDataSourceSnapshot<FavoritesSection, FavoriteViewModel>
 
+  private let _presentMovieDetails = PassthroughSubject<MovieDetailsViewModel, Never>()
+  public lazy var presentMovieDetails: AnyPublisher<MovieDetailsViewModel, Never> = _presentMovieDetails.eraseToAnyPublisher()
+
   private let viewModel: FavoritesViewModel
   private var cancellables = Set<AnyCancellable>()
   private lazy var dataSource: DataSource = {
@@ -93,8 +96,7 @@ public final class FavoritesViewController: UITableViewController {
       genres: ["GENRE 1", "GENRE 2"],
       overview: item.overview
     )
-    let detailsViewController = MovieDetailsViewController(viewModel: movieDetailsViewModel)
-    navigationController?.pushViewController(detailsViewController, animated: true)
+    _presentMovieDetails.send(movieDetailsViewModel)
   }
 
   override public func tableView(_: UITableView, titleForDeleteConfirmationButtonForRowAt _: IndexPath) -> String? {

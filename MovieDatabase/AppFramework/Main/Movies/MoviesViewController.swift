@@ -5,6 +5,9 @@ public final class MoviesViewController: UICollectionViewController {
   typealias DataSource = UICollectionViewDiffableDataSource<MoviesSection, MovieViewModel>
   typealias Snapshot = NSDiffableDataSourceSnapshot<MoviesSection, MovieViewModel>
 
+  private let _presentMovieDetails = PassthroughSubject<MovieDetailsViewModel, Never>()
+  public lazy var presentMovieDetails: AnyPublisher<MovieDetailsViewModel, Never> = _presentMovieDetails.eraseToAnyPublisher()
+
   private var cancellables = Set<AnyCancellable>()
   private let viewModel: MoviesViewModel
   private let refreshControl = UIRefreshControl()
@@ -132,5 +135,19 @@ public final class MoviesViewController: UICollectionViewController {
     if indexPath.item == numberOfItems - 1 {
       _nextPage.send(numberOfItems)
     }
+  }
+
+  override public func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+    // TODO: Other attributes
+    let movieDetailsViewModel = MovieDetailsViewModel(
+      id: Int64(item.id),
+      poster: "POSTER",
+      title: item.title,
+      year: "YEAR",
+      genres: ["GENRE 1", "GENRE 2"],
+      overview: "OVERVIEW"
+    )
+    _presentMovieDetails.send(movieDetailsViewModel)
   }
 }

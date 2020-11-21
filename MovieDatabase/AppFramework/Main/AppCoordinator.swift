@@ -1,10 +1,11 @@
+import Combine
 import UIKit
 
 public class AppCoordinator {
   private let window: UIWindow
   private let navigationController: UINavigationController
 
-  public var childCoordinators: [Any] = []
+  private var cancellables = Set<AnyCancellable>()
 
   public init(window: UIWindow) {
     self.window = window
@@ -16,5 +17,13 @@ public class AppCoordinator {
     navigationController.addChild(mainViewController)
     window.rootViewController = navigationController
     window.makeKeyAndVisible()
+
+    mainViewController.presentMovieDetails
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { [weak self] viewModel in
+        let viewControler = MovieDetailsViewController(viewModel: viewModel)
+        self?.navigationController.pushViewController(viewControler, animated: true)
+      })
+      .store(in: &cancellables)
   }
 }
