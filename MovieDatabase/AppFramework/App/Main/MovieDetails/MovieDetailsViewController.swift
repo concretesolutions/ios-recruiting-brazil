@@ -1,11 +1,82 @@
 import Combine
 import UIKit
 
-final class MovieDetailPosterCell: UITableViewCell {}
-final class MovieDetailTitleCell: UITableViewCell {}
-final class MovieDetailYearCell: UITableViewCell {}
-final class MovieDetailGenresCell: UITableViewCell {}
-final class MovieDetailOverviewCell: UITableViewCell {}
+final class MovieDetailPosterCell: UITableViewCell {
+  private let posterImageView: UIImageView = {
+    let imageView = UIImageView()
+    imageView.contentMode = .scaleAspectFill
+    imageView.layer.masksToBounds = true
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    return imageView
+  }()
+
+  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
+    selectionStyle = .none
+    contentView.addSubview(posterImageView)
+    NSLayoutConstraint.activate(posterImageView.makeConstraintsToEdges(of: contentView))
+  }
+
+  func setup(with url: URL) {
+    posterImageView.kf.setImage(with: url)
+  }
+
+  @available(*, unavailable)
+  required init?(coder _: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+}
+
+final class MovieDetailTitleCell: UITableViewCell {
+  override init(style _: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    super.init(style: .default, reuseIdentifier: reuseIdentifier)
+    selectionStyle = .none
+    textLabel?.numberOfLines = 0
+  }
+
+  @available(*, unavailable)
+  required init?(coder _: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+}
+
+final class MovieDetailYearCell: UITableViewCell {
+  override init(style _: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    super.init(style: .default, reuseIdentifier: reuseIdentifier)
+    selectionStyle = .none
+  }
+
+  @available(*, unavailable)
+  required init?(coder _: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+}
+
+final class MovieDetailGenresCell: UITableViewCell {
+  override init(style _: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    super.init(style: .default, reuseIdentifier: reuseIdentifier)
+    selectionStyle = .none
+    textLabel?.numberOfLines = 0
+  }
+
+  @available(*, unavailable)
+  required init?(coder _: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+}
+
+final class MovieDetailOverviewCell: UITableViewCell {
+  override init(style _: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    super.init(style: .default, reuseIdentifier: reuseIdentifier)
+    selectionStyle = .none
+    textLabel?.numberOfLines = 0
+  }
+
+  @available(*, unavailable)
+  required init?(coder _: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+}
 
 public enum MovieDetailsSection: Hashable {
   case main
@@ -55,7 +126,7 @@ public final class MovieDetailsViewController: UITableViewController {
       switch item {
       case let .poster(poster):
         let cell: MovieDetailPosterCell = tableView.dequeue(for: indexPath)
-        cell.textLabel?.text = poster
+        cell.setup(with: URL(string: poster)!)
         return cell
       case let .title(title):
         let cell: MovieDetailTitleCell = tableView.dequeue(for: indexPath)
@@ -89,7 +160,9 @@ public final class MovieDetailsViewController: UITableViewController {
 
   override public func viewDidLoad() {
     super.viewDidLoad()
+    view.backgroundColor = .systemBackground
     title = "Movie"
+    tableView.rowHeight = UITableView.automaticDimension
     tableView.register(MovieDetailPosterCell.self)
     tableView.register(MovieDetailTitleCell.self)
     tableView.register(MovieDetailYearCell.self)
