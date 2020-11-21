@@ -3,6 +3,7 @@
     <entity name="Genre" representedClassName=".MOGenre" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="movies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Movie" inverseName="genres" inverseEntity="Movie"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>
@@ -14,7 +15,7 @@
         <attribute name="overview" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="year" optional="YES" attributeType="String"/>
-        <relationship name="genres" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Genre"/>
+        <relationship name="genres" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Genre" inverseName="movies" inverseEntity="Genre"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>
@@ -22,7 +23,7 @@
         </uniquenessConstraints>
     </entity>
     <elements>
+        <element name="Genre" positionX="-63" positionY="18" width="128" height="74"/>
         <element name="Movie" positionX="-63" positionY="-18" width="128" height="104"/>
-        <element name="Genre" positionX="-63" positionY="18" width="128" height="59"/>
     </elements>
 </model>
