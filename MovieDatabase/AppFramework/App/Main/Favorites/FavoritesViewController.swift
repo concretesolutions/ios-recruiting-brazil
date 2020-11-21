@@ -88,12 +88,13 @@ public final class FavoritesViewController: UITableViewController {
     tableView.deselectRow(at: indexPath, animated: true)
     guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
     // TODO: Other attributes
+
     let movieDetailsViewModel = MovieDetailsViewModel(
       id: item.id,
       poster: "POSTER",
       title: item.title,
-      year: "YEAR",
-      genres: ["GENRE 1", "GENRE 2"],
+      year: item.year,
+      genres: item.genres,
       overview: item.overview
     )
     _presentMovieDetails.send(movieDetailsViewModel)

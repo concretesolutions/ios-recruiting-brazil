@@ -1,6 +1,16 @@
 import Combine
 import TheMovieDatabaseApi
 
+private extension DiscoverMovieResponse.Movie {
+  func year() -> String {
+    String(
+      releaseDate
+        .split(separator: "-")
+        .first(where: { $0.count == 4 }) ?? "????"
+    )
+  }
+}
+
 public enum MoviesSection: Hashable {
   case main
 }
@@ -64,7 +74,7 @@ public struct MoviesViewModel {
           MovieViewModel.default(
             id: movie.id,
             title: movie.title,
-            year: movie.releaseDate,
+            year: movie.year(),
             overview: movie.overview,
             genres: movie.genreIds,
             imageUrl: imageBaseUrl.appendingPathComponent(movie.posterPath),

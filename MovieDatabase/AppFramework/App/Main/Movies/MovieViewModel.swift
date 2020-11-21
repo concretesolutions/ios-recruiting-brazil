@@ -67,7 +67,7 @@ public struct MovieViewModel: Identifiable, Hashable {
       var currentLike = movie != nil
 
       let genreRepo = MOGenreRepo.default(moc: Env.database.moc)
-      let moGenres = genres.compactMap { genreId in genreRepo.get(genreId) }
+      var moGenres: [MOGenre]?
 
       // TODO: This logic can be improved. We probably don't need to
       // delete and save the context right after a click
@@ -77,11 +77,14 @@ public struct MovieViewModel: Identifiable, Hashable {
         .handleEvents(receiveOutput: { liked in
           if liked {
             if movie == nil {
+              if moGenres == nil {
+                moGenres = genres.compactMap { genreId in genreRepo.get(genreId) }
+              }
               movie = repo.create { movie in
                 movie.id = Int64(id)
                 movie.title = title
                 movie.year = year
-                movie.genres = Set(moGenres)
+                movie.genres = Set(moGenres ?? [])
                 movie.overview = overview
               }
             }

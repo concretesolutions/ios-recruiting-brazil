@@ -48,7 +48,9 @@ public struct FavoritesViewModel {
                 FavoriteViewModel(
                   id: movie.id,
                   title: movie.title,
-                  overview: movie.overview
+                  year: movie.year,
+                  overview: movie.overview,
+                  genres: movie.genres.map(\.name)
                 )
               }
           )
