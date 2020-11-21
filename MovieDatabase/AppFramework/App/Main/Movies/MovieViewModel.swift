@@ -66,6 +66,9 @@ public struct MovieViewModel: Identifiable, Hashable {
       var movie = repo.get(id)
       var currentLike = movie != nil
 
+      let genreRepo = MOGenreRepo.default(moc: Env.database.moc)
+      let moGenres = genres.compactMap { genreId in genreRepo.get(genreId) }
+
       // TODO: This logic can be improved. We probably don't need to
       // delete and save the context right after a click
       let like = input.like
@@ -78,7 +81,7 @@ public struct MovieViewModel: Identifiable, Hashable {
                 movie.id = Int64(id)
                 movie.title = title
                 movie.year = year
-//                movie.genres = .init()
+                movie.genres = Set(moGenres)
                 movie.overview = overview
               }
             }
