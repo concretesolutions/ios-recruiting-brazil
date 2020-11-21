@@ -1,15 +1,25 @@
 import Foundation
 
 public struct ConfigurationResponse: Codable, Equatable {
-  public let secureBaseUrl: URL
-  public let posterSizes: [String]
+  public struct Images: Codable, Equatable {
+    public let secureBaseUrl: URL
+    public let posterSizes: [String]
+
+    public init(
+      secureBaseUrl: URL,
+      posterSizes: [String]
+    ) {
+      self.secureBaseUrl = secureBaseUrl
+      self.posterSizes = posterSizes
+    }
+  }
+
+  public let images: Images
 
   public init(
-    secureBaseUrl: URL,
-    posterSizes: [String]
+    images: Images
   ) {
-    self.secureBaseUrl = secureBaseUrl
-    self.posterSizes = posterSizes
+    self.images = images
   }
 }
 
