@@ -15,19 +15,22 @@ public struct DiscoverMovieResponse: Codable, Equatable {
     public let overview: String
     public let posterPath: String
     public let releaseDate: String
+    public let genreIds: [Int16]
 
     public init(
       id: Int,
       title: String,
       overview: String,
       posterPath: String,
-      releaseDate: String
+      releaseDate: String,
+      genreIds: [Int16]
     ) {
       self.id = id
       self.title = title
       self.overview = overview
       self.posterPath = posterPath
       self.releaseDate = releaseDate
+      self.genreIds = genreIds
     }
   }
 
