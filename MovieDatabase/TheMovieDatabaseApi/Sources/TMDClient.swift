@@ -16,4 +16,8 @@ public final class TMDClient {
   public func genres() -> ResponsePublisher<GenresResponse> {
     provider.executeWithResult(request: .genres())
   }
+
+  public func configuration() -> ResponsePublisher<ConfigurationResponse> {
+    provider.executeWithResult(request: .configuration())
+  }
 }
