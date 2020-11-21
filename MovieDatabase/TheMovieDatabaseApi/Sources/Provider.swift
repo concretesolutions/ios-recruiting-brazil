@@ -43,6 +43,9 @@ class Provider {
       .mapError { error -> ErrorResponse in
         if let errorResponse = error as? ErrorResponse {
           return errorResponse
+        } else if error is DecodingError {
+          os_log("[%s] %s %s - DecodingError: %s", log: generalLog, type: .debug, request.uuidShort, request.httpMethod.rawValue, request.path, error.localizedDescription)
+          return ErrorResponse(statusMessage: error.localizedDescription, statusCode: -999)
         } else {
           return ErrorResponse(statusMessage: error.localizedDescription, statusCode: -999)
         }
