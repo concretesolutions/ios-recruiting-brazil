@@ -12,4 +12,8 @@ public final class TMDClient {
   public func discoverMovie(_ params: DiscoverMovieRequestParams) -> ResponsePublisher<DiscoverMovieResponse> {
     provider.executeWithResult(request: .discoverMovie(params: params))
   }
+
+  public func genres() -> ResponsePublisher<GenresResponse> {
+    provider.executeWithResult(request: .genres())
+  }
 }
