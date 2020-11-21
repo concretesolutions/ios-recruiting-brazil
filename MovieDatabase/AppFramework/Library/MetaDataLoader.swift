@@ -9,8 +9,10 @@ private func loadConfig() -> AnyPublisher<Result<RemoteConfiguration, ErrorRespo
       result
         .map { config in
           RemoteConfiguration(
-            baseUrl: config.secureBaseUrl,
-            posterSizes: config.posterSizes
+            images: .init(
+              baseUrl: config.images.secureBaseUrl,
+              posterSizes: config.images.posterSizes
+            )
           )
         }
     }

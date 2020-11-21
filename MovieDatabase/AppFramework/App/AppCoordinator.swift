@@ -6,6 +6,7 @@ public class AppCoordinator {
   private let window: UIWindow
   private let navigationController: UINavigationController
   private let metaDataLoader: MetaDataLoader
+  private let metaData = CurrentValueSubject<MetaData, Never>(.init(configuration: nil, genres: nil))
 
   private var cancellables = Set<AnyCancellable>()
 
@@ -21,10 +22,20 @@ public class AppCoordinator {
     window.makeKeyAndVisible()
 
     metaDataLoader.metaData
+      .subscribe(metaData)
+      .store(in: &cancellables)
+
+    metaDataLoader.metaData
       .receive(on: DispatchQueue.main)
       .sink(receiveValue: { [weak self] _ in
-        self?.cancellables.removeAll()
+        let cancellableToRemove = self?.cancellables.first
         self?.startMain()
+
+        if let cancellableToRemove = cancellableToRemove {
+          DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+            self?.cancellables.remove(cancellableToRemove)
+          }
+        }
       })
       .store(in: &cancellables)
 
@@ -32,7 +43,7 @@ public class AppCoordinator {
   }
 
   private func startMain() {
-    let mainViewController = MainViewController()
+    let mainViewController = MainViewController(metaData: metaData.eraseToAnyPublisher())
     navigationController.addChild(mainViewController)
     navigationController.modalPresentationStyle = .fullScreen
     window.rootViewController?.present(navigationController, animated: true, completion: { [weak self] in

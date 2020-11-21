@@ -5,9 +5,11 @@ public final class MainViewController: UITabBarController {
   private var _presentMovieDetails = PassthroughSubject<MovieDetailsViewModel, Never>()
   public lazy var presentMovieDetails: AnyPublisher<MovieDetailsViewModel, Never> = _presentMovieDetails.eraseToAnyPublisher()
 
+  private let metaData: AnyPublisher<MetaData, Never>
   var cancellables = Set<AnyCancellable>()
 
-  public init() {
+  public init(metaData: AnyPublisher<MetaData, Never>) {
+    self.metaData = metaData
     super.init(nibName: nil, bundle: nil)
   }
 
@@ -26,7 +28,7 @@ public final class MainViewController: UITabBarController {
   }
 
   private func makeMoviesViewController() -> UIViewController {
-    let viewController = MoviesViewController()
+    let viewController = MoviesViewController(viewModel: .default(metaData: metaData))
     viewController.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(systemName: "list.bullet"), selectedImage: nil)
     viewController
       .presentMovieDetails

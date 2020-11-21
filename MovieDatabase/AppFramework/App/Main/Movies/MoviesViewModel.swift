@@ -41,7 +41,10 @@ public struct MoviesViewModel {
     self.transform = transform
   }
 
-  public static func `default`(movieRepo: MOMovieRepo = MOMovieRepo.default(moc: Env.database.moc)) -> MoviesViewModel {
+  public static func `default`(
+    movieRepo: MOMovieRepo = MOMovieRepo.default(moc: Env.database.moc),
+    metaData: AnyPublisher<MetaData, Never>
+  ) -> MoviesViewModel {
     MoviesViewModel { input in
       let paginationSink = PaginationSink<DiscoverMovieResponse.Movie, ErrorResponse>.make(
         refreshTrigger: input.refresh,
@@ -51,18 +54,21 @@ public struct MoviesViewModel {
         requestFromCursor: { page in Env.client.discoverMovie(DiscoverMovieRequestParams(page: page)) }
       )
 
-      let value = paginationSink.values
-        .map { movies in
-          movies.map { movie in
-            // TODO: Get baseUrl from config
-            MovieViewModel.default(
-              id: movie.id,
-              title: movie.title,
-              imageUrl: URL(string: "https://image.tmdb.org/t/p/w300\(movie.posterPath)")!,
-              repo: movieRepo
-            )
-          }
+      let value = Publishers.CombineLatest(
+        paginationSink.values.share(),
+        metaData
+      )
+      .map { movies, metaData -> [MovieViewModel] in
+        let imageBaseUrl = metaData.configuration?.urlForSmallImage() ?? Constants.fallbackImageBaseUrl
+        return movies.map { movie in
+          MovieViewModel.default(
+            id: movie.id,
+            title: movie.title,
+            imageUrl: imageBaseUrl.appendingPathComponent(movie.posterPath),
+            repo: movieRepo
+          )
         }
+      }
 
       return Output(
         values: value.eraseToAnyPublisher(),

@@ -50,7 +50,7 @@ public final class MoviesViewController: UICollectionViewController {
     return layout
   }
 
-  public init(viewModel: MoviesViewModel = .default()) {
+  public init(viewModel: MoviesViewModel) {
     self.viewModel = viewModel
     let layout = Self.makeCollectionViewLayout()
     super.init(collectionViewLayout: layout)
