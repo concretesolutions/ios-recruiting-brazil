@@ -29,17 +29,26 @@ public struct MovieViewModel: Identifiable, Hashable {
 
   public let id: Int
   public let title: String
+  public let year: String
+  public let overview: String
+  public let genres: [Int16]
   public let imageUrl: URL
   public let transform: (Input) -> Output
 
   public init(
     id: Int,
     title: String,
+    year: String,
+    overview: String,
+    genres: [Int16],
     imageUrl: URL,
     transform: @escaping (Input) -> Output
   ) {
     self.id = id
     self.title = title
+    self.year = year
+    self.overview = overview
+    self.genres = genres
     self.imageUrl = imageUrl
     self.transform = transform
   }
@@ -47,10 +56,13 @@ public struct MovieViewModel: Identifiable, Hashable {
   public static func `default`(
     id: Int,
     title: String,
+    year: String,
+    overview: String,
+    genres: [Int16],
     imageUrl: URL,
     repo: MOMovieRepo
   ) -> MovieViewModel {
-    MovieViewModel(id: id, title: title, imageUrl: imageUrl) { input in
+    MovieViewModel(id: id, title: title, year: year, overview: overview, genres: genres, imageUrl: imageUrl) { input in
       var movie = repo.get(id)
       var currentLike = movie != nil
 
@@ -65,7 +77,9 @@ public struct MovieViewModel: Identifiable, Hashable {
               movie = repo.create { movie in
                 movie.id = Int64(id)
                 movie.title = title
-                movie.overview = "Hello 123"
+                movie.year = year
+//                movie.genres = .init()
+                movie.overview = overview
               }
             }
           } else {

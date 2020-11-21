@@ -64,6 +64,9 @@ public struct MoviesViewModel {
           MovieViewModel.default(
             id: movie.id,
             title: movie.title,
+            year: movie.releaseDate,
+            overview: movie.overview,
+            genres: movie.genreIds,
             imageUrl: imageBaseUrl.appendingPathComponent(movie.posterPath),
             repo: movieRepo
           )
