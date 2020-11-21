@@ -309,8 +309,6 @@
 			isa = PBXGroup;
 			children = (
 				2720752725648CA800B3C7C5 /* MainViewController.swift */,
-				2784FB2725696A5500FD4E41 /* AppCoordinator.swift */,
-				2784FB2C2569887600FD4E41 /* SplashViewController.swift */,
 				27CCAFFD256960CD0092A4B2 /* MovieDetails */,
 				2720753125648F4C00B3C7C5 /* Favorites */,
 				2720752C25648DF400B3C7C5 /* Movies */,
@@ -468,14 +466,24 @@
 			path = TestSupport;
 			sourceTree = "<group>";
 		};
+		2784FB3125698BC400FD4E41 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2784FB2725696A5500FD4E41 /* AppCoordinator.swift */,
+				2784FB2C2569887600FD4E41 /* SplashViewController.swift */,
+				2720752625648C9700B3C7C5 /* Main */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		27A734E32564650D0041FCB9 /* AppFramework */ = {
 			isa = PBXGroup;
 			children = (
 				27A734E42564650D0041FCB9 /* AppFramework.h */,
 				27A734E52564650D0041FCB9 /* Info.plist */,
+				2784FB3125698BC400FD4E41 /* App */,
 				2772401125681F0900D713A5 /* CoreData */,
 				272075362564902D00B3C7C5 /* Library */,
-				2720752625648C9700B3C7C5 /* Main */,
 			);
 			path = AppFramework;
 			sourceTree = "<group>";
