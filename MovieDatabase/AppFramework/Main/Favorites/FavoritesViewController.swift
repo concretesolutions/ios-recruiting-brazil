@@ -1,19 +1,17 @@
 import Combine
 import UIKit
 
-public final class FavoriteCell: UITableViewCell {
-  override public init(style _: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-    super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-  }
-
-  @available(*, unavailable)
-  required init?(coder _: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-}
-
 public final class FavoritesViewController: UITableViewController {
-  typealias DataSource = UITableViewDiffableDataSource<FavoritesSection, FavoriteViewModel>
+  final class DataSource: UITableViewDiffableDataSource<FavoritesSection, FavoriteViewModel> {
+    override func tableView(_: UITableView, canEditRowAt _: IndexPath) -> Bool {
+      true
+    }
+
+    override func tableView(_: UITableView, commit _: UITableViewCell.EditingStyle, forRowAt _: IndexPath) {
+      print("Delete")
+    }
+  }
+
   typealias Snapshot = NSDiffableDataSourceSnapshot<FavoritesSection, FavoriteViewModel>
 
   private let viewModel: FavoritesViewModel
@@ -77,25 +75,11 @@ public final class FavoritesViewController: UITableViewController {
     tabBarController?.title = nil
   }
 
-  override public func tableView(_: UITableView, canEditRowAt _: IndexPath) -> Bool {
-    true
-  }
-
   override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
   }
 
-  override public func tableView(_: UITableView, editingStyleForRowAt _: IndexPath) -> UITableViewCell.EditingStyle {
-    .delete
-  }
-
   override public func tableView(_: UITableView, titleForDeleteConfirmationButtonForRowAt _: IndexPath) -> String? {
     "Unfavorite"
-  }
-
-  override public func tableView(_: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt _: IndexPath) {
-    if editingStyle == .delete {
-      print("DELETE")
-    }
   }
 }

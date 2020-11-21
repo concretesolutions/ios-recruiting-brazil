@@ -60,6 +60,8 @@
 		2788068125685D7100120A22 /* MOMovieRepo+mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2788068025685D7100120A22 /* MOMovieRepo+mock.swift */; };
 		278806862568634F00120A22 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278806852568634F00120A22 /* FavoritesViewModel.swift */; };
 		278806A5256871F200120A22 /* UITableView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278806A4256871F200120A22 /* UITableView+Helpers.swift */; };
+		278806AA2568934200120A22 /* FavoriiteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278806A92568934200120A22 /* FavoriiteCell.swift */; };
+		278806AF2568935700120A22 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278806AE2568935700120A22 /* FavoriteViewModel.swift */; };
 		27A734E62564650D0041FCB9 /* AppFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 27A734E42564650D0041FCB9 /* AppFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		27A734E92564650D0041FCB9 /* AppFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A734E22564650D0041FCB9 /* AppFramework.framework */; };
 		27A734EA2564650D0041FCB9 /* AppFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27A734E22564650D0041FCB9 /* AppFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -224,6 +226,8 @@
 		2788068025685D7100120A22 /* MOMovieRepo+mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MOMovieRepo+mock.swift"; sourceTree = "<group>"; };
 		278806852568634F00120A22 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		278806A4256871F200120A22 /* UITableView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Helpers.swift"; sourceTree = "<group>"; };
+		278806A92568934200120A22 /* FavoriiteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriiteCell.swift; sourceTree = "<group>"; };
+		278806AE2568935700120A22 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		27A734E22564650D0041FCB9 /* AppFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A734E42564650D0041FCB9 /* AppFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppFramework.h; sourceTree = "<group>"; };
 		27A734E52564650D0041FCB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -317,6 +321,8 @@
 			children = (
 				2720753225648F6400B3C7C5 /* FavoritesViewController.swift */,
 				278806852568634F00120A22 /* FavoritesViewModel.swift */,
+				278806A92568934200120A22 /* FavoriiteCell.swift */,
+				278806AE2568935700120A22 /* FavoriteViewModel.swift */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -815,11 +821,13 @@
 				272075492564A0E100B3C7C5 /* MovieCell.swift in Sources */,
 				2720753325648F6400B3C7C5 /* FavoritesViewController.swift in Sources */,
 				2720753F2564913500B3C7C5 /* UICollectionView+Helpers.swift in Sources */,
+				278806AF2568935700120A22 /* FavoriteViewModel.swift in Sources */,
 				278806A5256871F200120A22 /* UITableView+Helpers.swift in Sources */,
 				272075C02564BBBC00B3C7C5 /* PaginationSink.swift in Sources */,
 				272075382564905000B3C7C5 /* UIView+LayoutHelpers.swift in Sources */,
 				2772401825681FAB00D713A5 /* Database.swift in Sources */,
 				277C726625683AC100DD0BA8 /* MOMovieRepo.swift in Sources */,
+				278806AA2568934200120A22 /* FavoriiteCell.swift in Sources */,
 				2720754625649C3100B3C7C5 /* MovieViewModel.swift in Sources */,
 				2720752E25648DFE00B3C7C5 /* MoviesViewController.swift in Sources */,
 				278806862568634F00120A22 /* FavoritesViewModel.swift in Sources */,
