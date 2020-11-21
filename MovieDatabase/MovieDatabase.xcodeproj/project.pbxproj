@@ -74,6 +74,8 @@
 		27F491592566CDEE00C8F501 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F491582566CDEE00C8F501 /* ApiKey.swift */; };
 		27F4AAF325698CC0006E5077 /* MOGenreRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F4AAF225698CC0006E5077 /* MOGenreRepo.swift */; };
 		27F4AAFB256993A1006E5077 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F4AAFA256993A1006E5077 /* Configuration.swift */; };
+		27F4AB0025699F15006E5077 /* MetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F4AAFF25699F15006E5077 /* MetaData.swift */; };
+		27F4AB0525699F1E006E5077 /* MetaDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F4AB0425699F1E006E5077 /* MetaDataLoader.swift */; };
 		27F4E81C25645A2E00080104 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F4E81B25645A2E00080104 /* AppDelegate.swift */; };
 		27F4E82525645A2F00080104 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27F4E82425645A2F00080104 /* Assets.xcassets */; };
 		27F4E82825645A2F00080104 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27F4E82625645A2F00080104 /* LaunchScreen.storyboard */; };
@@ -247,6 +249,8 @@
 		27F491582566CDEE00C8F501 /* ApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 		27F4AAF225698CC0006E5077 /* MOGenreRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MOGenreRepo.swift; sourceTree = "<group>"; };
 		27F4AAFA256993A1006E5077 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		27F4AAFF25699F15006E5077 /* MetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaData.swift; sourceTree = "<group>"; };
+		27F4AB0425699F1E006E5077 /* MetaDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaDataLoader.swift; sourceTree = "<group>"; };
 		27F4E81825645A2E00080104 /* MovieDatabase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDatabase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27F4E81B25645A2E00080104 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27F4E82425645A2F00080104 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -352,6 +356,8 @@
 				274B3FC62565EF21002D9B4C /* Environment.swift */,
 				27F491532566CD9300C8F501 /* Constants.swift */,
 				277C72602568398E00DD0BA8 /* Logging.swift */,
+				27F4AAFF25699F15006E5077 /* MetaData.swift */,
+				27F4AB0425699F1E006E5077 /* MetaDataLoader.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -857,8 +863,10 @@
 				2720752825648CA800B3C7C5 /* MainViewController.swift in Sources */,
 				27F491542566CD9300C8F501 /* Constants.swift in Sources */,
 				2720754325649BF000B3C7C5 /* MoviesViewModel.swift in Sources */,
+				27F4AB0525699F1E006E5077 /* MetaDataLoader.swift in Sources */,
 				272075492564A0E100B3C7C5 /* MovieCell.swift in Sources */,
 				2720753325648F6400B3C7C5 /* FavoritesViewController.swift in Sources */,
+				27F4AB0025699F15006E5077 /* MetaData.swift in Sources */,
 				27CCAFFF256960D80092A4B2 /* MovieDetailsViewController.swift in Sources */,
 				2720753F2564913500B3C7C5 /* UICollectionView+Helpers.swift in Sources */,
 				278806AF2568935700120A22 /* FavoriteViewModel.swift in Sources */,

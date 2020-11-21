@@ -3,12 +3,15 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-  let window = UIWindow()
+  var window: UIWindow?
 
-  private lazy var coordinator = AppCoordinator(window: window)
+  private var coordinator: AppCoordinator!
 
   func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     Env.database.loadStore()
+    let window = UIWindow(frame: UIScreen.main.bounds)
+    coordinator = AppCoordinator(window: window)
+    self.window = window
     coordinator.start()
     return true
   }
