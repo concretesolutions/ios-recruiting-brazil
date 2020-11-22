@@ -71,7 +71,7 @@ public final class MovieDetailsViewController: UITableViewController {
       .poster(viewModel.movie.posterUrl.absoluteString),
       .title(titleViewModel),
       .year(viewModel.movie.year),
-      .genres(viewModel.movie.genreIds.map(String.init)),
+      .genres(viewModel.genres),
       .overview(viewModel.movie.overview),
     ])
 

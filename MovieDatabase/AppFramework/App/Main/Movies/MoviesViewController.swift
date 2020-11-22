@@ -5,8 +5,8 @@ public final class MoviesViewController: UICollectionViewController {
   typealias DataSource = UICollectionViewDiffableDataSource<MoviesSection, MovieViewModel>
   typealias Snapshot = NSDiffableDataSourceSnapshot<MoviesSection, MovieViewModel>
 
-  private let _presentMovieDetails = PassthroughSubject<MovieDetailsViewModel, Never>()
-  public lazy var presentMovieDetails: AnyPublisher<MovieDetailsViewModel, Never> = _presentMovieDetails.eraseToAnyPublisher()
+  private let _presentMovieDetails = PassthroughSubject<Movie, Never>()
+  public lazy var presentMovieDetails: AnyPublisher<Movie, Never> = _presentMovieDetails.eraseToAnyPublisher()
 
   private var cancellables = Set<AnyCancellable>()
   private let viewModel: MoviesViewModel
@@ -139,8 +139,6 @@ public final class MoviesViewController: UICollectionViewController {
 
   override public func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
-    // TODO: Other attributes
-    let movieDetailsViewModel = MovieDetailsViewModel(movie: item.movie)
-    _presentMovieDetails.send(movieDetailsViewModel)
+    _presentMovieDetails.send(item.movie)
   }
 }

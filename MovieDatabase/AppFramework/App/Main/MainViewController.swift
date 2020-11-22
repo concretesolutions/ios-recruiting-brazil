@@ -2,8 +2,8 @@ import Combine
 import UIKit
 
 public final class MainViewController: UITabBarController {
-  private var _presentMovieDetails = PassthroughSubject<MovieDetailsViewModel, Never>()
-  public lazy var presentMovieDetails: AnyPublisher<MovieDetailsViewModel, Never> = _presentMovieDetails.eraseToAnyPublisher()
+  private var _presentMovieDetails = PassthroughSubject<Movie, Never>()
+  public lazy var presentMovieDetails: AnyPublisher<Movie, Never> = _presentMovieDetails.eraseToAnyPublisher()
 
   private let metaData: AnyPublisher<MetaData, Never>
   var cancellables = Set<AnyCancellable>()

@@ -54,9 +54,11 @@ public class AppCoordinator {
 
     mainViewController.presentMovieDetails
       .receive(on: DispatchQueue.main)
-      .sink(receiveValue: { [weak self] viewModel in
+      .sink(receiveValue: { [weak self] movie in
+        guard let self = self else { return }
+        let viewModel = MovieDetailsViewModel(movie: movie, metadata: self.metaData.value)
         let viewControler = MovieDetailsViewController(viewModel: viewModel)
-        self?.navigationController.pushViewController(viewControler, animated: true)
+        self.navigationController.pushViewController(viewControler, animated: true)
       })
       .store(in: &cancellables)
   }

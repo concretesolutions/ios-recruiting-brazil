@@ -20,8 +20,8 @@ public final class FavoritesViewController: UITableViewController {
 
   typealias Snapshot = NSDiffableDataSourceSnapshot<FavoritesSection, FavoriteViewModel>
 
-  private let _presentMovieDetails = PassthroughSubject<MovieDetailsViewModel, Never>()
-  public lazy var presentMovieDetails: AnyPublisher<MovieDetailsViewModel, Never> = _presentMovieDetails.eraseToAnyPublisher()
+  private let _presentMovieDetails = PassthroughSubject<Movie, Never>()
+  public lazy var presentMovieDetails: AnyPublisher<Movie, Never> = _presentMovieDetails.eraseToAnyPublisher()
 
   private let viewModel: FavoritesViewModel
   private var cancellables = Set<AnyCancellable>()
@@ -87,10 +87,7 @@ public final class FavoritesViewController: UITableViewController {
   override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
-    // TODO: Other attributes
-
-    let movieDetailsViewModel = MovieDetailsViewModel(movie: item.movie)
-    _presentMovieDetails.send(movieDetailsViewModel)
+    _presentMovieDetails.send(item.movie)
   }
 
   override public func tableView(_: UITableView, titleForDeleteConfirmationButtonForRowAt _: IndexPath) -> String? {
