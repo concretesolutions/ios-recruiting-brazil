@@ -27,7 +27,7 @@ private class MovieRepoSpy {
     )
   }()
 
-  var get: [Int]
+  var get: [Int64]
   var create: Int
   var delete: Int
 
@@ -63,7 +63,8 @@ final class MovieViewModelTests: XCTestCase {
 
   func testMovieViewModel_LikeEvents_ShouldCreateAndDeleteMOMovies() throws {
     let spy = MovieRepoSpy(database: database)
-    let viewModel = MovieViewModel.default(id: 1, title: "", imageUrl: TestConstants.exampleUrl, repo: spy.movieRepo)
+    let movie = Movie(id: 1, title: "", year: "", genreIds: [], overview: "", posterUrl: TestConstants.exampleUrl)
+    let viewModel = MovieViewModel.default(movie: movie, repo: spy.movieRepo)
 
     let like = PassthroughSubject<Void, Never>()
     let output = viewModel
