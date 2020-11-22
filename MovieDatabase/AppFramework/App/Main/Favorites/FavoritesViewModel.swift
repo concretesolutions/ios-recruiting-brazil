@@ -55,12 +55,16 @@ public struct FavoritesViewModel {
             }
 
             guard curr.1.row > -1 else {
-              return curr.0
+              return acc
             }
 
-            var newValues = [FavoriteViewModel]()
-            newValues.remove(at: curr.1.row)
+            let rowToDelete = curr.1.row
+            let viewModelToDelete = acc[curr.1.row]
 
+            var newValues = acc
+            if repo.delete(viewModelToDelete.movie) {
+              newValues.remove(at: rowToDelete)
+            }
             return newValues
           }
         }
