@@ -46,11 +46,13 @@ public struct FavoritesViewModel {
             repo.getAll()
               .map { movie in
                 FavoriteViewModel(
-                  id: movie.id,
-                  title: movie.title,
-                  year: movie.year,
-                  overview: movie.overview,
-                  genres: movie.genres.map(\.name)
+                  movie: .init(
+                    id: movie.id,
+                    title: movie.title,
+                    year: movie.year,
+                    genreIds: movie.genres.map(\.id),
+                    overview: movie.overview
+                  )
                 )
               }
           )

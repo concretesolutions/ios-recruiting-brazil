@@ -1,21 +1,10 @@
 public struct FavoriteViewModel: Identifiable, Hashable {
-  public let id: Int64
-  public let title: String
-  public let year: String
-  public let overview: String
-  public let genres: [String]
+  public let movie: Movie
+  public var id: Int64 { movie.id }
 
   public init(
-    id: Int64,
-    title: String,
-    year: String,
-    overview: String,
-    genres: [String]
+    movie: Movie
   ) {
-    self.id = id
-    self.title = title
-    self.year = year
-    self.overview = overview
-    self.genres = genres
+    self.movie = movie
   }
 }

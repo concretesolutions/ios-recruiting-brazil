@@ -28,8 +28,8 @@ public final class FavoritesViewController: UITableViewController {
   private lazy var dataSource: DataSource = {
     DataSource(tableView: tableView, cellProvider: { tableView, indexPath, item in
       let cell: FavoriteCell = tableView.dequeue(for: indexPath)
-      cell.textLabel?.text = item.title
-      cell.detailTextLabel?.text = item.overview
+      cell.textLabel?.text = item.movie.title
+      cell.detailTextLabel?.text = item.movie.overview
       return cell
     })
   }()
@@ -92,10 +92,10 @@ public final class FavoritesViewController: UITableViewController {
     let movieDetailsViewModel = MovieDetailsViewModel(
       id: item.id,
       poster: "POSTER",
-      title: item.title,
-      year: item.year,
-      genres: item.genres,
-      overview: item.overview
+      title: item.movie.title,
+      year: item.movie.year,
+      genres: item.movie.genreIds.map(String.init),
+      overview: item.movie.overview
     )
     _presentMovieDetails.send(movieDetailsViewModel)
   }
