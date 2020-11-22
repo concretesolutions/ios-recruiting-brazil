@@ -9,4 +9,11 @@ public struct Genre {
     self.id = id
     self.name = name
   }
+
+  public init(
+    moGenre: MOGenre
+  ) {
+    id = moGenre.id
+    name = moGenre.name
+  }
 }

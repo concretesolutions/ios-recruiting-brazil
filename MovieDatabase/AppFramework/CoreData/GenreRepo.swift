@@ -2,12 +2,12 @@ import CoreData
 import os.log
 
 public struct GenreRepo {
-  public let get: (Int16) -> MOGenre?
-  public let getAll: () -> [MOGenre]
+  public let get: (Int16) -> Genre?
+  public let getAll: () -> [Genre]
 
   public init(
-    get: @escaping (Int16) -> MOGenre?,
-    getAll: @escaping () -> [MOGenre]
+    get: @escaping (Int16) -> Genre?,
+    getAll: @escaping () -> [Genre]
   ) {
     self.get = get
     self.getAll = getAll
@@ -25,7 +25,7 @@ public struct GenreRepo {
           } else {
             os_log("Tryed to fetch MOGenre with id %i, but it doesn't exist", log: generalLog, type: .debug, id)
           }
-          return results.first
+          return results.first.map(Genre.init(moGenre:))
         } catch {
           os_log("Failed to get MOGenre with id %i, reason: %s", log: generalLog, type: .error, id, error.localizedDescription)
           return nil
@@ -36,7 +36,7 @@ public struct GenreRepo {
         do {
           let results = try moc.fetch(fetchRequest)
           os_log("Got all all MOGenre, count: %i", log: generalLog, type: .debug, results.count)
-          return results
+          return results.map(Genre.init(moGenre:))
         } catch {
           os_log("Failed to get all MOGenre, reason: %s", log: generalLog, type: .error)
           return []
