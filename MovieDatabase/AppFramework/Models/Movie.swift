@@ -1,4 +1,4 @@
-public struct Movie {
+public struct Movie: Equatable, Hashable {
   public let id: Int64
   public let title: String
   public let year: String
