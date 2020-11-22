@@ -29,7 +29,7 @@ public final class MainViewController: UITabBarController {
 
   private func makeMoviesViewController() -> UIViewController {
     let viewController = MoviesViewController(viewModel: .default(metaData: metaData))
-    viewController.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(systemName: "list.bullet"), selectedImage: nil)
+    viewController.tabBarItem = UITabBarItem(title: L10n.Global.Navigation.movies, image: UIImage(systemName: "list.bullet"), selectedImage: nil)
     viewController
       .presentMovieDetails
       .subscribe(_presentMovieDetails)
@@ -39,7 +39,7 @@ public final class MainViewController: UITabBarController {
 
   private func makeFavoritesViewController() -> UIViewController {
     let viewController = FavoritesViewController()
-    viewController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart"), selectedImage: nil)
+    viewController.tabBarItem = UITabBarItem(title: L10n.Global.Navigation.favorites, image: UIImage(systemName: "heart"), selectedImage: nil)
     viewController
       .presentMovieDetails
       .subscribe(_presentMovieDetails)
