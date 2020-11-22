@@ -54,7 +54,7 @@ public final class MovieDetailsViewController: UITableViewController {
   override public func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
-    title = "Movie"
+    title = L10n.Global.Navigation.movie
     tableView.rowHeight = UITableView.automaticDimension
     tableView.register(MovieDetailPosterCell.self)
     tableView.register(MovieDetailTitleCell.self)

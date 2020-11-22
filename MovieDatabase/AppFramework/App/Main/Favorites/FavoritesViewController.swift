@@ -91,6 +91,6 @@ public final class FavoritesViewController: UITableViewController {
   }
 
   override public func tableView(_: UITableView, titleForDeleteConfirmationButtonForRowAt _: IndexPath) -> String? {
-    "Unfavorite"
+    L10n.Screen.Favorites.unfavorite
   }
 }
