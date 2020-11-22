@@ -15,7 +15,7 @@ private class MovieRepoSpy {
       create: { [weak self] _ in
         guard let self = self else { return nil }
         self.create += 1
-        let movie = MOMovie(context: self.database.moc)
+        let movie = Movie(id: 1, title: "", year: "", genreIds: [], overview: "", posterUrl: TestConstants.exampleUrl)
         self.movie = movie
         return movie
       },
@@ -31,7 +31,7 @@ private class MovieRepoSpy {
   var create: Int
   var delete: Int
 
-  var movie: MOMovie?
+  var movie: Movie?
   let database: Database
 
   public init(database: Database) {

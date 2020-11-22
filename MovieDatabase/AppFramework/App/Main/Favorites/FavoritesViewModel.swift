@@ -44,18 +44,7 @@ public struct FavoritesViewModel {
         .map { _ in
           Just<[FavoriteViewModel]>(
             repo.getAll()
-              .map { movie in
-                FavoriteViewModel(
-                  movie: .init(
-                    id: movie.id,
-                    title: movie.title,
-                    year: movie.year,
-                    genreIds: movie.genres.map(\.id),
-                    overview: movie.overview,
-                    posterUrl: URL(string: "https://example.com")!
-                  )
-                )
-              }
+              .map(FavoriteViewModel.init(movie:))
           )
           .combineLatest(
             input.delete.prepend(IndexPath(row: -1, section: -1))
