@@ -18,9 +18,9 @@ public final class MovieDetailsViewController: UITableViewController {
         let cell: MovieDetailPosterCell = tableView.dequeue(for: indexPath)
         cell.setup(with: URL(string: poster)!)
         return cell
-      case let .title(title):
+      case let .title(titleViewModel):
         let cell: MovieDetailTitleCell = tableView.dequeue(for: indexPath)
-        cell.textLabel?.text = title
+        cell.setup(with: titleViewModel)
         return cell
       case let .year(year):
         let cell: MovieDetailYearCell = tableView.dequeue(for: indexPath)
@@ -37,6 +37,9 @@ public final class MovieDetailsViewController: UITableViewController {
       }
     })
   }()
+
+  private let _disappearPublisher = PassthroughSubject<Void, Never>()
+  private lazy var disappearPublisher = _disappearPublisher.eraseToAnyPublisher()
 
   init(viewModel: MovieDetailsViewModel) {
     self.viewModel = viewModel
@@ -61,16 +64,22 @@ public final class MovieDetailsViewController: UITableViewController {
 
     tableView.tableFooterView = UIView()
 
+    let titleViewModel = MovieDetailTitleViewModel.default(title: viewModel.title, initialLiked: false)
     var snapshot = Snapshot()
     snapshot.appendSections([.main])
     snapshot.appendItems([
       .poster(viewModel.poster),
-      .title(viewModel.title),
+      .title(titleViewModel),
       .year(viewModel.year),
       .genres(viewModel.genres),
       .overview(viewModel.overview),
     ])
 
     dataSource.apply(snapshot)
+  }
+
+  override public func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    _disappearPublisher.send(())
   }
 }
