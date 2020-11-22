@@ -14,8 +14,17 @@ internal enum L10n {
     internal enum Navigation {
       /// Favorites
       internal static let favorites = L10n.tr("Localizable", "global.navigation.favorites")
+      /// Movie
+      internal static let movie = L10n.tr("Localizable", "global.navigation.movie")
       /// Movies
       internal static let movies = L10n.tr("Localizable", "global.navigation.movies")
+    }
+  }
+
+  internal enum Screen {
+    internal enum Favorites {
+      /// Unfavorite
+      internal static let unfavorite = L10n.tr("Localizable", "screen.favorites.unfavorite")
     }
   }
 }
