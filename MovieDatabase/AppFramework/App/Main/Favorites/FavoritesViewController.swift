@@ -75,7 +75,7 @@ public final class FavoritesViewController: UITableViewController {
 
   override public func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    tabBarController?.title = L10n.Global.Navigation.favorites
+    tabBarController?.title = L10n.Screen.Favorites.title
     _refreshValues.send(())
   }
 

@@ -10,21 +10,22 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
-  internal enum Global {
-    internal enum Navigation {
-      /// Favorites
-      internal static let favorites = L10n.tr("Localizable", "global.navigation.favorites")
-      /// Movie
-      internal static let movie = L10n.tr("Localizable", "global.navigation.movie")
-      /// Movies
-      internal static let movies = L10n.tr("Localizable", "global.navigation.movies")
-    }
-  }
-
   internal enum Screen {
     internal enum Favorites {
+      /// Favorites
+      internal static let title = L10n.tr("Localizable", "screen.favorites.title")
       /// Unfavorite
       internal static let unfavorite = L10n.tr("Localizable", "screen.favorites.unfavorite")
+    }
+
+    internal enum MovieDetails {
+      /// Movie
+      internal static let title = L10n.tr("Localizable", "screen.movie_details.title")
+    }
+
+    internal enum Movies {
+      /// Movies
+      internal static let title = L10n.tr("Localizable", "screen.movies.title")
     }
   }
 }

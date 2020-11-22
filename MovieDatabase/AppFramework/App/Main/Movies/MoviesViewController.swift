@@ -115,7 +115,7 @@ public final class MoviesViewController: UICollectionViewController {
   var viewAlredyAppeared = false
   override public func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    tabBarController?.title = L10n.Global.Navigation.movies
+    tabBarController?.title = L10n.Screen.Movies.title
     if !viewAlredyAppeared {
       _refresh.send(())
     }
