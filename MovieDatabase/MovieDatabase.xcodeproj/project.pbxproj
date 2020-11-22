@@ -84,6 +84,7 @@
 		27F28462256B032500020C11 /* Design.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F2845B256B032500020C11 /* Design.framework */; };
 		27F28463256B032500020C11 /* Design.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27F2845B256B032500020C11 /* Design.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		27F2846C256B034200020C11 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27F2846B256B034200020C11 /* Images.xcassets */; };
+		27F28472256B041200020C11 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27F28471256B041200020C11 /* Colors.xcassets */; };
 		27F491542566CD9300C8F501 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F491532566CD9300C8F501 /* Constants.swift */; };
 		27F491592566CDEE00C8F501 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F491582566CDEE00C8F501 /* ApiKey.swift */; };
 		27F4AAF325698CC0006E5077 /* GenreRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F4AAF225698CC0006E5077 /* GenreRepo.swift */; };
@@ -281,6 +282,7 @@
 		27F2845D256B032500020C11 /* Design.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Design.h; sourceTree = "<group>"; };
 		27F2845E256B032500020C11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27F2846B256B034200020C11 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		27F28471256B041200020C11 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		27F491532566CD9300C8F501 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		27F491582566CDEE00C8F501 /* ApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 		27F4AAF225698CC0006E5077 /* GenreRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreRepo.swift; sourceTree = "<group>"; };
@@ -576,6 +578,7 @@
 				27F2845D256B032500020C11 /* Design.h */,
 				27F2845E256B032500020C11 /* Info.plist */,
 				27F2846B256B034200020C11 /* Images.xcassets */,
+				27F28471256B041200020C11 /* Colors.xcassets */,
 			);
 			path = Design;
 			sourceTree = "<group>";
@@ -830,6 +833,7 @@
 					};
 					27F2845A256B032500020C11 = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 					};
 					27F4E81725645A2E00080104 = {
 						CreatedOnToolsVersion = 12.2;
@@ -904,6 +908,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27F2846C256B034200020C11 /* Images.xcassets in Resources */,
+				27F28472256B041200020C11 /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1344,6 +1349,7 @@
 		27F28464256B032500020C11 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1361,6 +1367,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.alephao.MovieDatabase.Design;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1371,6 +1378,7 @@
 		27F28465256B032500020C11 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
