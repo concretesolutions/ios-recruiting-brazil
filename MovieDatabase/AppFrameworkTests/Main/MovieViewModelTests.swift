@@ -67,18 +67,19 @@ final class MovieViewModelTests: XCTestCase {
     let viewModel = MovieViewModel.default(movie: movie, repo: spy.movieRepo)
 
     let like = PassthroughSubject<Void, Never>()
+    let refresh = PassthroughSubject<Void, Never>()
     let output = viewModel
       .transform(
-        .init(like: like.eraseToAnyPublisher())
+        .init(like: like.eraseToAnyPublisher(), refresh: refresh.eraseToAnyPublisher())
       )
 
     let valuesExpectation = expectation(description: "values")
 
     output.like
-      .collect(5)
+      .collect(6)
       .sink(receiveValue: { likes in
         XCTAssertEqual(
-          [false, true, false, true, false],
+          [false, true, false, true, false, false],
           likes
         )
         valuesExpectation.fulfill()
@@ -89,10 +90,11 @@ final class MovieViewModelTests: XCTestCase {
     like.send(())
     like.send(())
     like.send(())
+    refresh.send(())
 
     waitForExpectations(timeout: 1.0, handler: nil)
 
-    XCTAssertEqual(spy.get, [1])
+    XCTAssertEqual(spy.get, [1, 1])
     XCTAssertEqual(spy.create, 2)
     XCTAssertEqual(spy.delete, 2)
   }
