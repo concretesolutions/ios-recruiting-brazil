@@ -29,26 +29,33 @@ public struct MovieDetailTitleViewModel: Hashable {
   }
 
   public let title: String
-  public let initialLiked: Bool
   public let transform: (Input) -> Output
 
   public init(
     title: String,
-    initialLiked: Bool,
     transform: @escaping (Input) -> Output
   ) {
     self.title = title
-    self.initialLiked = initialLiked
     self.transform = transform
   }
 
   public static func `default`(
-    title: String,
-    initialLiked: Bool
+    movie: Movie,
+    repo: MovieRepo = .default(moc: Env.database.moc)
   ) -> MovieDetailTitleViewModel {
-    MovieDetailTitleViewModel(title: title, initialLiked: initialLiked) { input in
+    MovieDetailTitleViewModel(title: movie.title) { input in
+      let initialLiked = repo.get(movie.id) != nil
+
       let like = input.like
         .scan(initialLiked) { acc, _ in !acc }
+        .handleEvents(receiveOutput: { liked in
+          if liked {
+            _ = repo.create(movie)
+          } else {
+            _ = repo.delete(movie)
+          }
+        })
+        .prepend(initialLiked)
         .share()
 
       return Output(

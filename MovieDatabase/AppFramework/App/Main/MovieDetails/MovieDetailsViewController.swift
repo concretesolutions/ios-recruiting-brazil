@@ -64,7 +64,7 @@ public final class MovieDetailsViewController: UITableViewController {
 
     tableView.tableFooterView = UIView()
 
-    let titleViewModel = MovieDetailTitleViewModel.default(title: viewModel.movie.title, initialLiked: false)
+    let titleViewModel = MovieDetailTitleViewModel.default(movie: viewModel.movie)
     var snapshot = Snapshot()
     snapshot.appendSections([.main])
     snapshot.appendItems([
