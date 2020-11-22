@@ -35,7 +35,7 @@ public class MetaDataLoader {
   public let metaData: AnyPublisher<MetaData, Never>
 
   public init() {
-    let genreRepo = MOGenreRepo.default(moc: Env.database.moc)
+    let genreRepo = GenreRepo.default(moc: Env.database.moc)
     let currentSavedGenres = genreRepo.getAll()
 
     let config = _reloadConfig

@@ -47,7 +47,7 @@ public struct MovieViewModel: Identifiable, Hashable {
       var _moMovie = repo.get(movie.id)
       var currentLike = _moMovie != nil
 
-      let genreRepo = MOGenreRepo.default(moc: Env.database.moc)
+      let genreRepo = GenreRepo.default(moc: Env.database.moc)
       var moGenres: [MOGenre]?
 
       // TODO: This logic can be improved. We probably don't need to

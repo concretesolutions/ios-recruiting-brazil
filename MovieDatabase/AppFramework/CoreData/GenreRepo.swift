@@ -1,7 +1,7 @@
 import CoreData
 import os.log
 
-public struct MOGenreRepo {
+public struct GenreRepo {
   public let get: (Int16) -> MOGenre?
   public let getAll: () -> [MOGenre]
 
@@ -13,8 +13,8 @@ public struct MOGenreRepo {
     self.getAll = getAll
   }
 
-  public static func `default`(moc: NSManagedObjectContext) -> MOGenreRepo {
-    MOGenreRepo(
+  public static func `default`(moc: NSManagedObjectContext) -> GenreRepo {
+    GenreRepo(
       get: { id in
         let fetchRequest = MOGenre.fetchRequest() as! NSFetchRequest<MOGenre>
         fetchRequest.predicate = NSPredicate(format: "id = %i", id)
