@@ -70,7 +70,7 @@ public final class MovieCell: UICollectionViewCell {
     cancellables.removeAll()
   }
 
-  public func setup(viewModel: MovieViewModel) {
+  public func setup(viewModel: MovieViewModel, refresh: AnyPublisher<Void, Never>) {
     titleLabel.text = viewModel.movie.title
 
     backgroundImageView.kf.setImage(with: viewModel.movie.posterUrl)
@@ -79,7 +79,8 @@ public final class MovieCell: UICollectionViewCell {
       .init(
         like: _like
           .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
-          .eraseToAnyPublisher()
+          .eraseToAnyPublisher(),
+        refresh: refresh
       )
     )
 

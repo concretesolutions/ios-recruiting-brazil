@@ -11,11 +11,14 @@ public struct MovieViewModel: Identifiable, Hashable {
 
   public struct Input {
     public let like: AnyPublisher<Void, Never>
+    public let refresh: AnyPublisher<Void, Never>
 
     public init(
-      like: AnyPublisher<Void, Never>
+      like: AnyPublisher<Void, Never>,
+      refresh: AnyPublisher<Void, Never>
     ) {
       self.like = like
+      self.refresh = refresh
     }
   }
 
@@ -44,20 +47,25 @@ public struct MovieViewModel: Identifiable, Hashable {
     repo: MovieRepo
   ) -> MovieViewModel {
     MovieViewModel(movie: movie) { input in
-      let initialLiked = repo.get(movie.id) != nil
-
       // TODO: This logic can be improved. We probably don't need to
       // delete and save the context right after a click
-      let like = input.like
-        .scan(initialLiked) { liked, _ in !liked }
-        .handleEvents(receiveOutput: { liked in
-          if liked {
-            _ = repo.create(movie)
-          } else {
-            _ = repo.delete(movie)
-          }
-        })
-        .prepend(initialLiked)
+      let like = input.refresh
+        .prepend(())
+        .map { _ -> AnyPublisher<Bool, Never> in
+          let initialLiked = repo.get(movie.id) != nil
+          return input.like
+            .scan(initialLiked) { liked, _ in !liked }
+            .handleEvents(receiveOutput: { liked in
+              if liked {
+                _ = repo.create(movie)
+              } else {
+                _ = repo.delete(movie)
+              }
+            })
+            .prepend(initialLiked)
+            .eraseToAnyPublisher()
+        }
+        .switchToLatest()
 
       return Output(
         like: like.eraseToAnyPublisher()

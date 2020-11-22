@@ -11,13 +11,15 @@ public final class MoviesViewController: UICollectionViewController {
   private var cancellables = Set<AnyCancellable>()
   private let viewModel: MoviesViewModel
   private let refreshControl = UIRefreshControl()
+  private let _viewWillAppear = PassthroughSubject<Void, Never>()
   private let _refresh = PassthroughSubject<Void, Never>()
   private let _nextPage = PassthroughSubject<Int, Never>()
 
   private lazy var dataSource: DataSource = {
-    DataSource(collectionView: collectionView) { collectionView, indexPath, movieViewModel -> UICollectionViewCell? in
+    DataSource(collectionView: collectionView) { [weak self] collectionView, indexPath, movieViewModel -> UICollectionViewCell? in
+      guard let self = self else { return nil }
       let cell: MovieCell = collectionView.dequeue(for: indexPath)
-      cell.setup(viewModel: movieViewModel)
+      cell.setup(viewModel: movieViewModel, refresh: self._viewWillAppear.eraseToAnyPublisher())
       return cell
     }
   }()
@@ -118,6 +120,11 @@ public final class MoviesViewController: UICollectionViewController {
       _refresh.send(())
     }
     viewAlredyAppeared = true
+  }
+
+  override public func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    _viewWillAppear.send(())
   }
 
   override public func viewDidDisappear(_ animated: Bool) {
