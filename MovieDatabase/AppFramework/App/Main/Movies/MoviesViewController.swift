@@ -142,7 +142,7 @@ public final class MoviesViewController: UICollectionViewController {
     // TODO: Other attributes
     let movieDetailsViewModel = MovieDetailsViewModel(
       id: Int64(item.movie.id),
-      poster: item.imageUrl.absoluteString,
+      poster: item.movie.posterUrl.absoluteString,
       title: item.movie.title,
       year: item.movie.year,
       genres: item.movie.genreIds.map(String.init),

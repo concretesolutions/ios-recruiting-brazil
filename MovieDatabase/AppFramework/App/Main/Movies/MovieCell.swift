@@ -73,7 +73,7 @@ public final class MovieCell: UICollectionViewCell {
   public func setup(viewModel: MovieViewModel) {
     titleLabel.text = viewModel.movie.title
 
-    backgroundImageView.kf.setImage(with: viewModel.imageUrl)
+    backgroundImageView.kf.setImage(with: viewModel.movie.posterUrl)
 
     let output = viewModel.transform(
       .init(

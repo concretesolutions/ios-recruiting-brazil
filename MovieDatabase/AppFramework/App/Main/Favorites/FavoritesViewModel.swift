@@ -51,7 +51,8 @@ public struct FavoritesViewModel {
                     title: movie.title,
                     year: movie.year,
                     genreIds: movie.genres.map(\.id),
-                    overview: movie.overview
+                    overview: movie.overview,
+                    posterUrl: URL(string: "https://example.com")!
                   )
                 )
               }

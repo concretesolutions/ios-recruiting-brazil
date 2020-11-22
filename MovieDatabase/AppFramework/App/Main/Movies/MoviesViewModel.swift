@@ -77,9 +77,9 @@ public struct MoviesViewModel {
               title: movie.title,
               year: movie.year(),
               genreIds: movie.genreIds,
-              overview: movie.overview
+              overview: movie.overview,
+              posterUrl: imageBaseUrl.appendingPathComponent(movie.posterPath)
             ),
-            imageUrl: imageBaseUrl.appendingPathComponent(movie.posterPath),
             repo: movieRepo
           )
         }

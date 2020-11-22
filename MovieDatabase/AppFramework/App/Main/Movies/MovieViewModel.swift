@@ -29,25 +29,21 @@ public struct MovieViewModel: Identifiable, Hashable {
 
   public let movie: Movie
   public var id: Int64 { movie.id }
-  public let imageUrl: URL
   public let transform: (Input) -> Output
 
   public init(
     movie: Movie,
-    imageUrl: URL,
     transform: @escaping (Input) -> Output
   ) {
     self.movie = movie
-    self.imageUrl = imageUrl
     self.transform = transform
   }
 
   public static func `default`(
     movie: Movie,
-    imageUrl: URL,
     repo: MOMovieRepo
   ) -> MovieViewModel {
-    MovieViewModel(movie: movie, imageUrl: imageUrl) { input in
+    MovieViewModel(movie: movie) { input in
       var _moMovie = repo.get(movie.id)
       var currentLike = _moMovie != nil
 
