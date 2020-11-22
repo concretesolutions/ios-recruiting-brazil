@@ -2,11 +2,11 @@ import Combine
 
 public struct MovieViewModel: Identifiable, Hashable {
   public static func == (lhs: MovieViewModel, rhs: MovieViewModel) -> Bool {
-    lhs.id == rhs.id
+    lhs.movie.id == rhs.movie.id
   }
 
   public func hash(into hasher: inout Hasher) {
-    hasher.combine(id)
+    hasher.combine(movie.id)
   }
 
   public struct Input {
@@ -27,44 +27,29 @@ public struct MovieViewModel: Identifiable, Hashable {
     }
   }
 
-  public let id: Int
-  public let title: String
-  public let year: String
-  public let overview: String
-  public let genres: [Int16]
+  public let movie: Movie
+  public var id: Int64 { movie.id }
   public let imageUrl: URL
   public let transform: (Input) -> Output
 
   public init(
-    id: Int,
-    title: String,
-    year: String,
-    overview: String,
-    genres: [Int16],
+    movie: Movie,
     imageUrl: URL,
     transform: @escaping (Input) -> Output
   ) {
-    self.id = id
-    self.title = title
-    self.year = year
-    self.overview = overview
-    self.genres = genres
+    self.movie = movie
     self.imageUrl = imageUrl
     self.transform = transform
   }
 
   public static func `default`(
-    id: Int,
-    title: String,
-    year: String,
-    overview: String,
-    genres: [Int16],
+    movie: Movie,
     imageUrl: URL,
     repo: MOMovieRepo
   ) -> MovieViewModel {
-    MovieViewModel(id: id, title: title, year: year, overview: overview, genres: genres, imageUrl: imageUrl) { input in
-      var movie = repo.get(id)
-      var currentLike = movie != nil
+    MovieViewModel(movie: movie, imageUrl: imageUrl) { input in
+      var _moMovie = repo.get(movie.id)
+      var currentLike = _moMovie != nil
 
       let genreRepo = MOGenreRepo.default(moc: Env.database.moc)
       var moGenres: [MOGenre]?
@@ -76,22 +61,22 @@ public struct MovieViewModel: Identifiable, Hashable {
         .prepend(currentLike)
         .handleEvents(receiveOutput: { liked in
           if liked {
-            if movie == nil {
+            if _moMovie == nil {
               if moGenres == nil {
-                moGenres = genres.compactMap { genreId in genreRepo.get(genreId) }
+                moGenres = movie.genreIds.compactMap { genreId in genreRepo.get(genreId) }
               }
-              movie = repo.create { movie in
-                movie.id = Int64(id)
-                movie.title = title
-                movie.year = year
-                movie.genres = Set(moGenres ?? [])
-                movie.overview = overview
+              _moMovie = repo.create { moMovie in
+                moMovie.id = movie.id
+                moMovie.title = movie.title
+                moMovie.year = movie.year
+                moMovie.genres = Set(moGenres ?? [])
+                moMovie.overview = movie.overview
               }
             }
           } else {
-            if let movieUnwrapped = movie {
+            if let movieUnwrapped = _moMovie {
               _ = repo.delete(movieUnwrapped)
-              movie = nil
+              _moMovie = nil
             }
           }
           currentLike = liked

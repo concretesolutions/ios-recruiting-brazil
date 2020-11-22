@@ -141,12 +141,12 @@ public final class MoviesViewController: UICollectionViewController {
     guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
     // TODO: Other attributes
     let movieDetailsViewModel = MovieDetailsViewModel(
-      id: Int64(item.id),
+      id: Int64(item.movie.id),
       poster: item.imageUrl.absoluteString,
-      title: item.title,
-      year: item.year,
-      genres: item.genres.map(String.init),
-      overview: item.overview
+      title: item.movie.title,
+      year: item.movie.year,
+      genres: item.movie.genreIds.map(String.init),
+      overview: item.movie.overview
     )
     _presentMovieDetails.send(movieDetailsViewModel)
   }

@@ -2,13 +2,13 @@ import CoreData
 import os.log
 
 public struct MOMovieRepo {
-  public let get: (Int) -> MOMovie?
+  public let get: (Int64) -> MOMovie?
   public let getAll: () -> [MOMovie]
   public let create: ((inout MOMovie) -> Void) -> MOMovie?
   public let delete: (MOMovie) -> Bool
 
   public init(
-    get: @escaping (Int) -> MOMovie?,
+    get: @escaping (Int64) -> MOMovie?,
     getAll: @escaping () -> [MOMovie],
     create: @escaping ((inout MOMovie) -> Void) -> MOMovie?,
     delete: @escaping (MOMovie) -> Bool

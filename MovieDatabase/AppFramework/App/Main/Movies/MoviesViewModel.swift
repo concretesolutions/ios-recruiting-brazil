@@ -72,11 +72,13 @@ public struct MoviesViewModel {
         let imageBaseUrl = metaData.configuration?.urlForSmallImage() ?? Constants.fallbackImageBaseUrl
         return movies.map { movie in
           MovieViewModel.default(
-            id: movie.id,
-            title: movie.title,
-            year: movie.year(),
-            overview: movie.overview,
-            genres: movie.genreIds,
+            movie: .init(
+              id: Int64(movie.id),
+              title: movie.title,
+              year: movie.year(),
+              genreIds: movie.genreIds,
+              overview: movie.overview
+            ),
             imageUrl: imageBaseUrl.appendingPathComponent(movie.posterPath),
             repo: movieRepo
           )
