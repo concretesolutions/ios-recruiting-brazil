@@ -1,7 +1,7 @@
 import CoreData
 import os.log
 
-public struct MOMovieRepo {
+public struct MovieRepo {
   public let get: (Int64) -> MOMovie?
   public let getAll: () -> [MOMovie]
   public let create: ((inout MOMovie) -> Void) -> MOMovie?
@@ -19,8 +19,8 @@ public struct MOMovieRepo {
     self.delete = delete
   }
 
-  public static func `default`(moc: NSManagedObjectContext) -> MOMovieRepo {
-    MOMovieRepo(
+  public static func `default`(moc: NSManagedObjectContext) -> MovieRepo {
+    MovieRepo(
       get: { id in
         let fetchRequest = MOMovie.fetchRequest() as! NSFetchRequest<MOMovie>
         fetchRequest.predicate = NSPredicate(format: "id = %i", id)

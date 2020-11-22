@@ -41,7 +41,7 @@ public struct MovieViewModel: Identifiable, Hashable {
 
   public static func `default`(
     movie: Movie,
-    repo: MOMovieRepo
+    repo: MovieRepo
   ) -> MovieViewModel {
     MovieViewModel(movie: movie) { input in
       var _moMovie = repo.get(movie.id)

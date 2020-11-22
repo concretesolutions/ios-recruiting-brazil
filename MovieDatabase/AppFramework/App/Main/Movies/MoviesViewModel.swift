@@ -52,7 +52,7 @@ public struct MoviesViewModel {
   }
 
   public static func `default`(
-    movieRepo: MOMovieRepo = MOMovieRepo.default(moc: Env.database.moc),
+    movieRepo: MovieRepo = MovieRepo.default(moc: Env.database.moc),
     metaData: AnyPublisher<MetaData, Never>
   ) -> MoviesViewModel {
     MoviesViewModel { input in

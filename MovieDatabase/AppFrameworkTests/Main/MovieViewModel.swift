@@ -5,9 +5,9 @@ import TestSupport
 import TheMovieDatabaseApi
 import XCTest
 
-private class MOMovieRepoSpy {
-  lazy var movieRepo: MOMovieRepo = {
-    MOMovieRepo.mock(
+private class MovieRepoSpy {
+  lazy var movieRepo: MovieRepo = {
+    MovieRepo.mock(
       get: { [weak self] id in
         self?.get.append(id)
         return self?.movie
@@ -62,7 +62,7 @@ final class MovieViewModelTests: XCTestCase {
   }
 
   func testMovieViewModel_LikeEvents_ShouldCreateAndDeleteMOMovies() throws {
-    let spy = MOMovieRepoSpy(database: database)
+    let spy = MovieRepoSpy(database: database)
     let viewModel = MovieViewModel.default(id: 1, title: "", imageUrl: TestConstants.exampleUrl, repo: spy.movieRepo)
 
     let like = PassthroughSubject<Void, Never>()

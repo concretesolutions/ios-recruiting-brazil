@@ -35,7 +35,7 @@ public struct FavoritesViewModel {
     self.transform = transform
   }
 
-  public static func `default`(repo: MOMovieRepo = .default(moc: Env.database.moc)) -> FavoritesViewModel {
+  public static func `default`(repo: MovieRepo = .default(moc: Env.database.moc)) -> FavoritesViewModel {
     FavoritesViewModel { input in
 
       // We can improve this logic by watching the Notification with name NSManagedObjectContextDidSave
