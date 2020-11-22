@@ -51,7 +51,7 @@ public class MetaDataLoader {
           let fromServerIds = Set(genres.map(\.id))
           let changes = currentSavedIds
             .symmetricDifference(fromServerIds)
-            .intersection(currentSavedIds)
+            .intersection(fromServerIds)
 
           if changes.count == 0 { return }
 
