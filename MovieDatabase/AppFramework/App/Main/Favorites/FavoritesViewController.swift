@@ -89,14 +89,7 @@ public final class FavoritesViewController: UITableViewController {
     guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
     // TODO: Other attributes
 
-    let movieDetailsViewModel = MovieDetailsViewModel(
-      id: item.id,
-      poster: "POSTER",
-      title: item.movie.title,
-      year: item.movie.year,
-      genres: item.movie.genreIds.map(String.init),
-      overview: item.movie.overview
-    )
+    let movieDetailsViewModel = MovieDetailsViewModel(movie: item.movie)
     _presentMovieDetails.send(movieDetailsViewModel)
   }
 

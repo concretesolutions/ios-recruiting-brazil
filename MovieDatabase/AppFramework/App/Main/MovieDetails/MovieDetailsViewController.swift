@@ -64,15 +64,15 @@ public final class MovieDetailsViewController: UITableViewController {
 
     tableView.tableFooterView = UIView()
 
-    let titleViewModel = MovieDetailTitleViewModel.default(title: viewModel.title, initialLiked: false)
+    let titleViewModel = MovieDetailTitleViewModel.default(title: viewModel.movie.title, initialLiked: false)
     var snapshot = Snapshot()
     snapshot.appendSections([.main])
     snapshot.appendItems([
-      .poster(viewModel.poster),
+      .poster(viewModel.movie.posterUrl.absoluteString),
       .title(titleViewModel),
-      .year(viewModel.year),
-      .genres(viewModel.genres),
-      .overview(viewModel.overview),
+      .year(viewModel.movie.year),
+      .genres(viewModel.movie.genreIds.map(String.init)),
+      .overview(viewModel.movie.overview),
     ])
 
     dataSource.apply(snapshot)
