@@ -1,3 +1,4 @@
+import Design
 import UIKit
 
 public final class SplashViewController: UIViewController {
@@ -14,7 +15,7 @@ public final class SplashViewController: UIViewController {
 
   override public func viewDidLoad() {
     super.viewDidLoad()
-    let imageView = UIImageView(image: UIImage(named: "Splash", in: Bundle.main, compatibleWith: nil))
+    let imageView = UIImageView(image: Asset.Images.splash.image)
     imageView.contentMode = .scaleAspectFill
     imageView.translatesAutoresizingMaskIntoConstraints = false
 
