@@ -88,6 +88,7 @@
 		27F28493256B0C2500020C11 /* Assets.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F28492256B0C2500020C11 /* Assets.generated.swift */; };
 		27F2849C256B0F5C00020C11 /* Design.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27F2845B256B032500020C11 /* Design.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		27F284AB256B11A200020C11 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27F284AD256B11A200020C11 /* Localizable.strings */; };
+		27F284B4256B133700020C11 /* Strings.genreated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F284B3256B133700020C11 /* Strings.genreated.swift */; };
 		27F491542566CD9300C8F501 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F491532566CD9300C8F501 /* Constants.swift */; };
 		27F491592566CDEE00C8F501 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F491582566CDEE00C8F501 /* ApiKey.swift */; };
 		27F4AAF325698CC0006E5077 /* GenreRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F4AAF225698CC0006E5077 /* GenreRepo.swift */; };
@@ -289,6 +290,7 @@
 		27F28471256B041200020C11 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		27F28492256B0C2500020C11 /* Assets.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.generated.swift; sourceTree = "<group>"; };
 		27F284AC256B11A200020C11 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		27F284B3256B133700020C11 /* Strings.genreated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.genreated.swift; sourceTree = "<group>"; };
 		27F491532566CD9300C8F501 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		27F491582566CDEE00C8F501 /* ApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 		27F4AAF225698CC0006E5077 /* GenreRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreRepo.swift; sourceTree = "<group>"; };
@@ -556,6 +558,7 @@
 				27A734E42564650D0041FCB9 /* AppFramework.h */,
 				27A734E52564650D0041FCB9 /* Info.plist */,
 				27F284AD256B11A200020C11 /* Localizable.strings */,
+				27F284B3256B133700020C11 /* Strings.genreated.swift */,
 				2784FB3125698BC400FD4E41 /* App */,
 				276A143A256ACD9700606B45 /* Models */,
 				2772401125681F0900D713A5 /* CoreData */,
@@ -752,6 +755,7 @@
 			buildConfigurationList = 27A734EE2564650D0041FCB9 /* Build configuration list for PBXNativeTarget "AppFramework" */;
 			buildPhases = (
 				27A734DD2564650D0041FCB9 /* Headers */,
+				27F284AE256B12AD00020C11 /* SwiftGen */,
 				27A734DE2564650D0041FCB9 /* Sources */,
 				27A734DF2564650D0041FCB9 /* Frameworks */,
 				27A734E02564650D0041FCB9 /* Resources */,
@@ -954,6 +958,24 @@
 			shellPath = /bin/sh;
 			shellScript = "cd Design\nmint run swiftgen config run\n";
 		};
+		27F284AE256B12AD00020C11 /* SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftGen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd AppFramework\nmint run swiftgen config run\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1020,6 +1042,7 @@
 				276A14172569DD9A00606B45 /* MovieDetailTitleCell.swift in Sources */,
 				272075492564A0E100B3C7C5 /* MovieCell.swift in Sources */,
 				2720753325648F6400B3C7C5 /* FavoritesViewController.swift in Sources */,
+				27F284B4256B133700020C11 /* Strings.genreated.swift in Sources */,
 				27F4AB0025699F15006E5077 /* MetaData.swift in Sources */,
 				276A14122569DD8100606B45 /* MovieDetailPosterCell.swift in Sources */,
 				27CCAFFF256960D80092A4B2 /* MovieDetailsViewController.swift in Sources */,
