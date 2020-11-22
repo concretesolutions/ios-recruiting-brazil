@@ -3,6 +3,7 @@ import TheMovieDatabaseApi
 public struct Environment {
   public var client: TMDClient
   public var database: Database
+  public var notificationCenter: NotificationCenter
 
   init() {
     client = TMDClient(
@@ -14,14 +15,17 @@ public struct Environment {
       ]
     )
     database = Database()
+    notificationCenter = .default
   }
 
   public init(
     client: TMDClient,
-    database: Database
+    database: Database,
+    notificationCenter: NotificationCenter
   ) {
     self.client = client
     self.database = database
+    self.notificationCenter = notificationCenter
   }
 }
 

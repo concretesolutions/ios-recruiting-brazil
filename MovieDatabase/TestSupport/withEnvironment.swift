@@ -14,11 +14,13 @@ public func withEnvironment(
 public func withEnvironment(
   client: TMDClient = Env.client,
   database: Database = Env.database,
+  notificationCenter: NotificationCenter = Env.notificationCenter,
   body: @escaping () -> Void
 ) {
   let env = Environment(
     client: client,
-    database: database
+    database: database,
+    notificationCenter: notificationCenter
   )
   withEnvironment(env, body: body)
 }
