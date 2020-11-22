@@ -13,6 +13,7 @@
     <entity name="Movie" representedClassName=".MOMovie" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="overview" optional="YES" attributeType="String"/>
+        <attribute name="posterUrl" optional="YES" attributeType="URI"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="year" optional="YES" attributeType="String"/>
         <relationship name="genres" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Genre" inverseName="movies" inverseEntity="Genre"/>
@@ -24,6 +25,6 @@
     </entity>
     <elements>
         <element name="Genre" positionX="-63" positionY="18" width="128" height="74"/>
-        <element name="Movie" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="Movie" positionX="-63" positionY="-18" width="128" height="119"/>
     </elements>
 </model>

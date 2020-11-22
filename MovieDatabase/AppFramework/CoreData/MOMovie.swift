@@ -6,4 +6,5 @@ public final class MOMovie: NSManagedObject {
   @NSManaged public var year: String
   @NSManaged public var genres: Set<MOGenre>
   @NSManaged public var overview: String
+  @NSManaged public var posterUrl: URL
 }
