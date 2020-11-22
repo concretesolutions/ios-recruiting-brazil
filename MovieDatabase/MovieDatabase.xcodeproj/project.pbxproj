@@ -50,6 +50,8 @@
 		276A14262569DDB700606B45 /* MovieDetailOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276A14252569DDB700606B45 /* MovieDetailOverviewCell.swift */; };
 		276A142B2569DDFB00606B45 /* MovieDetailViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276A142A2569DDFB00606B45 /* MovieDetailViewItem.swift */; };
 		276A1433256A10A900606B45 /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276A1432256A10A900606B45 /* MovieDetailsViewModel.swift */; };
+		276A143C256ACDAA00606B45 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276A143B256ACDAA00606B45 /* Genre.swift */; };
+		276A1446256ACDC900606B45 /* RemoteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276A1445256ACDC900606B45 /* RemoteConfiguration.swift */; };
 		2772400A25681E4C00D713A5 /* Movies.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2772400825681E4C00D713A5 /* Movies.xcdatamodeld */; };
 		2772401325681F1400D713A5 /* MOMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2772401225681F1400D713A5 /* MOMovie.swift */; };
 		2772401825681FAB00D713A5 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2772401725681FAB00D713A5 /* Database.swift */; };
@@ -234,6 +236,8 @@
 		276A14252569DDB700606B45 /* MovieDetailOverviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailOverviewCell.swift; sourceTree = "<group>"; };
 		276A142A2569DDFB00606B45 /* MovieDetailViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewItem.swift; sourceTree = "<group>"; };
 		276A1432256A10A900606B45 /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
+		276A143B256ACDAA00606B45 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		276A1445256ACDC900606B45 /* RemoteConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfiguration.swift; sourceTree = "<group>"; };
 		2772400925681E4C00D713A5 /* Movies.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Movies.xcdatamodel; sourceTree = "<group>"; };
 		2772401225681F1400D713A5 /* MOMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MOMovie.swift; sourceTree = "<group>"; };
 		2772401725681FAB00D713A5 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
@@ -370,7 +374,6 @@
 				274B3FC62565EF21002D9B4C /* Environment.swift */,
 				27F491532566CD9300C8F501 /* Constants.swift */,
 				277C72602568398E00DD0BA8 /* Logging.swift */,
-				27F4AAFF25699F15006E5077 /* MetaData.swift */,
 				27F4AB0425699F1E006E5077 /* MetaDataLoader.swift */,
 			);
 			path = Library;
@@ -466,6 +469,16 @@
 			path = Endpoints;
 			sourceTree = "<group>";
 		};
+		276A143A256ACD9700606B45 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				27F4AAFF25699F15006E5077 /* MetaData.swift */,
+				276A143B256ACDAA00606B45 /* Genre.swift */,
+				276A1445256ACDC900606B45 /* RemoteConfiguration.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		2772401125681F0900D713A5 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,6 +521,7 @@
 				27A734E42564650D0041FCB9 /* AppFramework.h */,
 				27A734E52564650D0041FCB9 /* Info.plist */,
 				2784FB3125698BC400FD4E41 /* App */,
+				276A143A256ACD9700606B45 /* Models */,
 				2772401125681F0900D713A5 /* CoreData */,
 				272075362564902D00B3C7C5 /* Library */,
 			);
@@ -895,6 +909,7 @@
 				2720753F2564913500B3C7C5 /* UICollectionView+Helpers.swift in Sources */,
 				278806AF2568935700120A22 /* FavoriteViewModel.swift in Sources */,
 				278806A5256871F200120A22 /* UITableView+Helpers.swift in Sources */,
+				276A1446256ACDC900606B45 /* RemoteConfiguration.swift in Sources */,
 				276A14212569DDAD00606B45 /* MovieDetailGenresCell.swift in Sources */,
 				276A142B2569DDFB00606B45 /* MovieDetailViewItem.swift in Sources */,
 				2784FB2D2569887600FD4E41 /* SplashViewController.swift in Sources */,
@@ -908,6 +923,7 @@
 				2720754625649C3100B3C7C5 /* MovieViewModel.swift in Sources */,
 				2720752E25648DFE00B3C7C5 /* MoviesViewController.swift in Sources */,
 				278806862568634F00120A22 /* FavoritesViewModel.swift in Sources */,
+				276A143C256ACDAA00606B45 /* Genre.swift in Sources */,
 				27F4AAF325698CC0006E5077 /* MOGenreRepo.swift in Sources */,
 				2772401325681F1400D713A5 /* MOMovie.swift in Sources */,
 				27F491592566CDEE00C8F501 /* ApiKey.swift in Sources */,

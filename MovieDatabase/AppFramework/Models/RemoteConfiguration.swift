@@ -27,29 +27,3 @@ public struct RemoteConfiguration {
     return url
   }
 }
-
-public struct Genre {
-  public let id: Int16
-  public let name: String
-
-  public init(
-    id: Int16,
-    name: String
-  ) {
-    self.id = id
-    self.name = name
-  }
-}
-
-public struct MetaData {
-  public let configuration: RemoteConfiguration?
-  public let genres: [Genre]?
-
-  public init(
-    configuration: RemoteConfiguration?,
-    genres: [Genre]?
-  ) {
-    self.configuration = configuration
-    self.genres = genres
-  }
-}
