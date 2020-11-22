@@ -56,10 +56,12 @@ public struct MovieRepo {
         moMovie.overview = movie.overview
         moMovie.posterUrl = movie.posterUrl
 
-//        moMovie.genres = movie.genres
-        moMovie.genres = .init()
+        let moGenresFetchRequest = MOGenre.fetchRequest() as! NSFetchRequest<MOGenre>
 
         do {
+          let genres = try moc.fetch(moGenresFetchRequest)
+          let movieGenres = genres.filter { movie.genreIds.contains($0.id) }
+          moMovie.genres = Set(movieGenres)
           try moc.save()
           os_log("Created MOMovie with id %i", log: generalLog, type: .debug, movie.id)
           return moMovie
