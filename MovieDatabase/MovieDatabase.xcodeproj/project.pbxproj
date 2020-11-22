@@ -87,6 +87,7 @@
 		27F28472256B041200020C11 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27F28471256B041200020C11 /* Colors.xcassets */; };
 		27F28493256B0C2500020C11 /* Assets.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F28492256B0C2500020C11 /* Assets.generated.swift */; };
 		27F2849C256B0F5C00020C11 /* Design.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27F2845B256B032500020C11 /* Design.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		27F284AB256B11A200020C11 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27F284AD256B11A200020C11 /* Localizable.strings */; };
 		27F491542566CD9300C8F501 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F491532566CD9300C8F501 /* Constants.swift */; };
 		27F491592566CDEE00C8F501 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F491582566CDEE00C8F501 /* ApiKey.swift */; };
 		27F4AAF325698CC0006E5077 /* GenreRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F4AAF225698CC0006E5077 /* GenreRepo.swift */; };
@@ -287,6 +288,7 @@
 		27F2846B256B034200020C11 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		27F28471256B041200020C11 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		27F28492256B0C2500020C11 /* Assets.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.generated.swift; sourceTree = "<group>"; };
+		27F284AC256B11A200020C11 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		27F491532566CD9300C8F501 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		27F491582566CDEE00C8F501 /* ApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 		27F4AAF225698CC0006E5077 /* GenreRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreRepo.swift; sourceTree = "<group>"; };
@@ -553,6 +555,7 @@
 			children = (
 				27A734E42564650D0041FCB9 /* AppFramework.h */,
 				27A734E52564650D0041FCB9 /* Info.plist */,
+				27F284AD256B11A200020C11 /* Localizable.strings */,
 				2784FB3125698BC400FD4E41 /* App */,
 				276A143A256ACD9700606B45 /* Models */,
 				2772401125681F0900D713A5 /* CoreData */,
@@ -906,6 +909,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27F284AB256B11A200020C11 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1120,6 +1124,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		27F284AD256B11A200020C11 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27F284AC256B11A200020C11 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		27F4E82625645A2F00080104 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
