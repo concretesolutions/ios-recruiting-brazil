@@ -4,13 +4,13 @@ import os.log
 public struct MovieRepo {
   public let get: (Int64) -> MOMovie?
   public let getAll: () -> [MOMovie]
-  public let create: ((inout MOMovie) -> Void) -> MOMovie?
+  public let create: (Movie) -> MOMovie?
   public let delete: (MOMovie) -> Bool
 
   public init(
     get: @escaping (Int64) -> MOMovie?,
     getAll: @escaping () -> [MOMovie],
-    create: @escaping ((inout MOMovie) -> Void) -> MOMovie?,
+    create: @escaping (Movie) -> MOMovie?,
     delete: @escaping (MOMovie) -> Bool
   ) {
     self.get = get
@@ -48,13 +48,21 @@ public struct MovieRepo {
           return []
         }
       },
-      create: { applyChanges in
-        var movie = MOMovie(context: moc)
-        applyChanges(&movie)
+      create: { movie in
+        let moMovie = MOMovie(context: moc)
+        moMovie.id = movie.id
+        moMovie.title = movie.title
+        moMovie.year = movie.year
+        moMovie.overview = movie.overview
+        moMovie.posterUrl = movie.posterUrl
+
+//        moMovie.genres = movie.genres
+        moMovie.genres = .init()
+
         do {
           try moc.save()
           os_log("Created MOMovie with id %i", log: generalLog, type: .debug, movie.id)
-          return movie
+          return moMovie
         } catch {
           os_log("Failed to create MOMovie, reason: %s", log: generalLog, type: .error, error.localizedDescription)
           return nil

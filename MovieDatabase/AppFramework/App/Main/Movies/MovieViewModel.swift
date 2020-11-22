@@ -61,13 +61,7 @@ public struct MovieViewModel: Identifiable, Hashable {
               if moGenres == nil {
                 moGenres = movie.genreIds.compactMap { genreId in genreRepo.get(genreId) }
               }
-              _moMovie = repo.create { moMovie in
-                moMovie.id = movie.id
-                moMovie.title = movie.title
-                moMovie.year = movie.year
-                moMovie.genres = Set(moGenres ?? [])
-                moMovie.overview = movie.overview
-              }
+              _moMovie = repo.create(movie)
             }
           } else {
             if let movieUnwrapped = _moMovie {

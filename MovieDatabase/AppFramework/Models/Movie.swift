@@ -21,4 +21,13 @@ public struct Movie: Equatable, Hashable {
     self.overview = overview
     self.posterUrl = posterUrl
   }
+
+  public init(moMovie: MOMovie) {
+    id = moMovie.id
+    title = moMovie.title
+    year = moMovie.year
+    genreIds = moMovie.genres.map(\.id)
+    overview = moMovie.overview
+    posterUrl = moMovie.posterUrl
+  }
 }
