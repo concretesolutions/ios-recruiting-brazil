@@ -85,6 +85,8 @@
 		27F28463256B032500020C11 /* Design.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27F2845B256B032500020C11 /* Design.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		27F2846C256B034200020C11 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27F2846B256B034200020C11 /* Images.xcassets */; };
 		27F28472256B041200020C11 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27F28471256B041200020C11 /* Colors.xcassets */; };
+		27F28493256B0C2500020C11 /* Assets.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F28492256B0C2500020C11 /* Assets.generated.swift */; };
+		27F2849C256B0F5C00020C11 /* Design.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27F2845B256B032500020C11 /* Design.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		27F491542566CD9300C8F501 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F491532566CD9300C8F501 /* Constants.swift */; };
 		27F491592566CDEE00C8F501 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F491582566CDEE00C8F501 /* ApiKey.swift */; };
 		27F4AAF325698CC0006E5077 /* GenreRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F4AAF225698CC0006E5077 /* GenreRepo.swift */; };
@@ -176,6 +178,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				27F2849C256B0F5C00020C11 /* Design.framework in Embed Frameworks */,
 				273D0B502566E25800DB247D /* KingfisherDynamic in Embed Frameworks */,
 				274B3FBF2565EE9B002D9B4C /* TheMovieDatabaseApi.framework in Embed Frameworks */,
 			);
@@ -283,6 +286,7 @@
 		27F2845E256B032500020C11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27F2846B256B034200020C11 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		27F28471256B041200020C11 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		27F28492256B0C2500020C11 /* Assets.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.generated.swift; sourceTree = "<group>"; };
 		27F491532566CD9300C8F501 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		27F491582566CDEE00C8F501 /* ApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 		27F4AAF225698CC0006E5077 /* GenreRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreRepo.swift; sourceTree = "<group>"; };
@@ -577,6 +581,7 @@
 			children = (
 				27F2845D256B032500020C11 /* Design.h */,
 				27F2845E256B032500020C11 /* Info.plist */,
+				27F28492256B0C2500020C11 /* Assets.generated.swift */,
 				27F2846B256B034200020C11 /* Images.xcassets */,
 				27F28471256B041200020C11 /* Colors.xcassets */,
 			);
@@ -767,6 +772,7 @@
 			buildConfigurationList = 27F28466256B032500020C11 /* Build configuration list for PBXNativeTarget "Design" */;
 			buildPhases = (
 				27F28456256B032500020C11 /* Headers */,
+				27F28485256B0A5200020C11 /* SwiftGen */,
 				27F28457256B032500020C11 /* Sources */,
 				27F28458256B032500020C11 /* Frameworks */,
 				27F28459256B032500020C11 /* Resources */,
@@ -923,6 +929,29 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		27F28485256B0A5200020C11 /* SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Assets.generated.swift",
+				"$(SRCROOT)/swiftgen.yml",
+			);
+			name = SwiftGen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd Design\nmint run swiftgen config run\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		272075AE2564BAF600B3C7C5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1023,6 +1052,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27F28493256B0C2500020C11 /* Assets.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
