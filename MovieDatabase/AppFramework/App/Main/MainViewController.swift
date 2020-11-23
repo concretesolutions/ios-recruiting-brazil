@@ -2,14 +2,12 @@ import Combine
 import UIKit
 
 public final class MainViewController: UITabBarController {
-  private var _presentMovieDetails = PassthroughSubject<Movie, Never>()
-  public lazy var presentMovieDetails: AnyPublisher<Movie, Never> = _presentMovieDetails.eraseToAnyPublisher()
-
-  private let metaData: AnyPublisher<MetaData, Never>
-  var cancellables = Set<AnyCancellable>()
+  let moviesViewController: MoviesViewController
+  let favoritesViewController: FavoritesViewController
 
   public init(metaData: AnyPublisher<MetaData, Never>) {
-    self.metaData = metaData
+    moviesViewController = Self.makeMoviesViewController(metaData: metaData)
+    favoritesViewController = Self.makeFavoritesViewController(metaData: metaData)
     super.init(nibName: nil, bundle: nil)
   }
 
@@ -22,28 +20,20 @@ public final class MainViewController: UITabBarController {
     super.viewDidLoad()
 
     setViewControllers([
-      makeMoviesViewController(),
-      makeFavoritesViewController(),
+      moviesViewController,
+      favoritesViewController,
     ], animated: false)
   }
 
-  private func makeMoviesViewController() -> UIViewController {
+  private static func makeMoviesViewController(metaData: AnyPublisher<MetaData, Never>) -> MoviesViewController {
     let viewController = MoviesViewController(viewModel: .default(metaData: metaData))
     viewController.tabBarItem = UITabBarItem(title: L10n.Screen.Movies.title, image: UIImage(systemName: "list.bullet"), selectedImage: nil)
-    viewController
-      .presentMovieDetails
-      .subscribe(_presentMovieDetails)
-      .store(in: &cancellables)
     return viewController
   }
 
-  private func makeFavoritesViewController() -> UIViewController {
+  private static func makeFavoritesViewController(metaData _: AnyPublisher<MetaData, Never>) -> FavoritesViewController {
     let viewController = FavoritesViewController()
     viewController.tabBarItem = UITabBarItem(title: L10n.Screen.Favorites.title, image: UIImage(systemName: "heart"), selectedImage: nil)
-    viewController
-      .presentMovieDetails
-      .subscribe(_presentMovieDetails)
-      .store(in: &cancellables)
     return viewController
   }
 }

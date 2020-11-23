@@ -9,6 +9,7 @@ public class AppCoordinator {
   private let metaData = CurrentValueSubject<MetaData, Never>(.init(configuration: nil, genres: nil))
 
   private var cancellables = Set<AnyCancellable>()
+  private var childCoordinators = [UUID: Any]()
 
   public init(window: UIWindow) {
     self.window = window
@@ -52,14 +53,43 @@ public class AppCoordinator {
       }
     })
 
-    mainViewController.presentMovieDetails
+    Publishers.Merge(
+      mainViewController.moviesViewController.presentMovieDetails,
+      mainViewController.favoritesViewController.presentMovieDetails
+    )
+    .receive(on: DispatchQueue.main)
+    .sink(receiveValue: { [weak self] movie in
+      guard let self = self else { return }
+      let viewModel = MovieDetailsViewModel(movie: movie, metadata: self.metaData.value)
+      let viewControler = MovieDetailsViewController(viewModel: viewModel)
+      self.navigationController.pushViewController(viewControler, animated: true)
+    })
+    .store(in: &cancellables)
+
+    mainViewController.favoritesViewController.presentFilter
       .receive(on: DispatchQueue.main)
-      .sink(receiveValue: { [weak self] movie in
-        guard let self = self else { return }
-        let viewModel = MovieDetailsViewModel(movie: movie, metadata: self.metaData.value)
-        let viewControler = MovieDetailsViewController(viewModel: viewModel)
-        self.navigationController.pushViewController(viewControler, animated: true)
+      .sink(receiveValue: { [weak self] in
+        self?.goToFilter()
       })
       .store(in: &cancellables)
+  }
+
+  private func goToFilter() {
+    let filterCoordinator = FilterCoordinator(
+      navigationController: navigationController,
+      metadata: metaData.eraseToAnyPublisher()
+    )
+
+    let uuid = UUID()
+    childCoordinators[uuid] = filterCoordinator
+
+    filterCoordinator.finished
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { [weak self] _ in
+        self?.childCoordinators.removeValue(forKey: uuid)
+      })
+      .store(in: &cancellables)
+
+    filterCoordinator.start()
   }
 }

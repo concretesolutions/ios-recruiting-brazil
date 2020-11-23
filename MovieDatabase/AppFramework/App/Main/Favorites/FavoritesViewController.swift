@@ -22,6 +22,8 @@ public final class FavoritesViewController: UITableViewController {
 
   private let _presentMovieDetails = PassthroughSubject<Movie, Never>()
   public lazy var presentMovieDetails: AnyPublisher<Movie, Never> = _presentMovieDetails.eraseToAnyPublisher()
+  private let _presentFilter = PassthroughSubject<Void, Never>()
+  public lazy var presentFilter: AnyPublisher<Void, Never> = _presentFilter.eraseToAnyPublisher()
   fileprivate let _searhText = CurrentValueSubject<String?, Never>(nil)
 
   private let viewModel: FavoritesViewModel
@@ -126,8 +128,7 @@ public final class FavoritesViewController: UITableViewController {
   }
 
   @objc private func didTapFilter() {
-    let viewControler = FilterViewController()
-    navigationController?.pushViewController(viewControler, animated: true)
+    _presentFilter.send(())
   }
 }
 

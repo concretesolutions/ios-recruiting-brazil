@@ -1,3 +1,4 @@
+import Combine
 import UIKit
 
 enum FilterSection: Hashable {
@@ -24,6 +25,11 @@ final class FilterCell: UITableViewCell {
 public final class FilterViewController: UITableViewController {
   typealias DataSource = UITableViewDiffableDataSource<FilterSection, FilterItem>
   typealias Snapshot = NSDiffableDataSourceSnapshot<FilterSection, FilterItem>
+
+  private let _finished = PassthroughSubject<Void, Never>()
+  public lazy var finished = _finished.eraseToAnyPublisher()
+  private let _presentGenres = PassthroughSubject<Void, Never>()
+  public lazy var presentGenres: AnyPublisher<Void, Never> = _presentGenres.eraseToAnyPublisher()
 
   private lazy var dataSource: DataSource = {
     DataSource(tableView: tableView, cellProvider: { tableView, indexPath, item in
@@ -70,5 +76,16 @@ public final class FilterViewController: UITableViewController {
     if let indexPath = tableView.indexPathForSelectedRow {
       tableView.deselectRow(at: indexPath, animated: true)
     }
+  }
+
+  override public func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if indexPath.row == 0 {
+    } else if indexPath.row == 1 {
+      _presentGenres.send(())
+    }
+  }
+
+  deinit {
+    _finished.send(())
   }
 }
