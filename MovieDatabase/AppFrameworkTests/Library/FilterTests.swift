@@ -25,7 +25,7 @@ extension Movie {
 
 final class FilterTests: XCTestCase {
   func testFilterContramap() {
-    let filter = Filter<String>(predicate: { str in str.contains("a") })
+    let filter = Filter<String> { str in str.contains("a") }
       .contramap { (urlQueryItem: URLQueryItem) in
         urlQueryItem.name
       }
@@ -40,6 +40,30 @@ final class FilterTests: XCTestCase {
     XCTAssertEqual(expected, [
       URLQueryItem(name: "bbbab", value: ""),
       URLQueryItem(name: "adsf", value: ""),
+    ])
+  }
+
+  func testFilterMerge_WithAndStrategy() {
+    let filterLessThenTen = Filter<Int> { i in i < 10 }
+    let filterEven = Filter<Int> { i in i % 2 == 0 }
+    let merged = filterLessThenTen.merge(with: filterEven, strategy: .and)
+
+    let expected = merged.runFilter(Array(0 ... 15))
+
+    XCTAssertEqual(expected, [
+      0, 2, 4, 6, 8,
+    ])
+  }
+
+  func testFilterMerge_WithOrStrategy() {
+    let filterLessThenFive = Filter<Int> { i in i < 5 }
+    let filterEven = Filter<Int> { i in i % 2 == 0 }
+    let merged = filterLessThenFive.merge(with: filterEven, strategy: .or)
+
+    let expected = merged.runFilter(Array(0 ... 10))
+
+    XCTAssertEqual(expected, [
+      0, 1, 2, 3, 4, 6, 8, 10,
     ])
   }
 

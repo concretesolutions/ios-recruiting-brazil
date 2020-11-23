@@ -35,6 +35,7 @@
 		274B3FBF2565EE9B002D9B4C /* TheMovieDatabaseApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 275335C52565B97C00CC7225 /* TheMovieDatabaseApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		274B3FC72565EF21002D9B4C /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274B3FC62565EF21002D9B4C /* Environment.swift */; };
 		2752F549256C093800D5041B /* MoviesSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2752F548256C093800D5041B /* MoviesSearchResultsViewController.swift */; };
+		2752F553256C101600D5041B /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2752F552256C101600D5041B /* Filter.swift */; };
 		275335CE2565B97C00CC7225 /* TheMovieDatabaseApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 275335C52565B97C00CC7225 /* TheMovieDatabaseApi.framework */; };
 		275335D72565B97C00CC7225 /* TheMovieDatabaseApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 275335C72565B97C00CC7225 /* TheMovieDatabaseApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		275335DA2565B97C00CC7225 /* TheMovieDatabaseApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 275335C52565B97C00CC7225 /* TheMovieDatabaseApi.framework */; };
@@ -77,6 +78,7 @@
 		278806A5256871F200120A22 /* UITableView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278806A4256871F200120A22 /* UITableView+Helpers.swift */; };
 		278806AA2568934200120A22 /* FavoriiteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278806A92568934200120A22 /* FavoriiteCell.swift */; };
 		278806AF2568935700120A22 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278806AE2568935700120A22 /* FavoriteViewModel.swift */; };
+		279C7158256C168200E13718 /* FilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279C7157256C168200E13718 /* FilterTests.swift */; };
 		27A734E62564650D0041FCB9 /* AppFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 27A734E42564650D0041FCB9 /* AppFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		27A734E92564650D0041FCB9 /* AppFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A734E22564650D0041FCB9 /* AppFramework.framework */; };
 		27A734EA2564650D0041FCB9 /* AppFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27A734E22564650D0041FCB9 /* AppFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -241,6 +243,7 @@
 		274B3FB72565ECA6002D9B4C /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		274B3FC62565EF21002D9B4C /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		2752F548256C093800D5041B /* MoviesSearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesSearchResultsViewController.swift; sourceTree = "<group>"; };
+		2752F552256C101600D5041B /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		275335C52565B97C00CC7225 /* TheMovieDatabaseApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TheMovieDatabaseApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		275335C72565B97C00CC7225 /* TheMovieDatabaseApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TheMovieDatabaseApi.h; sourceTree = "<group>"; };
 		275335C82565B97C00CC7225 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -282,6 +285,7 @@
 		278806A4256871F200120A22 /* UITableView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Helpers.swift"; sourceTree = "<group>"; };
 		278806A92568934200120A22 /* FavoriiteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriiteCell.swift; sourceTree = "<group>"; };
 		278806AE2568935700120A22 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
+		279C7157256C168200E13718 /* FilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTests.swift; sourceTree = "<group>"; };
 		27A734E22564650D0041FCB9 /* AppFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A734E42564650D0041FCB9 /* AppFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppFramework.h; sourceTree = "<group>"; };
 		27A734E52564650D0041FCB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -417,6 +421,7 @@
 				27F491532566CD9300C8F501 /* Constants.swift */,
 				277C72602568398E00DD0BA8 /* Logging.swift */,
 				27F4AB0425699F1E006E5077 /* MetaDataLoader.swift */,
+				2752F552256C101600D5041B /* Filter.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -435,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				272075C42564BC0300B3C7C5 /* PaginationSinkTests.swift */,
+				279C7157256C168200E13718 /* FilterTests.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -990,6 +996,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				273D0B97256709E600DB247D /* MoviesViewModelTests.swift in Sources */,
+				279C7158256C168200E13718 /* FilterTests.swift in Sources */,
 				272075C52564BC0300B3C7C5 /* PaginationSinkTests.swift in Sources */,
 				277C726B25683F8600DD0BA8 /* MovieViewModelTests.swift in Sources */,
 			);
@@ -1068,6 +1075,7 @@
 				278806AA2568934200120A22 /* FavoriiteCell.swift in Sources */,
 				27F284BA256B2E2300020C11 /* FavoritesSearchResultsViewController.swift in Sources */,
 				2720754625649C3100B3C7C5 /* MovieViewModel.swift in Sources */,
+				2752F553256C101600D5041B /* Filter.swift in Sources */,
 				2720752E25648DFE00B3C7C5 /* MoviesViewController.swift in Sources */,
 				278806862568634F00120A22 /* FavoritesViewModel.swift in Sources */,
 				2752F549256C093800D5041B /* MoviesSearchResultsViewController.swift in Sources */,

@@ -14,9 +14,27 @@ public struct Filter<T> {
       self.predicate(f(u))
     }
   }
+
+  public func merge(with other: Filter<T>, strategy: Filters.Strategy) -> Filter<T> {
+    switch strategy {
+    case .and:
+      return Filter<T> { t in
+        self.predicate(t) && other.predicate(t)
+      }
+    case .or:
+      return Filter<T> { t in
+        self.predicate(t) || other.predicate(t)
+      }
+    }
+  }
 }
 
 public enum Filters {
+  public enum Strategy {
+    case and
+    case or
+  }
+
   public static func movieFilter(byTitle titleSearchString: String) -> Filter<Movie> {
     let strippedString = titleSearchString.trimmingCharacters(in: .whitespaces)
     let searchItems = strippedString.components(separatedBy: " ") as [String]
@@ -38,16 +56,6 @@ public enum Filters {
       Set(genreIds)
         .intersection(Set(movie.genreIds))
         .count > 0
-    }
-  }
-
-  public static func movieFilter(byTitle titleSearchString: String, year _: String, genreIds _: [Int16]) -> Filter<Movie> {
-    let strippedString = titleSearchString.trimmingCharacters(in: .whitespaces)
-    let searchItems = strippedString.components(separatedBy: " ") as [String]
-    let predicates = searchItems.map(comparisonPredicateForTitle)
-    let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-    return Filter<Movie> { movie in
-      predicate.evaluate(with: movie.title)
     }
   }
 }
