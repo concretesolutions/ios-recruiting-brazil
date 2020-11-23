@@ -16,6 +16,14 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "screen.favorites.title")
       /// Unfavorite
       internal static let unfavorite = L10n.tr("Localizable", "screen.favorites.unfavorite")
+      internal enum Filter {
+        /// Date
+        internal static let date = L10n.tr("Localizable", "screen.favorites.filter.date")
+        /// Genres
+        internal static let genres = L10n.tr("Localizable", "screen.favorites.filter.genres")
+        /// Filter
+        internal static let title = L10n.tr("Localizable", "screen.favorites.filter.title")
+      }
     }
 
     internal enum MovieDetails {

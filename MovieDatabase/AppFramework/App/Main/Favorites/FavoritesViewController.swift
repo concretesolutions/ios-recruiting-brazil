@@ -37,6 +37,12 @@ public final class FavoritesViewController: UITableViewController {
 
   private let _refreshValues = PassthroughSubject<Void, Never>()
 
+  private lazy var filterButton = UIBarButtonItem(
+    image: UIImage(systemName: "line.horizontal.3.decrease.circle"),
+    style: .plain,
+    target: self,
+    action: #selector(didTapFilter)
+  )
   private let resultsController = FavoritesSearchResultsViewController()
   private lazy var searchController: UISearchController = {
     let searchController = UISearchController(searchResultsController: resultsController)
@@ -99,12 +105,14 @@ public final class FavoritesViewController: UITableViewController {
     super.viewDidAppear(animated)
     tabBarController?.navigationItem.title = L10n.Screen.Favorites.title
     tabBarController?.navigationItem.searchController = searchController
+    tabBarController?.navigationItem.rightBarButtonItem = filterButton
     _refreshValues.send(())
   }
 
   override public func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     tabBarController?.navigationItem.searchController = nil
+    tabBarController?.navigationItem.rightBarButtonItem = nil
   }
 
   override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -115,6 +123,11 @@ public final class FavoritesViewController: UITableViewController {
 
   override public func tableView(_: UITableView, titleForDeleteConfirmationButtonForRowAt _: IndexPath) -> String? {
     L10n.Screen.Favorites.unfavorite
+  }
+
+  @objc private func didTapFilter() {
+    let viewControler = FilterViewController()
+    navigationController?.pushViewController(viewControler, animated: true)
   }
 }
 
