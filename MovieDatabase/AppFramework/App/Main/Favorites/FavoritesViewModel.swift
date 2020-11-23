@@ -9,23 +9,29 @@ public struct FavoritesViewModel {
   public struct Input {
     public let refresh: AnyPublisher<Void, Never>
     public let delete: AnyPublisher<IndexPath, Never>
+    public let searchText: AnyPublisher<String?, Never>
 
     public init(
       refresh: AnyPublisher<Void, Never>,
-      delete: AnyPublisher<IndexPath, Never>
+      delete: AnyPublisher<IndexPath, Never>,
+      searchText: AnyPublisher<String?, Never>
     ) {
       self.refresh = refresh
       self.delete = delete
+      self.searchText = searchText
     }
   }
 
   public struct Output {
     public let values: AnyPublisher<[FavoriteViewModel], Never>
+    public let filteredValues: AnyPublisher<[FavoriteViewModel], Never>
 
     public init(
-      values: AnyPublisher<[FavoriteViewModel], Never>
+      values: AnyPublisher<[FavoriteViewModel], Never>,
+      filteredValues: AnyPublisher<[FavoriteViewModel], Never>
     ) {
       self.values = values
+      self.filteredValues = filteredValues
     }
   }
 
@@ -69,10 +75,44 @@ public struct FavoritesViewModel {
           }
         }
         .switchToLatest()
+        .share()
+
+      let filteredValues = Publishers.CombineLatest(input.searchText, values)
+        .map { searchText, favoriteViewModels -> [FavoriteViewModel] in
+          guard let searchText = searchText, !searchText.isEmpty else {
+            return []
+          }
+          let strippedString = searchText.trimmingCharacters(in: .whitespaces)
+          let searchItems = strippedString.components(separatedBy: " ") as [String]
+          let predicates = searchItems.map(predicates(for:))
+          let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+          return favoriteViewModels.filter { predicate.evaluate(with: $0.movie.title) }
+        }
 
       return Output(
-        values: values.eraseToAnyPublisher()
+        values: values.eraseToAnyPublisher(),
+        filteredValues: filteredValues.eraseToAnyPublisher()
       )
     }
   }
+}
+
+private func predicates(for searchString: String) -> NSComparisonPredicate {
+  let titleExpression = NSExpression(
+    block: { value, _, _ in
+      value!
+    },
+    arguments: nil
+  )
+  let searchStringExpression = NSExpression(forConstantValue: searchString)
+
+  let titleSearchComparisonPredicate = NSComparisonPredicate(
+    leftExpression: titleExpression,
+    rightExpression: searchStringExpression,
+    modifier: .direct,
+    type: .contains,
+    options: [.caseInsensitive, .diacriticInsensitive]
+  )
+
+  return titleSearchComparisonPredicate
 }

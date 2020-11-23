@@ -22,6 +22,7 @@ public final class FavoritesViewController: UITableViewController {
 
   private let _presentMovieDetails = PassthroughSubject<Movie, Never>()
   public lazy var presentMovieDetails: AnyPublisher<Movie, Never> = _presentMovieDetails.eraseToAnyPublisher()
+  fileprivate let _searhText = CurrentValueSubject<String?, Never>(nil)
 
   private let viewModel: FavoritesViewModel
   private var cancellables = Set<AnyCancellable>()
@@ -36,6 +37,14 @@ public final class FavoritesViewController: UITableViewController {
 
   private let _refreshValues = PassthroughSubject<Void, Never>()
 
+  private let resultsController = FavoritesSearchResultsViewController()
+  private lazy var searchController: UISearchController = {
+    let searchController = UISearchController(searchResultsController: resultsController)
+    searchController.searchBar.autocapitalizationType = .none
+    searchController.searchResultsUpdater = self
+    return searchController
+  }()
+
   public init(viewModel: FavoritesViewModel = .default()) {
     self.viewModel = viewModel
     super.init(style: .plain)
@@ -48,6 +57,8 @@ public final class FavoritesViewController: UITableViewController {
 
   override public func viewDidLoad() {
     super.viewDidLoad()
+    definesPresentationContext = true
+
     tableView.tableFooterView = UIView()
     tableView.register(FavoriteCell.self)
 
@@ -58,7 +69,8 @@ public final class FavoritesViewController: UITableViewController {
         refresh: _refreshValues
           .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
           .eraseToAnyPublisher(),
-        delete: dataSource.delete
+        delete: dataSource.delete,
+        searchText: _searhText.eraseToAnyPublisher()
       )
     )
 
@@ -71,17 +83,28 @@ public final class FavoritesViewController: UITableViewController {
         self?.dataSource.apply(snapshot)
       })
       .store(in: &cancellables)
+
+    output.filteredValues
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { [weak self] favorites in
+        var snapshot = Snapshot()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(favorites)
+        self?.resultsController.dataSource.apply(snapshot)
+      })
+      .store(in: &cancellables)
   }
 
   override public func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    tabBarController?.title = L10n.Screen.Favorites.title
+    tabBarController?.navigationItem.title = L10n.Screen.Favorites.title
+    tabBarController?.navigationItem.searchController = searchController
     _refreshValues.send(())
   }
 
   override public func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
-    tabBarController?.title = nil
+    tabBarController?.navigationItem.searchController = nil
   }
 
   override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -92,5 +115,11 @@ public final class FavoritesViewController: UITableViewController {
 
   override public func tableView(_: UITableView, titleForDeleteConfirmationButtonForRowAt _: IndexPath) -> String? {
     L10n.Screen.Favorites.unfavorite
+  }
+}
+
+extension FavoritesViewController: UISearchResultsUpdating {
+  public func updateSearchResults(for searchController: UISearchController) {
+    _searhText.send(searchController.searchBar.text)
   }
 }
