@@ -19,9 +19,14 @@ public struct GenreItem: Hashable {
 
 public struct SelectGenresViewModel {
   public struct Input {
+    public let clear: AnyPublisher<Void, Never>
     public let selectedGenre: AnyPublisher<GenreItem, Never>
 
-    public init(selectedGenre: AnyPublisher<GenreItem, Never>) {
+    public init(
+      clear: AnyPublisher<Void, Never>,
+      selectedGenre: AnyPublisher<GenreItem, Never>
+    ) {
+      self.clear = clear
       self.selectedGenre = selectedGenre
     }
   }
@@ -44,18 +49,23 @@ public struct SelectGenresViewModel {
 
   public static func `default`(metadata: AnyPublisher<MetaData, Never>) -> SelectGenresViewModel {
     SelectGenresViewModel { input in
-      let selectedGenres = input.selectedGenre
-        .scan(Set<Genre>()) { acc, curr in
-          var newSet = acc
-          if acc.contains(curr.genre) {
-            newSet.remove(curr.genre)
-            return newSet
-          } else {
-            newSet.insert(curr.genre)
-            return newSet
-          }
+      let selectedGenres = input.clear
+        .prepend(())
+        .map {
+          input.selectedGenre
+            .scan(Set<Genre>()) { acc, curr in
+              var newSet = acc
+              if acc.contains(curr.genre) {
+                newSet.remove(curr.genre)
+                return newSet
+              } else {
+                newSet.insert(curr.genre)
+                return newSet
+              }
+            }
+            .prepend(.init())
         }
-        .prepend(.init())
+        .switchToLatest()
 
       let values = metadata
         .combineLatest(selectedGenres)

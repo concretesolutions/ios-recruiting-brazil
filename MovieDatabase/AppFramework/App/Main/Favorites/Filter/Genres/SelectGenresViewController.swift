@@ -16,6 +16,9 @@ public final class SelectGenresViewController: UITableViewController {
     })
   }()
 
+  private lazy var clearButton = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(didTapClear))
+
+  private let _clear = PassthroughSubject<Void, Never>()
   private let _didSelectItem = PassthroughSubject<GenreItem, Never>()
   private var cancellables = Set<AnyCancellable>()
   private let viewModel: SelectGenresViewModel
@@ -33,6 +36,7 @@ public final class SelectGenresViewController: UITableViewController {
   override public func viewDidLoad() {
     super.viewDidLoad()
     title = L10n.Screen.Favorites.Filter.genres
+    navigationItem.rightBarButtonItem = clearButton
     tableView.register(UITableViewCell.self)
 
     dataSource.defaultRowAnimation = .fade
@@ -44,6 +48,7 @@ public final class SelectGenresViewController: UITableViewController {
 
     let output = viewModel.transform(
       .init(
+        clear: _clear.eraseToAnyPublisher(),
         selectedGenre: _didSelectItem.eraseToAnyPublisher()
       )
     )
@@ -63,5 +68,9 @@ public final class SelectGenresViewController: UITableViewController {
     tableView.deselectRow(at: indexPath, animated: true)
     guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
     _didSelectItem.send(item)
+  }
+
+  @objc private func didTapClear() {
+    _clear.send(())
   }
 }
