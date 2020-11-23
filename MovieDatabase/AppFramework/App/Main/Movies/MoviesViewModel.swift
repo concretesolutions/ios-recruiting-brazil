@@ -97,11 +97,11 @@ public struct MoviesViewModel {
           guard let searchText = searchText, !searchText.isEmpty else {
             return []
           }
-          let strippedString = searchText.trimmingCharacters(in: .whitespaces)
-          let searchItems = strippedString.components(separatedBy: " ") as [String]
-          let predicates = searchItems.map(predicates(for:))
-          let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-          return movieViewModels.filter { predicate.evaluate(with: $0.movie.title) }
+          let titleFilter = Filters.movieFilter(byTitle: searchText)
+            .contramap { (viewModel: MovieViewModel) in
+              viewModel.movie
+            }
+          return titleFilter.runFilter(movieViewModels)
         }
 
       return Output(
