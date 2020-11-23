@@ -24,23 +24,6 @@ extension Movie {
 }
 
 final class FilterTests: XCTestCase {
-  func testMovieFilter() {
-    let movies = [
-      Movie.stub(id: 0, title: "123a4"),
-      Movie.stub(id: 1, title: "12345"),
-      Movie.stub(id: 2, title: "qwertya"),
-      Movie.stub(id: 3, title: "zxcvbn"),
-    ]
-
-    let expected = Filters.movieFilter(byTitle: "a")
-      .runFilter(movies)
-
-    XCTAssertEqual(expected, [
-      Movie.stub(id: 0, title: "123a4"),
-      Movie.stub(id: 2, title: "qwertya"),
-    ])
-  }
-
   func testFilterContramap() {
     let filter = Filter<String>(predicate: { str in str.contains("a") })
       .contramap { (urlQueryItem: URLQueryItem) in
@@ -57,6 +40,57 @@ final class FilterTests: XCTestCase {
     XCTAssertEqual(expected, [
       URLQueryItem(name: "bbbab", value: ""),
       URLQueryItem(name: "adsf", value: ""),
+    ])
+  }
+
+  func testMovieFilterByTitle() {
+    let movies = [
+      Movie.stub(id: 0, title: "123a4"),
+      Movie.stub(id: 1, title: "12345"),
+      Movie.stub(id: 2, title: "qwertya"),
+      Movie.stub(id: 3, title: "zxcvbn"),
+    ]
+
+    let expected = Filters.movieFilter(byTitle: "a")
+      .runFilter(movies)
+
+    XCTAssertEqual(expected, [
+      Movie.stub(id: 0, title: "123a4"),
+      Movie.stub(id: 2, title: "qwertya"),
+    ])
+  }
+
+  func testMovieFilterByYear() {
+    let movies = [
+      Movie.stub(id: 0, year: "2000"),
+      Movie.stub(id: 1, year: "2001"),
+      Movie.stub(id: 2, year: "2002"),
+    ]
+
+    let expected = Filters.movieFilter(byYear: "2002")
+      .runFilter(movies)
+
+    XCTAssertEqual(expected, [
+      Movie.stub(id: 2, year: "2002"),
+    ])
+  }
+
+  func testMovieFilterByGenreIds() {
+    let movies = [
+      Movie.stub(id: 0, genreIds: [0, 1, 2, 3, 4]),
+      Movie.stub(id: 1, genreIds: [1, 3, 10]),
+      Movie.stub(id: 2, genreIds: [0, 2, 4]),
+      Movie.stub(id: 3, genreIds: [9, 8, 10]),
+      Movie.stub(id: 4, genreIds: [11, 12, 13]),
+    ]
+
+    let expected = Filters.movieFilter(byGenreIds: [1, 12])
+      .runFilter(movies)
+
+    XCTAssertEqual(expected, [
+      Movie.stub(id: 0, genreIds: [0, 1, 2, 3, 4]),
+      Movie.stub(id: 1, genreIds: [1, 3, 10]),
+      Movie.stub(id: 4, genreIds: [11, 12, 13]),
     ])
   }
 }

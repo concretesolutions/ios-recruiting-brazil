@@ -26,6 +26,30 @@ public enum Filters {
       predicate.evaluate(with: movie.title)
     }
   }
+
+  public static func movieFilter(byYear year: String) -> Filter<Movie> {
+    Filter<Movie> { movie in
+      movie.year == year
+    }
+  }
+
+  public static func movieFilter(byGenreIds genreIds: [Int16]) -> Filter<Movie> {
+    Filter<Movie> { movie in
+      Set(genreIds)
+        .intersection(Set(movie.genreIds))
+        .count > 0
+    }
+  }
+
+  public static func movieFilter(byTitle titleSearchString: String, year _: String, genreIds _: [Int16]) -> Filter<Movie> {
+    let strippedString = titleSearchString.trimmingCharacters(in: .whitespaces)
+    let searchItems = strippedString.components(separatedBy: " ") as [String]
+    let predicates = searchItems.map(comparisonPredicateForTitle)
+    let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+    return Filter<Movie> { movie in
+      predicate.evaluate(with: movie.title)
+    }
+  }
 }
 
 private func comparisonPredicateForTitle(_ searchString: String) -> NSComparisonPredicate {
