@@ -97,7 +97,7 @@ public struct FavoritesViewModel {
   }
 }
 
-private func predicates(for searchString: String) -> NSComparisonPredicate {
+func predicates(for searchString: String) -> NSComparisonPredicate {
   let titleExpression = NSExpression(
     block: { value, _, _ in
       value!

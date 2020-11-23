@@ -11,20 +11,30 @@ public final class MoviesViewController: UICollectionViewController {
   private var cancellables = Set<AnyCancellable>()
   private let viewModel: MoviesViewModel
   private let refreshControl = UIRefreshControl()
-  private let _viewWillAppear = PassthroughSubject<Void, Never>()
+  private let _refreshCells = PassthroughSubject<Void, Never>()
   private let _refresh = PassthroughSubject<Void, Never>()
   private let _nextPage = PassthroughSubject<Int, Never>()
+  fileprivate let _searhText = CurrentValueSubject<String?, Never>(nil)
 
   private lazy var dataSource: DataSource = {
     DataSource(collectionView: collectionView) { [weak self] collectionView, indexPath, movieViewModel -> UICollectionViewCell? in
       guard let self = self else { return nil }
       let cell: MovieCell = collectionView.dequeue(for: indexPath)
-      cell.setup(viewModel: movieViewModel, refresh: self._viewWillAppear.eraseToAnyPublisher())
+      cell.setup(viewModel: movieViewModel, refresh: self._refreshCells.eraseToAnyPublisher())
       return cell
     }
   }()
 
-  private static func makeCollectionViewLayout() -> UICollectionViewCompositionalLayout {
+  private lazy var resultsController = MoviesSearchResultsViewController(collectionViewLayout: Self.makeCollectionViewLayout())
+  private lazy var searchController: UISearchController = {
+    let searchController = UISearchController(searchResultsController: resultsController)
+    searchController.searchBar.autocapitalizationType = .none
+    searchController.searchResultsUpdater = self
+    searchController.delegate = self
+    return searchController
+  }()
+
+  static func makeCollectionViewLayout() -> UICollectionViewCompositionalLayout {
     let itemSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(0.46),
       heightDimension: .fractionalHeight(1.0)
@@ -65,6 +75,8 @@ public final class MoviesViewController: UICollectionViewController {
 
   override public func viewDidLoad() {
     super.viewDidLoad()
+    definesPresentationContext = true
+
     refreshControl.addTarget(self, action: #selector(refresh), for: .primaryActionTriggered)
 
     collectionView.backgroundColor = .systemBackground
@@ -81,7 +93,8 @@ public final class MoviesViewController: UICollectionViewController {
           .removeDuplicates()
           .map { _ in () }
           .throttle(for: .milliseconds(1500), scheduler: DispatchQueue.main, latest: true)
-          .eraseToAnyPublisher()
+          .eraseToAnyPublisher(),
+        searchText: _searhText.eraseToAnyPublisher()
       )
     )
 
@@ -110,12 +123,23 @@ public final class MoviesViewController: UICollectionViewController {
         self?.refreshControl.endRefreshing()
       })
       .store(in: &cancellables)
+
+    output.filteredValues
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { [weak self] movies in
+        var snapshot = Snapshot()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(movies)
+        self?.resultsController.dataSource.apply(snapshot)
+      })
+      .store(in: &cancellables)
   }
 
   var viewAlredyAppeared = false
   override public func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    tabBarController?.title = L10n.Screen.Movies.title
+    tabBarController?.navigationItem.title = L10n.Screen.Movies.title
+    tabBarController?.navigationItem.searchController = searchController
     if !viewAlredyAppeared {
       _refresh.send(())
     }
@@ -124,7 +148,7 @@ public final class MoviesViewController: UICollectionViewController {
 
   override public func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    _viewWillAppear.send(())
+    _refreshCells.send(())
   }
 
   override public func viewDidDisappear(_ animated: Bool) {
@@ -147,5 +171,17 @@ public final class MoviesViewController: UICollectionViewController {
   override public func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
     _presentMovieDetails.send(item.movie)
+  }
+}
+
+extension MoviesViewController: UISearchResultsUpdating {
+  public func updateSearchResults(for searchController: UISearchController) {
+    _searhText.send(searchController.searchBar.text)
+  }
+}
+
+extension MoviesViewController: UISearchControllerDelegate {
+  public func didDismissSearchController(_: UISearchController) {
+    _refreshCells.send(())
   }
 }

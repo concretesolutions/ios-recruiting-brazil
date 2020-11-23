@@ -19,13 +19,16 @@ public struct MoviesViewModel {
   public struct Input {
     public let refresh: AnyPublisher<Void, Never>
     public let nextPage: AnyPublisher<Void, Never>
+    public let searchText: AnyPublisher<String?, Never>
 
     public init(
       refresh: AnyPublisher<Void, Never>,
-      nextPage: AnyPublisher<Void, Never>
+      nextPage: AnyPublisher<Void, Never>,
+      searchText: AnyPublisher<String?, Never>
     ) {
       self.refresh = refresh
       self.nextPage = nextPage
+      self.searchText = searchText
     }
   }
 
@@ -33,15 +36,18 @@ public struct MoviesViewModel {
     public let values: AnyPublisher<[MovieViewModel], Never>
     public let error: AnyPublisher<ErrorResponse, Never>
     public let isRefreshing: AnyPublisher<Bool, Never>
+    public let filteredValues: AnyPublisher<[MovieViewModel], Never>
 
     public init(
       values: AnyPublisher<[MovieViewModel], Never>,
       error: AnyPublisher<ErrorResponse, Never>,
-      isRefreshing: AnyPublisher<Bool, Never>
+      isRefreshing: AnyPublisher<Bool, Never>,
+      filteredValues: AnyPublisher<[MovieViewModel], Never>
     ) {
       self.values = values
       self.error = error
       self.isRefreshing = isRefreshing
+      self.filteredValues = filteredValues
     }
   }
 
@@ -64,7 +70,7 @@ public struct MoviesViewModel {
         requestFromCursor: { page in Env.client.discoverMovie(DiscoverMovieRequestParams(page: page)) }
       )
 
-      let value = Publishers.CombineLatest(
+      let values = Publishers.CombineLatest(
         paginationSink.values.share(),
         metaData
       )
@@ -84,11 +90,25 @@ public struct MoviesViewModel {
           )
         }
       }
+      .share()
+
+      let filteredValues = Publishers.CombineLatest(input.searchText, values)
+        .map { searchText, movieViewModels -> [MovieViewModel] in
+          guard let searchText = searchText, !searchText.isEmpty else {
+            return []
+          }
+          let strippedString = searchText.trimmingCharacters(in: .whitespaces)
+          let searchItems = strippedString.components(separatedBy: " ") as [String]
+          let predicates = searchItems.map(predicates(for:))
+          let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+          return movieViewModels.filter { predicate.evaluate(with: $0.movie.title) }
+        }
 
       return Output(
-        values: value.eraseToAnyPublisher(),
+        values: values.eraseToAnyPublisher(),
         error: paginationSink.error,
-        isRefreshing: paginationSink.isRefreshing
+        isRefreshing: paginationSink.isRefreshing,
+        filteredValues: filteredValues.eraseToAnyPublisher()
       )
     }
   }
