@@ -82,11 +82,12 @@ public struct FavoritesViewModel {
           guard let searchText = searchText, !searchText.isEmpty else {
             return []
           }
-          let strippedString = searchText.trimmingCharacters(in: .whitespaces)
-          let searchItems = strippedString.components(separatedBy: " ") as [String]
-          let predicates = searchItems.map(predicates(for:))
-          let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-          return favoriteViewModels.filter { predicate.evaluate(with: $0.movie.title) }
+          let filter = Filters.movieFilter(byTitle: searchText)
+            .contramap { (favoriteViewModel: FavoriteViewModel) in
+              favoriteViewModel.movie
+            }
+
+          return filter.runFilter(favoriteViewModels)
         }
 
       return Output(
@@ -95,24 +96,4 @@ public struct FavoritesViewModel {
       )
     }
   }
-}
-
-func predicates(for searchString: String) -> NSComparisonPredicate {
-  let titleExpression = NSExpression(
-    block: { value, _, _ in
-      value!
-    },
-    arguments: nil
-  )
-  let searchStringExpression = NSExpression(forConstantValue: searchString)
-
-  let titleSearchComparisonPredicate = NSComparisonPredicate(
-    leftExpression: titleExpression,
-    rightExpression: searchStringExpression,
-    modifier: .direct,
-    type: .contains,
-    options: [.caseInsensitive, .diacriticInsensitive]
-  )
-
-  return titleSearchComparisonPredicate
 }
