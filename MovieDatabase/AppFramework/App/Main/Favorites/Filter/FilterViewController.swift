@@ -67,6 +67,13 @@ public final class FilterViewController: UITableViewController {
     ], toSection: .apply)
     dataSource.apply(snapshot)
 
+    output.apply
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { [weak self] in
+        self?.navigationController?.popViewController(animated: true)
+      })
+      .store(in: &cancellables)
+
     cancellables.formUnion(output.cancellables)
   }
 
