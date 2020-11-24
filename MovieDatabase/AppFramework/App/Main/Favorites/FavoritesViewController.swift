@@ -65,7 +65,7 @@ public final class FavoritesViewController: UITableViewController {
 
   // MARK: Lifecycle
 
-  public init(viewModel: FavoritesViewModel = .default()) {
+  public init(viewModel: FavoritesViewModel) {
     self.viewModel = viewModel
     super.init(style: .plain)
     definesPresentationContext = true

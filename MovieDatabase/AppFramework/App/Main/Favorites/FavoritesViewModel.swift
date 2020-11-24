@@ -41,7 +41,10 @@ public struct FavoritesViewModel {
     self.transform = transform
   }
 
-  public static func `default`(repo: MovieRepo = .default(moc: Env.database.moc)) -> FavoritesViewModel {
+  public static func `default`(
+    repo: MovieRepo = .default(moc: Env.database.moc),
+    genresFilter: CurrentValueSubject<Set<Genre>, Never>
+  ) -> FavoritesViewModel {
     FavoritesViewModel { input in
 
       // We can improve this logic by watching the Notification with name NSManagedObjectContextDidSave
@@ -77,15 +80,28 @@ public struct FavoritesViewModel {
         .switchToLatest()
         .share()
 
-      let filteredValues = Publishers.CombineLatest(input.searchText, values)
-        .map { searchText, favoriteViewModels -> [FavoriteViewModel] in
-          guard let searchText = searchText, !searchText.isEmpty else {
-            return []
+      let filteredValues = Publishers.CombineLatest3(input.searchText, genresFilter, values)
+        .map { searchText, genresToFilter, favoriteViewModels -> [FavoriteViewModel] in
+          var filters = [Filter<Movie>]()
+
+          if let searchText = searchText, !searchText.isEmpty {
+            let filterByTitle = Filters.movieFilter(byTitle: searchText)
+            filters.append(filterByTitle)
           }
-          let filter = Filters.movieFilter(byTitle: searchText)
-            .contramap { (favoriteViewModel: FavoriteViewModel) in
-              favoriteViewModel.movie
-            }
+
+          if genresToFilter.count > 0 {
+            let filterByGenre = Filters.movieFilter(byGenreIds: genresToFilter.map(\.id))
+            filters.append(filterByGenre)
+          }
+
+          let emptyFilter = Filter<Movie> { _ in true }
+
+          let filter = filters.reduce(emptyFilter) { acc, curr in
+            acc.merge(with: curr, strategy: .and)
+          }
+          .contramap { (favoriteViewModel: FavoriteViewModel) in
+            favoriteViewModel.movie
+          }
 
           return filter.runFilter(favoriteViewModels)
         }

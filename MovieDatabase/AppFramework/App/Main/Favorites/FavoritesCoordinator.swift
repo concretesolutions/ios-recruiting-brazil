@@ -6,6 +6,7 @@ public final class FavoritesCoordinator {
   public let tabBarController: MainViewController
   public let navigationController: UINavigationController
   private let metadata: CurrentValueSubject<MetaData, Never>
+  private let genresFilter = CurrentValueSubject<Set<Genre>, Never>(.init())
 
   private var childCoordinators = [UUID: Any]()
 
@@ -19,7 +20,9 @@ public final class FavoritesCoordinator {
   }
 
   public func start() {
-    let viewController = FavoritesViewController(viewModel: .default())
+    let viewController = FavoritesViewController(
+      viewModel: .default(genresFilter: genresFilter)
+    )
 
     viewController.presentMovieDetails
       .receive(on: DispatchQueue.main)
