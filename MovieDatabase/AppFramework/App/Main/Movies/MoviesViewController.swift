@@ -172,6 +172,11 @@ public final class MoviesViewController: UICollectionViewController {
         self?.resultsController.dataSource.apply(snapshot)
       })
       .store(in: &cancellables)
+
+    resultsController.didSelectItem
+      .map(\.movie)
+      .subscribe(_presentMovieDetails)
+      .store(in: &cancellables)
   }
 
   @objc private func refresh() {
