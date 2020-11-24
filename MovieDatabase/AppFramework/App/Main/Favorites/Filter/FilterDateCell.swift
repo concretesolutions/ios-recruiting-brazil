@@ -55,6 +55,7 @@ final class FilterDateCell: UITableViewCell {
   }
 
   func setup(subject: CurrentValueSubject<String?, Never>) {
+    textField.text = subject.value
     textField.publisher(for: \.text)
       .subscribe(subject)
       .store(in: &cancellables)

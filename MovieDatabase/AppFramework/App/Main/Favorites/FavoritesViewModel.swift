@@ -86,7 +86,7 @@ public struct FavoritesViewModel {
             filters.append(filterByTitle)
           }
 
-          if let dateToFilter = dateToFilter {
+          if let dateToFilter = dateToFilter, dateToFilter.count > 0 {
             let filterByDate = Filters.movieFilter(byYear: dateToFilter)
             filters.append(filterByDate)
           }
