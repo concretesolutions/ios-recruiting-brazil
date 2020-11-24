@@ -103,6 +103,7 @@ public struct MoviesViewModel {
             }
           return titleFilter.runFilter(movieViewModels)
         }
+        .share()
 
       return Output(
         values: values.eraseToAnyPublisher(),

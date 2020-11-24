@@ -32,6 +32,8 @@ internal enum L10n {
     }
 
     internal enum Movies {
+      /// Your search returned 0 results
+      internal static let emptyResultsMessage = L10n.tr("Localizable", "screen.movies.empty_results_message")
       /// Movies
       internal static let title = L10n.tr("Localizable", "screen.movies.title")
     }

@@ -173,6 +173,19 @@ public final class MoviesViewController: UICollectionViewController {
       })
       .store(in: &cancellables)
 
+    output.filteredValues
+      .map { values in values.count == 0 }
+      .removeDuplicates()
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { [weak self] empty in
+        if empty {
+          self?.resultsController.setEmptyResultsBackground()
+        } else {
+          self?.resultsController.removeEmptyResultsBackground()
+        }
+      })
+      .store(in: &cancellables)
+
     resultsController.didSelectItem
       .map(\.movie)
       .subscribe(_presentMovieDetails)

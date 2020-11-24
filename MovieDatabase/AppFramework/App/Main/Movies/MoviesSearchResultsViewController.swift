@@ -1,4 +1,5 @@
 import Combine
+import Design
 import UIKit
 
 public final class MoviesSearchResultsViewController: UICollectionViewController {
@@ -7,6 +8,13 @@ public final class MoviesSearchResultsViewController: UICollectionViewController
 
   private let _didSelectItem = PassthroughSubject<MovieViewModel, Never>()
   public lazy var didSelectItem = _didSelectItem.eraseToAnyPublisher()
+
+  private lazy var noResultsBackground: UIView = {
+    let label = UILabel()
+    label.textAlignment = .center
+    label.text = L10n.Screen.Movies.emptyResultsMessage
+    return label
+  }()
 
   lazy var dataSource: DataSource = {
     DataSource(collectionView: collectionView) { [weak self] collectionView, indexPath, movieViewModel -> UICollectionViewCell? in
@@ -30,5 +38,13 @@ public final class MoviesSearchResultsViewController: UICollectionViewController
   override public func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
     _didSelectItem.send(item)
+  }
+
+  public func setEmptyResultsBackground() {
+    collectionView.backgroundView = noResultsBackground
+  }
+
+  public func removeEmptyResultsBackground() {
+    collectionView.backgroundView = nil
   }
 }
