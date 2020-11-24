@@ -60,13 +60,10 @@ public struct SelectGenresViewModel {
       var cancellables = Set<AnyCancellable>()
 
       let selectedGenres = Publishers.Merge(
-        input.clear
-          .map { _ -> GenreItem? in
-            .none
-          },
+        input.clear.map { _ -> GenreItem? in .none },
         input.selectedGenre.map { genreItem -> GenreItem? in genreItem }
       )
-      .scan(Set<Genre>()) { acc, curr in
+      .scan(currentSelectedGenres.value) { acc, curr in
         guard let curr = curr else {
           return .init()
         }
@@ -80,7 +77,7 @@ public struct SelectGenresViewModel {
           return newSet
         }
       }
-      .multicast(subject: CurrentValueSubject<Set<Genre>, Never>(.init()))
+      .multicast(subject: CurrentValueSubject<Set<Genre>, Never>(currentSelectedGenres.value))
 
       selectedGenres
         .subscribe(currentSelectedGenres)
