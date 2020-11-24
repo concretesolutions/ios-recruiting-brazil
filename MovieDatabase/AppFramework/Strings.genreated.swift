@@ -10,12 +10,12 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
+
   internal enum Global {
     internal enum Action {
       /// Ok
       internal static let ok = L10n.tr("Localizable", "global.action.ok")
     }
-
     internal enum Title {
       /// Error
       internal static let error = L10n.tr("Localizable", "global.title.error")
@@ -35,9 +35,8 @@ internal enum L10n {
         internal static let genres = L10n.tr("Localizable", "screen.favorites.filter.genres")
         /// screen.favorites.filter.genres_selected %d
         internal static func genresSelected(_ p1: Int) -> String {
-          L10n.tr("Localizable", "screen.favorites.filter.genres_selected", p1)
+          return L10n.tr("Localizable", "screen.favorites.filter.genres_selected", p1)
         }
-
         /// Filter
         internal static let title = L10n.tr("Localizable", "screen.favorites.filter.title")
         internal enum Action {
@@ -46,7 +45,6 @@ internal enum L10n {
           /// Clear
           internal static let clear = L10n.tr("Localizable", "screen.favorites.filter.action.clear")
         }
-
         internal enum InvalidYearError {
           /// The year should be greater than or equal to 1874
           internal static let greaterThan1874 = L10n.tr("Localizable", "screen.favorites.filter.invalid_year_error.greater_than_1874")
@@ -57,12 +55,10 @@ internal enum L10n {
         }
       }
     }
-
     internal enum MovieDetails {
       /// Movie
       internal static let title = L10n.tr("Localizable", "screen.movie_details.title")
     }
-
     internal enum Movies {
       /// Your search returned 0 results
       internal static let emptyResultsMessage = L10n.tr("Localizable", "screen.movies.empty_results_message")
@@ -73,7 +69,6 @@ internal enum L10n {
     }
   }
 }
-
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
 
@@ -87,14 +82,13 @@ extension L10n {
 }
 
 // swiftlint:disable convenience_type
-private enum BundleToken {
+private final class BundleToken {
   static let bundle: Bundle = {
     #if SWIFT_PACKAGE
-      return Bundle.module
+    return Bundle.module
     #else
-      return Bundle(for: BundleToken.self)
+    return Bundle(for: BundleToken.self)
     #endif
   }()
 }
-
 // swiftlint:enable convenience_type
