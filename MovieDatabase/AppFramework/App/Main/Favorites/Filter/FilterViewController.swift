@@ -12,45 +12,6 @@ enum FilterItem: Hashable {
   case apply
 }
 
-final class FilterCell: UITableViewCell {
-  override init(style _: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-    super.init(style: .value1, reuseIdentifier: reuseIdentifier)
-    accessoryType = .disclosureIndicator
-  }
-
-  @available(*, unavailable)
-  required init?(coder _: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-}
-
-final class ButtonCell: UITableViewCell {
-  private let button = UIButton(type: .system)
-
-  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-    super.init(style: style, reuseIdentifier: reuseIdentifier)
-    selectionStyle = .none
-    contentView.addSubview(button)
-    button.translatesAutoresizingMaskIntoConstraints = false
-    NSLayoutConstraint.activate([
-      button.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
-      button.topAnchor.constraint(equalTo: contentView.topAnchor),
-      button.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
-      button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-      button.heightAnchor.constraint(equalToConstant: 44),
-    ])
-  }
-
-  @available(*, unavailable)
-  required init?(coder _: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-
-  func setup(with title: String) {
-    button.setTitle(title, for: .normal)
-  }
-}
-
 public final class FilterViewController: UITableViewController {
   typealias DataSource = UITableViewDiffableDataSource<FilterSection, FilterItem>
   typealias Snapshot = NSDiffableDataSourceSnapshot<FilterSection, FilterItem>
