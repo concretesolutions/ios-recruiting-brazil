@@ -31,11 +31,14 @@ public final class FavoritesViewController: UITableViewController {
     target: self,
     action: #selector(didTapFilter)
   )
-  private let resultsController = FavoritesSearchResultsViewController()
+
   private lazy var searchController: UISearchController = {
-    let searchController = UISearchController(searchResultsController: resultsController)
+    let searchController = UISearchController(searchResultsController: nil)
     searchController.searchBar.autocapitalizationType = .none
     searchController.searchResultsUpdater = self
+    searchController.hidesNavigationBarDuringPresentation = false
+    searchController.automaticallyShowsSearchResultsController = false
+    searchController.obscuresBackgroundDuringPresentation = false
     return searchController
   }()
 
@@ -110,23 +113,13 @@ public final class FavoritesViewController: UITableViewController {
       )
     )
 
-    output.values
-      .receive(on: DispatchQueue.main)
-      .sink(receiveValue: { [weak self] favorites in
-        var snapshot = Snapshot()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(favorites)
-        self?.dataSource.apply(snapshot)
-      })
-      .store(in: &cancellables)
-
     output.filteredValues
       .receive(on: DispatchQueue.main)
       .sink(receiveValue: { [weak self] favorites in
         var snapshot = Snapshot()
         snapshot.appendSections([.main])
         snapshot.appendItems(favorites)
-        self?.resultsController.dataSource.apply(snapshot)
+        self?.dataSource.apply(snapshot)
       })
       .store(in: &cancellables)
   }

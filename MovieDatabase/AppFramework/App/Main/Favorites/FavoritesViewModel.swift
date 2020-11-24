@@ -23,14 +23,11 @@ public struct FavoritesViewModel {
   }
 
   public struct Output {
-    public let values: AnyPublisher<[FavoriteViewModel], Never>
     public let filteredValues: AnyPublisher<[FavoriteViewModel], Never>
 
     public init(
-      values: AnyPublisher<[FavoriteViewModel], Never>,
       filteredValues: AnyPublisher<[FavoriteViewModel], Never>
     ) {
-      self.values = values
       self.filteredValues = filteredValues
     }
   }
@@ -78,7 +75,6 @@ public struct FavoritesViewModel {
           }
         }
         .switchToLatest()
-        .share()
 
       let filteredValues = Publishers.CombineLatest3(input.searchText, genresFilter, values)
         .map { searchText, genresToFilter, favoriteViewModels -> [FavoriteViewModel] in
@@ -107,7 +103,6 @@ public struct FavoritesViewModel {
         }
 
       return Output(
-        values: values.eraseToAnyPublisher(),
         filteredValues: filteredValues.eraseToAnyPublisher()
       )
     }
