@@ -44,6 +44,7 @@ public final class MovieDetailsViewController: UITableViewController {
   init(viewModel: MovieDetailsViewModel) {
     self.viewModel = viewModel
     super.init(style: .plain)
+    hidesBottomBarWhenPushed = true
   }
 
   @available(*, unavailable)
@@ -55,6 +56,7 @@ public final class MovieDetailsViewController: UITableViewController {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
     title = L10n.Screen.MovieDetails.title
+
     tableView.rowHeight = UITableView.automaticDimension
     tableView.register(MovieDetailPosterCell.self)
     tableView.register(MovieDetailTitleCell.self)

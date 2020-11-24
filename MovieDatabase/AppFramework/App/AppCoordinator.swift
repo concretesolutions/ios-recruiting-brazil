@@ -4,16 +4,14 @@ import UIKit
 
 public class AppCoordinator {
   private let window: UIWindow
-  private let navigationController: UINavigationController
   private let metaDataLoader: MetaDataLoader
-  private let metaData = CurrentValueSubject<MetaData, Never>(.init(configuration: nil, genres: nil))
+  private let metadata = CurrentValueSubject<MetaData, Never>(.init(configuration: nil, genres: nil))
 
   private var cancellables = Set<AnyCancellable>()
   private var childCoordinators = [UUID: Any]()
 
   public init(window: UIWindow) {
     self.window = window
-    navigationController = UINavigationController()
     metaDataLoader = MetaDataLoader()
   }
 
@@ -23,7 +21,7 @@ public class AppCoordinator {
     window.makeKeyAndVisible()
 
     metaDataLoader.metaData
-      .subscribe(metaData)
+      .subscribe(metadata)
       .store(in: &cancellables)
 
     metaDataLoader.metaData
@@ -44,52 +42,29 @@ public class AppCoordinator {
   }
 
   private func startMain() {
-    let mainViewController = MainViewController(metaData: metaData.eraseToAnyPublisher())
-    navigationController.addChild(mainViewController)
-    navigationController.modalPresentationStyle = .fullScreen
-    window.rootViewController?.present(navigationController, animated: true, completion: { [weak self] in
+    let mainViewController = MainViewController(metaData: metadata.eraseToAnyPublisher())
+
+    let moviesCoordinatorId = UUID()
+    let moviesCoordinator = MoviesCoordinator(
+      tabBarController: mainViewController,
+      metadata: metadata
+    )
+    childCoordinators[moviesCoordinatorId] = moviesCoordinator
+    moviesCoordinator.start()
+
+    let favoritesCoordinatorId = UUID()
+    let favoritesCoordinator = FavoritesCoordinator(
+      tabBarController: mainViewController,
+      metadata: metadata
+    )
+    childCoordinators[favoritesCoordinatorId] = favoritesCoordinator
+    favoritesCoordinator.start()
+
+    mainViewController.modalPresentationStyle = .fullScreen
+    window.rootViewController?.present(mainViewController, animated: true, completion: { [weak self] in
       DispatchQueue.main.async {
-        self?.window.rootViewController = self?.navigationController
+        self?.window.rootViewController = mainViewController
       }
     })
-
-    Publishers.Merge(
-      mainViewController.moviesViewController.presentMovieDetails,
-      mainViewController.favoritesViewController.presentMovieDetails
-    )
-    .receive(on: DispatchQueue.main)
-    .sink(receiveValue: { [weak self] movie in
-      guard let self = self else { return }
-      let viewModel = MovieDetailsViewModel(movie: movie, metadata: self.metaData.value)
-      let viewControler = MovieDetailsViewController(viewModel: viewModel)
-      self.navigationController.pushViewController(viewControler, animated: true)
-    })
-    .store(in: &cancellables)
-
-    mainViewController.favoritesViewController.presentFilter
-      .receive(on: DispatchQueue.main)
-      .sink(receiveValue: { [weak self] in
-        self?.goToFilter()
-      })
-      .store(in: &cancellables)
-  }
-
-  private func goToFilter() {
-    let filterCoordinator = FilterCoordinator(
-      navigationController: navigationController,
-      metadata: metaData.eraseToAnyPublisher()
-    )
-
-    let uuid = UUID()
-    childCoordinators[uuid] = filterCoordinator
-
-    filterCoordinator.finished
-      .receive(on: DispatchQueue.main)
-      .sink(receiveValue: { [weak self] _ in
-        self?.childCoordinators.removeValue(forKey: uuid)
-      })
-      .store(in: &cancellables)
-
-    filterCoordinator.start()
   }
 }

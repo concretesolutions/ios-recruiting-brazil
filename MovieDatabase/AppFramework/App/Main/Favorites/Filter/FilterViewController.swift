@@ -85,6 +85,7 @@ public final class FilterViewController: UITableViewController {
 
   init() {
     super.init(style: .grouped)
+    hidesBottomBarWhenPushed = true
   }
 
   @available(*, unavailable)

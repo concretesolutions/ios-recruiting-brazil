@@ -3,6 +3,8 @@ import CoreData
 import UIKit
 
 public final class FavoritesViewController: UITableViewController {
+  // MARK: Types
+
   final class DataSource: UITableViewDiffableDataSource<FavoritesSection, FavoriteViewModel> {
     private let _delete = PassthroughSubject<IndexPath, Never>()
     lazy var delete: AnyPublisher<IndexPath, Never> = {
@@ -20,25 +22,9 @@ public final class FavoritesViewController: UITableViewController {
 
   typealias Snapshot = NSDiffableDataSourceSnapshot<FavoritesSection, FavoriteViewModel>
 
-  private let _presentMovieDetails = PassthroughSubject<Movie, Never>()
-  public lazy var presentMovieDetails: AnyPublisher<Movie, Never> = _presentMovieDetails.eraseToAnyPublisher()
-  private let _presentFilter = PassthroughSubject<Void, Never>()
-  public lazy var presentFilter: AnyPublisher<Void, Never> = _presentFilter.eraseToAnyPublisher()
-  fileprivate let _searhText = CurrentValueSubject<String?, Never>(nil)
-
-  private let viewModel: FavoritesViewModel
-  private var cancellables = Set<AnyCancellable>()
-  private lazy var dataSource: DataSource = {
-    DataSource(tableView: tableView, cellProvider: { tableView, indexPath, item in
-      let cell: FavoriteCell = tableView.dequeue(for: indexPath)
-      cell.textLabel?.text = item.movie.title
-      cell.detailTextLabel?.text = item.movie.overview
-      return cell
-    })
-  }()
+  // MARK: UI
 
   private let _refreshValues = PassthroughSubject<Void, Never>()
-
   private lazy var filterButton = UIBarButtonItem(
     image: UIImage(systemName: "line.horizontal.3.decrease.circle"),
     style: .plain,
@@ -53,9 +39,38 @@ public final class FavoritesViewController: UITableViewController {
     return searchController
   }()
 
+  // MARK: Publishers
+
+  private let _presentMovieDetails = PassthroughSubject<Movie, Never>()
+  public lazy var presentMovieDetails: AnyPublisher<Movie, Never> = _presentMovieDetails.eraseToAnyPublisher()
+  private let _presentFilter = PassthroughSubject<Void, Never>()
+  public lazy var presentFilter: AnyPublisher<Void, Never> = _presentFilter.eraseToAnyPublisher()
+  fileprivate let _searhText = CurrentValueSubject<String?, Never>(nil)
+
+  // MARK: DataSource
+
+  private lazy var dataSource: DataSource = {
+    DataSource(tableView: tableView, cellProvider: { tableView, indexPath, item in
+      let cell: FavoriteCell = tableView.dequeue(for: indexPath)
+      cell.textLabel?.text = item.movie.title
+      cell.detailTextLabel?.text = item.movie.overview
+      return cell
+    })
+  }()
+
+  // MARK: Other Properties
+
+  private let viewModel: FavoritesViewModel
+  private var cancellables = Set<AnyCancellable>()
+
+  // MARK: Lifecycle
+
   public init(viewModel: FavoritesViewModel = .default()) {
     self.viewModel = viewModel
     super.init(style: .plain)
+    definesPresentationContext = true
+    title = L10n.Screen.Favorites.title
+    tabBarItem = UITabBarItem(title: L10n.Screen.Favorites.title, image: UIImage(systemName: "heart"), selectedImage: nil)
   }
 
   @available(*, unavailable)
@@ -65,13 +80,26 @@ public final class FavoritesViewController: UITableViewController {
 
   override public func viewDidLoad() {
     super.viewDidLoad()
-    definesPresentationContext = true
+    setupUI()
+    setupBindings()
+  }
 
+  override public func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    _refreshValues.send(())
+  }
+
+  // MARK: Methods
+
+  private func setupUI() {
+    dataSource.defaultRowAnimation = .fade
+    navigationItem.searchController = searchController
+    navigationItem.rightBarButtonItem = filterButton
     tableView.tableFooterView = UIView()
     tableView.register(FavoriteCell.self)
+  }
 
-    dataSource.defaultRowAnimation = .fade
-
+  private func setupBindings() {
     let output = viewModel.transform(
       .init(
         refresh: _refreshValues
@@ -103,19 +131,11 @@ public final class FavoritesViewController: UITableViewController {
       .store(in: &cancellables)
   }
 
-  override public func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    tabBarController?.navigationItem.title = L10n.Screen.Favorites.title
-    tabBarController?.navigationItem.searchController = searchController
-    tabBarController?.navigationItem.rightBarButtonItem = filterButton
-    _refreshValues.send(())
+  @objc private func didTapFilter() {
+    _presentFilter.send(())
   }
 
-  override public func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
-    tabBarController?.navigationItem.searchController = nil
-    tabBarController?.navigationItem.rightBarButtonItem = nil
-  }
+  // MARK: UITableViewDelegate
 
   override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
@@ -126,11 +146,9 @@ public final class FavoritesViewController: UITableViewController {
   override public func tableView(_: UITableView, titleForDeleteConfirmationButtonForRowAt _: IndexPath) -> String? {
     L10n.Screen.Favorites.unfavorite
   }
-
-  @objc private func didTapFilter() {
-    _presentFilter.send(())
-  }
 }
+
+// MARK: UISearchResultsUpdating
 
 extension FavoritesViewController: UISearchResultsUpdating {
   public func updateSearchResults(for searchController: UISearchController) {
