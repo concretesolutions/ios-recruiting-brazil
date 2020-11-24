@@ -62,7 +62,7 @@ public struct FilterViewModel {
       var cancellables = Set<AnyCancellable>()
 
       let genresDetails = currentSelectedGenres
-        .map { "\($0.count)" }
+        .map { L10n.Screen.Favorites.Filter.genresSelected($0.count) }
 
       let apply = PassthroughSubject<Void, Never>()
       let currentDate = CurrentValueSubject<String?, Never>(dateFilter.value)

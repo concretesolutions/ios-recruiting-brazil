@@ -33,6 +33,11 @@ internal enum L10n {
         internal static let date = L10n.tr("Localizable", "screen.favorites.filter.date")
         /// Genres
         internal static let genres = L10n.tr("Localizable", "screen.favorites.filter.genres")
+        /// screen.favorites.filter.genres_selected %d
+        internal static func genresSelected(_ p1: Int) -> String {
+          L10n.tr("Localizable", "screen.favorites.filter.genres_selected", p1)
+        }
+
         /// Filter
         internal static let title = L10n.tr("Localizable", "screen.favorites.filter.title")
         internal enum Action {
