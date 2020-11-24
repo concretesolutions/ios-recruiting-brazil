@@ -33,9 +33,14 @@ public struct SelectGenresViewModel {
 
   public struct Output {
     public let values: AnyPublisher<[GenreItem], Never>
+    public let cancellables: Set<AnyCancellable>
 
-    public init(values: AnyPublisher<[GenreItem], Never>) {
+    public init(
+      values: AnyPublisher<[GenreItem], Never>,
+      cancellables: Set<AnyCancellable>
+    ) {
       self.values = values
+      self.cancellables = cancellables
     }
   }
 
@@ -47,25 +52,39 @@ public struct SelectGenresViewModel {
     self.transform = transform
   }
 
-  public static func `default`(metadata: AnyPublisher<MetaData, Never>) -> SelectGenresViewModel {
+  public static func `default`(
+    metadata: AnyPublisher<MetaData, Never>,
+    currentSelectedGenres: CurrentValueSubject<Set<Genre>, Never>
+  ) -> SelectGenresViewModel {
     SelectGenresViewModel { input in
-      let selectedGenres = input.clear
-        .prepend(())
-        .map {
-          input.selectedGenre
-            .scan(Set<Genre>()) { acc, curr in
-              var newSet = acc
-              if acc.contains(curr.genre) {
-                newSet.remove(curr.genre)
-                return newSet
-              } else {
-                newSet.insert(curr.genre)
-                return newSet
-              }
-            }
-            .prepend(.init())
+      var cancellables = Set<AnyCancellable>()
+
+      let selectedGenres = Publishers.Merge(
+        input.clear
+          .map { _ -> GenreItem? in
+            .none
+          },
+        input.selectedGenre.map { genreItem -> GenreItem? in genreItem }
+      )
+      .scan(Set<Genre>()) { acc, curr in
+        guard let curr = curr else {
+          return .init()
         }
-        .switchToLatest()
+
+        var newSet = acc
+        if acc.contains(curr.genre) {
+          newSet.remove(curr.genre)
+          return newSet
+        } else {
+          newSet.insert(curr.genre)
+          return newSet
+        }
+      }
+      .multicast(subject: CurrentValueSubject<Set<Genre>, Never>(.init()))
+
+      selectedGenres
+        .subscribe(currentSelectedGenres)
+        .store(in: &cancellables)
 
       let values = metadata
         .combineLatest(selectedGenres)
@@ -79,9 +98,15 @@ public struct SelectGenresViewModel {
             )
           }
         }
+        .share()
+
+      selectedGenres
+        .connect()
+        .store(in: &cancellables)
 
       return Output(
-        values: values.eraseToAnyPublisher()
+        values: values.eraseToAnyPublisher(),
+        cancellables: cancellables
       )
     }
   }

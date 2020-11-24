@@ -1,17 +1,6 @@
 import Combine
 import UIKit
 
-enum FilterSection: Hashable {
-  case main
-  case apply
-}
-
-enum FilterItem: Hashable {
-  case date(String?)
-  case genres(Int?)
-  case apply
-}
-
 public final class FilterViewController: UITableViewController {
   typealias DataSource = UITableViewDiffableDataSource<FilterSection, FilterItem>
   typealias Snapshot = NSDiffableDataSourceSnapshot<FilterSection, FilterItem>
@@ -24,27 +13,33 @@ public final class FilterViewController: UITableViewController {
   private lazy var dataSource: DataSource = {
     DataSource(tableView: tableView, cellProvider: { tableView, indexPath, item in
       switch item {
-      case let .date(date):
+      case let .date(detailsPub):
         let cell: FilterCell = tableView.dequeue(for: indexPath)
-        cell.textLabel?.text = L10n.Screen.Favorites.Filter.date
-        cell.detailTextLabel?.text = date
+        cell.setup(
+          title: L10n.Screen.Favorites.Filter.date,
+          detailValue: detailsPub
+        )
         return cell
-      case let .genres(quantity):
+      case let .genres(detailsPub):
         let cell: FilterCell = tableView.dequeue(for: indexPath)
-        cell.textLabel?.text = L10n.Screen.Favorites.Filter.genres
-        cell.detailTextLabel?.text = quantity == nil
-          ? nil
-          : "\(quantity!) genres chosen"
+        cell.setup(
+          title: L10n.Screen.Favorites.Filter.genres,
+          detailValue: detailsPub
+        )
         return cell
-      case .apply:
+      case let .apply(subject):
         let cell: ButtonCell = tableView.dequeue(for: indexPath)
-        cell.setup(with: "Apply")
+        cell.setup(with: "Apply", subject: subject)
         return cell
       }
     })
   }()
 
-  init() {
+  private var cancellables = Set<AnyCancellable>()
+  private let viewModel: FilterViewModel
+
+  init(viewModel: FilterViewModel) {
+    self.viewModel = viewModel
     super.init(style: .grouped)
     hidesBottomBarWhenPushed = true
   }
@@ -57,18 +52,25 @@ public final class FilterViewController: UITableViewController {
   override public func viewDidLoad() {
     super.viewDidLoad()
     title = L10n.Screen.Favorites.Filter.title
+    tableView.rowHeight = UITableView.automaticDimension
+    tableView.estimatedRowHeight = 44
     tableView.register(FilterCell.self)
     tableView.register(ButtonCell.self)
+
+    let output = viewModel.transform()
 
     var snapshot = Snapshot()
     snapshot.appendSections([.main, .apply])
     snapshot.appendItems([
-      .date(nil),
-      .genres(nil),
+      .date(output.dateDetails),
+      .genres(output.genreDetails),
     ], toSection: .main)
-
-    snapshot.appendItems([.apply], toSection: .apply)
+    snapshot.appendItems([
+      .apply(output.apply),
+    ], toSection: .apply)
     dataSource.apply(snapshot)
+
+    cancellables.formUnion(output.cancellables)
   }
 
   override public func viewDidAppear(_ animated: Bool) {

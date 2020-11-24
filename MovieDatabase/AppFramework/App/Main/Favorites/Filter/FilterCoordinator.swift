@@ -5,6 +5,7 @@ import UIKit
 public class FilterCoordinator {
   private let navigationController: UINavigationController
   private let metadata: AnyPublisher<MetaData, Never>
+  private let genresFilter: CurrentValueSubject<Set<Genre>, Never>
   private var cancellables = Set<AnyCancellable>()
 
   private let _finished = PassthroughSubject<Void, Never>()
@@ -12,20 +13,29 @@ public class FilterCoordinator {
 
   public init(
     navigationController: UINavigationController,
-    metadata: AnyPublisher<MetaData, Never>
+    metadata: AnyPublisher<MetaData, Never>,
+    genresFilter: CurrentValueSubject<Set<Genre>, Never>
   ) {
     self.navigationController = navigationController
     self.metadata = metadata
+    self.genresFilter = genresFilter
     os_log("[FilterCoordinator] init", log: generalLog, type: .debug)
   }
 
   public func start() {
-    let viewController = FilterViewController()
+    let currentSelectedGenres = CurrentValueSubject<Set<Genre>, Never>(genresFilter.value)
+
+    let viewController = FilterViewController(
+      viewModel: .default(
+        currentSelectedGenres: currentSelectedGenres,
+        genresFilter: genresFilter
+      )
+    )
 
     viewController.presentGenres
       .sink(receiveValue: { [weak self] in
         guard let self = self else { return }
-        self.goToSelectGenres()
+        self.goToSelectGenres(currentSelectedGenres: currentSelectedGenres)
       })
       .store(in: &cancellables)
 
@@ -36,8 +46,13 @@ public class FilterCoordinator {
     navigationController.pushViewController(viewController, animated: true)
   }
 
-  private func goToSelectGenres() {
-    let viewController = SelectGenresViewController(viewModel: .default(metadata: metadata))
+  private func goToSelectGenres(currentSelectedGenres: CurrentValueSubject<Set<Genre>, Never>) {
+    let viewController = SelectGenresViewController(
+      viewModel: .default(
+        metadata: metadata,
+        currentSelectedGenres: currentSelectedGenres
+      )
+    )
     navigationController.pushViewController(viewController, animated: true)
   }
 

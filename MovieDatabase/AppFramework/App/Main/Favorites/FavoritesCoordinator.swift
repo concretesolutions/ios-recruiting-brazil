@@ -52,7 +52,8 @@ public final class FavoritesCoordinator {
   private func goToFilter() {
     let filterCoordinator = FilterCoordinator(
       navigationController: navigationController,
-      metadata: metadata.eraseToAnyPublisher()
+      metadata: metadata.eraseToAnyPublisher(),
+      genresFilter: genresFilter
     )
 
     let uuid = UUID()

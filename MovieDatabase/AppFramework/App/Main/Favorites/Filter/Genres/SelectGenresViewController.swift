@@ -62,6 +62,8 @@ public final class SelectGenresViewController: UITableViewController {
         self?.dataSource.apply(snapshot)
       })
       .store(in: &cancellables)
+
+    cancellables.formUnion(output.cancellables)
   }
 
   override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
