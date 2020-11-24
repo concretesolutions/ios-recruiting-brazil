@@ -67,10 +67,17 @@ public final class FilterViewController: UITableViewController {
     ], toSection: .apply)
     dataSource.apply(snapshot)
 
-    output.apply
+    output.applyError
       .receive(on: DispatchQueue.main)
-      .sink(receiveValue: { [weak self] in
-        self?.navigationController?.popViewController(animated: true)
+      .sink(receiveValue: { [weak self] errorMessage in
+        if let (title, message) = errorMessage {
+          let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+          let action = UIAlertAction(title: L10n.Global.Action.ok, style: .default, handler: nil)
+          alert.addAction(action)
+          self?.present(alert, animated: true, completion: nil)
+        } else {
+          self?.navigationController?.popViewController(animated: true)
+        }
       })
       .store(in: &cancellables)
 

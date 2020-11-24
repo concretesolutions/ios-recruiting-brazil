@@ -18,6 +18,7 @@ final class FilterDateCell: UITableViewCell {
     return textField
   }()
 
+  private let _text = CurrentValueSubject<String?, Never>("")
   private var cancellables = Set<AnyCancellable>()
 
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -42,6 +43,8 @@ final class FilterDateCell: UITableViewCell {
       textField.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor),
       textFieldWidthConstraint,
     ])
+
+    textField.addTarget(self, action: #selector(textFieldValueChanged), for: .editingChanged)
   }
 
   @available(*, unavailable)
@@ -56,7 +59,7 @@ final class FilterDateCell: UITableViewCell {
 
   func setup(subject: CurrentValueSubject<String?, Never>) {
     textField.text = subject.value
-    textField.publisher(for: \.text)
+    _text
       .subscribe(subject)
       .store(in: &cancellables)
   }
@@ -69,6 +72,10 @@ final class FilterDateCell: UITableViewCell {
     } else {
       textField.resignFirstResponder()
     }
+  }
+
+  @objc private func textFieldValueChanged() {
+    _text.send(textField.text)
   }
 }
 

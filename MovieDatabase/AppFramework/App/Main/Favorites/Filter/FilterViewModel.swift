@@ -33,17 +33,20 @@ public struct FilterViewModel {
     public let currentDate: CurrentValueSubject<String?, Never>
     public let genreDetails: AnyPublisher<String, Never>
     public let apply: PassthroughSubject<Void, Never>
+    public let applyError: AnyPublisher<(String, String)?, Never>
     public let cancellables: Set<AnyCancellable>
 
     public init(
       currentDate: CurrentValueSubject<String?, Never>,
       genreDetails: AnyPublisher<String, Never>,
       apply: PassthroughSubject<Void, Never>,
+      applyError: AnyPublisher<(String, String)?, Never>,
       cancellables: Set<AnyCancellable>
     ) {
       self.currentDate = currentDate
       self.genreDetails = genreDetails
       self.apply = apply
+      self.applyError = applyError
       self.cancellables = cancellables
     }
   }
@@ -61,21 +64,40 @@ public struct FilterViewModel {
       let genresDetails = currentSelectedGenres
         .map { "\($0.count)" }
 
+      let apply = PassthroughSubject<Void, Never>()
       let currentDate = CurrentValueSubject<String?, Never>(dateFilter.value)
-      currentDate
+
+      apply
+        .map { currentDate.value }
         .subscribe(dateFilter)
         .store(in: &cancellables)
 
-      let apply = PassthroughSubject<Void, Never>()
       apply
         .map { currentSelectedGenres.value }
         .subscribe(genresFilter)
         .store(in: &cancellables)
 
+      // Sends an error message or nil if no error
+      let applyError = apply
+        .map {
+          currentDate.value
+        }
+        .map { year -> (String, String)? in
+          guard let year = year, year.count > 0 else { return nil } // No filter applied
+          guard let intYear = Int(year) else {
+            return ("Invalid year", "Only numbers are allowed")
+          }
+          guard intYear >= 1874 else {
+            return ("Invalid year", "The year should be greater than or equal to 1874")
+          }
+          return nil
+        }
+
       return Output(
         currentDate: currentDate,
         genreDetails: genresDetails.eraseToAnyPublisher(),
         apply: apply,
+        applyError: applyError.eraseToAnyPublisher(),
         cancellables: cancellables
       )
     }
