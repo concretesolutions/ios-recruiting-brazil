@@ -91,6 +91,11 @@ public final class FilterViewController: UITableViewController {
     }
   }
 
+  override public func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    view.endEditing(true)
+  }
+
   override public func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
     switch item {

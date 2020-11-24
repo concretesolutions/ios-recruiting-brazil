@@ -10,25 +10,34 @@ public struct FavoritesViewModel {
     public let refresh: AnyPublisher<Void, Never>
     public let delete: AnyPublisher<IndexPath, Never>
     public let searchText: AnyPublisher<String?, Never>
+    public let clearFilters: AnyPublisher<Void, Never>
 
     public init(
       refresh: AnyPublisher<Void, Never>,
       delete: AnyPublisher<IndexPath, Never>,
-      searchText: AnyPublisher<String?, Never>
+      searchText: AnyPublisher<String?, Never>,
+      clearFilters: AnyPublisher<Void, Never>
     ) {
       self.refresh = refresh
       self.delete = delete
       self.searchText = searchText
+      self.clearFilters = clearFilters
     }
   }
 
   public struct Output {
     public let filteredValues: AnyPublisher<[FavoriteViewModel], Never>
+    public let filterOn: AnyPublisher<Bool, Never>
+    public let cancellables: Set<AnyCancellable>
 
     public init(
-      filteredValues: AnyPublisher<[FavoriteViewModel], Never>
+      filteredValues: AnyPublisher<[FavoriteViewModel], Never>,
+      filterOn: AnyPublisher<Bool, Never>,
+      cancellables: Set<AnyCancellable>
     ) {
       self.filteredValues = filteredValues
+      self.filterOn = filterOn
+      self.cancellables = cancellables
     }
   }
 
@@ -108,8 +117,26 @@ public struct FavoritesViewModel {
           return filter.runFilter(favoriteViewModels)
         }
 
+      let filterOn = Publishers.CombineLatest(
+        genresFilter, dateFilter
+      )
+      .map { genres, date in
+        genres.count > 0 || (date ?? "").count > 0
+      }
+
+      var cancellables = Set<AnyCancellable>()
+
+      input.clearFilters
+        .sink(receiveValue: {
+          genresFilter.send(.init())
+          dateFilter.send(nil)
+        })
+        .store(in: &cancellables)
+
       return Output(
-        filteredValues: filteredValues.eraseToAnyPublisher()
+        filteredValues: filteredValues.eraseToAnyPublisher(),
+        filterOn: filterOn.eraseToAnyPublisher(),
+        cancellables: cancellables
       )
     }
   }

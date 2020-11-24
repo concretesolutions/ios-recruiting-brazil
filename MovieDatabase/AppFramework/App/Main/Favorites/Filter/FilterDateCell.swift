@@ -69,8 +69,6 @@ final class FilterDateCell: UITableViewCell {
     print(selected)
     if selected {
       textField.becomeFirstResponder()
-    } else {
-      textField.resignFirstResponder()
     }
   }
 

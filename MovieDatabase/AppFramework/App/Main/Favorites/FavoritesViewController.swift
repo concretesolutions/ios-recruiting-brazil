@@ -35,6 +35,14 @@ public final class FavoritesViewController: UIViewController {
     target: self,
     action: #selector(didTapFilter)
   )
+  private let clearFilterButton: UIButton = {
+    let button = UIButton(type: .system)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setTitle("Clear Filters", for: .normal)
+    button.backgroundColor = .systemBackground
+    return button
+  }()
+
   private lazy var searchController: UISearchController = {
     let searchController = UISearchController(searchResultsController: nil)
     searchController.searchBar.autocapitalizationType = .none
@@ -53,6 +61,7 @@ public final class FavoritesViewController: UIViewController {
   private let _presentFilter = PassthroughSubject<Void, Never>()
   public lazy var presentFilter: AnyPublisher<Void, Never> = _presentFilter.eraseToAnyPublisher()
   fileprivate let _searhText = CurrentValueSubject<String?, Never>(nil)
+  private let _clearFilter = PassthroughSubject<Void, Never>()
 
   // MARK: DataSource
 
@@ -108,19 +117,28 @@ public final class FavoritesViewController: UIViewController {
     tableView.delegate = self
     tableView.tableFooterView = UIView()
     tableView.register(FavoriteCell.self)
-    NSLayoutConstraint.activate(
-      tableView.makeConstraintsToEdges(of: view)
-    )
+
+    view.addSubview(clearFilterButton)
+
+    NSLayoutConstraint.activate([
+      clearFilterButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      clearFilterButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+      clearFilterButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      clearFilterButton.heightAnchor.constraint(equalToConstant: 44),
+    ] + tableView.makeConstraintsToEdges(of: view))
   }
 
   private func setupBindings() {
+    clearFilterButton.addTarget(self, action: #selector(didTapClearFilter), for: .primaryActionTriggered)
+
     let output = viewModel.transform(
       .init(
         refresh: _refreshValues
           .throttle(for: .seconds(1), scheduler: DispatchQueue.main, latest: true)
           .eraseToAnyPublisher(),
         delete: dataSource.delete,
-        searchText: _searhText.eraseToAnyPublisher()
+        searchText: _searhText.eraseToAnyPublisher(),
+        clearFilters: _clearFilter.eraseToAnyPublisher()
       )
     )
 
@@ -133,10 +151,29 @@ public final class FavoritesViewController: UIViewController {
         self?.dataSource.apply(snapshot)
       })
       .store(in: &cancellables)
+
+    output.filterOn
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { [weak self] on in
+        if on {
+          self?.clearFilterButton.isHidden = false
+          self?.tableView.contentInset = .init(top: 44, left: 0, bottom: 0, right: 0)
+        } else {
+          self?.clearFilterButton.isHidden = true
+          self?.tableView.contentInset = .zero
+        }
+      })
+      .store(in: &cancellables)
+
+    cancellables.formUnion(output.cancellables)
   }
 
   @objc private func didTapFilter() {
     _presentFilter.send(())
+  }
+
+  @objc private func didTapClearFilter() {
+    _clearFilter.send(())
   }
 }
 
