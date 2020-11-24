@@ -26,6 +26,9 @@ public final class FavoritesViewController: UIViewController {
 
   private let tableView: UITableView = {
     let tv = UITableView(frame: .zero, style: .plain)
+    tv.translatesAutoresizingMaskIntoConstraints = false
+    tv.tableFooterView = UIView()
+    tv.register(FavoriteCell.self)
     return tv
   }()
 
@@ -113,10 +116,7 @@ public final class FavoritesViewController: UIViewController {
     navigationItem.rightBarButtonItem = filterButton
 
     view.addSubview(tableView)
-    tableView.translatesAutoresizingMaskIntoConstraints = false
     tableView.delegate = self
-    tableView.tableFooterView = UIView()
-    tableView.register(FavoriteCell.self)
 
     view.addSubview(clearFilterButton)
 
