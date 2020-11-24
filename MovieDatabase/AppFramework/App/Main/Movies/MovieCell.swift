@@ -51,6 +51,7 @@ public final class MovieCell: UICollectionViewCell {
       likeButton.bottomAnchor.constraint(equalTo: titleLabelContainer.topAnchor),
       likeButton.heightAnchor.constraint(equalToConstant: 44),
       likeButton.widthAnchor.constraint(equalToConstant: 44),
+      titleLabelContainer.heightAnchor.constraint(equalToConstant: 44),
     ])
     NSLayoutConstraint.activate(constraints)
 

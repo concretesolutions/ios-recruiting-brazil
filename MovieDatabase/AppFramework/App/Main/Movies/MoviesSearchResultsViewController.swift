@@ -11,7 +11,7 @@ public final class MoviesSearchResultsViewController: UICollectionViewController
       let cell: MovieCell = collectionView.dequeue(for: indexPath)
       cell.setup(
         viewModel: movieViewModel,
-        refresh: Empty<Void, Never>(completeImmediately: true)
+        refresh: Empty<Void, Never>(completeImmediately: false)
           .eraseToAnyPublisher()
       )
       return cell
