@@ -9,6 +9,10 @@ public final class TMDClient {
     provider = Provider(session: session, baseUrl: baseUrl, middlewares: middlewares)
   }
 
+  public func moviePopular(_ params: MoviePopularRequestParams) -> ResponsePublisher<MoviePopularResponse> {
+    provider.executeWithResult(request: .moviePopular(params: params))
+  }
+
   public func discoverMovie(_ params: DiscoverMovieRequestParams) -> ResponsePublisher<DiscoverMovieResponse> {
     provider.executeWithResult(request: .discoverMovie(params: params))
   }
