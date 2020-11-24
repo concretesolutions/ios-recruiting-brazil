@@ -10,6 +10,18 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
+  internal enum Global {
+    internal enum Action {
+      /// Ok
+      internal static let ok = L10n.tr("Localizable", "global.action.ok")
+    }
+
+    internal enum Title {
+      /// Error
+      internal static let error = L10n.tr("Localizable", "global.title.error")
+    }
+  }
+
   internal enum Screen {
     internal enum Favorites {
       /// Favorites
@@ -34,6 +46,8 @@ internal enum L10n {
     internal enum Movies {
       /// Your search returned 0 results
       internal static let emptyResultsMessage = L10n.tr("Localizable", "screen.movies.empty_results_message")
+      /// An error ocurred, please try again
+      internal static let errorMessage = L10n.tr("Localizable", "screen.movies.error_message")
       /// Movies
       internal static let title = L10n.tr("Localizable", "screen.movies.title")
     }

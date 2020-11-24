@@ -19,6 +19,13 @@ public final class MoviesViewController: UICollectionViewController {
     return searchController
   }()
 
+  private lazy var errorBackground: UIView = {
+    let label = UILabel()
+    label.textAlignment = .center
+    label.text = L10n.Screen.Movies.errorMessage
+    return label
+  }()
+
   // MARK: Publishers
 
   private let _presentMovieDetails = PassthroughSubject<Movie, Never>()
@@ -149,8 +156,11 @@ public final class MoviesViewController: UICollectionViewController {
 
     output.error
       .receive(on: DispatchQueue.main)
-      .sink(receiveValue: { error in
-        print("Error:", error.statusCode, error.statusMessage)
+      .sink(receiveValue: { [weak self] _ in
+        let alert = UIAlertController(title: L10n.Global.Title.error, message: L10n.Screen.Movies.errorMessage, preferredStyle: .alert)
+        let action = UIAlertAction(title: L10n.Global.Action.ok, style: .default, handler: nil)
+        alert.addAction(action)
+        self?.present(alert, animated: true, completion: nil)
       })
       .store(in: &cancellables)
 
