@@ -2,7 +2,7 @@ import Combine
 import CoreData
 import UIKit
 
-public final class FavoritesViewController: UITableViewController {
+public final class FavoritesViewController: UIViewController {
   // MARK: Types
 
   final class DataSource: UITableViewDiffableDataSource<FavoritesSection, FavoriteViewModel> {
@@ -24,14 +24,17 @@ public final class FavoritesViewController: UITableViewController {
 
   // MARK: UI
 
-  private let _refreshValues = PassthroughSubject<Void, Never>()
+  private let tableView: UITableView = {
+    let tv = UITableView(frame: .zero, style: .plain)
+    return tv
+  }()
+
   private lazy var filterButton = UIBarButtonItem(
     image: UIImage(systemName: "line.horizontal.3.decrease.circle"),
     style: .plain,
     target: self,
     action: #selector(didTapFilter)
   )
-
   private lazy var searchController: UISearchController = {
     let searchController = UISearchController(searchResultsController: nil)
     searchController.searchBar.autocapitalizationType = .none
@@ -44,6 +47,7 @@ public final class FavoritesViewController: UITableViewController {
 
   // MARK: Publishers
 
+  private let _refreshValues = PassthroughSubject<Void, Never>()
   private let _presentMovieDetails = PassthroughSubject<Movie, Never>()
   public lazy var presentMovieDetails: AnyPublisher<Movie, Never> = _presentMovieDetails.eraseToAnyPublisher()
   private let _presentFilter = PassthroughSubject<Void, Never>()
@@ -70,7 +74,7 @@ public final class FavoritesViewController: UITableViewController {
 
   public init(viewModel: FavoritesViewModel) {
     self.viewModel = viewModel
-    super.init(style: .plain)
+    super.init(nibName: nil, bundle: nil)
     definesPresentationContext = true
     title = L10n.Screen.Favorites.title
     tabBarItem = UITabBarItem(title: L10n.Screen.Favorites.title, image: UIImage(systemName: "heart"), selectedImage: nil)
@@ -98,8 +102,15 @@ public final class FavoritesViewController: UITableViewController {
     dataSource.defaultRowAnimation = .fade
     navigationItem.searchController = searchController
     navigationItem.rightBarButtonItem = filterButton
+
+    view.addSubview(tableView)
+    tableView.translatesAutoresizingMaskIntoConstraints = false
+    tableView.delegate = self
     tableView.tableFooterView = UIView()
     tableView.register(FavoriteCell.self)
+    NSLayoutConstraint.activate(
+      tableView.makeConstraintsToEdges(of: view)
+    )
   }
 
   private func setupBindings() {
@@ -127,16 +138,18 @@ public final class FavoritesViewController: UITableViewController {
   @objc private func didTapFilter() {
     _presentFilter.send(())
   }
+}
 
-  // MARK: UITableViewDelegate
+// MARK: UITableViewDelegate
 
-  override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+extension FavoritesViewController: UITableViewDelegate {
+  public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
     _presentMovieDetails.send(item.movie)
   }
 
-  override public func tableView(_: UITableView, titleForDeleteConfirmationButtonForRowAt _: IndexPath) -> String? {
+  public func tableView(_: UITableView, titleForDeleteConfirmationButtonForRowAt _: IndexPath) -> String? {
     L10n.Screen.Favorites.unfavorite
   }
 }
