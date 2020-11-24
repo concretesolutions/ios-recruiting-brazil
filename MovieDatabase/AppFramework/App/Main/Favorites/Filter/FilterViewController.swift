@@ -26,7 +26,7 @@ public final class FilterViewController: UITableViewController {
         return cell
       case let .apply(subject):
         let cell: ButtonCell = tableView.dequeue(for: indexPath)
-        cell.setup(with: "Apply", subject: subject)
+        cell.setup(with: L10n.Screen.Favorites.Filter.Action.apply, subject: subject)
         return cell
       }
     })

@@ -85,10 +85,10 @@ public struct FilterViewModel {
         .map { year -> (String, String)? in
           guard let year = year, year.count > 0 else { return nil } // No filter applied
           guard let intYear = Int(year) else {
-            return ("Invalid year", "Only numbers are allowed")
+            return (L10n.Screen.Favorites.Filter.InvalidYearError.title, L10n.Screen.Favorites.Filter.InvalidYearError.onlyNumbers)
           }
           guard intYear >= 1874 else {
-            return ("Invalid year", "The year should be greater than or equal to 1874")
+            return (L10n.Screen.Favorites.Filter.InvalidYearError.title, L10n.Screen.Favorites.Filter.InvalidYearError.greaterThan1874)
           }
           return nil
         }

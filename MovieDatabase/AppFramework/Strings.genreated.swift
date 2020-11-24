@@ -35,6 +35,21 @@ internal enum L10n {
         internal static let genres = L10n.tr("Localizable", "screen.favorites.filter.genres")
         /// Filter
         internal static let title = L10n.tr("Localizable", "screen.favorites.filter.title")
+        internal enum Action {
+          /// Apply
+          internal static let apply = L10n.tr("Localizable", "screen.favorites.filter.action.apply")
+          /// Clear
+          internal static let clear = L10n.tr("Localizable", "screen.favorites.filter.action.clear")
+        }
+
+        internal enum InvalidYearError {
+          /// The year should be greater than or equal to 1874
+          internal static let greaterThan1874 = L10n.tr("Localizable", "screen.favorites.filter.invalid_year_error.greater_than_1874")
+          /// Only numbers are allowed
+          internal static let onlyNumbers = L10n.tr("Localizable", "screen.favorites.filter.invalid_year_error.only_numbers")
+          /// Invalid year
+          internal static let title = L10n.tr("Localizable", "screen.favorites.filter.invalid_year_error.title")
+        }
       }
     }
 

@@ -16,7 +16,7 @@ public final class SelectGenresViewController: UITableViewController {
     })
   }()
 
-  private lazy var clearButton = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(didTapClear))
+  private lazy var clearButton = UIBarButtonItem(title: L10n.Screen.Favorites.Filter.Action.clear, style: .plain, target: self, action: #selector(didTapClear))
 
   private let _clear = PassthroughSubject<Void, Never>()
   private let _didSelectItem = PassthroughSubject<GenreItem, Never>()
