@@ -1,7 +1,7 @@
 import Combine
 import TheMovieDatabaseApi
 
-private extension DiscoverMovieResponse.Movie {
+private extension MoviePopularResponse.Movie {
   func year() -> String {
     String(
       releaseDate
@@ -67,7 +67,7 @@ public struct MoviesViewModel {
         nextPageTrigger: input.nextPage,
         valuesFromEnvelope: { envelope in envelope.results },
         cursorFromEnvelope: { envelope in envelope.page },
-        requestFromCursor: { page in Env.client.discoverMovie(DiscoverMovieRequestParams(page: page)) }
+        requestFromCursor: { page in Env.client.moviePopular(MoviePopularRequestParams(page: page)) }
       )
 
       let values = Publishers.CombineLatest(
