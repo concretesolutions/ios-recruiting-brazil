@@ -55,6 +55,9 @@ public final class MovieCell: UICollectionViewCell {
     ])
     NSLayoutConstraint.activate(constraints)
 
+    contentView.layer.cornerRadius = 8
+    contentView.layer.masksToBounds = true
+
     likeButton.addTarget(self, action: #selector(didTapLike), for: .primaryActionTriggered)
   }
 

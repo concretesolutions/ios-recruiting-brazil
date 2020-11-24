@@ -46,7 +46,7 @@ public final class MoviesViewController: UICollectionViewController {
 
   static func makeCollectionViewLayout() -> UICollectionViewCompositionalLayout {
     let itemSize = NSCollectionLayoutSize(
-      widthDimension: .fractionalWidth(0.46),
+      widthDimension: .fractionalWidth(0.48),
       heightDimension: .fractionalHeight(1.0)
     )
 
@@ -54,18 +54,18 @@ public final class MoviesViewController: UICollectionViewController {
 
     let groupSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1),
-      heightDimension: .absolute(200)
+      heightDimension: .absolute(230)
     )
 
     let group = NSCollectionLayoutGroup.horizontal(
       layoutSize: groupSize,
       subitems: [item]
     )
-    group.interItemSpacing = NSCollectionLayoutSpacing.flexible(16)
-    group.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: nil, top: nil, trailing: nil, bottom: .fixed(24))
+    group.interItemSpacing = NSCollectionLayoutSpacing.flexible(8)
+    group.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: nil, top: nil, trailing: nil, bottom: .fixed(20))
 
     let section = NSCollectionLayoutSection(group: group)
-    section.contentInsets = NSDirectionalEdgeInsets(top: 24, leading: 24, bottom: 24, trailing: 24)
+    section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
 
     let layout = UICollectionViewCompositionalLayout(section: section)
 
