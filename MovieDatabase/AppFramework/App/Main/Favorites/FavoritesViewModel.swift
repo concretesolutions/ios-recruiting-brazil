@@ -40,6 +40,7 @@ public struct FavoritesViewModel {
 
   public static func `default`(
     repo: MovieRepo = .default(moc: Env.database.moc),
+    dateFilter: CurrentValueSubject<String?, Never>,
     genresFilter: CurrentValueSubject<Set<Genre>, Never>
   ) -> FavoritesViewModel {
     FavoritesViewModel { input in
@@ -76,13 +77,18 @@ public struct FavoritesViewModel {
         }
         .switchToLatest()
 
-      let filteredValues = Publishers.CombineLatest3(input.searchText, genresFilter, values)
-        .map { searchText, genresToFilter, favoriteViewModels -> [FavoriteViewModel] in
+      let filteredValues = Publishers.CombineLatest4(input.searchText, genresFilter, dateFilter, values)
+        .map { searchText, genresToFilter, dateToFilter, favoriteViewModels -> [FavoriteViewModel] in
           var filters = [Filter<Movie>]()
 
           if let searchText = searchText, !searchText.isEmpty {
             let filterByTitle = Filters.movieFilter(byTitle: searchText)
             filters.append(filterByTitle)
+          }
+
+          if let dateToFilter = dateToFilter {
+            let filterByDate = Filters.movieFilter(byYear: dateToFilter)
+            filters.append(filterByDate)
           }
 
           if genresToFilter.count > 0 {

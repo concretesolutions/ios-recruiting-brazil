@@ -6,6 +6,7 @@ public class FilterCoordinator {
   private let navigationController: UINavigationController
   private let metadata: AnyPublisher<MetaData, Never>
   private let genresFilter: CurrentValueSubject<Set<Genre>, Never>
+  private let dateFilter: CurrentValueSubject<String?, Never>
   private var cancellables = Set<AnyCancellable>()
 
   private let _finished = PassthroughSubject<Void, Never>()
@@ -14,11 +15,13 @@ public class FilterCoordinator {
   public init(
     navigationController: UINavigationController,
     metadata: AnyPublisher<MetaData, Never>,
-    genresFilter: CurrentValueSubject<Set<Genre>, Never>
+    genresFilter: CurrentValueSubject<Set<Genre>, Never>,
+    dateFilter: CurrentValueSubject<String?, Never>
   ) {
     self.navigationController = navigationController
     self.metadata = metadata
     self.genresFilter = genresFilter
+    self.dateFilter = dateFilter
     os_log("[FilterCoordinator] init", log: generalLog, type: .debug)
   }
 
@@ -28,6 +31,7 @@ public class FilterCoordinator {
     let viewController = FilterViewController(
       viewModel: .default(
         currentSelectedGenres: currentSelectedGenres,
+        dateFilter: dateFilter,
         genresFilter: genresFilter
       )
     )

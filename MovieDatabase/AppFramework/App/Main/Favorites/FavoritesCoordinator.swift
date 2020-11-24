@@ -7,6 +7,7 @@ public final class FavoritesCoordinator {
   public let navigationController: UINavigationController
   private let metadata: CurrentValueSubject<MetaData, Never>
   private let genresFilter = CurrentValueSubject<Set<Genre>, Never>(.init())
+  private let dateFilter = CurrentValueSubject<String?, Never>(nil)
 
   private var childCoordinators = [UUID: Any]()
 
@@ -21,7 +22,10 @@ public final class FavoritesCoordinator {
 
   public func start() {
     let viewController = FavoritesViewController(
-      viewModel: .default(genresFilter: genresFilter)
+      viewModel: .default(
+        dateFilter: dateFilter,
+        genresFilter: genresFilter
+      )
     )
 
     viewController.presentMovieDetails
@@ -53,7 +57,8 @@ public final class FavoritesCoordinator {
     let filterCoordinator = FilterCoordinator(
       navigationController: navigationController,
       metadata: metadata.eraseToAnyPublisher(),
-      genresFilter: genresFilter
+      genresFilter: genresFilter,
+      dateFilter: dateFilter
     )
 
     let uuid = UUID()

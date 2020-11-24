@@ -13,12 +13,9 @@ public final class FilterViewController: UITableViewController {
   private lazy var dataSource: DataSource = {
     DataSource(tableView: tableView, cellProvider: { tableView, indexPath, item in
       switch item {
-      case let .date(detailsPub):
-        let cell: FilterCell = tableView.dequeue(for: indexPath)
-        cell.setup(
-          title: L10n.Screen.Favorites.Filter.date,
-          detailValue: detailsPub
-        )
+      case let .date(dateSubject):
+        let cell: FilterDateCell = tableView.dequeue(for: indexPath)
+        cell.setup(subject: dateSubject)
         return cell
       case let .genres(detailsPub):
         let cell: FilterCell = tableView.dequeue(for: indexPath)
@@ -52,8 +49,8 @@ public final class FilterViewController: UITableViewController {
   override public func viewDidLoad() {
     super.viewDidLoad()
     title = L10n.Screen.Favorites.Filter.title
-    tableView.rowHeight = UITableView.automaticDimension
-    tableView.estimatedRowHeight = 44
+    tableView.rowHeight = 44
+    tableView.register(FilterDateCell.self)
     tableView.register(FilterCell.self)
     tableView.register(ButtonCell.self)
 
@@ -62,7 +59,7 @@ public final class FilterViewController: UITableViewController {
     var snapshot = Snapshot()
     snapshot.appendSections([.main, .apply])
     snapshot.appendItems([
-      .date(output.dateDetails),
+      .date(output.currentDate),
       .genres(output.genreDetails),
     ], toSection: .main)
     snapshot.appendItems([

@@ -23,25 +23,25 @@ public enum FilterItem: Hashable, Equatable {
     }
   }
 
-  case date(AnyPublisher<String, Never>)
+  case date(CurrentValueSubject<String?, Never>)
   case genres(AnyPublisher<String, Never>)
   case apply(PassthroughSubject<Void, Never>)
 }
 
 public struct FilterViewModel {
   public struct Output {
-    public let dateDetails: AnyPublisher<String, Never>
+    public let currentDate: CurrentValueSubject<String?, Never>
     public let genreDetails: AnyPublisher<String, Never>
     public let apply: PassthroughSubject<Void, Never>
     public let cancellables: Set<AnyCancellable>
 
     public init(
-      dateDetails: AnyPublisher<String, Never>,
+      currentDate: CurrentValueSubject<String?, Never>,
       genreDetails: AnyPublisher<String, Never>,
       apply: PassthroughSubject<Void, Never>,
       cancellables: Set<AnyCancellable>
     ) {
-      self.dateDetails = dateDetails
+      self.currentDate = currentDate
       self.genreDetails = genreDetails
       self.apply = apply
       self.cancellables = cancellables
@@ -52,24 +52,28 @@ public struct FilterViewModel {
 
   public static func `default`(
     currentSelectedGenres: CurrentValueSubject<Set<Genre>, Never>,
+    dateFilter: CurrentValueSubject<String?, Never>,
     genresFilter: CurrentValueSubject<Set<Genre>, Never>
   ) -> FilterViewModel {
     FilterViewModel {
       var cancellables = Set<AnyCancellable>()
 
-      let apply = PassthroughSubject<Void, Never>()
-
-      let dateDetails = Empty<String, Never>(completeImmediately: false)
       let genresDetails = currentSelectedGenres
         .map { "\($0.count)" }
 
+      let currentDate = CurrentValueSubject<String?, Never>(dateFilter.value)
+      currentDate
+        .subscribe(dateFilter)
+        .store(in: &cancellables)
+
+      let apply = PassthroughSubject<Void, Never>()
       apply
         .map { currentSelectedGenres.value }
         .subscribe(genresFilter)
         .store(in: &cancellables)
 
       return Output(
-        dateDetails: dateDetails.eraseToAnyPublisher(),
+        currentDate: currentDate,
         genreDetails: genresDetails.eraseToAnyPublisher(),
         apply: apply,
         cancellables: cancellables
