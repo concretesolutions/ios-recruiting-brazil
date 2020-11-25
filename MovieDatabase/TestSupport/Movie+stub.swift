@@ -7,7 +7,7 @@ public extension Movie {
     year: String = "",
     genreIds: [Int16] = [],
     overview: String = "",
-    posterUrl: URL = TestConstants.exampleUrl.appendingPathComponent("w300")
+    posterUrl: URL = TestConstants.exampleUrl.appendingPathComponent("w300/")
   ) -> Movie {
     Movie(
       id: id,
