@@ -27,6 +27,7 @@ public final class FavoritesViewController: UIViewController {
   private let tableView: UITableView = {
     let tv = UITableView(frame: .zero, style: .plain)
     tv.translatesAutoresizingMaskIntoConstraints = false
+    tv.rowHeight = 120
     tv.tableFooterView = UIView()
     tv.register(FavoriteCell.self)
     return tv
@@ -78,8 +79,7 @@ public final class FavoritesViewController: UIViewController {
   private lazy var dataSource: DataSource = {
     DataSource(tableView: tableView, cellProvider: { tableView, indexPath, item in
       let cell: FavoriteCell = tableView.dequeue(for: indexPath)
-      cell.textLabel?.text = item.movie.title
-      cell.detailTextLabel?.text = item.movie.overview
+      cell.setup(with: item.movie)
       return cell
     })
   }()
