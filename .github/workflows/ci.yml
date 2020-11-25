@@ -34,5 +34,8 @@ jobs:
           bundle config path vendor/bundle;
           bundle install
 
+      - name: Setup ApiKey.swift
+        run: cp _ApiKey.swift ApiKey.swift
+
       - name: Run tests
         run: bundle exec fastlane test
