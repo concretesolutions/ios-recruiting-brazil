@@ -1,64 +1,50 @@
 import Combine
+import Design
 import Kingfisher
 import UIKit
 
 public final class MovieCell: UICollectionViewCell {
+  // MARK: UI
+
   private let backgroundImageView: UIImageView = {
     let imageView = UIImageView()
+    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.layer.masksToBounds = true
     imageView.contentMode = .scaleAspectFill
     imageView.kf.indicatorType = .activity
     return imageView
   }()
 
-  private let titleLabel: UILabel = {
-    let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.textAlignment = .center
-    label.numberOfLines = 2
-    label.adjustsFontSizeToFitWidth = true
-    return label
-  }()
-
   private let likeButton: UIButton = {
     let button = UIButton(type: .system)
     button.translatesAutoresizingMaskIntoConstraints = false
     button.setImage(UIImage(systemName: "heart"), for: .normal)
+
+    button.imageView?.layer.shadowColor = UIColor.black.cgColor
+    button.imageView?.layer.shadowRadius = 1.0
+    button.imageView?.layer.shadowOpacity = 1.0
+    button.imageView?.layer.shadowOffset = .zero // CGSize(width: 1, height: 1)
+    button.imageView?.layer.masksToBounds = false
+
+    button.tintColor = Asset.Colors.accent.color
+
     return button
   }()
 
+  // MARK: Publishers
+
   private let _like = PassthroughSubject<Void, Never>()
 
+  // MARK: Other Properties
+
+  private let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: UIFont.systemFont(ofSize: 32).pointSize, weight: .regular, scale: .medium)
   private var cancellables = Set<AnyCancellable>()
+
+  // MARK: Lifecycle
 
   override public init(frame: CGRect) {
     super.init(frame: frame)
-    let titleLabelContainer = titleLabel.withPadding(inset: 4)
-    titleLabelContainer.backgroundColor = .systemGray
-    let stackView = UIStackView(arrangedSubviews: [
-      backgroundImageView,
-      titleLabelContainer,
-    ])
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.axis = .vertical
-    stackView.distribution = .fill
-
-    contentView.addSubview(stackView)
-    contentView.addSubview(likeButton)
-    var constraints = stackView.makeConstraintsToEdges(of: contentView)
-    constraints.append(contentsOf: [
-      likeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-      likeButton.bottomAnchor.constraint(equalTo: titleLabelContainer.topAnchor),
-      likeButton.heightAnchor.constraint(equalToConstant: 44),
-      likeButton.widthAnchor.constraint(equalToConstant: 44),
-      titleLabelContainer.heightAnchor.constraint(equalToConstant: 44),
-    ])
-    NSLayoutConstraint.activate(constraints)
-
-    contentView.layer.cornerRadius = 8
-    contentView.layer.masksToBounds = true
-
-    likeButton.addTarget(self, action: #selector(didTapLike), for: .primaryActionTriggered)
+    setupUI()
   }
 
   @available(*, unavailable)
@@ -70,13 +56,32 @@ public final class MovieCell: UICollectionViewCell {
     super.prepareForReuse()
     likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
     backgroundImageView.image = nil
-    titleLabel.text = ""
     cancellables.removeAll()
   }
 
-  public func setup(viewModel: MovieViewModel, refresh: AnyPublisher<Void, Never>) {
-    titleLabel.text = viewModel.movie.title
+  // MARK: Methods
 
+  private func setupUI() {
+    contentView.addSubview(backgroundImageView)
+    contentView.addSubview(likeButton)
+
+    NSLayoutConstraint.activate(
+      backgroundImageView.makeConstraintsToEdges(of: contentView) +
+        [
+          likeButton.topAnchor.constraint(equalTo: contentView.topAnchor),
+          likeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+          likeButton.heightAnchor.constraint(equalToConstant: 44),
+          likeButton.widthAnchor.constraint(equalToConstant: 44),
+        ]
+    )
+
+    contentView.layer.cornerRadius = 8
+    contentView.layer.masksToBounds = true
+
+    likeButton.addTarget(self, action: #selector(didTapLike), for: .primaryActionTriggered)
+  }
+
+  public func setup(viewModel: MovieViewModel, refresh: AnyPublisher<Void, Never>) {
     backgroundImageView.kf.setImage(with: viewModel.movie.posterUrl)
 
     let output = viewModel.transform(
@@ -89,10 +94,10 @@ public final class MovieCell: UICollectionViewCell {
     )
 
     output.like
-      .map { liked in
+      .map { [symbolConfiguration] liked in
         liked
-          ? UIImage(systemName: "heart.fill")?.withRenderingMode(.alwaysTemplate)
-          : UIImage(systemName: "heart")?.withRenderingMode(.alwaysTemplate)
+          ? UIImage(systemName: "heart.fill", withConfiguration: symbolConfiguration)?.withRenderingMode(.alwaysTemplate)
+          : UIImage(systemName: "heart", withConfiguration: symbolConfiguration)?.withRenderingMode(.alwaysTemplate)
       }
       .receive(on: DispatchQueue.main)
       .sink(receiveValue: { [weak self] likeImage in
