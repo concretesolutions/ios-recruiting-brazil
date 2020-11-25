@@ -183,6 +183,21 @@ public final class MoviesViewController: UICollectionViewController {
       })
       .store(in: &cancellables)
 
+    Publishers.Merge(
+      output.values.map { $0.count == 0 },
+      output.error.map { _ in true }
+    )
+    .removeDuplicates()
+    .receive(on: DispatchQueue.main)
+    .sink(receiveValue: { [weak self] empty in
+      if empty {
+        self?.collectionView.backgroundView = self?.errorBackground
+      } else {
+        self?.collectionView.backgroundView = nil
+      }
+    })
+    .store(in: &cancellables)
+
     output.filteredValues
       .map { values in values.count == 0 }
       .removeDuplicates()
