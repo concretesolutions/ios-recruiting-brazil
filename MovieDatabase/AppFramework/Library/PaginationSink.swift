@@ -1,6 +1,6 @@
 import Combine
 
-public struct PaginationSink<Value, Error: Swift.Error> {
+public struct PaginationSink<Value, Err: Swift.Error> {
   /// A `Publisher` that returns true if a first page request is being made.
   public let isRefreshing: AnyPublisher<Bool, Never>
   /// A `Publisher` that returns true if a request to the next page is being made.
@@ -8,12 +8,12 @@ public struct PaginationSink<Value, Error: Swift.Error> {
   /// An `Publisher` with a list of all the items loaded since the first page.
   public let values: AnyPublisher<[Value], Never>
   /// An `Observable` that triggers when an error occurs during the request. The sequence should never fail.
-  public let error: AnyPublisher<Error, Never>
+  public let error: AnyPublisher<Err, Never>
 
   private init(isRefreshing: AnyPublisher<Bool, Never>,
                isLoadingNextPage: AnyPublisher<Bool, Never>,
                values: AnyPublisher<[Value], Never>,
-               error: AnyPublisher<Error, Never>)
+               error: AnyPublisher<Err, Never>)
   {
     self.isRefreshing = isRefreshing
     self.isLoadingNextPage = isLoadingNextPage
@@ -36,19 +36,19 @@ public struct PaginationSink<Value, Error: Swift.Error> {
   ///     - requestFromEnvelope: A function that gets the page number and returns the result of the request as a `Publisher`.
   ///
   /// - Returns: An object with `Observable` sequences that reflects the current state of the pagination's feedback loop
-  public static func make<Value: Equatable, Envelope, Error: Swift.Error>(
+  public static func make<Value: Equatable, Envelope, Err: Swift.Error>(
     refreshTrigger: AnyPublisher<Void, Never>,
     nextPageTrigger: AnyPublisher<Void, Never>,
     valuesFromEnvelope: @escaping (Envelope) -> [Value],
     cursorFromEnvelope: @escaping (Envelope) -> Int,
-    requestFromCursor: @escaping (Int) -> AnyPublisher<Result<Envelope, Error>, Never>
-  ) -> PaginationSink<Value, Error> {
+    requestFromCursor: @escaping (Int) -> AnyPublisher<Result<Envelope, Err>, Never>
+  ) -> PaginationSink<Value, Err> {
     var cursor = 1
 
     let _isRefreshing = CurrentValueSubject<Bool, Never>(false)
     let _isLoadingNextPage = CurrentValueSubject<Bool, Never>(false)
 
-    let _error = PassthroughSubject<Error, Never>()
+    let _error = PassthroughSubject<Err, Never>()
 
     let values = refreshTrigger
       .map { _ -> AnyPublisher<[Value], Never> in
@@ -56,7 +56,7 @@ public struct PaginationSink<Value, Error: Swift.Error> {
 
         return nextPageTrigger
           .prepend(())
-          .map { _ -> AnyPublisher<Result<Envelope, Error>, Never> in
+          .map { _ -> AnyPublisher<Result<Envelope, Err>, Never> in
             // TODO: Track
             let activityToTrack = cursor == 1
               ? _isRefreshing
@@ -87,7 +87,7 @@ public struct PaginationSink<Value, Error: Swift.Error> {
       }
       .switchToLatest()
 
-    return PaginationSink<Value, Error>(
+    return PaginationSink<Value, Err>(
       isRefreshing: _isRefreshing.share().eraseToAnyPublisher(),
       isLoadingNextPage: _isLoadingNextPage.share().eraseToAnyPublisher(),
       values: values.share().eraseToAnyPublisher(),
