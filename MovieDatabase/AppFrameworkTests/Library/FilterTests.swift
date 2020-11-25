@@ -3,26 +3,6 @@ import Combine
 import TestSupport
 import XCTest
 
-extension Movie {
-  static func stub(
-    id: Int64 = 0,
-    title: String = "",
-    year: String = "",
-    genreIds: [Int16] = [],
-    overview: String = "",
-    posterUrl: URL = TestConstants.exampleUrl
-  ) -> Movie {
-    Movie(
-      id: id,
-      title: title,
-      year: year,
-      genreIds: genreIds,
-      overview: overview,
-      posterUrl: posterUrl
-    )
-  }
-}
-
 final class FilterTests: XCTestCase {
   func testFilterContramap() {
     let filter = Filter<String> { str in str.contains("a") }
