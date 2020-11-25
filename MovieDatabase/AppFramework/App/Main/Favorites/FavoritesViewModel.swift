@@ -112,6 +112,7 @@ public struct FavoritesViewModel {
 
           return filter.runFilter(favoriteViewModels)
         }
+        .removeDuplicates()
 
       let filterOn = Publishers.CombineLatest(
         genresFilter, dateFilter
@@ -119,6 +120,7 @@ public struct FavoritesViewModel {
       .map { genres, date in
         genres.count > 0 || (date ?? "").count > 0
       }
+      .removeDuplicates()
 
       var cancellables = Set<AnyCancellable>()
 
