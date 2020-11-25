@@ -6,8 +6,8 @@ public final class FavoritesViewController: UIViewController {
   // MARK: Types
 
   final class DataSource: UITableViewDiffableDataSource<FavoritesSection, FavoriteViewModel> {
-    private let _delete = PassthroughSubject<IndexPath, Never>()
-    lazy var delete: AnyPublisher<IndexPath, Never> = {
+    private let _delete = PassthroughSubject<FavoriteViewModel?, Never>()
+    lazy var delete: AnyPublisher<FavoriteViewModel?, Never> = {
       _delete.eraseToAnyPublisher()
     }()
 
@@ -16,7 +16,8 @@ public final class FavoritesViewController: UIViewController {
     }
 
     override func tableView(_: UITableView, commit _: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-      _delete.send(indexPath)
+      let item = itemIdentifier(for: indexPath)
+      _delete.send(item)
     }
   }
 

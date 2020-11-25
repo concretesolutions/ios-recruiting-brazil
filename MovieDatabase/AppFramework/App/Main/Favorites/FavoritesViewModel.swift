@@ -8,13 +8,13 @@ public enum FavoritesSection: Hashable {
 public struct FavoritesViewModel {
   public struct Input {
     public let refresh: AnyPublisher<Void, Never>
-    public let delete: AnyPublisher<IndexPath, Never>
+    public let delete: AnyPublisher<FavoriteViewModel?, Never>
     public let searchText: AnyPublisher<String?, Never>
     public let clearFilters: AnyPublisher<Void, Never>
 
     public init(
       refresh: AnyPublisher<Void, Never>,
-      delete: AnyPublisher<IndexPath, Never>,
+      delete: AnyPublisher<FavoriteViewModel?, Never>,
       searchText: AnyPublisher<String?, Never>,
       clearFilters: AnyPublisher<Void, Never>
     ) {
@@ -53,7 +53,6 @@ public struct FavoritesViewModel {
     genresFilter: CurrentValueSubject<Set<Genre>, Never>
   ) -> FavoritesViewModel {
     FavoritesViewModel { input in
-
       // We can improve this logic by watching the Notification with name NSManagedObjectContextDidSave
       // and only make changes when needed instead of always reloading all Movies
       let values = input.refresh
@@ -63,25 +62,22 @@ public struct FavoritesViewModel {
               .map(FavoriteViewModel.init(movie:))
           )
           .combineLatest(
-            input.delete.prepend(IndexPath(row: -1, section: -1))
+            input.delete.prepend(nil)
           )
           .scan([FavoriteViewModel]()) { acc, curr -> [FavoriteViewModel] in
             guard acc.count > 0 else {
               return curr.0
             }
 
-            guard curr.1.row > -1 else {
+            guard let viewModelToDelete = curr.1 else {
               return acc
             }
 
-            let rowToDelete = curr.1.row
-            let viewModelToDelete = acc[curr.1.row]
-
-            var newValues = acc
             if repo.delete(viewModelToDelete.movie) {
-              newValues.remove(at: rowToDelete)
+              return acc.filter { $0 != viewModelToDelete }
+            } else {
+              return acc
             }
-            return newValues
           }
         }
         .switchToLatest()
