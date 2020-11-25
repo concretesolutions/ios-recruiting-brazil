@@ -134,7 +134,7 @@ public struct FavoritesViewModel {
         .store(in: &cancellables)
 
       return Output(
-        filteredValues: filteredValues.eraseToAnyPublisher(),
+        filteredValues: filteredValues.share().eraseToAnyPublisher(),
         filterOn: filterOn.eraseToAnyPublisher(),
         cancellables: cancellables
       )

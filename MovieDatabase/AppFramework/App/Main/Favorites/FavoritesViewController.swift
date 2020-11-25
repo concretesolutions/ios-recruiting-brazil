@@ -32,12 +32,19 @@ public final class FavoritesViewController: UIViewController {
     return tv
   }()
 
+  private let tableViewBackgroundLabel: UILabel = {
+    let label = UILabel()
+    label.textAlignment = .center
+    return label
+  }()
+
   private lazy var filterButton = UIBarButtonItem(
     image: UIImage(systemName: "line.horizontal.3.decrease.circle"),
     style: .plain,
     target: self,
     action: #selector(didTapFilter)
   )
+
   private let clearFilterButton: UIButton = {
     let button = UIButton(type: .system)
     button.translatesAutoresizingMaskIntoConstraints = false
@@ -161,6 +168,21 @@ public final class FavoritesViewController: UIViewController {
         } else {
           self?.clearFilterButton.isHidden = true
           self?.tableView.contentInset = .zero
+        }
+      })
+      .store(in: &cancellables)
+
+    Publishers.CombineLatest(output.filteredValues, output.filterOn)
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { [weak self] values, filterOn in
+        let empty = values.count == 0
+        if empty {
+          self?.tableViewBackgroundLabel.text = filterOn
+            ? L10n.Screen.Favorites.noResultsFilter
+            : L10n.Screen.Favorites.noFavorites
+          self?.tableView.backgroundView = self?.tableViewBackgroundLabel
+        } else {
+          self?.tableView.backgroundView = nil
         }
       })
       .store(in: &cancellables)
