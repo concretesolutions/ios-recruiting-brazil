@@ -8,7 +8,8 @@ platform :ios do
   lane :test do
     scan(
       workspace: "MovieDatabase.xcworkspace",
-      scheme: "MovieDatabaseTests"
+      scheme: "MovieDatabaseTests",
+      device: "iPhone 12 Pro"
     )
   end
 end
