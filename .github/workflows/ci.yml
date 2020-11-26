@@ -27,12 +27,25 @@ jobs:
           key: ${{ runner.os }}-gem-${{ hashFiles('Gemfile.lock') }}
           restore-keys: ${{ runner.os }}-gem-
 
+      - name: Cache Mint packages
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.MINT_PATH }}
+          key: ${{ runner.os }}-mint-${{ hashFiles('Mintfile') }}
+          restore-keys: ${{ runner.os }}-mint-
+
       - name: Install bundler
         run: | 
           gem install bundler --no-document
           bundle config set deployment 'true';
           bundle config path vendor/bundle;
           bundle install
+
+      - name: Install mint
+        run: |
+          brew upgrade
+          brew install mint
+          mint bootstrap
 
       - name: Setup ApiKey.swift
         run: cp _ApiKey.swift ApiKey.swift
@@ -42,3 +55,6 @@ jobs:
 
       - name: Run tests
         run: bundle exec fastlane test
+      
+    env:
+      MINT_PATH: ${{ github.workspace }}/mint
