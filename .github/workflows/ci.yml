@@ -37,5 +37,8 @@ jobs:
       - name: Setup ApiKey.swift
         run: cp _ApiKey.swift ApiKey.swift
 
+      - name: Change Xcode Version
+        run: sudo xcode-select -switch /Applications/Xcode_12.2.app
+
       - name: Run tests
         run: bundle exec fastlane test
