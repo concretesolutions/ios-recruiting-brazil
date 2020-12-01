@@ -22,23 +22,87 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O7N-wi-B3b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="635" y="-70"/>
+            <point key="canvasLocation" x="635" y="10"/>
         </scene>
         <!--Filmes-->
         <scene sceneID="ind-8f-drr">
             <objects>
-                <viewController id="ceG-xh-gpb" sceneMemberID="viewController">
+                <viewController id="ceG-xh-gpb" customClass="FilmesTabViewController" customModule="Movs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W7w-0I-52U">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dLJ-eq-I7V">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FilmeCell" rowHeight="118" id="fgY-Xc-r2o" customClass="FilmeTableViewCell" customModule="Movs" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="118"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fgY-Xc-r2o" id="Yzo-Ej-hfw">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="118"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BeI-oB-E6T">
+                                                    <rect key="frame" x="0.0" y="0.0" width="78.5" height="118"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="D9Q-W5-kM5"/>
+                                                        <constraint firstAttribute="width" secondItem="BeI-oB-E6T" secondAttribute="height" multiplier="2:3" id="LZG-8q-cNc"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Christmas Chronicles: Part Two" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nFc-BZ-EXB">
+                                                    <rect key="frame" x="88.5" y="5" width="320.5" height="24"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="BeI-oB-E6T" firstAttribute="leading" secondItem="Yzo-Ej-hfw" secondAttribute="leading" id="3hZ-jk-u9e"/>
+                                                <constraint firstItem="BeI-oB-E6T" firstAttribute="top" secondItem="Yzo-Ej-hfw" secondAttribute="top" id="LDq-QF-AcU"/>
+                                                <constraint firstAttribute="bottom" secondItem="BeI-oB-E6T" secondAttribute="bottom" id="PRz-TI-ieT"/>
+                                                <constraint firstItem="nFc-BZ-EXB" firstAttribute="leading" secondItem="BeI-oB-E6T" secondAttribute="trailing" constant="10" id="d1p-YQ-oz5"/>
+                                                <constraint firstItem="nFc-BZ-EXB" firstAttribute="top" secondItem="Yzo-Ej-hfw" secondAttribute="top" constant="5" id="gUE-Kk-T6c"/>
+                                                <constraint firstAttribute="trailing" secondItem="nFc-BZ-EXB" secondAttribute="trailing" constant="5" id="y5b-9B-WZO"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="capa" destination="BeI-oB-E6T" id="sNk-Xu-JH2"/>
+                                            <outlet property="titulo" destination="nFc-BZ-EXB" id="63U-k7-dja"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="U4S-Df-thv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="dLJ-eq-I7V" firstAttribute="leading" secondItem="U4S-Df-thv" secondAttribute="leading" id="1CH-1k-Lxg"/>
+                            <constraint firstItem="U4S-Df-thv" firstAttribute="bottom" secondItem="dLJ-eq-I7V" secondAttribute="bottom" id="EM2-vP-mkn"/>
+                            <constraint firstItem="dLJ-eq-I7V" firstAttribute="top" secondItem="U4S-Df-thv" secondAttribute="top" id="inX-S5-rtA"/>
+                            <constraint firstItem="U4S-Df-thv" firstAttribute="trailing" secondItem="dLJ-eq-I7V" secondAttribute="trailing" id="uO4-d4-7Mo"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Filmes" image="film" catalog="system" id="6Sz-oC-bY1"/>
+                    <connections>
+                        <outlet property="tabelaFilmes" destination="dLJ-eq-I7V" id="hCn-C4-CTp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z6c-RY-UcN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="635" y="-676"/>
+            <point key="canvasLocation" x="635" y="-744"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="hTu-Lw-l9s">
