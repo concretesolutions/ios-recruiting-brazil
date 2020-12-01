@@ -37,11 +37,11 @@ struct Endpoint {
             ]
         )
     }
-    static func trending(_ mediaType: String = "movie", ofThe timeWindow: JanelaTempoEnum = .semana) -> Endpoint {
+    static func trending(_ mediaType: String = "movie", ofThe timeWindow: JanelaTempoEnum = .semana, with apiKey: String) -> Endpoint {
         return Endpoint(
             path: "/trending/\(mediaType)/\(timeWindow.rawValue)",
             queryItems: [
-                URLQueryItem(name: "api_key", value: "43c36ace63ae7ab00bcc44feea1df181")
+                URLQueryItem(name: "api_key", value: apiKey)
             ]
         )
     }
