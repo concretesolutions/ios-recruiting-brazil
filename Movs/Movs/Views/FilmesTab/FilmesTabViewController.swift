@@ -27,6 +27,7 @@ class FilmesTabViewController: UIViewController {
         tabelaFilmes.dataSource = self
         tabelaFilmes.delegate = self
         setViewLoading()
+        atualizarFavoritos()
         listarTendencia.getFilmesTendencia { trending in
             guard let movies = trending?.results else {
                 self.setViewError()
@@ -34,6 +35,15 @@ class FilmesTabViewController: UIViewController {
             }
             self.filmes = movies
             self.setViewDone()
+        }
+    }
+    
+    func atualizarFavoritos() {
+        DispatchQueue.main.async {
+            guard let contexto = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else {
+                fatalError("Unable to read managed object context.")
+            }
+            self.filmesFavoritos = self.gerenciarFavoritos.getFavoritos(em: contexto)
         }
     }
     

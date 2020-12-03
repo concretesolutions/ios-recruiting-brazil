@@ -35,10 +35,11 @@ extension FilmesTabViewController: UITableViewDelegate {
             }
             
             self.gerenciarFavoritos.desfavoritar(filme: filme, em: contexto)
+            self.atualizarFavoritos()
             completion(true)
         }
         
-        swipeFavoritar.image = UIImage(named: "favorite_empty_icon")
+        swipeFavoritar.image = UIImage(named: "unfavorite_empty_icon")
         
         return swipeFavoritar
     }
@@ -50,6 +51,7 @@ extension FilmesTabViewController: UITableViewDelegate {
             }
             
             self.gerenciarFavoritos.favoritar(filme: filme, em: contexto)
+            self.atualizarFavoritos()
             completion(true)
         }
         
