@@ -11,8 +11,8 @@ struct Media: Codable {
     let posterPath: String?
     let adult: Bool?
     let overview: String?
-    let releaseDate: String?
-    let genreIds: [Genre]?
+    let releaseDate: Date?
+    let genreList: [Genre]?
     let id: Int?
     let originalTitle: String?
     let originalLanguage: String?
@@ -32,10 +32,14 @@ struct Media: Codable {
 
         overview = try values.decode(String.self, forKey: .overview)
 
-        releaseDate = try values.decode(String.self, forKey: .releaseDate)
+        let dateString = try values.decode(String.self, forKey: .releaseDate)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        releaseDate = dateFormatter.date(from: dateString)
 
-        let genreIdsInt = try values.decode([Int].self, forKey: .genreIds)
-        genreIds = genreIdsInt.map { genre in return Genre(id: genre) }
+        let genreListInt = try values.decode([Int].self, forKey: .genreList)
+        genreList = genreListInt.map { genre in return Genre(id: genre) }
 
         id = try values.decode(Int.self, forKey: .id)
 
@@ -65,7 +69,7 @@ struct Media: Codable {
              video,
              posterPath = "poster_path",
              releaseDate = "release_date",
-             genreIds = "genre_ids",
+             genreList = "genre_ids",
              originalTitle = "original_title",
              originalLanguage = "original_language",
              backdropPath = "backdrop_path",

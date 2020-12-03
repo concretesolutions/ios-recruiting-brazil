@@ -11,10 +11,13 @@ class FilmeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var capa: UIImageView!
     @IBOutlet weak var titulo: UILabel!
+    @IBOutlet weak var estrelas: UILabel!
+    @IBOutlet weak var descricao: UILabel!
+    @IBOutlet weak var generos: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        titulo.sizeToFit()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

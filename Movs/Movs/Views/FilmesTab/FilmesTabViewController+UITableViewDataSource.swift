@@ -22,6 +22,9 @@ extension FilmesTabViewController: UITableViewDataSource {
         let filme = self.filmes[indexPath.row]
         
         cell.titulo.text = filme.title
+        cell.descricao.text = filme.overview
+        cell.estrelas.text = filme.voteAverage != nil ? String(filme.voteAverage!) : "-"
+        cell.generos.text = filme.genreList?.map({ $0.rawValue }).joined(separator: "; ")
         
         cell.capa.showGradientSkeleton()
         
