@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import AlamofireImage
 
 protocol TheMovieDBAPI {
     func getMovie(id movieId: Int, _ completionHandler: @escaping (Data?) -> Void)

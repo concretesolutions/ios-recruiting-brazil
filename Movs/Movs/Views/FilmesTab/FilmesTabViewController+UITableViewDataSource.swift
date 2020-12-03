@@ -32,7 +32,7 @@ extension FilmesTabViewController: UITableViewDataSource {
             } else {
                 cell.capa.image = UIImage(named: "movie_placeholder")
             }
-            cell.capa.hideSkeleton()
+            cell.hideSkeleton()
             cell.capa.addGradientBottomMask()
         }
 

@@ -26,8 +26,8 @@ class FavoritosTabViewController: UIViewController {
         tabelaFilmes.dataSource = self
 //        tabelaFilmes.delegate = self
         setViewLoading()
-        atualizarFavoritos()
-        tabelaFilmes.showAnimatedGradientSkeleton()
+//        atualizarFavoritos()
+//        tabelaFilmes.showAnimatedGradientSkeleton()
     }
     
     override func viewWillAppear(_ animated: Bool) {

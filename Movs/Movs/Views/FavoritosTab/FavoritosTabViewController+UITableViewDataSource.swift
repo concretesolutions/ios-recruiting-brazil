@@ -29,7 +29,7 @@ extension FavoritosTabViewController: UITableViewDataSource {
                     if let data = media {
                         cell.capa?.image = UIImage(data: data)
                     }
-                    cell.capa?.hideSkeleton()
+                    cell.hideSkeleton()
                 }
             }
         }
