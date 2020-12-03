@@ -2,34 +2,60 @@
 //  FilmesTabViewController+UITableViewDelegate.swift
 //  Movs
 //
-//  Created by Gabriel Coutinho on 01/12/20.
+//  Created by Gabriel Coutinho on 02/12/20.
 //
+
+import Foundation
 
 import Foundation
 import UIKit
 
-import Alamofire
-import AlamofireImage
-
-extension FilmesTabViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.filmes.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FilmeCell", for: indexPath) as! FilmeTableViewCell
+extension FilmesTabViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        var swipeButton: UIContextualAction?
         let filme = self.filmes[indexPath.row]
         
-        cell.titulo.text = filme.title
-        
-        AF.request("https://image.tmdb.org/t/p/w500/\(filme.posterPath ?? "")").responseImage { image in
-            if case .success(let image) = image.result {
-                cell.capa.image = image
-            }
+        if  let filmeId = filme.id,
+            self.filmesFavoritos.contains(filmeId) {
+            swipeButton = buildSwipeDesfavoritar(filme)
+        } else {
+            swipeButton = buildSwipeFavoritar(filme)
         }
-        return cell
+        
+        return UISwipeActionsConfiguration(actions: [
+            swipeButton!
+        ])
     }
-
-
+    
+    fileprivate func buildSwipeDesfavoritar(_ filme: Media) -> UIContextualAction {
+        let swipeFavoritar = UIContextualAction(style: .destructive, title: nil) { (action, swipeButtonView, completion) in
+            guard let contexto = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else {
+                fatalError("Unable to read managed object context.")
+            }
+            
+            self.gerenciarFavoritos.desfavoritar(filme: filme, em: contexto)
+            completion(true)
+        }
+        
+        swipeFavoritar.image = UIImage(named: "favorite_empty_icon")
+        
+        return swipeFavoritar
+    }
+    
+    fileprivate func buildSwipeFavoritar(_ filme: Media) -> UIContextualAction {
+        let swipeFavoritar = UIContextualAction(style: .normal, title: nil) { (action, swipeButtonView, completion) in
+            guard let contexto = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else {
+                fatalError("Unable to read managed object context.")
+            }
+            
+            self.gerenciarFavoritos.favoritar(filme: filme, em: contexto)
+            completion(true)
+        }
+        
+        swipeFavoritar.backgroundColor = UIColor(named: "movs_color")
+        swipeFavoritar.image = UIImage(named: "favorite_gray_icon")
+        
+        return swipeFavoritar
+    }
 }

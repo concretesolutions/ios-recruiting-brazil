@@ -7,18 +7,18 @@
 
 import Foundation
 
-protocol ListTrendingMoviesUseCase {
-    func getTrendingMovies(completionHandler: @escaping (Trending?) -> Void)
+protocol ListarFilmesTendenciaUseCase {
+    func getFilmesTendencia(_ completionHandler: @escaping (Trending?) -> Void)
 }
 
-class ListTrendingMovies: ListTrendingMoviesUseCase {
+class ListarFilmesTendencia: ListarFilmesTendenciaUseCase {
     private let api: TheMovieDBAPI
     
     init() {
         api = API()
     }
     
-    func getTrendingMovies(completionHandler: @escaping (Trending?) -> Void) {
+    func getFilmesTendencia(_ completionHandler: @escaping (Trending?) -> Void) {
         let decoder = JSONDecoder()
         api.getFilmesTendencia { data in
             guard let data = data else { return }

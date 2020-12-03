@@ -16,14 +16,18 @@ class FilmesTabViewController: UIViewController {
     
     private var viewState: ViewState = .idle
     
+    let listarTendencia: ListarFilmesTendenciaUseCase = ListarFilmesTendencia()
+    let gerenciarFavoritos: GerenciarFavoritosUseCase = GerenciarFavoritos()
     let cellReuseIdentifier = "FilmeCell"
+    
     var filmes: [Media] = []
+    var filmesFavoritos: [Int] = []
         
     override func viewDidLoad() {
         tabelaFilmes.dataSource = self
-        let listTrending: ListTrendingMoviesUseCase = ListTrendingMovies()
+        tabelaFilmes.delegate = self
         setViewLoading()
-        listTrending.getTrendingMovies { trending in
+        listarTendencia.getFilmesTendencia { trending in
             guard let movies = trending?.results else {
                 self.setViewError()
                 return
