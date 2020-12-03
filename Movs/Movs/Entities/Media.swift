@@ -26,38 +26,41 @@ struct Media: Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
-        posterPath = try values.decode(String.self, forKey: .posterPath)
+        posterPath = try? values.decode(String.self, forKey: .posterPath)
 
-        adult = try values.decode(Bool.self, forKey: .adult)
+        adult = try? values.decode(Bool.self, forKey: .adult)
 
-        overview = try values.decode(String.self, forKey: .overview)
+        overview = try? values.decode(String.self, forKey: .overview)
 
-        let dateString = try values.decode(String.self, forKey: .releaseDate)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-        releaseDate = dateFormatter.date(from: dateString)
+        if let dateString = try? values.decode(String.self, forKey: .releaseDate) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+            releaseDate = dateFormatter.date(from: dateString)
+        } else {
+            releaseDate = nil
+        }
 
-        let genreListInt = try values.decode([Int].self, forKey: .genreList)
-        genreList = genreListInt.map { genre in return Genre(id: genre) }
+        let genreListInt = try? values.decode([Int].self, forKey: .genreList)
+        genreList = genreListInt?.map { genre in return Genre(id: genre) }
 
-        id = try values.decode(Int.self, forKey: .id)
+        id = try? values.decode(Int.self, forKey: .id)
 
-        originalTitle = try values.decode(String.self, forKey: .originalTitle)
+        originalTitle = try? values.decode(String.self, forKey: .originalTitle)
 
-        originalLanguage = try values.decode(String.self, forKey: .originalLanguage)
+        originalLanguage = try? values.decode(String.self, forKey: .originalLanguage)
 
-        title = try values.decode(String.self, forKey: .title)
+        title = try? values.decode(String.self, forKey: .title)
 
-        backdropPath = try values.decode(String.self, forKey: .backdropPath)
+        backdropPath = try? values.decode(String.self, forKey: .backdropPath)
 
-        popularity = try values.decode(Float.self, forKey: .popularity)
+        popularity = try? values.decode(Float.self, forKey: .popularity)
 
-        voteCount = try values.decode(Int.self, forKey: .voteCount)
+        voteCount = try? values.decode(Int.self, forKey: .voteCount)
 
-        video = try values.decode(Bool.self, forKey: .video)
+        video = try? values.decode(Bool.self, forKey: .video)
 
-        voteAverage = try values.decode(Float.self, forKey: .voteAverage)
+        voteAverage = try? values.decode(Float.self, forKey: .voteAverage)
     }
     
     private enum CodingKeys: String, CodingKey {

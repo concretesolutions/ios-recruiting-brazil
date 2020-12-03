@@ -17,7 +17,7 @@ class FilmeTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        titulo.sizeToFit()
+        descricao.sizeToFit()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

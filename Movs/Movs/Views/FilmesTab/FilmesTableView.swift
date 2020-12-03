@@ -13,6 +13,6 @@ import AlamofireImage
 
 class FilmesTableView: UITableView {
     
-    
+
 
 }

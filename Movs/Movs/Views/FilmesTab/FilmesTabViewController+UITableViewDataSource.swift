@@ -14,6 +14,7 @@ import AlamofireImage
 extension FilmesTabViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.linhaLimite = filmes.count - 5
         return self.filmes.count
     }
 
@@ -24,9 +25,9 @@ extension FilmesTabViewController: UITableViewDataSource {
         cell.titulo.text = filme.title
         cell.descricao.text = filme.overview
         cell.estrelas.text = filme.voteAverage != nil ? String(filme.voteAverage!) : "-"
-        cell.generos.text = filme.genreList?.map({ $0.rawValue }).joined(separator: "; ")
+        cell.generos.text = filme.genreList?.map({ $0.rawValue }).prefix(3).joined(separator: "; ")
         
-        cell.capa.showGradientSkeleton()
+        cell.capa.showAnimatedGradientSkeleton()
         
         AF.request("https://image.tmdb.org/t/p/w500/\(filme.posterPath ?? "")").responseImage { image in
             switch image.result {

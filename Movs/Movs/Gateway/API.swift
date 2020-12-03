@@ -10,6 +10,7 @@ import Alamofire
 
 protocol TheMovieDBAPI {
     func getFilmesTendencia(_ completionHandler: @escaping (Data?) -> Void)
+    func getFilmesTendencia(pagina: Int, _ completionHandler: @escaping (Data?) -> Void)
 }
 
 class API: TheMovieDBAPI {
@@ -23,9 +24,13 @@ class API: TheMovieDBAPI {
         self.getFilmesTendencia(da: .semana, tipoMidia: "movie", completionHandler)
     }
     
+    func getFilmesTendencia(pagina: Int, _ completionHandler: @escaping (Data?) -> Void) {
+        self.getFilmesTendencia(da: .semana, tipoMidia: "movie", pagina: pagina, completionHandler)
+    }
+    
     func getFilmesTendencia(da janelaTempo: JanelaTempoEnum = .semana, tipoMidia: String = "movie",
-                            _ completionHandler: @escaping (Data?) -> Void) {
-        let urlRequest = Endpoint.trending(with: apiKey).url
+                            pagina: Int = 1, _ completionHandler: @escaping (Data?) -> Void) {
+        let urlRequest = Endpoint.trending(page: pagina, with: apiKey).url
         
         AF.request(urlRequest)
             .validate(statusCode: 200...299)

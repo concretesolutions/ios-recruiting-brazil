@@ -20,6 +20,8 @@ class FilmesTabViewController: UIViewController {
     let gerenciarFavoritos: GerenciarFavoritosUseCase = GerenciarFavoritos()
     let cellReuseIdentifier = "FilmeCell"
     
+    var pagina: Int = 1
+    var linhaLimite: Int = 0
     var filmes: [Media] = []
     var filmesFavoritos: [Int] = []
         
@@ -34,7 +36,20 @@ class FilmesTabViewController: UIViewController {
                 return
             }
             self.filmes = movies
+            self.pagina += 1
             self.setViewDone()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "FilmeDetalhes",
+           let filmeDetalhes = segue.destination as? FilmesDetalhesViewController,
+           let row = tabelaFilmes.indexPathForSelectedRow?.row {
+            let filme = filmes[row]
+            filmeDetalhes.titulo = filme.title
+            filmeDetalhes.fundoImagemPath = filme.backdropPath
+            filmeDetalhes.descricao = filme.overview
+            filmeDetalhes.generos = filme.genreList?.map({ $0.rawValue }).joined(separator: "; ")
         }
     }
     
@@ -47,18 +62,18 @@ class FilmesTabViewController: UIViewController {
         }
     }
     
-    private func setViewLoading() {
+    func setViewLoading() {
         viewState = .loading
         tabelaFilmes.showAnimatedGradientSkeleton()
     }
     
-    private func setViewDone() {
+    func setViewDone() {
         viewState = .done
         tabelaFilmes.hideSkeleton()
         tabelaFilmes.reloadData()
     }
     
-    private func setViewError() {
+    func setViewError() {
         viewState = .error
         tabelaFilmes.hideSkeleton()
     }

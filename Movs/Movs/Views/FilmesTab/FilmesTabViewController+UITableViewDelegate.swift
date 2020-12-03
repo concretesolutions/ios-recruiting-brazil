@@ -28,6 +28,20 @@ extension FilmesTabViewController: UITableViewDelegate {
         ])
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+         if indexPath.row == self.linhaLimite {
+            listarTendencia.getFilmesTendencia(pagina: self.pagina) { trending in
+                guard let movies = trending?.results else {
+                    self.setViewError()
+                    return
+                }
+                self.filmes.append(contentsOf: movies)
+                self.pagina += 1
+                self.setViewDone()
+            }
+         }
+     }
+    
     fileprivate func buildSwipeDesfavoritar(_ filme: Media) -> UIContextualAction {
         let swipeFavoritar = UIContextualAction(style: .destructive, title: nil) { (action, swipeButtonView, completion) in
             guard let contexto = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else {
