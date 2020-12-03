@@ -10,24 +10,28 @@
 import Foundation
 import UIKit
 
-protocol Bluring {
-    func addBlur(_ alpha: CGFloat)
+protocol Maskable {
+    func addGradientBottomMask()
 }
 
-extension Bluring where Self: UIView {
-    func addBlur(_ alpha: CGFloat = 0.5) {
-        // create effect
-        let effect = UIBlurEffect(style: .dark)
-        let effectView = UIVisualEffectView(effect: effect)
-
-        // set boundry and alpha
-        effectView.frame = self.bounds
-        effectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        effectView.alpha = alpha
-
-        self.addSubview(effectView)
+extension Maskable where Self: UIView {
+    func addGradientBottomMask() {
+        let gradient = CAGradientLayer()
+        gradient.startPoint = CGPoint(x: 0.5, y: 1.0)
+        gradient.endPoint = CGPoint(x: 0.5, y: 0.7)
+        let bgColor = UIColor.systemBackground
+        gradient.colors = [
+            bgColor.withAlphaComponent(0.0).cgColor,
+            bgColor.withAlphaComponent(1.0).cgColor
+        ]
+        gradient.locations = [
+            NSNumber(value: 0.0),
+            NSNumber(value: 1.0)
+        ]
+        gradient.frame = self.bounds
+        self.layer.mask = gradient
     }
 }
 
 // Conformance
-extension UIImageView: Bluring {}
+extension UIImageView: Maskable {}

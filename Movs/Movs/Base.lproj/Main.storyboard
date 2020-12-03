@@ -12,14 +12,128 @@
         <!--Favoritos-->
         <scene sceneID="1Ob-6a-up3">
             <objects>
-                <viewController id="hV1-VD-feV" sceneMemberID="viewController">
+                <viewController id="hV1-VD-feV" customClass="FavoritosTabViewController" customModule="Movs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9UL-j3-i6R">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VkS-C2-aRK">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoritoCell" rowHeight="118" id="hCL-vu-fhm" customClass="FavoritoTableViewCell" customModule="Movs" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="118"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hCL-vu-fhm" id="4LC-88-buX">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="118"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" text="9,9" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tmg-2y-sRY" userLabel="Estrelas">
+                                                    <rect key="frame" x="384.66666666666669" y="90" width="24.333333333333314" height="23"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Fz-ki-mcx">
+                                                    <rect key="frame" x="88.666666666666657" y="25.666666666666671" width="320.33333333333337" height="30.333333333333329"/>
+                                                    <string key="text">Aut sed consequatur quod sunt autem. Molestiae debitis voluptate consequatur ex rerum ut hic. Adipisci id molestiae alias asperiores et. Iste iste quas magni et ut earum eveniet amet. Voluptatem cum reprehenderit sed. Omnis veritatis ex et et in rerum omnis voluptatem.</string>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BmB-3h-mlB">
+                                                    <rect key="frame" x="0.0" y="0.0" width="78.666666666666671" height="118"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="BmB-3h-mlB" secondAttribute="height" multiplier="2:3" id="Ijw-Js-0rp"/>
+                                                        <constraint firstAttribute="height" constant="100" id="VTW-xX-Pzc"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="The Christmas Chronicles: Part Two" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vi1-bC-z2v">
+                                                    <rect key="frame" x="88.666666666666657" y="5" width="320.33333333333337" height="20.666666666666668"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terror; Suspense; Comédia" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPZ-0M-7cS" userLabel="Generos">
+                                                    <rect key="frame" x="88.666666666666686" y="99.666666666666671" width="282" height="13.333333333333329"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="YoR-CG-GIh">
+                                                    <rect key="frame" x="360.66666666666669" y="90.666666666666671" width="22" height="21.666666666666671"/>
+                                                    <color key="tintColor" red="0.97373729939999998" green="0.83095121380000003" blue="0.34649550909999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="YoR-CG-GIh" secondAttribute="height" multiplier="1:1" id="ONx-BP-1yx"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="YoR-CG-GIh" firstAttribute="trailing" secondItem="tmg-2y-sRY" secondAttribute="leading" constant="-2" id="1Rw-bt-hsr"/>
+                                                <constraint firstItem="YoR-CG-GIh" firstAttribute="height" secondItem="tmg-2y-sRY" secondAttribute="height" multiplier="0.952381" id="6TW-td-2dg"/>
+                                                <constraint firstAttribute="bottom" secondItem="BmB-3h-mlB" secondAttribute="bottom" id="AvG-TN-EQe"/>
+                                                <constraint firstItem="1Fz-ki-mcx" firstAttribute="top" secondItem="vi1-bC-z2v" secondAttribute="bottom" id="GMd-U7-6Cb"/>
+                                                <constraint firstAttribute="bottom" secondItem="tmg-2y-sRY" secondAttribute="bottom" constant="5" id="IYz-ir-YA0"/>
+                                                <constraint firstItem="1Fz-ki-mcx" firstAttribute="trailing" secondItem="vi1-bC-z2v" secondAttribute="trailing" id="LQ9-UH-c7y"/>
+                                                <constraint firstItem="vi1-bC-z2v" firstAttribute="top" secondItem="4LC-88-buX" secondAttribute="top" constant="5" id="PxW-5z-7ZE"/>
+                                                <constraint firstItem="BmB-3h-mlB" firstAttribute="leading" secondItem="4LC-88-buX" secondAttribute="leading" id="RtC-co-57I"/>
+                                                <constraint firstAttribute="bottom" secondItem="oPZ-0M-7cS" secondAttribute="bottom" constant="5" id="X2y-T9-hTz"/>
+                                                <constraint firstItem="oPZ-0M-7cS" firstAttribute="leading" secondItem="BmB-3h-mlB" secondAttribute="trailing" constant="10" id="X7k-Il-AYN"/>
+                                                <constraint firstItem="BmB-3h-mlB" firstAttribute="top" secondItem="4LC-88-buX" secondAttribute="top" id="YMH-Qc-x8Y"/>
+                                                <constraint firstItem="YoR-CG-GIh" firstAttribute="bottom" secondItem="tmg-2y-sRY" secondAttribute="bottom" id="ap7-Ac-Fzh"/>
+                                                <constraint firstAttribute="trailing" secondItem="vi1-bC-z2v" secondAttribute="trailing" constant="5" id="fdj-jx-lRD"/>
+                                                <constraint firstItem="vi1-bC-z2v" firstAttribute="leading" secondItem="BmB-3h-mlB" secondAttribute="trailing" constant="10" id="kib-V1-gWv"/>
+                                                <constraint firstItem="1Fz-ki-mcx" firstAttribute="leading" secondItem="vi1-bC-z2v" secondAttribute="leading" id="mBr-0z-8sa"/>
+                                                <constraint firstAttribute="trailing" secondItem="tmg-2y-sRY" secondAttribute="trailing" constant="5" id="mZR-hP-Wlr"/>
+                                                <constraint firstItem="oPZ-0M-7cS" firstAttribute="trailing" secondItem="YoR-CG-GIh" secondAttribute="leading" constant="10" id="uXc-Pc-STG"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="capa" destination="BmB-3h-mlB" id="aGz-pu-wsk"/>
+                                            <outlet property="descricao" destination="1Fz-ki-mcx" id="IeK-fo-VGW"/>
+                                            <outlet property="estrelas" destination="tmg-2y-sRY" id="6vi-31-B8h"/>
+                                            <outlet property="generos" destination="oPZ-0M-7cS" id="uyv-se-Ly3"/>
+                                            <outlet property="titulo" destination="vi1-bC-z2v" id="lBI-rI-jkC"/>
+                                            <segue destination="GEM-cr-p3d" kind="showDetail" identifier="FilmeDetalhes" id="18x-bw-F6w"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="eJD-gv-WLo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="VkS-C2-aRK" firstAttribute="top" secondItem="eJD-gv-WLo" secondAttribute="top" id="4Wb-Th-CjQ"/>
+                            <constraint firstItem="eJD-gv-WLo" firstAttribute="trailing" secondItem="VkS-C2-aRK" secondAttribute="trailing" id="Jvm-kn-uXZ"/>
+                            <constraint firstItem="VkS-C2-aRK" firstAttribute="leading" secondItem="eJD-gv-WLo" secondAttribute="leading" id="mFE-R5-AcK"/>
+                            <constraint firstItem="VkS-C2-aRK" firstAttribute="bottom" secondItem="eJD-gv-WLo" secondAttribute="bottom" id="vhk-UB-O8m"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favoritos" image="suit.heart.fill" catalog="system" id="jQe-d8-X55"/>
+                    <connections>
+                        <outlet property="tabelaFilmes" destination="VkS-C2-aRK" id="AhE-eP-YrM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O7N-wi-B3b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -49,6 +163,9 @@
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BeI-oB-E6T">
                                                     <rect key="frame" x="0.0" y="0.0" width="78.666666666666671" height="118"/>
@@ -75,12 +192,18 @@
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terror; Suspense; Comédia" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hvm-j5-SKn" userLabel="Generos">
                                                     <rect key="frame" x="88.666666666666686" y="99.666666666666671" width="282" height="13.333333333333329"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                     <color key="textColor" systemColor="secondaryLabelColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="pq9-Jm-lYx">
                                                     <rect key="frame" x="360.66666666666669" y="90.666666666666671" width="22" height="21.666666666666671"/>
@@ -151,7 +274,7 @@
             <objects>
                 <viewController id="GEM-cr-p3d" customClass="FilmesDetalhesViewController" customModule="Movs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qR0-z5-GHe">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ct5-cc-LvT">
@@ -163,32 +286,82 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HcR-9E-neH">
-                                <rect key="frame" x="20" y="186.66666666666666" width="374" height="41"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30/11/2020 · Terror; Pepero; Dentadura" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SbD-Em-fqJ" userLabel="Lançamento e Generos">
+                                <rect key="frame" x="20" y="242.66666666666666" width="374" height="19.333333333333343"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                <color key="textColor" systemColor="systemGrayColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfT-Jj-b5Z">
+                                <rect key="frame" x="20" y="307.33333333333331" width="374" height="108.33333333333331"/>
+                                <string key="text">Qui vel est fugit quam molestias eligendi sit. Atque suscipit nemo aut qui qui temporibus voluptatum ut. Molestiae sunt odit et inventore. In quis soluta quis iure nobis sit voluptas velit. Temporibus nobis ut laudantium.</string>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sinopse" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zdE-xx-ZRf" userLabel="Sinopse">
+                                <rect key="frame" x="20" y="282" width="303.33333333333331" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HcR-9E-neH">
+                                <rect key="frame" x="20" y="187" width="374" height="40.666666666666657"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                <color key="textColor" systemColor="systemGray5Color"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fhc-1k-SXc">
+                                <rect key="frame" x="323.33333333333331" y="281.33333333333337" width="22" height="21.666666666666657"/>
+                                <color key="tintColor" red="0.97373729939999998" green="0.83095121380000003" blue="0.34649550909999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="fhc-1k-SXc" secondAttribute="height" multiplier="1:1" id="G3m-lx-vSs"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" text="9,9/10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GOg-I7-Pke" userLabel="Estrelas">
+                                <rect key="frame" x="347.33333333333331" y="280.66666666666669" width="46.666666666666686" height="23"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TSC-ke-Gxd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="fhc-1k-SXc" firstAttribute="height" secondItem="GOg-I7-Pke" secondAttribute="height" multiplier="0.952381" id="14e-q7-AuX"/>
+                            <constraint firstItem="TSC-ke-Gxd" firstAttribute="trailing" secondItem="GOg-I7-Pke" secondAttribute="trailing" constant="20" id="5y5-g0-TdO"/>
+                            <constraint firstItem="GOg-I7-Pke" firstAttribute="centerY" secondItem="zdE-xx-ZRf" secondAttribute="centerY" id="9TT-AB-deJ"/>
                             <constraint firstItem="HcR-9E-neH" firstAttribute="leading" secondItem="TSC-ke-Gxd" secondAttribute="leading" constant="20" id="9eh-BK-2Zd"/>
+                            <constraint firstItem="fhc-1k-SXc" firstAttribute="width" secondItem="fhc-1k-SXc" secondAttribute="height" multiplier="1:1" id="Dok-7r-DLp"/>
+                            <constraint firstItem="JfT-Jj-b5Z" firstAttribute="leading" secondItem="zdE-xx-ZRf" secondAttribute="leading" id="Egp-4r-rkg"/>
+                            <constraint firstItem="JfT-Jj-b5Z" firstAttribute="trailing" secondItem="SbD-Em-fqJ" secondAttribute="trailing" id="F8d-Rc-ztF"/>
+                            <constraint firstItem="fhc-1k-SXc" firstAttribute="bottom" secondItem="GOg-I7-Pke" secondAttribute="bottom" id="FER-cJ-XsB"/>
+                            <constraint firstItem="fhc-1k-SXc" firstAttribute="trailing" secondItem="GOg-I7-Pke" secondAttribute="leading" constant="-2" id="Sb8-nF-hls"/>
+                            <constraint firstItem="SbD-Em-fqJ" firstAttribute="top" secondItem="Ct5-cc-LvT" secondAttribute="bottom" constant="10" id="U1v-HL-pzq"/>
                             <constraint firstItem="TSC-ke-Gxd" firstAttribute="trailing" secondItem="HcR-9E-neH" secondAttribute="trailing" constant="20" id="WVu-G4-DdU"/>
+                            <constraint firstItem="JfT-Jj-b5Z" firstAttribute="top" secondItem="zdE-xx-ZRf" secondAttribute="bottom" constant="5" id="Ym8-g5-KLb"/>
+                            <constraint firstItem="TSC-ke-Gxd" firstAttribute="trailing" secondItem="SbD-Em-fqJ" secondAttribute="trailing" constant="20" id="adC-i9-waD"/>
+                            <constraint firstItem="zdE-xx-ZRf" firstAttribute="leading" secondItem="SbD-Em-fqJ" secondAttribute="leading" id="dvH-5m-aXx"/>
                             <constraint firstItem="Ct5-cc-LvT" firstAttribute="top" secondItem="TSC-ke-Gxd" secondAttribute="top" id="gUa-Mn-uRo"/>
                             <constraint firstItem="HcR-9E-neH" firstAttribute="bottom" secondItem="Ct5-cc-LvT" secondAttribute="bottom" constant="-5" id="jQ4-Hc-0Yc"/>
+                            <constraint firstItem="zdE-xx-ZRf" firstAttribute="top" secondItem="SbD-Em-fqJ" secondAttribute="bottom" constant="20" id="k4j-ci-l23"/>
+                            <constraint firstItem="SbD-Em-fqJ" firstAttribute="leading" secondItem="TSC-ke-Gxd" secondAttribute="leading" constant="20" id="mRX-G0-nWc"/>
                             <constraint firstItem="TSC-ke-Gxd" firstAttribute="trailing" secondItem="Ct5-cc-LvT" secondAttribute="trailing" id="o9U-97-tJd"/>
                             <constraint firstItem="Ct5-cc-LvT" firstAttribute="leading" secondItem="TSC-ke-Gxd" secondAttribute="leading" id="qBw-SB-EDR"/>
+                            <constraint firstItem="zdE-xx-ZRf" firstAttribute="trailing" secondItem="fhc-1k-SXc" secondAttribute="leading" id="re2-m2-bV7"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="descricaoLabel" destination="JfT-Jj-b5Z" id="cOe-eW-ueJ"/>
+                        <outlet property="estrelasLabel" destination="GOg-I7-Pke" id="ktA-mV-9ud"/>
                         <outlet property="fundoImage" destination="Ct5-cc-LvT" id="BAO-v0-FEq"/>
+                        <outlet property="lancamentoEGenerosLabel" destination="SbD-Em-fqJ" id="6j3-J9-T0p"/>
                         <outlet property="tituloLabel" destination="HcR-9E-neH" id="DxC-Xr-nbk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DIT-QW-IiS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1851" y="-745"/>
+            <point key="canvasLocation" x="1542" y="-374"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="hTu-Lw-l9s">
@@ -211,6 +384,9 @@
             <point key="canvasLocation" x="-255" y="-374"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="18x-bw-F6w"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="film" catalog="system" width="128" height="93"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
@@ -224,8 +400,8 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

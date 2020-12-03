@@ -1,58 +1,53 @@
 //
-//  FilmesTabViewController.swift
+//  FavoritoTableViewController.swift
 //  Movs
 //
-//  Created by Gabriel Coutinho on 01/12/20.
+//  Created by Gabriel Coutinho on 03/12/20.
 //
 
 import Foundation
 import UIKit
-
-import SkeletonView
-
-class FilmesTabViewController: UIViewController {
+class FavoritosTabViewController: UIViewController {
     
     @IBOutlet weak var tabelaFilmes: UITableView!
     
     private var viewState: ViewState = .idle
     
-    let listarTendencia: ListarFilmesTendenciaUseCase = ListarFilmesTendencia()
-    let gerenciarFavoritos: GerenciarFavoritosUseCase = GerenciarFavoritos()
+    let buscarFilme: BuscarFilmeUseCase = BuscarFilme()
     let buscarImagem: BuscarImagemUseCase = BuscarImagem()
-    let cellReuseIdentifier = "FilmeCell"
+    let gerenciarFavoritos: GerenciarFavoritosUseCase = GerenciarFavoritos()
+    let cellReuseIdentifier = "FavoritoCell"
     
     var pagina: Int = 1
     var linhaLimite: Int = 0
-    var filmes: [Media] = []
     var filmesFavoritos: [Int] = []
         
     override func viewDidLoad() {
         tabelaFilmes.dataSource = self
-        tabelaFilmes.delegate = self
+//        tabelaFilmes.delegate = self
         setViewLoading()
         atualizarFavoritos()
-        listarTendencia.getFilmesTendencia { trending in
-            guard let movies = trending?.results else {
-                self.setViewError()
-                return
-            }
-            self.filmes = movies
-            self.pagina += 1
-            self.setViewDone()
-        }
+        tabelaFilmes.showAnimatedGradientSkeleton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        atualizarFavoritos()
+        tabelaFilmes.showAnimatedGradientSkeleton()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "FilmeDetalhes",
            let filmeDetalhes = segue.destination as? FilmesDetalhesViewController,
            let row = tabelaFilmes.indexPathForSelectedRow?.row {
-            let filme = filmes[row]
-            filmeDetalhes.titulo = filme.title
-            filmeDetalhes.fundoImagemPath = filme.backdropPath
-            filmeDetalhes.descricao = filme.overview
-            filmeDetalhes.generos = filme.genreList?.map({ $0.rawValue }) ?? []
-            filmeDetalhes.lancamento = filme.releaseDate
-            filmeDetalhes.estrelas = filme.voteAverage
+            let filme = filmesFavoritos[row]
+            buscarFilme.por(id: filme) { media in
+                filmeDetalhes.titulo = media?.title
+                filmeDetalhes.fundoImagemPath = media?.backdropPath
+                filmeDetalhes.descricao = media?.overview
+                filmeDetalhes.generos = media?.genreList?.map({ $0.rawValue }) ?? []
+                filmeDetalhes.lancamento = media?.releaseDate
+                filmeDetalhes.estrelas = media?.voteAverage
+            }
         }
     }
     
@@ -62,6 +57,8 @@ class FilmesTabViewController: UIViewController {
                 fatalError("Unable to read managed object context.")
             }
             self.filmesFavoritos = self.gerenciarFavoritos.getFavoritos(em: contexto)
+            self.tabelaFilmes.reloadData()
+            self.setViewDone()
         }
     }
     

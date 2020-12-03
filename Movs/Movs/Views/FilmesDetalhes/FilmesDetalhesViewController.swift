@@ -8,35 +8,49 @@
 import Foundation
 import UIKit
 
-import Alamofire
-import AlamofireImage
-
 class FilmesDetalhesViewController: UIViewController {
     @IBOutlet weak var fundoImage: UIImageView!
     @IBOutlet weak var tituloLabel: UILabel!
     @IBOutlet weak var descricaoLabel: UILabel!
-    @IBOutlet weak var generosLabel: UILabel!
+    @IBOutlet weak var lancamentoEGenerosLabel: UILabel!
+    @IBOutlet weak var estrelasLabel: UILabel!
     
     var titulo: String?
     var descricao: String?
     var fundoImagemPath: String?
-    var generos: String?
+    var generos: [String] = []
+    var lancamento: Date?
+    var estrelas: Float?
+    
+    let buscarImagem: BuscarImagemUseCase = BuscarImagem()
     
     override func viewDidLoad() {
         tituloLabel.text = titulo
+        descricaoLabel.text = descricao
+        let estrelasString = estrelas != nil ? String(estrelas!) : "?"
+        estrelasLabel.text = "\(estrelasString)/10"
+        
+        let data = formatarData(lancamento)
+        let generosJoined = generos.joined(separator: "; ")
+        lancamentoEGenerosLabel.text = "\(data) · \(generosJoined)"
+        
         self.fundoImage.showAnimatedGradientSkeleton()
         
-        AF.request("https://image.tmdb.org/t/p/w500/\(fundoImagemPath ?? "")").responseImage { image in
-            switch image.result {
-            case let .success(image):
-                self.fundoImage.image = image
-            case let .failure(error):
+        self.buscarImagem.com(path: fundoImagemPath ?? "") { media in
+            if let data = media {
+                self.fundoImage.image = UIImage(data: data)
+            } else {
                 self.fundoImage.image = UIImage(named: "movie_placeholder")
-                debugPrint(error)
             }
             self.fundoImage.hideSkeleton()
-            self.fundoImage.addBlur()
+            self.fundoImage.addGradientBottomMask()
         }
+    }
+    
+    private func formatarData(_ data: Date?) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        return data != nil ? formatter.string(from: data!) : "?"
     }
     
 }

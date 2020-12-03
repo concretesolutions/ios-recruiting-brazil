@@ -21,7 +21,7 @@ class ListarFilmesTendencia: ListarFilmesTendenciaUseCase {
     
     func getFilmesTendencia(_ completionHandler: @escaping (Trending?) -> Void) {
         let decoder = JSONDecoder()
-        api.getFilmesTendencia { data in
+        api.getTrending { data in
             guard let data = data else { return }
             let trending = try? decoder.decode(Trending.self, from: data)
             completionHandler(trending)
@@ -30,7 +30,7 @@ class ListarFilmesTendencia: ListarFilmesTendenciaUseCase {
     
     func getFilmesTendencia(pagina: Int = 1, _ completionHandler: @escaping (Trending?) -> Void) {
         let decoder = JSONDecoder()
-        api.getFilmesTendencia(pagina: pagina) { data in
+        api.getTrending(page: pagina) { data in
             guard let data = data else { return }
             let trending = try! decoder.decode(Trending.self, from: data)
             completionHandler(trending)

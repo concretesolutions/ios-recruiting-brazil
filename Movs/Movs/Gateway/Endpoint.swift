@@ -37,6 +37,16 @@ struct Endpoint {
             ]
         )
     }
+    
+    static func movie(id: Int, with apiKey: String) -> Endpoint {
+        return Endpoint(
+            path: "/movie/\(id)",
+            queryItems: [
+                URLQueryItem(name: "api_key", value: apiKey)
+            ]
+        )
+    }
+    
     static func trending(_ mediaType: String = "movie", ofThe timeWindow: JanelaTempoEnum = .semana,
                          page: Int = 1, with apiKey: String) -> Endpoint {
         return Endpoint(

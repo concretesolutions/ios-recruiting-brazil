@@ -8,11 +8,7 @@
 import Foundation
 import UIKit
 
-import Alamofire
-import AlamofireImage
-
 class FilmesTableView: UITableView {
     
-
 
 }
