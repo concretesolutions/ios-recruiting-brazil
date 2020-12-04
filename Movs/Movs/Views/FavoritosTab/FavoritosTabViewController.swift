@@ -32,18 +32,19 @@ class FavoritosTabViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "FilmeDetalhes",
-           let filmeDetalhes = segue.destination as? FilmesDetalhesViewController,
-           let row = tabelaFilmes.indexPathForSelectedRow?.row {
-            let filme = filmesFavoritos[row]
-            buscarFilme.por(id: filme) { media in
-                filmeDetalhes.titulo = media?.title
-                filmeDetalhes.fundoImagemPath = media?.backdropPath
-                filmeDetalhes.descricao = media?.overview
-                filmeDetalhes.generos = media?.genreList?.map({ $0.rawValue }) ?? []
-                filmeDetalhes.lancamento = media?.releaseDate
-                filmeDetalhes.estrelas = media?.voteAverage
-            }
+        if segue.identifier == "FilmeDetalhes" {
+           if let filmeDetalhes = segue.destination as? FilmesDetalhesViewController,
+              let row = tabelaFilmes.indexPathForSelectedRow?.row {
+                let filme = filmesFavoritos[row]
+                buscarFilme.por(id: filme) { media in
+                    filmeDetalhes.titulo = media?.title
+                    filmeDetalhes.fundoImagemPath = media?.backdropPath
+                    filmeDetalhes.descricao = media?.overview
+                    filmeDetalhes.generos = media?.genreList?.map({ $0.rawValue }) ?? []
+                    filmeDetalhes.lancamento = media?.releaseDate
+                    filmeDetalhes.estrelas = media?.voteAverage
+                }
+           }
         }
     }
     

@@ -36,5 +36,4 @@ extension FavoritosTabViewController: UITableViewDataSource {
         return cell
     }
     
-    
 }
