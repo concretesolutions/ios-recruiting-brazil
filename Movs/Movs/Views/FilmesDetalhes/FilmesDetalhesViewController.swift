@@ -27,6 +27,7 @@ class FilmesDetalhesViewController: UIViewController {
     override func viewDidLoad() {
         tituloLabel.text = titulo
         descricaoLabel.text = descricao
+        descricaoLabel.sizeToFit()
         let estrelasString = estrelas != nil ? String(estrelas!) : "?"
         estrelasLabel.text = "\(estrelasString)/10"
         

@@ -19,12 +19,12 @@ extension FavoritosTabViewController: UITableViewDataSource {
         cell.showAnimatedGradientSkeleton()
         
         buscarFilme.por(id: filmeId) { media in
-            guard media != nil else { return }
-            cell.titulo.text = media!.title
-            cell.descricao.text = media!.overview
-            cell.estrelas.text = media!.voteAverage != nil ? String(media!.voteAverage!) : "-"
-            cell.generos.text = media!.genreList?.map({ $0.rawValue }).prefix(3).joined(separator: "; ")
-            if let path = media!.posterPath {
+            guard let media = media else { return }
+            cell.titulo.text = media.title
+            cell.descricao.text = media.overview
+            cell.estrelas.text = media.voteAverage != nil ? String(media.voteAverage!) : "-"
+            cell.generos.text = media.genreList?.map({ $0.rawValue }).prefix(3).joined(separator: "; ")
+            if let path = media.posterPath {
                 self.buscarImagem.com(path: path) { media in
                     if let data = media {
                         cell.capa?.image = UIImage(data: data)

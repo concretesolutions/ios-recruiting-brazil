@@ -9,26 +9,26 @@ import Foundation
 
 // TODO: tradução, ta em portugues pra simplificar
 enum Genre: String, Encodable {
-    case action = "Ação",
-         adventure = "Aventura",
-         animation = "Animação",
-         comedy = "Comédia",
+    case action = "Action",
+         adventure = "Adventure",
+         animation = "Animation",
+         comedy = "Comedy",
          crime = "Crime",
-         documentary = "Documentário",
-          drama = "Drama",
-         family = "Família",
-         fantasy = "Fantasia",
-         history = "História",
-         horror = "Terror",
-         music = "Música",
-         mystery = "Mistério",
+         documentary = "Documentary",
+         drama = "Drama",
+         family = "Family",
+         fantasy = "Fantasy",
+         history = "History",
+         horror = "Horror",
+         music = "Music",
+         mystery = "Mystery",
          romance = "Romance",
-         scienceFiction  = "Ficção científica",
-         tvMovie  = "Cinema TV",
+         scienceFiction = "Science Fiction",
+         tvMovie = "TV Movie",
          thriller = "Thriller",
-         war = "Guerra",
-         western = "Faroeste",
-         other = "Outro"
+         war = "War",
+         western = "Western",
+         other = "Other"
 }
 
 extension Genre {

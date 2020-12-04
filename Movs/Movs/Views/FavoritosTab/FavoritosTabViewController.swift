@@ -18,16 +18,12 @@ class FavoritosTabViewController: UIViewController {
     let gerenciarFavoritos: GerenciarFavoritosUseCase = GerenciarFavoritos()
     let cellReuseIdentifier = "FavoritoCell"
     
-    var pagina: Int = 1
-    var linhaLimite: Int = 0
     var filmesFavoritos: [Int] = []
         
     override func viewDidLoad() {
         tabelaFilmes.dataSource = self
-//        tabelaFilmes.delegate = self
+        tabelaFilmes.delegate = self
         setViewLoading()
-//        atualizarFavoritos()
-//        tabelaFilmes.showAnimatedGradientSkeleton()
     }
     
     override func viewWillAppear(_ animated: Bool) {

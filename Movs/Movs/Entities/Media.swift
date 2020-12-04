@@ -22,6 +22,7 @@ struct Media: Codable {
     let voteCount: Int?
     let video: Bool?
     let voteAverage: Float?
+    private let genres: [MovieGenre]?
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -41,8 +42,14 @@ struct Media: Codable {
             releaseDate = nil
         }
 
-        let genreListInt = try? values.decode([Int].self, forKey: .genreList)
-        genreList = genreListInt?.map { genre in return Genre(id: genre) }
+        genres = try? values.decode([MovieGenre].self, forKey: .genres)
+        
+        if let genreListInt = try? values.decode([Int].self, forKey: .genreList) {
+            genreList = genreListInt.map { genre in return Genre(id: genre) }
+        } else {
+            let genreListInt = genres?.compactMap { $0.id }
+            genreList = genreListInt?.map { genre in return Genre(id: genre) }
+        }
 
         id = try? values.decode(Int.self, forKey: .id)
 
@@ -70,6 +77,7 @@ struct Media: Codable {
              title,
              popularity,
              video,
+             genres,
              posterPath = "poster_path",
              releaseDate = "release_date",
              genreList = "genre_ids",
@@ -79,4 +87,10 @@ struct Media: Codable {
              voteCount = "vote_count",
              voteAverage = "vote_average"
     }
+    
+    fileprivate struct MovieGenre: Codable {
+        let id: Int
+        let name: String
+    }
+
 }
